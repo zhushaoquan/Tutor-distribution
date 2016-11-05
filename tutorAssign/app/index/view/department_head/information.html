@@ -1,0 +1,182 @@
+{extend name="common/layout" /}
+{block name="head"}
+{load href="__STATIC__/css/department_head.css" /}
+{load href="__STATIC__/css/bootstrap-table.css" /}
+{load href="__STATIC__/css/bootstrap-editable.css" /}
+{/block}
+{block name="main"}
+<div class="alert-area">
+    <!-- 这里加载目前的个人信息 -->
+    
+    <table class="table table-bordered table-hover table-search-result" id="deparment_head_info">
+        <tr>
+            <th>工号</th>
+            <th>姓名</th>
+            <th>性别</th>
+          <!--   <th>所属系别</th> -->
+            <th>电话</th>
+            <th>邮箱</th>
+        </tr>
+        <tr>
+            <td>{{$user['workNumber']}}</td>
+            <td>{{$user['name']}}</td>
+            <td>{{$user['sex']}}</td>
+         <!--    <td>{{$user['department']}}</td> -->
+            <td>{{$user['telephone']}}</td>
+            <td>{{$user['email']}}</td>
+        </tr>
+    </table>
+    
+    <table class="table table-bordered table-hover table-search-result" id="deparment_head_major">
+        <tr>
+            <th>所负责的专业</th>
+            {foreach name="majors" item="row"}
+            <td>{{$row['major_name']}}</td>
+            {/foreach}
+        </tr>
+    </table>
+
+</div>
+<div class="table-area">
+
+    <form class="form-horizontal form-response" role="form" action="{{:url('information')}}" id="form-information" method="post">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">姓名：</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="name" value="{{$user['name']}}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-3 control-label" name="sex">选择性别：</label>
+            <div class="col-sm-9">
+                <select class="form-control">
+                    <option value="男" {if condition="$user['sex'] == '男'"} selected="selected"  {/if}>男</option>
+                    <option value="女" {if condition="$user['sex'] == '女'"} selected="selected"  {/if}>女</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">选择系别：</label>
+            <div id="dep" class="hidden">{{$user["department"]}}</div>
+            <div class="col-sm-9">
+                <select class="form-control" name="department" id="depselect">
+                    <option value="计算机科学与技术">计算机科学与技术</option>
+                    <option value="信息安全与网络工程">信息安全与网络工程</option>
+                    <option value="信息安全与网络工程">软件工程</option>
+                    <option value="软件工程">软件工程</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">联系电话：</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="telephone" value="{{$user['telephone']}}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">邮箱：</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="email" value="{{$user['email']}}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">密码：</label>
+            <div class="col-sm-9">
+                <input type="password" class="form-control" name="password" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">确认密码：</label>
+            <div class="col-sm-9">
+                <input type="password" class="form-control" name="re_password" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">所负责的专业：</label>
+            <div class="col-sm-9">
+                <input type="checkbox"   name="major[]" value="tc_soft_pro"/>软件工程
+                </br> </br>
+                <input type="checkbox" name="major[]" value="tc_com_nor" />计算机类、计算机科学与技术
+                </br> </br>
+                <input type="checkbox" name="major[]" value="tc_com_ope" />计算机科学与技术（实验班）
+                </br> </br>
+                <input type="checkbox" name="major[]" value="tc_com_exc" />计算机科学与技术（卓越班）
+                </br> </br>
+                <input type="checkbox" name="major[]" value="tc_net_pro" />网络工程
+                </br> </br>
+                <input type="checkbox" name="major[]" value="tc_inf_sec" />信息安全专业
+                </br> </br>
+                <input type="checkbox" name="major[]" value="tc_mathsub_ope" />数学与应用数学（实验班）
+                </br> </br>
+                <input type="checkbox" name="major[]" value="tc_math_nor" />数学类、数学与应用数学、信息与计算科学
+                </br> </br>
+                <input type="checkbox" name="major[]" value="tc_math_ope" />数学类（实验班）
+                </br> </br>
+                <input type="checkbox" name="major[]" value="tc_infcom_ope" />信息与计算科学（实验班）
+                </br> </br>
+
+            </div>
+        </div>
+        <div class="submit-area">
+            <button type="submit" class="btn btn-primary" id="sub-information-change">确认修改</button>
+        </div>
+    </form>
+
+</div>
+{/block}
+
+{block name="js"}
+{load href="__STATIC__/js/bootstrap-table.js" /}
+{load href="__STATIC__/js/bootstrap-table-zh-CN.js" /}
+{load href="__STATIC__/js/bootstrap-editable.js" /}
+{load href="__STATIC__/js/bootstrap-table-editable.js" /}
+<script>
+    (function ($) {
+        //下拉框选中
+        $("#depselect").find("option[value='"+$("#dep").html()+"']").attr("selected",true);
+    })(jQuery)
+
+
+</script>
+<script>
+    var data ="";
+    var user = '{name:"sss",age:1,area:"hexi",hobby:["movie","music"]}';
+    $.post('{{:url("information_json")}}',data,function(result){
+        loadData($("#form-information"),result);
+    });
+    function loadData(form,jsonStr){
+        var obj = jsonStr;
+        var key,value,tagName,type,arr;
+        for(x in obj){
+            key = x;
+            value = obj[x];
+
+            form.find($("[name='"+key+"'],[name='"+key+"[]']")).each(function(){
+                tagName = $(this)[0].tagName;
+                type = $(this).attr('type');
+                if(tagName=='INPUT'){
+                    if(type=='radio'){
+                        $(this).attr('checked',$(this).val()==value);
+                    }else if(type=='checkbox'){
+
+                        arr = value.toString().split(',');
+                        for(var i =0;i<arr.length;i++){
+                            if($(this).val()==arr[i]){
+                                $(this).attr('checked',true);
+                                break;
+                            }
+                        }
+                    }else{
+                        $(this).val(value);
+                    }
+                }else if(tagName=='SELECT' || tagName=='TEXTAREA'){
+                    $(this).val(value);
+                }
+
+            });
+        }
+    }
+</script>
+{/block}

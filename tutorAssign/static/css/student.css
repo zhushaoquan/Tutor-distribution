@@ -1,0 +1,76 @@
+
+.sider-navbar-nav li {
+            color: #fff;
+            text-align: center;
+            padding-top: 10px;
+        }
+
+.my-information-title  {
+	font-size: 30px;
+	width: 600px;
+	height: 55px;
+	color: #2e363f;
+	padding-left: 50px;
+	padding-top: 40px;
+}
+
+.my-information-subtitle  {
+	font-size: 16px;
+	/*width: 600px;*/
+	height: 20px;
+	color: #2e363f;
+	padding-left: 50px;
+	padding-top: 40px;
+}
+
+.my-information-detail-1 {
+	font-size: 16px;
+	height: 20px;
+	padding-left: 50px;
+	padding-top: 60px;
+}
+
+.my-information-detail-1 ul li {
+	list-style: none;
+	margin-bottom: 15px;
+}
+
+.my-information-detail-1 ul li span:nth-child(odd) {
+	list-style: none;
+	display: inline-block;
+
+	width: 80px;
+}
+
+.my-information-detail-1 ul li span:nth-child(even) {
+	list-style: none;
+	display: inline-block;
+
+	width: 270px;
+	/*background: #0ff;*/
+}
+
+.skill-title {
+	font-size: 16px;
+	padding-left: 90px; 
+	padding-top: 150px;
+}
+
+.skill-detail {
+	font-size: 16px;
+	width: 1000px;
+	padding-left: 90px; 
+	padding-top: 13px;
+}
+
+.button-position {
+	width: 60px;
+	height: 40px;
+	margin-left: 950px;
+}
+
+.button-size {
+	font-size: 16px;
+	width: 60px;
+	height: 40px;
+}

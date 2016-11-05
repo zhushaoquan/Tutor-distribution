@@ -1,0 +1,32 @@
+{extend name="common/layout" /}
+{block name="head"}
+{load href="__STATIC__/css/teacher.css" /}
+{/block}
+{block name="main"}
+<div class="alert-area">
+    <a href ="{{:url('information_change')}}" class="btn btn-primary">修改个人信息</a>
+</div>
+<div class="table-area">
+    <table class="table table-bordered table-hover table-search-result">
+        <tr>
+            <th>工号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>电话</th>
+            <th>邮箱</th>
+        </tr>
+        <tr>
+            <td>{{$user["workNumber"]}}</td>
+            <td>{{$user["name"]}}</td>
+            <td>{{$user["sex"]}}</td>
+            <td>{{$user["telephone"]}}</td>
+            <td>{{$user["email"]}}</td>
+        </tr>
+    </table>
+</div>
+{/block}
+
+{block name="js"}
+{load href="__STATIC__/js/bootstrap-datepicker.js" /}
+{load href="__STATIC__/js/bootstrapValidator.js" /}
+{/block}

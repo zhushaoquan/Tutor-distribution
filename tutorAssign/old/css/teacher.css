@@ -1,0 +1,58 @@
+/*查看报课页面*/
+.search-form{
+	background: #fff;
+	padding: 30px 20px;
+	border-bottom: dotted 1px #ccc;
+}
+.form-group-search{
+	margin-left: 20px;
+}
+.fr{float: right;}
+.form-group-search select{
+	min-width: 100px;
+}
+.table-area{
+	background: #fff;
+	min-height: 100px;
+	padding: 20px;
+}
+.table-tool-page{
+	float: left;
+}
+.table-tool-search{
+	float: right;
+	
+}
+.table-toolbar{
+	margin-bottom:20px; 
+}
+.table-tool-search input{
+	padding: 5px;
+	
+	border: 1px solid #b2b2b2;
+}
+.table-tool-search input:focus{
+	
+}
+.table-tool-foot{
+	text-align: center;
+}
+.table-tool-search .input-group-addon{
+	top: 0;
+    background: #2888b4;
+    color: #fff;
+    border-color: #2888b4;
+}
+
+.alert-area{
+	padding: 20px;
+	border-bottom: 1px dotted #ccc;
+}
+.table-search-result{
+	border-collapse:collapse;
+}
+#submit-alert{
+	 display: none;
+	 z-index: 1200;
+	 top: 300px;
+}

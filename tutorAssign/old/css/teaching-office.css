@@ -1,0 +1,16 @@
+
+ .form-response {
+ 	width: 75%;
+    margin:0 auto; 
+  }
+.form-area{
+	background: #fff;
+	padding: 20px;
+}
+.alert-area{
+	padding: 20px;
+	border-bottom: 1px dotted #ccc;
+}
+.table-area {
+    padding: 20px;
+}

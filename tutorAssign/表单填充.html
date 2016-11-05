@@ -1,0 +1,63 @@
+<!Doctype html>
+	<head>
+		<meta  charset="utf-8">
+		<title>事件代理</title>
+		<script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+		
+	<head>
+	<body>
+		<form action="" id="test">
+			<input type="text" name ="name">
+			<input type="text" name ="age">
+			<select name="area">
+				<option value="nankai">南开区</option>
+				<option value="hexi">河西区</option>
+				<option value="xiqing">西青区</option>
+			</select>
+			<input type="checkbox" name="hobby[]" value="movie" />电影
+			<input type="checkbox" name="hobby[]" value="music" />音乐
+			<input type="checkbox" name="hobby[]" value="basketball" />篮球
+		</form>
+	</body>
+	<script>
+		var data ="";
+		$.post('user.php',data,function(result){
+			console.log(result);
+		});
+		var user = '{name:"sss",age:1,area:"hexi",hobby:["movie","music"]}';
+		loadData($("#test"),user);
+		function loadData(form,jsonStr){
+			var obj = eval("("+jsonStr+")");
+			var key,value,tagName,type,arr;
+			for(x in obj){
+				key = x;
+				value = obj[x];
+				
+				form.find($("[name='"+key+"'],[name='"+key+"[]']")).each(function(){
+					tagName = $(this)[0].tagName;
+					type = $(this).attr('type');
+					if(tagName=='INPUT'){
+						if(type=='radio'){
+							$(this).attr('checked',$(this).val()==value);
+						}else if(type=='checkbox'){
+
+							arr = value.toString().split(',');
+
+							for(var i =0;i<arr.length;i++){
+								if($(this).val()==arr[i]){
+									$(this).attr('checked',true);
+									break;
+								}
+							}
+						}else{
+							$(this).val(value);
+						}
+					}else if(tagName=='SELECT' || tagName=='TEXTAREA'){
+						$(this).val(value);
+					}
+					
+				});
+			}
+		}
+	</script>
+</html>

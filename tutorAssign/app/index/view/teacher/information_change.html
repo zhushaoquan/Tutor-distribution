@@ -1,0 +1,79 @@
+{extend name="common/layout" /}
+{block name="head"}
+{load href="__STATIC__/css/teacher.css" /}
+{/block}
+{block name="main"}
+<div class="table-area">
+    <form class="form-horizontal form-response" role="form" action="" id="form-information" method="post">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">姓名：</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="name" value="{{$user['name']}}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-3 control-label">选择性别：</label>
+            <div class="col-sm-9">
+                <select class="form-control" name="sex">
+                    <option value="男" {if condition="$user['sex'] == '男'"} selected="selected"  {/if}>男</option>
+                    <option value="女" {if condition="$user['sex'] == '女'"} selected="selected"  {/if}>女</option>
+                </select>
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            <label class="col-sm-3 control-label">选择系别：</label>
+            <div class="col-sm-9">
+                <div id="dep" class="hidden">{{$user["department"]}}</div>
+                <select id="depselect" class="form-control" name="department">
+                    <option value="">请选择专业</option>
+                    <option value="计算机科学与技术">计算机科学与技术</option>
+                    <option value="信息安全与网络工程">信息安全与网络工程</option>
+                    <option value="软件工程">软件工程</option>
+                    <option value="数学类">数学类</option>
+                </select>
+            </div>
+        </div> -->
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">联系电话：</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="telephone" value="{{$user['telephone']}}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">邮箱：</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="email" value="{{$user['email']}}" />
+            </div>
+        </div>
+       <!--  <div class="form-group">
+            <label class="col-sm-3 control-label">密码：</label>
+            <div class="col-sm-9">
+                <input type="password" class="form-control" name="password" placeholder="置空不修改" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">确认密码：</label>
+            <div class="col-sm-9">
+                <input type="password" class="form-control" name="re_password" />
+            </div>
+        </div> -->
+        <div class="submit-area">
+            <button type="submit" class="btn btn-primary" id="sub-information-change">确认修改</button>
+        </div>
+    </form>
+</div>
+{/block}
+
+{block name="js"}
+{load href="__STATIC__/js/bootstrap-datepicker.js" /}
+{load href="__STATIC__/js/bootstrapValidator.js" /}
+<script>
+    (function ($) {
+        //下拉框选中
+        $("#depselect").find("option[value='"+$("#dep").html()+"']").attr("selected",true);
+    })(jQuery)
+
+
+</script>
+{/block}

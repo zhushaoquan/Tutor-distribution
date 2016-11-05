@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{block name="title"}教师报课管理系统{/block}</title>
+    {css href="__STATIC__/css/bootstrap.css" /}
+    {css href="__STATIC__/css/backstage.css" /}
+    {block name="head"}{/block}
+</head>
+<body>
+<div id="container-backstage" class="clearfix">
+    {include file="common/siderbar" /}
+
+    <div id="mainpage">
+        {include file="common/nav" /}
+        <div class="page-content">
+            <div class="main-content">
+                {block name="main"}主内容{/block}
+            </div>
+        </div>
+    </div>
+    {include file="common/footer" /}
+
+
+</div>
+{js href="__STATIC__/js/index.js" /}
+{js href="__STATIC__/js/jquery2.14.min.js" /}
+{js href="__STATIC__/js/bootstrap.js" /}
+{js href="__STATIC__/js/backstage.js" /}
+{block name="js"}{/block}
+</body>
+</html>

@@ -1,0 +1,26 @@
+@charset "UTF-8";
+body{
+	background-color: #2e363f;
+	font-family: "Microsoft YaHei","微软雅黑";
+}
+#login-box{
+	max-width: 460px;
+    padding: 15px;
+    margin: 0 auto;
+    margin-top: 100px;
+    
+}
+#login-box img{
+	width: 100%;
+}
+.login-alert{
+	width:100%;
+	text-align: center;
+	display: none;
+	position: fixed;
+	top: 0;
+}
+#iden{
+	color: #fff;
+	text-indent: 1em;
+}

@@ -1,0 +1,61 @@
+/*查看报课页面*/
+.search-form{
+	background: #fff;
+	padding: 20px ;
+	border-bottom: dotted 1px #ccc;
+}
+.form-group-search{
+	margin-left: 100px;
+
+}
+.form-group-search select{
+	min-width: 100px;
+}
+.table-area{
+	background: #fff;
+	min-height: 100px;
+	padding: 20px;
+}
+.table-search-result{
+	
+
+}
+
+.top-nav-1 {
+	background: #2e363f;
+	color: #fff;
+}
+
+.two-div-contain {
+	background: #2e363f;
+	width: 750px;
+	margin: 0 auto;
+}
+
+.baoke-position {
+	float: left;
+	background: #e6e8ea;
+	width: 300px;
+	height: 400px;
+	margin-left: 20px;
+	margin-top: 100px;
+	border-radius: 10px;
+}
+
+.tutorchoose-position {
+	float: right;
+	background: #e6e8ea;
+	width: 300px;
+	height: 400px;
+	margin-left: 20px;
+	margin-top: 100px;
+	border-radius: 10px;
+}
+
+.span-position {
+	font-size: 45px;
+	color: #2e363f;
+	width: 180px;
+	height: 150px;
+	margin: 130px auto;
+}

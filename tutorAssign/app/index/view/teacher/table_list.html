@@ -1,0 +1,46 @@
+{extend name="common/layout" /}
+{block name="head"}
+<!-- css -->
+{load href="__STATIC__/css/teacher.css" /}
+{/block}
+{block name="main"}
+<div class="alert-area">
+    <div role="alert" class="alert alert-info">
+        <p>提示一:想查看填写完的报课情况 请在左侧导航选择“查看报课”进行查看</p>
+        <p>提示二:填写报课时请务必小心核对，一旦提交无法更改</p>
+    </div>
+</div>
+<div class="table-area">
+    <table class="table table-bordered table-hover table-search-result">
+        <tbody><tr>
+            <th>课表名称</th>
+            <th>所属专业</th>
+            <th>报课截止日期</th>
+            <th>操作</th>
+        </tr>
+        {foreach name='data' item='row'}
+        <tr>
+            <td>{{$row['courseName']}}</td>
+            <td>{{$row['major']}}</td>
+            <td>{{$row['deadline']}}</td>
+            <td>
+                <a href="{{:url('table_fill',['table'=>'cb_'.$row['relativeTable']])}}">填写</a>
+            </td>
+        </tr>
+        {/foreach}
+
+        </tbody></table>
+    {empty name="data"}
+    <div role="alert" class="alert alert-success">
+        <p>当前暂无可填写的报课表</p>
+
+    </div>
+    {/empty}
+    {{$page}}
+</div>
+
+{/block}
+
+{block name="js"}
+
+{/block}

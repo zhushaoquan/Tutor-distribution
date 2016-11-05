@@ -1,0 +1,2152 @@
+[ 2016-09-21T15:53:08+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/view_baoke.html?limit=10&offset=0&_=1474444388293
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/view_baoke.html?limit=10&offset=0&_=1474444388293 [运行时间：0.075004s][吞吐率：13.33req/s] [内存消耗：3,669.61kb] [文件加载：44]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'view_baoke',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/view_baoke.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded',
+)
+[ info ] [ PARAM ] array (
+  'limit' => '10',
+  'offset' => '0',
+  '_' => '1474444388293',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method view_baoke ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 29 - 61
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM task_info t,department_head_majors d WHERE  t.taskState <> 0  AND d.workNumber = '06033'  AND locate(d.major,t.relativeTable) > 0 LIMIT 1   [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT t.* FROM task_info t,department_head_majors d WHERE  t.taskState <> 0  AND d.workNumber = '06033'  AND locate(d.major,t.relativeTable) > 0 LIMIT 0,10   [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_com_exc201601` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_com_exc201601` WHERE  `insertTime` = 1 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_com_nor201601` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_com_nor201601` WHERE  `insertTime` = 1 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_com_ope201601` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_com_ope201601` WHERE  `insertTime` = 1 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_inf_sec201601` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_inf_sec201601` WHERE  `insertTime` = 1 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_infcom_ope201601` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_infcom_ope201601` WHERE  `insertTime` = 1 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_math_nor201602` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_math_nor201602` WHERE  `insertTime` = 1 LIMIT 1    [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:09+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/show_table.html?table_name=cb_tc_com_exc201601
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/show_table.html?table_name=cb_tc_com_exc201601 [运行时间：0.045002s][吞吐率：22.22req/s] [内存消耗：2,425.17kb] [文件加载：37]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'show_table',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/view_baoke.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+  'table_name' => 'cb_tc_com_exc201601',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method show_table ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 118 - 151
+}
+
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\department_head\show_table.html [ array (
+  0 => 'menus',
+  1 => 'user',
+  2 => 'table_name',
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:09+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/show_table.html?table_name=cb_tc_com_exc201601&limit=10&offset=0&_=1474444389589
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/show_table.html?table_name=cb_tc_com_exc201601&limit=10&offset=0&_=1474444389589 [运行时间：0.078005s][吞吐率：12.82req/s] [内存消耗：3,643.79kb] [文件加载：44]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'show_table',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/show_table.html?table_name=cb_tc_com_exc201601',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded',
+)
+[ info ] [ PARAM ] array (
+  'table_name' => 'cb_tc_com_exc201601',
+  'limit' => '10',
+  'offset' => '0',
+  '_' => '1474444389589',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method show_table ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 118 - 151
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011001s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cb_tc_com_exc201601` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cb_tc_com_exc201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 1   [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `cb_tc_com_exc201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 0,10   [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:10+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/view_baoke.html
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/view_baoke.html [运行时间：0.032002s][吞吐率：31.25req/s] [内存消耗：2,424.45kb] [文件加载：37]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'view_baoke',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/teacher_manager.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method view_baoke ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 29 - 61
+}
+
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\department_head\view_baoke.html [ array (
+  0 => 'menus',
+  1 => 'user',
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:10+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/view_baoke.html?limit=10&offset=0&_=1474444390215
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/view_baoke.html?limit=10&offset=0&_=1474444390215 [运行时间：0.064004s][吞吐率：15.62req/s] [内存消耗：3,669.42kb] [文件加载：44]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'view_baoke',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/view_baoke.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded',
+)
+[ info ] [ PARAM ] array (
+  'limit' => '10',
+  'offset' => '0',
+  '_' => '1474444390215',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method view_baoke ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 29 - 61
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM task_info t,department_head_majors d WHERE  t.taskState <> 0  AND d.workNumber = '06033'  AND locate(d.major,t.relativeTable) > 0 LIMIT 1   [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT t.* FROM task_info t,department_head_majors d WHERE  t.taskState <> 0  AND d.workNumber = '06033'  AND locate(d.major,t.relativeTable) > 0 LIMIT 0,10   [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_com_exc201601` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_com_exc201601` WHERE  `insertTime` = 1 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_com_nor201601` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_com_nor201601` WHERE  `insertTime` = 1 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_com_ope201601` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_com_ope201601` WHERE  `insertTime` = 1 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_inf_sec201601` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_inf_sec201601` WHERE  `insertTime` = 1 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_infcom_ope201601` [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_infcom_ope201601` WHERE  `insertTime` = 1 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_math_nor201602` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_math_nor201602` WHERE  `insertTime` = 1 LIMIT 1    [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:10+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601 [运行时间：0.034002s][吞吐率：29.41req/s] [内存消耗：2,425.22kb] [文件加载：37]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'edit_baoke',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/view_baoke.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+  'table_name' => 'cb_tc_infcom_ope201601',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method edit_baoke ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 84 - 116
+}
+
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\department_head\edit_baoke.html [ array (
+  0 => 'menus',
+  1 => 'user',
+  2 => 'table_name',
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:11+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=0&_=1474444390998
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=0&_=1474444390998 [运行时间：0.046003s][吞吐率：21.74req/s] [内存消耗：3,640.90kb] [文件加载：44]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'edit_baoke',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded',
+)
+[ info ] [ PARAM ] array (
+  'table_name' => 'cb_tc_infcom_ope201601',
+  'limit' => '10',
+  'offset' => '0',
+  '_' => '1474444390998',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method edit_baoke ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 84 - 116
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cb_tc_infcom_ope201601` [ RunTime:0.004001s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 1   [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 0,10   [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:20+08:00 ] ::1 ::1 POST /baoke2.0/public/index.php/index/department_head/save_table.html?table_name=cb_tc_infcom_ope201601
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/save_table.html?table_name=cb_tc_infcom_ope201601 [运行时间：0.102006s][吞吐率：9.80req/s] [内存消耗：3,403.31kb] [文件加载：40]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'save_table',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'origin' => 'http://localhost',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'content-length' => '650',
+)
+[ info ] [ PARAM ] array (
+  'table_name' => 'cb_tc_infcom_ope201601',
+  'strJson' => '{"insertTime":4,"grade":"2013","major":"数学与应用数学（实验班）","people":"23","courseName":" C++程序设计实训","courseType":"  实践选修","courseCredit":"2","courseHour":"48","practiceHour":"","onMachineHour":"","timePeriod":"按时打算","teacherName":"黄建军","remark":""}',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method save_table ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 68 - 83
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011001s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cb_tc_infcom_ope201601` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] UPDATE `cb_tc_infcom_ope201601`  SET `insertTime`=4,`grade`='2013',`major`='数学与应用数学（实验班）',`people`='23',`courseName`=' C++程序设计实训',`courseType`='  实践选修',`courseCredit`='2',`courseHour`='48',`practiceHour`='',`onMachineHour`='',`timePeriod`='按时打算',`teacherName`='黄建军',`remark`=''  WHERE  `insertTime` = 4                 [ RunTime:0.040002s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:21+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=0&_=1474444390999
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=0&_=1474444390999 [运行时间：0.067004s][吞吐率：14.92req/s] [内存消耗：3,640.88kb] [文件加载：44]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'edit_baoke',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded',
+)
+[ info ] [ PARAM ] array (
+  'table_name' => 'cb_tc_infcom_ope201601',
+  'limit' => '10',
+  'offset' => '0',
+  '_' => '1474444390999',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method edit_baoke ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 84 - 116
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cb_tc_infcom_ope201601` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 1   [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 0,10   [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:22+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601 [运行时间：0.044002s][吞吐率：22.73req/s] [内存消耗：2,425.37kb] [文件加载：37]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'edit_baoke',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/view_baoke.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+  'table_name' => 'cb_tc_infcom_ope201601',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method edit_baoke ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 84 - 116
+}
+
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\department_head\edit_baoke.html [ array (
+  0 => 'menus',
+  1 => 'user',
+  2 => 'table_name',
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:23+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=0&_=1474444402907
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=0&_=1474444402907 [运行时间：0.132008s][吞吐率：7.58req/s] [内存消耗：3,641.09kb] [文件加载：44]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'edit_baoke',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded',
+)
+[ info ] [ PARAM ] array (
+  'table_name' => 'cb_tc_infcom_ope201601',
+  'limit' => '10',
+  'offset' => '0',
+  '_' => '1474444402907',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method edit_baoke ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 84 - 116
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cb_tc_infcom_ope201601` [ RunTime:0.077004s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 1   [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 0,10   [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:30+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=10&_=1474444402908
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=10&_=1474444402908 [运行时间：0.059003s][吞吐率：16.95req/s] [内存消耗：3,640.97kb] [文件加载：44]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'edit_baoke',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded',
+)
+[ info ] [ PARAM ] array (
+  'table_name' => 'cb_tc_infcom_ope201601',
+  'limit' => '10',
+  'offset' => '10',
+  '_' => '1474444402908',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method edit_baoke ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 84 - 116
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011001s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cb_tc_infcom_ope201601` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 1   [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 10,10   [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:31+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=20&_=1474444402909
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=20&_=1474444402909 [运行时间：0.061004s][吞吐率：16.39req/s] [内存消耗：3,640.93kb] [文件加载：44]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'edit_baoke',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded',
+)
+[ info ] [ PARAM ] array (
+  'table_name' => 'cb_tc_infcom_ope201601',
+  'limit' => '10',
+  'offset' => '20',
+  '_' => '1474444402909',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method edit_baoke ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 84 - 116
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cb_tc_infcom_ope201601` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 1   [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 20,10   [ RunTime:0.001001s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:31+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=30&_=1474444402910
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=30&_=1474444402910 [运行时间：0.063004s][吞吐率：15.87req/s] [内存消耗：3,640.98kb] [文件加载：44]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'edit_baoke',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded',
+)
+[ info ] [ PARAM ] array (
+  'table_name' => 'cb_tc_infcom_ope201601',
+  'limit' => '10',
+  'offset' => '30',
+  '_' => '1474444402910',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method edit_baoke ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 84 - 116
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cb_tc_infcom_ope201601` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 1   [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 30,10   [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:31+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=40&_=1474444402911
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=40&_=1474444402911 [运行时间：0.055004s][吞吐率：18.18req/s] [内存消耗：3,640.95kb] [文件加载：44]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'edit_baoke',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded',
+)
+[ info ] [ PARAM ] array (
+  'table_name' => 'cb_tc_infcom_ope201601',
+  'limit' => '10',
+  'offset' => '40',
+  '_' => '1474444402911',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method edit_baoke ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 84 - 116
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cb_tc_infcom_ope201601` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 1   [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 40,10   [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:31+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=50&_=1474444402912
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=50&_=1474444402912 [运行时间：0.061003s][吞吐率：16.39req/s] [内存消耗：3,640.91kb] [文件加载：44]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'edit_baoke',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded',
+)
+[ info ] [ PARAM ] array (
+  'table_name' => 'cb_tc_infcom_ope201601',
+  'limit' => '10',
+  'offset' => '50',
+  '_' => '1474444402912',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method edit_baoke ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 84 - 116
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011001s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cb_tc_infcom_ope201601` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 1   [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 50,10   [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:32+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=60&_=1474444402913
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601&limit=10&offset=60&_=1474444402913 [运行时间：0.065004s][吞吐率：15.38req/s] [内存消耗：3,615.02kb] [文件加载：44]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'edit_baoke',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded',
+)
+[ info ] [ PARAM ] array (
+  'table_name' => 'cb_tc_infcom_ope201601',
+  'limit' => '10',
+  'offset' => '60',
+  '_' => '1474444402913',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method edit_baoke ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 84 - 116
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011001s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cb_tc_infcom_ope201601` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 1   [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `cb_tc_infcom_ope201601` WHERE  (  major != "" AND major != "专业" ) LIMIT 60,10   [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:35+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/teacher_manager.html
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/teacher_manager.html [运行时间：0.055003s][吞吐率：18.18req/s] [内存消耗：2,424.45kb] [文件加载：37]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'teacher_manager',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/edit_baoke.html?table_name=cb_tc_infcom_ope201601',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method teacher_manager ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 195 - 237
+}
+
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\department_head\teacher_manager.html [ array (
+  0 => 'menus',
+  1 => 'user',
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:35+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/teacher_manager.html?action=teacher_info&limit=10&offset=0&_=1474444415777
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/teacher_manager.html?action=teacher_info&limit=10&offset=0&_=1474444415777 [运行时间：0.048002s][吞吐率：20.83req/s] [内存消耗：3,618.19kb] [文件加载：44]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'teacher_manager',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/teacher_manager.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded',
+)
+[ info ] [ PARAM ] array (
+  'action' => 'teacher_info',
+  'limit' => '10',
+  'offset' => '0',
+  '_' => '1474444415777',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method teacher_manager ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 195 - 237
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `user_teacher` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `user_teacher` LIMIT 1   [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `user_teacher` LIMIT 0,10   [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:36+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/information.html
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/information.html [运行时间：0.061003s][吞吐率：16.39req/s] [内存消耗：3,463.76kb] [文件加载：42]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'information',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/teacher_manager.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method information ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 154 - 192
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\department_head\information.html [ array (
+  0 => 'menus',
+  1 => 'user',
+  2 => 'majors',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `department_head_majors` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `department_head_majors` WHERE  `workNumber` = '06033'   [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `user_department_head` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `user_department_head` WHERE  `workNumber` = '06033' LIMIT 1    [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:36+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/teacher_manager.html
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/teacher_manager.html [运行时间：0.036002s][吞吐率：27.78req/s] [内存消耗：2,424.53kb] [文件加载：37]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'teacher_manager',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/information.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method teacher_manager ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 195 - 237
+}
+
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\department_head\teacher_manager.html [ array (
+  0 => 'menus',
+  1 => 'user',
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-09-21T15:53:37+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/teacher_manager.html?action=teacher_info&limit=10&offset=0&_=1474444416978
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/teacher_manager.html?action=teacher_info&limit=10&offset=0&_=1474444416978 [运行时间：0.064003s][吞吐率：15.62req/s] [内存消耗：3,618.19kb] [文件加载：44]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'teacher_manager',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/teacher_manager.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded',
+)
+[ info ] [ PARAM ] array (
+  'action' => 'teacher_info',
+  'limit' => '10',
+  'offset' => '0',
+  '_' => '1474444416978',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method teacher_manager ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 195 - 237
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011001s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `user_teacher` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `user_teacher` LIMIT 1   [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `user_teacher` LIMIT 0,10   [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:20+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/department_head/information.html
+[ log ] localhost/baoke2.0/public/index.php/index/department_head/information.html [运行时间：0.066004s][吞吐率：15.15req/s] [内存消耗：3,463.76kb] [文件加载：42]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'department_head',
+    2 => 'information',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/teacher_manager.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method information ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\DepartmentHead.php 154 - 192
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\department_head\information.html [ array (
+  0 => 'menus',
+  1 => 'user',
+  2 => 'majors',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011001s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `department_head_majors` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `department_head_majors` WHERE  `workNumber` = '06033'   [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `user_department_head` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `user_department_head` WHERE  `workNumber` = '06033' LIMIT 1    [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:24+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/base_controller/logout.html
+[ log ] localhost/baoke2.0/public/index.php/index/base_controller/logout.html [运行时间：0.040002s][吞吐率：25.00req/s] [内存消耗：2,258.95kb] [文件加载：34]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'base_controller',
+    2 => 'logout',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/information.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] Method [ <user> public method logout ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\BaseController.php 51 - 58
+}
+
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:24+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/base_controller/login.html
+[ log ] localhost/baoke2.0/public/index.php/index/base_controller/login.html [运行时间：0.035002s][吞吐率：28.57req/s] [内存消耗：2,238.27kb] [文件加载：35]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'base_controller',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/department_head/information.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] Method [ <user> public method login ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\BaseController.php 21 - 42
+}
+
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\common\login.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:31+08:00 ] ::1 ::1 POST /baoke2.0/public/index.php/index/base_controller/login.html
+[ log ] localhost/baoke2.0/public/index.php/index/base_controller/login.html [运行时间：0.067004s][吞吐率：14.92req/s] [内存消耗：3,349.05kb] [文件加载：42]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'base_controller',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'origin' => 'http://localhost',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/base_controller/login.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'content-length' => '64',
+)
+[ info ] [ PARAM ] array (
+  'login-user' => '90002',
+  'login-password' => '90002',
+  'login-type' => 'teaching_office',
+)
+[ info ] [ RUN ] Method [ <user> public method login ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\BaseController.php 21 - 42
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\thinkphp\tpl\dispatch_jump.tpl [ array (
+  0 => 'code',
+  1 => 'msg',
+  2 => 'data',
+  3 => 'url',
+  4 => 'wait',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011001s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `user_teaching_office` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `user_teaching_office` WHERE  `workNumber` = '90002' LIMIT 1    [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:34+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/teaching_office/index.html
+[ log ] localhost/baoke2.0/public/index.php/index/teaching_office/index.html [运行时间：0.030002s][吞吐率：33.33req/s] [内存消耗：2,386.96kb] [文件加载：35]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teaching_office',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/base_controller/login.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method index ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\TeachingOffice.php 27 - 29
+}
+
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:34+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/teaching_office/add_baoke.html
+[ log ] localhost/baoke2.0/public/index.php/index/teaching_office/add_baoke.html [运行时间：0.040003s][吞吐率：25.00req/s] [内存消耗：2,445.25kb] [文件加载：37]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teaching_office',
+    2 => 'add_baoke',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/base_controller/login.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method add_baoke ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\TeachingOffice.php 147 - 250
+}
+
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\teaching_office\add_baoke.html [ array (
+  0 => 'user',
+  1 => 'menus',
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:35+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/teaching_office/table_overview.html
+[ log ] localhost/baoke2.0/public/index.php/index/teaching_office/table_overview.html [运行时间：0.063003s][吞吐率：15.87req/s] [内存消耗：3,465.79kb] [文件加载：42]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teaching_office',
+    2 => 'table_overview',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/teaching_office/add_baoke.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method table_overview ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\TeachingOffice.php 66 - 73
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\teaching_office\index.html [ array (
+  0 => 'user',
+  1 => 'menus',
+  2 => 'task',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012001s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `task_info` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT DISTINCT  `year` FROM `task_info`  [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:35+08:00 ] ::1 ::1 POST /baoke2.0/public/index.php/index/teaching_office/select.html
+[ log ] localhost/baoke2.0/public/index.php/index/teaching_office/select.html [运行时间：0.052003s][吞吐率：19.23req/s] [内存消耗：3,412.41kb] [文件加载：40]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teaching_office',
+    2 => 'select',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'origin' => 'http://localhost',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/teaching_office/table_overview.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'content-length' => '18',
+)
+[ info ] [ PARAM ] array (
+  'select_level' => 'first',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method select ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\TeachingOffice.php 32 - 65
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `task_info` [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT DISTINCT  `year` FROM `task_info`  [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:36+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/teaching_office/table_overview.html
+[ log ] localhost/baoke2.0/public/index.php/index/teaching_office/table_overview.html [运行时间：0.069004s][吞吐率：14.49req/s] [内存消耗：3,465.70kb] [文件加载：42]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teaching_office',
+    2 => 'table_overview',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/teaching_office/table_overview.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method table_overview ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\TeachingOffice.php 66 - 73
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\teaching_office\index.html [ array (
+  0 => 'user',
+  1 => 'menus',
+  2 => 'task',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `task_info` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT DISTINCT  `year` FROM `task_info`  [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:36+08:00 ] ::1 ::1 POST /baoke2.0/public/index.php/index/teaching_office/select.html
+[ log ] localhost/baoke2.0/public/index.php/index/teaching_office/select.html [运行时间：0.046002s][吞吐率：21.74req/s] [内存消耗：3,412.41kb] [文件加载：40]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teaching_office',
+    2 => 'select',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'origin' => 'http://localhost',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/teaching_office/table_overview.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'content-length' => '18',
+)
+[ info ] [ PARAM ] array (
+  'select_level' => 'first',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method select ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\TeachingOffice.php 32 - 65
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `task_info` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT DISTINCT  `year` FROM `task_info`  [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:37+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/teaching_office/teacher_manager.html
+[ log ] localhost/baoke2.0/public/index.php/index/teaching_office/teacher_manager.html [运行时间：0.032001s][吞吐率：31.25req/s] [内存消耗：2,441.60kb] [文件加载：36]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teaching_office',
+    2 => 'teacher_manager',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/teaching_office/table_overview.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method teacher_manager ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\TeachingOffice.php 139 - 141
+}
+
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:38+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/teaching_office/table_overview.html
+[ log ] localhost/baoke2.0/public/index.php/index/teaching_office/table_overview.html [运行时间：0.052003s][吞吐率：19.23req/s] [内存消耗：3,465.70kb] [文件加载：42]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teaching_office',
+    2 => 'table_overview',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/teaching_office/table_overview.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method table_overview ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\TeachingOffice.php 66 - 73
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\teaching_office\index.html [ array (
+  0 => 'user',
+  1 => 'menus',
+  2 => 'task',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `task_info` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT DISTINCT  `year` FROM `task_info`  [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:38+08:00 ] ::1 ::1 POST /baoke2.0/public/index.php/index/teaching_office/select.html
+[ log ] localhost/baoke2.0/public/index.php/index/teaching_office/select.html [运行时间：0.058003s][吞吐率：17.24req/s] [内存消耗：3,412.41kb] [文件加载：40]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teaching_office',
+    2 => 'select',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'origin' => 'http://localhost',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/teaching_office/table_overview.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'content-length' => '18',
+)
+[ info ] [ PARAM ] array (
+  'select_level' => 'first',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method select ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\TeachingOffice.php 32 - 65
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `task_info` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT DISTINCT  `year` FROM `task_info`  [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:39+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/teaching_office/table_overview.html
+[ log ] localhost/baoke2.0/public/index.php/index/teaching_office/table_overview.html [运行时间：0.059003s][吞吐率：16.95req/s] [内存消耗：3,465.70kb] [文件加载：42]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teaching_office',
+    2 => 'table_overview',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/teaching_office/table_overview.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method table_overview ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\TeachingOffice.php 66 - 73
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\teaching_office\index.html [ array (
+  0 => 'user',
+  1 => 'menus',
+  2 => 'task',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `task_info` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT DISTINCT  `year` FROM `task_info`  [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:39+08:00 ] ::1 ::1 POST /baoke2.0/public/index.php/index/teaching_office/select.html
+[ log ] localhost/baoke2.0/public/index.php/index/teaching_office/select.html [运行时间：0.051003s][吞吐率：19.61req/s] [内存消耗：3,412.41kb] [文件加载：40]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teaching_office',
+    2 => 'select',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'origin' => 'http://localhost',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/teaching_office/table_overview.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'content-length' => '18',
+)
+[ info ] [ PARAM ] array (
+  'select_level' => 'first',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method select ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\TeachingOffice.php 32 - 65
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `task_info` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT DISTINCT  `year` FROM `task_info`  [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:41+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/teaching_office/add_baoke.html
+[ log ] localhost/baoke2.0/public/index.php/index/teaching_office/add_baoke.html [运行时间：0.038002s][吞吐率：26.31req/s] [内存消耗：2,445.44kb] [文件加载：37]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teaching_office',
+    2 => 'add_baoke',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/teaching_office/table_overview.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method add_baoke ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\TeachingOffice.php 147 - 250
+}
+
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\teaching_office\add_baoke.html [ array (
+  0 => 'user',
+  1 => 'menus',
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:45+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/base_controller/logout.html
+[ log ] localhost/baoke2.0/public/index.php/index/base_controller/logout.html [运行时间：0.044002s][吞吐率：22.73req/s] [内存消耗：2,258.77kb] [文件加载：34]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'base_controller',
+    2 => 'logout',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/teaching_office/add_baoke.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] Method [ <user> public method logout ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\BaseController.php 51 - 58
+}
+
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:45+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/base_controller/login.html
+[ log ] localhost/baoke2.0/public/index.php/index/base_controller/login.html [运行时间：0.035002s][吞吐率：28.57req/s] [内存消耗：2,238.15kb] [文件加载：35]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'base_controller',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/teaching_office/add_baoke.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] Method [ <user> public method login ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\BaseController.php 21 - 42
+}
+
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\common\login.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-09-21T15:54:59+08:00 ] ::1 ::1 POST /baoke2.0/public/index.php/index/base_controller/login.html
+[ log ] localhost/baoke2.0/public/index.php/index/base_controller/login.html [运行时间：0.060003s][吞吐率：16.67req/s] [内存消耗：3,352.97kb] [文件加载：42]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'base_controller',
+    2 => 'login',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'origin' => 'http://localhost',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/base_controller/login.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'content-length' => '56',
+)
+[ info ] [ PARAM ] array (
+  'login-user' => '00022',
+  'login-password' => '00022',
+  'login-type' => 'teacher',
+)
+[ info ] [ RUN ] Method [ <user> public method login ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\BaseController.php 21 - 42
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\thinkphp\tpl\dispatch_jump.tpl [ array (
+  0 => 'code',
+  1 => 'msg',
+  2 => 'data',
+  3 => 'url',
+  4 => 'wait',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `user_teacher` [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `user_teacher` WHERE  `workNumber` = '00022' LIMIT 1    [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:55:02+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/teacher/index.html
+[ log ] localhost/baoke2.0/public/index.php/index/teacher/index.html [运行时间：0.034002s][吞吐率：29.41req/s] [内存消耗：2,365.55kb] [文件加载：35]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teacher',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/base_controller/login.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method index ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\Teacher.php 21 - 23
+}
+
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-09-21T15:55:02+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/teacher/table_overview.html
+[ log ] localhost/baoke2.0/public/index.php/index/teacher/table_overview.html [运行时间：0.049003s][吞吐率：20.41req/s] [内存消耗：3,444.09kb] [文件加载：42]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teacher',
+    2 => 'table_overview',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/base_controller/login.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method table_overview ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\Teacher.php 59 - 66
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\teacher\index.html [ array (
+  0 => 'user',
+  1 => 'menus',
+  2 => 'task',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `task_info` [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT DISTINCT  `year` FROM `task_info`  [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:55:02+08:00 ] ::1 ::1 POST /baoke2.0/public/index.php/index/teacher/select.html
+[ log ] localhost/baoke2.0/public/index.php/index/teacher/select.html [运行时间：0.053003s][吞吐率：18.87req/s] [内存消耗：3,390.99kb] [文件加载：40]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teacher',
+    2 => 'select',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'accept' => '*/*',
+  'origin' => 'http://localhost',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.113 Safari/537.36',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/teacher/table_overview.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'content-length' => '18',
+)
+[ info ] [ PARAM ] array (
+  'select_level' => 'first',
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method select ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\Teacher.php 25 - 58
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `task_info` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT DISTINCT  `year` FROM `task_info`  [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:56:11+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/teacher/table_list.html
+[ log ] localhost/baoke2.0/public/index.php/index/teacher/table_list.html [运行时间：0.080005s][吞吐率：12.50req/s] [内存消耗：3,672.37kb] [文件加载：46]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teacher',
+    2 => 'table_list',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/teacher/table_overview.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method table_list ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\Teacher.php 107 - 130
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\teacher\table_list.html [ array (
+  0 => 'user',
+  1 => 'menus',
+  2 => 'page',
+  3 => 'data',
+  4 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011000s ] mysql:dbname=teacher_class_system;host=localhost;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `task_info` [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `task_info` WHERE  `taskState` = 0 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `task_info` WHERE  `taskState` = 0 LIMIT 0,3    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_math_nor201601` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_math_nor201601` WHERE  `workNumber` = '00022' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_soft_pro201601` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_soft_pro201601` WHERE  `workNumber` = '00022' LIMIT 1    [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-09-21T15:56:11+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/teacher/information.html
+[ log ] localhost/baoke2.0/public/index.php/index/teacher/information.html [运行时间：0.034002s][吞吐率：29.41req/s] [内存消耗：2,423.06kb] [文件加载：37]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teacher',
+    2 => 'information',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/teacher/table_list.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method information ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\Teacher.php 148 - 151
+}
+
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\teacher\information.html [ array (
+  0 => 'user',
+  1 => 'menus',
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-09-21T15:56:12+08:00 ] ::1 ::1 GET /baoke2.0/public/index.php/index/teacher/information.html
+[ log ] localhost/baoke2.0/public/index.php/index/teacher/information.html [运行时间：0.040003s][吞吐率：25.00req/s] [内存消耗：2,423.04kb] [文件加载：37]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'teacher',
+    2 => 'information',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/baoke2.0/public/index.php/index/teacher/information.html',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=s4g3e8f0bmprlodhfkji57qjj6; think_var=zh-cn',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method information ] {
+  @@ D:\wamp3\wamp64\www\baoke2.0\app\index\controller\Teacher.php 148 - 151
+}
+
+[ info ] [ VIEW ] D:\wamp3\wamp64\www\baoke2.0\public/../app/index\view\teacher\information.html [ array (
+  0 => 'user',
+  1 => 'menus',
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------

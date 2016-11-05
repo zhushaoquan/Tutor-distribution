@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <title>教师报课管理系统</title>
+    {js href="__STATIC__/js/jquery2.14.min.js" /}
+    <script type="text/javascript">
+        jQuery.fn.rowspan = function(colIdx) { //封装的一个JQuery小插件
+            return this.each(function(){
+                var that;
+                $('tr', this).each(function(row) {
+                    $('td:eq('+colIdx+')', this).filter(':visible').each(function(col) {
+                        if (that!=null && $(this).html() == $(that).html()) {
+                            rowspan = $(that).attr("rowSpan");
+                            if (rowspan == undefined) {
+                                $(that).attr("rowSpan",1);
+                                rowspan = $(that).attr("rowSpan"); }
+                            rowspan = Number(rowspan)+1;
+                            $(that).attr("rowSpan",rowspan);
+                            $(this).hide();
+                        } else {
+                            that = this;
+                        }
+                    });
+                });
+            });
+        }
+        $(function() {
+            $("#table_cl_info").rowspan(0);//
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function(){
+                    setSize();
+                }
+        )
+        $(window).resize(function(){
+            setSize();
+        });
+        function setSize() {
+            var height1 = $("#bgConsure").height();
+            var height2 = $("#footer").height();
+            var number = parseInt(height1);
+            var right_nav = $("#right-nav").height();
+            var min_height = number - 110;
+            var r_min_height = min_height - right_nav;
+            $("#left").css('min-height', min_height);
+            $("#right").css('min-height', min_height);
+            $("#left").css('height', min_height);
+            $("#right").css('height', min_height);
+
+            $("#right-content").css('height', r_min_height);
+            var left = $("#left").height();
+            var width1 = $("#container").width();
+            var width11 = parseInt(width1);
+            var width_status = width11 - 221;
+            $("#status1").css('min-width',width_status);
+            $("#status2").css('min-width',width_status);
+            $("#right-text").css('width',width_status);
+            //alert(left);
+        }
+    </script>
+    {load href="__STATIC__/css/base.css" /}
+</head>
+<body>
+
+<div id="container">
+    <div id="head">
+        <div id="logo">
+            <img src="__STATIC__/image/logo.png" width="220" height="78">
+        </div>
+        <div id="status1">
+            <?php
+                 @session_start();
+                 $work_number = $_SESSION["temp"][0];
+                 header("Content-type: text/html; charset:utf-8");
+                   $con = mysqli_connect("localhost","root","", 'teacher_class_system');
+                   if (!$con)
+                  {
+                         die('Could not connect: ' . mysqli_error());
+                  }
+                  else
+                  {
+                      mysqli_query($con, "SET NAMES UTF8");
+                      $result = mysqli_query($con,"SELECT * FROM user_teacher where workNumber='$work_number'");
+                      if(mysqli_num_rows($result)>0)
+            {
+            $row = mysqli_fetch_array($result);
+            $GLOBALS['name']=$row['name'];
+            }
+            }
+            ?>
+            <a class="a_exit" href="{{:url('index/BaseController/logout')}}">退出系统</a>
+
+            <p>欢迎您，<span>
+              <?php
+                 if(!isset($name)||empty($name))
+                {
+                  header("Location:../../index.php");
+                  //jump_success("请重新登录", '../../index.php');
+                }
+               //echo $name;
+                   ?>
+            </span>老师</p>
+        </div>
+        <div id="status2">
+        </div>
+    </div>
+    <div id="main-content">
+        <div id="sider">
+            <ul>
+                <li class="now_li"><a class="a_sider a_now" href="../teacher_table_overview"  >查看表格</a></li>
+                <li><a class="a_sider" href="../teacher_fill_online">填写表格</a></li>
+                <li><a class="a_sider" href="../teacher-information.php">个人信息</a></li>
+            </ul>
+        </div>
+        <div id="right-text">
+
+            <!--此处应显示所有年份列表-->
+            <?php
+
+                      mysqli_query($con, "SET NAMES UTF8");
+                      //$year=date("Y");
+                      $sql="SELECT DISTINCT year,semester FROM task_info WHERE taskState>=0 ORDER BY year DESC,semester DESC";
+            $result=mysqli_query($con, $sql);
+            if(mysqli_num_rows($result)>0)
+            while($row=mysqli_fetch_array($result))
+            {
+            echo'<li class="list-group-item">
+            <span class="table_name">'.$row['year'].'年'.$row['semester'].'学期'.'</span>'
+            .'<span class="table_download">
+                          <a class="list-group-item-a" href="index.php?year='.$row['year'].'&semester='.$row['semester'].'">'.'点击查看</a></sapn>';
+
+                      }
+                      //echo $year;
+
+              ?>
+            <div>
+            </div>
+        </div>
+        <div id ="footer">
+            <p>Designed by Code.R</p>
+        </div>
+</body>
+</html>

@@ -1,0 +1,103 @@
+@charset "utf-8";
+html{ margin: 0; width: 100%;}
+body{ margin: 0; width: 100%;background-color: #fff;}
+/*上方导航部分*/
+#left-logo{ float: left; margin-left:3%; margin-top:10px;  }
+#head{height: 80px; min-width:1083px;width:100%;margin: 0; padding:0; background:url(../image/head3.png); background-color:#93bfe6; background-repeat: no-repeat;}
+/*登录注册部分*/
+#login{ width:90px; position: relative; float:right; margin-right:3%;
+   top: 10px;  height: 30px; }
+#login a:link{  padding:5px; text-decoration: none;  
+	font-size: 13px; font-family: "微软雅黑";color: #fff;}
+#login a:hover,a:active{color: #fff;text-decoration: underline;  }
+.btn-lo{ color: #fff;  text-align: center;height: 30px;
+ float: left; display: inline; width: 30px;
+ border-radius:2px;  }
+#l-lo{float: left; }
+#r-lo{float: right;}
+/*空部分*/
+#empty{width: 100%; height:30px;}
+/*左侧tab导航*/
+.tab_nav{ height: 30px; background-color:#3191e8; display: block;float: left; width: 50%; }
+.tab_nav{ text-align: center; line-height: 30px; padding-top: 0px; font-family:"微软雅黑" ; font-size: 14px; border-radius: 2px;}
+#left-nav{ background-color:#fff; }
+#serach{ background-color:#f8f8f8; color:#355f81;}
+#store{ color: #fff;background:url(../image/right-nav.png);}
+/*以下是主要部分*/
+#content{width:100%; background-color:#fff; }
+/*左侧*/
+#left{ z-index: 3; float: left; border-right:1px solid #b7b7b5;  position: relative;  min-width: 200px;width:17.5%;  
+ min-height: 520px;background-color: #fff;   margin-left:0; }
+#left-content{width:99.5%;height: 398px; border:none;}
+#left-text{  font-size:13px;   position: relative;left: 10%; top:20px;}
+#left-serach{ font-family: "微软雅黑"; display: block; position: relative;margin-left: 20px; top:20px;}
+#serach-input{ margin-bottom:10px;  height: 20px; width:195px;}
+.btn-serach{ width: 200px; height: 34px; background-color:#2e91e9; color: #fff;
+	border:1px solid #fff;  border-radius: 5px; font-size:13px; font-family: "微软雅黑";   }
+/*右边*/
+#right{ float: none; min-width:800px;   border-left:1px solid #b7b7b5;
+    position: relative; top:0px; margin-left:17.5%; 
+  min-height: 520px; background-color: #fff; }
+#right-nav{ width: 100%;   height:30px;background:url(../image/right-nav.png);}
+#right-content{ width: 100%; min-height:200px; }
+.tool_a{text-decoration: none; display: block; float: left; height: 30px; margin-right:4px; line-height: 30px;   margin-left:4px;}
+a.tool_a:hover,a.tool_a:active{background-color: #fff;}
+.nav-bar{ height: 30px; background-color: #fff;}
+#left-inside{ float: left; position: relative; z-index: 3; left: -15px; top:150px; width: 40px; height: 130px; background: url(../image/left-inside.png);}
+#head-nav{ float:left; padding-left: 0; width: 500px; height: 30px; position: relative; }
+#head-nav a:link,a:visited{ color: #fff; text-align: center; border-radius: 5px; padding:5px;padding-left: 0;
+  width: 75px; display: block;float: left; 
+	text-decoration: none; font-family: "微软雅黑";font-size:12px; }
+#head-nav a.a_now{background-color:#28a5be; color: #fff;}
+#head-nav a:hover,a:active{ text-decoration: underline; }
+/*页脚*/
+#footer{ height: 30px; background-color:#7eadcd;  }
+/*------login页面------*/
+#login-content{ width: 100%; min-height: 520px; background: url(../image/background.png); 
+	background-repeat: no-repeat;}
+#login-box{ border-radius: 3px; border: 1px solid #c0c0be; background-color: #f9f9f9;
+ position: relative;left: 56%; top: 80px; width: 400px; height:350px; }
+#login-user{ font-size: 14px; height: 33px; width: 300px; margin-left:50px; margin-top:50px;  }
+#login-pass{font-size: 14px;height: 33px; width: 300px;margin-left:50px;margin-top:15px;}
+.login-btn{ font-size: 15px; width: 302px; height: 40px; margin-left:50px;margin-top:30px;}
+#login-head{ background:url(../image/login.png);  height: 50px; color: #000;
+ width: 100%; background-color:30px;  }
+#login-head span{ line-height:50px; color: #fff; margin-left:160px;  font-size: 18px; font-family: "微软雅黑";}
+#login-re{ margin-left:80px; margin-top:15px;  }
+#login-re a{color: #313232; font-size:14px; margin-left:50px; }
+#iden{margin-left: 80px;margin-top: 10px;}
+/*----register--------*/
+#register-content{ width: 100%;background:#f4f4f4; padding-top: 90px; padding-bottom: 40px; }
+#re-logo{width: 80%;height:33px;margin-left: 10%;margin-bottom:30px; }
+#re-logo span{ font-size: 28px; float: left; width:80%;font-family: "微软雅黑";font-weight: normal;}
+a.re_a:link,a.re_a:visited{font-size: 13px; position: relative;right: 0; color:#f7a73f;
+ text-decoration: none;font-family: "微软雅黑";}
+a.re_a:hover,a.re_a:active{ text-decoration: underline;}
+#re-text{ margin-bottom:20px;  border: 2px solid #cccccc; background: #fff; width:80%; min-width: 600px; 
+	margin-left: 10%; position: relative;    }
+#re-text input{ width:40%; margin-left:25%; }
+.re-input{  font-family: "微软雅黑"; font-size: 
+15px; height: 30px; width: 300px;margin-top:30px; }
+.top-input{ margin-top:60px; }
+.last-input{margin-bottom:40px;}
+.re-btn{ font-size:18px;  width: 50%;margin-left: 25%;margin-bottom:40px; height: 40px;
+margin-top: 50px;}
+.state1{ font-size: 13px;font-family: "微软雅黑";color:#4f5153;}
+.state2{ font-size: 13px;font-family: "微软雅黑";color:#000;}
+.state3{ font-size: 13px;font-family: "微软雅黑";color:red;}
+.state4{ font-size: 13px;font-family: "微软雅黑";color:green;}
+/*opreration页面*/
+#left-nav-ul{ list-style-type:none; min-width: 200px; width: 100%; }
+#left-nav-ul li{ font-weight: normal; color: #fff; text-align: center;line-height: 40px;font-family: "微软雅黑";font-size: 15px; 
+	margin-left:0%; padding:0; width: 100%; height: 40px; background: url(../image/op-left-nav.png);}
+.nav-ul-2{color: #000; width: inherit; }
+a.nav-ul-2-a{ display: block;font-weight: normal; color: #000; text-align: center;
+	line-height: 26px;font-family: "微软雅黑";font-size: 13px; 
+	margin-left:0%; padding:0; width:inherit; height: 26px; background:#fff;
+border-bottom: 1px solid #cccccc; }
+#text-content{ width: 100%; ,min-width: 700px; background: #f8f8f8;}
+#text-box{ position: relative; width: 95%; left: 2.5%;top: 30px; ,min-width: 700px;
+	min-height: 430px; background: #fff;border:1px solid #d1d2d2; margin-bottom:40px;  }
+#button-area{height: 50px;width: 50%;position: relative;left: 25%;}
+.btn-op{ margin-left:60px; width: 160px; height: 34px; background-color:#2e91e9; color: #fff;
+	border:1px solid #fff;  border-radius: 5px; font-size:13px; font-family: "微软雅黑"; }

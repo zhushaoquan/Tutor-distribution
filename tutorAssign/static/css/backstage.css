@@ -1,0 +1,114 @@
+/* 整体布局 */
+body{
+	font-family: "Microsoft YaHei","微软雅黑";
+}
+#container-backstage{
+	overflow: hidden;
+}
+#siderbar{
+	width:240px;
+	margin-right: 0;
+	float: left;
+	background-color: #2e363f;
+	margin-bottom: -999em;
+	padding-bottom:999em;
+}
+#mainpage{
+	overflow: hidden;
+	
+}
+/*侧边栏导航*/
+.sider-navbar-header{
+	height: 60px;
+	border-bottom: 1px solid #333; 
+}
+.sider-navbar-nav{
+	padding: 0;
+	list-style: none;
+}
+.sider-navbar-nav li{
+	border-bottom: solid 1px #1f262d;
+	height: 40px;
+	background-color: #2e363f;
+}
+.sider-navbar-nav .active,.sider-navbar-nav li:hover{
+	background-color: #d95043;
+}
+.sider-navbar-nav li.active >a{
+	color: #fff;
+}
+.sider-navbar-nav li >a{
+	display: inline-block;
+	text-align:left;
+	text-indent: 24px;
+	width:240px;
+	color: #dadada;
+	font-size:14px;
+	padding: 10px 5px;
+	
+}
+.sider-navbar-nav li >a>i{
+	margin-right: 10px;
+}
+.sider-navbar-nav li >a:hover{
+	color: #fff;
+	text-decoration: none;
+}
+/*右边顶部*/
+.top-nav{
+	height: 59px;
+	border-bottom: solid 1px #ccc;
+	box-shadow: 1px 1px 1px #ccc;
+	color: #141719;
+	overflow: hidden;
+}
+
+.top-nav span{
+	color: #141719;
+}
+.user-area{
+	float: left;
+	height: 60px;
+	line-height: 60px;	
+	padding: 0 20px;
+	margin-left: 80px;
+}
+.user-area i{
+	margin-right:6px;
+}
+.login-out-area{
+	float: right;
+	height: 60px; 
+	line-height: 60px;
+	margin-right: 60px;
+}
+.login-out-area a{
+	color:#141719 ;
+}
+/* 右边主体 */
+.page-content{
+	background-color: #e6e8ea;
+	min-height:400px;
+	padding: 20px;
+}
+
+/*页脚*/
+.footer{
+	height: 50px;
+	text-align:center;
+	color:#838181;
+	line-height: 50px;
+	border-top:1px solid #ccc;
+	background: #fff;
+}
+
+.submit-area{
+	text-align:center;
+	margin: 20px 0;
+}
+
+.sider-navbar-nav li {
+            color: #fff;
+            text-align: center;
+            padding-top: 10px;
+        }

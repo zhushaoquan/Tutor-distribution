@@ -1,0 +1,60 @@
+{extend name="common/layout" /}
+{block name="head"}
+{load href="__STATIC__/css/teacher.css" /}
+{/block}
+{block name="main"}
+<div class="table-area">
+    <form class="form-horizontal form-response" role="form" action="" id="form-information" method="post">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">姓名：</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="name" value="{{$user['name']}}" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">联系电话：</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="telephone" value="{{$user['telephone']}}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">邮箱：</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="email" value="{{$user['email']}}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">密码：</label>
+            <div class="col-sm-9">
+                <input type="password" class="form-control" name="password" placeholder="不修改放空" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">确认密码：</label>
+            <div class="col-sm-9">
+                <input type="password" class="form-control" name="re_password" />
+            </div>
+        </div>
+
+        <div class="submit-area">
+            <button type="submit" class="btn btn-primary" id="sub-information-change">确认修改</button>
+        </div>
+    </form>
+</div>
+{/block}
+
+{block name="js"}
+{load href="__STATIC__/js/bootstrap-table.js" /}
+{load href="__STATIC__/js/bootstrap-table-zh-CN.js" /}
+{load href="__STATIC__/js/bootstrap-editable.js" /}
+{load href="__STATIC__/js/bootstrap-table-editable.js" /}
+<script>
+    (function ($) {
+        //下拉框选中
+        $("#depselect").find("option[value='"+$("#dep").html()+"']").attr("selected",true);
+    })(jQuery)
+
+
+</script>
+{/block}

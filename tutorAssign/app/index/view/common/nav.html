@@ -1,0 +1,13 @@
+<div class="top-nav">
+    <div class="user-area">
+        <div class="hello-user">
+            <span><i class="glyphicon glyphicon-user"></i>欢迎您,</span>
+            <span class="user-name">{{:user_type()}}: {{$user['name']|default="xxx"}}</span>
+        </div>
+    </div>
+    <div class="login-out-area">
+        <!-- <a href="{{:url('BaseController/back')}}"><i class = "glyphicon glyphicon-arrow-left"></i>返回</a> -->
+        <a href="{{:url('BaseController/logout')}}"><i class = "glyphicon glyphicon-off"></i>退出</a>
+    </div>
+    <!-- <div class="path-box"></div> -->
+</div>

@@ -1,0 +1,131 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body{
+	padding:0px;
+	margin:0px;
+}
+body{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:9pt;
+	background-color:#3A4954;
+}
+ul,li{
+	padding:0px;
+	margin:0px;
+	list-style-type: none;
+}
+* a{
+	text-decoration: none;
+	color:#CFE0EE;
+}
+a:hover{
+	color:#F09C42;
+}
+
+/*^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^*/ 
+a:hover{
+color:#F09C42;
+}
+
+/*导航菜单*/
+#navMenu {
+	width:60%;
+	height: 30px;
+	line-height: 30px;
+	display:block;
+	overflow:hidden;
+	background-image: url(../images/nav_bg.jpg);
+	background-repeat:repeat-x;
+	background-position: left top;
+	float: left;
+}
+#navMenu ul{
+			width:95%;
+			margin-left:16px;}
+			#navMenu .onelink{
+			background-image:none;}
+#navMenu li {
+				width:90px;
+				text-align:center;
+				float: left;
+				line-height: 34px;
+				height: 34px;
+				
+				background-repeat: no-repeat;
+				background-position: 0 center;
+				margin-left: -2px;
+
+}
+
+#navMenu li a {
+	color:#fff;
+	font-family: "宋体";
+	padding-right: 1em;
+	padding-left: 1em;
+	margin-left: 2px;
+	display: block;
+}
+#navMenu li a:hover, #navMenu li.hover a {
+
+	background-repeat:repeat-x;
+	background-position: center top;
+	text-decoration: none;
+	color:#FF7B0E;
+}
+/*-------- 下拉菜单 --------------*/
+.dropMenu {
+	position:absolute;
+	top: 30px;
+	left: -200px;
+	z-index:100;
+	width: 90px;
+	visibility: hidden;
+/*  	filter: progid:DXImageTransform.Microsoft.Shadow(color=#000, direction=135, strength=4);
+*/	margin-top: -86px;
+	margin-left:-240px;
+	border: 1px solid #4D5B66;
+	border-top: 0px solid #3CA2DC;
+	background:url(../image/right-nav.png);
+	/*background:url(../imagess/mmenubg.gif);*/
+	
+	
+	
+}
+
+.dropMenu li {
+	height: 30px;
+	padding-left:6px;
+}
+.dropMenu li a {
+	width: 92%;
+	display: block;
+	text-align:center;
+	color: black;
+	padding: 4px 0 4px 0px;
+	color:#fff;
+	border-bottom: 1px dashed #4D5B66;
+
+}
+.dropMenu+li a{
+border-top:none;
+}
+* html .dropMenu a {
+	width: 100%;
+	color:#6CA7C7;
+}
+.dropMenu a:hover {
+	text-decoration: underline;
+	color:#F09C42;
+}
+
+.hdo{
+width:100%;
+height:auto;
+display:block;
+overflow:hidden;
+}
+
+
+
+
+

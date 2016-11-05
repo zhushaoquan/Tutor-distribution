@@ -1,0 +1,14 @@
+<div id="siderbar">
+    <nav class="sider-navbar">
+        <div class="sider-navbar-header">
+            <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
+        </div>
+        <ul class="sider-navbar-nav">
+            {foreach name="menus" item="item"}
+            <li {if condition="$item['is_now']"} class="active"{/if}>
+                <a href="{{$item['url']}}"><i class="glyphicon glyphicon-{{$item['icon']}}"></i>{{$item['name']}}</a>
+            </li>
+            {/foreach}
+        </ul>
+    </nav>
+</div>

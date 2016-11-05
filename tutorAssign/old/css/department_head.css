@@ -1,0 +1,16 @@
+.alert-area{
+	padding: 20px;
+}
+.table-area{
+	padding: 20px;
+}
+.operation-a{
+	margin: 0 10px;
+}
+.alert-area{
+	border-bottom:dotted 1px #ccc;
+}
+span.table-title{
+	font-weight: bold;
+	font-size: 16px;
+}
