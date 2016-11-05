@@ -12,6 +12,14 @@
 return [
     // 数据库类型
     'type'           => 'mysql',
+    // // 服务器地址
+    // 'hostname'       => 'fun.hongweipeng.com',
+    // // 数据库名
+    // 'database'       => 'b3log',
+    // // 用户名
+    // 'username'       => 'bobo',
+    // // 密码
+    // 'password'       => 'bobofive',
     // 服务器地址
     'hostname'       => '127.0.0.1',
     // 数据库名
