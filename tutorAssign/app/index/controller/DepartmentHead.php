@@ -22,8 +22,12 @@ class DepartmentHead extends BaseController {
 
     }
 
-    public function index() {
+    public function index_1() {
         $this->redirect('view_baoke');
+    }
+
+    public function index() {
+        return $this->fetch('index');
     }
 
     public function view_baoke() {

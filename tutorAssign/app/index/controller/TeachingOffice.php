@@ -24,8 +24,12 @@ class TeachingOffice extends BaseController {
 
     }
 
-    public function index() {
+    public function index_1() {
         $this->redirect(url('add_baoke'));
+    }
+
+    public function index() {
+        return $this->fetch('indexHome');
     }
 
     //ajax 联动

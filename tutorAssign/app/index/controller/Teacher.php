@@ -19,10 +19,12 @@ class Teacher extends BaseController {
         $this->assign('menus', $this->menu);
     }
     public function index() {
-        $this->redirect(url('table_overview'));
+        return $this->fetch('index');
+        // $this->redirect(url('table_overview'));
     }
+    
     public function indexHome() {
-        return $this->fetch('index_1');
+        $this->redirect(url('table_overview'));
     }
     //ajax 联动
     public function select() {
@@ -65,7 +67,7 @@ class Teacher extends BaseController {
         $table = Db::table('task_info');
         $task = $table->distinct(true)->field('year')->select();
         $this->assign('task', $task);
-        return $this->fetch('index');
+        return $this->fetch('index_1');
     }
     public function table_page($table_name = '') {
         $request = Request::instance();
