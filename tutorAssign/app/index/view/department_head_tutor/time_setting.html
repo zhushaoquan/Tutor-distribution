@@ -1,0 +1,287 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>毕设导师智能分配系统</title>
+    <link rel="stylesheet" type="text/css" href="./old/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="./old/css/backstage.css">
+    <link rel="stylesheet" type="text/css" href="./old/css/student.css">
+    <link rel="stylesheet" type="text/css" href="./old/css/department_time.css">
+    <link href="./old/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="./old/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+        .sider-navbar-nav li {
+            color: #fff;
+            text-align: center;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+
+<body cz-shortcut-listen="true">
+<div id="container-backstage" class="clearfix">
+    <div id="siderbar">
+        <nav class="sider-navbar">
+            <div class="sider-navbar-header">
+                <img src="./old/image/mainpage-logo.png" alt="" width="240">
+            </div>
+            <ul class="sider-navbar-nav">
+                <li><i class="glyphicon glyphicon-user"></i> 个人信息</li>
+                <li><i class="glyphicon glyphicon-th-list"></i> 学生管理</li>
+                <li><i class="glyphicon glyphicon-pencil"></i> 导师管理</li>
+                <li class="active"><i class="glyphicon glyphicon-time"></i> 时间设置</li>
+                <li><i class="glyphicon glyphicon-ok"></i> 匹配结果</li>
+                <li><i class="glyphicon glyphicon-download-alt"></i> 结果导出</li>
+            </ul>
+        </nav>
+    </div>
+    <div id="mainpage">
+        <div class="top-nav">
+            <div class="user-area">
+                <div class="hello-user">
+                    <span><i class="glyphicon glyphicon-user"></i>欢迎您,</span>
+                    <span class="user-name">负责人:大东东 </span>
+                </div>
+            </div>
+            <div class="login-out-area">
+                <a href="/public/index.php/index/base_controller/logout.html"><i class="glyphicon glyphicon-off"></i>退出</a>
+            </div>
+        </div>
+        <div class="page-content" style="min-height: 595px;">
+            <div class="main-content" style="border-radius: 10px; padding: 20px; min-height: 555px;">
+                <div role="alert" class="alert alert-info" style="margin-bottom: 0">
+                    <p>提示：你还未设置毕设导师分配的时间</p>
+                </div>
+                <div class="container separate">
+                    <label class="title padding">学生人数设置</label>
+                    <div>
+                        <div class="inline section">
+                            <label class="inline">最少人数：</label>
+                            <input type="number" name="" class="select inline">
+                        </div>
+                        <div class="inline section">
+                            <label class="inline">最多人数：</label>
+                            <input type="number" name="" class="select inline">
+                        </div>
+                        <div class="inline section">
+                            <label class="inline">默认人数：</label>
+                            <input type="number" name="" class="select inline">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container separate">
+                    <label class="padding">选题时间</label>
+                    <form action="" class="form-horizontal" role="form">
+                        <fieldset>
+                            <div class="form-group" style="float: left">
+                                <label for="dtp_input1" class="col-md-2 control-label" style="width: 100px">起始时间</label>
+                                <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z"
+                                     data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1"
+                                     style="width: 320px">
+                                    <input class="form-control" size="16" type="text" value="" readonly>
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                </div>
+                                <input type="hidden" id="dtp_input1" value=""/>
+                                <br/>
+                            </div>
+                            <div class="form-group">
+                                <label for="dtp_input2" class="col-md-2 control-label">截止时间</label>
+                                <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z"
+                                     data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1"
+                                     style="width: 320px">
+                                    <input class="form-control" size="16" type="text" value="" readonly>
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                </div>
+                                <input type="hidden" id="dtp_input2" value=""/>
+                                <br/>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div class="container separate">
+                    <label class="padding">志愿填报时间</label>
+                    <p>第一轮</p>
+                    <form action="" class="form-horizontal" role="form">
+                        <fieldset>
+                            <div class="form-group" style="float: left">
+                                <label for="dtp_input1" class="col-md-2 control-label" style="width: 100px">起始时间</label>
+                                <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z"
+                                     data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1"
+                                     style="width: 320px">
+                                    <input class="form-control" size="16" type="text" value="" readonly>
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                </div>
+                                <input type="hidden" id="dtp_input3" value=""/>
+                                <br/>
+                            </div>
+                            <div class="form-group">
+                                <label for="dtp_input2" class="col-md-2 control-label">截止时间</label>
+                                <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z"
+                                     data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1"
+                                     style="width: 320px">
+                                    <input class="form-control" size="16" type="text" value="" readonly>
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                </div>
+                                <input type="hidden" id="dtp_input4" value=""/>
+                                <br/>
+                            </div>
+                            <p>第二轮</p>
+                            <div class="form-group" style="float: left">
+                                <label for="dtp_input1" class="col-md-2 control-label" style="width: 100px">起始时间</label>
+                                <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z"
+                                     data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1"
+                                     style="width: 320px">
+                                    <input class="form-control" size="16" type="text" value="" readonly>
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                </div>
+                                <input type="hidden" id="dtp_input3" value=""/>
+                                <br/>
+                            </div>
+                            <div class="form-group">
+                                <label for="dtp_input2" class="col-md-2 control-label">截止时间</label>
+                                <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z"
+                                     data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1"
+                                     style="width: 320px">
+                                    <input class="form-control" size="16" type="text" value="" readonly>
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                </div>
+                                <input type="hidden" id="dtp_input4" value=""/>
+                                <br/>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div class="container separate">
+                    <label class="padding">导师选择时间</label>
+                    <p>第一轮</p>
+                    <form action="" class="form-horizontal" role="form">
+                        <fieldset>
+                            <div class="form-group" style="float: left">
+                                <label for="dtp_input1" class="col-md-2 control-label" style="width: 100px">起始时间</label>
+                                <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z"
+                                     data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1"
+                                     style="width: 320px">
+                                    <input class="form-control" size="16" type="text" value="" readonly>
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                </div>
+                                <input type="hidden" id="dtp_input3" value=""/>
+                                <br/>
+                            </div>
+                            <div class="form-group">
+                                <label for="dtp_input2" class="col-md-2 control-label">截止时间</label>
+                                <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z"
+                                     data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1"
+                                     style="width: 320px">
+                                    <input class="form-control" size="16" type="text" value="" readonly>
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                </div>
+                                <input type="hidden" id="dtp_input4" value=""/>
+                                <br/>
+                            </div>
+                            <p>第二轮</p>
+                            <div class="form-group" style="float: left">
+                                <label for="dtp_input1" class="col-md-2 control-label" style="width: 100px">起始时间</label>
+                                <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z"
+                                     data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1"
+                                     style="width: 320px">
+                                    <input class="form-control" size="16" type="text" value="" readonly>
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                </div>
+                                <input type="hidden" id="dtp_input3" value=""/>
+                                <br/>
+                            </div>
+                            <div class="form-group">
+                                <label for="dtp_input2" class="col-md-2 control-label">截止时间</label>
+                                <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z"
+                                     data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1"
+                                     style="width: 320px">
+                                    <input class="form-control" size="16" type="text" value="" readonly>
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                </div>
+                                <input type="hidden" id="dtp_input4" value=""/>
+                                <br/>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div class="form-group form-group-search button">
+                    <button id="sub-table-view" class="btn btn-info size" type="submit" disabled="">确&nbsp;&nbsp;定</button>
+                </div>
+            </div>
+
+            <div class="footer" style="border-radius: 10px;">
+                Designed by Lin &amp; 我说的都队
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="./old/js/index.js"></script>
+<script type="text/javascript" src="./old/js/jquery2.14.min.js"></script>
+<script type="text/javascript" src="./old/js/bootstrap.js"></script>
+<script type="text/javascript" src="./old/js/backstage.js"></script>
+<script type="text/javascript" src="./old/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="./old/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./old/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="./old/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1
+    });
+    $('.form_date').datetimepicker({
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+    $('.form_time').datetimepicker({
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 1,
+        minView: 0,
+        maxView: 1,
+        forceParse: 0
+    });
+</script>
+</body>
+</html>

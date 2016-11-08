@@ -1,0 +1,44 @@
+div.mod-time-setting
+{
+    width: 100%;
+    padding: 10px;
+    margin: 20px auto 20px auto;
+    border: 5px solid pink;
+}
+
+.inline{
+	display: inline;
+}
+
+div.section{
+	margin: 30px;
+}
+
+input.select{
+	width: 100px;
+}
+
+.const-width{
+    width: 200px;
+}
+
+div.separate{
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    margin: 10px auto 10px auto;
+    padding: 10px;
+}
+
+div.button{
+    width: 200px;
+    margin: 0 auto;
+}
+
+button.size{
+    width: 200px;
+}
+
+div p{
+    text-align: start;
+}
+
