@@ -1,0 +1,127 @@
+div.mod-time-setting
+{
+    width: 100%;
+    padding: 10px;
+    margin: 20px auto 20px auto;
+    border: 5px solid pink;
+}
+
+.inline{
+	display: inline;
+}
+
+div.section{
+	margin: 30px;
+}
+
+input.select{
+	width: 100px;
+}
+
+.const-width{
+    width: 200px;
+}
+
+div.separate{
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    margin: 10px auto 10px auto;
+    padding: 10px;
+}
+
+div.button{
+    width: 200px;
+    margin: 0 auto;
+}
+
+button.size{
+    width: 200px;
+}
+
+
+.inline-block {
+    display: inline-block;
+}
+
+.parent-div{
+    width: 100%;
+    padding: 10px 0px 0px 0px;
+    margin: 10px auto;
+    /*border: 1px solid rebeccapurple;*/
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+
+@media screen and (min-width: 800px){
+    .parent-div > div{
+        width: 32.9%;
+        height: 50px;
+        /*border: 1px solid lightseagreen;*/
+        display: inline-block;
+    }
+    .parent-div > div > p {
+        width: 80%;
+        margin: 10% auto;
+        text-align: center;
+        vertical-align: middle;
+        /*border: 1px solid palegreen;*/
+    }
+}
+
+@media screen and (max-width: 799px){
+     .parent-div > div{
+        width: 80%;
+        height: 50px;
+        /*border: 1px solid lightseagreen;*/
+        display: block;
+        margin: 0 auto;
+    }
+    .parent-div > div > p {
+        width: 80%;
+        margin: 10% auto;
+        text-align: center;
+        vertical-align: middle;
+        /*border: 1px solid palegreen;*/
+    }
+}
+
+
+.parent-div > div > div{
+    height: 80%;
+    width: 80%;
+    margin: 0 auto;
+    /*border: 1px dotted orange;*/
+}
+
+.parent-div > div > div > input{
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px 2px #eee inset ;
+    border: 2px solid #ddd;
+}
+
+.parent-div p{
+    /*border: 1px solid indianred;*/
+}
+
+.div-flex{
+    width: 100%;
+    display: flex;
+    /*border: 2px solid indianred;*/
+}
+
+.div-flex > div {
+    flex: 1;
+    /*border: 2px solid dodgerblue;*/
+}
+
+.div-flex > div > div > input{
+    background-color: white;
+}
+
+#btn-submit{
+    margin: 0 auto;
+    text-align: center;
+    width: 200px;
+}
+
