@@ -14,4 +14,15 @@ class DepartmentHeadTutor extends BaseController {
 		$this->assign('user', $head);
 		return $this->fetch('index');
 	}
+
+
+	public function matchSetting() {
+		$user = $this->auto_login();
+		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
+		
+
+		$this->assign('user', $head);
+		return $this->fetch('match_setting');
+
+	}
 }
