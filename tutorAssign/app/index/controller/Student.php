@@ -65,4 +65,23 @@ class Student extends BaseController {
 
 		}
 	}
+
+	public function editVoluntary() {
+		$user = $this->auto_login();
+
+        //可选导师为自己department的导师
+		$teachers = Db::table('tc_teacher')->where('department', $user['department'])->select();
+		if($teachers!=NULL) {
+			$this->assign('voluntory_teachers',$teachers);
+			//加载填报志愿页面；
+			}
+
+
+	}
+
+
+
+
+
+
 }
