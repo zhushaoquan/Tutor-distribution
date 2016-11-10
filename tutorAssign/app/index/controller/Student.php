@@ -79,6 +79,40 @@ class Student extends BaseController {
 
 	}
 
+	public function addVoluntary() {
+		//导师工号传进来
+		$request = Request::instance();
+		
+        if ($request->isPost()) {
+            $data['wishFirst'] = $request->post('wishFirst', '');
+            $data['wishSecond'] = $request->post('wishSecond', '');
+            $data['wishThird'] = $request->post('wishThird', '');
+            $data['wishForth'] = $request->post('wishForth', '');
+            $data['wishFifth'] = $request->post('wishFifth', '');        
+        }
+        
+/*
+        $data['wishFirst'] = '00022';
+        $data['wishSecond'] = '00022';
+        $data['wishThird'] = '00022';
+        $data['wishForth'] = '00022';
+        $data['wishFifth'] = '00022';
+*/
+        $user = $this->auto_login();
+        $data['sid'] = $user['sid'];
+        $result = Db::table('tc_voluntary')->where('sid', $user['sid'])->find();
+        if($result==NULL) {
+        	Db::table('tc_voluntary')->insert($data);
+        } else {
+        	$data['vid'] = $result['vid'];
+        	DB::table('tc_voluntary')->update($data);
+        }
+
+	}
+
+
+
+
 
 
 
