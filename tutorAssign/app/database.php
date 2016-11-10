@@ -27,7 +27,11 @@ return [
     // 用户名
     'username'       => 'root',
     // 密码
+<<<<<<< HEAD
+    'password'       => '',
+=======
    'password'       => 'root',
+>>>>>>> 6ffe061726a539eab5018c116f87fee6555af4d6
     // 端口
     'hostport'       => '',
     // 连接dsn

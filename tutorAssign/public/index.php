@@ -9,6 +9,6 @@
 define('APP_PATH', __DIR__ . '/../app/');
 define('APP_DEBUG', false);
 
-define('TUTOR_STATIC','http://127.0.0.1/baoke2.0/static');
+define('TUTOR_STATIC','http://127.0.0.1/Tutor-distribution/tutorAssign/static');
 // 加载框架引导文件
 require __DIR__ . '/../thinkphp/start.php';
