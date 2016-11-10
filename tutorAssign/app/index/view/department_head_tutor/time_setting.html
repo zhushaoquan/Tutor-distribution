@@ -166,7 +166,7 @@
                                     <label for="wish-end-second" class="col-md-3 control-label">截止时间</label>
                                     <div class="input-group date form_datetime col-md-8" data-date=""
                                          data-date-format="mm-dd hh:ii "
-                                         data-link-field="ish-end-second" data-link-format="yyyy-mm-dd hh:ii">
+                                         data-link-field="wish-end-second" data-link-format="yyyy-mm-dd hh:ii">
                                         <input class="form-control" size="16" type="text" value="" readonly>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span
@@ -307,6 +307,10 @@
 </script>
 <script type="text/javascript">
     $("input").click(function () {
+        $(this).parent().removeClass("has-error");
+        console.log($(this).parent().parent());
+    });
+    $("span.input-group-addon").click(function () {
         $(this).parent().removeClass("has-error");
         console.log($(this).parent().parent());
     });
