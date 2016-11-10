@@ -36,4 +36,33 @@ class Student extends BaseController {
         $this->assign('user', $student);
 		return $this->fetch('modify');
 	}
+
+	public function showResult() {
+		$user = $this->auto_login();
+		$result = Db::table('tc_result')->where('sid',$user['sid'])->find();
+		if($result != NULL) {
+			$teacher = Db::table('tc_teacher')->where('workNumber', $result['workNumber'])->find();
+		    $sids = Db::table('tc_result')->where("sid!=".$user['sid']." and "."workNumber=".$teacher['workNumber'])->select();
+		    if($sids != NULL) {
+		    	 $students = array();
+			     $i = 0;
+			     foreach ($sids as $key => $value) {
+			    	$stuinfo = Db::table('tc_student')->where('sid',$value['sid'])->find();    	
+			    	$students[$i] = $stuinfo;
+			    	$i++;
+		    	 }
+		    } else {
+		    	$students = NULL;
+		    }
+		    //表示有志愿结果已出
+		    $this->assign('voluntory_result',1);
+			$this->assign('voluntory_teacher',$teacher);
+			$this->assign('voluntory_students',$students);
+
+		} else {
+			//志愿结果未出
+			$this->assign('voluntory_result',0);
+
+		}
+	}
 }
