@@ -53,8 +53,35 @@ class TeacherTutor extends BaseController {
 		$teacher = Db::table('tc_teacher')->where('workNumber',$user['workNumber'])->find();
 		$user = $teacher;
 
+        
+        $studentList = Db::table('tc_result')->where('workNumber',$user['workNumber'])->select();
+        if($studentList!=NULL) {
+        	$students = array();
+        	$i=0;
+        	foreach ($studentList as $key => $value) {
+        		$students[$i] = Db::table('tc_student')->where('sid',$value['sid'])->find();
+        		$i++;
+        	}
+
+        	echo "<br />students:.<br />";
+        	var_dump($students);
+        	
+        }
 
 		return $this->fetch('showResult');
+
+	}
+
+	public function showResultdetail($sid = null) {
+		$user = $this->auto_login();
+		$teacher = Db::table('tc_teacher')->where('workNumber',$user['workNumber'])->find();
+		$user = $teacher;
+        
+        $student = Db::table('tc_student')->where('sid', $sid)->find();
+        var_dump($student);
+        exit;
+
+		return $this->fetch('showResultdetail');
 
 	}
 }
