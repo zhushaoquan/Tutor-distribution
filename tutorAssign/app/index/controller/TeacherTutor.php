@@ -41,7 +41,19 @@ class TeacherTutor extends BaseController {
 		$teacher = Db::table('tc_teacher')->where('workNumber',$user['workNumber'])->find();
 		$user = $teacher;
 
+        $students = Db::table('tc_voluntary')->where('wishFirst', $user['workNumber'])
+                                                ->whereOr('wishSecond', $user['workNumber'])
+                                                ->whereOr('wishThird', $user['workNumber'])
+                                                ->whereOr('wishForth', $user['workNumber'])
+                                                ->whereOr('wishFifth', $user['workNumber'])
+                                                ->select();
 
+        $studentsList = array();
+        $i = 0;
+        foreach ($students as $key => $value) {
+            $studentsList[$i] = Db::table('tc_student')->where('sid', $value['sid'])->find();
+            $i++;
+        }
     	return $this->fetch('studentList');
 
 
