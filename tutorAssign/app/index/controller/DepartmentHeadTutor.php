@@ -25,4 +25,22 @@ class DepartmentHeadTutor extends BaseController {
 		return $this->fetch('match_setting');
 
 	}
+
+    public function timeSetting(){
+        $user = $this->auto_login();
+        return $this->fetch('time_setting');
+    }
+
+    /*=================================
+     * 用于接口测试                    *
+     *================================*/
+    public function hello($name = '某某你'){
+        $result = "";
+        foreach ($_SERVER as $k => $v){
+            $result.= $k."=>".$v."<br/><br/>";
+        }
+
+
+        return $result;
+    }
 }
