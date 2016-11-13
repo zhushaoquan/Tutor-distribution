@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:92:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\tutorList.html";i:1478702141;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:92:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\tutorList.html";i:1479046175;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +7,9 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>毕设导师只能分配系统</title>
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/backstage.css">
-    <link rel="stylesheet" type="text/css" href="../../../static/css/student.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/student.css">
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
@@ -27,10 +27,10 @@
                 <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="<?php echo url('Student/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <a href="<?php echo url('Student/tutorList'); ?>"><li class="active"><i class="glyphicon glyphicon-th-list"></i> 专业导师</li></a>
-                <li><i class="glyphicon glyphicon-pencil"></i> 志愿填报</li>
-                <li><i class="glyphicon glyphicon-ok"></i> 最终结果</li>
+                <a href="<?php echo url('Student/index'); ?>"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
+                <a href="<?php echo url('Student/tutorList'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 专业导师</li></a>
+                <a href="<?php echo url('Student/editVoluntary'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 志愿填报</li></a>
+                <a href="<?php echo url('Student/showResult'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 最终结果</li></a>
             </ul>
         </nav>
     </div>
@@ -75,7 +75,7 @@
                             <td>副教授</td>
                             <td>计算机网络</td>
                             <td>1111111111@qq.com</td>
-                            <td>选择</td>
+                            <td><input class="btn btn-default" type="submit" value="选择"></td>
                         </tr>
                         <tr>
                             <td>2</td>
@@ -84,7 +84,7 @@
                             <td>副教授</td>
                             <td>计算机网络</td>
                             <td>1111111111@qq.com</td>
-                            <td>选择</td>
+                            <td><input class="btn btn-default" type="submit" value="选择"></td>
                         </tr>
                         <tr>
                             <td>3</td>
@@ -93,7 +93,7 @@
                             <td>副教授</td>
                             <td>计算机网络</td>
                             <td>1111111111@qq.com</td>
-                            <td>选择</td>
+                            <td><input class="btn btn-default" type="submit" value="选择"></td>
                         </tr>
                         <tr>
                             <td>4</td>
@@ -102,12 +102,38 @@
                             <td>副教授</td>
                             <td>计算机网络</td>
                             <td>1111111111@qq.com</td>
-                            <td>选择</td>
+                            <td><input class="btn btn-default" type="submit" value="选择"></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>张栋</td>
+                            <td>男</td>
+                            <td>副教授</td>
+                            <td>计算机网络</td>
+                            <td>1111111111@qq.com</td>
+                            <td><input class="btn btn-default" type="submit" value="选择"></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>张栋</td>
+                            <td>男</td>
+                            <td>副教授</td>
+                            <td>计算机网络</td>
+                            <td>1111111111@qq.com</td>
+                            <td><input class="btn btn-default" type="submit" value="选择"></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>张栋</td>
+                            <td>男</td>
+                            <td>副教授</td>
+                            <td>计算机网络</td>
+                            <td>1111111111@qq.com</td>
+                            <td><input class="btn btn-default" type="submit" value="选择"></td>
                         </tr>
                         </tbody>
                     </table>
-                </div>
-                <nav style="float: right;">
+                    <nav style="float: right;">
                     <ul class="pagination" >
                         <li><a href="#">&laquo;</a></li>
                         <li ><a href="#">1</a></li>
@@ -120,13 +146,8 @@
 
                     </ul>
                 </nav>
-
-
-
-
-
-
-
+                </div>
+                
             </div>
             
             <div class="footer"  style="border-radius: 10px;">
