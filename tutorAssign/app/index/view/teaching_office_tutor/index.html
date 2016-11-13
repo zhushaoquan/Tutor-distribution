@@ -6,9 +6,14 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>毕设导师智能分配系统</title>
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.css">
+   <!-- <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="__STATIC__/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.TUTOR_STATIC}}/css/student.css">
+    !-->
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student.css">
+    
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
@@ -28,8 +33,8 @@
             <ul class="sider-navbar-nav">
                 <a href="{{:url('TeachingOfficeTutor/index')}}"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
-                <li><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
-                <li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
+                <a href="{{:url('TeachingOfficeTutor/tutor_assign')}}"><li ><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
+                <a href="{{:url('TeachingOfficeTutor/student_assign')}}"><li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
             </ul>
         </nav>
     </div>

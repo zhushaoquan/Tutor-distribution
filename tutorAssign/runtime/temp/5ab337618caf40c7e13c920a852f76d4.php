@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:100:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office\indexHome.html";i:1478505666;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:100:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office\indexHome.html";i:1478959888;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>

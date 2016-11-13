@@ -9,6 +9,11 @@
 define('APP_PATH', __DIR__ . '/../app/');
 define('APP_DEBUG', false);
 
-define('TUTOR_STATIC','http://127.0.0.1/Tutor-distribution/tutorAssign/static');
+//define('TUTOR_STATIC','http://127.0.0.1/Tutor-distribution/tutorAssign/static');
+
+$_path = explode("/public",$_SERVER['SCRIPT_NAME']);
+define('TUTOR_STATIC',"http://".$_SERVER['HTTP_HOST'].$_path[0]."/static");
+define('OLD',"http://".$_SERVER['HTTP_HOST'].$_path[0].'/old');
+define('STATIC',"http://".$_SERVER['HTTP_HOST'].$_path[0].'/static');
 // 加载框架引导文件
 require __DIR__ . '/../thinkphp/start.php';
