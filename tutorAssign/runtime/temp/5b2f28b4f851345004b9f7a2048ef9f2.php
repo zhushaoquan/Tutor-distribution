@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\index.html";i:1479045308;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:89:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\modify.html";i:1479045573;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,36 +49,37 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                     <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                        <p>提示：第一轮志愿填报时间为2016年10月19日至2016年10月22日，请在规定时间内完成志愿填报！</p>
+                        <p>提示：部分信息通过系统导入无法修改！</p>
                     </div>
                 <div class="my-information-title">
-                   
-                        <span>我的信息</span>
-                                    
-                        <a href="<?php echo url('Student/modify'); ?>"><button class="btn btn-info button-size btn-edit" type="submit">修改</button></a>
-        
+                    <span>修改信息</span>
                 </div>
                 <div class="my-information-subtitle">
-                    <span>你可以在这里查看或修改自己的个人信息</span>
+                    <span>你可以在这里修改自己的个人信息</span>
                 </div>
                 <div class="my-information-detail-1">
                     <ul>
                         <li><span>姓名：</span><span class="span-value"><?php echo $user['name']; ?></span><span>学号：</span><span class="span-value"><?php echo $user['serialNum']; ?></span><span>性别：</span><span class="span-value"><?php echo $user['gender']; ?></span></li>
                         <li><span>学院：</span><span class="span-value"><?php echo $user['college']; ?></span><span>系别：</span><span class="span-value"><?php echo $user['department']; ?></span><span>方向：</span><span class="span-value"><?php echo $user['field']; ?></span></li>
                         <li><span>绩点：</span><span class="span-value"><?php echo $user['gpa']; ?></span><span>排名：</span><span class="span-value"><?php echo $user['rank']; ?></span><span>中选：</span><span class="span-value"><?php echo $user['chosen']; ?></span></li>
-                        <li><span>电话：</span><span class="span-value"><?php echo $user['telephone']; ?></span><span>邮箱：</span><span class="span-value"><?php echo $user['email']; ?></span></li>
-                    </ul>
                 </div>
-                <div class="skill-title">
-                    <p>技能及经历：</p>
-                </div>
-                <div class="skill-detail">
-                    <p><?php echo $user['skill']; ?></p>
-                </div>
-                <!-- <div class="time-reminder">
-                    <i class="glyphicon glyphicon-star-empty"></i>&nbsp;<span>提示：第一轮志愿填报时间为2016年10月19日至2016年10月22日，请同学们在规定时间内完成志愿填报</span>
-                </div> -->
-
+                
+                <form role="form">
+                      <div class="form-group">
+                        <span>旧密码：</span>
+                        <input type="email" class="form-control-1" id="exampleInputEmail1" placeholder="Enter email">
+                      </div>
+                      <div class="form-group pw-position">
+                        <span>新密码：</span>
+                        <input type="password" class="form-control-1" id="exampleInputPassword1" placeholder="Password">
+                      </div>
+                      <div class="form-group  pw-position">
+                        <span>确认密码：</span>
+                        <input type="password" class="form-control-1" id="exampleInputPassword1" placeholder="Password">
+                      </div>
+                  <button type="submit" class="btn btn-info button-size">修改</button>
+                </form>
+                <a href="<?php echo url('Student/index'); ?>"><button class="btn btn-info button-size" type="submit">返回</button></a></a>
             </div>
             
             <div class="footer"  style="border-radius: 10px;">

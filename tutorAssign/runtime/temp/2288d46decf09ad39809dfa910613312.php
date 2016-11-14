@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:94:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\index.html";i:1478505666;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:94:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\index.html";i:1479046568;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +7,10 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>毕设导师只能分配系统</title>
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/backstage.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo TUTOR_STATIC; ?>/css/student.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo TUTOR_STATIC; ?>/css/teacher.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/student.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/teacher.css">
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
