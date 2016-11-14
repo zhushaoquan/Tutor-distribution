@@ -67,14 +67,17 @@
                 <div class="form-group">
                     <label  class="col-sm-1 control-label">选择系别：</label>
                     <div class="col-sm-4">
-                        <select class="form-control" name="department">
-                            <option value="01">计算机系</option>
-                            <option value="02">数学系</option>
-                            <option value="03">网络工程系</option>
-                            <option value="04">软件工程系</option>
-                            <option value="05">信息安全系</option>
-                            <option value="06">系统结构系</option>
-                        </select>
+                    <form action="{{:url('TeachingOfficeTutor/student_assign')}}"  method="post">
+                        <select class="form-control" name="department" style="display: inline; width: 45%">
+                            <option value="计算机系">计算机系</option>
+                            <option value="数学系">数学系</option>
+                            <option value="网络工程系">网络工程系</option>
+                            <option value="软件工程系">软件工程系</option>
+                            <option value="信息安全系">信息安全系</option>
+                            <option value="系统结构系">系统结构系</option>
+                        </select>  
+                        <input type="submit" class="btn btn-primary" style="display: inline;" id="sub-result-export">
+                    </form>
                     </div>
                 </div>
 
@@ -83,85 +86,41 @@
                     <table class="table">
                         <tr>
                             <th>#</th>
-                            <th>学生学号</th>
+                           <th>学生学号</th>
                             <th>学生姓名</th>
-                            <th>班级</th>
+                         <!--   <th>班级</th>  !-->
                             <th>导师工号</th>
                             <th>导师姓名</th>
-                            <th>研究方向</th>
+                         <!--  <th>研究方向</th>  !-->
                         </tr>
 
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>031402203</td>
-                            <td>陈齐民</td>
-                            <td>计算机2班</td>
-                            <td>00023</td>
-                            <td>廖祥文</td>
-                            <td>系统结构</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>031402209</td>
-                            <td>黄伟炜</td>
-                            <td>计算机2班</td>
-                            <td>00024</td>
-                            <td>陈欢</td>
-                            <td>离散数学</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>031402233</td>
-                            <td>郑扬涛</td>
-                            <td>计算机2班</td>
-                            <td>00019</td>
-                            <td>牛玉贞</td>
-                            <td>计算机图形学</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>031402304</td>
-                            <td>陈燊</td>
-                            <td>计算机3班</td>
-                            <td>00020</td>
-                            <td>叶东毅</td>
-                            <td>人工智能</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>031402337</td>
-                            <td>胡心颖</td>
-                            <td>计算机3班</td>
-                            <td>00021</td>
-                            <td>郭龙坤</td>
-                            <td>云计算</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>031402341</td>
-                            <td>王婷婷</td>
-                            <td>计算机3班</td>
-                            <td>00022</td>
-                            <td>叶少珍</td>
-                            <td>电子商务</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>031402342</td>
-                            <td>许玲玲</td>
-                            <td>计算机3班</td>
-                            <td>00025</td>
-                            <td>郭坤</td>
-                            <td>数据挖掘</td>
-                        </tr>
+                        <?php
+                        $i=1;
+                        foreach ($data as  $value) 
+                        {
+                            
+                        echo '<tr>
+                            <td>'.$i.'</td>
+                            <td>'.$value['snum'].'</td>
+                            <td>'.$value['sname'].'</td>
+                       <!--      <td>计算机2班</td>  !-->
+                            <td>'.$value['tnum'].'</td>
+                            <td>'.$value['tname'].'</td>
+                       <!--      <td>系统结构</td>  !-->
+                        </tr>';
+                        $i++;
+                         }
+                        ?>
+                  
                         </tbody>
                     </table>
 
                     <div class="submit-area">
                         <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button>
-                        <button type="submit" class="btn btn-primary" id="sub-result-change">修&nbsp;&nbsp;改</button>
-                        <button type="submit" class="btn btn-primary" id="sub-result-confirm">确&nbsp;&nbsp;认</button>
+                           <button type="submit" class="btn btn-primary" id="sub-result-change"><a style="color:white;" href="{{:url('TeachingOfficeTutor/student_change')}}">修&nbsp;&nbsp;改</a></button>  
+                     <!--   <button type="submit" class="btn btn-primary" id="sub-result-change">修&nbsp;&nbsp;改</button> !-->
+                   <!--     <button type="submit" class="btn btn-primary" id="sub-result-confirm">确&nbsp;&nbsp;认</button>  !-->
                     </div>
 
                     <nav>

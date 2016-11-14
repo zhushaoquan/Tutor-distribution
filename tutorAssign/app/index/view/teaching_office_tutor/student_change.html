@@ -33,8 +33,8 @@
             <ul class="sider-navbar-nav">
                 <a href="{{:url('TeachingOfficeTutor/index')}}"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
-                <a href="{{:url('TeachingOfficeTutor/tutor_assign')}}"><li class="active"><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
-                <a href="{{:url('TeachingOfficeTutor/student_assign')}}"><li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
+                <a href="{{:url('TeachingOfficeTutor/tutor_assign')}}"><li ><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
+                <a href="{{:url('TeachingOfficeTutor/student_assign')}}"><li class="active"><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
             </ul>
         </nav>
     </div>
@@ -60,102 +60,108 @@
                 </div>
 
                 <div class="page-header">
-                    <h3>导师分配情况
+                    <h3>学生分配情况
                     </h3>
                 </div>
 
-                <div class="table-responsive">
+                <div class="form-group">
+                    <label  class="col-sm-1 control-label">选择系别：</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" name="department">
+                            <option value="01">计算机系</option>
+                            <option value="02">数学系</option>
+                            <option value="03">网络工程系</option>
+                            <option value="04">软件工程系</option>
+                            <option value="05">信息安全系</option>
+                            <option value="06">系统结构系</option>
+                        </select>
+                    </div>
+                </div>
 
+                <br /><br /><br />
+                <div class="table-responsive">
                     <table class="table">
                         <tr>
-                            <th>导师工号</th>
-                            <th>导师姓名</th>
+                            <th>#</th>
                             <th>学生学号</th>
                             <th>学生姓名</th>
+                         <!--   <th>班级</th>  !-->
+                            <th>导师工号</th>
+                            <th>导师姓名</th>
+                         <!--  <th>研究方向</th>  !-->
                         </tr>
 
                         <tbody>
-
-                        <?php foreach ($data as $value) 
-                        {
-                                  
-                            echo '<tr>
-                            <td style="vertical-align:middle" rowspan="'.count($value['tstudentL']).'">' . $value['tnum'].
-                            '</td>
-                            <td style="vertical-align:middle" rowspan="'.count($value['tstudentL']).'">'.$value['tname'].'</td>
-                            ';
-                            $i=0;
-                            foreach ($value['tstudentL'] as $value1) 
-                            {
-                               
-                            if($i>0) echo '<tr>';
-                             echo   '<td>' .  $value1['snum'] .'</td>
-                                    <td>' . $value1['sname'].'</td>';
-                               echo '
-                               </tr>';
-                              $i++;
-                            }
-                           
-                           // echo  '';
-                        }
-                        ?>
+                        <tr>
+                            <td>1</td>
+                            <td>031402203</td>
+                            <td>陈齐民</td>
+                       <!--      <td>计算机2班</td>  !-->
+                            <td>00023</td>
+                            <td>廖祥文</td>
+                       <!--      <td>系统结构</td>  !-->
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>031402209</td>
+                            <td>黄伟炜</td>
+                       <!--      <td>计算机2班</td>  !-->
+                            <td>00024</td>
+                            <td>陈欢</td>
+                      <!--       <td>离散数学</td>   !-->
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>031402233</td>
+                            <td>郑扬涛</td>
+                        <!--     <td>计算机2班</td>  !-->
+                            <td>00019</td>
+                            <td>牛玉贞</td>
+                      <!--       <td>计算机图形学</td>   !-->
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>031402304</td>
+                            <td>陈燊</td>
+                      <!--       <td>计算机3班</td>   !-->
+                            <td>00020</td>
+                            <td>叶东毅</td>
+                     <!--        <td>人工智能</td>   !-->
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>031402337</td>
+                            <td>胡心颖</td>
+                      <!--       <td>计算机3班</td>   !-->
+                            <td>00021</td>
+                            <td>郭龙坤</td>
+                       <!--      <td>云计算</td>   !-->
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>031402341</td>
+                            <td>王婷婷</td>
+                        <!--     <td>计算机3班</td>   !-->
+                            <td>00022</td>
+                            <td>叶少珍</td>
+                       <!--      <td>电子商务</td>   !-->
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>031402342</td>
+                            <td>许玲玲</td>
+                       <!--      <td>计算机3班</td>   !-->
+                            <td>00025</td>
+                            <td>郭坤</td>
+                      <!--       <td>数据挖掘</td>   !-->
+                        </tr>
                         </tbody>
                     </table>
-                    <!--   <tr>
-                            <td>031402XXX</td>
-                            <td>李四</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>王五</td>
-                        </tr> 
-                           
-                     <tr>
-                            <td style="vertical-align:middle" rowspan="4">00022</td>
-                            <td style="vertical-align:middle" rowspan="4">张栋</td>
-                            <td>031402XXX</td>
-                            <td>张三</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>李四</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>王五</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>赵六</td>
-                        </tr>
 
-                        <tr>
-                            <td style="vertical-align:middle" rowspan="2">00023</td>
-                            <td style="vertical-align:middle" rowspan="2">柯逍</td>
-                            <td>031402XXX</td>
-                            <td>张三</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>李四</td>
-                        </tr>
-
-                        <tr>
-                            <td style="vertical-align:middle" rowspan="2">00024</td>
-                            <td style="vertical-align:middle" rowspan="2">吴英杰</td>
-                            <td>031402XXX</td>
-                            <td>赵六</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>王五</td>
-                        </tr> !-->
-                  
                     <div class="submit-area">
                         <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button>
-                        <button type="submit" class="btn btn-primary" id="sub-result-change">
-                            <a style="color:white;" href="{{:url('TeachingOfficeTutor/tutor_change')}}">修&nbsp;&nbsp;改</a></button>
-                     <!--   <button type="submit" class="btn btn-primary" id="sub-result-confirm">确&nbsp;&nbsp;认</button>  !-->
+                <!--        <button type="submit" class="btn btn-primary" id="sub-result-change">修&nbsp;&nbsp;改</button>   !-->
+                        <button type="submit" class="btn btn-primary" id="sub-result-confirm">确&nbsp;&nbsp;认</button>
                     </div>
 
                     <nav>
