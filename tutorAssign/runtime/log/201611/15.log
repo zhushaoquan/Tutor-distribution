@@ -1,10 +1,16 @@
+<<<<<<< HEAD
 [ 2016-11-15T21:00:49+08:00 ] ::1 ::1 POST /tutor-distribution/tutorAssign/public/index.php/index/teaching_office_tutor/student_modify.html
 [ log ] localhost/tutor-distribution/tutorAssign/public/index.php/index/teaching_office_tutor/student_modify.html [运行时间：0.075445s][吞吐率：13.25req/s] [内存消耗：3,498.34kb] [文件加载：45]
+=======
+[ 2016-11-15T20:09:45+08:00 ] ::1 ::1 GET /Tutor-distribution/tutorAssign/public/index.php/
+[ log ] localhost/Tutor-distribution/tutorAssign/public/index.php/ [运行时间：0.500583s][吞吐率：2.00req/s] [内存消耗：2,400.22kb] [文件加载：37]
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
 [ info ] [ LANG ] D:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\lang\zh-cn.php
 [ info ] [ ROUTE ] array (
   'type' => 'module',
   'module' => 
   array (
+<<<<<<< HEAD
     0 => 'index',
     1 => 'teaching_office_tutor',
     2 => 'student_modify',
@@ -3292,10 +3298,16 @@
     0 => 'index',
     1 => 'teaching_office_tutor',
     2 => 'tutor_assign',
+=======
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
   ),
 )
 [ info ] [ HEADER ] array (
   'host' => 'localhost',
+<<<<<<< HEAD
   'connection' => 'keep-alive',
   'upgrade-insecure-requests' => '1',
   'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.87 Safari/537.36',
@@ -3309,6 +3321,20 @@
 )
 [ info ] [ RUN ] Class [ <user> class app\index\controller\TeachingOfficeTutor extends app\index\controller\BaseController ] {
   @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\TeachingOfficeTutor.php 7-109
+=======
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'Webstorm-b18dcdb6=ab2514c5-d3dd-4774-bf32-8a62f505ea87; Phpstorm-4f95f2da=0291b448-e5fe-4740-b7fd-e68182f4695e',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] Class [ <user> class app\index\controller\Index extends app\index\controller\BaseController ] {
+  @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Index.php 7-22
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
 
   - Constants [0] {
   }
@@ -3327,6 +3353,7 @@
     Property [ <default> protected $beforeActionList ]
   }
 
+<<<<<<< HEAD
   - Methods [31] {
     Method [ <user> public method index ] {
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\TeachingOfficeTutor.php 9 - 16
@@ -3358,6 +3385,15 @@
 
     Method [ <user> public method confirm ] {
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\TeachingOfficeTutor.php 105 - 108
+=======
+  - Methods [25] {
+    Method [ <user> public method index ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Index.php 9 - 13
+    }
+
+    Method [ <user> public method test ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Index.php 16 - 21
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
     }
 
     Method [ <user, inherits app\index\controller\BaseController> public method auto_login ] {
@@ -3654,8 +3690,13 @@
   }
 }
 
+<<<<<<< HEAD
 [ info ] [ RUN ] Method [ <user> public method tutor_assign ] {
   @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\TeachingOfficeTutor.php 40 - 59
+=======
+[ info ] [ RUN ] Method [ <user> public method index ] {
+  @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Index.php 9 - 13
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
 }
 
 [ info ] [ SESSION ] INIT array (
@@ -3665,6 +3706,7 @@
   'type' => '',
   'auto_start' => true,
 )
+<<<<<<< HEAD
 [ info ] [ DB ] INIT mysql
 [ info ] [ VIEW ] D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_assign.html [ array (
   0 => 'data',
@@ -3684,18 +3726,31 @@
 ---------------------------------------------------------------
 [ 2016-11-15T21:04:21+08:00 ] ::1 ::1 GET /tutor-distribution/tutorAssign/public/index.php/index/teaching_office_tutor/student_assign.html
 [ log ] localhost/tutor-distribution/tutorAssign/public/index.php/index/teaching_office_tutor/student_assign.html [运行时间：0.075532s][吞吐率：13.24req/s] [内存消耗：3,773.55kb] [文件加载：48]
+=======
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-11-15T20:09:46+08:00 ] ::1 ::1 GET /Tutor-distribution/tutorAssign/public/index.php/index/base_controller/login.html
+[ log ] localhost/Tutor-distribution/tutorAssign/public/index.php/index/base_controller/login.html [运行时间：1.032162s][吞吐率：0.97req/s] [内存消耗：3,383.44kb] [文件加载：42]
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
 [ info ] [ LANG ] D:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\lang\zh-cn.php
 [ info ] [ ROUTE ] array (
   'type' => 'module',
   'module' => 
   array (
     0 => 'index',
+<<<<<<< HEAD
     1 => 'teaching_office_tutor',
     2 => 'student_assign',
+=======
+    1 => 'base_controller',
+    2 => 'login',
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
   ),
 )
 [ info ] [ HEADER ] array (
   'host' => 'localhost',
+<<<<<<< HEAD
   'connection' => 'keep-alive',
   'upgrade-insecure-requests' => '1',
   'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.87 Safari/537.36',
@@ -3709,6 +3764,20 @@
 )
 [ info ] [ RUN ] Class [ <user> class app\index\controller\TeachingOfficeTutor extends app\index\controller\BaseController ] {
   @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\TeachingOfficeTutor.php 7-109
+=======
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'cookie' => 'Webstorm-b18dcdb6=ab2514c5-d3dd-4774-bf32-8a62f505ea87; Phpstorm-4f95f2da=0291b448-e5fe-4740-b7fd-e68182f4695e; PHPSESSID=ltdlfantmk89li2ngdihlrcc14',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] Class [ <user> class app\index\controller\BaseController extends think\Controller ] {
+  @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 9-128
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
 
   - Constants [0] {
   }
@@ -3727,6 +3796,7 @@
     Property [ <default> protected $beforeActionList ]
   }
 
+<<<<<<< HEAD
   - Methods [31] {
     Method [ <user> public method index ] {
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\TeachingOfficeTutor.php 9 - 16
@@ -3761,6 +3831,10 @@
     }
 
     Method [ <user, inherits app\index\controller\BaseController> public method auto_login ] {
+=======
+  - Methods [23] {
+    Method [ <user> public method auto_login ] {
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 14 - 19
 
       - Parameters [1] {
@@ -3768,11 +3842,19 @@
       }
     }
 
+<<<<<<< HEAD
     Method [ <user, inherits app\index\controller\BaseController> public method login ] {
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 63
     }
 
     Method [ <user, inherits app\index\controller\BaseController> public method hasLogin ] {
+=======
+    Method [ <user> public method login ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 63
+    }
+
+    Method [ <user> public method hasLogin ] {
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 65 - 70
 
       - Parameters [1] {
@@ -3780,6 +3862,7 @@
       }
     }
 
+<<<<<<< HEAD
     Method [ <user, inherits app\index\controller\BaseController> public method logout ] {
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 72 - 79
     }
@@ -3789,6 +3872,17 @@
     }
 
     Method [ <user, inherits app\index\controller\BaseController> public method make_menu ] {
+=======
+    Method [ <user> public method logout ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 72 - 79
+    }
+
+    Method [ <user> public method refresh_user ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 81 - 87
+    }
+
+    Method [ <user> public method make_menu ] {
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 89 - 101
 
       - Parameters [1] {
@@ -3796,7 +3890,11 @@
       }
     }
 
+<<<<<<< HEAD
     Method [ <user, inherits app\index\controller\BaseController> public method translate ] {
+=======
+    Method [ <user> public method translate ] {
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 103 - 118
 
       - Parameters [1] {
@@ -3804,7 +3902,11 @@
       }
     }
 
+<<<<<<< HEAD
     Method [ <user, inherits app\index\controller\BaseController> public method successJson ] {
+=======
+    Method [ <user> public method successJson ] {
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 120 - 122
 
       - Parameters [1] {
@@ -3812,7 +3914,11 @@
       }
     }
 
+<<<<<<< HEAD
     Method [ <user, inherits app\index\controller\BaseController> public method errorJson ] {
+=======
+    Method [ <user> public method errorJson ] {
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 124 - 126
 
       - Parameters [1] {
@@ -4054,6 +4160,7 @@
   }
 }
 
+<<<<<<< HEAD
 [ info ] [ RUN ] Method [ <user> public method student_assign ] {
   @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\TeachingOfficeTutor.php 17 - 39
 }
@@ -4083,18 +4190,42 @@
 ---------------------------------------------------------------
 [ 2016-11-15T21:04:24+08:00 ] ::1 ::1 GET /tutor-distribution/tutorAssign/public/index.php/index/teaching_office_tutor/tutor_assign.html
 [ log ] localhost/tutor-distribution/tutorAssign/public/index.php/index/teaching_office_tutor/tutor_assign.html [运行时间：0.087766s][吞吐率：11.39req/s] [内存消耗：3,768.88kb] [文件加载：48]
+=======
+[ info ] [ RUN ] Method [ <user> public method login ] {
+  @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 63
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\common\login.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.187852s ] mysql:dbname=teacher_class_system;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `task_info` [ RunTime:0.466882s ]
+[ sql ] [ SQL ] UPDATE `task_info`  SET `taskState`=1  WHERE  `teacherDeadline` < '20161115'  AND `taskState` = 0      [ RunTime:0.171818s ]
+[ sql ] [ SQL ] UPDATE `task_info`  SET `taskState`=2  WHERE  `departmentDeadline` < '20161115'  AND `taskState` = 1      [ RunTime:0.000622s ]
+
+---------------------------------------------------------------
+[ 2016-11-15T20:10:12+08:00 ] ::1 ::1 POST /Tutor-distribution/tutorAssign/public/index.php/index/base_controller/login.html
+[ log ] localhost/Tutor-distribution/tutorAssign/public/index.php/index/base_controller/login.html [运行时间：0.190185s][吞吐率：5.26req/s] [内存消耗：3,486.48kb] [文件加载：44]
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
 [ info ] [ LANG ] D:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\lang\zh-cn.php
 [ info ] [ ROUTE ] array (
   'type' => 'module',
   'module' => 
   array (
     0 => 'index',
+<<<<<<< HEAD
     1 => 'teaching_office_tutor',
     2 => 'tutor_assign',
+=======
+    1 => 'base_controller',
+    2 => 'login',
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
   ),
 )
 [ info ] [ HEADER ] array (
   'host' => 'localhost',
+<<<<<<< HEAD
   'connection' => 'keep-alive',
   'upgrade-insecure-requests' => '1',
   'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.87 Safari/537.36',
@@ -4108,6 +4239,26 @@
 )
 [ info ] [ RUN ] Class [ <user> class app\index\controller\TeachingOfficeTutor extends app\index\controller\BaseController ] {
   @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\TeachingOfficeTutor.php 7-109
+=======
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://localhost/Tutor-distribution/tutorAssign/public/index.php/index/base_controller/login.html',
+  'cookie' => 'thinkphp_show_page_trace=0|0; Webstorm-b18dcdb6=ab2514c5-d3dd-4774-bf32-8a62f505ea87; Phpstorm-4f95f2da=0291b448-e5fe-4740-b7fd-e68182f4695e; PHPSESSID=ltdlfantmk89li2ngdihlrcc14',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'content-length' => '56',
+)
+[ info ] [ PARAM ] array (
+  'login-user' => '00022',
+  'login-password' => '00022',
+  'login-type' => 'teacher',
+)
+[ info ] [ RUN ] Class [ <user> class app\index\controller\BaseController extends think\Controller ] {
+  @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 9-128
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
 
   - Constants [0] {
   }
@@ -4126,6 +4277,7 @@
     Property [ <default> protected $beforeActionList ]
   }
 
+<<<<<<< HEAD
   - Methods [31] {
     Method [ <user> public method index ] {
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\TeachingOfficeTutor.php 9 - 16
@@ -4160,6 +4312,10 @@
     }
 
     Method [ <user, inherits app\index\controller\BaseController> public method auto_login ] {
+=======
+  - Methods [23] {
+    Method [ <user> public method auto_login ] {
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 14 - 19
 
       - Parameters [1] {
@@ -4167,11 +4323,19 @@
       }
     }
 
+<<<<<<< HEAD
     Method [ <user, inherits app\index\controller\BaseController> public method login ] {
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 63
     }
 
     Method [ <user, inherits app\index\controller\BaseController> public method hasLogin ] {
+=======
+    Method [ <user> public method login ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 63
+    }
+
+    Method [ <user> public method hasLogin ] {
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 65 - 70
 
       - Parameters [1] {
@@ -4179,6 +4343,7 @@
       }
     }
 
+<<<<<<< HEAD
     Method [ <user, inherits app\index\controller\BaseController> public method logout ] {
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 72 - 79
     }
@@ -4188,6 +4353,17 @@
     }
 
     Method [ <user, inherits app\index\controller\BaseController> public method make_menu ] {
+=======
+    Method [ <user> public method logout ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 72 - 79
+    }
+
+    Method [ <user> public method refresh_user ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 81 - 87
+    }
+
+    Method [ <user> public method make_menu ] {
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 89 - 101
 
       - Parameters [1] {
@@ -4195,7 +4371,11 @@
       }
     }
 
+<<<<<<< HEAD
     Method [ <user, inherits app\index\controller\BaseController> public method translate ] {
+=======
+    Method [ <user> public method translate ] {
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 103 - 118
 
       - Parameters [1] {
@@ -4203,7 +4383,11 @@
       }
     }
 
+<<<<<<< HEAD
     Method [ <user, inherits app\index\controller\BaseController> public method successJson ] {
+=======
+    Method [ <user> public method successJson ] {
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 120 - 122
 
       - Parameters [1] {
@@ -4211,7 +4395,11 @@
       }
     }
 
+<<<<<<< HEAD
     Method [ <user, inherits app\index\controller\BaseController> public method errorJson ] {
+=======
+    Method [ <user> public method errorJson ] {
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 124 - 126
 
       - Parameters [1] {
@@ -4453,10 +4641,18 @@
   }
 }
 
+<<<<<<< HEAD
 [ info ] [ RUN ] Method [ <user> public method tutor_assign ] {
   @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\TeachingOfficeTutor.php 40 - 59
 }
 
+=======
+[ info ] [ RUN ] Method [ <user> public method login ] {
+  @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 63
+}
+
+[ info ] [ DB ] INIT mysql
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
 [ info ] [ SESSION ] INIT array (
   'id' => '',
   'var_session_id' => '',
@@ -4464,6 +4660,7 @@
   'type' => '',
   'auto_start' => true,
 )
+<<<<<<< HEAD
 [ info ] [ DB ] INIT mysql
 [ info ] [ VIEW ] D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_assign.html [ array (
   0 => 'data',
@@ -4483,18 +4680,41 @@
 ---------------------------------------------------------------
 [ 2016-11-15T21:04:47+08:00 ] ::1 ::1 GET /tutor-distribution/tutorAssign/public/index.php/index/teaching_office_tutor/tutor_assign.html
 [ log ] localhost/tutor-distribution/tutorAssign/public/index.php/index/teaching_office_tutor/tutor_assign.html [运行时间：0.065685s][吞吐率：15.22req/s] [内存消耗：3,768.58kb] [文件加载：48]
+=======
+[ info ] [ VIEW ] D:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\tpl\dispatch_jump.tpl [ array (
+  0 => 'code',
+  1 => 'msg',
+  2 => 'data',
+  3 => 'url',
+  4 => 'wait',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001262s ] mysql:dbname=teacher_class_system;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `user_teacher` [ RunTime:0.015867s ]
+[ sql ] [ SQL ] SELECT * FROM `user_teacher` WHERE  `workNumber` = '00022' LIMIT 1    [ RunTime:0.085139s ]
+
+---------------------------------------------------------------
+[ 2016-11-15T20:10:15+08:00 ] ::1 ::1 GET /Tutor-distribution/tutorAssign/public/index.php/index/teacher/index.html
+[ log ] localhost/Tutor-distribution/tutorAssign/public/index.php/index/teacher/index.html [运行时间：0.093892s][吞吐率：10.65req/s] [内存消耗：2,560.04kb] [文件加载：39]
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
 [ info ] [ LANG ] D:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\lang\zh-cn.php
 [ info ] [ ROUTE ] array (
   'type' => 'module',
   'module' => 
   array (
     0 => 'index',
+<<<<<<< HEAD
     1 => 'teaching_office_tutor',
     2 => 'tutor_assign',
+=======
+    1 => 'teacher',
+    2 => 'index',
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
   ),
 )
 [ info ] [ HEADER ] array (
   'host' => 'localhost',
+<<<<<<< HEAD
   'connection' => 'keep-alive',
   'cache-control' => 'max-age=0',
   'upgrade-insecure-requests' => '1',
@@ -4509,6 +4729,21 @@
 )
 [ info ] [ RUN ] Class [ <user> class app\index\controller\TeachingOfficeTutor extends app\index\controller\BaseController ] {
   @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\TeachingOfficeTutor.php 7-109
+=======
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://localhost/Tutor-distribution/tutorAssign/public/index.php/index/base_controller/login.html',
+  'cookie' => 'Webstorm-b18dcdb6=ab2514c5-d3dd-4774-bf32-8a62f505ea87; Phpstorm-4f95f2da=0291b448-e5fe-4740-b7fd-e68182f4695e; PHPSESSID=ltdlfantmk89li2ngdihlrcc14',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] Class [ <user> class app\index\controller\Teacher extends app\index\controller\BaseController ] {
+  @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Teacher.php 8-209
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
 
   - Constants [0] {
   }
@@ -4519,7 +4754,12 @@
   - Static methods [0] {
   }
 
+<<<<<<< HEAD
   - Properties [5] {
+=======
+  - Properties [6] {
+    Property [ <default> public $menu ]
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
     Property [ <default> protected $view ]
     Property [ <default> protected $request ]
     Property [ <default> protected $failException ]
@@ -4527,6 +4767,7 @@
     Property [ <default> protected $beforeActionList ]
   }
 
+<<<<<<< HEAD
   - Methods [31] {
     Method [ <user> public method index ] {
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\TeachingOfficeTutor.php 9 - 16
@@ -4558,6 +4799,55 @@
 
     Method [ <user> public method confirm ] {
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\TeachingOfficeTutor.php 105 - 108
+=======
+  - Methods [33] {
+    Method [ <user, overwrites think\Controller, prototype think\Controller> public method _initialize ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Teacher.php 10 - 20
+    }
+
+    Method [ <user> public method index ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Teacher.php 21 - 24
+    }
+
+    Method [ <user> public method indexHome ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Teacher.php 26 - 28
+    }
+
+    Method [ <user> public method select ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Teacher.php 30 - 63
+    }
+
+    Method [ <user> public method table_overview ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Teacher.php 64 - 71
+    }
+
+    Method [ <user> public method table_page ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Teacher.php 72 - 110
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $table_name = '' ]
+      }
+    }
+
+    Method [ <user> public method table_list ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Teacher.php 112 - 135
+    }
+
+    Method [ <user> public method table_fill ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Teacher.php 137 - 150
+    }
+
+    Method [ <user> public method information ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Teacher.php 153 - 156
+    }
+
+    Method [ <user> public method information_change ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Teacher.php 158 - 183
+    }
+
+    Method [ <user> public method save_table_fill ] {
+      @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Teacher.php 185 - 207
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
     }
 
     Method [ <user, inherits app\index\controller\BaseController> public method auto_login ] {
@@ -4633,10 +4923,13 @@
       }
     }
 
+<<<<<<< HEAD
     Method [ <user, inherits think\Controller> protected method _initialize ] {
       @@ D:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 66 - 68
     }
 
+=======
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
     /**
      * 前置操作
      * @access protected
@@ -4854,10 +5147,13 @@
   }
 }
 
+<<<<<<< HEAD
 [ info ] [ RUN ] Method [ <user> public method tutor_assign ] {
   @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\TeachingOfficeTutor.php 40 - 59
 }
 
+=======
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
 [ info ] [ SESSION ] INIT array (
   'id' => '',
   'var_session_id' => '',
@@ -4865,6 +5161,7 @@
   'type' => '',
   'auto_start' => true,
 )
+<<<<<<< HEAD
 [ info ] [ DB ] INIT mysql
 [ info ] [ VIEW ] D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_assign.html [ array (
   0 => 'data',
@@ -4880,5 +5177,16 @@
 [ sql ] [ SQL ] select s.serialNum snum,s.name sname from tc_student s,tc_result r where  r.workNumber='01017'  and s.sid=r.sid [ RunTime:0.000524s ]
 [ sql ] [ SQL ] select s.serialNum snum,s.name sname from tc_student s,tc_result r where  r.workNumber='03161'  and s.sid=r.sid [ RunTime:0.000579s ]
 [ sql ] [ SQL ] select s.serialNum snum,s.name sname from tc_student s,tc_result r where  r.workNumber='04073'  and s.sid=r.sid [ RunTime:0.000514s ]
+=======
+[ info ] [ RUN ] Method [ <user> public method index ] {
+  @@ D:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\Teacher.php 21 - 24
+}
+
+[ info ] [ VIEW ] D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher\index.html [ array (
+  0 => 'user',
+  1 => 'menus',
+) ]
+[ info ] [ LOG ] INIT File
+>>>>>>> d30b27ee03452b59da3877681b460e7521ac7dfc
 
 ---------------------------------------------------------------
