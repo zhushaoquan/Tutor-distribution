@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_assign.html";i:1478962613;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_assign.html";i:1479136785;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,6 +66,7 @@
                 </div>
 
                 <div class="table-responsive">
+
                     <table class="table">
                         <tr>
                             <th>导师工号</th>
@@ -76,22 +77,41 @@
 
                         <tbody>
 
-                        <tr>
-                            <td style="vertical-align:middle" rowspan="3">00021</td>
-                            <td style="vertical-align:middle" rowspan="3">叶东毅</td>
-                            <td>031402XXX</td>
-                            <td>张三</td>
-                        </tr>
-                        <tr>
+                        <?php foreach ($data as $value) 
+                        {
+                                  
+                            echo '<tr>
+                            <td style="vertical-align:middle" rowspan="'.count($value['tstudentL']).'">' . $value['tnum'].
+                            '</td>
+                            <td style="vertical-align:middle" rowspan="'.count($value['tstudentL']).'">'.$value['tname'].'</td>
+                            ';
+                            $i=0;
+                            foreach ($value['tstudentL'] as $value1) 
+                            {
+                               
+                            if($i>0) echo '<tr>';
+                             echo   '<td>' .  $value1['snum'] .'</td>
+                                    <td>' . $value1['sname'].'</td>';
+                               echo '
+                               </tr>';
+                              $i++;
+                            }
+                           
+                           // echo  '';
+                        }
+                        ?>
+                        </tbody>
+                    </table>
+                    <!--   <tr>
                             <td>031402XXX</td>
                             <td>李四</td>
                         </tr>
                         <tr>
                             <td>031402XXX</td>
                             <td>王五</td>
-                        </tr>
-
-                        <tr>
+                        </tr> 
+                           
+                     <tr>
                             <td style="vertical-align:middle" rowspan="4">00022</td>
                             <td style="vertical-align:middle" rowspan="4">张栋</td>
                             <td>031402XXX</td>
@@ -130,14 +150,13 @@
                         <tr>
                             <td>031402XXX</td>
                             <td>王五</td>
-                        </tr>
-                        </tbody>
-                    </table>
-
+                        </tr> !-->
+                  
                     <div class="submit-area">
                         <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button>
-                        <button type="submit" class="btn btn-primary" id="sub-result-change">修&nbsp;&nbsp;改</button>
-                        <button type="submit" class="btn btn-primary" id="sub-result-confirm">确&nbsp;&nbsp;认</button>
+                        <button type="submit" class="btn btn-primary" id="sub-result-change">
+                            <a style="color:white;" href="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>">修&nbsp;&nbsp;改</a></button>
+                     <!--   <button type="submit" class="btn btn-primary" id="sub-result-confirm">确&nbsp;&nbsp;认</button>  !-->
                     </div>
 
                     <nav>

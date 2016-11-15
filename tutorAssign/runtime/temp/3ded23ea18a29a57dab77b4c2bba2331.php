@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_assign.html";i:1479137559;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_change.html";i:1479125192;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,8 +34,8 @@
             <ul class="sider-navbar-nav">
                 <a href="<?php echo url('TeachingOfficeTutor/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
-                <a href="<?php echo url('TeachingOfficeTutor/tutor_assign'); ?>"><li ><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
-                <a href="<?php echo url('TeachingOfficeTutor/student_assign'); ?>"><li class="active"><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
+                <a href="<?php echo url('TeachingOfficeTutor/tutor_assign'); ?>"><li class="active"><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
+                <a href="<?php echo url('TeachingOfficeTutor/student_assign'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
             </ul>
         </nav>
     </div>
@@ -61,69 +61,86 @@
                 </div>
 
                 <div class="page-header">
-                    <h3>学生分配情况
+                    <h3>导师分配情况
                     </h3>
                 </div>
-
-                <div class="form-group">
-                    <label  class="col-sm-1 control-label">选择系别：</label>
-                    <div class="col-sm-4">
-                    <form action="<?php echo url('TeachingOfficeTutor/student_assign'); ?>"  method="post">
-                        <select class="form-control" name="department" style="display: inline; width: 45%">
-                            <option value="计算机系">计算机系</option>
-                            <option value="数学系">数学系</option>
-                            <option value="网络工程系">网络工程系</option>
-                            <option value="软件工程系">软件工程系</option>
-                            <option value="信息安全系">信息安全系</option>
-                            <option value="系统结构系">系统结构系</option>
-                        </select>  
-                        <input type="submit" class="btn btn-primary" style="display: inline;" id="sub-result-export">
-                    </form>
-                    </div>
-                </div>
-
-                <br /><br /><br />
+                <form action="welcome.php" method="post">
                 <div class="table-responsive">
+
                     <table class="table">
                         <tr>
-                            <th>#</th>
-                           <th>学生学号</th>
-                            <th>学生姓名</th>
-                         <!--   <th>班级</th>  !-->
                             <th>导师工号</th>
                             <th>导师姓名</th>
-                         <!--  <th>研究方向</th>  !-->
+                            <th>学生学号</th>
+                            <th>学生姓名</th>
                         </tr>
 
                         <tbody>
-                        <?php
-                        $i=1;
-                        foreach ($data as  $value) 
-                        {
-                            
-                        echo '<tr>
-                            <td>'.$i.'</td>
-                            <td>'.$value['snum'].'</td>
-                            <td>'.$value['sname'].'</td>
-                       <!--      <td>计算机2班</td>  !-->
-                            <td>'.$value['tnum'].'</td>
-                            <td>'.$value['tname'].'</td>
-                       <!--      <td>系统结构</td>  !-->
-                        </tr>';
-                        $i++;
-                         }
-                        ?>
-                  
+
+                        <tr>
+                            <td style="vertical-align:middle" rowspan="3">00021</td>
+                            <td style="vertical-align:middle" rowspan="3">叶东毅</td>
+                            <td>031402XXX</td>
+                            <td>张三</td>
+                        </tr>
+                        <tr>
+                            <td>031402XXX</td>
+                            <td>李四</td>
+                        </tr>
+                        <tr>
+                            <td>031402XXX</td>
+                            <td>王五</td>
+                        </tr>
+
+                        <tr>
+                            <td style="vertical-align:middle" rowspan="4">00022</td>
+                            <td style="vertical-align:middle" rowspan="4">张栋</td>
+                            <td>031402XXX</td>
+                            <td>张三</td>
+                        </tr>
+                        <tr>
+                            <td>031402XXX</td>
+                            <td>李四</td>
+                        </tr>
+                        <tr>
+                            <td>031402XXX</td>
+                            <td>王五</td>
+                        </tr>
+                        <tr>
+                            <td>031402XXX</td>
+                            <td>赵六</td>
+                        </tr>
+
+                        <tr>
+                            <td style="vertical-align:middle" rowspan="2">00023</td>
+                            <td style="vertical-align:middle" rowspan="2">柯逍</td>
+                            <td>031402XXX</td>
+                            <td>张三</td>
+                        </tr>
+                        <tr>
+                            <td>031402XXX</td>
+                            <td>李四</td>
+                        </tr>
+
+                        <tr>
+                            <td style="vertical-align:middle" rowspan="2">00024</td>
+                            <td style="vertical-align:middle" rowspan="2">吴英杰</td>
+                            <td>031402XXX</td>
+                            <td>赵六</td>
+                        </tr>
+                        <tr>
+                            <td>031402XXX</td>
+                            <td>王五</td>
+                        </tr>
                         </tbody>
                     </table>
 
                     <div class="submit-area">
-                        <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button>
-                           <button type="submit" class="btn btn-primary" id="sub-result-change"><a style="color:white;" href="<?php echo url('TeachingOfficeTutor/student_change'); ?>">修&nbsp;&nbsp;改</a></button>  
-                     <!--   <button type="submit" class="btn btn-primary" id="sub-result-change">修&nbsp;&nbsp;改</button> !-->
-                   <!--     <button type="submit" class="btn btn-primary" id="sub-result-confirm">确&nbsp;&nbsp;认</button>  !-->
+                 <!--       <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button>   !-->
+                   <!--     <button type="submit" class="btn btn-primary" id="sub-result-change">修&nbsp;&nbsp;改</button>  !-->
+                        <button type="submit" class="btn btn-primary" id="sub-result-confirm">确&nbsp;&nbsp;认</button>
                     </div>
-
+                </from>
                     <nav>
                         <ul class="pagination" style="float: right;">
                             <li><a href="#">&laquo;</a></li>
