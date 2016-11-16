@@ -27,10 +27,10 @@
                 <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="{{:url('TeacherTutor/index')}}"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <a href="{{:url('TeacherTutor/studentList')}}"><li  class="active"><i class="glyphicon glyphicon-th-list"></i> 可选学生</li></a>
-                <a href="{{:url('TeacherTutor/issueSubmit')}}"><li><i class="glyphicon glyphicon-pencil"></i> 课题提交</li></a>
-                <a href="{{:url('TeacherTutor/showResult')}}"><li><i class="glyphicon glyphicon-ok"></i> 最终结果</li></a>
+                <a href="{{:url('TeacherTutor/index')}}"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
+                <a href="{{:url('TeacherTutor/student_list')}}"><li><i class="glyphicon glyphicon-th-list"></i> 可选学生</li></a>
+                <a href="{{:url('TeacherTutor/issue_submit')}}"><li><i class="glyphicon glyphicon-pencil"></i> 课题提交</li></a>
+                <a href="{{:url('TeacherTutor/show_result')}}"><li><i class="glyphicon glyphicon-ok"></i> 最终结果</li></a>
             </ul>
         </nav>
     </div>
@@ -70,53 +70,27 @@
                             <th>#</th>
                             <th>姓名</th>
                             <th>性别</th>
-                            <th>绩点</th>
                             <th>排名</th>
+                            <th>绩点</th>
                             <th>志愿顺序</th>
                             <th>选择</th>
                             <th>拒绝</th>
                         </tr>
                         <tbody>
+                        <?php foreach ($studentList as $key => $value):?>
+                        <form method="post" action="{{:url('TeacherTutor/student_list')}}">
                         <tr>
-                            <td>1</td>
-                            <td>张三</td>
-                            <td>男</td>
-                            <td>3.9</td>
-                            <td>1/70</td>
-                            <td>第一志愿</td>
-                            <td><input class="btn btn-default" type="submit" value="选择"></td>
-                            <td><input class="btn btn-default" type="submit" value="拒绝"></td>
+                            <td><input type="text" style="display:none" name="sid" value="<?php echo $value['sid'];?>"><?php echo $value['sid']?></td>
+                            <td><?php echo $value['name']?></td>
+                            <td><?php if($value['gender'])echo "男";else echo "女";?></td>
+                            <td><?php echo $value['rank']?></td>
+                            <td><?php echo $value['gpa']?></td>
+                            <td><?php echo "第".$value['wish']."志愿"?></td>
+                            <input type="text" style="display:none" name="department" value="<?php echo $value['department'];?>">
+                            <td><input class="btn btn-default" type="submit" value="选择" name="choise"></td>
+                            <td><input class="btn btn-default" type="submit" value="拒绝" name="choise"></td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>张三</td>
-                            <td>男</td>
-                            <td>3.9</td>
-                            <td>1/70</td>
-                            <td>第一志愿</td>
-                            <td><input class="btn btn-default" type="submit" value="选择"></td>
-                            <td><input class="btn btn-default" type="submit" value="拒绝"></td>
-                        </tr>
-                         <tr>
-                            <td>3</td>
-                            <td>张三</td>
-                            <td>男</td>
-                            <td>3.9</td>
-                            <td>1/70</td>
-                            <td>第一志愿</td>
-                            <td><input class="btn btn-default" type="submit" value="选择"></td>
-                            <td><input class="btn btn-default" type="submit" value="拒绝"></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>张三</td>
-                            <td>男</td>
-                            <td>3.9</td>
-                            <td>1/70</td>
-                            <td>第一志愿</td>
-                            <td><input class="btn btn-default" type="submit" value="选择"></td>
-                            <td><input class="btn btn-default" type="submit" value="拒绝"></td>
-                        </tr>
+                    <?php endforeach;?>
                         </tbody>
                     </table>
                     <nav style="float: right;">
