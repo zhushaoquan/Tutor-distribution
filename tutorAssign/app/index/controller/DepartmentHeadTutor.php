@@ -176,4 +176,15 @@ class DepartmentHeadTutor extends BaseController {
 				// dump($teacher);
 
 	}
+
+
+	public function testtest() {
+		$data = Db::table('tc_voluntary')->select();
+		// $dat = json_decode($data);
+		$dat = file_get_contents('data.txt');
+		dump($dat);
+		// file_put_contents('data.txt', var_export($data,true));
+		// return json($dat);
+		// return json($data);
+	}
 }
