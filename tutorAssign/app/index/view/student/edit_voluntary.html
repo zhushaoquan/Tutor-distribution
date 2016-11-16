@@ -57,8 +57,9 @@
                 </div>
                  <hr>
             <div class ="center-block" >
-            <!--<?php if($ontime==0){?>-->                     
-            <form method="post" action="{{:url('student/edit_voluntary')}}" >           
+            <?php if($ontime==1){?>                   
+            <form method="post" action="{{:url('student/edit_voluntary')}}" > 
+
                     <div class="form-horizontal" role="form">
                         <div class="form-group">
                             <label for="basic" class="col-lg-2 control-label">第一志愿：</label>
@@ -133,7 +134,7 @@
                     <button class="btn btn-info" type="submit">提交</button>
                 </form>
                 </div>
-            <!--<?php }?>-->
+            <?php }?>
             </div>
 
 
