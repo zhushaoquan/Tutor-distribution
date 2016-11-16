@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_assign.html";i:1479136785;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_assign.html";i:1479206615;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,7 +79,6 @@
 
                         <?php foreach ($data as $value) 
                         {
-                                  
                             echo '<tr>
                             <td style="vertical-align:middle" rowspan="'.count($value['tstudentL']).'">' . $value['tnum'].
                             '</td>
@@ -96,8 +95,6 @@
                                </tr>';
                               $i++;
                             }
-                           
-                           // echo  '';
                         }
                         ?>
                         </tbody>

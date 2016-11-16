@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_modify.html";i:1479214708;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -9,11 +10,11 @@
     <title>毕设导师智能分配系统</title>
     <!--  <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="__STATIC__/css/backstage.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.TUTOR_STATIC}}/css/student.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo TUTOR_STATIC; ?>/css/student.css">
     !-->
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/student.css">
     <style type="text/css">
     .sider-navbar-nav li {
         color: #fff;
@@ -35,14 +36,14 @@
                     <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
                 </div>
                 <ul class="sider-navbar-nav">
-                    <a href="{{:url('TeachingOfficeTutor/index')}}">
+                    <a href="<?php echo url('TeachingOfficeTutor/index'); ?>">
                         <li><i class="glyphicon glyphicon-user"></i> 个人信息</li>
                     </a>
                     <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
-                    <a href="{{:url('TeachingOfficeTutor/tutor_assign')}}">
+                    <a href="<?php echo url('TeachingOfficeTutor/tutor_assign'); ?>">
                         <li><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
                     </a>
-                    <a href="{{:url('TeachingOfficeTutor/student_assign')}}">
+                    <a href="<?php echo url('TeachingOfficeTutor/student_assign'); ?>">
                         <li class="active"><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
                     </a>
                 </ul>
@@ -53,11 +54,11 @@
                 <div class="user-area">
                     <div class="hello-user">
                         <span><i class="glyphicon glyphicon-user"></i>欢迎您,</span>
-                        <span class="user-name">{{:user_type()}}: {{$user['name']|default="xxx"}}</span>
+                        <span class="user-name"><?php echo user_type(); ?>: <?php echo (isset($user['name']) && ($user['name'] !== '')?$user['name']:"xxx"); ?></span>
                     </div>
                 </div>
                 <div class="login-out-area">
-                    <a href="{{:url('BaseController/logout')}}"><i class = "glyphicon glyphicon-off"></i>退出</a>
+                    <a href="<?php echo url('BaseController/logout'); ?>"><i class = "glyphicon glyphicon-off"></i>退出</a>
                 </div>
             </div>
             <div class="page-content">
@@ -72,7 +73,7 @@
                     <div class="form-group">
                         <label class="control-label" style="width: 100px;display: inline-block; text-align: center; vertical-align: middle;">选择系别：</label>
                         <div style="display: inline-block;">
-                            <form id="department-submit" action="{{:url('TeachingOfficeTutor/student_assign')}}" method="post">
+                            <form id="department-submit" action="<?php echo url('TeachingOfficeTutor/student_assign'); ?>" method="post">
                                 <select class="form-control" name="department" style="display: inline-block; width: 200px">
                                     <option value="计算机系">计算机系</option>
                                     <option value="应用数学系">应用数学系</option>
@@ -89,7 +90,7 @@
                     </div>
                     <br />
                     <div class="table-responsive">
-                        <form action="{{:url('TeachingOfficeTutor/student_modify')}}" method="post" id="modify-info">
+                        <form action="<?php echo url('TeachingOfficeTutor/student_modify'); ?>" method="post" id="modify-info">
                         <table class="table">
                             <tr>
                                 <th>#</th>
