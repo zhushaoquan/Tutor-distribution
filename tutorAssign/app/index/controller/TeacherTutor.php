@@ -8,8 +8,7 @@ class TeacherTutor extends BaseController {
 	
 	public function index() {
 		$user = $this->auto_login();
-		$teacher = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
-		$user = $teacher;
+
 /*		
 
 //wtt修改
@@ -20,13 +19,11 @@ class TeacherTutor extends BaseController {
 			$teacher['isExperial'] = '是';
 		}
 */
-		$this->assign('user', $teacher);
+		$this->assign('user', $user);
 		return $this->fetch('index');
 	}
     public function issue_submit() {
     	 $user = $this->auto_login();
-		 $teacher = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
-		 $user = $teacher;
          
          $data = Db::table('tc_issue')->where('workNumber', $user['workNumber'])->find();
          $res = Db::table('tc_voluntaryinfoSetting')->find();
@@ -65,7 +62,7 @@ class TeacherTutor extends BaseController {
              }
         }
         $this->assign('message', $data['message']);
-        $this->assign('user', $teacher);
+        $this->assign('user', $user);
         return $this->fetch('issue_submit');
 
     }
@@ -74,8 +71,7 @@ class TeacherTutor extends BaseController {
 
     public function student_list() {
     	$user = $this->auto_login();
-		$teacher = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
-		$user = $teacher;
+		
 
         $students = Db::table('tc_voluntary')->where('wishFirst', $user['workNumber'])
                                             ->whereOr('wishSecond', $user['workNumber'])
@@ -102,7 +98,7 @@ class TeacherTutor extends BaseController {
 
             $i++;
         }
-        $this->assign('user', $teacher);
+        $this->assign('user', $user);
         $this->assign('studentList', $studentList);
 
         $request = Request::instance();
@@ -148,8 +144,7 @@ class TeacherTutor extends BaseController {
     
 	public function show_result() {
 		$user = $this->auto_login();
-		$teacher = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
-		$user = $teacher; 
+		 
                
         $studentList = Db::table('tc_result')->where('workNumber',$user['workNumber'])->select();
         $students = array();
@@ -178,7 +173,7 @@ class TeacherTutor extends BaseController {
          }
 
         $this->assign('message',$data['message']);
-        $this->assign('user', $teacher);
+        $this->assign('user', $user);
         $this->assign('students',$students);
 		return $this->fetch('show_result');
 
@@ -186,15 +181,14 @@ class TeacherTutor extends BaseController {
 
 	public function show_resultdetail($sid = null) {
 		$user = $this->auto_login();
-		$teacher = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
-		$user = $teacher;
+		
         
         $student = Db::table('user_student')->where('sid', $sid)->find();
 
         $this->assign('student', $student);
         var_dump($student);
         exit;
-        $this->assign('user', $teacher);
+        $this->assign('user', $user);
 		return $this->fetch('show_resultdetail');
 
 	}

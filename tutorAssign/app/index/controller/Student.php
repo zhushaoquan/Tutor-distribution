@@ -18,6 +18,13 @@ class Student extends BaseController {
 		return $this->fetch('index');
 	}
 
+	public function test() {
+		$user = $this->auto_login();
+		$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //
+		$this->assign('user', $student);
+		return $this->fetch('choiceassign');
+	}
+
 	
 
 	public function modify() {

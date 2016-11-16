@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>毕设导师只能分配系统</title>
+    <title>毕设导师智能分配系统</title>
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student.css">
@@ -27,9 +27,9 @@
                 <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="{{:url('TeacherTutor/index')}}"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
+                <a href="{{:url('TeacherTutor/index')}}"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <a href="{{:url('TeacherTutor/student_list')}}"><li><i class="glyphicon glyphicon-th-list"></i> 可选学生</li></a>
-                <a href="{{:url('TeacherTutor/issue_submit')}}"><li><i class="glyphicon glyphicon-pencil"></i> 课题提交</li></a>
+                <a href="{{:url('TeacherTutor/issue_submit')}}"><li class="active"><i class="glyphicon glyphicon-pencil"></i> 课题提交</li></a>
                 <a href="{{:url('TeacherTutor/show_result')}}"><li><i class="glyphicon glyphicon-ok"></i> 最终结果</li></a>
             </ul>
         </nav>
@@ -55,6 +55,7 @@
                 <div class="my-information-title">
                     <span>课题提交</span>
                 </div>
+                <hr>
                 <form method="post" action="{{:url('TeacherTutor/issue_submit')}}">
                     <div class="form-horizontal" role="form">
                          <div class="form-group">
@@ -62,6 +63,7 @@
                                  <label for="firstname" class="col-sm-2 control-label">实验班人数</label>
                                  <div class="col-xs-3">
                                      <select class="form-control" name="totalExper" >
+                                     <option value=0>0</option>
                                      <option value=1>1</option>
                                      <option value=2>2</option>
                                      <option value=3>3</option>
@@ -86,7 +88,7 @@
                         <div class="form-group">
                                <div class="row">
                                <label for="inputissuename" class="col-sm-2 control-label">课题名称</label>
-                               <div class="col-sm-10">
+                               <div class="col-sm-8">
                                      <input type="text" class="form-control" id="inputissuename" placeholder="请输入课题名称" name="title" >
                                </div>
                                </div>
@@ -94,13 +96,13 @@
                         <div class="form-group">
                                 <div class="row">
                                 <label for="inputissueintroduction" class="col-sm-2 control-label">课题介绍</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                      <textarea class="form-control" rows="3" input type="text" id="inputissueintroduction" placeholder="请填写具体的课题介绍" name="content" ></textarea>
                                  </div>
                                  </div>
                         </div>
                     </div>
-                    <div class="button-position">
+                    <div class="button-position" style="padding: 0 50px;">
                         <button class="btn btn-info" type="submit">修改</button>
                     </div>
                 </form>
