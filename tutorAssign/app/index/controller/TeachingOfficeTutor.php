@@ -5,7 +5,7 @@ use think\Db;
 use think\Request;
 
 class TeachingOfficeTutor extends BaseController {
-	
+
 	public function index() 
 	{
 		$user = $this->auto_login();
@@ -15,27 +15,45 @@ class TeachingOfficeTutor extends BaseController {
 		return $this->fetch('index');
 	}
 
-	public function student_assign()
+	public function student_assign($page=1)
 	{
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
-		$page_size=5;
-		$off_set=0;
+		$pageSize=8;
+
 		$dep="";
 		if($_SERVER["REQUEST_METHOD"] == "POST")$dep=$_POST['department'];
-		$list=Db::table('user_teacher t,user_student s,tc_result r')->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')->order('s.serialNum')->paginate(8);
-	   	$data=$list->toArray()['data'];	 	
+
+		$data=Db::table('user_teacher t,user_student s,tc_result r')
+		->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)
+		->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
+		->order('s.serialNum')->page($page,$pageSize)->select();
+
+		$total=	count(Db::table('user_teacher t,user_student s,tc_result r')
+				->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)
+				->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
+				->order('s.serialNum')->select());
+		$totalPage = ceil($total/$pageSize);
+
 	 	if($dep='计算机实验班')
 	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','计算机系')->where('isExperial','=',1)->field('workNumber,name')->select();
 	 	else if($dep='数学实验班')
 	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','应用数学系')->where('isExperial','=',1)->field('workNumber,name')->select();
 	 	else $tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
 	
+		$pageBar = [
+			'total'     => $total,
+			'totalPage' => $totalPage+1,
+			'pageSize'  => $pageSize,
+			'curPage'   => $page
+			];
+
+		$this->assign($pageBar);
 	 	$this->assign('teacher',$tealist);
 	    $this->assign('data',$data);
 		$this->assign('user', $officer);		
-		if( $_SERVER["REQUEST_METHOD"] == "POST" && $_POST["stu"] == 'modify')
-			return $this->fetch('student_modify');
+		// if( $_SERVER["REQUEST_METHOD"] == "POST" && $_POST["stu"] == 'modify')
+		// 	return $this->fetch('student_modify');
 		return $this->fetch('student_assign');
 	}
 	public function tutor_assign()
