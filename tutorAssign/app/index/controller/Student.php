@@ -41,13 +41,13 @@ class Student extends BaseController {
 		$user = $this->auto_login();
 		$result = Db::table('tc_result')->where('sid',$user['sid'])->find();
 		if($result != NULL) {
-			$teacher = Db::table('tc_teacher')->where('workNumber', $result['workNumber'])->find();
-		    $sids = Db::table('tc_result')->where("sid!=".$user['sid']." and "."workNumber=".$teacher['workNumber'])->select();
+			$teacher = Db::table('user_teacher')->where('workNumber', $result['workNumber'])->find();
+		    $sids = Db::table('user_result')->where("sid!=".$user['sid']." and "."workNumber=".$teacher['workNumber'])->select();
 		    if($sids != NULL) {
 		    	 $students = array();
 			     $i = 0;
 			     foreach ($sids as $key => $value) {
-			    	$stuinfo = Db::table('tc_student')->where('sid',$value['sid'])->find();    	
+			    	$stuinfo = Db::table('user_student')->where('sid',$value['sid'])->find();    	
 			    	$students[$i] = $stuinfo;
 			    	$i++;
 		    	 }
@@ -62,7 +62,6 @@ class Student extends BaseController {
 		} else {
 			//志愿结果未出
 			$this->assign('voluntory_result',0);
-
 		}
 	}
 
@@ -70,13 +69,13 @@ class Student extends BaseController {
 		$user = $this->auto_login();
 
         //可选导师为自己department的导师
-		$teachers = Db::table('tc_teacher')->where('department', $user['department'])->select();
+		$teachers = Db::table('user_teacher')->where('department', $user['department'])->select();
 		if($teachers!=NULL) {
 			$this->assign('voluntory_teachers',$teachers);
 			//加载填报志愿页面；
 			}
 
-
+		return $this->fetch('choiceassign');
 	}
 
 	public function addVoluntary() {

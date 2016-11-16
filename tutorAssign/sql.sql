@@ -1,5 +1,5 @@
 
-CREATE TABLE IF NOT EXISTS `tc_student` (
+CREATE TABLE IF NOT EXISTS `user_student` (
   `sid` MEDIUMINT(8) NOT NULL AUTO_INCREMENT,
   `serialNum` VARCHAR(9) NOT NULL COMMENT '学号',
   `password` CHAR(20) NOT NULL COMMENT '密码',
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `user_teacher` (
   `isExperial` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '导师是否实验班导师（0、不是 1、是）',
   `description` MEDIUMTEXT DEFAULT NULL COMMENT '个人简介',
   `avator` VARCHAR(50) DEFAULT NULL COMMENT '头像url',
-  `title` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '职称',
+  `title` VARCHAR(20) DEFAULT NULL COMMENT '职称',
 
   -- PRIMARY KEY (`tid`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

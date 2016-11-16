@@ -101,7 +101,7 @@ return [
     // 域名根，如thinkphp.cn
     'url_domain_root'        => '',
     // 是否自动转换URL中的控制器和操作名
-    'url_convert'            => true,
+    'url_convert'            => false,
     // 默认的访问控制器层
     'url_controller_layer'   => 'controller',
     // 表单请求类型伪装变量
@@ -133,7 +133,7 @@ return [
     // 视图输出字符串内容替换
     'view_replace_str'  =>  [
         '__ROOT__' => __ROOT__,
-        '__STATIC__'=>"/old",
+        '__STATIC__'=> __ROOT__. "/old",
     ],
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',

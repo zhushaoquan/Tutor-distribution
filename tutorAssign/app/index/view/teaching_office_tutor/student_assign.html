@@ -69,14 +69,12 @@
                     <form action="{{:url('TeachingOfficeTutor/student_assign')}}"  method="post">
                         <select class="form-control" name="department" style="display: inline; width: 45%">
                             <option value="计算机系">计算机系</option>
-                            <option value="应用数学系">应用数学系</option>
-                            <option value="信息与计算科学系">信息与计算科学系</option>
+                            <option value="数学系">数学系</option>
+                            <option value="网络工程系">网络工程系</option>
                             <option value="软件工程系">软件工程系</option>
-                            <option value="信息安全与网络工程系">信息安全与网络工程系</option>
-                            <option value="数学实验班">数学实验班</option>
-                            <option value="计算机实验班">计算机实验班</option>
+                            <option value="信息安全系">信息安全系</option>
+                            <option value="系统结构系">系统结构系</option>
                         </select>  
-                        <input type="hidden" name="stu" value="assign">
                         <input type="submit" class="btn btn-primary" style="display: inline;" id="sub-result-export">
                     </form>
                     </div>
@@ -105,6 +103,7 @@
                             <td>'.$i.'</td>
                             <td>'.$value['snum'].'</td>
                             <td>'.$value['sname'].'</td>
+                       <!--      <td>计算机2班</td>  !-->
                             <td>'.$value['tnum'].'</td>
                             <td>'.$value['tname'].'</td>
                        <!--      <td>系统结构</td>  !-->
@@ -118,7 +117,7 @@
 
                     <div class="submit-area">
                         <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button>
-                           <button type="submit" class="btn btn-primary" id="sub-result-change"><a style="color:white;" href="{{:url('TeachingOfficeTutor/student_to_modify')}}">修&nbsp;&nbsp;改</a></button>  
+                           <button type="submit" class="btn btn-primary" id="sub-result-change"><a style="color:white;" href="{{:url('TeachingOfficeTutor/student_change')}}">修&nbsp;&nbsp;改</a></button>  
                      <!--   <button type="submit" class="btn btn-primary" id="sub-result-change">修&nbsp;&nbsp;改</button> !-->
                    <!--     <button type="submit" class="btn btn-primary" id="sub-result-confirm">确&nbsp;&nbsp;认</button>  !-->
                     </div>
