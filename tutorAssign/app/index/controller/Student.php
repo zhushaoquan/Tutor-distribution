@@ -8,7 +8,7 @@ class Student extends BaseController {
 
 	public function index() {
 		$user = $this->auto_login();
-		$student = Db::table('tc_student')->where('serialNum',$user['serialNum'])->find(); //如果直接使用session里的用户信息，修改的信息必须重新登录才能更新显示
+		$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //如果直接使用session里的用户信息，修改的信息必须重新登录才能更新显示
         if ($user['chosen'] == 0) {
         	$student['chosen'] = '否';
         } else {
@@ -22,7 +22,7 @@ class Student extends BaseController {
 
 	public function modify() {
 		$user = $this->auto_login();
-		$student = Db::table('tc_student')->where('serialNum',$user['serialNum'])->find(); //如果直接使用session里的用户信息，修改的信息必须重新登录才能更新显示
+		$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //如果直接使用session里的用户信息，修改的信息必须重新登录才能更新显示
         if ($user['chosen'] == 0) {
         	$student['chosen'] = '否';
         } else {
@@ -34,8 +34,8 @@ class Student extends BaseController {
 
 	public function tutor_list() {
 		$user = $this->auto_login();
-		$student = Db::table('tc_student')->where('serialNum',$user['serialNum'])->find(); //
-        $tutors = Db::table('tc_teacher')->where('department',$student['department'])->select();
+		$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //
+        $tutors = Db::table('user_teacher')->where('department',$student['department'])->select();
 
 
         $res = Db::table('tc_voluntaryinfoSetting')->find();
@@ -63,8 +63,8 @@ class Student extends BaseController {
 
 	public function tutor_detail() {
 		$user = $this->auto_login();
-		$student = Db::table('tc_student')->where('serialNum',$user['serialNum'])->find(); //
-        $tutors = Db::table('tc_teacher')->where('department',$student['department'])->select();
+		$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //
+        $tutors = Db::table('user_teacher')->where('department',$student['department'])->select();
 
         $this->assign('tutors', $tutors);
         $this->assign('user', $user);
@@ -74,8 +74,8 @@ class Student extends BaseController {
 
 	public function edit_voluntary() {
 		$user = $this->auto_login();
-		$student = Db::table('tc_student')->where('serialNum',$user['serialNum'])->find(); //
-        $tutors = Db::table('tc_teacher')->where('department',$student['department'])->select();
+		$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //
+        $tutors = Db::table('user_teacher')->where('department',$student['department'])->select();
 
         $res = Db::table('tc_voluntaryinfoSetting')->find();
         $res['nowtime'] = time();
@@ -126,13 +126,13 @@ class Student extends BaseController {
 		$this->assign('user',$user);
 
 		if($result != NULL) {
-			$teacher = Db::table('tc_teacher')->where('workNumber', $result['workNumber'])->find();
+			$teacher = Db::table('user_teacher')->where('workNumber', $result['workNumber'])->find();
 		    $sids = Db::table('tc_result')->where("sid!=".$user['sid']." and "."workNumber=".$teacher['workNumber'])->select();
 		    if($sids != NULL) {
 		    	 $students = array();
 			     $i = 0;
 			     foreach ($sids as $key => $value) {
-			    	$stuinfo = Db::table('tc_student')->where('sid',$value['sid'])->find();    	
+			    	$stuinfo = Db::table('user_student')->where('sid',$value['sid'])->find();    	
 			    	$students[$i] = $stuinfo;
 			    	$i++;
 		    	 }

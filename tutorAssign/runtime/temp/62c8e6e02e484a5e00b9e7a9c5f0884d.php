@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:102:"/Applications/MAMP/htdocs/2/Tutor-distribution/tutorAssign/public/../app/index/view/student/index.html";i:1479300527;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:108:"/Applications/MAMP/htdocs/2/Tutor-distribution/tutorAssign/public/../app/index/view/student/show_result.html";i:1479293756;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,42 +48,52 @@
         </div>
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
-                    <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                        <p>提示：第一轮志愿填报时间为2016年10月19日至2016年10月22日，请在规定时间内完成志愿填报！</p>
-                    </div>
+                <div role="alert" class="alert alert-info" style="margin-bottom: 0">
+                    <p><?php echo $message;?></p>
+                    <!--<p>提示2：志愿选择不可为空，但同一老师可以多次选择！</p>-->
+                </div>
                 <div class="my-information-title">
-                   
-                        <span>我的信息</span>
-                                    
-                        <a href="<?php echo url('Student/modify'); ?>"><button class="btn btn-info button-size btn-edit" type="submit">修改</button></a>
-        
+                    <span>最终结果</span>
+
                 </div>
-                <div class="my-information-subtitle">
-                    <span>你可以在这里查看或修改自己的个人信息</span>
-                </div>
+                <hr>
                 <div class="my-information-detail-1">
+                    <?php if(isset($voluntory_teacher['name'])) { ?>
                     <ul>
-                        <li><span>姓名：</span><span class="span-value"><?php echo $user['name']; ?></span><span>学号：</span><span class="span-value"><?php echo $user['serialNum']; ?></span><span>性别：</span><span class="span-value"><?php echo $user['gender']; ?></span></li>
-                        <li><span>学院：</span><span class="span-value"><?php echo $user['college']; ?></span><span>系别：</span><span class="span-value"><?php echo $user['department']; ?></span><span>方向：</span><span class="span-value"><?php echo $user['field']; ?></span></li>
-                        <li><span>绩点：</span><span class="span-value"><?php echo $user['gpa']; ?></span><span>排名：</span><span class="span-value"><?php echo $user['rank']; ?></span><span>中选：</span><span class="span-value"><?php echo $user['chosen']; ?></span></li>
-                        <li><span>电话：</span><span class="span-value"><?php echo $user['telephone']; ?></span><span>邮箱：</span><span class="span-value"><?php echo $user['email']; ?></span></li>
+                        <li><span>导师名字：</span><span class="span-value"><?php echo $voluntory_teacher['name']; ?></span></li>
+                        <li><span>导师工号：</span><span class="span-value"><?php echo $voluntory_teacher['workNumber']; ?></span</li>
+                        <li><span>毕设选题：</span><span class="span-value"><?php echo $voluntory_teacher['title']; ?></span></li>
+                        <li><span>电子邮箱：</span><span class="span-value"><?php echo $voluntory_teacher['email']; ?></span></li>
+                        <li><span>同选学生</span>
+                            <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>名字</th>
+                                <th>学号</th>
+                                <th>电子邮箱</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($voluntory_students as $key => $value):?>
+                            <tr>
+                                <td><?php echo $value['name'];?></td>
+                                <td><?php echo $value['sid'];?></td>
+                                <td><?php echo $value['email'];?></td>
+                            </tr>
+                            <?php endforeach;?>
+                            </tbody>
+                        </table></li>
                     </ul>
+                    <?php }?>
+
                 </div>
-                <div class="skill-title">
-                    <p>技能及经历：</p>
-                </div>
-                <div class="skill-detail">
-                    <p><?php echo $user['skill']; ?></p>
-                </div>
-                <!-- <div class="time-reminder">
-                    <i class="glyphicon glyphicon-star-empty"></i>&nbsp;<span>提示：第一轮志愿填报时间为2016年10月19日至2016年10月22日，请同学们在规定时间内完成志愿填报</span>
-                </div> -->
 
             </div>
-            
-            <div class="footer"  style="border-radius: 10px;">
-                Designed by Lin & 我说的都队
+
             </div>
+        <div class="footer"  style="border-radius: 10px;">
+            Designed by Lin & 我说的都队
+        </div>
         </div>
     </div>
 </div>

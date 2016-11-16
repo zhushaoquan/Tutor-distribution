@@ -8,7 +8,7 @@ class TeacherTutor extends BaseController {
 	
 	public function index() {
 		$user = $this->auto_login();
-		$teacher = Db::table('tc_teacher')->where('workNumber',$user['workNumber'])->find();
+		$teacher = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
 		$user = $teacher;
 /*		
 
@@ -25,7 +25,7 @@ class TeacherTutor extends BaseController {
 	}
     public function issue_submit() {
     	 $user = $this->auto_login();
-		 $teacher = Db::table('tc_teacher')->where('workNumber',$user['workNumber'])->find();
+		 $teacher = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
 		 $user = $teacher;
          
          $data = Db::table('tc_issue')->where('workNumber', $user['workNumber'])->find();
@@ -74,7 +74,7 @@ class TeacherTutor extends BaseController {
 
     public function student_list() {
     	$user = $this->auto_login();
-		$teacher = Db::table('tc_teacher')->where('workNumber',$user['workNumber'])->find();
+		$teacher = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
 		$user = $teacher;
 
         $students = Db::table('tc_voluntary')->where('wishFirst', $user['workNumber'])
@@ -87,7 +87,7 @@ class TeacherTutor extends BaseController {
         $studentList = array();
         $i = 0;
         foreach ($students as $key => $value) {
-            $studentList[$i] = Db::table('tc_student')->where('sid', $value['sid'])->find();
+            $studentList[$i] = Db::table('user_student')->where('sid', $value['sid'])->find();
             if($value['wishFirst'] == $user['workNumber']) {
                 $studentList[$i]['wish'] = 1;
             } else if($value['wishSecond'] == $user['workNumber']) {
@@ -114,7 +114,7 @@ class TeacherTutor extends BaseController {
             if($accept=="选择") {
                 Db::table('tc_result')->insert($data1);
                 Db::table('tc_voluntary')->where('sid',$data1['sid'])->delete();
-                Db::table('tc_student')->where('sid',$data1['sid'])->setField('chosen',1);
+                Db::table('user_student')->where('sid',$data1['sid'])->setField('chosen',1);
                 Db::table('tc_issue')->where('workNumber',$data1['workNumber'])->setInc('totalNow',1);
 
             } else {
@@ -148,7 +148,7 @@ class TeacherTutor extends BaseController {
     
 	public function show_result() {
 		$user = $this->auto_login();
-		$teacher = Db::table('tc_teacher')->where('workNumber',$user['workNumber'])->find();
+		$teacher = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
 		$user = $teacher; 
                
         $studentList = Db::table('tc_result')->where('workNumber',$user['workNumber'])->select();
@@ -156,7 +156,7 @@ class TeacherTutor extends BaseController {
         if($studentList!=NULL) {
         	$i=0;
         	foreach ($studentList as $key => $value) {
-        		$students[$i] = Db::table('tc_student')->where('sid',$value['sid'])->find();
+        		$students[$i] = Db::table('user_student')->where('sid',$value['sid'])->find();
         		$i++;
         	}
         }
@@ -186,10 +186,10 @@ class TeacherTutor extends BaseController {
 
 	public function show_resultdetail($sid = null) {
 		$user = $this->auto_login();
-		$teacher = Db::table('tc_teacher')->where('workNumber',$user['workNumber'])->find();
+		$teacher = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
 		$user = $teacher;
         
-        $student = Db::table('tc_student')->where('sid', $sid)->find();
+        $student = Db::table('user_student')->where('sid', $sid)->find();
 
         $this->assign('student', $student);
         var_dump($student);

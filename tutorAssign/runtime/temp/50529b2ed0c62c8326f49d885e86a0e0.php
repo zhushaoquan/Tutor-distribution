@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:102:"/Applications/MAMP/htdocs/2/Tutor-distribution/tutorAssign/public/../app/index/view/student/index.html";i:1479300527;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:107:"/Applications/MAMP/htdocs/2/Tutor-distribution/tutorAssign/public/../app/index/view/student/tutor_list.html";i:1479278751;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>毕设导师智能分配系统</title>
+    <title>毕设导师只能分配系统</title>
     <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/student.css">
@@ -48,37 +48,52 @@
         </div>
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
-                    <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                        <p>提示：第一轮志愿填报时间为2016年10月19日至2016年10月22日，请在规定时间内完成志愿填报！</p>
-                    </div>
-                <div class="my-information-title">
-                   
-                        <span>我的信息</span>
-                                    
-                        <a href="<?php echo url('Student/modify'); ?>"><button class="btn btn-info button-size btn-edit" type="submit">修改</button></a>
-        
+                <div role="alert" class="alert alert-info" style="margin-bottom: 0">
+                    <p>提示1：<?php echo $message;?></p>
                 </div>
-                <div class="my-information-subtitle">
-                    <span>你可以在这里查看或修改自己的个人信息</span>
+                <div class="page-header">
+                    <h3>导师列表
+                    </h3>
                 </div>
-                <div class="my-information-detail-1">
-                    <ul>
-                        <li><span>姓名：</span><span class="span-value"><?php echo $user['name']; ?></span><span>学号：</span><span class="span-value"><?php echo $user['serialNum']; ?></span><span>性别：</span><span class="span-value"><?php echo $user['gender']; ?></span></li>
-                        <li><span>学院：</span><span class="span-value"><?php echo $user['college']; ?></span><span>系别：</span><span class="span-value"><?php echo $user['department']; ?></span><span>方向：</span><span class="span-value"><?php echo $user['field']; ?></span></li>
-                        <li><span>绩点：</span><span class="span-value"><?php echo $user['gpa']; ?></span><span>排名：</span><span class="span-value"><?php echo $user['rank']; ?></span><span>中选：</span><span class="span-value"><?php echo $user['chosen']; ?></span></li>
-                        <li><span>电话：</span><span class="span-value"><?php echo $user['telephone']; ?></span><span>邮箱：</span><span class="span-value"><?php echo $user['email']; ?></span></li>
-                    </ul>
-                </div>
-                <div class="skill-title">
-                    <p>技能及经历：</p>
-                </div>
-                <div class="skill-detail">
-                    <p><?php echo $user['skill']; ?></p>
-                </div>
-                <!-- <div class="time-reminder">
-                    <i class="glyphicon glyphicon-star-empty"></i>&nbsp;<span>提示：第一轮志愿填报时间为2016年10月19日至2016年10月22日，请同学们在规定时间内完成志愿填报</span>
-                </div> -->
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>姓名</th>
+                            <th>性别</th>
+                            <th>职称</th>
+                            <th>研究方向</th>
+                            <th>电子邮件</th>
+                        </tr>
 
+                        <tbody>
+                        <?php foreach ($tutors as $key => $value):?>
+                        <tr>
+                            <td><?php echo $value['workNumber']?></td>
+                            <td><?php echo $value['name']?></td>
+                            <td><?php echo $value['sex']?></td>
+                            <td><?php echo $value['title']?></td>
+                            <td><?php echo $value['department']?></td>
+                            <td><?php echo $value['email']?></td>
+                        </tr>
+                    <?php endforeach;?>
+                        </tbody>
+                    </table>
+                    <nav style="float: right;">
+                    <ul class="pagination" >
+                        <li><a href="#">&laquo;</a></li>
+                        <li ><a href="#">1</a></li>
+                        <li ><a href="#">2</a></li>
+                        <li ><a href="#">3</a></li>
+                        <li ><a href="#">4</a></li>
+                        <li ><a href="#">5</a></li>
+                        <li ><a href="#">&raquo;</a></li>
+
+
+                    </ul>
+                </nav>
+                </div>
+                
             </div>
             
             <div class="footer"  style="border-radius: 10px;">
