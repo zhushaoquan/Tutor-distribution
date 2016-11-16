@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:108:"/Applications/MAMP/htdocs/2/Tutor-distribution/tutorAssign/public/../app/index/view/student/show_result.html";i:1479293756;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:108:"/Applications/MAMP/htdocs/2/Tutor-distribution/tutorAssign/public/../app/index/view/student/show_result.html";i:1479307987;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,12 +58,12 @@
                 </div>
                 <hr>
                 <div class="my-information-detail-1">
-                    <?php if(isset($voluntory_teacher['name'])) { ?>
+                    <?php if(isset($voluntory_teacher['name'])&&$user['chosen']==1) { ?>
                     <ul>
-                        <li><span>导师名字：</span><span class="span-value"><?php echo $voluntory_teacher['name']; ?></span></li>
-                        <li><span>导师工号：</span><span class="span-value"><?php echo $voluntory_teacher['workNumber']; ?></span</li>
-                        <li><span>毕设选题：</span><span class="span-value"><?php echo $voluntory_teacher['title']; ?></span></li>
-                        <li><span>电子邮箱：</span><span class="span-value"><?php echo $voluntory_teacher['email']; ?></span></li>
+                        <li><span>导师名字：</span><span class="span-value"><?php if(isset($voluntory_teacher['name']))echo $voluntory_teacher['name']; ?></span></li>
+                        <li><span>导师工号：</span><span class="span-value"><?php if(isset($voluntory_teacher['workNumber']))echo $voluntory_teacher['workNumber']; ?></span</li>
+                        <li><span>毕设选题：</span><span class="span-value"><?php if(isset($voluntory_teacher['title']))echo $voluntory_teacher['title']; ?></span></li>
+                        <li><span>电子邮箱：</span><span class="span-value"><?php if(isset($voluntory_teacher['email']))echo $voluntory_teacher['email']; ?></span></li>
                         <li><span>同选学生</span>
                             <table class="table table-bordered">
                             <thead>
@@ -74,13 +74,13 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($voluntory_students as $key => $value):?>
+                            <?php if(isset($voluntory_students)) {foreach ($voluntory_students as $key => $value):?>
                             <tr>
                                 <td><?php echo $value['name'];?></td>
                                 <td><?php echo $value['sid'];?></td>
                                 <td><?php echo $value['email'];?></td>
                             </tr>
-                            <?php endforeach;?>
+                            <?php endforeach;}?>
                             </tbody>
                         </table></li>
                     </ul>

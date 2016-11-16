@@ -76,14 +76,15 @@ class Student extends BaseController {
 		$user = $this->auto_login();
 		$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //
         $tutors = Db::table('user_teacher')->where('department',$student['department'])->select();
-
         $res = Db::table('tc_voluntaryinfoSetting')->find();
         $res['nowtime'] = time();
         $data['message'] = '';
+        $data['ontime']=1;
         $data['firstStart'] = $res['firstStart'];
         $data['secondStart'] = $res['secondStart'];
         $data['firstEnd'] = $res['firstEnd'];
         $data['secondEnd'] = $res['secondEnd'];
+
         if($res['nowtime'] < $res['firstEnd'] && $res['nowtime'] > $res['firstStart']) {
             $data['message'] = "当前为第一轮的志愿填报时间：".date('Y-m-d',$res['firstStart'])."至".date('Y-m-d',$res['firstEnd']).",请同学们按时填报、修改志愿！";
          } else if($res['nowtime'] < $res['secondEnd'] && $res['nowtime'] > $res['secondStart']) {
@@ -91,6 +92,7 @@ class Student extends BaseController {
 
          } else {
             $data['message'] = "当前不在填报志愿时间段内！";
+            $data['ontime'] = 0;
          }
         $this->assign('tutors', $tutors);
         $this->assign('user', $user);
@@ -148,6 +150,54 @@ class Student extends BaseController {
 
 		}
 		return $this->fetch('show_result');
+	}
+
+	public function matchSetting($page=1) {
+		$user = $this->auto_login();
+		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
+		$student = Db::table('user_student')->where('chosen',0)->page($page,$this->pageSize)->select();
+
+		$total = count(Db::table('user_student')->where('chosen',0)->select());
+		$totalPage = ceil($total/$this->pageSize);
+
+		for ($i=0; $i <count($student) ; $i++) { 
+			$voluntary[$i] = Db::table('tc_voluntary')->where('sid',$student[$i]['sid'])->find();
+			$voluntary[$i]['information'] = Db::table('user_student')->where('sid',$student[$i]['sid'])->field('sid,field,serialNum,name')->find();
+
+			$voluntary[$i]['firstTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishFirst'])->field('name')->find();
+			$voluntary[$i]['secondTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishSecond'])->field('name')->find();
+			$voluntary[$i]['thirdTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishThird'])->field('name')->find();
+			$voluntary[$i]['forthTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishForth'])->field('name')->find();
+			$voluntary[$i]['fifthTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishFifth'])->field('name')->find();
+		}
+
+		$teacher = Db::table('user_teacher')->where('department',$student[0]['department'])->select();
+		$teacherTotal = count(Db::table('user_teacher')->where('department',$student[0]['department'])->select());
+		$teacherTotalPage = ceil($teacherTotal/$this->pageSize);
+
+		$pageBar = [
+			'total'     => $total,
+			'totalPage' => $totalPage+1,
+			'pageSize'  => $this->pageSize,
+			'curPage'   => $page
+			];
+
+		$teacherPageBar = [
+			'teacherTotal'     => $teacherTotal,
+			'teacherTotalPage' => $teacherTotalPage+1,
+			'teacherPageSize'  => $this->pageSize,
+			'teacherCurPage'   => $page
+			];
+
+		$this->assign($pageBar);
+		$this->assign($teacherPageBar);
+		$this->assign('student',$student);
+		$this->assign('voluntary',$voluntary);
+		$this->assign('teacher',$teacher);
+		$this->assign('user', $head);
+		return $this->fetch('match_setting');
+				// dump($teacher);
+
 	}
 
 	
