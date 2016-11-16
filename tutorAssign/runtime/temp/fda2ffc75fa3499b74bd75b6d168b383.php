@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_assign.html";i:1479211443;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_assign.html";i:1479287618;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +23,9 @@
     </style>
 </head>
 <body>
-
+{:dump($list)}
+{$list}
+<div>{$page}</div>
 <div id="container-backstage" class="clearfix">
 
     <div id="siderbar">
