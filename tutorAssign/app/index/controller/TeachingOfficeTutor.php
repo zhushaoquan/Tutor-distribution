@@ -78,6 +78,15 @@ class TeachingOfficeTutor extends BaseController {
 	}
 	public function confirm()
 	{
-		
+
 	}
+
+	public function test(){
+	    $request = Request::instance();
+        if($request->isPost()){
+            $data = $request->post();
+
+            file_put_contents('test.txt',var_export($data,true));
+        }
+    }
 }
