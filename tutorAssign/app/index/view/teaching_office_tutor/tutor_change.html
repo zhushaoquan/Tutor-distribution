@@ -266,7 +266,7 @@
 
         if(isAnyChecked){
             //向服务器提交新增数据
-            $.post("http://localhost/tutor-distribution/tutorAssign/public/index.php/index/TeachingOfficeTutor/insert",
+            $.post("{{$Think.const.PREFIX}}/TeachingOfficeTutor/insert",
             {
                 teacher_id: teacher_id,
                 stus: selectedStudent
@@ -294,7 +294,7 @@
 
     function getUnassignStu(isFirstTime=true){
         //将未匹配学生显示在表格上
-        $.getJSON("http://localhost/tutor-distribution/tutorAssign/public/index.php/index/TeachingOfficeTutor/select_student",function(data, status){
+        $.getJSON("{{$Think.const.PREFIX}}/TeachingOfficeTutor/select_student",function(data, status){
             if(status === "success"){
                 console.log('json');
                 if(isFirstTime){
@@ -335,7 +335,7 @@
     $("#btn-del-student").click(function(){
         $(this).attr("disabled","disabled");
         //向服务器提交数据
-        $.post("http://localhost/tutor-distribution/tutorAssign/public/index.php/index/TeachingOfficeTutor/delete",
+        $.post("{{$Think.const.PREFIX}}/TeachingOfficeTutor/delete",
         {
             teacher_id: teacher_id,
             student_id: student_id 
