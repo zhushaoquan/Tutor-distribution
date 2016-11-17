@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"/Applications/MAMP/htdocs/2/Tutor-distribution/tutorAssign/public/../app/index/view/student/edit_voluntary.html";i:1479233145;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"/Applications/MAMP/htdocs/2/Tutor-distribution/tutorAssign/public/../app/index/view/student/edit_voluntary.html";i:1479305758;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,8 +56,8 @@
                    
                         <span>志愿填报</span>
 
-                                    
-            <form method="post" action="">           
+            <!--<?php if($ontime==0){?>-->                     
+            <form method="post" action="<?php echo url('student/edit_voluntary'); ?>">           
                 </div>
                  <hr>
                     <div class="form-horizontal" role="form">
@@ -66,7 +66,7 @@
 
                             <div class="col-lg-4">
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishFirst">
-                                    <option value="">==请选择==</option>
+                                    <!--<option value="">==请选择==</option>-->
                                     <?php foreach($tutors as $key => $value): ?>
                                     <option value="<?php echo $value['workNumber']?>"><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
@@ -80,7 +80,7 @@
 
                             <div class="col-lg-4">
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishSecond">
-                                    <option value="">==请选择==</option>
+                                    <!--<option value="">==请选择==</option>-->
                                     <?php foreach($tutors as $key => $value): ?>
                                     <option value="<?php echo $value['workNumber']?>"><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
@@ -94,7 +94,7 @@
 
                             <div class="col-lg-4">
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishThird">
-                                    <option value="">==请选择==</option>
+                                    <!--<option value="">==请选择==</option>-->
                                     <?php foreach($tutors as $key => $value): ?>
                                     <option value="<?php echo $value['workNumber']?>"><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
@@ -108,7 +108,7 @@
 
                             <div class="col-lg-4">
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishForth">
-                                    <option value="">==请选择==</option>
+                                    <!--<option value="">==请选择==</option>-->
                                     <?php foreach($tutors as $key => $value): ?>
                                     <option value="<?php echo $value['workNumber']?>"><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
@@ -122,7 +122,7 @@
 
                             <div class="col-lg-4">
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishFifth">
-                                    <option value="">==请选择==</option>
+                                    <!--<option value="">==请选择==</option>-->
                                     <?php foreach($tutors as $key => $value): ?>
                                     <option value="<?php echo $value['workNumber']?>"><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
@@ -133,7 +133,11 @@
 
                     <button class="btn btn-info" type="submit">提交</button>
                 </form>
+            <!--<?php }?>-->
             </div>
+
+
+        </div>
         <div class="footer"  style="border-radius: 10px;">
                 Designed by Lin & 我说的都队
         </div>
