@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:115:"/Applications/MAMP/htdocs/2/Tutor-distribution/tutorAssign/public/../app/index/view/teacher_tutor/student_list.html";i:1479292305;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,10 +7,10 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>毕设导师只能分配系统</title>
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}css/student.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}css/teacher.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>css/student.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>css/teacher.css">
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
@@ -27,10 +28,10 @@
                 <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="{{:url('TeacherTutor/index')}}"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <a href="{{:url('TeacherTutor/studentList')}}"><li  class="active"><i class="glyphicon glyphicon-th-list"></i> 可选学生</li></a>
-                <a href="{{:url('TeacherTutor/issueSubmit')}}"><li><i class="glyphicon glyphicon-pencil"></i> 课题提交</li></a>
-                <a href="{{:url('TeacherTutor/showResult')}}"><li><i class="glyphicon glyphicon-ok"></i> 最终结果</li></a>
+                <a href="<?php echo url('TeacherTutor/index'); ?>"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
+                <a href="<?php echo url('TeacherTutor/student_list'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 可选学生</li></a>
+                <a href="<?php echo url('TeacherTutor/issue_submit'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 课题提交</li></a>
+                <a href="<?php echo url('TeacherTutor/show_result'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 最终结果</li></a>
             </ul>
         </nav>
     </div>
@@ -39,11 +40,11 @@
             <div class="user-area">
                 <div class="hello-user">
                     <span><i class="glyphicon glyphicon-user"></i>欢迎您,</span>
-                    <span class="user-name">{{:user_type()}}: {{$user['name']|default="xxx"}}</span>
+                    <span class="user-name"><?php echo user_type(); ?>: <?php echo (isset($user['name']) && ($user['name'] !== '')?$user['name']:"xxx"); ?></span>
                 </div>
             </div>
             <div class="login-out-area">
-                <a href="{{:url('BaseController/logout')}}"><i class = "glyphicon glyphicon-off"></i>退出</a>
+                <a href="<?php echo url('BaseController/logout'); ?>"><i class = "glyphicon glyphicon-off"></i>退出</a>
             </div>
         </div>
         <div class="page-content">
@@ -70,53 +71,27 @@
                             <th>#</th>
                             <th>姓名</th>
                             <th>性别</th>
-                            <th>绩点</th>
                             <th>排名</th>
+                            <th>绩点</th>
                             <th>志愿顺序</th>
                             <th>选择</th>
                             <th>拒绝</th>
                         </tr>
                         <tbody>
+                        <?php foreach ($studentList as $key => $value):?>
+                        <form method="post" action="<?php echo url('TeacherTutor/student_list'); ?>">
                         <tr>
-                            <td>1</td>
-                            <td>张三</td>
-                            <td>男</td>
-                            <td>3.9</td>
-                            <td>1/70</td>
-                            <td>第一志愿</td>
-                            <td><input class="btn btn-default" type="submit" value="选择"></td>
-                            <td><input class="btn btn-default" type="submit" value="拒绝"></td>
+                            <td><input type="text" style="display:none" name="sid" value="<?php echo $value['sid'];?>"><?php echo $value['sid']?></td>
+                            <td><?php echo $value['name']?></td>
+                            <td><?php if($value['gender'])echo "男";else echo "女";?></td>
+                            <td><?php echo $value['rank']?></td>
+                            <td><?php echo $value['gpa']?></td>
+                            <td><?php echo "第".$value['wish']."志愿"?></td>
+                            <input type="text" style="display:none" name="department" value="<?php echo $value['department'];?>">
+                            <td><input class="btn btn-default" type="submit" value="选择" name="choise"></td>
+                            <td><input class="btn btn-default" type="submit" value="拒绝" name="choise"></td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>张三</td>
-                            <td>男</td>
-                            <td>3.9</td>
-                            <td>1/70</td>
-                            <td>第一志愿</td>
-                            <td><input class="btn btn-default" type="submit" value="选择"></td>
-                            <td><input class="btn btn-default" type="submit" value="拒绝"></td>
-                        </tr>
-                         <tr>
-                            <td>3</td>
-                            <td>张三</td>
-                            <td>男</td>
-                            <td>3.9</td>
-                            <td>1/70</td>
-                            <td>第一志愿</td>
-                            <td><input class="btn btn-default" type="submit" value="选择"></td>
-                            <td><input class="btn btn-default" type="submit" value="拒绝"></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>张三</td>
-                            <td>男</td>
-                            <td>3.9</td>
-                            <td>1/70</td>
-                            <td>第一志愿</td>
-                            <td><input class="btn btn-default" type="submit" value="选择"></td>
-                            <td><input class="btn btn-default" type="submit" value="拒绝"></td>
-                        </tr>
+                    <?php endforeach;?>
                         </tbody>
                     </table>
                     <nav style="float: right;">

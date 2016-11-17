@@ -1,0 +1,43 @@
+.btn-add
+{
+    display: none;
+
+    color: white;
+    border: none;
+    border-radius: 3px;
+    background-color: #6c0;
+}
+
+.btn-add:hover
+{
+    /*display: none;*/
+    border: none;
+    background-color: #9c3;
+}
+
+.btn-delete
+{
+    display: none;
+
+    color: white;
+    border: none;
+    border-radius: 3px;
+    background-color: #d95043;
+}
+
+.btn-delete:hover
+{
+    color: white;
+    /*display: none;*/
+    border: none;
+    border-radius: 3px;
+    background-color: #ff7373;
+}
+
+.teacher-name
+{
+    width: 300px;
+
+    text-align: center;
+    vertical-align: middle;
+}

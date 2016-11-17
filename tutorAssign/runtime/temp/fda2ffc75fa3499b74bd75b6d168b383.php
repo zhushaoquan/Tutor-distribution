@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_assign.html";i:1479303414;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_assign.html";i:1479317654;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +33,7 @@
             <ul class="sider-navbar-nav">
                 <a href="<?php echo url('TeachingOfficeTutor/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
-                <a href="<?php echo url('TeachingOfficeTutor/tutor_assign'); ?>"><li ><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
+                <a href="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>"><li ><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
                 <a href="<?php echo url('TeachingOfficeTutor/student_assign'); ?>"><li class="active"><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
             </ul>
         </nav>
@@ -75,6 +75,8 @@
                             <option value="软件工程系">软件工程系</option>
                             <option value="信息安全系">信息安全系</option>
                             <option value="系统结构系">系统结构系</option>
+                            <option value="计算机实验班">计算机实验班</option>
+                            <option value="数学实验班">数学实验班</option>
                         </select>  
                         <input type="hidden" name="stu" value="assign">
                         <input type="submit" class="btn btn-primary" style="display: inline;" id="sub-result-export">
@@ -110,22 +112,22 @@
 
                     <div class="submit-area">
                         <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button>
-                           <button type="submit" class="btn btn-primary" id="sub-result-change"><a style="color:white;" href="<?php echo url('TeachingOfficeTutor/student_change'); ?>">修&nbsp;&nbsp;改</a></button>  
+                           <button type="submit" class="btn btn-primary" id="sub-result-change"><a style="color:white;" href="<?php echo url('TeachingOfficeTutor/student_to_modify'); ?>">修&nbsp;&nbsp;改</a></button>  
                    
                     </div>
 
                     <nav>
                         <ul class="pagination" style="float: right;">
                           <?php if($curPage != 1): ?>
-                              <li><a href="<?php echo url('/index/index/TeachingOfficeTutor/student_assign/'.($curPage-1)); ?>">&laquo;</a></li>
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_11105__=$curPage-2;$__FOR_END_11105__=$curPage+3;for($i=$__FOR_START_11105__;$i < $__FOR_END_11105__;$i+=1){ ?>
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/index/TeachingOfficeTutor/student_assign/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_20168__=$totalPage-5;$__FOR_END_20168__=$totalPage;for($i=$__FOR_START_20168__;$i < $__FOR_END_20168__;$i+=1){ ?>
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/index/TeachingOfficeTutor/student_assign/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_21355__=1;$__FOR_END_21355__=6;for($i=$__FOR_START_21355__;$i < $__FOR_END_21355__;$i+=1){ ?>
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/index/TeachingOfficeTutor/student_assign/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_18618__=1;$__FOR_END_18618__=$totalPage;for($i=$__FOR_START_18618__;$i < $__FOR_END_18618__;$i+=1){ ?>
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/index/TeachingOfficeTutor/student_assign/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                              <li><a href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage-1).'/dep/'.$dep); ?>">&laquo;</a></li>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_14233__=$curPage-2;$__FOR_END_14233__=$curPage+3;for($i=$__FOR_START_14233__;$i < $__FOR_END_14233__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep); ?>" ><?php echo $i; ?></a></li>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_2272__=$totalPage-5;$__FOR_END_2272__=$totalPage;for($i=$__FOR_START_2272__;$i < $__FOR_END_2272__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep); ?>" ><?php echo $i; ?></a></li>
+                            <?php } elseif($totalPage > 5): $__FOR_START_18147__=1;$__FOR_END_18147__=6;for($i=$__FOR_START_18147__;$i < $__FOR_END_18147__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep); ?>" ><?php echo $i; ?></a></li>
+                            <?php } else: $__FOR_START_32530__=1;$__FOR_END_32530__=$totalPage;for($i=$__FOR_START_32530__;$i < $__FOR_END_32530__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="#">&raquo;</a></li>
                           <?php endif; ?>

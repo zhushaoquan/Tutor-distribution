@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:102:"/Applications/MAMP/htdocs/2/Tutor-distribution/tutorAssign/public/../app/index/view/teacher/index.html";i:1478505666;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
     <title>毕设导师智能分配系统</title>
     <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="__STATIC__/css/backstage.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.TUTOR_STATIC}}/css/teacher.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo TUTOR_STATIC; ?>/css/teacher.css">
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
@@ -25,17 +26,17 @@
             <div class="user-area">
                 <div class="hello-user">
                     <span><i class="glyphicon glyphicon-user"></i>欢迎您,</span>
-                    <span class="user-name">{{:user_type()}}: {{$user['name']|default="xxx"}}</span>
+                    <span class="user-name"><?php echo user_type(); ?>: <?php echo (isset($user['name']) && ($user['name'] !== '')?$user['name']:"xxx"); ?></span>
                 </div>
             </div>
             <div class="login-out-area">
-                <a href="{{:url('BaseController/logout')}}"><i class = "glyphicon glyphicon-off"></i>退出</a>
+                <a href="<?php echo url('BaseController/logout'); ?>"><i class = "glyphicon glyphicon-off"></i>退出</a>
             </div>
         </div>
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;">
                 <div class="two-div-contain">
-                    <a href="{{:url('Teacher/indexHome')}}">
+                    <a href="<?php echo url('Teacher/indexHome'); ?>">
                         <div class="baoke-position">
                             <div class="span-position">
                                 <i class="glyphicon glyphicon-hand-right"></i>
@@ -43,7 +44,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="{{:url('TeacherTutor/index')}}" style="text-decoration: none;">
+                    <a href="<?php echo url('TeacherTutor/index'); ?>" style="text-decoration: none;">
                         <div class="tutorchoose-position">
                             <div class="span-position">
                                 <i class="glyphicon glyphicon-hand-right"></i>

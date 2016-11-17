@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:108:"/Applications/MAMP/htdocs/2/Tutor-distribution/tutorAssign/public/../app/index/view/teacher_tutor/index.html";i:1479225725;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,10 +7,10 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>毕设导师只能分配系统</title>
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/teacher.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/student.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/teacher.css">
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
@@ -27,10 +28,10 @@
                 <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="{{:url('teacher_tutor/index')}}"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <a href="{{:url('teacher_tutor/student_list')}}"><li><i class="glyphicon glyphicon-th-list"></i> 可选学生</li></a>
-                <a href="{{:url('teacher_tutor/issue_submit')}}"><li><i class="glyphicon glyphicon-pencil"></i> 课题提交</li></a>
-                <a href="{{:url('teacher_tutor/show_result')}}"><li><i class="glyphicon glyphicon-ok"></i> 最终结果</li></a>
+                <a href="<?php echo url('teacher_tutor/index'); ?>"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
+                <a href="<?php echo url('teacher_tutor/student_list'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 可选学生</li></a>
+                <a href="<?php echo url('teacher_tutor/issue_submit'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 课题提交</li></a>
+                <a href="<?php echo url('teacher_tutor/show_result'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 最终结果</li></a>
             </ul>
         </nav>
     </div>
@@ -39,11 +40,11 @@
             <div class="user-area">
                 <div class="hello-user">
                     <span><i class="glyphicon glyphicon-user"></i>欢迎您,</span>
-                    <span class="user-name">{{:user_type()}}: {{$user['name']|default="xxx"}}</span>
+                    <span class="user-name"><?php echo user_type(); ?>: <?php echo (isset($user['name']) && ($user['name'] !== '')?$user['name']:"xxx"); ?></span>
                 </div>
             </div>
             <div class="login-out-area">
-                <a href="{{:url('BaseController/logout')}}"><i class = "glyphicon glyphicon-off"></i>退出</a>
+                <a href="<?php echo url('BaseController/logout'); ?>"><i class = "glyphicon glyphicon-off"></i>退出</a>
             </div>
         </div>
         <div class="page-content">
@@ -61,16 +62,16 @@
                 </div>
                 <div class="my-information-detail-1">
                     <ul>
-                        <li><span>姓名：</span><span class="span-value">{{$user.name}}</span><span>工号：</span><span class="span-value">{{$user.workNumber}}</span><span>性别：</span><span class="span-value">{{$user.sex}}</span></li>
-                        <li><span>系别：</span><span class="span-value">{{$user.department}}</span><span>电话：</span><span class="span-value">{{$user.telephone}}</span><span>邮箱：</span><span class="span-value">{{$user.email}}</span></li>
-                        <li><span>生日：</span><span class="span-value">{{$user.birthday}}</span><span>职称：</span><span class="span-value">{{$user.title}}</span><span style="width: 100px;">实验班导师：</span><span class="span-value">{{$user.isExperial}}</span></li>
+                        <li><span>姓名：</span><span class="span-value"><?php echo $user['name']; ?></span><span>工号：</span><span class="span-value"><?php echo $user['workNumber']; ?></span><span>性别：</span><span class="span-value"><?php echo $user['sex']; ?></span></li>
+                        <li><span>系别：</span><span class="span-value"><?php echo $user['department']; ?></span><span>电话：</span><span class="span-value"><?php echo $user['telephone']; ?></span><span>邮箱：</span><span class="span-value"><?php echo $user['email']; ?></span></li>
+                        <li><span>生日：</span><span class="span-value"><?php echo $user['birthday']; ?></span><span>职称：</span><span class="span-value"><?php echo $user['title']; ?></span><span style="width: 100px;">实验班导师：</span><span class="span-value"><?php echo $user['isExperial']; ?></span></li>
                     </ul>
                 </div>
                 <div class="description-title">
                     <p>个人简介：</p>
                 </div>
                 <div class="description-detail">
-                    <p>{{$user.description}}</p>
+                    <p><?php echo $user['description']; ?></p>
                 </div>
                 <!-- <div class="button-position">
                     <button class="btn btn-info" type="submit">修改</button>

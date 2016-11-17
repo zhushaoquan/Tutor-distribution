@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_assign.html";i:1479298888;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_assign.html";i:1479314503;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,11 +76,11 @@
                         </tr>
 
                         <tbody>
-
                         <?php foreach ($data as $value) 
                         {
                                   
                             echo '<tr>
+
                             <td style="vertical-align:middle" rowspan="'.count($value['tstudentL']).'">' . $value['tnum'].
                             '</td>
                             <td style="vertical-align:middle" rowspan="'.count($value['tstudentL']).'">'.$value['tname'].'</td>
@@ -99,75 +99,33 @@
                            
                            // echo  '';
                         }
-                        ?>
+                        ?> 
                         </tbody>
                     </table>
-                    <!--   <tr>
-                            <td>031402XXX</td>
-                            <td>李四</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>王五</td>
-                        </tr> 
-                           
-                     <tr>
-                            <td style="vertical-align:middle" rowspan="4">00022</td>
-                            <td style="vertical-align:middle" rowspan="4">张栋</td>
-                            <td>031402XXX</td>
-                            <td>张三</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>李四</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>王五</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>赵六</td>
-                        </tr>
-
-                        <tr>
-                            <td style="vertical-align:middle" rowspan="2">00023</td>
-                            <td style="vertical-align:middle" rowspan="2">柯逍</td>
-                            <td>031402XXX</td>
-                            <td>张三</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>李四</td>
-                        </tr>
-
-                        <tr>
-                            <td style="vertical-align:middle" rowspan="2">00024</td>
-                            <td style="vertical-align:middle" rowspan="2">吴英杰</td>
-                            <td>031402XXX</td>
-                            <td>赵六</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>王五</td>
-                        </tr> !-->
+                   
                   
                     <div class="submit-area">
                         <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button>
                         <button type="submit" class="btn btn-primary" id="sub-result-change">
-                            <a style="color:white;" href="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>">修&nbsp;&nbsp;改</a></button>
+                            <a style="color:white;" href="<?php echo url('TeachingOfficeTutor/tutor_to_change'); ?>">修&nbsp;&nbsp;改</a></button>
                      <!--   <button type="submit" class="btn btn-primary" id="sub-result-confirm">确&nbsp;&nbsp;认</button>  !-->
                     </div>
 
                     <nav>
                         <ul class="pagination" style="float: right;">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
+                          <?php if($curPage != 1): ?>
+                              <li><a href="<?php echo url('/index/TeachingOfficeTutor/tutor_assign/'.($curPage-1)); ?>">&laquo;</a></li>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_29027__=$curPage-2;$__FOR_END_29027__=$curPage+3;for($i=$__FOR_START_29027__;$i < $__FOR_END_29027__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_assign/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_17298__=$totalPage-5;$__FOR_END_17298__=$totalPage;for($i=$__FOR_START_17298__;$i < $__FOR_END_17298__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_assign/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                            <?php } elseif($totalPage > 5): $__FOR_START_21789__=1;$__FOR_END_21789__=6;for($i=$__FOR_START_21789__;$i < $__FOR_END_21789__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_assign/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                            <?php } else: $__FOR_START_23028__=1;$__FOR_END_23028__=$totalPage;for($i=$__FOR_START_23028__;$i < $__FOR_END_23028__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_assign/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                            <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="#">&raquo;</a></li>
+                          <?php endif; ?>
                         </ul>
                      </nav>
 
