@@ -5,7 +5,7 @@ use think\Db;
 use think\Request;
 
 class TeacherTutor extends BaseController {
-	
+    public $pageSize = 5;
 	public function index() {
 		$user = $this->auto_login();
 
@@ -22,6 +22,25 @@ class TeacherTutor extends BaseController {
 		$this->assign('user', $user);
 		return $this->fetch('index');
 	}
+
+    public function showNotice($str, $smartMode) {
+        $str = str_replace("\n", "", $str);
+        echo '<DOCTYPE HTML>';
+        echo '<html>';
+        echo '<head>';
+        echo '<meta charset="UTF-8" />';
+        echo '<title>提示信息</title>';
+        echo '</head>';
+        echo '<body>';
+        echo '<script language="javascript">';
+        echo "alert('".addslashes($str)."');";
+        echo 'window.location.href="'.$smartMode.'";';
+        echo '</script>';
+        echo '</body>';
+        echo '</html>';
+        exit;
+    }
+
     public function issue_submit() {
     	 $user = $this->auto_login();
          
@@ -69,76 +88,72 @@ class TeacherTutor extends BaseController {
 
     
 
-    public function student_list() {
+    public function student_list($page=1) {
     	$user = $this->auto_login();
-		
-
-        $students = Db::table('tc_voluntary')->where('wishFirst', $user['workNumber'])
+        $students = Db::table('tc_voluntary')->alias('v')->join('user_student s','v.sid = s.sid')
+                                            ->where('wishFirst', $user['workNumber'])
                                             ->whereOr('wishSecond', $user['workNumber'])
                                             ->whereOr('wishThird', $user['workNumber'])
                                             ->whereOr('wishForth', $user['workNumber'])
                                             ->whereOr('wishFifth', $user['workNumber'])
-                                            ->select();
+                                            ->page($page,$this->pageSize)->select();
+        $total = count(Db::table('tc_voluntary')->where('wishFirst', $user['workNumber'])
+                                            ->whereOr('wishSecond', $user['workNumber'])
+                                            ->whereOr('wishThird', $user['workNumber'])
+                                            ->whereOr('wishForth', $user['workNumber'])
+                                            ->whereOr('wishFifth', $user['workNumber'])
+                                            ->select()
+                      );
+        $page = $totalPage = ceil($total/$this->pageSize);
+        $pageBar = [
+            'total'     => $total,
+            'totalPage' => $totalPage+1,
+            'pageSize'  => $this->pageSize,
+            'curPage'   => $page
+            ];
 
-        $studentList = array();
-        $i = 0;
-        foreach ($students as $key => $value) {
-            $studentList[$i] = Db::table('user_student')->where('sid', $value['sid'])->find();
-            if($value['wishFirst'] == $user['workNumber']) {
-                $studentList[$i]['wish'] = 1;
-            } else if($value['wishSecond'] == $user['workNumber']) {
-                $studentList[$i]['wish'] = 2;
-            } else if($value['wishThird'] == $user['workNumber']) {
-                $studentList[$i]['wish'] = 3;
-            } else if($value['wishForth'] == $user['workNumber']) {
-                $studentList[$i]['wish'] = 4;
-            } else {
-                $studentList[$i]['wish'] = 5;
-            }
-
-            $i++;
-        }
+        $this->assign($pageBar);
+        $this->assign('students',$students);
         $this->assign('user', $user);
-        $this->assign('studentList', $studentList);
 
         $request = Request::instance();
         if ($request->isPost()) {
             $data1['workNumber'] = $user['workNumber'];
             $data1['sid'] = $request->post('sid', '');
-            $accept = $request->post('accept','');
-     
+            $accept = $request->post('choise','');
             if($accept=="选择") {
-                Db::table('tc_result')->insert($data1);
+                $bool = Db::table('tc_result')->insert($data1);
                 Db::table('tc_voluntary')->where('sid',$data1['sid'])->delete();
                 Db::table('user_student')->where('sid',$data1['sid'])->setField('chosen',1);
                 Db::table('tc_issue')->where('workNumber',$data1['workNumber'])->setInc('totalNow',1);
+                if($bool) {
+                    $this->showNotice('选择成功',url('TeacherTutor/student_list'));
+                }
 
             } else {
                 $tmp = Db::table('tc_voluntary')->where('sid',$data1['sid'])->find();
+                $bool = 1;
                 if($tmp['wishFirst']==$data1['workNumber']) {
-                    Db::table('tc_voluntary')->where('sid',$data1['sid'])->setField('wishFirst',NULL);
+                    $bool = $bool && Db::table('tc_voluntary')->where('sid',$data1['sid'])->setField('wishFirst',NULL);
                 } 
                 if($tmp['wishSecond']==$data1['workNumber']) {
-                    Db::table('tc_voluntary')->where('sid',$data1['sid'])->setField('wishSecond',NULL);
+                    $bool = $bool && Db::table('tc_voluntary')->where('sid',$data1['sid'])->setField('wishSecond',NULL);
                 } 
                 if($tmp['wishThird']==$data1['workNumber']) {
-                    Db::table('tc_voluntary')->where('sid',$data1['sid'])->setField('wishThird',NULL);
+                    $bool = $bool && Db::table('tc_voluntary')->where('sid',$data1['sid'])->setField('wishThird',NULL);
                 } 
                 if($tmp['wishForth']==$data1['workNumber']) {
-                    Db::table('tc_voluntary')->where('sid',$data1['sid'])->setField('wishForth',NULL);
+                    $bool = $bool && Db::table('tc_voluntary')->where('sid',$data1['sid'])->setField('wishForth',NULL);
                 } 
                 if($tmp['wishFifth']==$data1['workNumber']) {
-                    Db::table('tc_voluntary')->where('sid',$data1['sid'])->setField('wishFifth',NULL);
+                    $bool = $bool && Db::table('tc_voluntary')->where('sid',$data1['sid'])->setField('wishFifth',NULL);
                 } 
+                if($bool) {
+                    $this->showNotice('拒绝成功',url('TeacherTutor/student_list'));
+                }
             }
-            
-
         }
-            
-
-    	return $this->fetch('student_list');
-
-
+        return $this->fetch('student_list');
     }
 
     

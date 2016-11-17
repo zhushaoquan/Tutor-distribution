@@ -29,7 +29,7 @@
                 <a href="{{:url('Student/index')}}"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <a href="{{:url('Student/tutor_list')}}"><li class="active"><i class="glyphicon glyphicon-th-list"></i> 专业导师</li></a>
                 <a href="{{:url('Student/edit_voluntary')}}"><li><i class="glyphicon glyphicon-pencil"></i> 志愿填报</li></a>
-                <a href="{{:url('Student/show_result')}}"><li><i class="glyphicon glyphicon-ok"></i> 最终结果</li></a>
+                <a href="{{:url('Student/show_result')}}"><li><i class="glyphicon glyphicon-ok"></i> 志愿结果</li></a>
             </ul>
         </nav>
     </div>
@@ -48,7 +48,7 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示1：<?php echo $message;?></p>
+                    <p>提示1</p>
                 </div>
                 <div class="page-header">
                     <h3>导师列表
@@ -64,33 +64,49 @@
                             <th>研究方向</th>
                             <th>电子邮件</th>
                         </tr>
-
                         <tbody>
-                        <?php foreach ($tutors as $key => $value):?>
-                        <tr>
-                            <td><?php echo $value['workNumber']?></td>
-                            <td><?php echo $value['name']?></td>
-                            <td><?php echo $value['sex']?></td>
-                            <td><?php echo $value['title']?></td>
-                            <td><?php echo $value['department']?></td>
-                            <td><?php echo $value['email']?></td>
-                        </tr>
-                    <?php endforeach;?>
+                            {volist name="teachers" id="t"}
+                                <tr>
+                                    <td>{{$t.workNumber}}</td>
+                                    <td>{{$t.name}}</td>
+                                    <td>{{$t.sex}}</td>
+                                    <td>{{$t.title}}</td>
+                                    <td>{{$t.department}}</td>
+                                    <td>{{$t.email}}</td>
+                                </tr>
+                            {/volist}
                         </tbody>
                     </table>
-                    <nav style="float: right;">
-                    <ul class="pagination" >
-                        <li><a href="#">&laquo;</a></li>
-                        <li ><a href="#">1</a></li>
-                        <li ><a href="#">2</a></li>
-                        <li ><a href="#">3</a></li>
-                        <li ><a href="#">4</a></li>
-                        <li ><a href="#">5</a></li>
-                        <li ><a href="#">&raquo;</a></li>
-
-
-                    </ul>
-                </nav>
+                    <nav>
+                      <ul class="pagination" style="float: right;">
+                      <a href="{{:url('/index/index/Student/tutor_list/'.($curPage-1))}}">&laquo;</a>
+                          {if condition="$curPage neq 1 "}
+                              <li><a href="{{:url('/index/index/Student/tutor_list/'.($curPage-1))}}">&laquo;</a></li>
+                          {/if}
+                            
+                          {if condition="($curPage gt 3) AND ($curPage lt $totalPage-2)"}
+                            {for start="$curPage-2" end="$curPage+3"}
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/Student/tutor_list/page/'.$i)}}" >{{$i}}</a></li>
+                            {/for}
+                          {elseif condition="($curPage gt $totalPage-3) AND ($totalPage gt 5)" /}
+                            {for start="$totalPage-5" end="$totalPage"}
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('index/Student/tutor_list/page/'.$i)}}" >{{$i}}</a></li>
+                            {/for}
+                          {elseif condition="$totalPage gt 5" /}
+                            {for start="1" end="6"}
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/Student/tutor_list/page/'.$i)}}" >{{$i}}</a></li>
+                            {/for}
+                          {else /}
+                            {for start="1" end="$totalPage"}
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/Student/tutor_list/page/'.$i)}}" >{{$i}}</a></li>
+                            {/for}
+                          {/if}
+                          {if condition="$curPage lt $totalPage-1"}
+                            <li><a href="#">&raquo;</a></li>
+                          {/if}
+                            <li><a href="#">共{{$total}}名导师</a></li>
+                      </ul>
+                    </nav>      
                 </div>
                 
             </div>
