@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_assign.html";i:1479314503;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,11 +9,11 @@
     <title>毕设导师智能分配系统</title>
   <!--  <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="__STATIC__/css/backstage.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.TUTOR_STATIC}}/css/student.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo TUTOR_STATIC; ?>/css/student.css">
     !-->
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/student.css">
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
@@ -31,10 +32,10 @@
                 <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="{{:url('TeachingOfficeTutor/index')}}"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
+                <a href="<?php echo url('TeachingOfficeTutor/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
-                <a href="{{:url('TeachingOfficeTutor/tutor_change')}}"><li class="active"><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
-                <a href="{{:url('TeachingOfficeTutor/student_assign')}}"><li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
+                <a href="<?php echo url('TeachingOfficeTutor/tutor_assign'); ?>"><li class="active"><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
+                <a href="<?php echo url('TeachingOfficeTutor/student_assign'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
             </ul>
         </nav>
     </div>
@@ -45,11 +46,11 @@
             <div class="user-area">
                 <div class="hello-user">
                     <span><i class="glyphicon glyphicon-user"></i>欢迎您,</span>
-                    <span class="user-name">{{:user_type()}}: {{$user['name']|default="xxx"}}</span>
+                    <span class="user-name"><?php echo user_type(); ?>: <?php echo (isset($user['name']) && ($user['name'] !== '')?$user['name']:"xxx"); ?></span>
                 </div>
             </div>
             <div class="login-out-area">
-                <a href="{{:url('BaseController/logout')}}"><i class = "glyphicon glyphicon-off"></i>退出</a>
+                <a href="<?php echo url('BaseController/logout'); ?>"><i class = "glyphicon glyphicon-off"></i>退出</a>
             </div>
         </div>
 
@@ -96,6 +97,7 @@
                               $i++;
                             }
                            
+                           // echo  '';
                         }
                         ?> 
                         </tbody>
@@ -105,36 +107,25 @@
                     <div class="submit-area">
                         <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button>
                         <button type="submit" class="btn btn-primary" id="sub-result-change">
-                            <a style="color:white;" href="{{:url('TeachingOfficeTutor/tutor_to_change')}}">修&nbsp;&nbsp;改</a></button>
+                            <a style="color:white;" href="<?php echo url('TeachingOfficeTutor/tutor_to_change'); ?>">修&nbsp;&nbsp;改</a></button>
                      <!--   <button type="submit" class="btn btn-primary" id="sub-result-confirm">确&nbsp;&nbsp;认</button>  !-->
                     </div>
 
                     <nav>
                         <ul class="pagination" style="float: right;">
-                          {if condition="$curPage neq 1 "}
-                              <li><a href="{{:url('/index/TeachingOfficeTutor/tutor_assign/'.($curPage-1))}}">&laquo;</a></li>
-                          {/if}
-                            
-                          {if condition="($curPage gt 3) AND ($curPage lt $totalPage-2)"}
-                            {for start="$curPage-2" end="$curPage+3"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/tutor_assign/page/'.$i)}}" >{{$i}}</a></li>
-                            {/for}
-                          {elseif condition="($curPage gt $totalPage-3) AND ($totalPage gt 5)" /}
-                            {for start="$totalPage-5" end="$totalPage"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/tutor_assign/page/'.$i)}}" >{{$i}}</a></li>
-                            {/for}
-                          {elseif condition="$totalPage gt 5" /}
-                            {for start="1" end="6"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/tutor_assign/page/'.$i)}}" >{{$i}}</a></li>
-                            {/for}
-                          {else /}
-                            {for start="1" end="$totalPage"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/tutor_assign/page/'.$i)}}" >{{$i}}</a></li>
-                            {/for}
-                          {/if}
-                          {if condition="$curPage lt $totalPage-1"}
+                          <?php if($curPage != 1): ?>
+                              <li><a href="<?php echo url('/index/TeachingOfficeTutor/tutor_assign/'.($curPage-1)); ?>">&laquo;</a></li>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_29027__=$curPage-2;$__FOR_END_29027__=$curPage+3;for($i=$__FOR_START_29027__;$i < $__FOR_END_29027__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_assign/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_17298__=$totalPage-5;$__FOR_END_17298__=$totalPage;for($i=$__FOR_START_17298__;$i < $__FOR_END_17298__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_assign/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                            <?php } elseif($totalPage > 5): $__FOR_START_21789__=1;$__FOR_END_21789__=6;for($i=$__FOR_START_21789__;$i < $__FOR_END_21789__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_assign/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                            <?php } else: $__FOR_START_23028__=1;$__FOR_END_23028__=$totalPage;for($i=$__FOR_START_23028__;$i < $__FOR_END_23028__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_assign/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                            <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="#">&raquo;</a></li>
-                          {/if}
+                          <?php endif; ?>
                         </ul>
                      </nav>
 

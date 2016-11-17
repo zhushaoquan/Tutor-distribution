@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_change.html";i:1479379349;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -7,11 +8,11 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>毕设导师智能分配系统</title>
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap-editable.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap-table.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/tutor-change.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap-editable.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/tutor-change.css">
     <style type="text/css">
     .sider-navbar-nav li {
         color: #fff;
@@ -29,14 +30,14 @@
                     <img src="./old/image/mainpage-logo.png" alt="" width="240">
                 </div>
                 <ul class="sider-navbar-nav">
-                    <a href="{{:url('TeachingOfficeTutor/index')}}">
+                    <a href="<?php echo url('TeachingOfficeTutor/index'); ?>">
                         <li><i class="glyphicon glyphicon-user"></i> 个人信息</li>
                     </a>
                     <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
-                    <a href="{{:url('TeachingOfficeTutor/tutor_change')}}">
+                    <a href="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>">
                         <li class="active"><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
                     </a>
-                    <a href="{{:url('TeachingOfficeTutor/student_assign')}}">
+                    <a href="<?php echo url('TeachingOfficeTutor/student_assign'); ?>">
                         <li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
                     </a>
                 </ul>
@@ -47,11 +48,11 @@
                 <div class="user-area">
                     <div class="hello-user">
                         <span><i class="glyphicon glyphicon-user"></i>欢迎您,</span>
-                        <span class="user-name">{{:user_type()}}: {{$user['name']|default="xxx"}}</span>
+                        <span class="user-name"><?php echo user_type(); ?>: <?php echo (isset($user['name']) && ($user['name'] !== '')?$user['name']:"xxx"); ?></span>
                     </div>
                 </div>
                 <div class="login-out-area">
-                    <a href="{{:url('BaseController/logout')}}"><i class="glyphicon glyphicon-off"></i>退出</a>
+                    <a href="<?php echo url('BaseController/logout'); ?>"><i class="glyphicon glyphicon-off"></i>退出</a>
                 </div>
             </div>
             <div class="page-content">
@@ -76,30 +77,27 @@
 
 
                                 
-                                {volist name="data" id="v"}
+                                <?php if(is_array($data) || $data instanceof \think\Collection): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
                                 <tr>
-                                    <td id="{{$v.tnum}}" style="vertical-align:middle" rowspan="{{$v.lenth+1}}">{{$v.tname}}</td>
-                                    <td class="teacher-name" rowspan="{{$v.lenth+1}}" style="vertical-align:middle">{{$v.tname}}&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button name="{{$v.tname}}" value="{{$v.tnum}}" class="btn-add" data-toggle='modal' data-backdrop="static" data-target="#addModal">新增
+                                    <td id="<?php echo $v['tnum']; ?>" style="vertical-align:middle" rowspan="<?php echo $v['lenth']+1; ?>"><?php echo $v['tname']; ?></td>
+                                    <td class="teacher-name" rowspan="<?php echo $v['lenth']+1; ?>" style="vertical-align:middle"><?php echo $v['tname']; ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <button name="<?php echo $v['tname']; ?>" value="<?php echo $v['tnum']; ?>" class="btn-add" data-toggle='modal' data-backdrop="static" data-target="#addModal">新增
                                         </button>
                                     </td>
                                
-                               <?php  if($v['lenth' ]== 0)echo "<td>暂无结果</td><td>暂无结果</td>"; ?>
-
-                                    {volist name="v.tstudentL" id="v2"}
+                               <?php  if($v['lenth' ]== 0)echo "<td>暂无结果</td><td>暂无结果</td>"; if(is_array($v['tstudentL']) || $v['tstudentL'] instanceof \think\Collection): $i = 0; $__LIST__ = $v['tstudentL'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v2): $mod = ($i % 2 );++$i;?>
                                        <if condition="$i eq )">
                                         <else/><tr>
                                         </if>
                                     
-                                        <td>{{$v2.snum}}</td>
-                                        <td>{{$v2.sname}}</td>
+                                        <td><?php echo $v2['snum']; ?></td>
+                                        <td><?php echo $v2['sname']; ?></td>
                                         <td style="display: none;">
-                                            <button class="btn-delete" id="{{$v2.snum}}" value="{{$v2.snum}}" name="{{$v2.sname}}" teacher_id="{{$v.tnum}}" data-toggle='modal' data-backdrop="static" data-target="#deleteModal">删除
+                                            <button class="btn-delete" id="<?php echo $v2['snum']; ?>" value="<?php echo $v2['snum']; ?>" name="<?php echo $v2['sname']; ?>" teacher_id="<?php echo $v['tnum']; ?>" data-toggle='modal' data-backdrop="static" data-target="#deleteModal">删除
                                             </button>
                                         </td>
                                     </tr>
-                                    {/volist}
-                                {/volist}
+                                    <?php endforeach; endif; else: echo "" ;endif; endforeach; endif; else: echo "" ;endif; ?>
                                 
                            
                             </tbody>
@@ -112,30 +110,19 @@
                     <div style="height: 60px">
                     <nav>
                         <ul class="pagination" style="float: right;">
-                           {if condition="$curPage neq 1 "}
-                              <li><a href="{{:url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage-1))}}">&laquo;</a></li>
-                          {/if}
-                            
-                          {if condition="($curPage gt 3) AND ($curPage lt $totalPage-2)"}
-                            {for start="$curPage-2" end="$curPage+3"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/tutor_change/page/'.$i)}}" >{{$i}}</a></li>
-                            {/for}
-                          {elseif condition="($curPage gt $totalPage-3) AND ($totalPage gt 5)" /}
-                            {for start="$totalPage-5" end="$totalPage"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/tutor_change/page/'.$i)}}" >{{$i}}</a></li>
-                            {/for}
-                          {elseif condition="$totalPage gt 5" /}
-                            {for start="1" end="6"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/tutor_change/page/'.$i)}}" >{{$i}}</a></li>
-                            {/for}
-                          {else /}
-                            {for start="1" end="$totalPage"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/tutor_change/page/'.$i)}}" >{{$i}}</a></li>
-                            {/for}
-                          {/if}
-                          {if condition="$curPage lt $totalPage-1"}
-                            <li><a href="{{:url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage+1))}}">&raquo;</a></li>
-                          {/if}
+                           <?php if($curPage != 1): ?>
+                              <li><a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage-1)); ?>">&laquo;</a></li>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_29385__=$curPage-2;$__FOR_END_29385__=$curPage+3;for($i=$__FOR_START_29385__;$i < $__FOR_END_29385__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_29392__=$totalPage-5;$__FOR_END_29392__=$totalPage;for($i=$__FOR_START_29392__;$i < $__FOR_END_29392__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                            <?php } elseif($totalPage > 5): $__FOR_START_25235__=1;$__FOR_END_25235__=6;for($i=$__FOR_START_25235__;$i < $__FOR_END_25235__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                            <?php } else: $__FOR_START_31618__=1;$__FOR_END_31618__=$totalPage;for($i=$__FOR_START_31618__;$i < $__FOR_END_31618__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                            <?php } endif; if($curPage < $totalPage-1): ?>
+                            <li><a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage+1)); ?>">&raquo;</a></li>
+                          <?php endif; ?>
                         </ul>
                     </nav>
                     </div>
@@ -180,7 +167,7 @@
                     </div>
                     </form>
                     <div class="modal-footer">
-                        <a href="{{:url('TeachingOfficeTutor/tutor_change')}}" id="btn-colse-add" class="btn btn-default" >关闭
+                        <a href="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>" id="btn-colse-add" class="btn btn-default" >关闭
                         </a>
                         <button id="btn-add-student" form="addStudent" class="btn btn-primary">
                             确认
@@ -208,7 +195,7 @@
                         
                     </div>
                     <div class="modal-footer">
-                        <a href="{{:url('TeachingOfficeTutor/tutor_change')}}" id="btn-colse-del" class="btn btn-default" >关闭
+                        <a href="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>" id="btn-colse-del" class="btn btn-default" >关闭
                         </a>
                         <button type="button" id="btn-del-student" class="btn btn-primary">
                             确认
@@ -219,9 +206,9 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="{{$Think.const.OLD}}/js/index.js"></script>
-    <script type="text/javascript" src="{{$Think.const.OLD}}/js/jquery2.14.min.js"></script>
-    <script type="text/javascript" src="{{$Think.const.OLD}}/js/bootstrap.js"></script>
+    <script type="text/javascript" src="<?php echo OLD; ?>/js/index.js"></script>
+    <script type="text/javascript" src="<?php echo OLD; ?>/js/jquery2.14.min.js"></script>
+    <script type="text/javascript" src="<?php echo OLD; ?>/js/bootstrap.js"></script>
     
     <script type="text/javascript">
     var teacher_id;

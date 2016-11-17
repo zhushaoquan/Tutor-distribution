@@ -1,8 +1,4 @@
-<<<<<<< HEAD:tutorAssign/runtime/temp/fda2ffc75fa3499b74bd75b6d168b383.php
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_assign.html";i:1479287618;}*/ ?>
-=======
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:92:"C:\wamp64\www\tutorAssign\public/../app/index\view\teaching_office_tutor\student_assign.html";i:1479170879;}*/ ?>
->>>>>>> 919d834b003b4de4be29fda002fc30810208f309:tutorAssign/runtime/temp/704f7391cfee9be36b4d9502cf92a89b.php
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_assign.html";i:1479317654;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,9 +23,6 @@
     </style>
 </head>
 <body>
-{:dump($list)}
-{$list}
-<div>{$page}</div>
 <div id="container-backstage" class="clearfix">
 
     <div id="siderbar">
@@ -40,7 +33,7 @@
             <ul class="sider-navbar-nav">
                 <a href="<?php echo url('TeachingOfficeTutor/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
-                <a href="<?php echo url('TeachingOfficeTutor/tutor_assign'); ?>"><li ><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
+                <a href="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>"><li ><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
                 <a href="<?php echo url('TeachingOfficeTutor/student_assign'); ?>"><li class="active"><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
             </ul>
         </nav>
@@ -63,7 +56,7 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示：毕设导师志愿时间为2016年10月19日至2016年10月22日，请同学们在规定时间内完成志愿选择.</p>
+                    <p>提示：您可以修改选课结果.</p>
                 </div>
 
                 <div class="page-header">
@@ -82,7 +75,10 @@
                             <option value="软件工程系">软件工程系</option>
                             <option value="信息安全系">信息安全系</option>
                             <option value="系统结构系">系统结构系</option>
+                            <option value="计算机实验班">计算机实验班</option>
+                            <option value="数学实验班">数学实验班</option>
                         </select>  
+                        <input type="hidden" name="stu" value="assign">
                         <input type="submit" class="btn btn-primary" style="display: inline;" id="sub-result-export">
                     </form>
                     </div>
@@ -95,50 +91,47 @@
                             <th>#</th>
                            <th>学生学号</th>
                             <th>学生姓名</th>
-                         <!--   <th>班级</th>  !-->
                             <th>导师工号</th>
                             <th>导师姓名</th>
-                         <!--  <th>研究方向</th>  !-->
                         </tr>
 
                         <tbody>
-                        <?php
-                        $i=1;
-                        foreach ($data as  $value) 
-                        {
-                            
-                        echo '<tr>
-                            <td>'.$i.'</td>
-                            <td>'.$value['snum'].'</td>
-                            <td>'.$value['sname'].'</td>
-                       <!--      <td>计算机2班</td>  !-->
-                            <td>'.$value['tnum'].'</td>
-                            <td>'.$value['tname'].'</td>
-                       <!--      <td>系统结构</td>  !-->
-                        </tr>';
-                        $i++;
-                         }
-                        ?>
-                  
+                            <?php if(is_array($data) || $data instanceof \think\Collection): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
+                                <tr>
+                                    <td><?php echo $i; ?></td>
+                                    <td><?php echo $v['snum']; ?></td>
+                                    <td><?php echo $v['sname']; ?></td>
+                                    <td><?php echo $v['tnum']; ?></td>
+                                    <td><?php echo $v['tname']; ?></td>
+                                    
+                                </tr>
+                            <?php endforeach; endif; else: echo "" ;endif; ?>
+
                         </tbody>
                     </table>
 
                     <div class="submit-area">
                         <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button>
-                           <button type="submit" class="btn btn-primary" id="sub-result-change"><a style="color:white;" href="<?php echo url('TeachingOfficeTutor/student_change'); ?>">修&nbsp;&nbsp;改</a></button>  
-                     <!--   <button type="submit" class="btn btn-primary" id="sub-result-change">修&nbsp;&nbsp;改</button> !-->
-                   <!--     <button type="submit" class="btn btn-primary" id="sub-result-confirm">确&nbsp;&nbsp;认</button>  !-->
+                           <button type="submit" class="btn btn-primary" id="sub-result-change"><a style="color:white;" href="<?php echo url('TeachingOfficeTutor/student_to_modify'); ?>">修&nbsp;&nbsp;改</a></button>  
+                   
                     </div>
 
                     <nav>
                         <ul class="pagination" style="float: right;">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
+                          <?php if($curPage != 1): ?>
+                              <li><a href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage-1).'/dep/'.$dep); ?>">&laquo;</a></li>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_14233__=$curPage-2;$__FOR_END_14233__=$curPage+3;for($i=$__FOR_START_14233__;$i < $__FOR_END_14233__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep); ?>" ><?php echo $i; ?></a></li>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_2272__=$totalPage-5;$__FOR_END_2272__=$totalPage;for($i=$__FOR_START_2272__;$i < $__FOR_END_2272__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep); ?>" ><?php echo $i; ?></a></li>
+                            <?php } elseif($totalPage > 5): $__FOR_START_18147__=1;$__FOR_END_18147__=6;for($i=$__FOR_START_18147__;$i < $__FOR_END_18147__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep); ?>" ><?php echo $i; ?></a></li>
+                            <?php } else: $__FOR_START_32530__=1;$__FOR_END_32530__=$totalPage;for($i=$__FOR_START_32530__;$i < $__FOR_END_32530__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep); ?>" ><?php echo $i; ?></a></li>
+                            <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="#">&raquo;</a></li>
+                          <?php endif; ?>
+                            <li><a href="#">共<?php echo $total; ?>名学生</a></li>
                         </ul>
                      </nav>
 
