@@ -1,116 +1,3 @@
-<<<<<<< HEAD
-
-.sider-navbar-nav li {
-            color: #fff;
-            text-align: center;
-            padding-top: 10px;
-        }
-
-.my-information-title  {
-	font-size: 30px;
-	width: 100%;
-	height: auto;
-	color: #2e363f;
-	padding-left: 50px;
-	padding-top: 40px;
-}
-
-.btn-edit{
-	float: right;
-	margin-right: 30px;
-}
-
-.my-information-subtitle  {
-	font-size: 16px;
-	/*width: 600px;*/
-	height: 30px;
-	color: #2e363f;
-	margin: auto;
-	padding: 10px 50px 50px 50px;
-
-
-}
-
-.my-information-detail-1 {
-	font-size: 16px;
-	padding: 10px 60px;
-
-}
-
-.my-information-detail-1 ul li {
-	list-style: none;
-	margin-bottom: 15px;
-}
-
-.span-value{
-	margin-right: 9px;
-}
-
-.my-information-detail-1 ul li span:nth-child(odd) {
-	list-style: none;
-	display: inline-block;
-
-	width: 70px;
-}
-
-.my-information-detail-1 ul li span:nth-child(even) {
-	list-style: none;
-	display: inline-block;
-
-	width: 200px;
-	/*background: #0ff;*/
-}
-
-.skill-title {
-	font-size: 16px;
-	padding-left: 100px; 
-	padding-top: 20px;
-}
-
-.skill-detail {
-	font-size: 16px;
-	width: 1000px;
-	height: 100px;
-	padding-left: 100px; 
-	padding-top: 10px;
-}
-
-.button-position {
-	width: 60px;
-	height: 40px;
-	margin-left: 950px;
-}
-
-.button-size {
-	font-size: 16px;
-	width: 60px;
-	height: 40px;
-}
-
-.time-reminder {
-	height: 30px;
-	padding-left: 90px;
-	padding-top: 180px;
-}
-
-.form-control-1 {
-	width: 800px;
-	height: 34px;
-  	padding: 6px 12px;
-  	font-size: 14px;
-  	line-height: 1.42857143;
-  	color: #555;
-  	background-color: #fff;
-  	background-image: none;
-  	border: 1px solid #ccc;
-  	border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-}
-=======
 
 .sider-navbar-nav li {
             color: #fff;
@@ -163,7 +50,7 @@
 	list-style: none;
 	display: inline-block;
 
-	width: 70px;
+	width: 90px;
 }
 
 .my-information-detail-1 ul li span:nth-child(even) {
@@ -228,5 +115,37 @@
 	width: 93%;
 	height: auto;
 	margin:0 auto;
+
 }
->>>>>>> 6ffe061726a539eab5018c116f87fee6555af4d6
+
+.table-position-popup {
+	width: 80%;
+	height: auto;
+	margin:0 auto;
+	position: absolute;
+	padding: 35px 50px 30px 50px;
+	top: 150px;
+	z-index: 2;
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: 1px 1px 3px #ddd;
+	display: none;
+}
+
+.mask{
+	height: 100%;
+	width: 100%;
+	background-color: #000000;
+	opacity: 0.8;
+	z-index: 1;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.close-custom {
+	color: #000;
+	float: right;
+	font-size: 14px;
+	cursor: pointer;
+}

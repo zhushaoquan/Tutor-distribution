@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:102:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\index.html";i:1479006638;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:102:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\index.html";i:1479317601;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,14 +7,9 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>毕设导师智能分配系统</title>
-   <!-- <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="__STATIC__/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="<?php echo TUTOR_STATIC; ?>/css/student.css">
-    !-->
-    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/student.css">
-    
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
@@ -34,8 +29,8 @@
             <ul class="sider-navbar-nav">
                 <a href="<?php echo url('TeachingOfficeTutor/index'); ?>"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
-                <a href="<?php echo url('TeachingOfficeTutor/tutor_assign'); ?>"><li ><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
-                <a href="<?php echo url('TeachingOfficeTutor/student_assign'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
+                <a href="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li></a>
+                <a href="<?php echo url('TeachingOfficeTutor/student_assign'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li></a>
             </ul>
         </nav>
     </div>
@@ -54,7 +49,7 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示：导师分配尚未开始，暂无导师分配结果！</p>
+                    <p>提示：您可以查看选课结果！</p>
                 </div>
                 <div class="my-information-title">
                     <span>我的信息</span>

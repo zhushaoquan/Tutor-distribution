@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,11 +29,11 @@
                 <img src="{{$Think.const.OLD}}/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <li><i class="glyphicon glyphicon-user"></i> 个人信息</li>
+                <a href="{{:url('DepartmentHeadTutor/index')}}"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <li><i class="glyphicon glyphicon-th-list"></i> 学生管理</li>
                 <li><i class="glyphicon glyphicon-pencil"></i> 导师管理</li>
-                <li class="active"><i class="glyphicon glyphicon-time"></i> 时间设置</li>
-                <li><i class="glyphicon glyphicon-ok"></i> 匹配结果</li>
+                <a href="{{:url('DepartmentHeadTutor/timeSetting')}}"><li class="active"><i class="glyphicon glyphicon-time"></i> 时间设置</li></a>
+                <a href="{{:url('DepartmentHeadTutor/matchSetting')}}"><li><i class="glyphicon glyphicon-ok"></i> 匹配结果</li></a>
                 <li><i class="glyphicon glyphicon-download-alt"></i> 结果导出</li>
             </ul>
         </nav>
@@ -44,19 +43,23 @@
             <div class="user-area">
                 <div class="hello-user">
                     <span><i class="glyphicon glyphicon-user"></i>欢迎您,</span>
-                    <span class="user-name">负责人:大东东 </span>
+                    <span class="user-name">{{:user_type()}}: {{$user['name']|default="xxx"}}</span>
                 </div>
             </div>
             <div class="login-out-area">
-                <a href="/public/index.php/index/base_controller/logout.html"><i class="glyphicon glyphicon-off"></i>退出</a>
+                <a href="{{:url('BaseController/logout')}}"><i class="glyphicon glyphicon-off"></i>退出</a>
             </div>
         </div>
         <div class="page-content" style="min-height: 595px;">
             <div class="main-content" style="border-radius: 10px; padding: 20px; min-height: 555px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示：你还未设置毕设导师分配的时间</p>
+                    {if condition="$settingInfo.empty eq 1 "}
+                        <p>提示：您还未设置毕设导师分配的时间</p>
+                        {else /}
+                        <p>提示：您已设置毕设导师分配的时间，可进行时间修改</p>
+                    {/if}
                 </div>
-                <form action="http://www.303studio.cn:5000/form/test" method="post" onsubmit="return validate()"
+                <form action="{{:url('DepartmentHeadTutor/infoSetting')}}" method="post" onsubmit="return validate()"
                       role="form">
                     <div class="separate form-horizontal">
                         <fieldset>
@@ -65,22 +68,45 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-12">最多人数</label>
                                     <div class="input-group col-md-8 col-sm-12">
-                                        <input class="form-control" type="number" id="student-num-max"
-                                               name="student-num-max" round="" style="border-radius: 3px">
+                                        <input class="form-control" value="{{$settingInfo.totalMax}}" type="number" id="student-num-max"
+                                               name="totalMax" round="" style="border-radius: 3px">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-12">最少人数</label>
                                     <div class="input-group col-md-8 col-sm-12">
-                                        <input class="form-control" type="number" id="student-num-min"
-                                               name="student-num-min" round="" style="border-radius: 3px">
+                                        <input class="form-control" value="{{$settingInfo.totalMin}}" type="number" id="student-num-min"
+                                               name="totalMin" round="" style="border-radius: 3px">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-12 ">默认人数</label>
                                     <div class="input-group col-md-8 col-sm-12">
-                                        <input class="form-control" type="number" id="student-num-default"
-                                               name="student-num-default" round="" style="border-radius: 3px">
+                                        <input class="form-control" value="{{$settingInfo.defaultNum}}" type="number" id="student-num-default"
+                                               name="defaultNum" round="" style="border-radius: 3px">
+                                    </div>
+                                </div>
+                                <div class="blank"></div>
+                            </div>
+                            <div class="div-flex">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-12">&nbsp;&nbsp;志愿数</label>
+                                    <div class="input-group col-md-8 col-sm-12">
+                                        <input class="form-control" value="{{$settingInfo.voluntaryNum}}" type="number" id="wish-num"
+                                               name="voluntaryNum" round="" style="border-radius: 3px">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-12">最多人数<br/><span style="font-size: 12px;text-align: center;">(实验班)</span></label>
+                                    <div class="input-group col-md-8 col-sm-12">
+                                        <input class="form-control" value="{{$settingInfo.experialMax}}" type="number" id="student-num-max-expri"
+                                               name="experialMax" round="" style="border-radius: 3px">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-12"><br/></label>
+                                    <div class="input-group col-md-8 col-sm-12">
+                                        
                                     </div>
                                 </div>
                                 <div class="blank"></div>
@@ -95,26 +121,26 @@
                                 <div class="form-group">
                                     <label for="research-start" class="col-md-3 control-label">起始时间</label>
                                     <div class="input-group date form_datetime col-md-8" data-date=""
-                                         data-date-format="mm-dd hh:ii "
+                                         data-date-format="yyyy-mm-dd hh:ii "
                                          data-link-field="research-start" data-link-format="yyyy-mm-dd hh:ii">
-                                        <input class="form-control" size="16" type="text" value="" readonly>
+                                        <input class="form-control" size="16" type="text" value="{{$settingInfo.issueStart}}" readonly>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-                                    <input type="hidden" name="research-start" id="research-start" value=""/><br/>
+                                    <input type="hidden" name="issueStart" id="research-start" value="{{$settingInfo.issueStart}}"/><br/>
                                 </div>
                                 <div class="form-group">
                                     <label for="research-end" class="col-md-3 control-label">截止时间</label>
                                     <div class="input-group date form_datetime col-md-8" data-date=""
-                                         data-date-format="mm-dd hh:ii "
+                                         data-date-format="yyyy-mm-dd hh:ii "
                                          data-link-field="research-end" data-link-format="yyyy-mm-dd hh:ii">
-                                        <input class="form-control" size="16" type="text" value="" readonly>
+                                        <input class="form-control" size="16" type="text" value="{{$settingInfo.issueEnd}}" readonly>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-                                    <input type="hidden" name="research-end" id="research-end" value=""/><br/>
+                                    <input type="hidden" name="issueEnd" id="research-end" value="{{$settingInfo.issueEnd}}"/><br/>
                                 </div>
                             </div>
                         </fieldset>
@@ -128,26 +154,26 @@
                                 <div class="form-group">
                                     <label for="wish-start-first" class="col-md-3 control-label">起始时间</label>
                                     <div class="input-group date form_datetime col-md-8" data-date=""
-                                         data-date-format="mm-dd hh:ii "
+                                         data-date-format="yyyy-mm-dd hh:ii "
                                          data-link-field="wish-start-first" data-link-format="yyyy-mm-dd hh:ii">
-                                        <input class="form-control" size="16" type="text" value="" readonly>
+                                        <input class="form-control" size="16" type="text" value="{{$settingInfo.firstStart}}" readonly>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-                                    <input type="hidden" name="wish-start-first" id="wish-start-first" value=""/><br/>
+                                    <input type="hidden" name="firstStart" id="wish-start-first" value="{{$settingInfo.firstStart}}"/><br/>
                                 </div>
                                 <div class="form-group">
                                     <label for="wish-end-first" class="col-md-3 control-label">截止时间</label>
                                     <div class="input-group date form_datetime col-md-8" data-date=""
-                                         data-date-format="mm-dd hh:ii "
+                                         data-date-format="yyyy-mm-dd hh:ii "
                                          data-link-field="wish-end-first" data-link-format="yyyy-mm-dd hh:ii">
-                                        <input class="form-control" size="16" type="text" value="" readonly>
+                                        <input class="form-control" size="16" type="text" value="{{$settingInfo.firstEnd}}" readonly>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-                                    <input type="hidden" name="wish-end-first" id="wish-end-first" value=""/><br/>
+                                    <input type="hidden" name="firstEnd" id="wish-end-first" value="{{$settingInfo.firstEnd}}"/><br/>
                                 </div>
                             </div>
                             <p>第二轮</p>
@@ -155,26 +181,26 @@
                                 <div class="form-group">
                                     <label for="wish-start-second" class="col-md-3 control-label">起始时间</label>
                                     <div class="input-group date form_datetime col-md-8" data-date=""
-                                         data-date-format="mm-dd hh:ii "
+                                         data-date-format="yyyy-mm-dd hh:ii "
                                          data-link-field="wish-start-second" data-link-format="yyyy-mm-dd hh:ii">
-                                        <input class="form-control" size="16" type="text" value="" readonly>
+                                        <input class="form-control" size="16" type="text" value="{{$settingInfo.secondStart}}" readonly>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-                                    <input type="hidden" name="wish-start-second" id="wish-start-second" value=""/><br/>
+                                    <input type="hidden" name="secondStart" id="wish-start-second" value="{{$settingInfo.secondStart}}"/><br/>
                                 </div>
                                 <div class="form-group">
                                     <label for="wish-end-second" class="col-md-3 control-label">截止时间</label>
                                     <div class="input-group date form_datetime col-md-8" data-date=""
-                                         data-date-format="mm-dd hh:ii "
+                                         data-date-format="yyyy-mm-dd hh:ii "
                                          data-link-field="wish-end-second" data-link-format="yyyy-mm-dd hh:ii">
-                                        <input class="form-control" size="16" type="text" value="" readonly>
+                                        <input class="form-control" size="16" type="text" value="{{$settingInfo.secondEnd}}" readonly>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-                                    <input type="hidden" name="wish-end-second" id="wish-end-second" value=""/><br/>
+                                    <input type="hidden" name="secondEnd" id="wish-end-second" value="{{$settingInfo.secondEnd}}"/><br/>
                                 </div>
                             </div>
                         </fieldset>
@@ -188,27 +214,27 @@
                                 <div class="form-group">
                                     <label for="teacher-start-first" class="col-md-3 control-label">起始时间</label>
                                     <div class="input-group date form_datetime col-md-8" data-date=""
-                                         data-date-format="mm-dd hh:ii "
+                                         data-date-format="yyyy-mm-dd hh:ii "
                                          data-link-field="teacher-start-first" data-link-format="yyyy-mm-dd hh:ii">
-                                        <input class="form-control" size="16" type="text" value="" readonly>
+                                        <input class="form-control" size="16" type="text" value="{{$settingInfo.confirmFirstStart}}" readonly>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-                                    <input type="hidden" name="teacher-start-first" id="teacher-start-first"
-                                           value=""/><br/>
+                                    <input type="hidden" name="confirmFirstStart" id="teacher-start-first"
+                                           value="{{$settingInfo.confirmFirstStart}}"/><br/>
                                 </div>
                                 <div class="form-group">
                                     <label for="teacher-end-first" class="col-md-3 control-label">截止时间</label>
                                     <div class="input-group date form_datetime col-md-8" data-date=""
-                                         data-date-format="mm-dd hh:ii "
+                                         data-date-format="yyyy-mm-dd hh:ii "
                                          data-link-field="teacher-end-first" data-link-format="yyyy-mm-dd hh:ii">
-                                        <input class="form-control" size="16" type="text" value="" readonly>
+                                        <input class="form-control" size="16" type="text" value="{{$settingInfo.confirmFirstEnd}}" readonly>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-                                    <input type="hidden" name="teacher-end-first" id="teacher-end-first" value=""/><br/>
+                                    <input type="hidden" name="confirmFirstEnd" id="teacher-end-first" value="{{$settingInfo.confirmFirstEnd}}"/><br/>
                                 </div>
                             </div>
                             <p>第二轮</p>
@@ -216,28 +242,28 @@
                                 <div class="form-group">
                                     <label for="teacher-start-second" class="col-md-3 control-label">起始时间</label>
                                     <div class="input-group date form_datetime col-md-8" data-date=""
-                                         data-date-format="mm-dd hh:ii "
+                                         data-date-format="yyyy-mm-dd hh:ii "
                                          data-link-field="teacher-start-second" data-link-format="yyyy-mm-dd hh:ii">
-                                        <input class="form-control" size="16" type="text" value="" readonly>
+                                        <input class="form-control" size="16" type="text" value="{{$settingInfo.confirmSecondStart}}" readonly>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-                                    <input type="hidden" name="teacher-start-second" id="teacher-start-second"
-                                           value=""/><br/>
+                                    <input type="hidden" name="confirmSecondStart" id="teacher-start-second"
+                                           value="{{$settingInfo.confirmSecondStart}}"/><br/>
                                 </div>
                                 <div class="form-group">
                                     <label for="teacher-end-second" class="col-md-3 control-label">截止时间</label>
                                     <div class="input-group date form_datetime col-md-8" data-date=""
-                                         data-date-format="mm-dd hh:ii "
+                                         data-date-format="yyyy-mm-dd hh:ii "
                                          data-link-field="teacher-end-second" data-link-format="yyyy-mm-dd hh:ii">
-                                        <input class="form-control" size="16" type="text" value="" readonly>
+                                        <input class="form-control" size="16" type="text" value="{{$settingInfo.confirmSecondEnd}}" readonly>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                         <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-                                    <input type="hidden" name="teacher-end-second" id="teacher-end-second"
-                                           value=""/><br/>
+                                    <input type="hidden" name="confirmSecondEnd" id="teacher-end-second"
+                                           value="{{$settingInfo.confirmSecondEnd}}"/><br/>
                                 </div>
                             </div>
                         </fieldset>

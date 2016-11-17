@@ -33,7 +33,7 @@
             <ul class="sider-navbar-nav">
                 <a href="{{:url('TeachingOfficeTutor/index')}}"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
-                <a href="{{:url('TeachingOfficeTutor/tutor_assign')}}"><li class="active"><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
+                <a href="{{:url('TeachingOfficeTutor/tutor_change')}}"><li class="active"><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
                 <a href="{{:url('TeachingOfficeTutor/student_assign')}}"><li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
             </ul>
         </nav>
@@ -56,7 +56,7 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示：毕设导师志愿时间为2016年10月19日至2016年10月22日，请同学们在规定时间内完成志愿选择.</p>
+                    <p>提示：您可以修改选课结果.</p>
                 </div>
 
                 <div class="page-header">
@@ -75,11 +75,11 @@
                         </tr>
 
                         <tbody>
-
                         <?php foreach ($data as $value) 
                         {
                                   
                             echo '<tr>
+
                             <td style="vertical-align:middle" rowspan="'.count($value['tstudentL']).'">' . $value['tnum'].
                             '</td>
                             <td style="vertical-align:middle" rowspan="'.count($value['tstudentL']).'">'.$value['tname'].'</td>
@@ -96,77 +96,45 @@
                               $i++;
                             }
                            
-                           // echo  '';
                         }
-                        ?>
+                        ?> 
                         </tbody>
                     </table>
-                    <!--   <tr>
-                            <td>031402XXX</td>
-                            <td>李四</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>王五</td>
-                        </tr> 
-                           
-                     <tr>
-                            <td style="vertical-align:middle" rowspan="4">00022</td>
-                            <td style="vertical-align:middle" rowspan="4">张栋</td>
-                            <td>031402XXX</td>
-                            <td>张三</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>李四</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>王五</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>赵六</td>
-                        </tr>
-
-                        <tr>
-                            <td style="vertical-align:middle" rowspan="2">00023</td>
-                            <td style="vertical-align:middle" rowspan="2">柯逍</td>
-                            <td>031402XXX</td>
-                            <td>张三</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>李四</td>
-                        </tr>
-
-                        <tr>
-                            <td style="vertical-align:middle" rowspan="2">00024</td>
-                            <td style="vertical-align:middle" rowspan="2">吴英杰</td>
-                            <td>031402XXX</td>
-                            <td>赵六</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>王五</td>
-                        </tr> !-->
+                   
                   
                     <div class="submit-area">
                         <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button>
                         <button type="submit" class="btn btn-primary" id="sub-result-change">
-                            <a style="color:white;" href="{{:url('TeachingOfficeTutor/tutor_change')}}">修&nbsp;&nbsp;改</a></button>
+                            <a style="color:white;" href="{{:url('TeachingOfficeTutor/tutor_to_change')}}">修&nbsp;&nbsp;改</a></button>
                      <!--   <button type="submit" class="btn btn-primary" id="sub-result-confirm">确&nbsp;&nbsp;认</button>  !-->
                     </div>
 
                     <nav>
                         <ul class="pagination" style="float: right;">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
+                          {if condition="$curPage neq 1 "}
+                              <li><a href="{{:url('/index/TeachingOfficeTutor/tutor_assign/'.($curPage-1))}}">&laquo;</a></li>
+                          {/if}
+                            
+                          {if condition="($curPage gt 3) AND ($curPage lt $totalPage-2)"}
+                            {for start="$curPage-2" end="$curPage+3"}
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/tutor_assign/page/'.$i)}}" >{{$i}}</a></li>
+                            {/for}
+                          {elseif condition="($curPage gt $totalPage-3) AND ($totalPage gt 5)" /}
+                            {for start="$totalPage-5" end="$totalPage"}
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/tutor_assign/page/'.$i)}}" >{{$i}}</a></li>
+                            {/for}
+                          {elseif condition="$totalPage gt 5" /}
+                            {for start="1" end="6"}
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/tutor_assign/page/'.$i)}}" >{{$i}}</a></li>
+                            {/for}
+                          {else /}
+                            {for start="1" end="$totalPage"}
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/tutor_assign/page/'.$i)}}" >{{$i}}</a></li>
+                            {/for}
+                          {/if}
+                          {if condition="$curPage lt $totalPage-1"}
                             <li><a href="#">&raquo;</a></li>
+                          {/if}
                         </ul>
                      </nav>
 

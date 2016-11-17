@@ -39,7 +39,7 @@
                         <li><i class="glyphicon glyphicon-user"></i> 个人信息</li>
                     </a>
                     <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
-                    <a href="{{:url('TeachingOfficeTutor/tutor_assign')}}">
+                    <a href="{{:url('TeachingOfficeTutor/tutor_change')}}">
                         <li><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
                     </a>
                     <a href="{{:url('TeachingOfficeTutor/student_assign')}}">
@@ -66,28 +66,31 @@
                         <p>提示：毕设导师志愿时间为2016年10月19日至2016年10月22日，请同学们在规定时间内完成志愿选择.</p>
                     </div>
                     <div class="page-header">
-                        <h3>学生分配情况
+                        <h3>学生分配结果修改
                     </h3>
                     </div>
                     <div class="form-group">
                         <label class="control-label" style="width: 100px;display: inline-block; text-align: center; vertical-align: middle;">选择系别：</label>
                         <div style="display: inline-block;">
-                            <form id="department-submit" action="http://www.303studio.cn:5000/form/test" method="post">
+                            <form id="department-submit" action="{{:url('TeachingOfficeTutor/student_assign')}}" method="post">
                                 <select class="form-control" name="department" style="display: inline-block; width: 200px">
-                                    <option value="01">计算机系</option>
-                                    <option value="02">数学系</option>
-                                    <option value="03">网络工程系</option>
-                                    <option value="04">软件工程系</option>
-                                    <option value="05">信息安全系</option>
-                                    <option value="06">系统结构系</option>
+                                    <option value="计算机系">计算机系</option>
+                                    <option value="数学系">数学系</option>
+                                    <option value="网络工程系">网络工程系</option>
+                                    <option value="软件工程系">软件工程系</option>
+                                    <option value="信息安全系">信息安全系</option>
+                                    <option value="系统结构系">系统结构系</option>
+                                    <option value="计算机实验班">计算机实验班</option>
+                                    <option value="数学实验班">数学实验班</option>
                                 </select>
+                                <input type="hidden" name="stu" value="modify">
                                 <button type="submit" class="btn btn-primary" id="sub-result-confirm" form="department-submit">确&nbsp;&nbsp;认</button>
                             </form>
                         </div>
                     </div>
                     <br />
                     <div class="table-responsive">
-                        <form action="http://www.303studio.cn:5000/form/test" method="post" id="modify-info">
+                        <form action="{{:url('TeachingOfficeTutor/student_modify')}}" method="post" id="modify-info">
                         <table class="table">
                             <tr>
                                 <th>#</th>
@@ -96,122 +99,71 @@
                                 <th>导师姓名</th>
                             </tr>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>031402203</td>
-                                    <td>陈齐民</td>
-                                    <td style="width: 200px; padding:0; margin: 0; ">
-                                        <select  name="031402203" class="form-control" style="width: 200px; padding:5px 0; margin: 0; ">
-                                            <option value="00023">00023(廖祥文)</option>
-                                            <option value="00024">00024(陈欢)</option>
-                                            <option value="00025">00025(牛玉贞)</option>
-                                            <option value="00026">00026(叶东毅)</option>
-                                            <option value="00027">00027(郭龙坤)</option>
-                                            <option value="00028">00028(叶少珍)</option>
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>031402209</td>
-                                    <td>黄伟炜</td>
-                                    <td style="width: 200px; padding:0; margin: 0; ">
-                                        <select  name="031402209" class="form-control" style="width: 200px; padding:5px 0; margin: 0; ">
-                                            <option value="00023">00023(廖祥文)</option>
-                                            <option value="00024">00024(陈欢)</option>
-                                            <option value="00025">00025(牛玉贞)</option>
-                                            <option value="00026">00026(叶东毅)</option>
-                                            <option value="00027">00027(郭龙坤)</option>
-                                            <option value="00028">00028(叶少珍)</option>
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>031402233</td>
-                                    <td>郑扬涛</td>
-                                    <td style="width: 200px; padding:0; margin: 0; ">
-                                        <select  name="031402233" class="form-control" style="width: 200px; padding:5px 0; margin: 0; ">
-                                            <option value="00023">00023(廖祥文)</option>
-                                            <option value="00024">00024(陈欢)</option>
-                                            <option value="00025">00025(牛玉贞)</option>
-                                            <option value="00026">00026(叶东毅)</option>
-                                            <option value="00027">00027(郭龙坤)</option>
-                                            <option value="00028">00028(叶少珍)</option>
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>031402304</td>
-                                    <td>陈燊</td>
-                                    <td style="width: 200px; padding:0; margin: 0; ">
-                                        <select  name="031402304" class="form-control" style="width: 200px; padding:5px 0; margin: 0; ">
-                                            <option value="00023">00023(廖祥文)</option>
-                                            <option value="00024">00024(陈欢)</option>
-                                            <option value="00025">00025(牛玉贞)</option>
-                                            <option value="00026">00026(叶东毅)</option>
-                                            <option value="00027">00027(郭龙坤)</option>
-                                            <option value="00028">00028(叶少珍)</option>
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>031402337</td>
-                                    <td>胡心颖</td>
-                                    <td style="width: 200px; padding:0; margin: 0; ">
-                                        <select  name="031402337" class="form-control" style="width: 200px; padding:5px 0; margin: 0; ">
-                                            <option value="00023">00023(廖祥文)</option>
-                                            <option value="00024">00024(陈欢)</option>
-                                            <option value="00025">00025(牛玉贞)</option>
-                                            <option value="00026">00026(叶东毅)</option>
-                                            <option value="00027">00027(郭龙坤)</option>
-                                            <option value="00028">00028(叶少珍)</option>
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>031402341</td>
-                                    <td>王婷婷</td>
-                                    <td style="width: 200px; padding:0; margin: 0; ">
-                                        <select  name="031402341" class="form-control" style="width: 200px; padding:5px 0; margin: 0; ">
-                                            <option value="00023">00023(廖祥文)</option>
-                                            <option value="00024">00024(陈欢)</option>
-                                            <option value="00025">00025(牛玉贞)</option>
-                                            <option value="00026">00026(叶东毅)</option>
-                                            <option value="00027">00027(郭龙坤)</option>
-                                            <option value="00028">00028(叶少珍)</option>
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>031402342</td>
-                                    <td>许玲玲</td>
-                                    <td style="width: 200px; padding:0; margin: 0; ">
-                                        <select  name="031402342" class="form-control" style="width: 200px; padding:5px 0; margin: 0; ">
-                                            <option value="00023">00023(廖祥文)</option>
-                                            <option value="00024">00024(陈欢)</option>
-                                            <option value="00025">00025(牛玉贞)</option>
-                                            <option value="00026">00026(叶东毅)</option>
-                                            <option value="00027">00027(郭龙坤)</option>
-                                            <option value="00028">00028(叶少珍)</option>
-                                        </select></td>
-                                </tr>
-                               
+                                <?php
+                                    $i=1;
+                                    foreach ($data as $value) 
+                                    {
+                                        echo 
+                                        '<tr>
+                                            <td>'.$i.'</td>
+                                            <td>'.$value['snum'].'</td>
+                                            <td>'.$value['sname'].'</td>
+                                            <td style="width: 200px; padding:0; margin: 0; ">
+                                            <input type="hidden" name="snum'.$i.'" value="'.$value['snum'].'">
+                                            <select  name="'.$i.'" class="form-control" style="width: 200px; padding:5px 0; margin: 0; ">';
+                                            
+                                            foreach ($teacher as  $value1) 
+                                            {                                      
+                                            echo 
+                                            '<option value="'.$value1['workNumber'].'" ';
+                                            if($value1['workNumber'] == $value['tnum']) echo'selected = "true"';
+                                            echo  '>'.$value1['workNumber'].'('.$value1['name'].')'.'</option>';
+                                            }       
+                                            echo    '</select></td>
+                                            
+                                        </tr>';
+                                        $i++;
+                                    }
+                                    echo '<input type="hidden" name="count" value="'.($i-1).'">';
+                                ?>
+
+                            </tbody>
+                           
                         </table>
                         <div class="submit-area">
-                            <button type="submit" class="btn btn-primary" style="width: 100px">确&nbsp;&nbsp;认</button>
+                            <button type="submit" class="btn btn-primary" style="width: 100px" id="modify-info">确&nbsp;&nbsp;认</button>
                         </div>
-
+                        </form>
                         <nav style="margin-bottom: 100px">
                             <ul class="pagination" style="float: right;">
-                                <li><a href="#">&laquo;</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">&raquo;</a></li>
+                                {if condition="$curPage neq 1 "}
+                              <li><a href="{{:url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage-1).'/dep/'.$dep.'/to/'.'modify')}}">&laquo;</a></li>
+                              {/if}
+                                
+                              {if condition="($curPage gt 3) AND ($curPage lt $totalPage-2)"}
+                                {for start="$curPage-2" end="$curPage+3"}
+                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify')}}" >{{$i}}</a></li>
+                                {/for}
+                              {elseif condition="($curPage gt $totalPage-3) AND ($totalPage gt 5)" /}
+                                {for start="$totalPage-5" end="$totalPage"}
+                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify')}}" >{{$i}}</a></li>
+                                {/for}
+                              {elseif condition="$totalPage gt 5" /}
+                                {for start="1" end="6"}
+                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify')}}" >{{$i}}</a></li>
+                                {/for}
+                              {else /}
+                                {for start="1" end="$totalPage"}
+                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify')}}" >{{$i}}</a></li>
+                                {/for}
+                              {/if}
+                              {if condition="$curPage lt $totalPage-1"}
+                                <li><a href="{{:url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage+11).'/dep/'.$dep.'/to/'.'modify')}}">&raquo;</a></li>
+                              {/if}
+                                
                             </ul>
                         </nav>
-                    </form>
+                    
                     </div>
                 </div>
                 <div class="footer" style="border-radius: 10px;">

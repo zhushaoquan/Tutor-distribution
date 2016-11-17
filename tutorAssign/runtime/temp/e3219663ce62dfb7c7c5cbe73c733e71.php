@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_change.html";i:1479122709;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_change.html";i:1479308757;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +57,7 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示：毕设导师志愿时间为2016年10月19日至2016年10月22日，请同学们在规定时间内完成志愿选择.</p>
+                    <p>提示：您可以修改选课结果.</p>
                 </div>
 
                 <div class="page-header">
@@ -160,7 +160,7 @@
                     </table>
 
                     <div class="submit-area">
-                        <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button>
+                  <!--      <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button> -->
                 <!--        <button type="submit" class="btn btn-primary" id="sub-result-change">修&nbsp;&nbsp;改</button>   !-->
                         <button type="submit" class="btn btn-primary" id="sub-result-confirm">确&nbsp;&nbsp;认</button>
                     </div>
