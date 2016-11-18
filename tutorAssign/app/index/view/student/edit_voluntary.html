@@ -47,17 +47,16 @@
         </div>
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
-                    <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                        <p>提示1：<?php echo $message;?></p>
+                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
+                     <p>提示1：<?php echo $message;?></p>
                         <?php if($user['chosen']==0){?><p>提示2：志愿选择不可为空，但同一老师可以多次选择！</p><?php }?>
-                    </div>
-                <div class="my-information-title">
+                 </div>
+                 <div class="my-information-title">
                    
-                        <span>志愿填报</span>
-                </div>
+                     <span>志愿填报</span>
+                 </div>
                  <hr>
-            <div class ="center-block" >
-            <?php if($ontime==1&&$user['chosen']==0){?>                   
+                   <?php if($ontime==1&&$user['chosen']==0){?>                   
             <form method="post" action="{{:url('student/edit_voluntary')}}" style="margin:0px auto; width:90%" > 
 
                     <div class="form-horizontal" role="form" style="margin:10px auto;width:50%">
@@ -128,21 +127,21 @@
                                     <?php endforeach;?>
                                 </select>
                             </div>
-                        </div>
+                        </div>   
                     </div>
-                    <div class="button-position" style="margin: 10px 500px; width: 200px;">
-                    <button class="btn btn-info" type="submit" style="margin: 0px auto; width: 150px;" >提交</button>
-                    </div>
-                </form>
-                </div>
+                    <p class="text-center">
+                    <button type="button" class="btn btn-info" style="width:20%">确定</button>
+                    </p>
+
+                       <!--<button class="btn btn-info" type="submit" style="margin: 10px auto; width: 50%;" >提交</button>-->
+             </form>
+                
             <?php }?>
             </div>
-
-
-        </div>
-        <div class="footer"  style="border-radius: 10px;">
+             <div class="footer"  style="border-radius: 10px;">
                 Designed by Lin & 我说的都队
-        </div>
+             </div>
+         </div>       
     </div>
 </div>
 <script type="text/javascript" src="__STATIC__/js/index.js"></script>

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:102:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\index.html";i:1479472168;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:102:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\index.html";i:1479472168;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,10 +27,12 @@
                 <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="<?php echo url('TeachingOfficeTutor/index'); ?>"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
-                <a href="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li></a>
-                <a href="<?php echo url('TeachingOfficeTutor/student_assign'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li></a>
+                <a href="<?php echo url('DepartmentHeadTutor/index'); ?>"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
+                <li><i class="glyphicon glyphicon-user"></i> 学生管理</li>
+                <li><i class="glyphicon glyphicon-user"></i> 导师管理</li>
+                <a href="<?php echo url('DepartmentHeadTutor/timeSetting'); ?>"><li><i class="glyphicon glyphicon-time"></i> 时间设置</li></a>
+                <a href="<?php echo url('DepartmentHeadTutor/matchSetting'); ?>"><li><i class="glyphicon glyphicon-resize-small"></i> 匹配设置</li></a>
+                <li><i class="glyphicon glyphicon-cloud-download"></i> 结果导出</li>
             </ul>
         </nav>
     </div>
@@ -49,7 +51,7 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示：您可以查看选课结果！</p>
+                    <p>提示：导师互选尚未开始，您还未设置导师分配系统的时间设置！</p>
                 </div>
                 <div class="my-information-title">
                     <span>我的信息</span>
@@ -60,10 +62,12 @@
                 </div>
                 <div class="my-information-detail-1">
                     <ul>
-                        <li><span>姓名：</span><span><?php echo $user['name']; ?></span><span>工号：</span><span><?php echo $user['workNumber']; ?></span></li>
-                        <li><span>电话：</span><span><?php echo $user['telephone']; ?></span><span>邮箱：</span><span><?php echo $user['email']; ?></span></li>
+                        <li><span>姓名：</span><span><?php echo $user['name']; ?></span><span>工号：</span><span><?php echo $user['workNumber']; ?></span><span>性别：</span><span><?php echo $user['sex']; ?></span></li>
+                        <li><span>系别：</span><span><?php echo $user['department']; ?></span><span>电话：</span><span><?php echo $user['telephone']; ?></span><span>邮箱：</span><span><?php echo $user['email']; ?></span></li>
+                        <li><span>生日：</span><span><?php echo $user['birthday']; ?></span></li>
                     </ul>
                 </div>
+
             </div>
             
             <div class="footer"  style="border-radius: 10px;">

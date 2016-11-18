@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher\index.html";i:1479472168;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:96:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head\index.html";i:1479472168;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>毕设导师智能分配系统</title>
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/backstage.css">
+    <title>毕设导师只能分配系统</title>
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="<?php echo TUTOR_STATIC; ?>/css/teacher.css">
     <style type="text/css">
         .sider-navbar-nav li {
@@ -36,7 +36,7 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;">
                 <div class="two-div-contain">
-                    <a href="<?php echo url('Teacher/indexHome'); ?>">
+                    <a href="<?php echo url('DepartmentHead/index_1'); ?>">
                         <div class="baoke-position">
                             <div class="span-position">
                                 <i class="glyphicon glyphicon-hand-right"></i>
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="<?php echo url('TeacherTutor/index'); ?>" style="text-decoration: none;">
+                    <a href="<?php echo url('DepartmentHeadTutor/index'); ?>" style="text-decoration: none;">
                         <div class="tutorchoose-position">
                             <div class="span-position">
                                 <i class="glyphicon glyphicon-hand-right"></i>
@@ -61,10 +61,10 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="__STATIC__/js/index.js"></script>
-<script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
-<script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
-<script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/index.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/jquery2.14.min.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/bootstrap.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/backstage.js"></script>
 </body>
 </html>
 
