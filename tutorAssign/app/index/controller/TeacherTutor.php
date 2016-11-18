@@ -56,7 +56,7 @@ class TeacherTutor extends BaseController {
     	 $user = $this->auto_login();
          
          $data = Db::table('tc_issue')->where('workNumber', $user['workNumber'])->find();
-         $res = Db::table('tc_voluntaryinfoSetting')->find();
+         $res = Db::table('tc_voluntaryinfosetting')->find();
          $data['nowtime'] = time();
          $data['message'] = '';
          $data['issueStart'] = $res['issueStart'];
