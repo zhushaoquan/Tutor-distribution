@@ -173,13 +173,14 @@ class TeachingOfficeTutor extends BaseController {
 		$this->assign('user', $officer);
 		return $this->fetch('tutor_change');
 	} */
-	public function delete()
-	{
-		$flag1=Db::table('tc_result')->where('sid',$_POST['student_id'])->where('workNumber',$_POST['teacher_id'])->delete();
-		$flag2=Db::table('user_student')->where('sid',$_POST['student_id'])->setField('chosen',0);
-		if($flag1==1 && $flag2==1)$this->success('删除成功','TeachingOfficeTutor/tutor_assign');
-		$this->error('删除失败','TeachingOfficeTutor/tutor_assign');
-	}
+    public function delete()
+    {
+        $sid=Db::table('user_student')->where('serialNum',$_POST['student_id'])->field('sid')->find();
+        $flag1=Db::table('tc_result')->where('sid',$sid['sid'])->where('workNumber',$_POST['teacher_id'])->delete();
+        $flag2=Db::table('user_student')->where('sid',$sid['sid'])->setField('chosen',0);
+        if($flag1&&$flag2)return "success";
+        return "fail";
+    }
 	public function insert()
 	{
 
