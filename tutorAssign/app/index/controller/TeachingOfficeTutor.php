@@ -187,18 +187,18 @@ class TeachingOfficeTutor extends BaseController {
 		foreach ($_POST['stus'] as $value) 
 		{
 	//		var_dump($value);
-			$sid=Db::table('user_student')->where('sid',$value)->field('serialNum')->find();
+			$sid=Db::table('user_student')->where('serialNum',$value)->field('sid')->find();
 		//	$have=count(Db::table('tc_result')->where('sid',$sid)->select());
 		//	if($have == 0)
 		//	{
-				$flag=Db::table('tc_result')->insert(["sid" => $sid['serialNum'] , 'workNumber' => $_POST['teacher_id']]);
-				if($flag == 0)$this->error('增加失败','TeachingOfficeTutor/tutor_assign');
-		 		Db::table('user_student')->where('sid',$value)->setField('chosen',1);
+				$flag=Db::table('tc_result')->insert(["sid" => $sid['sid'] , 'workNumber' => $_POST['teacher_id']]);
+				if($flag == 0)return "fail";
+		 		Db::table('user_student')->where('serialNum',$value)->setField('chosen',1);
 		 //	}
 		}
 		 // $flag1=Db::table('tc_result')->insert(["sid" => $_POST['student'] , 'workNumber' => $_POST['teacher']]);
 		 // $flag2=Db::table('user_student')->where('sid',$_POST['student'])->setField('chosen',1);
-		 $this->success('增加成功','TeachingOfficeTutor/tutor_assign');
+		 return "success";
 		//$this->error('增加失败','TeachingOfficeTutor/tutor_assign');
 	}
 
