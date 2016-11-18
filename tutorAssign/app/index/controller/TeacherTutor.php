@@ -61,7 +61,7 @@ class TeacherTutor extends BaseController {
          $data['message'] = '';
          $data['issueStart'] = $res['issueStart'];
          $data['issueEnd'] = $res['issueEnd'];
-         $data['voluntaryinfoSetting'] = Db::table('tc_voluntaryinfoSetting')->find();
+         $data['voluntaryinfoSetting'] = Db::table('tc_voluntaryinfosetting')->find();
          $data['message1'] = "导师所带学生总数不得超过".$data['voluntaryinfoSetting']['totalMax']."名，不得少于".$data['voluntaryinfoSetting']['totalMin']."名";
          if($user['isExperial']==1) $data['message1'].="，实验班总人数不超过".$data['voluntaryinfoSetting']['experialMax']."名！";
          if($data['nowtime'] < $data['issueStart'] || $data['nowtime'] > $data['issueEnd']) {
