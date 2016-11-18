@@ -22,7 +22,7 @@ class TeachingOfficeTutor extends BaseController {
 		$pageSize=8;
 
 		if($_SERVER["REQUEST_METHOD"] == "POST")$dep=$_POST['department'];
-	//	var_dump($dep);
+		var_dump($dep);
 		$data=Db::table('user_teacher t,user_student s,tc_result r')
 		->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)
 		->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
