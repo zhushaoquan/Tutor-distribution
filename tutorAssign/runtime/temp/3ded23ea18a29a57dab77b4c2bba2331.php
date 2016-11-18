@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_change.html";i:1479492654;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_change.html";i:1479494408;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -112,13 +112,13 @@
                         <ul class="pagination" style="float: right;">
                            <?php if($curPage != 1): ?>
                               <li><a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage-1)); ?>">&laquo;</a></li>
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_4947__=$curPage-2;$__FOR_END_4947__=$curPage+3;for($i=$__FOR_START_4947__;$i < $__FOR_END_4947__;$i+=1){ ?>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_15200__=$curPage-2;$__FOR_END_15200__=$curPage+3;for($i=$__FOR_START_15200__;$i < $__FOR_END_15200__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_30530__=$totalPage-5;$__FOR_END_30530__=$totalPage;for($i=$__FOR_START_30530__;$i < $__FOR_END_30530__;$i+=1){ ?>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_13155__=$totalPage-5;$__FOR_END_13155__=$totalPage;for($i=$__FOR_START_13155__;$i < $__FOR_END_13155__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_18829__=1;$__FOR_END_18829__=6;for($i=$__FOR_START_18829__;$i < $__FOR_END_18829__;$i+=1){ ?>
+                            <?php } elseif($totalPage > 5): $__FOR_START_19858__=1;$__FOR_END_19858__=6;for($i=$__FOR_START_19858__;$i < $__FOR_END_19858__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_6692__=1;$__FOR_END_6692__=$totalPage;for($i=$__FOR_START_6692__;$i < $__FOR_END_6692__;$i+=1){ ?>
+                            <?php } else: $__FOR_START_18205__=1;$__FOR_END_18205__=$totalPage;for($i=$__FOR_START_18205__;$i < $__FOR_END_18205__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage+1)); ?>">&raquo;</a></li>
@@ -167,7 +167,7 @@
                     </div>
                     </form>
                     <div class="modal-footer">
-                        <a href="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>" id="btn-colse-add" class="btn btn-default" >关闭
+                        <a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change'); ?>" id="btn-colse-add" class="btn btn-default" >关闭
                         </a>
                         <button id="btn-add-student" form="addStudent" class="btn btn-primary">
                             确认
@@ -195,7 +195,7 @@
                         
                     </div>
                     <div class="modal-footer">
-                        <a href="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>" id="btn-colse-del" class="btn btn-default" >关闭
+                        <a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change'); ?>" id="btn-colse-del" class="btn btn-default" >关闭
                         </a>
                         <button type="button" id="btn-del-student" class="btn btn-primary">
                             确认
@@ -253,7 +253,7 @@
 
         if(isAnyChecked){
             //向服务器提交新增数据
-            $.post("http://localhost/tutor-distribution/tutorAssign/public/index.php/index/TeachingOfficeTutor/insert",
+            $.post("<?php echo PREFIX; ?>/TeachingOfficeTutor/insert",
             {
                 teacher_id: teacher_id,
                 stus: selectedStudent
@@ -281,7 +281,7 @@
 
     function getUnassignStu(isFirstTime=true){
         //将未匹配学生显示在表格上
-        $.getJSON("http://localhost/tutor-distribution/tutorAssign/public/index.php/index/TeachingOfficeTutor/select_student",function(data, status){
+        $.getJSON("<?php echo PREFIX; ?>/TeachingOfficeTutor/select_student",function(data, status){
             if(status === "success"){
                 console.log('json');
                 if(isFirstTime){
@@ -322,7 +322,7 @@
     $("#btn-del-student").click(function(){
         $(this).attr("disabled","disabled");
         //向服务器提交数据
-        $.post("http://localhost/tutor-distribution/tutorAssign/public/index.php/index/TeachingOfficeTutor/delete",
+        $.post("<?php echo PREFIX; ?>/TeachingOfficeTutor/delete",
         {
             teacher_id: teacher_id,
             student_id: student_id 
