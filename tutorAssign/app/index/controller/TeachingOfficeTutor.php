@@ -176,10 +176,11 @@ class TeachingOfficeTutor extends BaseController {
 	} */
 	public function delete()
 	{
-		$flag1=Db::table('tc_result')->where('sid',$_POST['student_id'])->where('workNumber',$_POST['teacher_id'])->delete();
-		$flag2=Db::table('user_student')->where('sid',$_POST['student_id'])->setField('chosen',0);
-		if($flag1==1 && $flag2==1)$this->success('删除成功','TeachingOfficeTutor/tutor_assign');
-		$this->error('删除失败','TeachingOfficeTutor/tutor_assign');
+		$sid=Db::table('user_student')->where('serialNum',$_POST['student_id'])->field('sid')->find();
+		$flag1=Db::table('tc_result')->where('sid',$sid['sid'])->where('workNumber',$_POST['teacher_id'])->delete();
+		$flag2=Db::table('user_student')->where('sid',$sid['sid'])->setField('chosen',0);
+		if($flag1&&$flag2)return "success";
+		return "fail";
 	}
 	public function insert()
 	{
@@ -188,11 +189,11 @@ class TeachingOfficeTutor extends BaseController {
 		foreach ($_POST['stus'] as $value) 
 		{
 	//		var_dump($value);
-			$sid=Db::table('user_student')->where('sid',$value)->field('serialNum')->find();
+			$sid=Db::table('user_student')->where('serialNum',$value)->field('sid')->find();
 		//	$have=count(Db::table('tc_result')->where('sid',$sid)->select());
 		//	if($have == 0)
 		//	{
-				$flag=Db::table('tc_result')->insert(["sid" => $sid['serialNum'] , 'workNumber' => $_POST['teacher_id']]);
+				$flag=Db::table('tc_result')->insert(["sid" => $sid['sid'] , 'workNumber' => $_POST['teacher_id']]);
 				if($flag == 0)$this->error('增加失败','TeachingOfficeTutor/tutor_assign');
 		 		Db::table('user_student')->where('sid',$value)->setField('chosen',1);
 		 //	}
