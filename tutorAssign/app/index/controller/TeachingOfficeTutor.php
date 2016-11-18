@@ -44,7 +44,8 @@ class TeachingOfficeTutor extends BaseController {
 	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','应用数学系')->where('isExperial','=',1)->field('workNumber,name')->select();
 	 		$dep ='数学实验班';
 	 	}
-	 	else $tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
+	 	else 
+	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
 	
 		$pageBar = [
 			'total'     => $total,
@@ -122,7 +123,7 @@ class TeachingOfficeTutor extends BaseController {
 		$this->assign('user', $officer);
 		$this->success('修改成功','TeachingOfficeTutor/student_assign');
 	}
-	public function student_to_modify()
+	public function student_to_modify($dep="")
 	{
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
@@ -133,7 +134,7 @@ class TeachingOfficeTutor extends BaseController {
 			'curPage'   => 1
 			];
 		$this->assign($pageBar);
-		$dep="";
+		//$dep="";
 		$list=Db::table('user_teacher t,user_student s,tc_result r')->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')->order('s.serialNum')->paginate(8);
 	   	$data=$list->toArray()['data'];	 
 	   	$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
