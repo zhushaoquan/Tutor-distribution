@@ -294,6 +294,11 @@
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 <script type="text/javascript">
+    $("#warn-alert-close").click(function() {
+        $("#warn-alert").hide(300);
+    });
+</script>
+<script type="text/javascript">
     $('.form_datetime').datetimepicker({
         language: 'zh-CN',
         weekStart: 1,
