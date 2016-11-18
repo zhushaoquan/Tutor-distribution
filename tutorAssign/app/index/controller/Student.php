@@ -111,7 +111,7 @@ class Student extends BaseController {
 		} else {
 			$tutors = Db::table('user_teacher')->where('department',$user['department'])->select();
 		}
-        $res = Db::table('tc_voluntaryinfoSetting')->find();
+        $res = Db::table('tc_voluntaryinfosetting')->find();
         $res['nowtime'] = time();
         $data['message'] = '';
         $data['ontime']=1;
