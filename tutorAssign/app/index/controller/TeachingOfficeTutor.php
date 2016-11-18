@@ -21,7 +21,6 @@ class TeachingOfficeTutor extends BaseController {
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
 		$pageSize=8;
 
-		// $dep="";
 		if($_SERVER["REQUEST_METHOD"] == "POST")$dep=$_POST['department'];
 	//	var_dump($dep);
 		$data=Db::table('user_teacher t,user_student s,tc_result r')
@@ -36,9 +35,15 @@ class TeachingOfficeTutor extends BaseController {
 		$totalPage = ceil($total/$pageSize);
 
 	 	if($dep =='计算机实验班')
+	 	{
 	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','计算机系')->where('isExperial','=',1)->field('workNumber,name')->select();
+	 		$dep ='计算机实验班';
+	 	}
 	 	else if($dep =='数学实验班')
+	 	{
 	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','应用数学系')->where('isExperial','=',1)->field('workNumber,name')->select();
+	 		$dep ='数学实验班';
+	 	}
 	 	else $tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
 	
 		$pageBar = [
@@ -47,14 +52,12 @@ class TeachingOfficeTutor extends BaseController {
 			'pageSize'  => $pageSize,
 			'curPage'   => $page
 			];
-	//		var_dump($pageBar);
 		$this->assign('dep',$dep);
 		$this->assign($pageBar);
 	 	$this->assign('teacher',$tealist);
 	    $this->assign('data',$data);
 		$this->assign('user', $officer);	
-	//	var_dump($_SERVER["REQUEST_METHOD"]);	
-		 if( $_SERVER["REQUEST_METHOD"] == "POST" && $_POST["stu"] == 'modify')
+		if( $_SERVER["REQUEST_METHOD"] == "POST" && $_POST["stu"] == 'modify')
 			return $this->fetch('student_modify');
 		if($to=="modify") return $this->fetch('student_modify');
 		return $this->fetch('student_assign');
@@ -67,7 +70,6 @@ class TeachingOfficeTutor extends BaseController {
 		$pageSize=4;
 		$tea=Db::table('user_teacher t')
 		->field('t.workNumber as tnum,t.name as tname')->distinct(true)->page($page,$pageSize)->select();
-	//	$tea=$list->toArray()['data'];
 		
 		$total=count(Db::table('user_teacher t')
 		->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
@@ -88,7 +90,6 @@ class TeachingOfficeTutor extends BaseController {
 			'curPage'   => $page
 			];
 
-		//	dump($tea);
 		$this->assign($pageBar);
 		$this->assign('data',$tea);
 		$this->assign('user', $officer);
@@ -98,7 +99,6 @@ class TeachingOfficeTutor extends BaseController {
 	{
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
-	//	var_dump($_POST['1']);
 		
 		for($i=1;$i<=$_POST['count'];$i++)
 		{
@@ -120,9 +120,7 @@ class TeachingOfficeTutor extends BaseController {
 	 	$this->assign('teacher',$tealist);
 	    $this->assign('data',$data);	
 		$this->assign('user', $officer);
-
 		$this->success('修改成功','TeachingOfficeTutor/student_assign');
-	//	return $this->fetch('student_assign');
 	}
 	public function student_to_modify()
 	{
@@ -139,6 +137,7 @@ class TeachingOfficeTutor extends BaseController {
 		$list=Db::table('user_teacher t,user_student s,tc_result r')->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')->order('s.serialNum')->paginate(8);
 	   	$data=$list->toArray()['data'];	 
 	   	$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
+	 	$this->assign('dep',$dep);
 	 	$this->assign('teacher',$tealist);
 	    $this->assign('data',$data);	
 		$this->assign('user', $officer);
@@ -183,7 +182,7 @@ class TeachingOfficeTutor extends BaseController {
 	}
 	public function insert()
 	{
-	//	var_dump($_POST['teacher_id']);
+
 		$flag=1;
 		foreach ($_POST['stus'] as $value) 
 		{

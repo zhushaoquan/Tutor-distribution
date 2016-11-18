@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:102:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\index.html";i:1479472168;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:94:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\index.html";i:1479472168;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +7,10 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>毕设导师智能分配系统</title>
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/backstage.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo TUTOR_STATIC; ?>/css/student.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/student.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/teacher.css">
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
@@ -27,10 +28,10 @@
                 <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="<?php echo url('TeachingOfficeTutor/index'); ?>"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
-                <a href="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li></a>
-                <a href="<?php echo url('TeachingOfficeTutor/student_assign'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li></a>
+                <a href="<?php echo url('teacher_tutor/index'); ?>"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
+                <a href="<?php echo url('teacher_tutor/student_list'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 可选学生</li></a>
+                <a href="<?php echo url('teacher_tutor/issue_submit'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 课题提交</li></a>
+                <a href="<?php echo url('teacher_tutor/show_result'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 志愿结果</li></a>
             </ul>
         </nav>
     </div>
@@ -49,8 +50,9 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示：您可以查看选课结果！</p>
+                    <p>提示：第一轮导师确认学生时间为2016年10月19日至2016年10月22日，请导师在规定时间内完成学生的选择和确认！</p>
                 </div>
+
                 <div class="my-information-title">
                     <span>我的信息</span>
                     <button class="btn btn-info button-size btn-edit" type="submit">修改</button>
@@ -60,10 +62,21 @@
                 </div>
                 <div class="my-information-detail-1">
                     <ul>
-                        <li><span>姓名：</span><span><?php echo $user['name']; ?></span><span>工号：</span><span><?php echo $user['workNumber']; ?></span></li>
-                        <li><span>电话：</span><span><?php echo $user['telephone']; ?></span><span>邮箱：</span><span><?php echo $user['email']; ?></span></li>
+                        <li><span>姓名：</span><span class="span-value"><?php echo $user['name']; ?></span><span>工号：</span><span class="span-value"><?php echo $user['workNumber']; ?></span><span>性别：</span><span class="span-value"><?php echo $user['sex']; ?></span></li>
+                        <li><span>系别：</span><span class="span-value"><?php echo $user['department']; ?></span><span>电话：</span><span class="span-value"><?php echo $user['telephone']; ?></span><span>邮箱：</span><span class="span-value"><?php echo $user['email']; ?></span></li>
+                        <li><span>生日：</span><span class="span-value"><?php echo $user['birthday']; ?></span><span>职称：</span><span class="span-value"><?php echo $user['title']; ?></span><span style="width: 100px;">实验班导师：</span><span class="span-value"><?php echo $user['isExperial']; ?></span></li>
                     </ul>
                 </div>
+                <div class="description-title">
+                    <p>个人简介：</p>
+                </div>
+                <div class="description-detail">
+                    <p><?php echo $user['description']; ?></p>
+                </div>
+                <!-- <div class="button-position">
+                    <button class="btn btn-info" type="submit">修改</button>
+                </div> -->
+
             </div>
             
             <div class="footer"  style="border-radius: 10px;">

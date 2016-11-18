@@ -56,14 +56,16 @@
                     <span>可选学生</span>
                 </div>
                 <hr>
+                <?php if($user['isExperial']) {?>
                  <div class="dropdown" style="padding: 0 50px 0 50px;">
                     <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">请选择方向
                         <span class="caret"></span></button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">实验班</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">非实验班</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href={{:url('TeacherTutor/student_list1')}}>实验班</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href={{:url('TeacherTutor/student_list2')}}>非实验班</a></li>
                     </ul>
                 </div>
+                <?php }?>
                 <div class="table-responsive">
                     <table class="table">
                         <tr>
