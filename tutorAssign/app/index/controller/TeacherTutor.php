@@ -423,6 +423,5 @@ class TeacherTutor extends BaseController {
                 Db::table('tc_issue')->insert($data);
             }
         }
-
     }
 }

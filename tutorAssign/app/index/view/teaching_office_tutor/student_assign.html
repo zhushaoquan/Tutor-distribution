@@ -30,10 +30,10 @@
                 <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="{{:url('TeachingOfficeTutor/index')}}"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
+                <a href="{{:url('/index/TeachingOfficeTutor/index')}}"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
-                <a href="{{:url('TeachingOfficeTutor/tutor_change')}}"><li ><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
-                <a href="{{:url('TeachingOfficeTutor/student_assign')}}"><li class="active"><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
+                <a href="{{:url('/index/TeachingOfficeTutor/tutor_change')}}"><li ><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
+                <a href="{{:url('/index/TeachingOfficeTutor/student_assign')}}"><li class="active"><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
             </ul>
         </nav>
     </div>
@@ -62,10 +62,10 @@
                     <h3>学生分配情况
                     </h3>
                 </div>
-
+                 <div class="form-horizontal" role="form">
                 <div class="form-group">
-                    <label  class="col-sm-1 control-label">选择系别：</label>
-                    <div class="col-sm-4">
+                    <label for="firstname"  class="col-md-2 control-label"  >选择学生系别：</label>
+                    <div class="col-xs-5" >
                     <form action="{{:url('TeachingOfficeTutor/student_assign')}}"  method="post">
                         <select class="form-control" name="department" style="display: inline; width: 45%">
                             <option value="应用数学系" <?php if($dep == "应用数学系") echo'selected = "true"';?>>应用数学系</option>
@@ -77,12 +77,12 @@
                             <option value="数学实验班" <?php if($dep == "数学实验班") echo'selected = "true"';?>>数学实验班</option>
                         </select>  
                         <input type="hidden" name="stu" value="assign">
-                        <input type="submit" class="btn btn-primary" style="display: inline;" id="sub-result-export" >
+                        <button type="submit" class="btn btn-primary" style="display: inline;" id="sub-result-export" >确定</button>
                     </form>
                     </div>
                 </div>
-
-                <br /><br /><br />
+                </div>
+                <br />
                 <div class="table-responsive">
                     <table class="table">
                         <tr>
@@ -110,7 +110,7 @@
 
                     <div class="submit-area">
                         <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button>
-                           <button type="submit" class="btn btn-primary" id="sub-result-change"><a style="color:white;" href="{{:url('TeachingOfficeTutor/student_to_modify')}}">修&nbsp;&nbsp;改</a></button>  
+                           <button type="submit" class="btn btn-primary" id="sub-result-change"><a style="color:white;" href="{{:url('/index/TeachingOfficeTutor/student_to_modify/dep/'.$dep)}}">修&nbsp;&nbsp;改</a></button>  
                    
                     </div>
 
