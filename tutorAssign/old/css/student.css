@@ -149,3 +149,9 @@
 	font-size: 14px;
 	cursor: pointer;
 }
+
+
+.center {
+	float:center;
+	padding: 0 100px;
+}
