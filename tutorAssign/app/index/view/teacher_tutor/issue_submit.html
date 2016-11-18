@@ -64,26 +64,28 @@
                                  <label for="firstname" class="col-sm-2 control-label">自然班人数</label>
                                  <div class="col-xs-3">
                                      <select class="form-control" name="totalNatur">
-                                     <option <?php if($issue['totalNatur'] == 0 ) {?> selected="selected" <?php }?> value=0>0</option>
-                                     <option <?php if($issue['totalNatur'] == 1 ) {?> selected="selected" <?php }?> value=1>1</option>
-                                     <option <?php if($issue['totalNatur'] == 2 ) {?> selected="selected" <?php }?> >2</option>
-                                     <option <?php if($issue['totalNatur'] == 3 ) {?> selected="selected" <?php }?> >3</option>
-                                     <option <?php if($issue['totalNatur'] == 4 ) {?> selected="selected" <?php }?> >4</option>
-                                     <option <?php if($issue['totalNatur'] == 5 ) {?> selected="selected" <?php }?> >5</option>
-                                     <option <?php if($issue['totalNatur'] == 6 ) {?> selected="selected" <?php }?> >6</option>
-                                     <option <?php if($issue['totalNatur'] == 7 ) {?> selected="selected" <?php }?> >7</option>
+                                     <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 0 ) {?> selected="selected" <?php }}?> value=0>0</option>
+                                     <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 1 ) {?> selected="selected" <?php }}?> value=1>1</option>
+                                     <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 2 ) {?> selected="selected" <?php }}?> value=2>2</option>
+                                     <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 3 ) {?> selected="selected" <?php }}?> value=3>3</option>
+                                     <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 4 ) {?> selected="selected" <?php }}?> value=4>4</option>
+                                     <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 5 ) {?> selected="selected" <?php }}?> value=5>5</option>
+                                     <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 6 ) {?> selected="selected" <?php }}?> value=6>6</option>
+                                     <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 7 ) {?> selected="selected" <?php }}?> value=7>7</option>
+
                                      </select>
                                  </div> 
                                  <?php if($user['isExperial']) {?>
                                  <label for="firstname" class="col-sm-2 control-label">实验班人数</label>
                                  <div class="col-xs-3">
                                      <select class="form-control" name="totalExper" >
-                                     <option <?php if($issue['totalExper'] == 0 ) {?> selected="selected" <?php }?> >0</option>
-                                     <option <?php if($issue['totalExper'] == 1 ) {?> selected="selected" <?php }?> >1</option>
-                                     <option <?php if($issue['totalExper'] == 2 ) {?> selected="selected" <?php }?> >2</option>
-                                     <option <?php if($issue['totalExper'] == 3 ) {?> selected="selected" <?php }?> >3</option>
-                                     <option <?php if($issue['totalExper'] == 4 ) {?> selected="selected" <?php }?> >4</option>
-                                     <option <?php if($issue['totalExper'] == 5 ) {?> selected="selected" <?php }?> >5</option>
+                                     <option <?php if(isset($issue['totalExper'])) { if($issue['totalExper'] == 0 ) {?> selected="selected" <?php }}?> >0</option>
+                                     <option <?php if(isset($issue['totalExper'])) { if($issue['totalExper'] == 1 ) {?> selected="selected" <?php }}?> >1</option>
+                                     <option <?php if(isset($issue['totalExper'])) { if($issue['totalExper'] == 2 ) {?> selected="selected" <?php }}?> >2</option>
+                                     <option <?php if(isset($issue['totalExper'])) { if($issue['totalExper'] == 3 ) {?> selected="selected" <?php }}?> >3</option>
+                                     <option <?php if(isset($issue['totalExper'])) { if($issue['totalExper'] == 4 ) {?> selected="selected" <?php }}?> >4</option>
+                                     <option <?php if(isset($issue['totalExper'])) { if($issue['totalExper'] == 5 ) {?> selected="selected" <?php }}?> >5</option>
+                                     <option <?php if(isset($issue['totalExper'])) { if($issue['totalExper'] == 6 ) {?> selected="selected" <?php }}?> >6</option>
                                      </select>
                                  </div>
                                  <?php }?>
