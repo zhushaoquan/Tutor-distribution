@@ -373,7 +373,7 @@ class TeacherTutor extends BaseController {
         	}
         }
 
-        $res = Db::table('tc_voluntaryinfoSetting')->find();
+        $res = Db::table('tc_voluntaryinfosetting')->find();
         $res['nowtime'] = time();
         $data['message'] = '';
         $data['firstStart'] = $res['firstStart'];
@@ -415,7 +415,7 @@ class TeacherTutor extends BaseController {
         $unfinish_teachers = Db::table('user_teacher')->where('name', 'not in', $finish_teachers['name'])->select();
         foreach ($unfinish_teachers as $key => $value) {
             if($value['isExperial']) {
-                $defaultNum = DB::table('tc_voluntaryinfoSetting')->find()['defaultNum'];
+                $defaultNum = DB::table('tc_voluntaryinfosetting')->find()['defaultNum'];
                 $data['workNumber'] = $value['workNumber'];
                 $data['title'] = "无";
                 $data['totalExper'] = $defaultNum;
