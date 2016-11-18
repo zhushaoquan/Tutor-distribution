@@ -72,6 +72,7 @@ class TeacherTutor extends BaseController {
             $data['ontime'] = 1;
          }
          $data['issue'] = Db::table('tc_issue')->where('workNumber', $user['workNumber'])->find();
+         $data['issue']['content'] = htmlspecialchars_decode($data['issue']['content']);
 
          $request = Request::instance();
          if ($request->isPost()) {
@@ -408,4 +409,20 @@ class TeacherTutor extends BaseController {
 		return $this->fetch('show_resultdetail');
 
 	}
+
+    public function auto_set_issue() {
+        $finish_teachers = Db::table('tc_issue')->select();
+        $unfinish_teachers = Db::table('user_teacher')->where('name', 'not in', $finish_teachers['name'])->select();
+        foreach ($unfinish_teachers as $key => $value) {
+            if($value['isExperial']) {
+                $defaultNum = DB::table('tc_voluntaryinfoSetting')->find()['defaultNum'];
+                $data['workNumber'] = $value['workNumber'];
+                $data['title'] = "无";
+                $data['totalExper'] = $defaultNum;
+                $data['totalNatur'] = $defaultNum;
+                Db::table('tc_issue')->insert($data);
+            }
+        }
+
+    }
 }

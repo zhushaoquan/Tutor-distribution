@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:108:"/Applications/MAMP/htdocs/2/Tutor-distribution/tutorAssign/public/../app/index/view/student/show_result.html";i:1479307987;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:108:"/Applications/MAMP/htdocs/2/Tutor-distribution/tutorAssign/public/../app/index/view/student/show_result.html";i:1479310492;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,10 +27,10 @@
                 <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="<?php echo url('Student/index'); ?>"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
+                <a href="<?php echo url('Student/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <a href="<?php echo url('Student/tutor_list'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 专业导师</li></a>
                 <a href="<?php echo url('Student/edit_voluntary'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 志愿填报</li></a>
-                <a href="<?php echo url('Student/show_result'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 最终结果</li></a>
+                <a href="<?php echo url('Student/show_result'); ?>"><li class="active"><i class="glyphicon glyphicon-ok"></i> 最终结果</li></a>
             </ul>
         </nav>
     </div>

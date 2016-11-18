@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:107:"/Applications/MAMP/htdocs/2/Tutor-distribution/tutorAssign/public/../app/index/view/student/tutor_list.html";i:1479325954;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:101:"/Applications/MAMP/htdocs/2/Tutor-distribution/tutorAssign/public/../app/index/view/student/test.html";i:1479318854;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +30,7 @@
                 <a href="<?php echo url('Student/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <a href="<?php echo url('Student/tutor_list'); ?>"><li class="active"><i class="glyphicon glyphicon-th-list"></i> 专业导师</li></a>
                 <a href="<?php echo url('Student/edit_voluntary'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 志愿填报</li></a>
-                <a href="<?php echo url('Student/show_result'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 志愿结果</li></a>
+                <a href="<?php echo url('Student/show_result'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 最终结果</li></a>
             </ul>
         </nav>
     </div>
@@ -80,17 +80,17 @@
                     </table>
                     <nav>
                       <ul class="pagination" style="float: right;">
-                      <a href="<?php echo url('/index/index/Student/tutor_list/'.($curPage-1)); ?>">&laquo;</a>
+                      <a href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/'.($curPage-1)); ?>">&laquo;</a>
                           <?php if($curPage != 1): ?>
-                              <li><a href="<?php echo url('/index/index/Student/tutor_list/'.($curPage-1)); ?>">&laquo;</a></li>
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_2110977363__=$curPage-2;$__FOR_END_2110977363__=$curPage+3;for($i=$__FOR_START_2110977363__;$i < $__FOR_END_2110977363__;$i+=1){ ?>
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/Student/tutor_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_78978426__=$totalPage-5;$__FOR_END_78978426__=$totalPage;for($i=$__FOR_START_78978426__;$i < $__FOR_END_78978426__;$i+=1){ ?>
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('index/Student/tutor_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_1533023189__=1;$__FOR_END_1533023189__=6;for($i=$__FOR_START_1533023189__;$i < $__FOR_END_1533023189__;$i+=1){ ?>
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/Student/tutor_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_1835318216__=1;$__FOR_END_1835318216__=$totalPage;for($i=$__FOR_START_1835318216__;$i < $__FOR_END_1835318216__;$i+=1){ ?>
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/Student/tutor_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                              <li><a href="<?php echo url('/index/index/Student/test1/'.($curPage-1)); ?>">&laquo;</a></li>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_1022907691__=$curPage-2;$__FOR_END_1022907691__=$curPage+3;for($i=$__FOR_START_1022907691__;$i < $__FOR_END_1022907691__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/Student/test1/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_676641412__=$totalPage-5;$__FOR_END_676641412__=$totalPage;for($i=$__FOR_START_676641412__;$i < $__FOR_END_676641412__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('index/Student/test1/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                            <?php } elseif($totalPage > 5): $__FOR_START_312699343__=1;$__FOR_END_312699343__=6;for($i=$__FOR_START_312699343__;$i < $__FOR_END_312699343__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/Student/test1/page/'.$i); ?>" ><?php echo $i; ?></a></li>
+                            <?php } else: $__FOR_START_1888177346__=1;$__FOR_END_1888177346__=$totalPage;for($i=$__FOR_START_1888177346__;$i < $__FOR_END_1888177346__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index//Student/test1/page/'.$i); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="#">&raquo;</a></li>
                           <?php endif; ?>
