@@ -56,12 +56,12 @@ class TeacherTutor extends BaseController {
     	 $user = $this->auto_login();
          
          $data = Db::table('tc_issue')->where('workNumber', $user['workNumber'])->find();
-         $res = Db::table('tc_voluntaryinfosetting')->find();
+         $res = Db::table('tc_voluntaryinfoSetting')->find();
          $data['nowtime'] = time();
          $data['message'] = '';
          $data['issueStart'] = $res['issueStart'];
          $data['issueEnd'] = $res['issueEnd'];
-         $data['voluntaryinfoSetting'] = Db::table('tc_voluntaryinfosetting')->find();
+         $data['voluntaryinfoSetting'] = Db::table('tc_voluntaryinfoSetting')->find();
          $data['message1'] = "导师所带学生总数不得超过".$data['voluntaryinfoSetting']['totalMax']."名，不得少于".$data['voluntaryinfoSetting']['totalMin']."名";
          if($user['isExperial']==1) $data['message1'].="，实验班总人数不超过".$data['voluntaryinfoSetting']['experialMax']."名！";
          if($data['nowtime'] < $data['issueStart'] || $data['nowtime'] > $data['issueEnd']) {
@@ -373,7 +373,7 @@ class TeacherTutor extends BaseController {
         	}
         }
 
-        $res = Db::table('tc_voluntaryinfosetting')->find();
+        $res = Db::table('tc_voluntaryinfoSetting')->find();
         $res['nowtime'] = time();
         $data['message'] = '';
         $data['firstStart'] = $res['firstStart'];
@@ -415,7 +415,7 @@ class TeacherTutor extends BaseController {
         $unfinish_teachers = Db::table('user_teacher')->where('name', 'not in', $finish_teachers['name'])->select();
         foreach ($unfinish_teachers as $key => $value) {
             if($value['isExperial']) {
-                $defaultNum = DB::table('tc_voluntaryinfosetting')->find()['defaultNum'];
+                $defaultNum = DB::table('tc_voluntaryinfoSetting')->find()['defaultNum'];
                 $data['workNumber'] = $value['workNumber'];
                 $data['title'] = "无";
                 $data['totalExper'] = $defaultNum;
