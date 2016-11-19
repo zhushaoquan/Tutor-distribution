@@ -44,7 +44,8 @@ class TeachingOfficeTutor extends BaseController {
 	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','应用数学系')->where('isExperial','=',1)->field('workNumber,name')->select();
 	 		$dep ='数学实验班';
 	 	}
-	 	else $tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
+	 	else 
+	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
 	
 		$pageBar = [
 			'total'     => $total,
@@ -104,8 +105,14 @@ class TeachingOfficeTutor extends BaseController {
 		{
 			$str="".$i;
 			$str1="snum".$i;
-			Db::table('tc_result')->where('sid',$_POST[$str1])->setField('workNumber',$_POST[$str]);
+		//	var_dump($str);
+		//	var_dump($str1);
+		//	var_dump($_POST[$str1]);
+			$seri=DB::table('user_student')->where('serialNum',$_POST[$str1])->field('sid')->find();
+		//	var_dump($seri['sid']);
+			Db::table('tc_result')->where('sid',$seri['sid'])->setField('workNumber',$_POST[$str]);
 		}
+	//exit();
 		$pageBar = [
 			'total'     => 0,
 			'totalPage' => 1,
@@ -114,6 +121,7 @@ class TeachingOfficeTutor extends BaseController {
 			];
 		$this->assign($pageBar);
 		$dep="";
+
 		$list=Db::table('user_teacher t,user_student s,tc_result r')->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')->order('s.serialNum')->paginate(8);
 	   	$data=$list->toArray()['data'];	 
 	   	$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
@@ -122,25 +130,47 @@ class TeachingOfficeTutor extends BaseController {
 		$this->assign('user', $officer);
 		$this->success('修改成功','TeachingOfficeTutor/student_assign');
 	}
-	public function student_to_modify()
+	public function student_to_modify($dep="")
 	{
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
+		$pageSize=8;
+		$page=1;
+		if($_SERVER["REQUEST_METHOD"] == "POST")$dep=$_POST['department'];
+		$data=Db::table('user_teacher t,user_student s,tc_result r')
+		->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)
+		->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
+		->order('s.serialNum')->page($page,$pageSize)->select();
+
+		$total=	count(Db::table('user_teacher t,user_student s,tc_result r')
+				->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)
+				->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
+				->order('s.serialNum')->select());
+		$totalPage = ceil($total/$pageSize);
+	 	if($dep =='计算机实验班')
+	 	{
+	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','计算机系')->where('isExperial','=',1)->field('workNumber,name')->select();
+	 		$dep ='计算机实验班';
+	 	}
+	 	else if($dep =='数学实验班')
+	 	{
+	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','应用数学系')->where('isExperial','=',1)->field('workNumber,name')->select();
+	 		$dep ='数学实验班';
+	 	}
+	 	else 
+	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
+	
 		$pageBar = [
-			'total'     => 0,
-			'totalPage' => 1,
-			'pageSize'  => 8,
-			'curPage'   => 1
+			'total'     => $total,
+			'totalPage' => $totalPage+1,
+			'pageSize'  => $pageSize,
+			'curPage'   => $page
 			];
+		$this->assign('dep',$dep);
 		$this->assign($pageBar);
-		$dep="";
-		$list=Db::table('user_teacher t,user_student s,tc_result r')->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')->order('s.serialNum')->paginate(8);
-	   	$data=$list->toArray()['data'];	 
-	   	$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
-	 	$this->assign('dep',$dep);
 	 	$this->assign('teacher',$tealist);
-	    $this->assign('data',$data);	
-		$this->assign('user', $officer);
+	    $this->assign('data',$data);
+		$this->assign('user', $officer);	
 		return $this->fetch('student_modify');
 	}
 /*	public function tutor_to_change()
@@ -175,10 +205,11 @@ class TeachingOfficeTutor extends BaseController {
 	} */
 	public function delete()
 	{
-		$flag1=Db::table('tc_result')->where('sid',$_POST['student_id'])->where('workNumber',$_POST['teacher_id'])->delete();
-		$flag2=Db::table('user_student')->where('sid',$_POST['student_id'])->setField('chosen',0);
-		if($flag1==1 && $flag2==1)$this->success('删除成功','TeachingOfficeTutor/tutor_assign');
-		$this->error('删除失败','TeachingOfficeTutor/tutor_assign');
+		$sid=Db::table('user_student')->where('serialNum',$_POST['student_id'])->field('sid')->find();
+		$flag1=Db::table('tc_result')->where('sid',$sid['sid'])->where('workNumber',$_POST['teacher_id'])->delete();
+		$flag2=Db::table('user_student')->where('sid',$sid['sid'])->setField('chosen',0);
+		if($flag1&&$flag2)return "success";
+		return "fail";
 	}
 	public function insert()
 	{
@@ -187,13 +218,13 @@ class TeachingOfficeTutor extends BaseController {
 		foreach ($_POST['stus'] as $value) 
 		{
 	//		var_dump($value);
-			$sid=Db::table('user_student')->where('sid',$value)->field('serialNum')->find();
+			$sid=Db::table('user_student')->where('serialNum',$value)->field('sid')->find();
 		//	$have=count(Db::table('tc_result')->where('sid',$sid)->select());
 		//	if($have == 0)
 		//	{
-				$flag=Db::table('tc_result')->insert(["sid" => $sid['serialNum'] , 'workNumber' => $_POST['teacher_id']]);
+				$flag=Db::table('tc_result')->insert(["sid" => $sid['sid'] , 'workNumber' => $_POST['teacher_id']]);
 				if($flag == 0)$this->error('增加失败','TeachingOfficeTutor/tutor_assign');
-		 		Db::table('user_student')->where('sid',$value)->setField('chosen',1);
+		 		Db::table('user_student')->where('serialNum',$value)->setField('chosen',1);
 		 //	}
 		}
 		 // $flag1=Db::table('tc_result')->insert(["sid" => $_POST['student'] , 'workNumber' => $_POST['teacher']]);

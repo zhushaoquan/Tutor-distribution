@@ -56,12 +56,12 @@ class TeacherTutor extends BaseController {
     	 $user = $this->auto_login();
          
          $data = Db::table('tc_issue')->where('workNumber', $user['workNumber'])->find();
-         $res = Db::table('tc_voluntaryinfoSetting')->find();
+         $res = Db::table('tc_voluntaryinfosetting')->find();
          $data['nowtime'] = time();
          $data['message'] = '';
          $data['issueStart'] = $res['issueStart'];
          $data['issueEnd'] = $res['issueEnd'];
-         $data['voluntaryinfoSetting'] = Db::table('tc_voluntaryinfoSetting')->find();
+         $data['voluntaryinfoSetting'] = Db::table('tc_voluntaryinfosetting')->find();
          $data['message1'] = "导师所带学生总数不得超过".$data['voluntaryinfoSetting']['totalMax']."名，不得少于".$data['voluntaryinfoSetting']['totalMin']."名";
          if($user['isExperial']==1) $data['message1'].="，实验班总人数不超过".$data['voluntaryinfoSetting']['experialMax']."名！";
          if($data['nowtime'] < $data['issueStart'] || $data['nowtime'] > $data['issueEnd']) {
@@ -88,7 +88,7 @@ class TeacherTutor extends BaseController {
             if(($data1['totalExper']+$data1['totalNatur'])>$data['voluntaryinfoSetting']['totalMax']) {$this->showNotice('所带学生总人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));exit;}
             if(($data1['totalExper']+$data1['totalNatur'])<=$data['voluntaryinfoSetting']['totalMin']) {$this->showNotice('所带学生总人数未达下限，请重新输入', url('TeacherTutor/issue_submit'));exit;}
 
-             if($data['issue']) {
+             if(isset($data['issue']['pid'])) {
                 $data1['pid'] = $data['issue']['pid'];
                 $data1['totalNow'] = $data['issue']['totalNow'];
                 $bool = Db::table('tc_issue')->update($data1);
@@ -122,7 +122,7 @@ class TeacherTutor extends BaseController {
         $total = count(Db::table('tc_voluntary')->where($where)
                                             ->select()
                       );
-        $page = $totalPage = ceil($total/$this->pageSize);
+        $totalPage = ceil($total/$this->pageSize);
         $pageBar = [
             'total'     => $total,
             'totalPage' => $totalPage+1,
@@ -192,7 +192,7 @@ class TeacherTutor extends BaseController {
                                             ->where($where)
                                             ->select());
                       
-        $page = $totalPage = ceil($total/$this->pageSize);
+        $totalPage = ceil($total/$this->pageSize);
         $pageBar = [
             'total'     => $total,
             'totalPage' => $totalPage+1,
@@ -280,7 +280,7 @@ class TeacherTutor extends BaseController {
                                                 ->where($where)
                                                 ->select()
                       );
-        $page = $totalPage = ceil($total/$this->pageSize);
+        $totalPage = ceil($total/$this->pageSize);
         $pageBar = [
             'total'     => $total,
             'totalPage' => $totalPage+1,
@@ -373,7 +373,7 @@ class TeacherTutor extends BaseController {
         	}
         }
 
-        $res = Db::table('tc_voluntaryinfoSetting')->find();
+        $res = Db::table('tc_voluntaryinfosetting')->find();
         $res['nowtime'] = time();
         $data['message'] = '';
         $data['firstStart'] = $res['firstStart'];
@@ -415,7 +415,7 @@ class TeacherTutor extends BaseController {
         $unfinish_teachers = Db::table('user_teacher')->where('name', 'not in', $finish_teachers['name'])->select();
         foreach ($unfinish_teachers as $key => $value) {
             if($value['isExperial']) {
-                $defaultNum = DB::table('tc_voluntaryinfoSetting')->find()['defaultNum'];
+                $defaultNum = DB::table('tc_voluntaryinfosetting')->find()['defaultNum'];
                 $data['workNumber'] = $value['workNumber'];
                 $data['title'] = "无";
                 $data['totalExper'] = $defaultNum;
@@ -423,6 +423,5 @@ class TeacherTutor extends BaseController {
                 Db::table('tc_issue')->insert($data);
             }
         }
-
     }
 }
