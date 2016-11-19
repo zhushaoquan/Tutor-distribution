@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:75:"C:\wamp64\www\tutorAssign\public/../app/index\view\teacher_tutor\index.html";i:1479295134;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:75:"C:\wamp64\www\tutorAssign\public/../app/index\view\teacher_tutor\index.html";i:1479486507;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>毕设导师只能分配系统</title>
+    <title>毕设导师智能分配系统</title>
     <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo TUTOR_STATIC; ?>/css/student.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo TUTOR_STATIC; ?>/css/teacher.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/student.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/teacher.css">
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
@@ -25,13 +25,13 @@
     <div id="siderbar">
         <nav class="sider-navbar">
             <div class="sider-navbar-header">
-                <img src="<?php echo OLD; ?>/image/mainpage-logo.png" alt="" width="240">
+                <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="<?php echo url('TeacherTutor/index'); ?>"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <a href="<?php echo url('TeacherTutor/studentList'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 可选学生</li></a>
-                <a href="<?php echo url('TeacherTutor/issueSubmit'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 课题提交</li></a>
-                <a href="<?php echo url('TeacherTutor/showResult'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 最终结果</li></a>
+                <a href="<?php echo url('teacher_tutor/index'); ?>"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
+                <a href="<?php echo url('teacher_tutor/student_list'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 可选学生</li></a>
+                <a href="<?php echo url('teacher_tutor/issue_submit'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 课题提交</li></a>
+                <a href="<?php echo url('teacher_tutor/show_result'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 志愿结果</li></a>
             </ul>
         </nav>
     </div>
@@ -67,10 +67,10 @@
                         <li><span>生日：</span><span><?php echo $user['birthday']; ?></span><span>职称：</span><span><?php echo $user['title']; ?></span><span style="width: 100px;">实验班导师：</span><span><?php echo $user['isExperial']; ?></span></li>
                     </ul>
                 </div>
-                <div class="description-title">
+                <div class="skill-title">
                     <p>个人简介：</p>
                 </div>
-                <div class="description-detail">
+                <div class="skill-detail">
                     <p><?php echo $user['description']; ?></p>
                 </div>
                 <!-- <div class="button-position">

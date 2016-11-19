@@ -98,7 +98,6 @@
                     </table>
                     <nav>
                       <ul class="pagination" style="float: right;">
-                      <a href="{{:url('/index/index/TeacherTutor/student_list/'.($curPage-1))}}">&laquo;</a>
                           {if condition="$curPage neq 1 "}
                               <li><a href="{{:url('/index/index/TeacherTutor/student_list/'.($curPage-1))}}">&laquo;</a></li>
                           {/if}
@@ -123,7 +122,6 @@
                           {if condition="$curPage lt $totalPage-1"}
                             <li><a href="#">&raquo;</a></li>
                           {/if}
-                            <li><a href="#">共{{$total}}名学生</a></li>
                       </ul>
                     </nav>
                 </div>

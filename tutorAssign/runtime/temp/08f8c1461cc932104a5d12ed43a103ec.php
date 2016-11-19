@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_modify.html";i:1479492614;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_modify.html";i:1479476360;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -36,14 +36,14 @@
                     <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
                 </div>
                 <ul class="sider-navbar-nav">
-                    <a href="<?php echo url('/index/TeachingOfficeTutor/index'); ?>">
+                    <a href="<?php echo url('TeachingOfficeTutor/index'); ?>">
                         <li><i class="glyphicon glyphicon-user"></i> 个人信息</li>
                     </a>
                     <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
-                    <a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change'); ?>">
+                    <a href="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>">
                         <li><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
                     </a>
-                    <a href="<?php echo url('/index/TeachingOfficeTutor/student_assign'); ?>">
+                    <a href="<?php echo url('TeachingOfficeTutor/student_assign'); ?>">
                         <li class="active"><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
                     </a>
                 </ul>
@@ -75,12 +75,13 @@
                         <div style="display: inline-block;">
                             <form id="department-submit" action="<?php echo url('TeachingOfficeTutor/student_assign'); ?>" method="post">
                                 <select class="form-control" name="department" style="display: inline-block; width: 200px">
-                                    <option value="应用数学系" <?php if($dep == "应用数学系") echo'selected = "true"';?>>应用数学系</option>
-                                    <option value="信息与计算科学系" <?php if($dep == "信息与计算科学系") echo'selected = "true"';?>>信息与计算科学系</option>
                                     <option value="计算机系" <?php if($dep == "计算机系") echo'selected = "true"';?>>计算机系</option>
+                                    <option value="数学系" <?php if($dep == "数学系") echo'selected = "true"';?>>数学系</option>
+                                    <option value="网络工程系" <?php if($dep == "网络工程系") echo'selected = "true"';?>>网络工程系</option>
                                     <option value="软件工程系" <?php if($dep == "软件工程系") echo'selected = "true"';?>>软件工程系</option>
-                                    <option value="信息安全与网络工程系" <?php if($dep == "信息安全与网络工程系") echo'selected = "true"';?>>信息安全与网络工程系</option>
-                                    <option value="计算机实验班" <?php if($dep == "计算机实验班") echo'selected = "true"';?>>计算机实验班</option>
+                                    <option value="信息安全系" <?php if($dep == "信息安全系") echo'selected = "true"';?>>信息安全系</option>
+                                    <option value="系统结构系" <?php if($dep == "系统结构系") echo'selected = "true"';?>>系统结构系</option>
+                                    <option value="计算机实验班" <?php if($dep == "计算机实验") echo'selected = "true"';?>>计算机实验班</option>
                                     <option value="数学实验班" <?php if($dep == "数学实验班") echo'selected = "true"';?>>数学实验班</option>
                                 </select>
                                 <input type="hidden" name="stu" value="modify">
@@ -90,7 +91,7 @@
                     </div>
                     <br />
                     <div class="table-responsive">
-                        <form action="<?php echo url('/index/TeachingOfficeTutor/student_modify'); ?>" method="post" id="modify-info">
+                        <form action="<?php echo url('TeachingOfficeTutor/student_modify'); ?>" method="post" id="modify-info">
                         <table class="table">
                             <tr>
                                 <th>#</th>
@@ -138,13 +139,13 @@
                             <ul class="pagination" style="float: right;">
                                 <?php if($curPage != 1): ?>
                               <li><a href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage-1).'/dep/'.$dep.'/to/'.'modify'); ?>">&laquo;</a></li>
-                              <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_1438__=$curPage-2;$__FOR_END_1438__=$curPage+3;for($i=$__FOR_START_1438__;$i < $__FOR_END_1438__;$i+=1){ ?>
+                              <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_8249__=$curPage-2;$__FOR_END_8249__=$curPage+3;for($i=$__FOR_START_8249__;$i < $__FOR_END_8249__;$i+=1){ ?>
                                   <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'); ?>" ><?php echo $i; ?></a></li>
-                                <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_26585__=$totalPage-5;$__FOR_END_26585__=$totalPage;for($i=$__FOR_START_26585__;$i < $__FOR_END_26585__;$i+=1){ ?>
+                                <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_12288__=$totalPage-5;$__FOR_END_12288__=$totalPage;for($i=$__FOR_START_12288__;$i < $__FOR_END_12288__;$i+=1){ ?>
                                   <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'); ?>" ><?php echo $i; ?></a></li>
-                                <?php } elseif($totalPage > 5): $__FOR_START_21024__=1;$__FOR_END_21024__=6;for($i=$__FOR_START_21024__;$i < $__FOR_END_21024__;$i+=1){ ?>
+                                <?php } elseif($totalPage > 5): $__FOR_START_5763__=1;$__FOR_END_5763__=6;for($i=$__FOR_START_5763__;$i < $__FOR_END_5763__;$i+=1){ ?>
                                   <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'); ?>" ><?php echo $i; ?></a></li>
-                                <?php } else: $__FOR_START_27939__=1;$__FOR_END_27939__=$totalPage;for($i=$__FOR_START_27939__;$i < $__FOR_END_27939__;$i+=1){ ?>
+                                <?php } else: $__FOR_START_18738__=1;$__FOR_END_18738__=$totalPage;for($i=$__FOR_START_18738__;$i < $__FOR_END_18738__;$i+=1){ ?>
                                   <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'); ?>" ><?php echo $i; ?></a></li>
                                 <?php } endif; if($curPage < $totalPage-1): ?>
                                 <li><a href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage+11).'/dep/'.$dep.'/to/'.'modify'); ?>">&raquo;</a></li>

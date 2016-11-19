@@ -178,34 +178,6 @@ class DepartmentHeadTutor extends BaseController {
 		}
 	}
 
-	// public function test($page=1) {
-	// 	// $user = $this->auto_login();
-	// 	// $head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
-	// 	$student = Db::table('user_student')->where('chosen',0)->page($page,$this->pageSize)->select();
-
-	// 	$total = count(Db::table('user_student')->where('chosen',0)->select());
-	// 	$totalPage = ceil($total/$this->pageSize);
-
-	// 	for ($i=0; $i <count($student) ; $i++) { 
-	// 		$voluntary[$i] = Db::table('tc_voluntary')->where('sid',$student[$i]['sid'])->find();
-	// 		$voluntary[$i]['information'] = Db::table('user_student')->where('sid',$student[$i]['sid'])->field('sid,field,serialNum,name')->find();
-
-	// 		$voluntary[$i]['firstTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishFirst'])->field('name')->find();
-	// 		$voluntary[$i]['secondTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishSecond'])->field('name')->find();
-	// 		$voluntary[$i]['thirdTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishThird'])->field('name')->find();
-	// 		$voluntary[$i]['forthTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishForth'])->field('name')->find();
-	// 		$voluntary[$i]['fifthTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishFifth'])->field('name')->find();
-	// 	}
-
-	// 	$teacher = Db::table('user_teacher')->where('department',$student[0]['field'])->page($page,$this->pageSize)->select();
-	// 	$teacherTotal = count(Db::table('user_teacher')->where('department',$student[0]['field'])->select());
-	// 	$teacherTotalPage = ceil($teacherTotal/$this->pageSize);
-
-	// 	return json($voluntary);
-	// 			// dump($teacher);
-
-	// }
-
 
 
 	public function allocStudent() {
@@ -225,35 +197,35 @@ class DepartmentHeadTutor extends BaseController {
 	public function intelligentAlloc() {
 		$user = $this->auto_login();
 
-		// //获取学生信息
-		// $student = Db::table('user_student')->where('chosen',0)->where('department',$user['department'])->field('sid,serialNum,gpa,chosen')->select();
-		// $countStudent = count($student);
+		//获取学生信息
+		$student = Db::table('user_student')->where('chosen',0)->where('department',$user['department'])->field('sid,serialNum,gpa,chosen')->select();
+		$countStudent = count($student);
 
-		// for ($i=0; $i <$countStudent ; $i++) { 
-		// 	$student[$i]['voluntary'] = Db::table('tc_voluntary')->where('sid',$student[$i]['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
+		for ($i=0; $i <$countStudent ; $i++) { 
+			$student[$i]['voluntary'] = Db::table('tc_voluntary')->where('sid',$student[$i]['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
 
-		// 	$inputStudent[$i] = $student[$i]['serialNum'].' '.$student[$i]['gpa'].PHP_EOL.$student[$i]['voluntary']['wishFirst'].PHP_EOL.$student[$i]['voluntary']['wishSecond'].PHP_EOL.$student[$i]['voluntary']['wishThird'].PHP_EOL.$student[$i]['voluntary']['wishForth'].PHP_EOL.$student[$i]['voluntary']['wishFifth'].PHP_EOL.PHP_EOL;
-		// }
-		// //将获取的学生信息转换为.txt文件
-		// file_put_contents('student.txt', $inputStudent);
+			$inputStudent[$i] = $student[$i]['serialNum'].' '.$student[$i]['gpa'].PHP_EOL.$student[$i]['voluntary']['wishFirst'].PHP_EOL.$student[$i]['voluntary']['wishSecond'].PHP_EOL.$student[$i]['voluntary']['wishThird'].PHP_EOL.$student[$i]['voluntary']['wishForth'].PHP_EOL.$student[$i]['voluntary']['wishFifth'].PHP_EOL.PHP_EOL;
+		}
+		//将获取的学生信息转换为.txt文件
+		file_put_contents('student.txt', $inputStudent);
 
-		// //获取导师信息
-		// $teacher = Db::table('user_teacher')->where('department',$user['department'])->select();
-		// $countTeacher = count($teacher);
+		//获取导师信息
+		$teacher = Db::table('user_teacher')->where('department',$user['department'])->select();
+		$countTeacher = count($teacher);
 
 
-		// for ($i=0; $i <$countTeacher ; $i++) {
-		// 	$teacherIssue[$i] = Db::table('tc_issue')->where('workNumber',$teacher[$i]['workNumber'])->find(); 
-		// 	$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalNatur'] - $teacherIssue[$i]['nowNatur'];
+		for ($i=0; $i <$countTeacher ; $i++) {
+			$teacherIssue[$i] = Db::table('tc_issue')->where('workNumber',$teacher[$i]['workNumber'])->find(); 
+			$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalNatur'] - $teacherIssue[$i]['nowNatur'];
 
-		// 	$inputTeacher[$i] = $teacher[$i]['workNumber'].' '.$teacher[$i]['avaliableNumber'].PHP_EOL;
-		// }
-		// //将获取的老师信息转换为.txt文件
-		// file_put_contents('teacher.txt', $inputTeacher);
+			$inputTeacher[$i] = $teacher[$i]['workNumber'].' '.$teacher[$i]['avaliableNumber'].PHP_EOL;
+		}
+		//将获取的老师信息转换为.txt文件
+		file_put_contents('teacher.txt', $inputTeacher);
 
-		// //调用算法进行分配
-		// $fileNameWithParam = 'distribute.exe '.$countStudent.' '.$countTeacher;
-		// system($fileNameWithParam);
+		//调用算法进行分配
+		$fileNameWithParam = 'distribute.exe '.$countStudent.' '.$countTeacher;
+		system($fileNameWithParam);
 
 		$studentElected = file_get_contents('student_elected.txt');      //获取通过算法得到分配的学生的结果，转换为string
 		$studentUnelected = file_get_contents('student_unelected.txt');  //获取通过算法仍然未得到分配的学生的结果，转换为string
@@ -266,7 +238,10 @@ class DepartmentHeadTutor extends BaseController {
 			$studentElectedArr[$i] = explode(' ', $studentElectedArr[$i]);
 
 			$studentElectedResult[$i]['serialNum'] = $studentElectedArr[$i][0];
+			$studentElectedResult[$i]['sid'] = Db::table('user_student')->where('serialNum',$studentElectedResult[$i]['serialNum'])->field('sid')->find();
+			$studentElectedResult[$i]['sname'] = Db::table('user_student')->where('serialNum',$studentElectedResult[$i]['serialNum'])->field('name')->find();
 			$studentElectedResult[$i]['workNumber'] = $studentElectedArr[$i][1];
+			$studentElectedResult[$i]['tname'] = Db::table('user_teacher')->where('workNumber',$studentElectedResult[$i]['workNumber'])->field('name')->find();
 		}
 
 		//分割studentUnlected字符串，转换为数组
@@ -296,14 +271,27 @@ class DepartmentHeadTutor extends BaseController {
 			}
 		}
 
+		// dump($tutorAssignResult);
+		$this->assign('studentElectedResult',$studentElectedResult);
+		$this->assign('user', $user);
+		return $this->fetch('assign_result');
 
 		// return json($studentElectedResult); //返回通过算法得到分配的学生的JSON
 		// return json($studentUnelectedResult); //获取通过算法仍然未得到分配的学生的JSON
 		// dump($tutorAssignArr);
-		dump($tutorAssignResult);
+		// dump($tutorAssignResult);
 
 
 
+	}
+
+
+	public function assignResult() {
+		$user = $this->auto_login();
+
+
+		$this->assign('user', $user);
+		return $this->fetch('assign_result');
 	}
 
 	//测试调用算法

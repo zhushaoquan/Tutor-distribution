@@ -100,6 +100,8 @@ CREATE TABLE IF NOT EXISTS `tc_issue` (
   `time` INT NOT NULL COMMENT '课题时间（时间戳）',
   `totalExper` INT NOT NULL COMMENT '导师所带实验班人数',
   `totalNatur` INT NOT NULL COMMENT '导师所带自然班人数',
+  `nowExper` INT NOT NULL COMMENT '导师当前所带实验班人数',
+  `nowNatur` INT NOT NULL COMMENT '导师当前所带自然班人数',
   `totalNow` INT NOT NULL DEFAULT '0' COMMENT '导师当前学生数',
 
   PRIMARY KEY (`pid`)
