@@ -14,5 +14,8 @@ define('TUTOR_STATIC',"http://".$_SERVER['HTTP_HOST'].$_path[0].'/static');
 define('OLD',"http://".$_SERVER['HTTP_HOST'].$_path[0].'/old');
 define('STATIC',"http://".$_SERVER['HTTP_HOST'].$_path[0].'/static');
 
+$_prefix = explode('index/',$_SERVER['SCRIPT_NAME']);
+define('PREFIX', "http://".$_SERVER['HTTP_HOST'].$_prefix[0]."/index");
+
 // 加载框架引导文件
 require __DIR__ . '/../thinkphp/start.php';

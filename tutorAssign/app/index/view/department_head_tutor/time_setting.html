@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,12 +16,18 @@
             text-align: center;
             padding-top: 10px;
         }
+        #warn-alert-close:hover {
+            background-color: pink;
+        }
     </style>
 </head>
 
 <body cz-shortcut-listen="true">
 
-
+<div id="warn-alert" class="alert alert-info" style="display: none; position:fixed; top:10px; left: 300px;right: 300px; margin:auto; border: 2px solid red; opacity: 1; z-index: 4">
+    <p id="warn-alert-text" style="display: inline-block;float: left;">提示：你还未设置毕设导师分配的时间</p>
+    <span id="warn-alert-close" style="display: inline-block; float: right;" class="glyphicon glyphicon-remove" style="margin-right: 50px"></span>
+</div>
 <div id="container-backstage" class="clearfix">
     <div id="siderbar">
         <nav class="sider-navbar">
@@ -289,6 +294,11 @@
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 <script type="text/javascript">
+    $("#warn-alert-close").click(function() {
+        $("#warn-alert").hide(300);
+    });
+</script>
+<script type="text/javascript">
     $('.form_datetime').datetimepicker({
         language: 'zh-CN',
         weekStart: 1,
@@ -299,47 +309,96 @@
         forceParse: 0,
         showMeridian: 1
     });
+    $('.form_datetime').datetimepicker('setStartDate', new Date());
 </script>
 <script type="text/javascript">
+    var warn_text = new Array("提示：输入框不能为空！",
+            "提示：截至时间 不得早于 起始时间！");
+
     function validate() {
         var form2to4 = $("input:hidden");
         var form1 = $("input[type='number']");
 
-        var form1_flag = validateForm(form1, 1)
+        var form1_flag = validateForm(form1, 1);
         var form2to4_flag = validateForm(form2to4, 2);
-        return form1_flag && form2to4_flag;
+        var dateLegal_flag = checkData(form2to4);
+        showWarnInfo(form1_flag,form2to4_flag,dateLegal_flag);
+        return form1_flag && form2to4_flag && dateLegal_flag;
     }
 
-    function validateForm(form, option) {
-        var flag = false;
-        console.log(form.length);
+    function validateForm(form, formNum) {
+        var isLegal = true;
+        var idSet = new Array();
         for (var i = 0; i < form.length; ++i) {
             var item = form[i];
             if (item.value === "") {
-                if (option === 2) {
-                    $("#" + item.id).prev().addClass("has-error");
-                } else if (option == 1) {
-                    $("#" + item.id).parent().addClass("has-error");
-                }
-                console.log(item.id);
-                flag = true;
+                idSet.push(item.id);
+                isLegal = false;
             }
         }
-        if (flag) {
-            return false;
+
+        if(formNum == 1){
+            displayWarnStyleNumber(idSet);
+        }else if(formNum == 2){
+            displayWarnStyleDate(idSet);
         }
-        return true;
+
+        return isLegal;
     }
 
+    function checkData(form) {
+        console.log("checkData");
+        console.log(form);
+        var idSet = new Array();
+        var isLegal = true;
+
+        //检查起始时间小于截止时间
+        var index = 0;
+        for (var j = 0; j < 5; ++j) {
+            dateStart = new Date(form[index].value);
+            dateEnd = new Date(form[index + 1].value);
+
+            if (dateStart > dateEnd) {
+                idSet.push(form[index].id);
+                idSet.push(form[index + 1].id);
+                isLegal = false;
+
+            }
+            index += 2;
+        }
+
+        displayWarnStyleDate(idSet);
+        return isLegal;
+    }
+
+    function displayWarnStyleDate(idSet) {
+        for (var i = 0; i < idSet.length; ++i) {
+            $("#" + idSet[i]).prev().addClass("has-error");
+        }
+    }
+
+    function displayWarnStyleNumber(idSet) {
+        for (var i = 0; i < idSet.length; ++i) {
+            $("#" + idSet[i]).parent().addClass("has-error");
+        }
+    }
+
+    function showWarnInfo(form1_flag,form2to4_flag,dateLegal_flag){
+        if(!form2to4_flag || !form1_flag){
+            $("#warn-alert-text").text(warn_text[0]);
+            $("#warn-alert").show(300);
+        }else if(!dateLegal_flag){
+            $("#warn-alert-text").text(warn_text[1]);
+            $("#warn-alert").show(300);
+        }
+    }
 </script>
 <script type="text/javascript">
-    $("input").click(function () {
+    $("input").click(function() {
         $(this).parent().removeClass("has-error");
-        console.log($(this).parent().parent());
     });
-    $("span.input-group-addon").click(function () {
+    $("span.input-group-addon").click(function() {
         $(this).parent().removeClass("has-error");
-        console.log($(this).parent().parent());
     });
 </script>
 </body>
