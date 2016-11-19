@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:91:"C:\wamp64\www\tutorAssign\public/../app/index\view\department_head_tutor\match_setting.html";i:1479294472;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:91:"C:\wamp64\www\tutorAssign\public/../app/index\view\department_head_tutor\match_setting.html";i:1479482727;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="my-information-title">
                     <span>分配列表</span>
-                    <button class="btn btn-info button-size btn-edit" type="submit" style="width: 90px;">智能分配</button>
+                    <a href="<?php echo url('DepartmentHeadTutor/intelligentAlloc'); ?>" class="btn btn-info button-size btn-edit" style="width: 90px;">智能分配</a>
                 </div>
                 <div class="my-information-subtitle">
                     <span>为未分配到导师的学生进行导师分配</span>
@@ -88,7 +88,7 @@
                                     <td><?php echo $v['forthTeacher']['name']; ?></td>
                                     <td><?php echo $v['fifthTeacher']['name']; ?></td>
                                     <td>
-                                        <a class="teacher-select" href="#" style="text-decoration: none;"><span>可选导师</span></a>
+                                        <button id="btn-teacher" value="<?php echo $v['information']['sid']; ?>" class="teacher-select" href="#" style="text-decoration: none;background-color: transparent;border-style: none;"><span>可选导师</span></button>
                                     </td>
                                 </tr>
                             <?php endforeach; endif; else: echo "" ;endif; ?>
@@ -99,18 +99,17 @@
                       <ul class="pagination" style="float: right;">
                           <?php if($curPage != 1): ?>
                               <li><a href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/'.($curPage-1)); ?>">&laquo;</a></li>
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_23269__=$curPage-2;$__FOR_END_23269__=$curPage+3;for($i=$__FOR_START_23269__;$i < $__FOR_END_23269__;$i+=1){ ?>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_2190__=$curPage-2;$__FOR_END_2190__=$curPage+3;for($i=$__FOR_START_2190__;$i < $__FOR_END_2190__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_14812__=$totalPage-5;$__FOR_END_14812__=$totalPage;for($i=$__FOR_START_14812__;$i < $__FOR_END_14812__;$i+=1){ ?>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_24713__=$totalPage-5;$__FOR_END_24713__=$totalPage;for($i=$__FOR_START_24713__;$i < $__FOR_END_24713__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_28239__=1;$__FOR_END_28239__=6;for($i=$__FOR_START_28239__;$i < $__FOR_END_28239__;$i+=1){ ?>
+                            <?php } elseif($totalPage > 5): $__FOR_START_32656__=1;$__FOR_END_32656__=6;for($i=$__FOR_START_32656__;$i < $__FOR_END_32656__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_12462__=1;$__FOR_END_12462__=$totalPage;for($i=$__FOR_START_12462__;$i < $__FOR_END_12462__;$i+=1){ ?>
+                            <?php } else: $__FOR_START_10835__=1;$__FOR_END_10835__=$totalPage;for($i=$__FOR_START_10835__;$i < $__FOR_END_10835__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="#">&raquo;</a></li>
                           <?php endif; ?>
-                            <li><a href="#">共<?php echo $total; ?>名学生</a></li>
                       </ul>
                     </nav>   
                 </div>
@@ -124,8 +123,10 @@
                                 <th>姓名</th>
                                 <th>系别</th>
                                 <th>实验班导师</th>
-                                <th>所需总学生数</th>
-                                <th>当前学生数</th>
+                                <th>所需实验班人数</th>
+                                <th>所需自然班人数</th>
+                                <th>当前所带实验班人数</th>
+                                <th>当前所带自然班人数</th>
                                 <th>分配操作</th>
                             </tr>
                         </thead>
@@ -135,35 +136,19 @@
                                     <td><?php echo $k; ?></td>
                                     <td><?php echo $t['name']; ?></td>
                                     <td><?php echo $t['department']; ?></td>
-                                    <td><?php echo $t['isExperial']; ?></td>
-                                    <td><?php echo $t['isExperial']; ?></td>
-                                    <td><?php echo $t['isExperial']; ?></td>
+                                    <td style="text-align: center;"><?php echo $t['isExperial']; ?></td>
+                                    <td style="text-align: center;"><?php echo $t['issue']['totalExper']; ?></td>
+                                    <td style="text-align: center;"><?php echo $t['issue']['totalNatur']; ?></td>
+                                    <td style="text-align: center;"><?php echo $t['issue']['nowExper']; ?></td>
+                                    <td style="text-align: center;"><?php echo $t['issue']['nowNatur']; ?></td>
                                     <td>
-                                        <a href="#" style="text-decoration: none;"><span>确认分配</span></a>
+                                        <button href="#" class="btn-alloc" value="<?php echo $t['workNumber']; ?>" style="text-decoration: none;background-color: transparent;border-style: none;"><span>确认分配</span></button>
                                     </td>
                                 </tr>
                             <?php endforeach; endif; else: echo "" ;endif; ?>
                         </tbody>
-                    </table> 
-                    <!-- <nav>
-                      <ul class="pagination" style="float: right;">
-                          <?php if($teacherCurPage != 1): ?>
-                              <li><a href="<?php echo url('DepartmentHeadTutor/matchSetting/'.($teacherCurPage-1)); ?>">&laquo;</a></li>
-                          <?php endif; if(($teacherCurPage > 3) AND ($teacherCurPage < $teacherTotalPage-2)): $__FOR_START_5417__=$teacherCurPage-2;$__FOR_END_5417__=$teacherCurPage+3;for($i=$__FOR_START_5417__;$i < $__FOR_END_5417__;$i+=1){ ?>
-                              <li><a <?php if($i==$teacherCurPage) echo "class='active'"; ?> href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($teacherCurPage > $teacherTotalPage-3) AND ($teacherTotalPage > 5)): $__FOR_START_8880__=$teacherTotalPage-5;$__FOR_END_8880__=$teacherTotalPage;for($i=$__FOR_START_8880__;$i < $__FOR_END_8880__;$i+=1){ ?>
-                              <li><a <?php if($i==$teacherCurPage) echo "class='active'"; ?> href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($teacherTotalPage > 5): $__FOR_START_26099__=1;$__FOR_END_26099__=6;for($i=$__FOR_START_26099__;$i < $__FOR_END_26099__;$i+=1){ ?>
-                              <li><a <?php if($i==$teacherCurPage) echo "class='active'"; ?> href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_28770__=1;$__FOR_END_28770__=$teacherTotalPage;for($i=$__FOR_START_28770__;$i < $__FOR_END_28770__;$i+=1){ ?>
-                              <li><a <?php if($i==$teacherCurPage) echo "class='active'"; ?> href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } endif; ?>
-                        <li><a href="#">&raquo;</a></li>
-                        <li><a href="#">共<?php echo $teacherTotal; ?>名导师</a></li>
-                      </ul>
-                    </nav>   --> 
+                    </table>
                 </div>
-
             </div>
             
 
@@ -173,10 +158,10 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="__STATIC__/js/index.js"></script>
-<script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
-<script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
-<script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/index.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/jquery2.14.min.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/bootstrap.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/backstage.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         var popupID = $('.table-position-popup');
@@ -198,6 +183,32 @@
 
 
 </script>
+
+<script type="text/javascript">
+    var sid;
+    var workNumber;
+    $(".teacher-select").click(function(){
+        sid = $(this).val();
+        // console.log(sid);
+    });
+
+    $(".btn-alloc").click(function(){
+        workNumber = $(this).val();
+        // console.log(workNumber);
+        $.post("../DepartmentHeadTutor/allocStudent.html",
+    {
+        sid: sid,
+        workNumber: workNumber
+    },
+    function(data,status){
+        if(status == "success"){
+            // console.log(data);
+            location.href = "../DepartmentHeadTutor/matchSetting.html"
+        }
+    }
+    );
+    });
+</script>>
 </body>
 </html>
 

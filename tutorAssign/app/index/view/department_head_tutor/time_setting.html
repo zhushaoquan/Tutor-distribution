@@ -310,6 +310,7 @@
         showMeridian: 1
     });
     $('.form_datetime').datetimepicker('setStartDate', new Date());
+
 </script>
 <script type="text/javascript">
     var warn_text = new Array("提示：输入框不能为空！",
@@ -362,7 +363,6 @@
                 idSet.push(form[index].id);
                 idSet.push(form[index + 1].id);
                 isLegal = false;
-
             }
             index += 2;
         }
@@ -394,12 +394,13 @@
     }
 </script>
 <script type="text/javascript">
+
     $("input").click(function() {
         $(this).parent().removeClass("has-error");
     });
     $("span.input-group-addon").click(function() {
         $(this).parent().removeClass("has-error");
     });
-</script>
+    </script>
 </body>
 </html>

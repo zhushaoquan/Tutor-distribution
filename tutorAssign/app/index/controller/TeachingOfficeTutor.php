@@ -168,6 +168,12 @@ class TeachingOfficeTutor extends BaseController {
 			];
 		$this->assign('dep',$dep);
 		$this->assign($pageBar);
+
+		//$dep="";
+		$list=Db::table('user_teacher t,user_student s,tc_result r')->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')->order('s.serialNum')->paginate(8);
+	   	$data=$list->toArray()['data'];	 
+	   	$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
+	 	$this->assign('dep',$dep);
 	 	$this->assign('teacher',$tealist);
 	    $this->assign('data',$data);
 		$this->assign('user', $officer);	

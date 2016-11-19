@@ -72,7 +72,6 @@ class TeacherTutor extends BaseController {
             $data['ontime'] = 1;
          }
          $data['issue'] = Db::table('tc_issue')->where('workNumber', $user['workNumber'])->find();
-         $data['issue']['content'] = htmlspecialchars_decode($data['issue']['content']);
 
          $request = Request::instance();
          if ($request->isPost()) {

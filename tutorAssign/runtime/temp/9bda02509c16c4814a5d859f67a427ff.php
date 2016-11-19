@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:77:"C:\wamp64\www\tutorAssign\public/../app/index\view\department_head\index.html";i:1478442169;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:77:"C:\wamp64\www\tutorAssign\public/../app/index\view\department_head\index.html";i:1479295230;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +7,8 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>毕设导师只能分配系统</title>
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/backstage.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="<?php echo TUTOR_STATIC; ?>/css/teacher.css">
     <style type="text/css">
         .sider-navbar-nav li {
@@ -61,10 +61,10 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="__STATIC__/js/index.js"></script>
-<script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
-<script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
-<script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/index.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/jquery2.14.min.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/bootstrap.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/backstage.js"></script>
 </body>
 </html>
 
