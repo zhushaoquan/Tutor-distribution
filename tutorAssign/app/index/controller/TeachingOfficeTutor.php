@@ -105,8 +105,14 @@ class TeachingOfficeTutor extends BaseController {
 		{
 			$str="".$i;
 			$str1="snum".$i;
-			Db::table('tc_result')->where('sid',$_POST[$str1])->setField('workNumber',$_POST[$str]);
+		//	var_dump($str);
+		//	var_dump($str1);
+		//	var_dump($_POST[$str1]);
+			$seri=DB::table('user_student')->where('serialNum',$_POST[$str1])->field('sid')->find();
+		//	var_dump($seri['sid']);
+			Db::table('tc_result')->where('sid',$seri['sid'])->setField('workNumber',$_POST[$str]);
 		}
+	//exit();
 		$pageBar = [
 			'total'     => 0,
 			'totalPage' => 1,
@@ -218,7 +224,7 @@ class TeachingOfficeTutor extends BaseController {
 		//	{
 				$flag=Db::table('tc_result')->insert(["sid" => $sid['sid'] , 'workNumber' => $_POST['teacher_id']]);
 				if($flag == 0)$this->error('增加失败','TeachingOfficeTutor/tutor_assign');
-		 		Db::table('user_student')->where('sid',$value)->setField('chosen',1);
+		 		Db::table('user_student')->where('serialNum',$value)->setField('chosen',1);
 		 //	}
 		}
 		 // $flag1=Db::table('tc_result')->insert(["sid" => $_POST['student'] , 'workNumber' => $_POST['teacher']]);
