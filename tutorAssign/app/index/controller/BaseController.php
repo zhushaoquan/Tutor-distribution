@@ -32,7 +32,8 @@ class BaseController extends Controller {
             }
             if(empty($user) || $user["password"] != $login_pass) {
                 //错误
-                return json(array("success"=>false, "msg"=> "账号或密码错误"));
+                //return json(array("success"=>false, "msg"=> "账号或密码错误"));
+                $this->error("帐号或密码错误，请重新登录",url('login'));
             }
             Session::set('user', $user);
             Session::set('user_type', $login_type);
