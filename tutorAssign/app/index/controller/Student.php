@@ -56,7 +56,7 @@ class Student extends BaseController {
 		if($user['department'] == $this->department_1) {
 			$teachers = Db::table('user_teacher')->where('isExperial',1)->page($page,$this->pageSize)->select();
 		    $total = count(Db::table('user_teacher')->where('isExperial',1)->select());
-			$page = $totalPage = ceil($total/$this->pageSize);
+			$totalPage = ceil($total/$this->pageSize);
 			$pageBar = [
 				'total'     => $total,
 				'totalPage' => $totalPage+1,
@@ -67,7 +67,7 @@ class Student extends BaseController {
 		} else if($user['department'] == $this->department_2) {
 			$teachers = Db::table('user_teacher')->where('isExperial',2)->page($page,$this->pageSize)->select();
 		    $total = count(Db::table('user_teacher')->where('isExperial',2)->select());
-			$page = $totalPage = ceil($total/$this->pageSize);
+			$totalPage = ceil($total/$this->pageSize);
 			$pageBar = [
 				'total'     => $total,
 				'totalPage' => $totalPage+1,
@@ -77,7 +77,7 @@ class Student extends BaseController {
 		} else {
 			$teachers = Db::table('user_teacher')->where('department',$user['department'])->page($page,$this->pageSize)->select();
 		    $total = count(Db::table('user_teacher')->where('department',$user['department'])->select());
-			$page = $totalPage = ceil($total/$this->pageSize);
+			$totalPage = ceil($total/$this->pageSize);
 			$pageBar = [
 				'total'     => $total,
 				'totalPage' => $totalPage+1,
@@ -85,6 +85,8 @@ class Student extends BaseController {
 				'curPage'   => $page
 				];
 		}
+
+	// dump($pageBar);
 		$this->assign($pageBar);
 		$this->assign('teachers',$teachers);
 		$this->assign('user', $user);
@@ -189,5 +191,95 @@ class Student extends BaseController {
 		return $this->fetch('show_result');
 	}
 
+
+	//以下部分为测试数据随机生成，与项目无关
+
+
+	public function hahaha() {
+		for ($i=0; $i <0 ; $i++) { 
+			$student[$i] = $this->datadata();
+		}
+		dump($student);
+		Db::table('user_student')->insertAll($student);
+	}
+
+	public function heiheihei() {
+		for ($i=0; $i <70 ; $i++) { 
+			$voluntary[$i]['sid'] = $i + 1;
+			$voluntary[$i]['wishFirst'] = $this->wishRand()['workNumber'];
+			$voluntary[$i]['wishSecond'] = $this->wishRand()['workNumber'];
+			$voluntary[$i]['wishThird'] = $this->wishRand()['workNumber'];
+			$voluntary[$i]['wishForth'] = $this->wishRand()['workNumber'];
+			$voluntary[$i]['wishFifth'] = $this->wishRand()['workNumber'];
+
+		}
+		// dump($voluntary);
+		Db::table('tc_voluntary')->insertAll($voluntary);
+	}
+
+
+	public function datadata() {
+		$data['serialNum'] = '031402'.$this->serialNumRand();
+		$data['password'] = $data['serialNum'];
+		$data['name'] = $this->getRandName();
+
+		$data['gender'] = '男';
+		$data['gpa'] = $this->getRandFloat();
+		$data['college'] = "数学与计算机科学学院";
+		$data['department'] = "信息安全与网络工程系";
+		$data['rank'] = $this->getRandRank();
+
+		return $data;
+	}
+
+
+	public function wishRand() {
+		$where['department'] = "信息安全与网络工程系";
+		$teacher = Db::table('user_teacher')->where($where)->field('workNumber')->select();
+		return $teacher[rand(0,54)];
+		// dump($teacher);
+	}
+
+
+	public function issueRand() {
+		$where['department'] = "信息安全与网络工程系";
+		$teacher = Db::table('user_teacher')->where($where)->field('workNumber')->select();
+		$count = count($teacher);
+		for ($i=0; $i <$count ; $i++) { 
+			$issue[$i]['workNumber'] = $teacher[$i]['workNumber'];
+			$issue[$i]['title'] = '111';
+			$issue[$i]['content'] = '111111';
+			$issue[$i]['time'] = time();
+			$issue[$i]['totalExper'] = rand(3,5);
+			$issue[$i]['totalNatur'] = rand(4,8);
+			$issue[$i]['nowExper'] = rand(0,2);
+			$issue[$i]['nowNatur'] = rand(0,2);
+			$issue[$i]['totalNow'] = 0;
+		}
+		Db::table('tc_issue')->insertAll($issue);
+	}
+
+	public function serialNumRand() {
+		return mt_rand(101,601);
+	}
+
+	public function getRandName() {
+		$arr = array(
+		'才','放','去','个','给','齐','民','陈','燊','黄','胡','伟','炜','心','王','婷','许','颖','玲','郑','杨','羊','涛','阳','直','通','蔡','菜','辣','鸡','国','林','展','富','云','家','瑞','奇','豪','昊'
+		);
+		$rand1 = rand(0,39);
+		$rand2 = rand(0,39);
+		$rand3 = rand(0,39);
+		return $arr[$rand1].$arr[$rand2].$arr[$rand3];
+	}
+	
+
+	public function getRandFloat() {
+		return rand(300,450)/100;
+	}
+
+	public function getRandRank() {
+		return rand(1,30).'/'.rand(40,80);
+	}
 	
 }

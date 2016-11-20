@@ -9,11 +9,15 @@
 define('APP_PATH', __DIR__ . '/../app/');
 define('APP_DEBUG', false);
 
+
+//css 前缀
 $_path = explode("/public",$_SERVER['SCRIPT_NAME']);
 define('TUTOR_STATIC',"http://".$_SERVER['HTTP_HOST'].$_path[0].'/static');
 define('OLD',"http://".$_SERVER['HTTP_HOST'].$_path[0].'/old');
 define('STATIC',"http://".$_SERVER['HTTP_HOST'].$_path[0].'/static');
 
+
+//接口 前缀
 $_prefix = explode('index/',$_SERVER['SCRIPT_NAME']);
 define('PREFIX', "http://".$_SERVER['HTTP_HOST'].$_prefix[0]."/index");
 

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:90:"C:\wamp64\www\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_assign.html";i:1479170879;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:90:"C:\wamp64\www\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_assign.html";i:1479361513;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +65,7 @@
                     </h3>
                 </div>
 
-                <div class="table-responsive">
+                <div class="table-responsive" style="width: 90%;height: auto;margin:0 auto;">
 
                     <table class="table">
                         <tr>
@@ -102,56 +102,6 @@
                         ?>
                         </tbody>
                     </table>
-                    <!--   <tr>
-                            <td>031402XXX</td>
-                            <td>李四</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>王五</td>
-                        </tr> 
-                           
-                     <tr>
-                            <td style="vertical-align:middle" rowspan="4">00022</td>
-                            <td style="vertical-align:middle" rowspan="4">张栋</td>
-                            <td>031402XXX</td>
-                            <td>张三</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>李四</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>王五</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>赵六</td>
-                        </tr>
-
-                        <tr>
-                            <td style="vertical-align:middle" rowspan="2">00023</td>
-                            <td style="vertical-align:middle" rowspan="2">柯逍</td>
-                            <td>031402XXX</td>
-                            <td>张三</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>李四</td>
-                        </tr>
-
-                        <tr>
-                            <td style="vertical-align:middle" rowspan="2">00024</td>
-                            <td style="vertical-align:middle" rowspan="2">吴英杰</td>
-                            <td>031402XXX</td>
-                            <td>赵六</td>
-                        </tr>
-                        <tr>
-                            <td>031402XXX</td>
-                            <td>王五</td>
-                        </tr> !-->
-                  
                     <div class="submit-area">
                         <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button>
                         <button type="submit" class="btn btn-primary" id="sub-result-change">

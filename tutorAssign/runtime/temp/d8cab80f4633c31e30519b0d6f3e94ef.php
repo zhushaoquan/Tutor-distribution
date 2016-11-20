@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:76:"C:\wamp64\www\tutorAssign\public/../app/index\view\student\choiceassign.html";i:1479292694;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:76:"C:\wamp64\www\tutorAssign\public/../app/index\view\student\choiceassign.html";i:1479481311;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,9 +27,9 @@
                 <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="<?php echo url('Student/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
+                <a href="<?php echo url('Student/index'); ?>"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <a href="<?php echo url('Student/tutorList'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 专业导师</li></a>
-                <a href="<?php echo url('Student/editVoluntary'); ?>"><li class="active"><i class="glyphicon glyphicon-pencil"></i> 志愿填报</li></a>
+                <a href="<?php echo url('Student/editVoluntary'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 志愿填报</li></a>
                 <a href="<?php echo url('Student/showResult'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 最终结果</li></a>
             </ul>
         </nav>
@@ -66,6 +66,42 @@
                         <div class="col-lg-4">
                             <select id="basic" class="selectpicker show-tick form-control">
                                 <option value="">==请选择==</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
+                                <option value="">张栋</option>
                                 <option value="">张栋</option>
                                 <option value="">张栋</option>
                                 <option value="">张栋</option>
