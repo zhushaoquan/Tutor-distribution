@@ -155,3 +155,68 @@
 	float:center;
 	padding: 0 100px;
 }
+
+.my-modify-detail {
+	font-size: 16px;
+	padding: 16px 140px;
+}
+
+.pw-modify {
+	padding-left: 30px;
+	width: 90%;
+	float: right;
+}
+
+.pw-form-width {
+	width: 85%;
+}
+
+.tel-form-width {
+	width: 85%;
+}
+
+.email-form-width {
+	width: 85%;
+}
+
+.pw-title {
+	float: left;
+}
+
+.tel-title {
+	float: left;
+}
+
+.email-title {
+	float: left;
+}
+
+.skill-modify-title {
+	float: left;
+}
+
+.skill-width {
+	width: 85%;
+	
+}
+
+.skill-modify-text {
+	width: 90%;
+	float: right;
+	padding-left: 30px;
+}
+.modify-btn-position {
+	width: 46%;
+	float: left;
+	text-align: right;
+	padding-left: 180px;
+	marker-bottom: 30px;
+}
+
+.return-btn-position {
+	width: 30%;
+	float: left;
+	padding-left: 80px;
+	text-align: left;
+	
+}
