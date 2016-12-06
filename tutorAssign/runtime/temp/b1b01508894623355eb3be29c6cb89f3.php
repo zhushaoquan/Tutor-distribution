@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:89:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\modify.html";i:1480945134;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:89:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\modify.html";i:1481021315;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +49,7 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;padding-bottom: 55px;">
                     <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                        <p>提示：部分信息通过教务系统导入，无法修改！</p>
+                        <p>提示：部分信息通过教务系统导入，无法修改！点击头像即可上传修改头像！</p>
                     </div>
                 <div class="my-information-title">
                     <span>修改信息</span>
@@ -85,7 +85,15 @@
                         <div class="skill-modify-text"><textarea class="form-control skill-width" name="skill" rows="5"><?php echo $user['skill']; ?></textarea></div>
                       </div>
                       <div class="modify-btn-position">
-                        <button type="submit" class="btn btn-info button-size">修改</button>
+                        <button type="submit" class="btn btn-info button-size">确认</button>
+                      </div>
+                      <div class="avator-positon">
+                          <input type="file" id="avator" name="avator" class="fileInput" style="cursor: pointer;">
+                          <?php if($user['avatorIsEmpty'] == 0): ?>
+                            <img src="<?php echo COMMON_PATH; ?><?php echo $user['avator']; ?>" id="avatorPre" class="avatorPre" style="cursor: pointer;">
+                          <?php elseif($user['avatorIsEmpty'] == 1): ?>
+                            <img src="<?php echo OLD; ?>/image/defaultAvator.png" class="avatorPre">
+                          <?php endif; ?>
                       </div>
                 </form>
                 <div class="return-btn-position"><a href="<?php echo url('Student/index'); ?>"><button class="btn btn-info button-size" type="submit">返回</button></a></a></div>
@@ -101,6 +109,27 @@
 <script type="text/javascript" src="<?php echo OLD; ?>/js/jquery2.14.min.js"></script>
 <script type="text/javascript" src="<?php echo OLD; ?>/js/bootstrap.js"></script>
 <script type="text/javascript" src="<?php echo OLD; ?>/js/backstage.js"></script>
+
+<script type="text/javascript">
+    $("#avator").change(function(){
+        var avatorURL = getAvatorURL(this.files[0]);
+        console.log("avatorURL = "+avatorURL);
+        if (avatorURL) {
+            $("#avatorPre").attr("src",avatorURL);
+        }
+    })
+    function getAvatorURL(file) {
+         var url = null ; 
+         if (window.createObjectURL!=undefined) { // basic
+          url = window.createObjectURL(file) ;
+         } else if (window.URL!=undefined) { // mozilla(firefox)
+          url = window.URL.createObjectURL(file) ;
+         } else if (window.webkitURL!=undefined) { // webkit or chrome
+          url = window.webkitURL.createObjectURL(file) ;
+         }
+         return url ;
+    }
+</script>
 
 <script type="text/javascript">
     function checkall() {

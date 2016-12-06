@@ -16,6 +16,12 @@ class Student extends BaseController {
         } else {
         	$student['chosen'] = '是';
         }
+        if ($student['avator'] == "") {
+        	$student['avatorIsEmpty'] = 1;
+        }
+        if ($student['avator'] != "") {
+        	$student['avatorIsEmpty'] = 0;
+        }
         $this->assign('user', $student);
 		return $this->fetch('index');
 	}
@@ -42,7 +48,12 @@ class Student extends BaseController {
 		$user = $this->auto_login();
 		$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //如果直接使用session里的用户信息，修改的信息必须重新登录才能更新显示
         
-
+		if ($student['avator'] == "") {
+        	$student['avatorIsEmpty'] = 1;
+        }
+        if ($student['avator'] != "") {
+        	$student['avatorIsEmpty'] = 0;
+        }
         $this->assign('user', $student);
 		return $this->fetch('modify');
 	}
@@ -51,6 +62,14 @@ class Student extends BaseController {
 		$user = $this->auto_login();
 		$where['sid'] = $user['sid'];
 		$request = Request::instance();
+
+		//获取上传的头像的信息
+		$avator = request()->file('avator');
+		$avatorInfo = $avator->move('../uploads/student');
+		if ($avatorInfo) {
+			$temp['ava'] = explode("..", $avatorInfo->getPathName());
+			$data['avator'] = $temp['ava'][1];
+		}
 		if ($request->isPost()) {
 			$password = $request->post('newPasswordConfirm');
 			if ($password == "") {

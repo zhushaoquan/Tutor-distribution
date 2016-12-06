@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\index.html";i:1480930747;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\index.html";i:1481021234;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,8 +54,7 @@
                 <div class="my-information-title">
                    
                         <span>我的信息</span>
-                                    
-                        <a href="<?php echo url('Student/modify'); ?>"><button class="btn btn-info button-size btn-edit" type="submit">修改</button></a>
+                                
         
                 </div>
                 <div class="my-information-subtitle">
@@ -63,10 +62,10 @@
                 </div>
                 <div class="my-information-detail-1">
                     <ul>
-                        <li><span>姓名：</span><span class="span-value"><?php echo $user['name']; ?></span><span>学号：</span><span class="span-value"><?php echo $user['serialNum']; ?></span><span>性别：</span><span class="span-value"><?php echo $user['gender']; ?></span></li>
-                        <li><span>学院：</span><span class="span-value"><?php echo $user['college']; ?></span><span>系别：</span><span class="span-value"><?php echo $user['department']; ?></span><span>方向：</span><span class="span-value"><?php echo $user['field']; ?></span></li>
-                        <li><span>绩点：</span><span class="span-value"><?php echo $user['gpa']; ?></span><span>排名：</span><span class="span-value"><?php echo $user['rank']; ?></span><span>中选：</span><span class="span-value"><?php echo $user['chosen']; ?></span></li>
-                        <li><span>电话：</span><span class="span-value"><?php echo $user['telephone']; ?></span><span>邮箱：</span><span class="span-value"><?php echo $user['email']; ?></span></li>
+                        <li><span>姓名：</span><span><?php echo $user['name']; ?></span><span>学号：</span><span><?php echo $user['serialNum']; ?></span><span>性别：</span><span><?php echo $user['gender']; ?></span></li>
+                        <li><span>学院：</span><span><?php echo $user['college']; ?></span><span>系别：</span><span><?php echo $user['department']; ?></span><span>方向：</span><span><?php echo $user['field']; ?></span></li>
+                        <li><span>绩点：</span><span><?php echo $user['gpa']; ?></span><span>排名：</span><span><?php echo $user['rank']; ?></span><span>中选：</span><span><?php echo $user['chosen']; ?></span></li>
+                        <li><span>电话：</span><span><?php echo $user['telephone']; ?></span><span>邮箱：</span><span><?php echo $user['email']; ?></span><span>年级：</span><span>2014级</span></li>
                     </ul>
                 </div>
                 <div class="skill-title">
@@ -75,10 +74,22 @@
                 <div class="skill-detail">
                     <p><?php echo $user['skill']; ?></p>
                 </div>
+
+                <div class="edit-btn">
+                    <a href="<?php echo url('Student/modify'); ?>">
+                        <button class="btn btn-info button-size" type="submit">修改</button>
+                    </a>
+                </div>
                 <!-- <div class="time-reminder">
                     <i class="glyphicon glyphicon-star-empty"></i>&nbsp;<span>提示：第一轮志愿填报时间为2016年10月19日至2016年10月22日，请同学们在规定时间内完成志愿填报</span>
                 </div> -->
-
+                <div class="avator-positon">
+                    <?php if($user['avatorIsEmpty'] == 0): ?>
+                      <img src="<?php echo COMMON_PATH; ?><?php echo $user['avator']; ?>" class="avatorPre">
+                    <?php elseif($user['avatorIsEmpty'] == 1): ?>
+                      <img src="<?php echo OLD; ?>/image/defaultAvator.png" class="avatorPre">
+                    <?php endif; ?>
+                </div>
             </div>
             
             <div class="footer"  style="border-radius: 10px;">

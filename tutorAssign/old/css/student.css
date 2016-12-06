@@ -168,15 +168,15 @@
 }
 
 .pw-form-width {
-	width: 85%;
+	width: 80%;
 }
 
 .tel-form-width {
-	width: 85%;
+	width: 80%;
 }
 
 .email-form-width {
-	width: 85%;
+	width: 80%;
 }
 
 .pw-title {
@@ -196,7 +196,7 @@
 }
 
 .skill-width {
-	width: 85%;
+	width: 80%;
 	
 }
 
@@ -219,4 +219,36 @@
 	padding-left: 80px;
 	text-align: left;
 	
+}
+
+.fileInput {
+	height: 100px;
+	width: 100px;
+	border-radius: 100px;
+	opacity: 0;
+	position: absolute;
+	background-color: #F54;
+	
+}
+
+.avatorPre {
+	height: 100px;
+	width: 100px;
+	border-radius: 100px;
+}
+
+.avator-positon{
+	float: right;
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	right: 100px;
+	top: 200px;
+}
+
+.edit-btn{
+	width: 100%;
+	height: 60px;
+	text-align: center;
+	margin-top: 45px;
 }
