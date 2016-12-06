@@ -16,6 +16,12 @@ class Student extends BaseController {
         } else {
         	$student['chosen'] = '是';
         }
+        if ($student['avator'] == "") {
+        	$student['avatorIsEmpty'] = 1;
+        }
+        if ($student['avator'] != "") {
+        	$student['avatorIsEmpty'] = 0;
+        }
         $this->assign('user', $student);
 		return $this->fetch('index');
 	}
@@ -41,13 +47,47 @@ class Student extends BaseController {
 	public function modify() {
 		$user = $this->auto_login();
 		$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //如果直接使用session里的用户信息，修改的信息必须重新登录才能更新显示
-        if ($user['chosen'] == 0) {
-        	$student['chosen'] = '否';
-        } else {
-        	$student['chosen'] = '是';
+        
+		if ($student['avator'] == "") {
+        	$student['avatorIsEmpty'] = 1;
+        }
+        if ($student['avator'] != "") {
+        	$student['avatorIsEmpty'] = 0;
         }
         $this->assign('user', $student);
 		return $this->fetch('modify');
+	}
+
+	public function saveModify() {
+		$user = $this->auto_login();
+		$where['sid'] = $user['sid'];
+		$request = Request::instance();
+
+		//获取上传的头像的信息
+		$avator = request()->file('avator');
+		$avatorInfo = $avator->move('../uploads/student');
+		if ($avatorInfo) {
+			$temp['ava'] = explode("..", $avatorInfo->getPathName());
+			$data['avator'] = $temp['ava'][1];
+		}
+		if ($request->isPost()) {
+			$password = $request->post('newPasswordConfirm');
+			if ($password == "") {
+				$data['password'] = $request->post('oldPassword');
+			} else {
+				$data['password'] = $request->post('newPasswordConfirm');
+			}
+
+			$data['telephone'] = $request->post('telephone');
+			$data['email'] = $request->post('email');
+			$data['skill'] = $request->post('skill');
+
+			if (Db::table('user_student')->where($where)->update($data)) {
+				$this->success("信息修改成功!",url('index'));
+			} else {
+				$this->error("信息尚未修改，请修改信息后再次提交修改!",url('modify'));
+			}
+		}
 	}
 
 	public function tutor_list($page=1) {

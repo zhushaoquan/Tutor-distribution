@@ -15,7 +15,7 @@ $_path = explode("/public",$_SERVER['SCRIPT_NAME']);
 define('TUTOR_STATIC',"http://".$_SERVER['HTTP_HOST'].$_path[0].'/static');
 define('OLD',"http://".$_SERVER['HTTP_HOST'].$_path[0].'/old');
 define('STATIC',"http://".$_SERVER['HTTP_HOST'].$_path[0].'/static');
-
+define('COMMON_PATH',"http://".$_SERVER['HTTP_HOST'].$_path[0]);
 
 //接口 前缀
 $_prefix = explode('index/',$_SERVER['SCRIPT_NAME']);
