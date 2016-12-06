@@ -65,10 +65,12 @@ class Student extends BaseController {
 
 		//获取上传的头像的信息
 		$avator = request()->file('avator');
-		$avatorInfo = $avator->move('../uploads/student');
-		if ($avatorInfo) {
-			$temp['ava'] = explode("..", $avatorInfo->getPathName());
-			$data['avator'] = $temp['ava'][1];
+		if ($avator != "") {
+			$avatorInfo = $avator->move('../uploads/student');
+			if ($avatorInfo) {
+				$temp['ava'] = explode("..", $avatorInfo->getPathName());
+				$data['avator'] = $temp['ava'][1];
+			}
 		}
 		if ($request->isPost()) {
 			$password = $request->post('newPasswordConfirm');
