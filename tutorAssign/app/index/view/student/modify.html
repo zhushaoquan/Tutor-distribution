@@ -23,7 +23,7 @@
     <div id="siderbar">
         <nav class="sider-navbar">
             <div class="sider-navbar-header">
-                <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
+                <img src="{{$Think.const.OLD}}/image/mainpage-logo.png" alt="" width="240">
             </div>
              <ul class="sider-navbar-nav">
                 <a href="{{:url('Student/index')}}"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
@@ -46,9 +46,9 @@
             </div>
         </div>
         <div class="page-content">
-            <div class="main-content" style="border-radius: 10px;padding: 20px;">
+            <div class="main-content" style="border-radius: 10px;padding: 20px;padding-bottom: 55px;">
                     <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                        <p>提示：部分信息通过系统导入无法修改！</p>
+                        <p>提示：部分信息通过教务系统导入，无法修改！点击头像即可上传修改头像！</p>
                     </div>
                 <div class="my-information-title">
                     <span>修改信息</span>
@@ -56,29 +56,46 @@
                 <div class="my-information-subtitle">
                     <span>你可以在这里修改自己的个人信息</span>
                 </div>
-                <div class="my-information-detail-1">
-                    <ul>
-                        <li><span>姓名：</span><span class="span-value">{{$user.name}}</span><span>学号：</span><span class="span-value">{{$user.serialNum}}</span><span>性别：</span><span class="span-value">{{$user.gender}}</span></li>
-                        <li><span>学院：</span><span class="span-value">{{$user.college}}</span><span>系别：</span><span class="span-value">{{$user.department}}</span><span>方向：</span><span class="span-value">{{$user.field}}</span></li>
-                        <li><span>绩点：</span><span class="span-value">{{$user.gpa}}</span><span>排名：</span><span class="span-value">{{$user.rank}}</span><span>中选：</span><span class="span-value">{{$user.chosen}}</span></li>
-                </div>
                 
-                <form role="form">
-                      <div class="form-group">
-                        <span>旧密码：</span>
-                        <input type="email" class="form-control-1" id="exampleInputEmail1" placeholder="Enter email">
+                
+                <form role="form" action="{{:url('Student/saveModify')}}" name="modify" method="post" enctype="multipart/form-data" onsubmit="return checkall()">
+                      <div class="form-group my-modify-detail">
+                        <div class="pw-title"><span>旧密码：</span></div>
+                        <div class="pw-modify"><input type="password" name="oldPassword" class="form-control-1 pw-form-width" id="exampleInputEmail1" placeholder="旧密码" value="{{$user.password}}"></div>
                       </div>
-                      <div class="form-group pw-position">
-                        <span>新密码：</span>
-                        <input type="password" class="form-control-1" id="exampleInputPassword1" placeholder="Password">
+                      <div class="form-group pw-position my-modify-detail">
+                        <div class="pw-title"><span>新密码：</span></div>
+                        <div class="pw-modify"><input type="password" name="newPassword" class="form-control-1 pw-form-width" id="newPassword" placeholder="新密码"></div>
                       </div>
-                      <div class="form-group  pw-position">
-                        <span>确认密码：</span>
-                        <input type="password" class="form-control-1" id="exampleInputPassword1" placeholder="Password">
+                      <div class="form-group  pw-position my-modify-detail">
+                        <div class="pw-title"><span>确认密码：</span></div>
+                        <div class="pw-modify"><input type="password" name="newPasswordConfirm" class="form-control-1 pw-form-width" id="newPasswordConfirm" placeholder="新密码"></div>
                       </div>
-                  <button type="submit" class="btn btn-info button-size">修改</button>
+                      <div class="form-group my-modify-detail">
+                        <div class="tel-title"><span>联系方式：</span></div>
+                        <div class="pw-modify"><input type="text" name="telephone" class="form-control-1 pw-form-width" id="exampleInputEmail1" placeholder="联系方式" value="{{$user.telephone}}"></div>
+                      </div>
+                      <div class="form-group my-modify-detail">
+                        <div class="email-title"><span>邮&nbsp;&nbsp;&nbsp;箱：</span></div>
+                        <div class="pw-modify"><input type="email" name="email" class="form-control-1 pw-form-width" id="exampleInputEmail1" placeholder="邮箱" value="{{$user.email}}"></div>
+                      </div>
+                      <div class="form-group my-modify-detail" style="height: 140px;">
+                        <div class="skill-modify-title"><span>技能经历：</span></div>
+                        <div class="skill-modify-text"><textarea class="form-control skill-width" name="skill" rows="5">{{$user.skill}}</textarea></div>
+                      </div>
+                      <div class="modify-btn-position">
+                        <button type="submit" class="btn btn-info button-size">确认</button>
+                      </div>
+                      <div class="avator-positon">
+                          <input type="file" id="avator" name="avator" class="fileInput" style="cursor: pointer;">
+                          {if condition="$user.avatorIsEmpty eq 0"}
+                            <img src="{{$Think.const.COMMON_PATH}}{{$user.avator}}" id="avatorPre" class="avatorPre" style="cursor: pointer;">
+                          {elseif condition="$user.avatorIsEmpty eq 1"}
+                            <img src="{{$Think.const.OLD}}/image/defaultAvator.png" class="avatorPre">
+                          {/if}
+                      </div>
                 </form>
-                <a href="{{:url('Student/index')}}"><button class="btn btn-info button-size" type="submit">返回</button></a></a>
+                <div class="return-btn-position"><a href="{{:url('Student/index')}}"><button class="btn btn-info button-size" type="submit">返回</button></a></a></div>
             </div>
             
             <div class="footer"  style="border-radius: 10px;">
@@ -87,10 +104,47 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="__STATIC__/js/index.js"></script>
-<script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
-<script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
-<script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/index.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/jquery2.14.min.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/bootstrap.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/backstage.js"></script>
+
+<script type="text/javascript">
+    $("#avator").change(function(){
+        var avatorURL = getAvatorURL(this.files[0]);
+        console.log("avatorURL = "+avatorURL);
+        if (avatorURL) {
+            $("#avatorPre").attr("src",avatorURL);
+        }
+    })
+    function getAvatorURL(file) {
+         var url = null ; 
+         if (window.createObjectURL!=undefined) { // basic
+          url = window.createObjectURL(file) ;
+         } else if (window.URL!=undefined) { // mozilla(firefox)
+          url = window.URL.createObjectURL(file) ;
+         } else if (window.webkitURL!=undefined) { // webkit or chrome
+          url = window.webkitURL.createObjectURL(file) ;
+         }
+         return url ;
+    }
+</script>
+
+<script type="text/javascript">
+    function checkall() {
+        
+        if (modify.newPassword.value != "" && modify.newPasswordConfirm.value == "") {
+            alert("请输入确认密码！");
+            modify.newPasswordConfirm.focus();
+            return false;
+        }
+        if (modify.newPassword.value != modify.newPasswordConfirm.value) {
+            alert("两次密码输入不相同，请重新输入！");
+            return false;
+        }
+        return true;
+    }
+</script>
 </body>
 </html>
 
