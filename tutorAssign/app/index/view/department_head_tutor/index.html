@@ -8,7 +8,7 @@
     <title>毕设导师智能分配系统</title>
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.TUTOR_STATIC}}/css/student.css">
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student.css">
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
@@ -54,7 +54,6 @@
                 </div>
                 <div class="my-information-title">
                     <span>我的信息</span>
-                    <button class="btn btn-info button-size btn-edit" type="submit">修改</button>
                 </div>
                 <div class="my-information-subtitle">
                     <span>您可以在这里查看或修改自己的个人信息</span>
@@ -65,6 +64,19 @@
                         <li><span>系别：</span><span>{{$user.department}}</span><span>电话：</span><span>{{$user.telephone}}</span><span>邮箱：</span><span>{{$user.email}}</span></li>
                         <li><span>生日：</span><span>{{$user.birthday}}</span></li>
                     </ul>
+                </div>
+                <div class="edit-btn">
+                    <a href="{{:url('DepartmentHeadTutor/modify')}}">
+                        <button class="btn btn-info button-size" type="submit" style="margin-top: 160px;">修改</button>
+                    </a>
+                </div>
+
+                <div class="avator-positon">
+                    {if condition="$user.avatorIsEmpty eq 0"}
+                      <img src="{{$Think.const.COMMON_PATH}}{{$user.avator}}" class="avatorPre">
+                    {elseif condition="$user.avatorIsEmpty eq 1"}
+                      <img src="{{$Think.const.OLD}}/image/defaultAvator.png" class="avatorPre">
+                    {/if}
                 </div>
 
             </div>
