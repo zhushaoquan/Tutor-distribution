@@ -61,7 +61,7 @@
                 <form role="form" action="{{:url('Student/saveModify')}}" name="modify" method="post" enctype="multipart/form-data" onsubmit="return checkall()">
                       <div class="form-group my-modify-detail">
                         <div class="pw-title"><span>旧密码：</span></div>
-                        <div class="pw-modify"><input type="password" name="oldPassword" class="form-control-1 pw-form-width" id="exampleInputEmail1" placeholder="旧密码" value="{{$user.password}}"></div>
+                        <div class="pw-modify"><input type="password" name="oldPassword" class="form-control-1 pw-form-width" id="oldPassword" placeholder="旧密码" value=""><p id="oldPwWrong" style="font-size: 12px;float: right;padding-right: 43px;padding-top: 8px;display: none;color: red;">*旧密码输入错误</p></div>
                       </div>
                       <div class="form-group pw-position my-modify-detail">
                         <div class="pw-title"><span>新密码：</span></div>
@@ -84,7 +84,7 @@
                         <div class="skill-modify-text"><textarea class="form-control skill-width" name="skill" rows="5">{{$user.skill}}</textarea></div>
                       </div>
                       <div class="modify-btn-position">
-                        <button type="submit" class="btn btn-info button-size">确认</button>
+                        <button type="submit" id="modifyConfirm" class="btn btn-info button-size" disabled="true">确认</button>
                       </div>
                       <div class="avator-positon">
                           <input type="file" id="avator" name="avator" class="fileInput" style="cursor: pointer;">
@@ -131,7 +131,34 @@
 </script>
 
 <script type="text/javascript">
+
+$("#oldPassword").change(function(){
+    oldPW = $("#oldPassword").val();
+    $.post("{{$Think.const.PREFIX}}/Student/oldPasswordConfirm",
+    {
+        oldPW: oldPW
+    },
+        function(data,status) {
+            console.log(data);
+            if (data == false) {
+                $("#oldPwWrong").css("display","block");
+                document.getElementById("modifyConfirm").disabled=true;
+            }
+            if (data == true) {
+                $("#oldPwWrong").css("display","none");
+                document.getElementById("modifyConfirm").disabled=false;
+            }
+        }
+    );
+})
+
     function checkall() {
+
+        if (modify.oldPassword.value =="") {
+            alert("请输入旧密码！");
+            modify.oldPassword.focus();
+            return false;
+        }
         
         if (modify.newPassword.value != "" && modify.newPasswordConfirm.value == "") {
             alert("请输入确认密码！");

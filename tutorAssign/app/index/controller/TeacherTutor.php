@@ -11,6 +11,13 @@ class TeacherTutor extends BaseController {
     //public $voluntaryinfoSetting = Db::table('tc_voluntaryinfoSetting')->find();
 	public function index() {
 		$user = $this->auto_login();
+        $teacher = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
+        if ($teacher['avator'] == "") {
+            $teacher['avatorIsEmpty'] = 1;
+        }
+        if ($teacher['avator'] != "") {
+            $teacher['avatorIsEmpty'] = 0;
+        }
 
 /*		
 
@@ -22,9 +29,10 @@ class TeacherTutor extends BaseController {
 			$teacher['isExperial'] = '是';
 		}
 */
-		$this->assign('user', $user);
+		$this->assign('user', $teacher);
 		return $this->fetch('index');
 	}
+
     public function test() {
         $user = $this->auto_login();
         $where['department'] = $this->department1;
@@ -423,4 +431,78 @@ class TeacherTutor extends BaseController {
             }
         }
     }
+
+
+
+    public function modify() {
+        $user = $this->auto_login();
+        $teacher = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
+
+        if ($teacher['avator'] == "") {
+            $teacher['avatorIsEmpty'] = 1;
+        }
+        if ($teacher['avator'] != "") {
+            $teacher['avatorIsEmpty'] = 0;
+        }
+
+        $this->assign('user',$teacher);
+        return $this->fetch('modify');
+    }
+
+
+
+    public function oldPasswordConfirm() {
+        $user = $this->auto_login();
+        $teacher = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
+
+        $request = Request::instance();
+        if ($request->isPost()) {
+            $oldPassword = $request->post();
+            if ($oldPassword['oldPW'] != $teacher['password']) {
+                $data = false;
+            }
+            if ($oldPassword['oldPW'] == $teacher['password']) {
+                $data = true;
+            }
+        return json($data);
+        }
+    }
+
+    public function saveModify() {
+        $user = $this->auto_login();
+        $where['workNumber'] = $user['workNumber'];
+        $request = Request::instance();
+
+        //获取上传的头像的信息
+        $avator = request()->file('avator');
+        if ($avator != "") {
+            $avatorInfo = $avator->move('../uploads/teacher');
+            if ($avatorInfo) {
+                $temp['ava'] = explode("..", $avatorInfo->getPathName());
+                $data['avator'] = $temp['ava'][1];
+            }
+        }
+
+        if ($request->isPost()) {
+            $password = $request->post('newPasswordConfirm');
+            if ($password == "") {
+                $data['password'] = $request->post('oldPassword');
+            } else {
+                $data['password'] = $request->post('newPasswordConfirm');
+            }
+
+            $data['telephone'] = $request->post('telephone');
+            $data['email'] = $request->post('email');
+            $data['description'] = $request->post('description');
+
+            if (Db::table('user_teacher')->where($where)->update($data)) {
+                $this->success("信息修改成功!",url('index'));
+            } else {
+                $this->error("信息尚未修改，请修改信息后再次提交修改!",url('modify'));
+            }
+        }
+
+    }
+
+
 }

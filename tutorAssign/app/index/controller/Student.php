@@ -324,4 +324,22 @@ class Student extends BaseController {
 		return rand(1,30).'/'.rand(40,80);
 	}
 	
+
+	public function oldPasswordConfirm() {
+		$user = $this->auto_login();
+        $student = Db::table('user_student')->where('sid',$user['sid'])->find();
+
+        $request = Request::instance();
+        if ($request->isPost()) {
+            $oldPassword = $request->post();
+            if ($oldPassword['oldPW'] != $student['password']) {
+                $data = false;
+            }
+            if ($oldPassword['oldPW'] == $student['password']) {
+                $data = true;
+            }
+        return json($data);
+        }
+	}
+
 }
