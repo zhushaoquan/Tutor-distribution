@@ -13,6 +13,12 @@ class DepartmentHeadTutor extends BaseController {
 		$user = $this->auto_login();
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
 		
+		if ($head['avator'] == "") {
+        	$head['avatorIsEmpty'] = 1;
+        }
+        if ($head['avator'] != "") {
+        	$head['avatorIsEmpty'] = 0;
+        }
 
 		$this->assign('user', $head);
 		return $this->fetch('index');
@@ -399,4 +405,73 @@ class DepartmentHeadTutor extends BaseController {
 		$data = Db::table('user_student')->select();
 		return json($data);
 	}
+
+
+	public function modify() {
+		$user = $this->auto_login();
+		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
+
+		if ($head['avator'] == "") {
+        	$head['avatorIsEmpty'] = 1;
+        }
+        if ($head['avator'] != "") {
+        	$head['avatorIsEmpty'] = 0;
+        }
+
+		$this->assign('user', $head);
+		return $this->fetch('modify');
+	}
+
+	public function saveModify() {
+		$user = $this->auto_login();
+		$where['workNumber'] = $user['workNumber'];
+		$request = Request::instance();
+
+		//获取上传的头像的信息
+		$avator = request()->file('avator');
+		if ($avator != "") {
+			$avatorInfo = $avator->move('../uploads/departmentHead');
+			if ($avatorInfo) {
+				$temp['ava'] = explode("..", $avatorInfo->getPathName());
+				$data['avator'] = $temp['ava'][1];
+			}
+		}
+
+		if ($request->isPost()) {
+			$password = $request->post('newPasswordConfirm');
+			if ($password == "") {
+				$data['password'] = $request->post('oldPassword');
+			} else {
+				$data['password'] = $request->post('newPasswordConfirm');
+			}
+
+			$data['telephone'] = $request->post('telephone');
+			$data['email'] = $request->post('email');
+
+			if (Db::table('user_department_head')->where($where)->update($data)) {
+				$this->success("信息修改成功!",url('index'));
+			} else {
+				$this->error("信息尚未修改，请修改信息后再次提交修改!",url('modify'));
+			}
+		}
+
+	}
+
+	public function oldPasswordConfirm() {
+		$user = $this->auto_login();
+        $head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
+
+        $request = Request::instance();
+        if ($request->isPost()) {
+            $oldPassword = $request->post();
+            if ($oldPassword['oldPW'] != $head['password']) {
+                $data = false;
+            }
+            if ($oldPassword['oldPW'] == $head['password']) {
+                $data = true;
+            }
+        return json($data);
+        }
+	}
+
 }
