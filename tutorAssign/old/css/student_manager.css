@@ -1,0 +1,24 @@
+.module{
+    width: 90%;
+    margin: 20px auto;
+    /*border: 3px solid orange;*/
+}
+
+.module button{
+    width: 100%;
+    padding: 6px 0;
+}
+
+#delete-item{
+    background-color: #D95043;
+    border: none;
+}
+
+#delete-item:hover{
+    background-color: #FF7373;
+    border: none;
+}
+
+.modal-lg{
+    width: 900px;
+}
