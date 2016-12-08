@@ -64,15 +64,15 @@
                       <div class="form-group my-modify-detail">
                         <div class="pw-title"><span>旧密码：</span></div>
                         <div class="pw-modify"><input type="password" name="oldPassword" class="form-control-1 pw-form-width" id="oldPassword" placeholder="旧密码" value="">
-                        <p id="oldPwWrong" style="font-size: 12px;float: right;padding-right: 43px;padding-top: 8px;display: none;color: red;">*旧密码输入错误</p></div>
+                        <p id="oldPwWrong" style="font-size: 12px;float: right;padding-right: 48px;padding-top: 8px;display: none;color: red;">*旧密码输入错误</p></div>
                       </div>
                       <div class="form-group pw-position my-modify-detail">
                         <div class="pw-title"><span>新密码：</span></div>
-                        <div class="pw-modify"><input type="password" name="newPassword" class="form-control-1 pw-form-width" id="newPassword" placeholder="新密码"></div>
+                        <div class="pw-modify"><input type="password" name="newPassword" class="form-control-1 pw-form-width" id="newPassword" placeholder="新密码"><p id="passwordSame" style="font-size: 12px;float: right;padding-right: 0px;padding-top: 8px;display: none;color: red;">*新密码与旧密码不能相同</p></div>
                       </div>
                       <div class="form-group  pw-position my-modify-detail">
                         <div class="pw-title"><span>确认密码：</span></div>
-                        <div class="pw-modify"><input type="password" name="newPasswordConfirm" class="form-control-1 pw-form-width" id="newPasswordConfirm" placeholder="新密码"></div>
+                        <div class="pw-modify"><input type="password" name="newPasswordConfirm" class="form-control-1 pw-form-width" id="newPasswordConfirm" placeholder="新密码"><p id="newPw" style="font-size: 12px;float: right;padding-right: 48px;padding-top: 8px;display: none;color: red;">*请输入确认密码</p><p id="newPwConfirmWrong" style="font-size: 12px;float: right;padding-right: 36px;padding-top: 8px;display: none;color: red;">*两次密码输入不同</p></div>
                       </div>
                       <div class="form-group my-modify-detail">
                         <div class="tel-title"><span>联系方式：</span></div>
@@ -156,6 +156,17 @@ $("#oldPassword").change(function(){
     );
 })
 
+$("#newPasswordConfirm").focus(function(){
+    oldPW = $("#oldPassword").val();
+    newPW = $("#newPassword").val();
+    if (oldPW == newPW) {
+        $("#passwordSame").css("display","block");
+    }
+    if (oldPW != newPW) {
+        $("#passwordSame").css("display","none");
+    }
+})
+
     function checkall() {
 
         if (modify.oldPassword.value =="") {
@@ -165,14 +176,19 @@ $("#oldPassword").change(function(){
         }
         
         if (modify.newPassword.value != "" && modify.newPasswordConfirm.value == "") {
-            alert("请输入确认密码！");
+            $("#newPw").css("display","block");
             modify.newPasswordConfirm.focus();
             return false;
         }
-        if (modify.newPassword.value != modify.newPasswordConfirm.value) {
-            alert("两次密码输入不相同，请重新输入！");
-            return false;
+
+        if (modify.newPassword.value != "" && modify.newPasswordConfirm.value != "") {
+            $("#newPw").css("display","none");
+            if (modify.newPassword.value != modify.newPasswordConfirm.value) {
+                $("#newPwConfirmWrong").css("display","block");
+                return false;
+            }
         }
+
         return true;
     }
 </script>
