@@ -147,6 +147,7 @@ $("#oldPassword").change(function(){
             if (data == false) {
                 $("#oldPwWrong").css("display","block");
                 document.getElementById("modifyConfirm").disabled=true;
+                modify.oldPassword.focus();
             }
             if (data == true) {
                 $("#oldPwWrong").css("display","none");
@@ -161,9 +162,22 @@ $("#newPasswordConfirm").focus(function(){
     newPW = $("#newPassword").val();
     if (oldPW == newPW) {
         $("#passwordSame").css("display","block");
+        modify.newPassword.focus();
     }
     if (oldPW != newPW) {
         $("#passwordSame").css("display","none");
+    }
+})
+
+$('#newPasswordConfirm').change(function(){
+    newPW = $("#newPassword").val();
+    newPWC = $("#newPasswordConfirm").val();
+    if (newPW == newPWC) {
+        $("#newPwConfirmWrong").css("display","none");
+    }
+    if (newPW != newPWC) {
+        $("#newPwConfirmWrong").css("display","block");
+        modify.newPasswordConfirm.focus();
     }
 })
 
