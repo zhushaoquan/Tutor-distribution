@@ -54,7 +54,7 @@
 
                 <div class="my-information-title">
                     <span>我的信息</span>
-                    <button class="btn btn-info button-size btn-edit" type="submit">修改</button>
+                    
                 </div>
                 <div class="my-information-subtitle">
                     <span>您可以在这里查看或修改自己的个人信息</span>
@@ -75,7 +75,20 @@
                 <!-- <div class="button-position">
                     <button class="btn btn-info" type="submit">修改</button>
                 </div> -->
+                <div class="edit-btn">
+                    <a href="{{:url('TeacherTutor/modify')}}">
+                        <button class="btn btn-info button-size" type="submit">修改</button>
+                    </a>
+                </div>
 
+                <div class="avator-positon">
+                    {if condition="$user.avatorIsEmpty eq 0"}
+                      <img src="{{$Think.const.COMMON_PATH}}{{$user.avator}}" class="avatorPre">
+                    {elseif condition="$user.avatorIsEmpty eq 1"}
+                      <img src="{{$Think.const.OLD}}/image/defaultAvator.png" class="avatorPre">
+                    {/if}
+                </div>
+                
             </div>
             
             <div class="footer"  style="border-radius: 10px;">

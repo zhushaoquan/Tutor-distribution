@@ -10,6 +10,12 @@ class TeachingOfficeTutor extends BaseController {
 	{
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
+		if ($officer['avator'] == "") {
+        	$officer['avatorIsEmpty'] = 1;
+        }
+        if ($officer['avator'] != "") {
+        	$officer['avatorIsEmpty'] = 0;
+        }
 		
 		$this->assign('user', $officer);
 		return $this->fetch('index');
@@ -244,6 +250,72 @@ class TeachingOfficeTutor extends BaseController {
 		$data=DB::table('user_student')->where('chosen',0)->field('name,serialNum')->select();
 		$d['result']= $data;
 		return json($d);
+	}
+
+	public function modify() {
+		$user = $this->auto_login();
+		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
+
+		if ($officer['avator'] == "") {
+        	$officer['avatorIsEmpty'] = 1;
+        }
+        if ($officer['avator'] != "") {
+        	$officer['avatorIsEmpty'] = 0;
+        }
+        $this->assign('user', $officer);
+		return $this->fetch('modify');
+	}
+
+	public function saveModify() {
+		$user = $this->auto_login();
+		$where['workNumber'] = $user['workNumber'];
+		$request = Request::instance();
+
+		//获取上传的头像的信息
+		$avator = request()->file('avator');
+		if ($avator != "") {
+			$avatorInfo = $avator->move('../uploads/teachingOfficer');
+			if ($avatorInfo) {
+				$temp['ava'] = explode("..", $avatorInfo->getPathName());
+				$data['avator'] = $temp['ava'][1];
+			}
+		}
+		if ($request->isPost()) {
+			$password = $request->post('newPasswordConfirm');
+			if ($password == "") {
+				$data['password'] = $request->post('oldPassword');
+			} else {
+				$data['password'] = $request->post('newPasswordConfirm');
+			}
+
+			$data['telephone'] = $request->post('telephone');
+			$data['email'] = $request->post('email');
+
+			if (Db::table('user_teaching_office')->where($where)->update($data)) {
+				$this->success("信息修改成功!",url('index'));
+			} else {
+				$this->error("信息尚未修改，请修改信息后再次提交修改!",url('modify'));
+			}
+		}
+	}
+
+
+
+	public function oldPasswordConfirm() {
+		$user = $this->auto_login();
+		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
+
+        $request = Request::instance();
+        if ($request->isPost()) {
+            $oldPassword = $request->post();
+            if ($oldPassword['oldPW'] != $officer['password']) {
+                $data = false;
+            }
+            if ($oldPassword['oldPW'] == $officer['password']) {
+                $data = true;
+            }
+        return json($data);
+        }
 	}
 
 }
