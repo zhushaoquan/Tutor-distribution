@@ -38,7 +38,7 @@
                 <a href="{{:url('DepartmentHeadTutor/index')}}"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <li><i class="glyphicon glyphicon-th-list"></i> 学生管理</li>
                 <li><i class="glyphicon glyphicon-pencil"></i> 导师管理</li>
-                <a href="{{:url('DepartmentHeadTutor/timeSetting')}}"><li class="active"><i class="glyphicon glyphicon-time"></i> 时间设置</li></a>
+                <a href="{{:url('DepartmentHeadTutor/timeSetting')}}"><li class="active"><i class="glyphicon glyphicon-time"></i> 匹配设置</li></a>
                 <a href="{{:url('DepartmentHeadTutor/matchSetting')}}"><li><i class="glyphicon glyphicon-ok"></i> 匹配结果</li></a>
                 <li><i class="glyphicon glyphicon-download-alt"></i> 结果导出</li>
             </ul>
@@ -113,6 +113,36 @@
                                     <label class="control-label col-md-4 col-sm-12"><br/></label>
                                     <div class="input-group col-md-8 col-sm-12">
                                         
+                                    </div>
+                                </div>
+                                <div class="blank"></div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="separate form-horizontal">
+                        <fieldset>
+                            <legend>年级设置</legend>
+                            <div class="div-flex">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-12">当前年级</label>
+                                    <div class="input-group col-md-8 col-sm-12">
+                                        <!-- <input class="form-control" type="number" id="wish-num" name="wish-num" round="" style="border-radius: 3px"> -->
+                                        <select class="form-control" name="grade" style="border-radius:3px;background-color:#fcfcfc">
+                                            <option>2016级</option>
+                                            <option>2015级</option>
+                                            <option>2014级</option>
+                                            <option>2013级</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-12">
+                                        <br/>
+                                    </label>
+                                    <div class="input-group col-md-8 col-sm-12">
                                     </div>
                                 </div>
                                 <div class="blank"></div>
@@ -312,45 +342,85 @@
     $('.form_datetime').datetimepicker('setStartDate', new Date());
 </script>
 <script type="text/javascript">
-    var warn_text = new Array("提示：输入框不能为空！",
-            "提示：截至时间 不得早于 起始时间！");
-
     function validate() {
-        var form2to4 = $("input:hidden");
-        var form1 = $("input[type='number']");
+        var formDate = $("input:hidden");
+        var formNum = $("input[type='number']");
 
-        var form1_flag = validateForm(form1, 1);
-        var form2to4_flag = validateForm(form2to4, 2);
-        var dateLegal_flag = checkData(form2to4);
-        showWarnInfo(form1_flag,form2to4_flag,dateLegal_flag);
-        return form1_flag && form2to4_flag && dateLegal_flag;
+        var isNumEmpty = validateForm(formNum, 1);
+        var isDateEmpty = validateForm(formDate, 2);
+        var isEndBigger = checkDate(formDate);
+        var isSecondRoundBigger = checkDateOfTwoRound(formDate);
+        var isNegative = numIsNegative(formNum);
+
+        showWarnInfo(isNumEmpty, isDateEmpty, isEndBigger, isSecondRoundBigger, isNegative);
+        return !isNumEmpty && !isDateEmpty && isEndBigger && isSecondRoundBigger && !isNegative;
     }
 
-    function validateForm(form, formNum) {
-        var isLegal = true;
+    function numIsNegative(formNum) {
         var idSet = new Array();
-        for (var i = 0; i < form.length; ++i) {
-            var item = form[i];
-            if (item.value === "") {
-                idSet.push(item.id);
-                isLegal = false;
+        var isNegative = false;
+        for (var i = 0; i < formNum.length; ++i) {
+            if (formNum[i].value !== "" &&
+                    formNum[i].value <= 0) {
+                idSet.push(formNum[i].id);
+                isNegative = true;
             }
         }
 
-        if(formNum == 1){
-            displayWarnStyleNumber(idSet);
-        }else if(formNum == 2){
-            displayWarnStyleDate(idSet);
-        }
-
-        return isLegal;
+        displayWarnStyleNum(idSet);
+        return isNegative;
     }
 
-    function checkData(form) {
-        console.log("checkData");
-        console.log(form);
+    function checkDateOfTwoRound(formDate) {
         var idSet = new Array();
-        var isLegal = true;
+        var isSecondRoundBigger = true;
+        var volRound1 = formDate[3];
+        var volRound2 = formDate[4];
+        var tutorRound1 = formDate[7];
+        var tutorRound2 = formDate[8];
+
+        if (new Date(volRound1.value) > new Date(volRound2.value)) {
+            idSet.push(volRound1.id);
+            idSet.push(volRound2.id);
+            isSecondRoundBigger = false;
+        }
+
+        if (new Date(tutorRound1.value) > new Date(tutorRound2.value)) {
+            idSet.push(tutorRound1.id);
+            idSet.push(tutorRound2.id);
+            isSecondRoundBigger = false;
+        }
+
+        displayWarnStyleDate(idSet);
+        return isSecondRoundBigger;
+    }
+
+    function validateForm(form, option) {
+        var idSetNum = new Array();
+        var idSetDate = new Array();
+        var isEmpty = false;
+
+        for (var i = 0; i < form.length; ++i) {
+            var item = form[i];
+            if (item.value === "") {
+                if (option === 2) {
+                    // $("#" + item.id).prev().addClass("has-error");
+                    idSetDate.push(item.id);
+                } else if (option == 1) {
+                    // $("#" + item.id).parent().addClass("has-error");
+                    idSetNum.push(item.id);
+                }
+                isEmpty = true;
+            }
+        }
+        displayWarnStyleNum(idSetNum)
+        displayWarnStyleDate(idSetDate);
+        return isEmpty;
+    }
+
+    function checkDate(form) {
+        var idSet = new Array();
+        var isEndBigger = true;
 
         //检查起始时间小于截止时间
         var index = 0;
@@ -361,14 +431,13 @@
             if (dateStart > dateEnd) {
                 idSet.push(form[index].id);
                 idSet.push(form[index + 1].id);
-                isLegal = false;
-
+                isEndBigger = false;
             }
             index += 2;
         }
 
         displayWarnStyleDate(idSet);
-        return isLegal;
+        return isEndBigger;
     }
 
     function displayWarnStyleDate(idSet) {
@@ -377,20 +446,40 @@
         }
     }
 
-    function displayWarnStyleNumber(idSet) {
+    function displayWarnStyleNum(idSet) {
         for (var i = 0; i < idSet.length; ++i) {
             $("#" + idSet[i]).parent().addClass("has-error");
         }
     }
 
-    function showWarnInfo(form1_flag,form2to4_flag,dateLegal_flag){
-        if(!form2to4_flag || !form1_flag){
-            $("#warn-alert-text").text(warn_text[0]);
-            $("#warn-alert").show(300);
-        }else if(!dateLegal_flag){
-            $("#warn-alert-text").text(warn_text[1]);
-            $("#warn-alert").show(300);
+    function showWarnInfo(isNumEmpty, isDateEmpty, isEndBigger, isSecondRoundBigger, isNegative) {
+        var finalText = "提示：";
+        var order = 0;
+        if (isDateEmpty || isNumEmpty) {
+            order++;
+            finalText = finalText.concat("<br>" + order + ".输入框不能为空！");
+            console.log("judge1");
         }
+
+        if (!isEndBigger) {
+            order++;
+            finalText = finalText.concat("<br>" + order + ".起始时间不得大于截止时间！");
+            console.log("judge2");
+        }
+
+        if (!isSecondRoundBigger) {
+            order++;
+            finalText = finalText.concat("<br>" + order + ".第一轮时间不得大于第二轮时间！");
+        }
+
+        if (isNegative) {
+            order++;
+            finalText = finalText.concat("<br>" + order + ".人数不能为负！")
+        }
+
+        $("#warn-alert-text").html(finalText);
+        $("#warn-alert").show(300);
+        console.log(finalText);
     }
 </script>
 <script type="text/javascript">
