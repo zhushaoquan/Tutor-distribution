@@ -27,15 +27,15 @@ class DepartmentHeadTutor extends BaseController {
 
 	public function matchSetting($page=1) {
 		$user = $this->auto_login();
+		$grade = Db::table('tc_grade')->order('grade desc')->select();
+		$student = Db::table('user_student_'.$grade[0]['grade'])->where('chosen',0)->where('department',$user['department'])->page($page,$this->pageSize)->select();
 
-		$student = Db::table('user_student')->where('chosen',0)->where('department',$user['department'])->page($page,$this->pageSize)->select();
-
-		$total = count(Db::table('user_student')->where('chosen',0)->where('department',$user['department'])->select());
+		$total = count(Db::table('user_student_'.$grade[0]['grade'])->where('chosen',0)->where('department',$user['department'])->select());
 		$totalPage = ceil($total/$this->pageSize);
 
 		for ($i=0; $i <count($student) ; $i++) { 
-			$voluntary[$i] = Db::table('tc_voluntary')->where('sid',$student[$i]['sid'])->find();
-			$voluntary[$i]['information'] = Db::table('user_student')->where('sid',$student[$i]['sid'])->field('sid,field,serialNum,name')->find();
+			$voluntary[$i] = Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$student[$i]['sid'])->find();
+			$voluntary[$i]['information'] = Db::table('user_student_'.$grade[0]['grade'])->where('sid',$student[$i]['sid'])->field('sid,field,serialNum,name')->find();
 
 			$voluntary[$i]['firstTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishFirst'])->field('name')->find();
 			$voluntary[$i]['secondTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishSecond'])->field('name')->find();
@@ -46,7 +46,7 @@ class DepartmentHeadTutor extends BaseController {
 
 		$teacher = Db::table('user_teacher')->where('department',$student[0]['department'])->select();
 		for ($i=0; $i <count($teacher) ; $i++) { 
-			$teacher[$i]['issue'] = Db::table('tc_issue')->where('workNumber',$teacher[$i]['workNumber'])->find();
+			$teacher[$i]['issue'] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$teacher[$i]['workNumber'])->find();
 
 		}
 
@@ -82,6 +82,7 @@ class DepartmentHeadTutor extends BaseController {
 
 	public function timeSetting() {
 		$user = $this->auto_login();
+		$grade = Db::table('tc_grade')->order('grade desc')->select();
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
 		$settingInfo = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
 
@@ -137,6 +138,7 @@ class DepartmentHeadTutor extends BaseController {
 
 	public function infoSetting() {
 		$user = $this->auto_login();
+		$grade = Db::table('tc_grade')->order('grade desc')->select();
 		$userExist = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
 
 		$request = Request::instance();
@@ -188,12 +190,13 @@ class DepartmentHeadTutor extends BaseController {
 
 	public function allocStudent() {
 		$request = Request::instance();
+		$grade = Db::table('tc_grade')->order('grade desc')->select();
 		if ($request->isPost()) {
 			$data = $request->post();
 
 			Db::table('tc_result')->insert($data);
-			Db::table('user_student')->where('sid',$data['sid'])->setField('chosen',1);
-			Db::table('tc_issue')->where('workNumber',$data['workNumber'])->setInc('totalNow',1);
+			Db::table('user_student_'.$grade[0]['grade'])->where('sid',$data['sid'])->setField('chosen',1);
+			Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$data['workNumber'])->setInc('totalNow',1);
 		}
 		
 	}
@@ -203,13 +206,13 @@ class DepartmentHeadTutor extends BaseController {
 	public function intelligentAlloc()
     {
         $user = $this->auto_login();
-
+        $grade = Db::table('tc_grade')->order('grade desc')->select();
         //获取学生信息
-        $student = Db::table('user_student')->where('chosen', 0)->where('department', $user['department'])->field('sid,serialNum,gpa,chosen')->select();
+        $student = Db::table('user_student_'.$grade[0]['grade'])->where('chosen', 0)->where('department', $user['department'])->field('sid,serialNum,gpa,chosen')->select();
         $countStudent = count($student);
 
         for ($i = 0; $i < $countStudent; $i++) {
-            $student[$i]['voluntary'] = Db::table('tc_voluntary')->where('sid', $student[$i]['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
+            $student[$i]['voluntary'] = Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid', $student[$i]['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
 
             $inputStudent[$i] = $student[$i]['serialNum'] . ' ' . $student[$i]['gpa'] . PHP_EOL . $student[$i]['voluntary']['wishFirst'] . PHP_EOL . $student[$i]['voluntary']['wishSecond'] . PHP_EOL . $student[$i]['voluntary']['wishThird'] . PHP_EOL . $student[$i]['voluntary']['wishForth'] . PHP_EOL . $student[$i]['voluntary']['wishFifth'] . PHP_EOL . PHP_EOL;
         }
@@ -222,7 +225,7 @@ class DepartmentHeadTutor extends BaseController {
 
 
         for ($i = 0; $i < $countTeacher; $i++) {
-            $teacherIssue[$i] = Db::table('tc_issue')->where('workNumber', $teacher[$i]['workNumber'])->find();
+            $teacherIssue[$i] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber', $teacher[$i]['workNumber'])->find();
             $teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalNatur'] - $teacherIssue[$i]['nowNatur'];
 
             $inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
@@ -245,8 +248,8 @@ class DepartmentHeadTutor extends BaseController {
             $studentElectedArr[$i] = explode(' ', $studentElectedArr[$i]);
 
             $studentElectedResult[$i]['serialNum'] = $studentElectedArr[$i][0];
-            $studentElectedResult[$i]['sid'] = Db::table('user_student')->where('serialNum', $studentElectedResult[$i]['serialNum'])->field('sid')->find();
-            $studentElectedResult[$i]['sname'] = Db::table('user_student')->where('serialNum', $studentElectedResult[$i]['serialNum'])->field('name')->find();
+            $studentElectedResult[$i]['sid'] = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum', $studentElectedResult[$i]['serialNum'])->field('sid')->find();
+            $studentElectedResult[$i]['sname'] = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum', $studentElectedResult[$i]['serialNum'])->field('name')->find();
             $studentElectedResult[$i]['workNumber'] = $studentElectedArr[$i][1];
             $studentElectedResult[$i]['tname'] = Db::table('user_teacher')->where('workNumber', $studentElectedResult[$i]['workNumber'])->field('name')->find();
         }
@@ -293,14 +296,14 @@ class DepartmentHeadTutor extends BaseController {
 
 	public function assignResult() {
 		$user = $this->auto_login();
-
+		$grade = Db::table('tc_grade')->order('grade desc')->select();
 
 		//获取学生信息
-		$student = Db::table('user_student')->where('chosen',0)->where('department',$user['department'])->field('sid,serialNum,gpa,chosen')->select();
+		$student = Db::table('user_student_'.$grade[0]['grade'])->where('chosen',0)->where('department',$user['department'])->field('sid,serialNum,gpa,chosen')->select();
 		$countStudent = count($student);
 
 		for ($i=0; $i <$countStudent ; $i++) { 
-			$student[$i]['voluntary'] = Db::table('tc_voluntary')->where('sid',$student[$i]['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
+			$student[$i]['voluntary'] = Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$student[$i]['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
 
 			$inputStudent[$i] = $student[$i]['serialNum'].' '.$student[$i]['gpa'].PHP_EOL.$student[$i]['voluntary']['wishFirst'].PHP_EOL.$student[$i]['voluntary']['wishSecond'].PHP_EOL.$student[$i]['voluntary']['wishThird'].PHP_EOL.$student[$i]['voluntary']['wishForth'].PHP_EOL.$student[$i]['voluntary']['wishFifth'].PHP_EOL.PHP_EOL;
 		}
@@ -313,7 +316,7 @@ class DepartmentHeadTutor extends BaseController {
 
 
 		for ($i=0; $i <$countTeacher ; $i++) {
-			$teacherIssue[$i] = Db::table('tc_issue')->where('workNumber',$teacher[$i]['workNumber'])->find(); 
+			$teacherIssue[$i] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$teacher[$i]['workNumber'])->find(); 
 			$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalNatur'] - $teacherIssue[$i]['nowNatur'];
 
 			$inputTeacher[$i] = $teacher[$i]['workNumber'].' '.$teacher[$i]['avaliableNumber'].PHP_EOL;
@@ -336,8 +339,8 @@ class DepartmentHeadTutor extends BaseController {
 			$studentElectedArr[$i] = explode(' ', $studentElectedArr[$i]);
 
 			$studentElectedResult[$i]['serialNum'] = $studentElectedArr[$i][0];
-			$studentElectedResult[$i]['sid'] = Db::table('user_student')->where('serialNum',$studentElectedResult[$i]['serialNum'])->field('sid')->find();
-			$studentElectedResult[$i]['sname'] = Db::table('user_student')->where('serialNum',$studentElectedResult[$i]['serialNum'])->field('name')->find();
+			$studentElectedResult[$i]['sid'] = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum',$studentElectedResult[$i]['serialNum'])->field('sid')->find();
+			$studentElectedResult[$i]['sname'] = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum',$studentElectedResult[$i]['serialNum'])->field('name')->find();
 			$studentElectedResult[$i]['workNumber'] = $studentElectedArr[$i][1];
 			$studentElectedResult[$i]['tname'] = Db::table('user_teacher')->where('workNumber',$studentElectedResult[$i]['workNumber'])->field('name')->find();
 		}
@@ -402,7 +405,8 @@ class DepartmentHeadTutor extends BaseController {
 
 	//测试调用算法
 	public function cTest() {
-		$data = Db::table('user_student')->select();
+		$grade = Db::table('tc_grade')->order('grade desc')->select();
+		$data = Db::table('user_student_'.$grade[0]['grade'])->select();
 		return json($data);
 	}
 
