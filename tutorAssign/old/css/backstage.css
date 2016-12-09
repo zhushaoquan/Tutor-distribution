@@ -12,10 +12,15 @@ body{
 	background-color: #2e363f;
 	margin-bottom: -999em;
 	padding-bottom:999em;
+	position: fixed;
 }
 #mainpage{
 	overflow: hidden;
-	
+
+}
+
+#siderbar + #mainpage{
+	margin-left: 240px;
 }
 /*侧边栏导航*/
 .sider-navbar-header{
@@ -61,6 +66,7 @@ body{
 	box-shadow: 1px 1px 1px #ccc;
 	color: #141719;
 	overflow: hidden;
+	background-color: #fff;
 }
 
 .top-nav span{
@@ -109,3 +115,10 @@ body{
 	margin: 20px 0;
 }
 
+.sider-navbar-nav > a{
+	text-decoration: none;
+}
+
+body {
+	background: #e6e8ea;
+}
