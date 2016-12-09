@@ -25,7 +25,8 @@ class BaseController extends Controller {
             $login_pass = $request->post('login-password', '');
             $login_type = $request->post('login-type', '');
             if ($login_type == 'student') {
-                $user = Db::table('user_student')->where('serialNum',$login_name)->find();
+                $grade = Db::table('tc_grade')->order('grade desc')->select();
+                $user = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum',$login_name)->find();
             } else {
                 $table = Db::table('user_' . $login_type);
                 $user = $table->where('workNumber',$login_name)->find();

@@ -10,7 +10,8 @@ class Student extends BaseController {
     public $pageSize = 5;
 	public function index() {
 		$user = $this->auto_login();
-		$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //如果直接使用session里的用户信息，修改的信息必须重新登录才能更新显示
+		$grade = Db::table('tc_grade')->order('grade desc')->select();
+		$student = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum',$user['serialNum'])->find(); //如果直接使用session里的用户信息，修改的信息必须重新登录才能更新显示
         if ($user['chosen'] == 0) {
         	$student['chosen'] = '否';
         } else {
@@ -46,7 +47,8 @@ class Student extends BaseController {
 
 	public function modify() {
 		$user = $this->auto_login();
-		$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //如果直接使用session里的用户信息，修改的信息必须重新登录才能更新显示
+		$grade = Db::table('tc_grade')->order('grade desc')->select();
+		$student = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum',$user['serialNum'])->find(); //如果直接使用session里的用户信息，修改的信息必须重新登录才能更新显示
         
 		if ($student['avator'] == "") {
         	$student['avatorIsEmpty'] = 1;
@@ -62,6 +64,7 @@ class Student extends BaseController {
 		$user = $this->auto_login();
 		$where['sid'] = $user['sid'];
 		$request = Request::instance();
+		$grade = Db::table('tc_grade')->order('grade desc')->select();
 
 		//获取上传的头像的信息
 		$avator = request()->file('avator');
@@ -84,7 +87,7 @@ class Student extends BaseController {
 			$data['email'] = $request->post('email');
 			$data['skill'] = $request->post('skill');
 
-			if (Db::table('user_student')->where($where)->update($data)) {
+			if (Db::table('user_student_'.$grade[0]['grade'])->where($where)->update($data)) {
 				$this->success("信息修改成功!",url('index'));
 			} else {
 				$this->error("信息尚未修改，请修改信息后再次提交修改!",url('modify'));
@@ -93,7 +96,7 @@ class Student extends BaseController {
 	}
 
 	public function tutor_list($page=1) {
-
+		$grade = Db::table('tc_grade')->order('grade desc')->select();
 		$user = $this->auto_login();
 		if($user['department'] == $this->department_1) {
 			$teachers = Db::table('user_teacher')->where('isExperial',1)->page($page,$this->pageSize)->select();
@@ -137,7 +140,8 @@ class Student extends BaseController {
 
 	public function tutor_detail() {
 		$user = $this->auto_login();
-		$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //
+		$grade = Db::table('tc_grade')->order('grade desc')->select();
+		$student = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum',$user['serialNum'])->find(); //
         $tutors = Db::table('user_teacher')->where('department',$student['department'])->select();
 
         $this->assign('tutors', $tutors);
@@ -148,6 +152,7 @@ class Student extends BaseController {
 
 	public function edit_voluntary() {
 		$user = $this->auto_login();
+		$grade = Db::table('tc_grade')->order('grade desc')->select();
 		if($user['department'] == $this->department_1) {
 			$tutors = Db::table('user_teacher')->where('isExperial',1)->select();
 		} else if($user['department'] == $this->department_2) {
@@ -205,6 +210,7 @@ class Student extends BaseController {
 
 	public function show_result() {
 		$user = $this->auto_login();
+		$grade = Db::table('tc_grade')->order('grade desc')->select();
 		$result = Db::table('tc_result')->where('sid',$user['sid'])->find();
 		$this->assign('user',$user);
 
@@ -215,7 +221,7 @@ class Student extends BaseController {
 		    	 $students = array();
 			     $i = 0;
 			     foreach ($sids as $key => $value) {
-			    	$stuinfo = Db::table('user_student')->where('sid',$value['sid'])->find();    	
+			    	$stuinfo = Db::table('user_student_'.$grade[0]['grade'])->where('sid',$value['sid'])->find();    	
 			    	$students[$i] = $stuinfo;
 			    	$i++;
 		    	 }
@@ -242,7 +248,7 @@ class Student extends BaseController {
 			$student[$i] = $this->datadata();
 		}
 		dump($student);
-		Db::table('user_student')->insertAll($student);
+		Db::table('user_student_'.$grade[0]['grade'])->insertAll($student);
 	}
 
 	public function heiheihei() {
@@ -327,7 +333,8 @@ class Student extends BaseController {
 
 	public function oldPasswordConfirm() {
 		$user = $this->auto_login();
-        $student = Db::table('user_student')->where('sid',$user['sid'])->find();
+		$grade = Db::table('tc_grade')->order('grade desc')->select();
+        $student = Db::table('user_student_'.$grade[0]['grade'])->where('sid',$user['sid'])->find();
 
         $request = Request::instance();
         if ($request->isPost()) {
