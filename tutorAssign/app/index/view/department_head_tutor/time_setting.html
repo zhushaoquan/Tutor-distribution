@@ -19,9 +19,6 @@
         #warn-alert-close:hover {
             background-color: pink;
         }
-        .sider-navbar-nav > a{
-            text-decoration: none;
-        }
     </style>
 </head>
 
@@ -32,7 +29,7 @@
     <span id="warn-alert-close" style="display: inline-block; float: right;" class="glyphicon glyphicon-remove" style="margin-right: 50px"></span>
 </div>
 <div id="container-backstage" class="clearfix">
-    <div id="siderbar">
+    <div id="siderbar" style="position: fixed">
         <nav class="sider-navbar">
             <div class="sider-navbar-header">
                 <img src="{{$Think.const.OLD}}/image/mainpage-logo.png" alt="" width="240">
@@ -47,7 +44,7 @@
             </ul>
         </nav>
     </div>
-    <div id="mainpage">
+    <div id="mainpage" style="padding-left: 240px">
         <div class="top-nav">
             <div class="user-area">
                 <div class="hello-user">
