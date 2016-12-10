@@ -361,7 +361,7 @@
         var isNegative = false;
         for (var i = 0; i < formNum.length; ++i) {
             if (formNum[i].value !== "" &&
-                    formNum[i].value <= 0) {
+                    formNum[i].value < 0) {
                 idSet.push(formNum[i].id);
                 isNegative = true;
             }
