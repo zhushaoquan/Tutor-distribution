@@ -55,7 +55,7 @@
                 </div>
                 <div class="my-information-title">
                     <span>分配列表</span>
-                    <a href="{{:url('DepartmentHeadTutor/intelligentAlloc')}}" class="btn btn-info button-size btn-edit" style="width: 90px;">智能分配</a>
+                    <a href="" class="btn btn-info button-size btn-edit" style="width: 90px;">智能分配</a>
                 </div>
                 <div class="my-information-subtitle">
                     <span>为未分配到导师的学生进行导师分配</span>
@@ -103,19 +103,19 @@
                             
                           {if condition="($curPage gt 3) AND ($curPage lt $totalPage-2)"}
                             {for start="$curPage-2" end="$curPage+3"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i)}}" >{{$i}}</a></li>
+                              <li><a <?php if($i==$curPage) echo "class='now'"; ?> href="{{:url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i)}}" >{{$i}}</a></li>
                             {/for}
                           {elseif condition="($curPage gt $totalPage-3) AND ($totalPage gt 5)" /}
                             {for start="$totalPage-5" end="$totalPage"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i)}}" >{{$i}}</a></li>
+                              <li><a <?php if($i==$curPage) echo "class='now'"; ?> href="{{:url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i)}}" >{{$i}}</a></li>
                             {/for}
                           {elseif condition="$totalPage gt 5" /}
                             {for start="1" end="6"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i)}}" >{{$i}}</a></li>
+                              <li><a <?php if($i==$curPage) echo "class='now'"; ?> href="{{:url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i)}}" >{{$i}}</a></li>
                             {/for}
                           {else /}
                             {for start="1" end="$totalPage"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i)}}" >{{$i}}</a></li>
+                              <li><a <?php if($i==$curPage) echo "class='now'"; ?> href="{{:url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i)}}" >{{$i}}</a></li>
                             {/for}
                           {/if}
                           {if condition="$curPage lt $totalPage-1"}
@@ -132,12 +132,13 @@
                             <tr>
                                 <th>#</th>
                                 <th>姓名</th>
-                                <th>系别</th>
-                                <th>实验班导师</th>
-                                <th>所需实验班人数</th>
+                                <th>是否带实验班</th>
+                                <th>所需计实班人数</th>
+                                <th>所需数实班人数</th>
                                 <th>所需自然班人数</th>
-                                <th>当前所带实验班人数</th>
-                                <th>当前所带自然班人数</th>
+                                <th>当前计实班人数</th>
+                                <th>当前数实班人数</th>
+                                <th>当前自然班人数</th>
                                 <th>分配操作</th>
                             </tr>
                         </thead>
@@ -146,12 +147,13 @@
                                 <tr>
                                     <td>{{$k}}</td>
                                     <td>{{$t.name}}</td>
-                                    <td>{{$t.department}}</td>
+                                    <td>是</td>
                                     <td style="text-align: center;">{{$t.isExperial}}</td>
-                                    <td style="text-align: center;">{{$t.issue.totalExper}}</td>
-                                    <td style="text-align: center;">{{$t.issue.totalNatur}}</td>
-                                    <td style="text-align: center;">{{$t.issue.nowExper}}</td>
-                                    <td style="text-align: center;">{{$t.issue.nowNatur}}</td>
+                                    <td style="text-align: center;">10</td>
+                                    <td style="text-align: center;">10</td>
+                                    <td style="text-align: center;">10</td>
+                                    <td style="text-align: center;">10</td>
+                                    <td style="text-align: center;">10</td>
                                     <td>
                                         <button href="#" class="btn-alloc" value="{{$t.workNumber}}" style="text-decoration: none;background-color: transparent;border-style: none;"><span>确认分配</span></button>
                                     </td>

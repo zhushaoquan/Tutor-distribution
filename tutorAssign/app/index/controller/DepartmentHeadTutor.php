@@ -30,8 +30,6 @@ class DepartmentHeadTutor extends BaseController {
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
 		$student = Db::table('user_student_'.$grade[0]['grade'])->where('chosen',0)->where('department',$user['department'])->page($page,$this->pageSize)->select();
 
-		$total = count(Db::table('user_student_'.$grade[0]['grade'])->where('chosen',0)->where('department',$user['department'])->select());
-		$totalPage = ceil($total/$this->pageSize);
 
 		for ($i=0; $i <count($student) ; $i++) { 
 			$voluntary[$i] = Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$student[$i]['sid'])->find();
@@ -50,6 +48,9 @@ class DepartmentHeadTutor extends BaseController {
 
 		}
 
+		$total = count(Db::table('user_student_'.$grade[0]['grade'])->where('chosen',0)->where('department',$user['department'])->select());
+		$totalPage = ceil($total/$this->pageSize);
+		
 		$teacherTotal = count($teacher);
 		$teacherTotalPage = ceil($teacherTotal/$this->pageSize);
 
