@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:94:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\index.html";i:1480930815;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:94:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\index.html";i:1481099675;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +55,7 @@
 
                 <div class="my-information-title">
                     <span>我的信息</span>
-                    <button class="btn btn-info button-size btn-edit" type="submit">修改</button>
+                    
                 </div>
                 <div class="my-information-subtitle">
                     <span>您可以在这里查看或修改自己的个人信息</span>
@@ -76,7 +76,20 @@
                 <!-- <div class="button-position">
                     <button class="btn btn-info" type="submit">修改</button>
                 </div> -->
+                <div class="edit-btn">
+                    <a href="<?php echo url('TeacherTutor/modify'); ?>">
+                        <button class="btn btn-info button-size" type="submit">修改</button>
+                    </a>
+                </div>
 
+                <div class="avator-positon">
+                    <?php if($user['avatorIsEmpty'] == 0): ?>
+                      <img src="<?php echo COMMON_PATH; ?><?php echo $user['avator']; ?>" class="avatorPre">
+                    <?php elseif($user['avatorIsEmpty'] == 1): ?>
+                      <img src="<?php echo OLD; ?>/image/defaultAvator.png" class="avatorPre">
+                    <?php endif; ?>
+                </div>
+                
             </div>
             
             <div class="footer"  style="border-radius: 10px;">
