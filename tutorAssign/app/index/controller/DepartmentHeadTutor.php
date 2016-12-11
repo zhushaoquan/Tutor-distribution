@@ -483,4 +483,35 @@ class DepartmentHeadTutor extends BaseController {
         $user = $this->auto_login();
 	    return $this->fetch('student_manager');
     }
+
+
+    public function addStudent() {
+    	$request = Request::instance();
+    	if ($request->isPost()) {
+    		
+    	}
+    }
+
+    public function deleteStudent() {
+    	$request = Request::instance();
+    	if ($request->isPost()) {
+    		
+    	}
+    }
+
+    public function studentList() {
+    	$user = $this->auto_login();
+    	$department = $user['department'];
+    	$lastGrade = Db::table('tc_grade')->order('grade desc')->select();
+    	$pageSize = 10;
+
+    	$request = Request::instance();
+    	if ($request->isGet()) {
+    		$grade = $request->get('grade') != '' ? $request->get('grade') : $lastGrade[0]['grade'];
+    		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
+
+    		$studentList = Db::table('user_student_'.$grade)->where('department',$department)->field('sid,serialNum,name,department,grade,gpa,rank')->page($curPage,$pageSize)->select();
+    		return json($studentList);
+    	}
+    }
 }
