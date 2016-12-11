@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\time_setting.html";i:1481285546;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\time_setting.html";i:1481382321;}*/ ?>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -362,7 +362,7 @@
         var isNegative = false;
         for (var i = 0; i < formNum.length; ++i) {
             if (formNum[i].value !== "" &&
-                    formNum[i].value <= 0) {
+                    formNum[i].value < 0) {
                 idSet.push(formNum[i].id);
                 isNegative = true;
             }
