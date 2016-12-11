@@ -501,14 +501,12 @@ class DepartmentHeadTutor extends BaseController {
 
     public function studentList() {
     	$user = $this->auto_login();
-    	$allDepartment = Db::table('tc_departheadright')->where('workNumber',$user['workNumber'])->select();
-    	$allDepartment = "信息安全与网络工程系";
+    	$department = $user['department'];
     	$lastGrade = Db::table('tc_grade')->order('grade desc')->select();
     	$pageSize = 10;
 
     	$request = Request::instance();
     	if ($request->isGet()) {
-    		$department = $request->get('department') != '' ? $request->get('department') : $allDepartment[0];
     		$grade = $request->get('grade') != '' ? $request->get('grade') : $lastGrade[0]['grade'];
     		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 

@@ -65,19 +65,45 @@
                         <h3>导师分配情况
                     </h3>
                     </div>
+
+
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="firstname"  class="col-md-2 control-label"  >选择年级：</label>
+                            <div class="col-xs-5" >
+                                <form action="{{:url('TeachingOfficeTutor/student_assign')}}"  method="post">
+                                    <select class="form-control" name="grade" style="display: inline; width: 45%">
+                                        <option value="全部年级">全部年级</option>
+                                        <option value="2014级" selected="selected">2014级</option>
+                                        <option value="2015级">2015级</option>
+                                        <option value="2016级">2016级</option>
+                                        <option value="2017级">2017级</option>
+                                        <option value="2018级">2018级</option>
+                                    </select>  
+                                    <input type="hidden" name="stu" value="assign">
+                                    <button type="submit" class="btn btn-primary" style="display: inline;" id="sub-confirm" >确定</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    
                     <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <tr>
-                                <th>导师工号</th>
-                                <th style="text-align: center;">导师姓名</th>
-                                <th>学生学号</th>
-                                <th>学生姓名</th>
-                                <th class="col-add" style="display: none">操作</th>
-                            </tr>
+                        
+
+                        <table id="tresult" class="table table-bordered">
+
+                            <thead> 
+                                <tr>
+                                    <th>导师工号</th>
+                                    <th style="text-align: center;">导师姓名</th>
+                                    <th>学生学号</th>
+                                    <th>学生姓名</th>
+                                    <th class="col-add" style="display: none">操作</th>
+                                </tr>
+                            </thead>
+
                             <tbody>
-
-
-                                
                                 {volist name="data" id="v"}
                                 <tr>
                                     <td id="{{$v.tnum}}" style="vertical-align:middle" rowspan="{{$v.lenth+1}}">{{$v.tnum}}</td>
@@ -99,7 +125,7 @@
                                             <button class="btn-delete" id="{{$v2.snum}}" value="{{$v2.snum}}" name="{{$v2.sname}}" teacher_id="{{$v.tnum}}" data-toggle='modal' data-backdrop="static" data-target="#deleteModal">删除
                                             </button>
                                         </td>
-                                    </tr>
+                                </tr>
                                     {/volist}
                                 {/volist}
                                 
@@ -107,10 +133,19 @@
                             </tbody>
                         </table>
                     </div>
+
                     <div class="submit-area">
-                        <button class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button>
-                        <button class="btn btn-primary" id="sub-result-change">修&nbsp;&nbsp;改</button>
+                        <div class="col-md-2"> </div>
+                        <div class="col-md-2"> </div>
+                        <div class="col-md-2"> 
+                            <button type="submit" class="btn btn-primary" id="sub-result-export" onClick ="$('#sresult').tableExport({type:'excel',escape:'false'});">导&nbsp;&nbsp;出</button>
+                        </div>
+
+                        <div class="col-md-2"> 
+                        <button type="submit" class="btn btn-danger" id="sub-result-change">修&nbsp;&nbsp;改</button>  
+                        </div>
                     </div>
+
                     <div style="height: 60px">
                     <nav>
                         <ul class="pagination" style="float: right;">
@@ -224,7 +259,11 @@
     <script type="text/javascript" src="{{$Think.const.OLD}}/js/index.js"></script>
     <script type="text/javascript" src="{{$Think.const.OLD}}/js/jquery2.14.min.js"></script>
     <script type="text/javascript" src="{{$Think.const.OLD}}/js/bootstrap.js"></script>
-    
+
+    <!--导出excel-->
+    <script type="text/javascript" src="{{$Think.const.OLD}}/js/tableExport.js"></script>
+
+
     <script type="text/javascript">
     var teacher_id;
     var teacher_name;
