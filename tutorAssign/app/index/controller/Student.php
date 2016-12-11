@@ -275,37 +275,40 @@ class Student extends BaseController {
         
 	}
 
-
+    //最终结果页面
 	public function show_result() {
-		$user = $this->auto_login();
-		$grade = Db::table('tc_grade')->order('grade desc')->select();
-		$result = Db::table('tc_result')->where('sid',$user['sid'])->find();
-		$this->assign('user',$user);
 
-		if($result != NULL) {
+		//$user = $this->auto_login();
+		
+		$this->assign('user',$this->user);
+
+		if($this->user['chosen'] == '1') {
+
+			$result = Db::table('tc_result_'.$this->grades[0]['grade'])->where('sid',$this->user['sid'])->find();
 			$teacher = Db::table('user_teacher')->where('workNumber', $result['workNumber'])->find();
-		    $sids = Db::table('tc_result')->where("sid!=".$user['sid']." and "."workNumber=".$teacher['workNumber'])->select();
+		    $sids = Db::table('tc_result_'.$this->grades[0]['grade'])->where("sid!=".$this->user['sid']." and "."workNumber=".$teacher['workNumber'])->select();
 		    if($sids != NULL) {
 		    	 $students = array();
-			     $i = 0;
+			     $students[1] = $this->user;
+			     $i=2;
 			     foreach ($sids as $key => $value) {
-			    	$stuinfo = Db::table('user_student_'.$grade[0]['grade'])->where('sid',$value['sid'])->find();    	
+			    	$stuinfo = Db::table('user_student')->where('sid',$value['sid'])->find();    	
 			    	$students[$i] = $stuinfo;
 			    	$i++;
 		    	 }
 		    } else {
-		    	$students = NULL;
+		    	$students[1] = $this->user;
 		    }
 			$this->assign('voluntory_teacher',$teacher);
 			$this->assign('voluntory_students',$students);
-			$this->assign('message',"志愿结果已出，请及时查看");
-
+			
 		} else {
-			$this->assign('message',"志愿结果未出，请耐心等待!");
+			//$this->assign('message',"志愿结果未出，请耐心等待!");
 
 		}
 		return $this->fetch('show_result');
 	}
+
 
 
 	//以下部分为测试数据随机生成，与项目无关
