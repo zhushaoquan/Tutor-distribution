@@ -33,6 +33,55 @@ class TeacherTutor extends BaseController {
 		return $this->fetch('index');
 	}
 
+    public function _initialize()
+    {
+        /*
+        初始化函数
+
+        初始化一些 时间设置（第几轮志愿时间等等）
+        */
+        $this->user = $this->auto_login();
+        $data = Db::table('tc_voluntaryinfosetting')->find();
+        $nowtime = time();
+        $data['message'] = '';
+        $data['ontime']=-1;
+        /*
+        data['time'] 当前为什么时段
+        data['time'] = 0,导师提交课题时间
+        data['time'] = 1,第一轮导师互选时间
+        data['time'] = 2,第二轮导师互选时间
+        data['time'] = 3,志愿结果已出
+
+        */
+       /* if($this->user['chosen'] == 1) {
+            $data['ontime'] = 3;
+            $data['message'] = "志愿结果已出，请前往 最终结果 页面查看哦~~~";
+        }
+        else */if($nowtime >= $data['issueStart'] && $nowtime <= $data['issueEnd']) {
+            //导师填报课题时段！
+            $data['ontime'] = 0;
+            $data['message'] = "当前为导师"."<font color='#FF0000'>填报课题</font>时间：".date('Y-m-d',$data['issueStart'])."至".date('Y-m-d',$data['issueEnd'])."！ 导师们请及时填报课题哟~~!";
+
+        }else if($nowtime < $data['firstEnd'] && $nowtime > $data['firstStart']) {
+            //第一轮志愿填报
+            $data['ontime'] = 1;
+            $data['message'] = "当前为<font color='#FF0000'>第一轮的志愿互选</font>时间：".date('Y-m-d',$data['firstStart'])."至".date('Y-m-d',$data['firstEnd']).",请导师们尽快挑选学生！";
+         } else if($data['nowtime'] < $data['secondEnd'] && $data['nowtime'] > $data['secondStart']) {
+            //第二轮志愿填报时间
+            $data['ontime'] = 2;
+            $data['message'] = "当前为<font color='#FF0000'>第二轮的志愿互选</font>时间：".date('Y-m-d',$data['secondStart'])."至".date('Y-m-d',$data['secondEnd']).",请导师们尽快挑选学生！";
+
+         } else {
+            $data['message'] = "当前不在志愿互选时间段内！";
+            $data['ontime'] = 4;
+         }
+         $this->assign('message',$data['message']);
+         $this->assign('ontime',$data['ontime']);
+         $this->assign('voluntaryinfosetting',$data);
+  
+    }
+
+
     public function test() {
         $user = $this->auto_login();
         $where['department'] = $this->department1;
