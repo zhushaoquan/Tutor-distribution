@@ -7,7 +7,75 @@ use think\Request;
 class Student extends BaseController {
 	public $department_1 = "计算机实验班";
 	public $department_2 = "数学实验班";
+	public $time = "";
     public $pageSize = 5;
+    public $user;
+    public $grades;
+
+
+    public function _initialize()
+    {
+    	/*
+    	初始化函数
+
+    	初始化一些 时间设置（第几轮志愿时间等等）年级
+    	*/
+
+    	$this->grades = Db::table('tc_grade')->order('grade desc')->limit(5)->select();
+  
+    	$this->user = $this->auto_login();
+    	$data = Db::table('tc_voluntaryinfosetting')->where('grade',$this->grades[0]['grade'])->where('department',$this->user['department'])->find();
+        $nowtime = time();
+        $data['message'] = '';
+        $data['ontime']= -1;
+
+        /*
+        data['time'] 当前为什么时段
+        data['time'] = 0,导师提交课题时间
+        data['time'] = 1,第一轮学生填报志愿时间
+        data['time'] = 2,第二轮学生填报志愿时间
+        data['time'] = 11,第一轮导师选择学生时间
+        data['time'] = 22,第二轮导师选择学生时间
+        data['time'] = 3,志愿结果已出
+
+        */
+       
+        if($this->user['chosen'] == 1) {
+        	$data['ontime'] = 3;
+        	$data['message'] = "志愿结果已出，请前往 最终结果 页面查看哦~~~";
+        }else if($nowtime >= $data['issueStart'] && $nowtime <= $data['issueEnd']) {
+        	//导师填报课题时段！
+        	$data['ontime'] = 0;
+        	$data['message'] = "当前为导师"."<font color='#FF0000'>填报课题</font>时间：".date('Y-m-d',$data['issueStart'])."至".date('Y-m-d',$data['issueEnd'])."！"."<font color='#FF0000'>第一轮志愿填报</font>时间为".date('Y-m-d',$data['firstStart'])."至".date('Y-m-d',$data['firstEnd'])."! <font color='#FF0000'>第二轮志愿填报</font>时间为".date('Y-m-d',$data['secondStart'])."至".date('Y-m-d',$data['secondEnd'])."!";
+
+        }else if($nowtime < $data['firstEnd'] && $nowtime > $data['firstStart']) {
+        	//第一轮志愿填报
+        	$data['ontime'] = 1;
+            $data['message'] = "当前为<font color='#FF0000'>第一轮的志愿填报</font>时间：".date('Y-m-d',$data['firstStart'])."至".date('Y-m-d',$data['firstEnd']).",请同学们按时填报、修改志愿！";
+         } else if($nowtime  < $data['secondEnd'] && $nowtime > $data['secondStart']) {
+         	//第二轮志愿填报时间
+         	$data['ontime'] = 2;
+         	$data['message'] = "当前为<font color='#FF0000'>第二轮的志愿填报</font>时间：".date('Y-m-d',$data['secondStart'])."至".date('Y-m-d',$data['secondEnd']).",请同学们按时填报、修改志愿！";
+
+         }else if($nowtime >= $data['confirmFirstStart'] && $nowtime <= $data['confirmFirstEnd']) {
+         	//第一轮导师选择学生时间
+         	$data['ontime'] = 11;
+         	$data['message'] = "当前为<font color='#FF0000'>第一轮的导师选择学生</font>时间：".date('Y-m-d',$data['confirmFirstStart'])."至".date('Y-m-d',$data['confirmFirstEnd']).",请同学们耐心等候！";
+
+         } else if($nowtime >= $data['confirmSecondStart'] && $nowtime <= $data['confirmSecondEnd']) {
+         	//第二轮导师选择学生时间
+         	$data['ontime'] = 22;
+         	$data['message'] = "当前为<font color='#FF0000'>第二轮的导师选择学生</font>时间：".date('Y-m-d',$data['confirmSecondStart'])."至".date('Y-m-d',$data['confirmSecondEnd']).",请同学们耐心等候！";
+
+         }else {
+            $data['message'] = "当前不在填报志愿时间段内！";
+            
+         }
+         $this->assign('message',$data['message']);
+         $this->assign('ontime',$data['ontime']);
+         $this->assign('voluntaryinfosetting',$data);
+  
+    }
 	public function index() {
 		$user = $this->auto_login();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
