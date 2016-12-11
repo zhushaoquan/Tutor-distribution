@@ -545,7 +545,8 @@ class DepartmentHeadTutor extends BaseController {
     		$grade = $request->get('grade') != '' ? $request->get('grade') : $lastGrade[0]['grade'];
     		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 
-    		$studentList = Db::table('user_student_'.$grade)->where('department',$department)->field('sid,serialNum,name,department,grade,gpa,rank')->page($curPage,$pageSize)->select();
+    		$studentList['amount'] = count(Db::table('user_student_'.$grade)->where('department',$department)->select());
+    		$studentList['information'] = Db::table('user_student_'.$grade)->where('department',$department)->field('sid,serialNum,name,department,grade,gpa,rank')->page($curPage,$pageSize)->select();
     		return json($studentList);
     	}
     }
@@ -559,7 +560,8 @@ class DepartmentHeadTutor extends BaseController {
     	if ($request->isGet()) {
     		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 
-    		$teacherList = Db::table('user_teacher')->where('department',$user['department'])->field('workNumber,name,sex')->page($curPage,$pageSize)->select();
+    		$teacherList['amount'] = count(Db::table('user_teacher')->where('department',$user['department'])->select());
+    		$teacherList['information'] = Db::table('user_teacher')->where('department',$user['department'])->field('workNumber,name,sex')->page($curPage,$pageSize)->select();
     		return json($teacherList);
     	}
     }
