@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:89:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\modify.html";i:1481203943;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:95:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\modify.html";i:1481203592;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/student.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/teacher.css">
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
@@ -26,11 +27,11 @@
             <div class="sider-navbar-header">
                 <img src="<?php echo OLD; ?>/image/mainpage-logo.png" alt="" width="240">
             </div>
-             <ul class="sider-navbar-nav">
-                <a href="<?php echo url('Student/index'); ?>"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <a href="<?php echo url('Student/tutor_list'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 专业导师</li></a>
-                <a href="<?php echo url('Student/edit_voluntary'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 志愿填报</li></a>
-                <a href="<?php echo url('Student/show_result'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 志愿结果</li></a>
+            <ul class="sider-navbar-nav">
+                <a href="<?php echo url('teacher_tutor/index'); ?>"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
+                <a href="<?php echo url('teacher_tutor/student_list'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 可选学生</li></a>
+                <a href="<?php echo url('teacher_tutor/issue_submit'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 课题提交</li></a>
+                <a href="<?php echo url('teacher_tutor/show_result'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 志愿结果</li></a>
             </ul>
         </nav>
     </div>
@@ -47,22 +48,24 @@
             </div>
         </div>
         <div class="page-content">
-            <div class="main-content" style="border-radius: 10px;padding: 20px;padding-bottom: 55px;">
-                    <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                        <p>提示：部分信息通过教务系统导入，无法修改！点击头像即可上传修改头像！</p>
-                    </div>
+            <div class="main-content" style="border-radius: 10px;padding: 20px;">
+                <div role="alert" class="alert alert-info" style="margin-bottom: 0">
+                    <p>提示：部分信息通过教务系统导入，无法修改！点击头像即可上传修改头像！</p>
+                </div>
+
                 <div class="my-information-title">
-                    <span>修改信息</span>
+                    <span>我的信息</span>
+                    
                 </div>
                 <div class="my-information-subtitle">
-                    <span>你可以在这里修改自己的个人信息</span>
+                    <span>您可以在这里查看或修改自己的个人信息</span>
                 </div>
                 
-                
-                <form role="form" action="<?php echo url('Student/saveModify'); ?>" name="modify" method="post" enctype="multipart/form-data" onsubmit="return checkall()">
+                <form role="form" action="<?php echo url('TeacherTutor/saveModify'); ?>" name="modify" method="post" enctype="multipart/form-data" onsubmit="return checkall()">
                       <div class="form-group my-modify-detail">
                         <div class="pw-title"><span>旧密码：</span></div>
-                        <div class="pw-modify"><input type="password" name="oldPassword" class="form-control-1 pw-form-width" id="oldPassword" placeholder="旧密码" value=""><p id="oldPwWrong" style="font-size: 12px;float: right;padding-right: 48px;padding-top: 8px;display: none;color: red;">*旧密码输入错误</p></div>
+                        <div class="pw-modify"><input type="password" name="oldPassword" class="form-control-1 pw-form-width" id="oldPassword" placeholder="旧密码" value="">
+                        <p id="oldPwWrong" style="font-size: 12px;float: right;padding-right: 48px;padding-top: 8px;display: none;color: red;">*旧密码输入错误</p></div>
                       </div>
                       <div class="form-group pw-position my-modify-detail">
                         <div class="pw-title"><span>新密码：</span></div>
@@ -81,8 +84,8 @@
                         <div class="pw-modify"><input type="email" name="email" class="form-control-1 pw-form-width" id="exampleInputEmail1" placeholder="邮箱" value="<?php echo $user['email']; ?>"></div>
                       </div>
                       <div class="form-group my-modify-detail" style="height: 140px;">
-                        <div class="skill-modify-title"><span>技能经历：</span></div>
-                        <div class="skill-modify-text"><textarea class="form-control skill-width" name="skill" rows="5"><?php echo $user['skill']; ?></textarea></div>
+                        <div class="skill-modify-title"><span>个人简介：</span></div>
+                        <div class="skill-modify-text"><textarea class="form-control skill-width" name="description" rows="5"><?php echo $user['description']; ?></textarea></div>
                       </div>
                       <div class="modify-btn-position">
                         <button type="submit" id="modifyConfirm" class="btn btn-info button-size" disabled="true">确认</button>
@@ -96,7 +99,8 @@
                           <?php endif; ?>
                       </div>
                 </form>
-                <div class="return-btn-position"><a href="<?php echo url('Student/index'); ?>"><button class="btn btn-info button-size" type="submit">返回</button></a></a></div>
+                <div class="return-btn-position"><a href="<?php echo url('TeacherTutor/index'); ?>"><button class="btn btn-info button-size" type="submit">返回</button></a></a></div>
+
             </div>
             
             <div class="footer"  style="border-radius: 10px;">
@@ -135,7 +139,7 @@
 
 $("#oldPassword").change(function(){
     oldPW = $("#oldPassword").val();
-    $.post("<?php echo PREFIX; ?>/Student/oldPasswordConfirm",
+    $.post("<?php echo PREFIX; ?>/TeacherTutor/oldPasswordConfirm",
     {
         oldPW: oldPW
     },
@@ -144,7 +148,6 @@ $("#oldPassword").change(function(){
             if (data == false) {
                 $("#oldPwWrong").css("display","block");
                 document.getElementById("modifyConfirm").disabled=true;
-                modify.oldPassword.focus();
             }
             if (data == true) {
                 $("#oldPwWrong").css("display","none");
@@ -159,7 +162,6 @@ $("#newPasswordConfirm").focus(function(){
     newPW = $("#newPassword").val();
     if (oldPW == newPW) {
         $("#passwordSame").css("display","block");
-        modify.newPassword.focus();
     }
     if (oldPW != newPW) {
         $("#passwordSame").css("display","none");
@@ -174,7 +176,6 @@ $('#newPasswordConfirm').change(function(){
     }
     if (newPW != newPWC) {
         $("#newPwConfirmWrong").css("display","block");
-        modify.newPasswordConfirm.focus();
     }
 })
 
