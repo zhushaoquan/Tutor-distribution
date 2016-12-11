@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_assign.html";i:1479476898;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_assign.html";i:1481455354;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +7,8 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>毕设导师智能分配系统</title>
-  <!--  <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/backstage.css">
+  <!--  <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="<?php echo TUTOR_STATIC; ?>/css/student.css">
     !-->
     <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
@@ -28,13 +28,13 @@
     <div id="siderbar">
         <nav class="sider-navbar">
             <div class="sider-navbar-header">
-                <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
+                <img src="<?php echo OLD; ?>/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="<?php echo url('TeachingOfficeTutor/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
+                <a href="<?php echo url('/index/TeachingOfficeTutor/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
-                <a href="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>"><li ><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
-                <a href="<?php echo url('TeachingOfficeTutor/student_assign'); ?>"><li class="active"><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
+                <a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change'); ?>"><li ><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li></a>
+                <a href="<?php echo url('/index/TeachingOfficeTutor/student_assign'); ?>"><li class="active"><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li></a>
             </ul>
         </nav>
     </div>
@@ -63,10 +63,10 @@
                     <h3>学生分配情况
                     </h3>
                 </div>
-
+                 <div class="form-horizontal" role="form">
                 <div class="form-group">
-                    <label  class="col-sm-1 control-label">选择系别：</label>
-                    <div class="col-sm-4">
+                    <label for="firstname"  class="col-md-2 control-label"  >选择学生系别：</label>
+                    <div class="col-xs-5" >
                     <form action="<?php echo url('TeachingOfficeTutor/student_assign'); ?>"  method="post">
                         <select class="form-control" name="department" style="display: inline; width: 45%">
                             <option value="应用数学系" <?php if($dep == "应用数学系") echo'selected = "true"';?>>应用数学系</option>
@@ -78,12 +78,13 @@
                             <option value="数学实验班" <?php if($dep == "数学实验班") echo'selected = "true"';?>>数学实验班</option>
                         </select>  
                         <input type="hidden" name="stu" value="assign">
-                        <input type="submit" class="btn btn-primary" style="display: inline;" id="sub-result-export">
+                        <button type="submit" class="btn btn-primary" style="display: inline;" id="sub-result-export" >确定</button>
+
                     </form>
                     </div>
                 </div>
-
-                <br /><br /><br />
+                </div>
+                <br />
                 <div class="table-responsive">
                     <table class="table">
                         <tr>
@@ -111,7 +112,7 @@
 
                     <div class="submit-area">
                         <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;出</button>
-                           <button type="submit" class="btn btn-primary" id="sub-result-change"><a style="color:white;" href="<?php echo url('TeachingOfficeTutor/student_to_modify'); ?>">修&nbsp;&nbsp;改</a></button>  
+                           <button type="submit" class="btn btn-primary" id="sub-result-change"><a style="color:white;" href="<?php echo url('/index/TeachingOfficeTutor/student_to_modify/dep/'.$dep); ?>">修&nbsp;&nbsp;改</a></button>  
                    
                     </div>
 
@@ -119,13 +120,13 @@
                         <ul class="pagination" style="float: right;">
                           <?php if($curPage != 1): ?>
                               <li><a href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage-1).'/dep/'.$dep); ?>">&laquo;</a></li>
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_31423__=$curPage-2;$__FOR_END_31423__=$curPage+3;for($i=$__FOR_START_31423__;$i < $__FOR_END_31423__;$i+=1){ ?>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_14631__=$curPage-2;$__FOR_END_14631__=$curPage+3;for($i=$__FOR_START_14631__;$i < $__FOR_END_14631__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_26846__=$totalPage-5;$__FOR_END_26846__=$totalPage;for($i=$__FOR_START_26846__;$i < $__FOR_END_26846__;$i+=1){ ?>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_32742__=$totalPage-5;$__FOR_END_32742__=$totalPage;for($i=$__FOR_START_32742__;$i < $__FOR_END_32742__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_20505__=1;$__FOR_END_20505__=6;for($i=$__FOR_START_20505__;$i < $__FOR_END_20505__;$i+=1){ ?>
+                            <?php } elseif($totalPage > 5): $__FOR_START_15937__=1;$__FOR_END_15937__=6;for($i=$__FOR_START_15937__;$i < $__FOR_END_15937__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_13152__=1;$__FOR_END_13152__=$totalPage;for($i=$__FOR_START_13152__;$i < $__FOR_END_13152__;$i+=1){ ?>
+                            <?php } else: $__FOR_START_24872__=1;$__FOR_END_24872__=$totalPage;for($i=$__FOR_START_24872__;$i < $__FOR_END_24872__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage+1).'/dep/'.$dep); ?>">&raquo;</a></li>
@@ -144,9 +145,9 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="__STATIC__/js/index.js"></script>
-<script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
-<script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
-<script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/index.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/jquery2.14.min.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/bootstrap.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/backstage.js"></script>
 </body>
 </html>
