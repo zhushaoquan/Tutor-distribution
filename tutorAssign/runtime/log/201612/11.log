@@ -64045,3 +64045,4665 @@
 >>>>>>> d5d43746df3bbc1b93f71aaca48ef49f6453dc63
 
 ---------------------------------------------------------------
+[ 2016-12-11T23:35:05+08:00 ] ::1 ::1 GET /Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/matchSetting.html
+[ log ] localhost/Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/matchSetting.html [运行时间：0.279016s][吞吐率：3.58req/s] [内存消耗：4,620.98kb] [文件加载：46]
+[ info ] [ LANG ] C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'DepartmentHeadTutor',
+    1 => 'matchSetting',
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/matchSetting.html',
+  'accept-encoding' => 'gzip, deflate, sdch, br',
+  'accept-language' => 'zh-CN,zh;q=0.8,en;q=0.6',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=k77jo1nnafouohb6f38siu76k1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] Class [ <user> class app\index\controller\DepartmentHeadTutor extends app\index\controller\BaseController ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 8-568
+
+  - Constants [0] {
+  }
+
+  - Static properties [0] {
+  }
+
+  - Static methods [0] {
+  }
+
+  - Properties [6] {
+    Property [ <default> public $pageSize ]
+    Property [ <default> protected $view ]
+    Property [ <default> protected $request ]
+    Property [ <default> protected $failException ]
+    Property [ <default> protected $batchValidate ]
+    Property [ <default> protected $beforeActionList ]
+  }
+
+  - Methods [40] {
+    Method [ <user> public method index ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 12 - 25
+    }
+
+    Method [ <user> public method matchSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 28 - 81
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $page = 1 ]
+      }
+    }
+
+    Method [ <user> public method timeSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 84 - 138
+    }
+
+    Method [ <user> public method infoSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 140 - 188
+    }
+
+    Method [ <user> public method allocStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 192 - 203
+    }
+
+    Method [ <user> public method intelligentAlloc ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 207 - 329
+    }
+
+    Method [ <user> public method assignResult ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 332 - 424
+    }
+
+    Method [ <user> public method assignResultConfirm ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 435 - 437
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $r ]
+      }
+    }
+
+    Method [ <user> public method cTest ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 442 - 446
+    }
+
+    Method [ <user> public method modify ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 449 - 462
+    }
+
+    Method [ <user> public method saveModify ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 464 - 497
+    }
+
+    Method [ <user> public method oldPasswordConfirm ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 499 - 514
+    }
+
+    Method [ <user> public method studentManager ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 516 - 519
+    }
+
+    Method [ <user> public method addStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 522 - 527
+    }
+
+    Method [ <user> public method deleteStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 529 - 534
+    }
+
+    Method [ <user> public method studentList ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 536 - 552
+    }
+
+    Method [ <user> public method teacherList ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 554 - 567
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method auto_login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 14 - 19
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 65
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method hasLogin ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 67 - 72
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method logout ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 74 - 81
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method refresh_user ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 83 - 89
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method make_menu ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 91 - 103
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $menus ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method translate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 105 - 120
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $name ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method successJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 122 - 124
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method errorJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 126 - 128
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    /**
+     * 架构函数
+     * @param Request $request Request对象
+     * @access public
+     */
+    Method [ <user, inherits think\Controller, ctor> public method __construct ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 44 - 63
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> think\Request or NULL $request = NULL ]
+      }
+    }
+
+    Method [ <user, inherits think\Controller> protected method _initialize ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 66 - 68
+    }
+
+    /**
+     * 前置操作
+     * @access protected
+     * @param string $method  前置操作方法名
+     * @param array  $options 调用参数 ['only'=>[...]] 或者['except'=>[...]]
+     */
+    Method [ <user, inherits think\Controller> protected method beforeAction ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 76 - 95
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $method ]
+        Parameter #1 [ <optional> $options = Array ]
+      }
+    }
+
+    /**
+     * 加载模板输出
+     * @access protected
+     * @param string $template 模板文件名
+     * @param array  $vars     模板输出变量
+     * @param array  $replace  模板替换
+     * @param array  $config   模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method fetch ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 106 - 109
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $template = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 渲染内容输出
+     * @access protected
+     * @param string $content 模板内容
+     * @param array  $vars    模板输出变量
+     * @param array  $replace 替换内容
+     * @param array  $config  模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method display ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 120 - 123
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $content = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 模板变量赋值
+     * @access protected
+     * @param mixed $name  要显示的模板变量
+     * @param mixed $value 变量的值
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method assign ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 132 - 135
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $name ]
+        Parameter #1 [ <optional> $value = '' ]
+      }
+    }
+
+    /**
+     * 初始化模板引擎
+     * @access protected
+     * @param array|string $engine 引擎参数
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method engine ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 143 - 146
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $engine ]
+      }
+    }
+
+    /**
+     * 设置验证失败后是否抛出异常
+     * @access protected
+     * @param bool $fail 是否抛出异常
+     * @return $this
+     */
+    Method [ <user, inherits think\Controller> protected method validateFailException ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 154 - 158
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $fail = true ]
+      }
+    }
+
+    /**
+     * 验证数据
+     * @access protected
+     * @param array        $data     数据
+     * @param string|array $validate 验证器名或者验证规则数组
+     * @param array        $message  提示信息
+     * @param bool         $batch    是否批量验证
+     * @param mixed        $callback 回调方法（闭包）
+     * @return array|string|true
+     * @throws ValidateException
+     */
+    Method [ <user, inherits think\Controller> protected method validate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 171 - 208
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <required> $validate ]
+        Parameter #2 [ <optional> $message = Array ]
+        Parameter #3 [ <optional> $batch = false ]
+        Parameter #4 [ <optional> $callback = NULL ]
+      }
+    }
+
+    /**
+     * 操作成功跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method success ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 37 - 64
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 操作错误跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method error ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 76 - 103
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 返回封装后的API数据到客户端
+     * @access protected
+     * @param mixed     $data 要返回的数据
+     * @param integer   $code 返回的code
+     * @param mixed     $msg 提示信息
+     * @param string    $type 返回数据格式
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method result ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 115 - 126
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <optional> $code = 0 ]
+        Parameter #2 [ <optional> $msg = '' ]
+        Parameter #3 [ <optional> $type = '' ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * URL重定向
+     * @access protected
+     * @param string         $url 跳转的URL表达式
+     * @param array|integer  $params 其它URL参数
+     * @param integer        $code http code
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method redirect ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 136 - 145
+
+      - Parameters [3] {
+        Parameter #0 [ <required> $url ]
+        Parameter #1 [ <optional> $params = Array ]
+        Parameter #2 [ <optional> $code = 302 ]
+      }
+    }
+
+    /**
+     * 获取当前的response 输出类型
+     * @access protected
+     * @return string
+     */
+    Method [ <user, inherits think\Controller> protected method getResponseType ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 152 - 156
+    }
+  }
+}
+
+[ info ] [ RUN ] Method [ <user> public method matchSetting ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 28 - 81
+
+  - Parameters [1] {
+    Parameter #0 [ <optional> $page = 1 ]
+  }
+}
+
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\match_setting.html [ array (
+  0 => 'total',
+  1 => 'totalPage',
+  2 => 'pageSize',
+  3 => 'curPage',
+  4 => 'teacherTotal',
+  5 => 'teacherTotalPage',
+  6 => 'teacherPageSize',
+  7 => 'teacherCurPage',
+  8 => 'student',
+  9 => 'voluntary',
+  10 => 'teacher',
+  11 => 'user',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010001s ] mysql:dbname=teacher_class_system;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_grade` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_grade` ORDER BY grade desc  [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `user_student_2014` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `user_student_2014` WHERE  `chosen` = 0  AND `department` = '信息安全与网络工程系' LIMIT 0,7     [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_voluntary_2014` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_voluntary_2014` WHERE  `sid` = 1 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `sid`,`field`,`serialNum`,`name` FROM `user_student_2014` WHERE  `sid` = 1 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `user_teacher` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '03015' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '03171' LIMIT 1    [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '04025' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '04020' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '03015' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_voluntary_2014` WHERE  `sid` = 3 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `sid`,`field`,`serialNum`,`name` FROM `user_student_2014` WHERE  `sid` = 3 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '03111' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '96070' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '04010' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '96070' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '02025' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_voluntary_2014` WHERE  `sid` = 4 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `sid`,`field`,`serialNum`,`name` FROM `user_student_2014` WHERE  `sid` = 4 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '97144' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '04018' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '03076' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '04010' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '04017' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_voluntary_2014` WHERE  `sid` = 5 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `sid`,`field`,`serialNum`,`name` FROM `user_student_2014` WHERE  `sid` = 5 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '03010' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '04010' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '03171' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '04010' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '03074' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_voluntary_2014` WHERE  `sid` = 6 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `sid`,`field`,`serialNum`,`name` FROM `user_student_2014` WHERE  `sid` = 6 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '03112' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '12005' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '05023' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '97144' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '01007' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_voluntary_2014` WHERE  `sid` = 7 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `sid`,`field`,`serialNum`,`name` FROM `user_student_2014` WHERE  `sid` = 7 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '03171' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '03171' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '04010' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '02025' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '96031' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_voluntary_2014` WHERE  `sid` = 8 LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `sid`,`field`,`serialNum`,`name` FROM `user_student_2014` WHERE  `sid` = 8 LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '02025' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '03015' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '03154' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '96031' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `name` FROM `user_teacher` WHERE  `workNumber` = '03154' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `user_teacher` WHERE  `department` = '信息安全与网络工程系'   [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `tc_issue_2014` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '00001' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '00022' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '01004' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '01007' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '01009' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '01017' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '01029' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '01100' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '02025' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '02089' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '02103' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '02108' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '02112' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '02117' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '02124' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '02125' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '02128' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03003' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03009' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03010' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03014' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03015' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03016' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03030' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03032' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03048' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03052' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03058' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03061' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03073' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03074' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03076' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03084' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03096' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03111' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03112' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03135' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03154' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03161' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '03171' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '04010' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '04017' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '04018' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '04019' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '04020' LIMIT 1    [ RunTime:0.001001s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '04021' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '04022' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '04025' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '04027' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '05023' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '12005' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '82058' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '96031' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '96070' LIMIT 1    [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `tc_issue_2014` WHERE  `workNumber` = '97144' LIMIT 1    [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `user_student_2014` WHERE  `chosen` = 0  AND `department` = '信息安全与网络工程系'    [ RunTime:0.001001s ]
+
+---------------------------------------------------------------
+[ 2016-12-11T23:35:06+08:00 ] ::1 ::1 GET /Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/studentManager.html
+[ log ] localhost/Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/studentManager.html [运行时间：0.085005s][吞吐率：11.76req/s] [内存消耗：2,754.48kb] [文件加载：39]
+[ info ] [ LANG ] C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'DepartmentHeadTutor',
+    1 => 'studentManager',
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/matchSetting.html',
+  'accept-encoding' => 'gzip, deflate, sdch, br',
+  'accept-language' => 'zh-CN,zh;q=0.8,en;q=0.6',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=k77jo1nnafouohb6f38siu76k1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] Class [ <user> class app\index\controller\DepartmentHeadTutor extends app\index\controller\BaseController ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 8-568
+
+  - Constants [0] {
+  }
+
+  - Static properties [0] {
+  }
+
+  - Static methods [0] {
+  }
+
+  - Properties [6] {
+    Property [ <default> public $pageSize ]
+    Property [ <default> protected $view ]
+    Property [ <default> protected $request ]
+    Property [ <default> protected $failException ]
+    Property [ <default> protected $batchValidate ]
+    Property [ <default> protected $beforeActionList ]
+  }
+
+  - Methods [40] {
+    Method [ <user> public method index ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 12 - 25
+    }
+
+    Method [ <user> public method matchSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 28 - 81
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $page = 1 ]
+      }
+    }
+
+    Method [ <user> public method timeSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 84 - 138
+    }
+
+    Method [ <user> public method infoSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 140 - 188
+    }
+
+    Method [ <user> public method allocStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 192 - 203
+    }
+
+    Method [ <user> public method intelligentAlloc ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 207 - 329
+    }
+
+    Method [ <user> public method assignResult ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 332 - 424
+    }
+
+    Method [ <user> public method assignResultConfirm ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 435 - 437
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $r ]
+      }
+    }
+
+    Method [ <user> public method cTest ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 442 - 446
+    }
+
+    Method [ <user> public method modify ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 449 - 462
+    }
+
+    Method [ <user> public method saveModify ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 464 - 497
+    }
+
+    Method [ <user> public method oldPasswordConfirm ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 499 - 514
+    }
+
+    Method [ <user> public method studentManager ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 516 - 519
+    }
+
+    Method [ <user> public method addStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 522 - 527
+    }
+
+    Method [ <user> public method deleteStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 529 - 534
+    }
+
+    Method [ <user> public method studentList ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 536 - 552
+    }
+
+    Method [ <user> public method teacherList ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 554 - 567
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method auto_login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 14 - 19
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 65
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method hasLogin ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 67 - 72
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method logout ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 74 - 81
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method refresh_user ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 83 - 89
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method make_menu ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 91 - 103
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $menus ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method translate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 105 - 120
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $name ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method successJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 122 - 124
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method errorJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 126 - 128
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    /**
+     * 架构函数
+     * @param Request $request Request对象
+     * @access public
+     */
+    Method [ <user, inherits think\Controller, ctor> public method __construct ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 44 - 63
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> think\Request or NULL $request = NULL ]
+      }
+    }
+
+    Method [ <user, inherits think\Controller> protected method _initialize ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 66 - 68
+    }
+
+    /**
+     * 前置操作
+     * @access protected
+     * @param string $method  前置操作方法名
+     * @param array  $options 调用参数 ['only'=>[...]] 或者['except'=>[...]]
+     */
+    Method [ <user, inherits think\Controller> protected method beforeAction ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 76 - 95
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $method ]
+        Parameter #1 [ <optional> $options = Array ]
+      }
+    }
+
+    /**
+     * 加载模板输出
+     * @access protected
+     * @param string $template 模板文件名
+     * @param array  $vars     模板输出变量
+     * @param array  $replace  模板替换
+     * @param array  $config   模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method fetch ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 106 - 109
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $template = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 渲染内容输出
+     * @access protected
+     * @param string $content 模板内容
+     * @param array  $vars    模板输出变量
+     * @param array  $replace 替换内容
+     * @param array  $config  模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method display ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 120 - 123
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $content = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 模板变量赋值
+     * @access protected
+     * @param mixed $name  要显示的模板变量
+     * @param mixed $value 变量的值
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method assign ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 132 - 135
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $name ]
+        Parameter #1 [ <optional> $value = '' ]
+      }
+    }
+
+    /**
+     * 初始化模板引擎
+     * @access protected
+     * @param array|string $engine 引擎参数
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method engine ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 143 - 146
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $engine ]
+      }
+    }
+
+    /**
+     * 设置验证失败后是否抛出异常
+     * @access protected
+     * @param bool $fail 是否抛出异常
+     * @return $this
+     */
+    Method [ <user, inherits think\Controller> protected method validateFailException ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 154 - 158
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $fail = true ]
+      }
+    }
+
+    /**
+     * 验证数据
+     * @access protected
+     * @param array        $data     数据
+     * @param string|array $validate 验证器名或者验证规则数组
+     * @param array        $message  提示信息
+     * @param bool         $batch    是否批量验证
+     * @param mixed        $callback 回调方法（闭包）
+     * @return array|string|true
+     * @throws ValidateException
+     */
+    Method [ <user, inherits think\Controller> protected method validate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 171 - 208
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <required> $validate ]
+        Parameter #2 [ <optional> $message = Array ]
+        Parameter #3 [ <optional> $batch = false ]
+        Parameter #4 [ <optional> $callback = NULL ]
+      }
+    }
+
+    /**
+     * 操作成功跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method success ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 37 - 64
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 操作错误跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method error ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 76 - 103
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 返回封装后的API数据到客户端
+     * @access protected
+     * @param mixed     $data 要返回的数据
+     * @param integer   $code 返回的code
+     * @param mixed     $msg 提示信息
+     * @param string    $type 返回数据格式
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method result ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 115 - 126
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <optional> $code = 0 ]
+        Parameter #2 [ <optional> $msg = '' ]
+        Parameter #3 [ <optional> $type = '' ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * URL重定向
+     * @access protected
+     * @param string         $url 跳转的URL表达式
+     * @param array|integer  $params 其它URL参数
+     * @param integer        $code http code
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method redirect ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 136 - 145
+
+      - Parameters [3] {
+        Parameter #0 [ <required> $url ]
+        Parameter #1 [ <optional> $params = Array ]
+        Parameter #2 [ <optional> $code = 302 ]
+      }
+    }
+
+    /**
+     * 获取当前的response 输出类型
+     * @access protected
+     * @return string
+     */
+    Method [ <user, inherits think\Controller> protected method getResponseType ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 152 - 156
+    }
+  }
+}
+
+[ info ] [ RUN ] Method [ <user> public method studentManager ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 516 - 519
+}
+
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ VIEW ] C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\student_manager.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-12-11T23:35:16+08:00 ] ::1 ::1 GET /Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/studentManager.html
+[ log ] localhost/Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/studentManager.html [运行时间：0.075004s][吞吐率：13.33req/s] [内存消耗：2,754.48kb] [文件加载：39]
+[ info ] [ LANG ] C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'DepartmentHeadTutor',
+    1 => 'studentManager',
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/matchSetting.html',
+  'accept-encoding' => 'gzip, deflate, sdch, br',
+  'accept-language' => 'zh-CN,zh;q=0.8,en;q=0.6',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=k77jo1nnafouohb6f38siu76k1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] Class [ <user> class app\index\controller\DepartmentHeadTutor extends app\index\controller\BaseController ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 8-568
+
+  - Constants [0] {
+  }
+
+  - Static properties [0] {
+  }
+
+  - Static methods [0] {
+  }
+
+  - Properties [6] {
+    Property [ <default> public $pageSize ]
+    Property [ <default> protected $view ]
+    Property [ <default> protected $request ]
+    Property [ <default> protected $failException ]
+    Property [ <default> protected $batchValidate ]
+    Property [ <default> protected $beforeActionList ]
+  }
+
+  - Methods [40] {
+    Method [ <user> public method index ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 12 - 25
+    }
+
+    Method [ <user> public method matchSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 28 - 81
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $page = 1 ]
+      }
+    }
+
+    Method [ <user> public method timeSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 84 - 138
+    }
+
+    Method [ <user> public method infoSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 140 - 188
+    }
+
+    Method [ <user> public method allocStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 192 - 203
+    }
+
+    Method [ <user> public method intelligentAlloc ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 207 - 329
+    }
+
+    Method [ <user> public method assignResult ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 332 - 424
+    }
+
+    Method [ <user> public method assignResultConfirm ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 435 - 437
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $r ]
+      }
+    }
+
+    Method [ <user> public method cTest ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 442 - 446
+    }
+
+    Method [ <user> public method modify ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 449 - 462
+    }
+
+    Method [ <user> public method saveModify ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 464 - 497
+    }
+
+    Method [ <user> public method oldPasswordConfirm ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 499 - 514
+    }
+
+    Method [ <user> public method studentManager ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 516 - 519
+    }
+
+    Method [ <user> public method addStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 522 - 527
+    }
+
+    Method [ <user> public method deleteStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 529 - 534
+    }
+
+    Method [ <user> public method studentList ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 536 - 552
+    }
+
+    Method [ <user> public method teacherList ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 554 - 567
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method auto_login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 14 - 19
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 65
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method hasLogin ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 67 - 72
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method logout ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 74 - 81
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method refresh_user ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 83 - 89
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method make_menu ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 91 - 103
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $menus ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method translate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 105 - 120
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $name ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method successJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 122 - 124
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method errorJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 126 - 128
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    /**
+     * 架构函数
+     * @param Request $request Request对象
+     * @access public
+     */
+    Method [ <user, inherits think\Controller, ctor> public method __construct ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 44 - 63
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> think\Request or NULL $request = NULL ]
+      }
+    }
+
+    Method [ <user, inherits think\Controller> protected method _initialize ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 66 - 68
+    }
+
+    /**
+     * 前置操作
+     * @access protected
+     * @param string $method  前置操作方法名
+     * @param array  $options 调用参数 ['only'=>[...]] 或者['except'=>[...]]
+     */
+    Method [ <user, inherits think\Controller> protected method beforeAction ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 76 - 95
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $method ]
+        Parameter #1 [ <optional> $options = Array ]
+      }
+    }
+
+    /**
+     * 加载模板输出
+     * @access protected
+     * @param string $template 模板文件名
+     * @param array  $vars     模板输出变量
+     * @param array  $replace  模板替换
+     * @param array  $config   模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method fetch ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 106 - 109
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $template = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 渲染内容输出
+     * @access protected
+     * @param string $content 模板内容
+     * @param array  $vars    模板输出变量
+     * @param array  $replace 替换内容
+     * @param array  $config  模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method display ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 120 - 123
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $content = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 模板变量赋值
+     * @access protected
+     * @param mixed $name  要显示的模板变量
+     * @param mixed $value 变量的值
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method assign ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 132 - 135
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $name ]
+        Parameter #1 [ <optional> $value = '' ]
+      }
+    }
+
+    /**
+     * 初始化模板引擎
+     * @access protected
+     * @param array|string $engine 引擎参数
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method engine ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 143 - 146
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $engine ]
+      }
+    }
+
+    /**
+     * 设置验证失败后是否抛出异常
+     * @access protected
+     * @param bool $fail 是否抛出异常
+     * @return $this
+     */
+    Method [ <user, inherits think\Controller> protected method validateFailException ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 154 - 158
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $fail = true ]
+      }
+    }
+
+    /**
+     * 验证数据
+     * @access protected
+     * @param array        $data     数据
+     * @param string|array $validate 验证器名或者验证规则数组
+     * @param array        $message  提示信息
+     * @param bool         $batch    是否批量验证
+     * @param mixed        $callback 回调方法（闭包）
+     * @return array|string|true
+     * @throws ValidateException
+     */
+    Method [ <user, inherits think\Controller> protected method validate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 171 - 208
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <required> $validate ]
+        Parameter #2 [ <optional> $message = Array ]
+        Parameter #3 [ <optional> $batch = false ]
+        Parameter #4 [ <optional> $callback = NULL ]
+      }
+    }
+
+    /**
+     * 操作成功跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method success ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 37 - 64
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 操作错误跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method error ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 76 - 103
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 返回封装后的API数据到客户端
+     * @access protected
+     * @param mixed     $data 要返回的数据
+     * @param integer   $code 返回的code
+     * @param mixed     $msg 提示信息
+     * @param string    $type 返回数据格式
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method result ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 115 - 126
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <optional> $code = 0 ]
+        Parameter #2 [ <optional> $msg = '' ]
+        Parameter #3 [ <optional> $type = '' ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * URL重定向
+     * @access protected
+     * @param string         $url 跳转的URL表达式
+     * @param array|integer  $params 其它URL参数
+     * @param integer        $code http code
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method redirect ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 136 - 145
+
+      - Parameters [3] {
+        Parameter #0 [ <required> $url ]
+        Parameter #1 [ <optional> $params = Array ]
+        Parameter #2 [ <optional> $code = 302 ]
+      }
+    }
+
+    /**
+     * 获取当前的response 输出类型
+     * @access protected
+     * @return string
+     */
+    Method [ <user, inherits think\Controller> protected method getResponseType ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 152 - 156
+    }
+  }
+}
+
+[ info ] [ RUN ] Method [ <user> public method studentManager ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 516 - 519
+}
+
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ VIEW ] C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\student_manager.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-12-11T23:35:17+08:00 ] ::1 ::1 GET /Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/index.html
+[ log ] localhost/Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/index.html [运行时间：0.076004s][吞吐率：13.16req/s] [内存消耗：3,771.12kb] [文件加载：44]
+[ info ] [ LANG ] C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'DepartmentHeadTutor',
+    1 => 'index',
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/studentManager.html',
+  'accept-encoding' => 'gzip, deflate, sdch, br',
+  'accept-language' => 'zh-CN,zh;q=0.8,en;q=0.6',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=k77jo1nnafouohb6f38siu76k1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] Class [ <user> class app\index\controller\DepartmentHeadTutor extends app\index\controller\BaseController ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 8-568
+
+  - Constants [0] {
+  }
+
+  - Static properties [0] {
+  }
+
+  - Static methods [0] {
+  }
+
+  - Properties [6] {
+    Property [ <default> public $pageSize ]
+    Property [ <default> protected $view ]
+    Property [ <default> protected $request ]
+    Property [ <default> protected $failException ]
+    Property [ <default> protected $batchValidate ]
+    Property [ <default> protected $beforeActionList ]
+  }
+
+  - Methods [40] {
+    Method [ <user> public method index ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 12 - 25
+    }
+
+    Method [ <user> public method matchSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 28 - 81
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $page = 1 ]
+      }
+    }
+
+    Method [ <user> public method timeSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 84 - 138
+    }
+
+    Method [ <user> public method infoSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 140 - 188
+    }
+
+    Method [ <user> public method allocStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 192 - 203
+    }
+
+    Method [ <user> public method intelligentAlloc ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 207 - 329
+    }
+
+    Method [ <user> public method assignResult ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 332 - 424
+    }
+
+    Method [ <user> public method assignResultConfirm ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 435 - 437
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $r ]
+      }
+    }
+
+    Method [ <user> public method cTest ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 442 - 446
+    }
+
+    Method [ <user> public method modify ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 449 - 462
+    }
+
+    Method [ <user> public method saveModify ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 464 - 497
+    }
+
+    Method [ <user> public method oldPasswordConfirm ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 499 - 514
+    }
+
+    Method [ <user> public method studentManager ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 516 - 519
+    }
+
+    Method [ <user> public method addStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 522 - 527
+    }
+
+    Method [ <user> public method deleteStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 529 - 534
+    }
+
+    Method [ <user> public method studentList ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 536 - 552
+    }
+
+    Method [ <user> public method teacherList ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 554 - 567
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method auto_login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 14 - 19
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 65
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method hasLogin ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 67 - 72
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method logout ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 74 - 81
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method refresh_user ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 83 - 89
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method make_menu ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 91 - 103
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $menus ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method translate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 105 - 120
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $name ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method successJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 122 - 124
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method errorJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 126 - 128
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    /**
+     * 架构函数
+     * @param Request $request Request对象
+     * @access public
+     */
+    Method [ <user, inherits think\Controller, ctor> public method __construct ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 44 - 63
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> think\Request or NULL $request = NULL ]
+      }
+    }
+
+    Method [ <user, inherits think\Controller> protected method _initialize ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 66 - 68
+    }
+
+    /**
+     * 前置操作
+     * @access protected
+     * @param string $method  前置操作方法名
+     * @param array  $options 调用参数 ['only'=>[...]] 或者['except'=>[...]]
+     */
+    Method [ <user, inherits think\Controller> protected method beforeAction ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 76 - 95
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $method ]
+        Parameter #1 [ <optional> $options = Array ]
+      }
+    }
+
+    /**
+     * 加载模板输出
+     * @access protected
+     * @param string $template 模板文件名
+     * @param array  $vars     模板输出变量
+     * @param array  $replace  模板替换
+     * @param array  $config   模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method fetch ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 106 - 109
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $template = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 渲染内容输出
+     * @access protected
+     * @param string $content 模板内容
+     * @param array  $vars    模板输出变量
+     * @param array  $replace 替换内容
+     * @param array  $config  模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method display ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 120 - 123
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $content = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 模板变量赋值
+     * @access protected
+     * @param mixed $name  要显示的模板变量
+     * @param mixed $value 变量的值
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method assign ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 132 - 135
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $name ]
+        Parameter #1 [ <optional> $value = '' ]
+      }
+    }
+
+    /**
+     * 初始化模板引擎
+     * @access protected
+     * @param array|string $engine 引擎参数
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method engine ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 143 - 146
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $engine ]
+      }
+    }
+
+    /**
+     * 设置验证失败后是否抛出异常
+     * @access protected
+     * @param bool $fail 是否抛出异常
+     * @return $this
+     */
+    Method [ <user, inherits think\Controller> protected method validateFailException ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 154 - 158
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $fail = true ]
+      }
+    }
+
+    /**
+     * 验证数据
+     * @access protected
+     * @param array        $data     数据
+     * @param string|array $validate 验证器名或者验证规则数组
+     * @param array        $message  提示信息
+     * @param bool         $batch    是否批量验证
+     * @param mixed        $callback 回调方法（闭包）
+     * @return array|string|true
+     * @throws ValidateException
+     */
+    Method [ <user, inherits think\Controller> protected method validate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 171 - 208
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <required> $validate ]
+        Parameter #2 [ <optional> $message = Array ]
+        Parameter #3 [ <optional> $batch = false ]
+        Parameter #4 [ <optional> $callback = NULL ]
+      }
+    }
+
+    /**
+     * 操作成功跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method success ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 37 - 64
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 操作错误跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method error ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 76 - 103
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 返回封装后的API数据到客户端
+     * @access protected
+     * @param mixed     $data 要返回的数据
+     * @param integer   $code 返回的code
+     * @param mixed     $msg 提示信息
+     * @param string    $type 返回数据格式
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method result ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 115 - 126
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <optional> $code = 0 ]
+        Parameter #2 [ <optional> $msg = '' ]
+        Parameter #3 [ <optional> $type = '' ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * URL重定向
+     * @access protected
+     * @param string         $url 跳转的URL表达式
+     * @param array|integer  $params 其它URL参数
+     * @param integer        $code http code
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method redirect ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 136 - 145
+
+      - Parameters [3] {
+        Parameter #0 [ <required> $url ]
+        Parameter #1 [ <optional> $params = Array ]
+        Parameter #2 [ <optional> $code = 302 ]
+      }
+    }
+
+    /**
+     * 获取当前的response 输出类型
+     * @access protected
+     * @return string
+     */
+    Method [ <user, inherits think\Controller> protected method getResponseType ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 152 - 156
+    }
+  }
+}
+
+[ info ] [ RUN ] Method [ <user> public method index ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 12 - 25
+}
+
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\index.html [ array (
+  0 => 'user',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=teacher_class_system;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `user_department_head` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `user_department_head` WHERE  `workNumber` = '00001' LIMIT 1    [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-12-11T23:35:18+08:00 ] ::1 ::1 GET /Tutor-distribution/tutorAssign/public/index/BaseController/logout.html
+[ log ] localhost/Tutor-distribution/tutorAssign/public/index/BaseController/logout.html [运行时间：0.045002s][吞吐率：22.22req/s] [内存消耗：2,383.60kb] [文件加载：36]
+[ info ] [ LANG ] C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'BaseController',
+    1 => 'logout',
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/index.html',
+  'accept-encoding' => 'gzip, deflate, sdch, br',
+  'accept-language' => 'zh-CN,zh;q=0.8,en;q=0.6',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=k77jo1nnafouohb6f38siu76k1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] Class [ <user> class app\index\controller\BaseController extends think\Controller ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 9-130
+
+  - Constants [0] {
+  }
+
+  - Static properties [0] {
+  }
+
+  - Static methods [0] {
+  }
+
+  - Properties [5] {
+    Property [ <default> protected $view ]
+    Property [ <default> protected $request ]
+    Property [ <default> protected $failException ]
+    Property [ <default> protected $batchValidate ]
+    Property [ <default> protected $beforeActionList ]
+  }
+
+  - Methods [23] {
+    Method [ <user> public method auto_login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 14 - 19
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user> public method login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 65
+    }
+
+    Method [ <user> public method hasLogin ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 67 - 72
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user> public method logout ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 74 - 81
+    }
+
+    Method [ <user> public method refresh_user ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 83 - 89
+    }
+
+    Method [ <user> public method make_menu ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 91 - 103
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $menus ]
+      }
+    }
+
+    Method [ <user> public method translate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 105 - 120
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $name ]
+      }
+    }
+
+    Method [ <user> public method successJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 122 - 124
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    Method [ <user> public method errorJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 126 - 128
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    /**
+     * 架构函数
+     * @param Request $request Request对象
+     * @access public
+     */
+    Method [ <user, inherits think\Controller, ctor> public method __construct ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 44 - 63
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> think\Request or NULL $request = NULL ]
+      }
+    }
+
+    Method [ <user, inherits think\Controller> protected method _initialize ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 66 - 68
+    }
+
+    /**
+     * 前置操作
+     * @access protected
+     * @param string $method  前置操作方法名
+     * @param array  $options 调用参数 ['only'=>[...]] 或者['except'=>[...]]
+     */
+    Method [ <user, inherits think\Controller> protected method beforeAction ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 76 - 95
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $method ]
+        Parameter #1 [ <optional> $options = Array ]
+      }
+    }
+
+    /**
+     * 加载模板输出
+     * @access protected
+     * @param string $template 模板文件名
+     * @param array  $vars     模板输出变量
+     * @param array  $replace  模板替换
+     * @param array  $config   模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method fetch ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 106 - 109
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $template = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 渲染内容输出
+     * @access protected
+     * @param string $content 模板内容
+     * @param array  $vars    模板输出变量
+     * @param array  $replace 替换内容
+     * @param array  $config  模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method display ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 120 - 123
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $content = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 模板变量赋值
+     * @access protected
+     * @param mixed $name  要显示的模板变量
+     * @param mixed $value 变量的值
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method assign ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 132 - 135
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $name ]
+        Parameter #1 [ <optional> $value = '' ]
+      }
+    }
+
+    /**
+     * 初始化模板引擎
+     * @access protected
+     * @param array|string $engine 引擎参数
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method engine ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 143 - 146
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $engine ]
+      }
+    }
+
+    /**
+     * 设置验证失败后是否抛出异常
+     * @access protected
+     * @param bool $fail 是否抛出异常
+     * @return $this
+     */
+    Method [ <user, inherits think\Controller> protected method validateFailException ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 154 - 158
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $fail = true ]
+      }
+    }
+
+    /**
+     * 验证数据
+     * @access protected
+     * @param array        $data     数据
+     * @param string|array $validate 验证器名或者验证规则数组
+     * @param array        $message  提示信息
+     * @param bool         $batch    是否批量验证
+     * @param mixed        $callback 回调方法（闭包）
+     * @return array|string|true
+     * @throws ValidateException
+     */
+    Method [ <user, inherits think\Controller> protected method validate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 171 - 208
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <required> $validate ]
+        Parameter #2 [ <optional> $message = Array ]
+        Parameter #3 [ <optional> $batch = false ]
+        Parameter #4 [ <optional> $callback = NULL ]
+      }
+    }
+
+    /**
+     * 操作成功跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method success ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 37 - 64
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 操作错误跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method error ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 76 - 103
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 返回封装后的API数据到客户端
+     * @access protected
+     * @param mixed     $data 要返回的数据
+     * @param integer   $code 返回的code
+     * @param mixed     $msg 提示信息
+     * @param string    $type 返回数据格式
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method result ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 115 - 126
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <optional> $code = 0 ]
+        Parameter #2 [ <optional> $msg = '' ]
+        Parameter #3 [ <optional> $type = '' ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * URL重定向
+     * @access protected
+     * @param string         $url 跳转的URL表达式
+     * @param array|integer  $params 其它URL参数
+     * @param integer        $code http code
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method redirect ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 136 - 145
+
+      - Parameters [3] {
+        Parameter #0 [ <required> $url ]
+        Parameter #1 [ <optional> $params = Array ]
+        Parameter #2 [ <optional> $code = 302 ]
+      }
+    }
+
+    /**
+     * 获取当前的response 输出类型
+     * @access protected
+     * @return string
+     */
+    Method [ <user, inherits think\Controller> protected method getResponseType ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 152 - 156
+    }
+  }
+}
+
+[ info ] [ RUN ] Method [ <user> public method logout ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 74 - 81
+}
+
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-12-11T23:35:18+08:00 ] ::1 ::1 GET /Tutor-distribution/tutorAssign/public/index/BaseController/login.html
+[ log ] localhost/Tutor-distribution/tutorAssign/public/index/BaseController/login.html [运行时间：0.064004s][吞吐率：15.62req/s] [内存消耗：3,386.73kb] [文件加载：42]
+[ info ] [ LANG ] C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'BaseController',
+    1 => 'login',
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/index.html',
+  'accept-encoding' => 'gzip, deflate, sdch, br',
+  'accept-language' => 'zh-CN,zh;q=0.8,en;q=0.6',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=k77jo1nnafouohb6f38siu76k1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] Class [ <user> class app\index\controller\BaseController extends think\Controller ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 9-130
+
+  - Constants [0] {
+  }
+
+  - Static properties [0] {
+  }
+
+  - Static methods [0] {
+  }
+
+  - Properties [5] {
+    Property [ <default> protected $view ]
+    Property [ <default> protected $request ]
+    Property [ <default> protected $failException ]
+    Property [ <default> protected $batchValidate ]
+    Property [ <default> protected $beforeActionList ]
+  }
+
+  - Methods [23] {
+    Method [ <user> public method auto_login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 14 - 19
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user> public method login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 65
+    }
+
+    Method [ <user> public method hasLogin ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 67 - 72
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user> public method logout ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 74 - 81
+    }
+
+    Method [ <user> public method refresh_user ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 83 - 89
+    }
+
+    Method [ <user> public method make_menu ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 91 - 103
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $menus ]
+      }
+    }
+
+    Method [ <user> public method translate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 105 - 120
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $name ]
+      }
+    }
+
+    Method [ <user> public method successJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 122 - 124
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    Method [ <user> public method errorJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 126 - 128
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    /**
+     * 架构函数
+     * @param Request $request Request对象
+     * @access public
+     */
+    Method [ <user, inherits think\Controller, ctor> public method __construct ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 44 - 63
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> think\Request or NULL $request = NULL ]
+      }
+    }
+
+    Method [ <user, inherits think\Controller> protected method _initialize ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 66 - 68
+    }
+
+    /**
+     * 前置操作
+     * @access protected
+     * @param string $method  前置操作方法名
+     * @param array  $options 调用参数 ['only'=>[...]] 或者['except'=>[...]]
+     */
+    Method [ <user, inherits think\Controller> protected method beforeAction ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 76 - 95
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $method ]
+        Parameter #1 [ <optional> $options = Array ]
+      }
+    }
+
+    /**
+     * 加载模板输出
+     * @access protected
+     * @param string $template 模板文件名
+     * @param array  $vars     模板输出变量
+     * @param array  $replace  模板替换
+     * @param array  $config   模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method fetch ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 106 - 109
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $template = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 渲染内容输出
+     * @access protected
+     * @param string $content 模板内容
+     * @param array  $vars    模板输出变量
+     * @param array  $replace 替换内容
+     * @param array  $config  模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method display ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 120 - 123
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $content = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 模板变量赋值
+     * @access protected
+     * @param mixed $name  要显示的模板变量
+     * @param mixed $value 变量的值
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method assign ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 132 - 135
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $name ]
+        Parameter #1 [ <optional> $value = '' ]
+      }
+    }
+
+    /**
+     * 初始化模板引擎
+     * @access protected
+     * @param array|string $engine 引擎参数
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method engine ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 143 - 146
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $engine ]
+      }
+    }
+
+    /**
+     * 设置验证失败后是否抛出异常
+     * @access protected
+     * @param bool $fail 是否抛出异常
+     * @return $this
+     */
+    Method [ <user, inherits think\Controller> protected method validateFailException ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 154 - 158
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $fail = true ]
+      }
+    }
+
+    /**
+     * 验证数据
+     * @access protected
+     * @param array        $data     数据
+     * @param string|array $validate 验证器名或者验证规则数组
+     * @param array        $message  提示信息
+     * @param bool         $batch    是否批量验证
+     * @param mixed        $callback 回调方法（闭包）
+     * @return array|string|true
+     * @throws ValidateException
+     */
+    Method [ <user, inherits think\Controller> protected method validate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 171 - 208
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <required> $validate ]
+        Parameter #2 [ <optional> $message = Array ]
+        Parameter #3 [ <optional> $batch = false ]
+        Parameter #4 [ <optional> $callback = NULL ]
+      }
+    }
+
+    /**
+     * 操作成功跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method success ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 37 - 64
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 操作错误跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method error ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 76 - 103
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 返回封装后的API数据到客户端
+     * @access protected
+     * @param mixed     $data 要返回的数据
+     * @param integer   $code 返回的code
+     * @param mixed     $msg 提示信息
+     * @param string    $type 返回数据格式
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method result ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 115 - 126
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <optional> $code = 0 ]
+        Parameter #2 [ <optional> $msg = '' ]
+        Parameter #3 [ <optional> $type = '' ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * URL重定向
+     * @access protected
+     * @param string         $url 跳转的URL表达式
+     * @param array|integer  $params 其它URL参数
+     * @param integer        $code http code
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method redirect ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 136 - 145
+
+      - Parameters [3] {
+        Parameter #0 [ <required> $url ]
+        Parameter #1 [ <optional> $params = Array ]
+        Parameter #2 [ <optional> $code = 302 ]
+      }
+    }
+
+    /**
+     * 获取当前的response 输出类型
+     * @access protected
+     * @return string
+     */
+    Method [ <user, inherits think\Controller> protected method getResponseType ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 152 - 156
+    }
+  }
+}
+
+[ info ] [ RUN ] Method [ <user> public method login ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 65
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\common\login.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=teacher_class_system;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `task_info` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] UPDATE `task_info`  SET `taskState`=1  WHERE  `teacherDeadline` < '20161211'  AND `taskState` = 0      [ RunTime:0.001000s ]
+[ sql ] [ SQL ] UPDATE `task_info`  SET `taskState`=2  WHERE  `departmentDeadline` < '20161211'  AND `taskState` = 1      [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-12-11T23:35:23+08:00 ] ::1 ::1 POST /Tutor-distribution/tutorAssign/public/index/baseController/login.html
+[ log ] localhost/Tutor-distribution/tutorAssign/public/index/baseController/login.html [运行时间：0.093005s][吞吐率：10.75req/s] [内存消耗：3,482.09kb] [文件加载：44]
+[ info ] [ LANG ] C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'baseController',
+    1 => 'login',
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'origin' => 'http://localhost',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/Tutor-distribution/tutorAssign/public/index/BaseController/login.html',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8,en;q=0.6',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=k77jo1nnafouohb6f38siu76k1',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'content-length' => '64',
+)
+[ info ] [ PARAM ] array (
+  'login-user' => '00001',
+  'login-password' => '00001',
+  'login-type' => 'department_head',
+)
+[ info ] [ RUN ] Class [ <user> class app\index\controller\BaseController extends think\Controller ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 9-130
+
+  - Constants [0] {
+  }
+
+  - Static properties [0] {
+  }
+
+  - Static methods [0] {
+  }
+
+  - Properties [5] {
+    Property [ <default> protected $view ]
+    Property [ <default> protected $request ]
+    Property [ <default> protected $failException ]
+    Property [ <default> protected $batchValidate ]
+    Property [ <default> protected $beforeActionList ]
+  }
+
+  - Methods [23] {
+    Method [ <user> public method auto_login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 14 - 19
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user> public method login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 65
+    }
+
+    Method [ <user> public method hasLogin ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 67 - 72
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user> public method logout ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 74 - 81
+    }
+
+    Method [ <user> public method refresh_user ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 83 - 89
+    }
+
+    Method [ <user> public method make_menu ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 91 - 103
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $menus ]
+      }
+    }
+
+    Method [ <user> public method translate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 105 - 120
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $name ]
+      }
+    }
+
+    Method [ <user> public method successJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 122 - 124
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    Method [ <user> public method errorJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 126 - 128
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    /**
+     * 架构函数
+     * @param Request $request Request对象
+     * @access public
+     */
+    Method [ <user, inherits think\Controller, ctor> public method __construct ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 44 - 63
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> think\Request or NULL $request = NULL ]
+      }
+    }
+
+    Method [ <user, inherits think\Controller> protected method _initialize ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 66 - 68
+    }
+
+    /**
+     * 前置操作
+     * @access protected
+     * @param string $method  前置操作方法名
+     * @param array  $options 调用参数 ['only'=>[...]] 或者['except'=>[...]]
+     */
+    Method [ <user, inherits think\Controller> protected method beforeAction ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 76 - 95
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $method ]
+        Parameter #1 [ <optional> $options = Array ]
+      }
+    }
+
+    /**
+     * 加载模板输出
+     * @access protected
+     * @param string $template 模板文件名
+     * @param array  $vars     模板输出变量
+     * @param array  $replace  模板替换
+     * @param array  $config   模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method fetch ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 106 - 109
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $template = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 渲染内容输出
+     * @access protected
+     * @param string $content 模板内容
+     * @param array  $vars    模板输出变量
+     * @param array  $replace 替换内容
+     * @param array  $config  模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method display ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 120 - 123
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $content = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 模板变量赋值
+     * @access protected
+     * @param mixed $name  要显示的模板变量
+     * @param mixed $value 变量的值
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method assign ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 132 - 135
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $name ]
+        Parameter #1 [ <optional> $value = '' ]
+      }
+    }
+
+    /**
+     * 初始化模板引擎
+     * @access protected
+     * @param array|string $engine 引擎参数
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method engine ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 143 - 146
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $engine ]
+      }
+    }
+
+    /**
+     * 设置验证失败后是否抛出异常
+     * @access protected
+     * @param bool $fail 是否抛出异常
+     * @return $this
+     */
+    Method [ <user, inherits think\Controller> protected method validateFailException ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 154 - 158
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $fail = true ]
+      }
+    }
+
+    /**
+     * 验证数据
+     * @access protected
+     * @param array        $data     数据
+     * @param string|array $validate 验证器名或者验证规则数组
+     * @param array        $message  提示信息
+     * @param bool         $batch    是否批量验证
+     * @param mixed        $callback 回调方法（闭包）
+     * @return array|string|true
+     * @throws ValidateException
+     */
+    Method [ <user, inherits think\Controller> protected method validate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 171 - 208
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <required> $validate ]
+        Parameter #2 [ <optional> $message = Array ]
+        Parameter #3 [ <optional> $batch = false ]
+        Parameter #4 [ <optional> $callback = NULL ]
+      }
+    }
+
+    /**
+     * 操作成功跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method success ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 37 - 64
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 操作错误跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method error ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 76 - 103
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 返回封装后的API数据到客户端
+     * @access protected
+     * @param mixed     $data 要返回的数据
+     * @param integer   $code 返回的code
+     * @param mixed     $msg 提示信息
+     * @param string    $type 返回数据格式
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method result ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 115 - 126
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <optional> $code = 0 ]
+        Parameter #2 [ <optional> $msg = '' ]
+        Parameter #3 [ <optional> $type = '' ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * URL重定向
+     * @access protected
+     * @param string         $url 跳转的URL表达式
+     * @param array|integer  $params 其它URL参数
+     * @param integer        $code http code
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method redirect ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 136 - 145
+
+      - Parameters [3] {
+        Parameter #0 [ <required> $url ]
+        Parameter #1 [ <optional> $params = Array ]
+        Parameter #2 [ <optional> $code = 302 ]
+      }
+    }
+
+    /**
+     * 获取当前的response 输出类型
+     * @access protected
+     * @return string
+     */
+    Method [ <user, inherits think\Controller> protected method getResponseType ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 152 - 156
+    }
+  }
+}
+
+[ info ] [ RUN ] Method [ <user> public method login ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 65
+}
+
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ VIEW ] C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\tpl\dispatch_jump.tpl [ array (
+  0 => 'code',
+  1 => 'msg',
+  2 => 'data',
+  3 => 'url',
+  4 => 'wait',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010000s ] mysql:dbname=teacher_class_system;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `user_department_head` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `user_department_head` WHERE  `workNumber` = '00001' LIMIT 1    [ RunTime:0.001001s ]
+
+---------------------------------------------------------------
+[ 2016-12-11T23:35:24+08:00 ] ::1 ::1 GET /Tutor-distribution/tutorAssign/public/index/department_head/index.html
+[ log ] localhost/Tutor-distribution/tutorAssign/public/index/department_head/index.html [运行时间：0.065003s][吞吐率：15.38req/s] [内存消耗：2,563.79kb] [文件加载：39]
+[ info ] [ LANG ] C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'department_head',
+    1 => 'index',
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/Tutor-distribution/tutorAssign/public/index/baseController/login.html',
+  'accept-encoding' => 'gzip, deflate, sdch, br',
+  'accept-language' => 'zh-CN,zh;q=0.8,en;q=0.6',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=k77jo1nnafouohb6f38siu76k1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] Class [ <user> class app\index\controller\DepartmentHead extends app\index\controller\BaseController ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHead.php 9-258
+
+  - Constants [0] {
+  }
+
+  - Static properties [0] {
+  }
+
+  - Static methods [0] {
+  }
+
+  - Properties [5] {
+    Property [ <default> protected $view ]
+    Property [ <default> protected $request ]
+    Property [ <default> protected $failException ]
+    Property [ <default> protected $batchValidate ]
+    Property [ <default> protected $beforeActionList ]
+  }
+
+  - Methods [33] {
+    Method [ <user, overwrites think\Controller, prototype think\Controller> public method _initialize ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHead.php 11 - 23
+    }
+
+    Method [ <user> public method index_1 ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHead.php 25 - 27
+    }
+
+    Method [ <user> public method index ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHead.php 29 - 31
+    }
+
+    Method [ <user> public method view_baoke ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHead.php 33 - 65
+    }
+
+    Method [ <user> public method manage_teacher ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHead.php 67 - 69
+    }
+
+    Method [ <user> public method save_table ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHead.php 72 - 87
+    }
+
+    Method [ <user> public method edit_baoke ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHead.php 88 - 120
+    }
+
+    Method [ <user> public method show_table ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHead.php 122 - 155
+    }
+
+    Method [ <user> public method information_json ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHead.php 157 - 164
+    }
+
+    Method [ <user> public method information ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHead.php 167 - 205
+    }
+
+    Method [ <user> public method teacher_manager ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHead.php 208 - 250
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method auto_login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 14 - 19
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 65
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method hasLogin ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 67 - 72
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method logout ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 74 - 81
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method refresh_user ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 83 - 89
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method make_menu ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 91 - 103
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $menus ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method translate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 105 - 120
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $name ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method successJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 122 - 124
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method errorJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 126 - 128
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    /**
+     * 架构函数
+     * @param Request $request Request对象
+     * @access public
+     */
+    Method [ <user, inherits think\Controller, ctor> public method __construct ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 44 - 63
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> think\Request or NULL $request = NULL ]
+      }
+    }
+
+    /**
+     * 前置操作
+     * @access protected
+     * @param string $method  前置操作方法名
+     * @param array  $options 调用参数 ['only'=>[...]] 或者['except'=>[...]]
+     */
+    Method [ <user, inherits think\Controller> protected method beforeAction ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 76 - 95
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $method ]
+        Parameter #1 [ <optional> $options = Array ]
+      }
+    }
+
+    /**
+     * 加载模板输出
+     * @access protected
+     * @param string $template 模板文件名
+     * @param array  $vars     模板输出变量
+     * @param array  $replace  模板替换
+     * @param array  $config   模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method fetch ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 106 - 109
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $template = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 渲染内容输出
+     * @access protected
+     * @param string $content 模板内容
+     * @param array  $vars    模板输出变量
+     * @param array  $replace 替换内容
+     * @param array  $config  模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method display ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 120 - 123
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $content = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 模板变量赋值
+     * @access protected
+     * @param mixed $name  要显示的模板变量
+     * @param mixed $value 变量的值
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method assign ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 132 - 135
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $name ]
+        Parameter #1 [ <optional> $value = '' ]
+      }
+    }
+
+    /**
+     * 初始化模板引擎
+     * @access protected
+     * @param array|string $engine 引擎参数
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method engine ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 143 - 146
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $engine ]
+      }
+    }
+
+    /**
+     * 设置验证失败后是否抛出异常
+     * @access protected
+     * @param bool $fail 是否抛出异常
+     * @return $this
+     */
+    Method [ <user, inherits think\Controller> protected method validateFailException ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 154 - 158
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $fail = true ]
+      }
+    }
+
+    /**
+     * 验证数据
+     * @access protected
+     * @param array        $data     数据
+     * @param string|array $validate 验证器名或者验证规则数组
+     * @param array        $message  提示信息
+     * @param bool         $batch    是否批量验证
+     * @param mixed        $callback 回调方法（闭包）
+     * @return array|string|true
+     * @throws ValidateException
+     */
+    Method [ <user, inherits think\Controller> protected method validate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 171 - 208
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <required> $validate ]
+        Parameter #2 [ <optional> $message = Array ]
+        Parameter #3 [ <optional> $batch = false ]
+        Parameter #4 [ <optional> $callback = NULL ]
+      }
+    }
+
+    /**
+     * 操作成功跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method success ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 37 - 64
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 操作错误跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method error ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 76 - 103
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 返回封装后的API数据到客户端
+     * @access protected
+     * @param mixed     $data 要返回的数据
+     * @param integer   $code 返回的code
+     * @param mixed     $msg 提示信息
+     * @param string    $type 返回数据格式
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method result ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 115 - 126
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <optional> $code = 0 ]
+        Parameter #2 [ <optional> $msg = '' ]
+        Parameter #3 [ <optional> $type = '' ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * URL重定向
+     * @access protected
+     * @param string         $url 跳转的URL表达式
+     * @param array|integer  $params 其它URL参数
+     * @param integer        $code http code
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method redirect ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 136 - 145
+
+      - Parameters [3] {
+        Parameter #0 [ <required> $url ]
+        Parameter #1 [ <optional> $params = Array ]
+        Parameter #2 [ <optional> $code = 302 ]
+      }
+    }
+
+    /**
+     * 获取当前的response 输出类型
+     * @access protected
+     * @return string
+     */
+    Method [ <user, inherits think\Controller> protected method getResponseType ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 152 - 156
+    }
+  }
+}
+
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ RUN ] Method [ <user> public method index ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHead.php 29 - 31
+}
+
+[ info ] [ VIEW ] C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head\index.html [ array (
+  0 => 'menus',
+  1 => 'user',
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-12-11T23:35:25+08:00 ] ::1 ::1 GET /Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/index.html
+[ log ] localhost/Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/index.html [运行时间：0.097005s][吞吐率：10.31req/s] [内存消耗：3,770.91kb] [文件加载：44]
+[ info ] [ LANG ] C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'DepartmentHeadTutor',
+    1 => 'index',
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/Tutor-distribution/tutorAssign/public/index/department_head/index.html',
+  'accept-encoding' => 'gzip, deflate, sdch, br',
+  'accept-language' => 'zh-CN,zh;q=0.8,en;q=0.6',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=k77jo1nnafouohb6f38siu76k1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] Class [ <user> class app\index\controller\DepartmentHeadTutor extends app\index\controller\BaseController ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 8-568
+
+  - Constants [0] {
+  }
+
+  - Static properties [0] {
+  }
+
+  - Static methods [0] {
+  }
+
+  - Properties [6] {
+    Property [ <default> public $pageSize ]
+    Property [ <default> protected $view ]
+    Property [ <default> protected $request ]
+    Property [ <default> protected $failException ]
+    Property [ <default> protected $batchValidate ]
+    Property [ <default> protected $beforeActionList ]
+  }
+
+  - Methods [40] {
+    Method [ <user> public method index ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 12 - 25
+    }
+
+    Method [ <user> public method matchSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 28 - 81
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $page = 1 ]
+      }
+    }
+
+    Method [ <user> public method timeSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 84 - 138
+    }
+
+    Method [ <user> public method infoSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 140 - 188
+    }
+
+    Method [ <user> public method allocStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 192 - 203
+    }
+
+    Method [ <user> public method intelligentAlloc ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 207 - 329
+    }
+
+    Method [ <user> public method assignResult ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 332 - 424
+    }
+
+    Method [ <user> public method assignResultConfirm ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 435 - 437
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $r ]
+      }
+    }
+
+    Method [ <user> public method cTest ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 442 - 446
+    }
+
+    Method [ <user> public method modify ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 449 - 462
+    }
+
+    Method [ <user> public method saveModify ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 464 - 497
+    }
+
+    Method [ <user> public method oldPasswordConfirm ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 499 - 514
+    }
+
+    Method [ <user> public method studentManager ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 516 - 519
+    }
+
+    Method [ <user> public method addStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 522 - 527
+    }
+
+    Method [ <user> public method deleteStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 529 - 534
+    }
+
+    Method [ <user> public method studentList ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 536 - 552
+    }
+
+    Method [ <user> public method teacherList ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 554 - 567
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method auto_login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 14 - 19
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 65
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method hasLogin ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 67 - 72
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method logout ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 74 - 81
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method refresh_user ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 83 - 89
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method make_menu ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 91 - 103
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $menus ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method translate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 105 - 120
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $name ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method successJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 122 - 124
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method errorJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 126 - 128
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    /**
+     * 架构函数
+     * @param Request $request Request对象
+     * @access public
+     */
+    Method [ <user, inherits think\Controller, ctor> public method __construct ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 44 - 63
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> think\Request or NULL $request = NULL ]
+      }
+    }
+
+    Method [ <user, inherits think\Controller> protected method _initialize ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 66 - 68
+    }
+
+    /**
+     * 前置操作
+     * @access protected
+     * @param string $method  前置操作方法名
+     * @param array  $options 调用参数 ['only'=>[...]] 或者['except'=>[...]]
+     */
+    Method [ <user, inherits think\Controller> protected method beforeAction ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 76 - 95
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $method ]
+        Parameter #1 [ <optional> $options = Array ]
+      }
+    }
+
+    /**
+     * 加载模板输出
+     * @access protected
+     * @param string $template 模板文件名
+     * @param array  $vars     模板输出变量
+     * @param array  $replace  模板替换
+     * @param array  $config   模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method fetch ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 106 - 109
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $template = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 渲染内容输出
+     * @access protected
+     * @param string $content 模板内容
+     * @param array  $vars    模板输出变量
+     * @param array  $replace 替换内容
+     * @param array  $config  模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method display ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 120 - 123
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $content = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 模板变量赋值
+     * @access protected
+     * @param mixed $name  要显示的模板变量
+     * @param mixed $value 变量的值
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method assign ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 132 - 135
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $name ]
+        Parameter #1 [ <optional> $value = '' ]
+      }
+    }
+
+    /**
+     * 初始化模板引擎
+     * @access protected
+     * @param array|string $engine 引擎参数
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method engine ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 143 - 146
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $engine ]
+      }
+    }
+
+    /**
+     * 设置验证失败后是否抛出异常
+     * @access protected
+     * @param bool $fail 是否抛出异常
+     * @return $this
+     */
+    Method [ <user, inherits think\Controller> protected method validateFailException ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 154 - 158
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $fail = true ]
+      }
+    }
+
+    /**
+     * 验证数据
+     * @access protected
+     * @param array        $data     数据
+     * @param string|array $validate 验证器名或者验证规则数组
+     * @param array        $message  提示信息
+     * @param bool         $batch    是否批量验证
+     * @param mixed        $callback 回调方法（闭包）
+     * @return array|string|true
+     * @throws ValidateException
+     */
+    Method [ <user, inherits think\Controller> protected method validate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 171 - 208
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <required> $validate ]
+        Parameter #2 [ <optional> $message = Array ]
+        Parameter #3 [ <optional> $batch = false ]
+        Parameter #4 [ <optional> $callback = NULL ]
+      }
+    }
+
+    /**
+     * 操作成功跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method success ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 37 - 64
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 操作错误跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method error ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 76 - 103
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 返回封装后的API数据到客户端
+     * @access protected
+     * @param mixed     $data 要返回的数据
+     * @param integer   $code 返回的code
+     * @param mixed     $msg 提示信息
+     * @param string    $type 返回数据格式
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method result ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 115 - 126
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <optional> $code = 0 ]
+        Parameter #2 [ <optional> $msg = '' ]
+        Parameter #3 [ <optional> $type = '' ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * URL重定向
+     * @access protected
+     * @param string         $url 跳转的URL表达式
+     * @param array|integer  $params 其它URL参数
+     * @param integer        $code http code
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method redirect ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 136 - 145
+
+      - Parameters [3] {
+        Parameter #0 [ <required> $url ]
+        Parameter #1 [ <optional> $params = Array ]
+        Parameter #2 [ <optional> $code = 302 ]
+      }
+    }
+
+    /**
+     * 获取当前的response 输出类型
+     * @access protected
+     * @return string
+     */
+    Method [ <user, inherits think\Controller> protected method getResponseType ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 152 - 156
+    }
+  }
+}
+
+[ info ] [ RUN ] Method [ <user> public method index ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 12 - 25
+}
+
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\index.html [ array (
+  0 => 'user',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=teacher_class_system;host=127.0.0.1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `user_department_head` [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `user_department_head` WHERE  `workNumber` = '00001' LIMIT 1    [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2016-12-11T23:35:26+08:00 ] ::1 ::1 GET /Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/studentManager.html
+[ log ] localhost/Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/studentManager.html [运行时间：0.074004s][吞吐率：13.51req/s] [内存消耗：2,754.45kb] [文件加载：39]
+[ info ] [ LANG ] C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'DepartmentHeadTutor',
+    1 => 'studentManager',
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'referer' => 'http://localhost/Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/index.html',
+  'accept-encoding' => 'gzip, deflate, sdch, br',
+  'accept-language' => 'zh-CN,zh;q=0.8,en;q=0.6',
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=k77jo1nnafouohb6f38siu76k1',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] Class [ <user> class app\index\controller\DepartmentHeadTutor extends app\index\controller\BaseController ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 8-568
+
+  - Constants [0] {
+  }
+
+  - Static properties [0] {
+  }
+
+  - Static methods [0] {
+  }
+
+  - Properties [6] {
+    Property [ <default> public $pageSize ]
+    Property [ <default> protected $view ]
+    Property [ <default> protected $request ]
+    Property [ <default> protected $failException ]
+    Property [ <default> protected $batchValidate ]
+    Property [ <default> protected $beforeActionList ]
+  }
+
+  - Methods [40] {
+    Method [ <user> public method index ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 12 - 25
+    }
+
+    Method [ <user> public method matchSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 28 - 81
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $page = 1 ]
+      }
+    }
+
+    Method [ <user> public method timeSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 84 - 138
+    }
+
+    Method [ <user> public method infoSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 140 - 188
+    }
+
+    Method [ <user> public method allocStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 192 - 203
+    }
+
+    Method [ <user> public method intelligentAlloc ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 207 - 329
+    }
+
+    Method [ <user> public method assignResult ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 332 - 424
+    }
+
+    Method [ <user> public method assignResultConfirm ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 435 - 437
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $r ]
+      }
+    }
+
+    Method [ <user> public method cTest ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 442 - 446
+    }
+
+    Method [ <user> public method modify ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 449 - 462
+    }
+
+    Method [ <user> public method saveModify ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 464 - 497
+    }
+
+    Method [ <user> public method oldPasswordConfirm ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 499 - 514
+    }
+
+    Method [ <user> public method studentManager ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 516 - 519
+    }
+
+    Method [ <user> public method addStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 522 - 527
+    }
+
+    Method [ <user> public method deleteStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 529 - 534
+    }
+
+    Method [ <user> public method studentList ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 536 - 552
+    }
+
+    Method [ <user> public method teacherList ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 554 - 567
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method auto_login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 14 - 19
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 65
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method hasLogin ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 67 - 72
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method logout ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 74 - 81
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method refresh_user ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 83 - 89
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method make_menu ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 91 - 103
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $menus ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method translate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 105 - 120
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $name ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method successJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 122 - 124
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method errorJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 126 - 128
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    /**
+     * 架构函数
+     * @param Request $request Request对象
+     * @access public
+     */
+    Method [ <user, inherits think\Controller, ctor> public method __construct ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 44 - 63
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> think\Request or NULL $request = NULL ]
+      }
+    }
+
+    Method [ <user, inherits think\Controller> protected method _initialize ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 66 - 68
+    }
+
+    /**
+     * 前置操作
+     * @access protected
+     * @param string $method  前置操作方法名
+     * @param array  $options 调用参数 ['only'=>[...]] 或者['except'=>[...]]
+     */
+    Method [ <user, inherits think\Controller> protected method beforeAction ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 76 - 95
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $method ]
+        Parameter #1 [ <optional> $options = Array ]
+      }
+    }
+
+    /**
+     * 加载模板输出
+     * @access protected
+     * @param string $template 模板文件名
+     * @param array  $vars     模板输出变量
+     * @param array  $replace  模板替换
+     * @param array  $config   模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method fetch ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 106 - 109
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $template = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 渲染内容输出
+     * @access protected
+     * @param string $content 模板内容
+     * @param array  $vars    模板输出变量
+     * @param array  $replace 替换内容
+     * @param array  $config  模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method display ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 120 - 123
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $content = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 模板变量赋值
+     * @access protected
+     * @param mixed $name  要显示的模板变量
+     * @param mixed $value 变量的值
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method assign ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 132 - 135
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $name ]
+        Parameter #1 [ <optional> $value = '' ]
+      }
+    }
+
+    /**
+     * 初始化模板引擎
+     * @access protected
+     * @param array|string $engine 引擎参数
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method engine ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 143 - 146
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $engine ]
+      }
+    }
+
+    /**
+     * 设置验证失败后是否抛出异常
+     * @access protected
+     * @param bool $fail 是否抛出异常
+     * @return $this
+     */
+    Method [ <user, inherits think\Controller> protected method validateFailException ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 154 - 158
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $fail = true ]
+      }
+    }
+
+    /**
+     * 验证数据
+     * @access protected
+     * @param array        $data     数据
+     * @param string|array $validate 验证器名或者验证规则数组
+     * @param array        $message  提示信息
+     * @param bool         $batch    是否批量验证
+     * @param mixed        $callback 回调方法（闭包）
+     * @return array|string|true
+     * @throws ValidateException
+     */
+    Method [ <user, inherits think\Controller> protected method validate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 171 - 208
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <required> $validate ]
+        Parameter #2 [ <optional> $message = Array ]
+        Parameter #3 [ <optional> $batch = false ]
+        Parameter #4 [ <optional> $callback = NULL ]
+      }
+    }
+
+    /**
+     * 操作成功跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method success ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 37 - 64
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 操作错误跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method error ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 76 - 103
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 返回封装后的API数据到客户端
+     * @access protected
+     * @param mixed     $data 要返回的数据
+     * @param integer   $code 返回的code
+     * @param mixed     $msg 提示信息
+     * @param string    $type 返回数据格式
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method result ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 115 - 126
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <optional> $code = 0 ]
+        Parameter #2 [ <optional> $msg = '' ]
+        Parameter #3 [ <optional> $type = '' ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * URL重定向
+     * @access protected
+     * @param string         $url 跳转的URL表达式
+     * @param array|integer  $params 其它URL参数
+     * @param integer        $code http code
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method redirect ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 136 - 145
+
+      - Parameters [3] {
+        Parameter #0 [ <required> $url ]
+        Parameter #1 [ <optional> $params = Array ]
+        Parameter #2 [ <optional> $code = 302 ]
+      }
+    }
+
+    /**
+     * 获取当前的response 输出类型
+     * @access protected
+     * @return string
+     */
+    Method [ <user, inherits think\Controller> protected method getResponseType ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 152 - 156
+    }
+  }
+}
+
+[ info ] [ RUN ] Method [ <user> public method studentManager ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 516 - 519
+}
+
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ VIEW ] C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\student_manager.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-12-11T23:46:03+08:00 ] ::1 ::1 POST /Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/addStudent.html
+[ log ] localhost/Tutor-distribution/tutorAssign/public/index/DepartmentHeadTutor/addStudent.html [运行时间：0.065004s][吞吐率：15.38req/s] [内存消耗：2,481.24kb] [文件加载：34]
+[ info ] [ LANG ] C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'DepartmentHeadTutor',
+    1 => 'addStudent',
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'localhost',
+  'connection' => 'keep-alive',
+  'postman-token' => 'b7877abd-6a40-f00c-351e-bddbdf04923b',
+  'cache-control' => 'no-cache',
+  'origin' => 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36',
+  'accept' => '*/*',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept-language' => 'zh-CN,zh;q=0.8,en;q=0.6',
+  'cookie' => 'PHPSESSID=gsi9pn5fj55d90racnr24r7va3',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'content-length' => '441',
+)
+[ info ] [ PARAM ] array (
+  '------WebKitFormBoundarybKXc5rPbPOO4CAkG
+Content-Disposition:_form-data;_name' => '"grade"
+
+2014
+------WebKitFormBoundarybKXc5rPbPOO4CAkG
+Content-Disposition: form-data; name="serialNum"
+
+031402203
+------WebKitFormBoundarybKXc5rPbPOO4CAkG
+Content-Disposition: form-data; name="name"
+
+陈齐民
+------WebKitFormBoundarybKXc5rPbPOO4CAkG
+Content-Disposition: form-data; name="gender"
+
+男
+------WebKitFormBoundarybKXc5rPbPOO4CAkG--',
+)
+[ info ] [ RUN ] Class [ <user> class app\index\controller\DepartmentHeadTutor extends app\index\controller\BaseController ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 8-570
+
+  - Constants [0] {
+  }
+
+  - Static properties [0] {
+  }
+
+  - Static methods [0] {
+  }
+
+  - Properties [6] {
+    Property [ <default> public $pageSize ]
+    Property [ <default> protected $view ]
+    Property [ <default> protected $request ]
+    Property [ <default> protected $failException ]
+    Property [ <default> protected $batchValidate ]
+    Property [ <default> protected $beforeActionList ]
+  }
+
+  - Methods [40] {
+    Method [ <user> public method index ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 12 - 25
+    }
+
+    Method [ <user> public method matchSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 28 - 81
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $page = 1 ]
+      }
+    }
+
+    Method [ <user> public method timeSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 84 - 138
+    }
+
+    Method [ <user> public method infoSetting ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 140 - 188
+    }
+
+    Method [ <user> public method allocStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 192 - 203
+    }
+
+    Method [ <user> public method intelligentAlloc ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 207 - 329
+    }
+
+    Method [ <user> public method assignResult ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 332 - 424
+    }
+
+    Method [ <user> public method assignResultConfirm ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 435 - 437
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $r ]
+      }
+    }
+
+    Method [ <user> public method cTest ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 442 - 446
+    }
+
+    Method [ <user> public method modify ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 449 - 462
+    }
+
+    Method [ <user> public method saveModify ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 464 - 497
+    }
+
+    Method [ <user> public method oldPasswordConfirm ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 499 - 514
+    }
+
+    Method [ <user> public method studentManager ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 516 - 519
+    }
+
+    Method [ <user> public method addStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 522 - 529
+    }
+
+    Method [ <user> public method deleteStudent ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 531 - 536
+    }
+
+    Method [ <user> public method studentList ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 538 - 554
+    }
+
+    Method [ <user> public method teacherList ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 556 - 569
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method auto_login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 14 - 19
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method login ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 21 - 65
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method hasLogin ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 67 - 72
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $type = NULL ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method logout ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 74 - 81
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method refresh_user ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 83 - 89
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method make_menu ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 91 - 103
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $menus ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method translate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 105 - 120
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $name ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method successJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 122 - 124
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    Method [ <user, inherits app\index\controller\BaseController> public method errorJson ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\BaseController.php 126 - 128
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $data = '' ]
+      }
+    }
+
+    /**
+     * 架构函数
+     * @param Request $request Request对象
+     * @access public
+     */
+    Method [ <user, inherits think\Controller, ctor> public method __construct ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 44 - 63
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> think\Request or NULL $request = NULL ]
+      }
+    }
+
+    Method [ <user, inherits think\Controller> protected method _initialize ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 66 - 68
+    }
+
+    /**
+     * 前置操作
+     * @access protected
+     * @param string $method  前置操作方法名
+     * @param array  $options 调用参数 ['only'=>[...]] 或者['except'=>[...]]
+     */
+    Method [ <user, inherits think\Controller> protected method beforeAction ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 76 - 95
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $method ]
+        Parameter #1 [ <optional> $options = Array ]
+      }
+    }
+
+    /**
+     * 加载模板输出
+     * @access protected
+     * @param string $template 模板文件名
+     * @param array  $vars     模板输出变量
+     * @param array  $replace  模板替换
+     * @param array  $config   模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method fetch ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 106 - 109
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $template = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 渲染内容输出
+     * @access protected
+     * @param string $content 模板内容
+     * @param array  $vars    模板输出变量
+     * @param array  $replace 替换内容
+     * @param array  $config  模板参数
+     * @return mixed
+     */
+    Method [ <user, inherits think\Controller> protected method display ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 120 - 123
+
+      - Parameters [4] {
+        Parameter #0 [ <optional> $content = '' ]
+        Parameter #1 [ <optional> $vars = Array ]
+        Parameter #2 [ <optional> $replace = Array ]
+        Parameter #3 [ <optional> $config = Array ]
+      }
+    }
+
+    /**
+     * 模板变量赋值
+     * @access protected
+     * @param mixed $name  要显示的模板变量
+     * @param mixed $value 变量的值
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method assign ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 132 - 135
+
+      - Parameters [2] {
+        Parameter #0 [ <required> $name ]
+        Parameter #1 [ <optional> $value = '' ]
+      }
+    }
+
+    /**
+     * 初始化模板引擎
+     * @access protected
+     * @param array|string $engine 引擎参数
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method engine ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 143 - 146
+
+      - Parameters [1] {
+        Parameter #0 [ <required> $engine ]
+      }
+    }
+
+    /**
+     * 设置验证失败后是否抛出异常
+     * @access protected
+     * @param bool $fail 是否抛出异常
+     * @return $this
+     */
+    Method [ <user, inherits think\Controller> protected method validateFailException ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 154 - 158
+
+      - Parameters [1] {
+        Parameter #0 [ <optional> $fail = true ]
+      }
+    }
+
+    /**
+     * 验证数据
+     * @access protected
+     * @param array        $data     数据
+     * @param string|array $validate 验证器名或者验证规则数组
+     * @param array        $message  提示信息
+     * @param bool         $batch    是否批量验证
+     * @param mixed        $callback 回调方法（闭包）
+     * @return array|string|true
+     * @throws ValidateException
+     */
+    Method [ <user, inherits think\Controller> protected method validate ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\think\Controller.php 171 - 208
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <required> $validate ]
+        Parameter #2 [ <optional> $message = Array ]
+        Parameter #3 [ <optional> $batch = false ]
+        Parameter #4 [ <optional> $callback = NULL ]
+      }
+    }
+
+    /**
+     * 操作成功跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method success ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 37 - 64
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 操作错误跳转的快捷方法
+     * @access protected
+     * @param mixed     $msg 提示信息
+     * @param string    $url 跳转的URL地址
+     * @param mixed     $data 返回的数据
+     * @param integer   $wait 跳转等待时间
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method error ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 76 - 103
+
+      - Parameters [5] {
+        Parameter #0 [ <optional> $msg = '' ]
+        Parameter #1 [ <optional> $url = NULL ]
+        Parameter #2 [ <optional> $data = '' ]
+        Parameter #3 [ <optional> $wait = 3 ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * 返回封装后的API数据到客户端
+     * @access protected
+     * @param mixed     $data 要返回的数据
+     * @param integer   $code 返回的code
+     * @param mixed     $msg 提示信息
+     * @param string    $type 返回数据格式
+     * @param array     $header 发送的Header信息
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method result ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 115 - 126
+
+      - Parameters [5] {
+        Parameter #0 [ <required> $data ]
+        Parameter #1 [ <optional> $code = 0 ]
+        Parameter #2 [ <optional> $msg = '' ]
+        Parameter #3 [ <optional> $type = '' ]
+        Parameter #4 [ <optional> array $header = Array ]
+      }
+    }
+
+    /**
+     * URL重定向
+     * @access protected
+     * @param string         $url 跳转的URL表达式
+     * @param array|integer  $params 其它URL参数
+     * @param integer        $code http code
+     * @return void
+     */
+    Method [ <user, inherits think\Controller> protected method redirect ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 136 - 145
+
+      - Parameters [3] {
+        Parameter #0 [ <required> $url ]
+        Parameter #1 [ <optional> $params = Array ]
+        Parameter #2 [ <optional> $code = 302 ]
+      }
+    }
+
+    /**
+     * 获取当前的response 输出类型
+     * @access protected
+     * @return string
+     */
+    Method [ <user, inherits think\Controller> protected method getResponseType ] {
+      @@ C:\wamp64\www\Tutor-distribution\tutorAssign\thinkphp\library\traits\controller\Jump.php 152 - 156
+    }
+  }
+}
+
+[ info ] [ RUN ] Method [ <user> public method addStudent ] {
+  @@ C:\wamp64\www\Tutor-distribution\tutorAssign\app\index\controller\DepartmentHeadTutor.php 522 - 529
+}
+
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------

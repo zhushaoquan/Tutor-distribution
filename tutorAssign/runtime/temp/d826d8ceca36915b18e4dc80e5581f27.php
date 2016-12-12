@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:110:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\match_setting.html";i:1481468037;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:110:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\match_setting.html";i:1481469522;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,13 +100,13 @@
                       <ul class="pagination" style="float: right;">
                           <?php if($curPage != 1): ?>
                               <li><a href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/'.($curPage-1)); ?>">&laquo;</a></li>
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_28485__=$curPage-2;$__FOR_END_28485__=$curPage+3;for($i=$__FOR_START_28485__;$i < $__FOR_END_28485__;$i+=1){ ?>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_17585__=$curPage-2;$__FOR_END_17585__=$curPage+3;for($i=$__FOR_START_17585__;$i < $__FOR_END_17585__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='now'"; ?> href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_25532__=$totalPage-5;$__FOR_END_25532__=$totalPage;for($i=$__FOR_START_25532__;$i < $__FOR_END_25532__;$i+=1){ ?>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_15192__=$totalPage-5;$__FOR_END_15192__=$totalPage;for($i=$__FOR_START_15192__;$i < $__FOR_END_15192__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='now'"; ?> href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_5039__=1;$__FOR_END_5039__=6;for($i=$__FOR_START_5039__;$i < $__FOR_END_5039__;$i+=1){ ?>
+                            <?php } elseif($totalPage > 5): $__FOR_START_22587__=1;$__FOR_END_22587__=6;for($i=$__FOR_START_22587__;$i < $__FOR_END_22587__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='now'"; ?> href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_3982__=1;$__FOR_END_3982__=$totalPage;for($i=$__FOR_START_3982__;$i < $__FOR_END_3982__;$i+=1){ ?>
+                            <?php } else: $__FOR_START_7882__=1;$__FOR_END_7882__=$totalPage;for($i=$__FOR_START_7882__;$i < $__FOR_END_7882__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='now'"; ?> href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="#">&raquo;</a></li>

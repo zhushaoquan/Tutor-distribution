@@ -522,21 +522,35 @@ class DepartmentHeadTutor extends BaseController {
     public function addStudent() {
     	$request = Request::instance();
     	if ($request->isPost()) {
-    		
+    		$student = $request->post();
+    		$student['password'] = $student['serialNum'];
+
+    		if (Db::table('user_student_'.$student['grade'])->insert($student)) {
+    			return true;
+    		} else {
+    			return false;
+    		}
     	}
     }
 
     public function deleteStudent() {
     	$request = Request::instance();
-    	if ($request->isPost()) {
-    		
+    	if ($request->isGet()) {
+    		$grade = $request->get('grade');
+    		$serialNum = $request->get('serialNum');
+
+    		if (Db::table('user_student_'.$grade)->where('serialNum','in',$serialNum)->delete()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
     	}
     }
 
     public function studentList() {
-//    	$user = $this->auto_login();
+	   	$user = $this->auto_login();
 
-//    	$department = $user['department'];
+	   	$department = $user['department'];
     	$lastGrade = Db::table('tc_grade')->order('grade desc')->select();
     	$pageSize = 10;
 
@@ -545,8 +559,9 @@ class DepartmentHeadTutor extends BaseController {
     		$grade = $request->get('grade') != '' ? $request->get('grade') : $lastGrade[0]['grade'];
     		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 
-    		$studentList['amount'] = count(Db::table('user_student_'.$grade)->where('department','信息安全与网络工程系')->select());
-    		$studentList['information'] = Db::table('user_student_'.$grade)->where('department','信息安全与网络工程系')->field('sid,serialNum,name,department,grade,gpa,rank')->page($curPage,$pageSize)->select();
+    		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('department',$department)->select())/$pageSize);
+    		$studentList['amount'] = $totalPage;
+    		$studentList['information'] = Db::table('user_student_'.$grade)->where('department',$department)->field('sid,serialNum,name,department,grade,gpa,rank')->page($curPage,$pageSize)->select();
     		return json($studentList);
     	}
     }
@@ -563,6 +578,17 @@ class DepartmentHeadTutor extends BaseController {
     		$teacherList['amount'] = count(Db::table('user_teacher')->where('department',$user['department'])->select());
     		$teacherList['information'] = Db::table('user_teacher')->where('department',$user['department'])->field('workNumber,name,sex')->page($curPage,$pageSize)->select();
     		return json($teacherList);
+    	}
+    }
+
+
+    public function gradeList() {
+    	$request = Request::instance();
+
+    	if ($request->isGet()) {
+    		$gradeList = Db::table('tc_grade')->limit(5)->select();
+
+    		return json($gradeList);
     	}
     }
 }
