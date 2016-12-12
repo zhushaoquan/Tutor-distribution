@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_change.html";i:1481544192;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_change.html";i:1481547620;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -35,7 +35,7 @@
                     <a href="<?php echo url('/index/TeachingOfficeTutor/index'); ?>">
                         <li><i class="glyphicon glyphicon-user"></i> 个人信息</li>
                     </a>
-                    <a href="<?php echo url('TeachingOfficeTutor/tutor_manager'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li></a>
+                    <a href="<?php echo url('TeachingOfficeTutor/head_list'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li></a>
                     <a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change'); ?>">
                         <li class="active"><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
                     </a>
@@ -160,13 +160,13 @@
                         <ul class="pagination" style="float: right;">
                            <?php if($curPage != 1): ?>
                               <li><a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage-1).'/dep/'.$dep.'/grade/'.$grade); ?>">&laquo;</a></li>
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_32197__=$curPage-2;$__FOR_END_32197__=$curPage+3;for($i=$__FOR_START_32197__;$i < $__FOR_END_32197__;$i+=1){ ?>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_30354__=$curPage-2;$__FOR_END_30354__=$curPage+3;for($i=$__FOR_START_30354__;$i < $__FOR_END_30354__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_7228__=$totalPage-5;$__FOR_END_7228__=$totalPage;for($i=$__FOR_START_7228__;$i < $__FOR_END_7228__;$i+=1){ ?>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_29725__=$totalPage-5;$__FOR_END_29725__=$totalPage;for($i=$__FOR_START_29725__;$i < $__FOR_END_29725__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_24111__=1;$__FOR_END_24111__=6;for($i=$__FOR_START_24111__;$i < $__FOR_END_24111__;$i+=1){ ?>
+                            <?php } elseif($totalPage > 5): $__FOR_START_5364__=1;$__FOR_END_5364__=6;for($i=$__FOR_START_5364__;$i < $__FOR_END_5364__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_29710__=1;$__FOR_END_29710__=$totalPage;for($i=$__FOR_START_29710__;$i < $__FOR_END_29710__;$i+=1){ ?>
+                            <?php } else: $__FOR_START_26311__=1;$__FOR_END_26311__=$totalPage;for($i=$__FOR_START_26311__;$i < $__FOR_END_26311__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage+1).'/dep/'.$dep.'/grade/'.$grade); ?>">&raquo;</a></li>
