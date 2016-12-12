@@ -333,17 +333,10 @@ class DepartmentHeadTutor extends BaseController {
 	}  
 
 
+
+
 	public function assignResultConfirm($r) {
 		dump($r);
-	}
-
-
-
-	//测试调用算法
-	public function cTest() {
-		$grade = Db::table('tc_grade')->order('grade desc')->select();
-		$data = Db::table('user_student_'.$grade[0]['grade'])->select();
-		return json($data);
 	}
 
 
@@ -476,9 +469,40 @@ class DepartmentHeadTutor extends BaseController {
     	if ($request->isGet()) {
     		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 
-    		$teacherList['amount'] = count(Db::table('user_teacher')->where('department',$user['department'])->select());
+    		$totalPage = ceil(count(Db::table('user_teacher')->where('department',$user['department'])->select())/$pageSize);
+    		$teacherList['amount'] = $totalPage;
     		$teacherList['information'] = Db::table('user_teacher')->where('department',$user['department'])->field('workNumber,name,sex')->page($curPage,$pageSize)->select();
     		return json($teacherList);
+    	}
+    }
+
+    public function addTeacher() {
+    	$request = Request::instance();
+    	if ($request->isPost()) {
+    		$teacher = $request->post();
+
+    		$teacher['password'] = $teacher['workNumber'];
+
+
+    		if (Db::table('user_teacher')->insert($teacher)) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	}
+    }
+
+
+    public function deleteTeacher() {
+    	$request = Request::instance();
+    	if ($request->isGet()) {
+    		$workNumber = $request->get('workNumber');
+
+    		if (Db::table('user_teacher')->where('workNumber','in',$workNumber)->delete()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
     	}
     }
 

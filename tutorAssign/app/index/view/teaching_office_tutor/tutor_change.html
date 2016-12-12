@@ -34,7 +34,7 @@
                     <a href="{{:url('/index/TeachingOfficeTutor/index')}}">
                         <li><i class="glyphicon glyphicon-user"></i> 个人信息</li>
                     </a>
-                    <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
+                    <a href="{{:url('TeachingOfficeTutor/tutor_manager')}}"><li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li></a>
                     <a href="{{:url('/index/TeachingOfficeTutor/tutor_change')}}">
                         <li class="active"><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
                     </a>
@@ -149,7 +149,7 @@
                         <div class="col-md-2"> </div>
                         <div class="col-md-2"> </div>
                         <div class="col-md-2"> 
-                            <button type="submit" class="btn btn-primary" id="sub-result-export" onClick ="$('#sresult').tableExport({type:'excel',escape:'false'});">导&nbsp;&nbsp;出</button>
+                            <button type="submit" class="btn btn-primary" id="sub-result-export"> <a id="downloadFile" href="{{$Think.const.OLD}}/../教师初始账号表.xls" download="result" style="color: #fff; text-decoration: none;">导&nbsp;&nbsp;出</a></button>
                         </div>
 
                         <div class="col-md-2"> 
