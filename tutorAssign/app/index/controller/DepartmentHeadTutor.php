@@ -324,112 +324,13 @@ class DepartmentHeadTutor extends BaseController {
 	    }
 
         $this->assign('user', $user);
-        // return $this->fetch('assign_result');
+
+		// $this->assign('studentElectedResult', $studentElectedResult);
+  //       $this->assign('studentUnelectedResult', $studentUnelectedResult);
+  //       $this->assign('tutorAssignResult', $tutorAssignResult);
+        return $this->fetch('assign_result');
 
 	}  
-
-
-	public function assignResult() {
-		$user = $this->auto_login();
-		$grade = Db::table('tc_grade')->order('grade desc')->select();
-
-		//获取学生信息
-		$student = Db::table('user_student_'.$grade[0]['grade'])->where('chosen',0)->where('department',$user['department'])->field('sid,serialNum,gpa,chosen')->select();
-		$countStudent = count($student);
-
-		for ($i=0; $i <$countStudent ; $i++) { 
-			$student[$i]['voluntary'] = Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$student[$i]['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
-
-			$inputStudent[$i] = $student[$i]['serialNum'].' '.$student[$i]['gpa'].PHP_EOL.$student[$i]['voluntary']['wishFirst'].PHP_EOL.$student[$i]['voluntary']['wishSecond'].PHP_EOL.$student[$i]['voluntary']['wishThird'].PHP_EOL.$student[$i]['voluntary']['wishForth'].PHP_EOL.$student[$i]['voluntary']['wishFifth'].PHP_EOL.PHP_EOL;
-		}
-		//将获取的学生信息转换为.txt文件
-		file_put_contents('student.txt', $inputStudent);
-
-		//获取导师信息
-		$teacher = Db::table('user_teacher')->where('department',$user['department'])->select();
-		$countTeacher = count($teacher);
-
-
-		for ($i=0; $i <$countTeacher ; $i++) {
-			$teacherIssue[$i] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$teacher[$i]['workNumber'])->find(); 
-			$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalNatur'] - $teacherIssue[$i]['nowNatur'];
-
-			$inputTeacher[$i] = $teacher[$i]['workNumber'].' '.$teacher[$i]['avaliableNumber'].PHP_EOL;
-		}
-		//将获取的老师信息转换为.txt文件
-		file_put_contents('teacher.txt', $inputTeacher);
-
-		//调用算法进行分配
-		$fileNameWithParam = 'distribute.exe '.$countStudent.' '.$countTeacher;
-		system($fileNameWithParam);
-
-		$studentElected = file_get_contents('student_elected.txt');      //获取通过算法得到分配的学生的结果，转换为string
-		$studentUnelected = file_get_contents('student_unelected.txt');  //获取通过算法仍然未得到分配的学生的结果，转换为string
-		$tutorAssign = file_get_contents('tutor_assign.txt');            //获取通过算法，生成的导师对应学生的结果，转换为string
-
-		//分割studentElected字符串，转换为数组
-		$studentElected = str_replace("\r\n", '', $studentElected);
-		$studentElectedArr = explode(',', $studentElected);
-		for ($i=0; $i <count($studentElectedArr) ; $i++) { 
-			$studentElectedArr[$i] = explode(' ', $studentElectedArr[$i]);
-
-			$studentElectedResult[$i]['serialNum'] = $studentElectedArr[$i][0];
-			$studentElectedResult[$i]['sid'] = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum',$studentElectedResult[$i]['serialNum'])->field('sid')->find();
-			$studentElectedResult[$i]['sname'] = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum',$studentElectedResult[$i]['serialNum'])->field('name')->find();
-			$studentElectedResult[$i]['workNumber'] = $studentElectedArr[$i][1];
-			$studentElectedResult[$i]['tname'] = Db::table('user_teacher')->where('workNumber',$studentElectedResult[$i]['workNumber'])->field('name')->find();
-		}
-
-		//分割studentUnlected字符串，转换为数组
-		$studentUnelected = str_replace("\r\n", '', $studentUnelected);
-		$studentUnelectedArr = explode(',', $studentUnelected);
-		for ($i=0; $i <count($studentUnelectedArr) ; $i++) { 
-			$studentUnelectedArr[$i] = explode(' ', $studentUnelectedArr[$i]);
-
-			$studentUnelectedResult[$i]['serialNum'] = $studentUnelectedArr[$i][0];
-		}
-
-		//分割tutorAssign字符串，转换为数组
-		$tutorAssign = str_replace("\r\n", '', $tutorAssign);
-		$tutorAssignArr = explode(',', $tutorAssign);
-		for ($i=0; $i <count($tutorAssignArr) ; $i++) { 
-			$tutorAssignArr[$i] = explode(' ', $tutorAssignArr[$i]);
-
-			$tutorAssignResult[$i]['workNumber'] = $tutorAssignArr[$i][0];
-			$tutorAssignResult[$i]['count'] = $tutorAssignArr[$i][1];
-			$tutorAssignResult[$i]['avaliableNumber'] = $tutorAssignArr[$i][2];
-			if ($tutorAssignArr[$i][3] == "null") {
-				$tutorAssignResult[$i]['student'] = null;
-			} else {
-				$tutorAssignResult[$i]['student'] = $tutorAssignArr[$i][3];
-
-				$tutorAssignResult[$i]['student'] = explode('-', $tutorAssignResult[$i]['student']);
-			}
-		}
-
-		// dump($tutorAssignResult);
-		$this->assign('studentElectedResult',$studentElectedResult);
-		$this->assign('user', $user);
-		return $this->fetch('assign_result');
-
-		// return json($studentElectedResult); //返回通过算法得到分配的学生的JSON
-		// return json($studentUnelectedResult); //获取通过算法仍然未得到分配的学生的JSON
-		// dump($tutorAssignArr);
-		// dump($tutorAssignResult);
-
-
-
-		$this->assign('user', $user);
-		return $this->fetch('assign_result');
-	}
-
-//
-//	public function assignResult() {
-//		$user = $this->auto_login();
-//
-//		$this->assign('user', $user);
-//		return $this->fetch('assign_result');
-//	}
 
 
 	public function assignResultConfirm($r) {
@@ -523,15 +424,27 @@ class DepartmentHeadTutor extends BaseController {
     	$request = Request::instance();
     	if ($request->isPost()) {
     		$student = $request->post();
+    		$student['password'] = $student['serialNum'];
 
-    		return json($student);
+    		if (Db::table('user_student_'.$student['grade'])->insert($student)) {
+    			return true;
+    		} else {
+    			return false;
+    		}
     	}
     }
 
     public function deleteStudent() {
     	$request = Request::instance();
-    	if ($request->isPost()) {
-    		
+    	if ($request->isGet()) {
+    		$grade = $request->get('grade');
+    		$serialNum = $request->get('serialNum');
+
+    		if (Db::table('user_student_'.$grade)->where('serialNum','in',$serialNum)->delete()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
     	}
     }
 
@@ -568,6 +481,7 @@ class DepartmentHeadTutor extends BaseController {
     		return json($teacherList);
     	}
     }
+
 
     public function student_result($page=1,$dep="",$to="",$grade=0)//学生结果查看
     {
@@ -671,5 +585,16 @@ class DepartmentHeadTutor extends BaseController {
 
 		$this->assign('user', $head);
 		return $this->fetch('tutor_result');
+=======
+
+    public function gradeList() {
+    	$request = Request::instance();
+
+    	if ($request->isGet()) {
+    		$gradeList = Db::table('tc_grade')->limit(5)->select();
+
+    		return json($gradeList);
+    	}
+
     }
 }

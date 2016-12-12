@@ -7,6 +7,7 @@ use think\Request;
 class Student extends BaseController {
 	public $department_1 = "计算机实验班";
 	public $department_2 = "数学实验班";
+	public $voluntaryinfosetting;
 	public $ontime;
 	public $teachers ;
 	public $time = "";
@@ -27,6 +28,7 @@ class Student extends BaseController {
   
     	$this->user = $this->auto_login();
     	$data = Db::table('tc_voluntaryinfosetting')->where('grade',$this->grades[0]['grade'])->where('department',$this->user['department'])->find();
+        $this->voluntaryinfosetting = $data;
         $nowtime = time();
         $data['message'] = '';
         $data['ontime']= -1;
@@ -48,7 +50,10 @@ class Student extends BaseController {
         }else if($nowtime >= $data['issueStart'] && $nowtime <= $data['issueEnd']) {
         	//导师填报课题时段！
         	$data['ontime'] = 0;
-        	$data['message'] = "当前为导师"."<font color='#FF0000'>填报课题</font>时间：".date('Y-m-d',$data['issueStart'])."至".date('Y-m-d',$data['issueEnd'])."！"."<font color='#FF0000'>第一轮志愿填报</font>时间为".date('Y-m-d',$data['firstStart'])."至".date('Y-m-d',$data['firstEnd'])."! <font color='#FF0000'>第二轮志愿填报</font>时间为".date('Y-m-d',$data['secondStart'])."至".date('Y-m-d',$data['secondEnd'])."!";
+        	/*
+        	$data['message'] = "当前为导师"."<font color='#FF0000'>填报课题</font>时间：".date('Y-m-d',$data['issueStart'])."至".date('Y-m-d',$data['issueEnd'])."！"."<font color='#FF0000'>第一轮志愿填报</font>时间为".date('Y-m-d',$data['firstStart'])."至".date('Y-m-d',$data['firstEnd'])."! <font color='#FF0000'>第二轮志愿填报</font>时间为".date('Y-m-d',$data['secondStart'])."至".date('Y-m-d',$data['secondEnd'])."!";*/
+        	$data['message'] = "当前为导师"."<font color='#FF0000'>填报课题</font>时间：".date('Y-m-d',$data['issueStart'])."至".date('Y-m-d',$data['issueEnd'])."！";
+
 
         }else if($nowtime < $data['firstEnd'] && $nowtime > $data['firstStart']) {
         	//第一轮志愿填报
@@ -192,7 +197,7 @@ class Student extends BaseController {
 			                                     ->where(function ($query) {
 			                                     	$query->where('isExperial',1)->whereOr('isExperial',3);
 			                                     })
-			                                     ->where('compExperNow < ','totalCompExper')
+			                                     ->where('compExperNow', '<','totalCompExper')
 			                                     ->order('t.name desc')
 			                                     ->page($page,$this->pageSize)
 			                                     ->select();
@@ -203,7 +208,7 @@ class Student extends BaseController {
 			                                     ->where(function ($query) {
 			                                     	$query->where('isExperial',1)->whereOr('isExperial',3);
 			                                     })
-			                                     ->where('compExperNow < ','totalCompExper')
+			                                     ->where('compExperNow', '<','totalCompExper')
 			                                     ->order('t.name desc')
 			                                     ->select());
 			$page = $totalPage = ceil($total/$this->pageSize);
@@ -221,7 +226,7 @@ class Student extends BaseController {
 			                                     ->where(function ($query) {
 			                                     	$query->where('isExperial',2)->whereOr('isExperial',3);
 			                                     })
-			                                     ->where('mathExperNow < ','totalMathExper')
+			                                     ->where('mathExperNow','<','totalMathExper')
 			                                     ->order('t.name desc')
 			                                     ->page($page,$this->pageSize)->select();
 			$this->teachers = $teachers;
@@ -230,7 +235,7 @@ class Student extends BaseController {
 			                                     ->where(function ($query) {
 			                                     	$query->where('isExperial',2)->whereOr('isExperial',3);
 			                                     })
-			                                     ->where('mathExperNow < ','totalMathExper')
+			                                     ->where('mathExperNow','<','totalMathExper')
 			                                     ->order('t.name desc')
 			                                     ->select());
 			$page = $totalPage = ceil($total/$this->pageSize);
@@ -244,14 +249,14 @@ class Student extends BaseController {
 			//自然班
 			$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                     ->where('department',$this->user['department'])
-			                                     ->where('naturNow < ','totalNatur')
+			                                     ->where('naturNow ','< ','totalNatur')
 			                                     ->order('t.name desc')
 			                                     ->page($page,$this->pageSize)
 			                                     ->select();
 
 		    $total = count(Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                     ->where('department',$this->user['department'])
-			                                     ->where('naturNow < ','totalNatur')
+			                                     ->where('naturNow ','< ','totalNatur')
 			                                     ->order('t.name desc')
 			                                     ->select());
 		    $this->teachers = $teachers;
@@ -270,14 +275,13 @@ class Student extends BaseController {
 	}
 
 //导师详细信息
-	public function tutor_detail() {
+	public function tutor_detail($workNumber) {
 		$user = $this->auto_login();
-		$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //
-        $tutors = Db::table('user_teacher')->where('department',$student['department'])->select();
-
-        $this->assign('tutors', $tutors);
+		//$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //
+        $tutor = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i','t.workNumber = i.workNumber')->where('t.workNumber',$workNumber)->find();
+        $this->assign('tutor', $tutor);
         $this->assign('user', $user);
-		return $this->fetch('tutor_list');
+		return $this->fetch('test');
 
 	}
 
@@ -286,25 +290,28 @@ class Student extends BaseController {
 
 		if($this->user['department'] == $this->department_1) {
 			//计算机实验吧
-			$tutors = Db::table('user_teacher') ->where(function ($query) {
+			$tutors = Db::table('user_teacher') ->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
+			                                    ->where(function ($query) {
 			                                     	$query->where('isExperial',1)->whereOr('isExperial',3);
 			                                     })
-			                                    ->where('compExperNow < ','totalCompExper')
+			                                    ->where('compExperNow ','< ','totalCompExper')
 			                                    ->order('t.name desc')
 			                                    ->select();
 
 		} else if($this->user['department'] == $this->department_2) {
 			//数学实验板
-			$tutors = Db::table('user_teacher')->where(function ($query) {
+			$tutors = Db::table('user_teacher') ->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
+			                                    ->where(function ($query) {
 			                                     	$query->where('isExperial',2)->whereOr('isExperial',3);
 			                                     })
-			                                    ->where('mathExperNow < ','totalMathExper')
+			                                    ->where('mathExperNow ','< ','totalMathExper')
 			                                    ->order('t.name desc')
 			                                    ->select();
 		} else {
 			//自然班
-			$tutors = Db::table('user_teacher')->where('department',$this->user['department'])
-			                                   ->where('naturNow < ','totalNatur')
+			$tutors = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
+			                                   ->where('department',$this->user['department'])
+			                                   ->where('naturNow ','<','totalNatur')
 			                                   ->order('t.name desc')
 			                                   ->select();
 		}
@@ -348,17 +355,17 @@ class Student extends BaseController {
 
             $bool;
 	        if($result==NULL) {
-	        	$bool = Db::table('tc_voluntary')->insert($data1);
+	        	$bool = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->insert($data1);
 	        } else {
 	        	$data1['vid'] = $result['vid'];
-	        	$bool = DB::table('tc_voluntary')->update($data1);
+	        	$bool = DB::table('tc_voluntary_'.$this->grades[0]['grade'])->update($data1);
 	        }
 
 	        if($bool) $this->showNotice("志愿填报成功，静候佳音吧！",url('Student/edit_voluntary'));
 
 
         }
-        if($this->ontime == 1|| $this->ontime == 2)$voluntary = Db::table('tc_voluntary')->where('sid',$this->user['sid'])->where('round', $this->ontime)->find();
+        if($this->ontime == 1|| $this->ontime == 2)$voluntary = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$this->user['sid'])->where('round', $this->ontime)->find();
         else $voluntary = array();
         
         $this->assign('voluntary',$voluntary);
@@ -384,7 +391,7 @@ class Student extends BaseController {
 			     $students[1] = $this->user;
 			     $i=2;
 			     foreach ($sids as $key => $value) {
-			    	$stuinfo = Db::table('user_student')->where('sid',$value['sid'])->find();    	
+			    	$stuinfo = Db::table('user_student_'.$this->grades[0]['grade'])->where('sid',$value['sid'])->find();    	
 			    	$students[$i] = $stuinfo;
 			    	$i++;
 		    	 }
