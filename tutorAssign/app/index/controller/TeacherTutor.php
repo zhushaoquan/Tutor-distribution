@@ -644,9 +644,7 @@ class TeacherTutor extends BaseController {
         $student = Db::table('user_student_'.$this->grades[0]['grade'])->where('sid', $sid)->find();
         $this->assign('student', $student);
         $this->assign('user', $user);
-        //
         return $this->fetch('show_resultdetail');
-
     }
 
 
