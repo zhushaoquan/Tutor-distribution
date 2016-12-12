@@ -609,7 +609,7 @@ class DepartmentHeadTutor extends BaseController {
 
 		$this->assign('user', $head);
 		return $this->fetch('tutor_result');
-=======
+}
 
     public function gradeList() {
     	$request = Request::instance();
