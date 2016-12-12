@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:93:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\tutor_list.html";i:1479472168;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:93:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\tutor_list.html";i:1481552370;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +49,7 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示1</p>
+                    <p>提示1：<?php echo $message;?></p>
                 </div>
                 <div class="page-header">
                     <h3>导师列表
@@ -66,30 +66,30 @@
                             <th>电子邮件</th>
                         </tr>
                         <tbody>
-                            <?php if(is_array($teachers) || $teachers instanceof \think\Collection): $i = 0; $__LIST__ = $teachers;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$t): $mod = ($i % 2 );++$i;?>
+                            <?php if(is_array($teachers) || $teachers instanceof \think\Collection): $i = 0; $__LIST__ = $teachers;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$t): $mod = ($i % 2 );++$i;$i=1;?>
                                 <tr>
-                                    <td><?php echo $t['workNumber']; ?></td>
-                                    <td><?php echo $t['name']; ?></td>
+                                    <td><?php echo $i; $i++;?></td>
+                                    <td><a href="<?php echo url('/index/Student/tutor_detail/workNumber/'.$t['workNumber']); ?>"><?php echo $t['name']; ?> </a></td>
                                     <td><?php echo $t['sex']; ?></td>
                                     <td><?php echo $t['title']; ?></td>
                                     <td><?php echo $t['department']; ?></td>
                                     <td><?php echo $t['email']; ?></td>
+                               
                                 </tr>
                             <?php endforeach; endif; else: echo "" ;endif; ?>
                         </tbody>
                     </table>
                     <nav>
                       <ul class="pagination" style="float: right;">
-                      <a href="<?php echo url('/index/index/Student/tutor_list/'.($curPage-1)); ?>">&laquo;</a>
                           <?php if($curPage != 1): ?>
-                              <li><a href="<?php echo url('/index/index/Student/tutor_list/'.($curPage-1)); ?>">&laquo;</a></li>
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_23564__=$curPage-2;$__FOR_END_23564__=$curPage+3;for($i=$__FOR_START_23564__;$i < $__FOR_END_23564__;$i+=1){ ?>
+                              <li><a href="<?php echo url('/index/Student/tutor_list/'.($curPage-1)); ?>">&laquo;</a></li>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_595__=$curPage-2;$__FOR_END_595__=$curPage+3;for($i=$__FOR_START_595__;$i < $__FOR_END_595__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/Student/tutor_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_31551__=$totalPage-5;$__FOR_END_31551__=$totalPage;for($i=$__FOR_START_31551__;$i < $__FOR_END_31551__;$i+=1){ ?>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_16962__=$totalPage-5;$__FOR_END_16962__=$totalPage;for($i=$__FOR_START_16962__;$i < $__FOR_END_16962__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('index/Student/tutor_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_7006__=1;$__FOR_END_7006__=6;for($i=$__FOR_START_7006__;$i < $__FOR_END_7006__;$i+=1){ ?>
+                            <?php } elseif($totalPage > 5): $__FOR_START_24717__=1;$__FOR_END_24717__=6;for($i=$__FOR_START_24717__;$i < $__FOR_END_24717__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/Student/tutor_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_15513__=1;$__FOR_END_15513__=$totalPage;for($i=$__FOR_START_15513__;$i < $__FOR_END_15513__;$i+=1){ ?>
+                            <?php } else: $__FOR_START_11556__=1;$__FOR_END_11556__=$totalPage;for($i=$__FOR_START_11556__;$i < $__FOR_END_11556__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/Student/tutor_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="#">&raquo;</a></li>
