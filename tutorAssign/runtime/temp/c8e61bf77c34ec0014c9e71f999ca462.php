@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:112:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\student_manager.html";i:1481546977;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:112:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\student_manager.html";i:1481547984;}*/ ?>
 <html>
 
 <head>
@@ -18,7 +18,6 @@
     }
     </style>
 </head>
-
 <body>
     <div id="container-backstage" class="clearfix">
         <div id="siderbar">
@@ -231,6 +230,11 @@
     <script type="text/javascript" src="<?php echo OLD; ?>/js/backstage.js"></script>
     <script type="text/javascript" src="<?php echo OLD; ?>/js/vue.min.js"></script>
     <script type="text/javascript" src="<?php echo OLD; ?>/js/jqPaginator.min.js"></script>
+    <script type="text/javascript">
+        var deleteStu = "<?php echo PREFIX; ?>/DepartmentHeadTutor/deleteStudent";
+        var stuList = "<?php echo PREFIX; ?>/DepartmentHeadTutor/studentList";
+        var gradeList = "<?php echo PREFIX; ?>/DepartmentHeadTutor/gradeList";
+    </script>
     <script type="text/javascript" src="<?php echo OLD; ?>/js/student_manager.js"></script>
 </body>
 </html>
