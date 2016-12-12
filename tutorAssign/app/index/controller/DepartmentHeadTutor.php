@@ -536,8 +536,9 @@ class DepartmentHeadTutor extends BaseController {
     public function deleteStudent() {
     	$request = Request::instance();
     	if ($request->isGet()) {
-    		$grade = $request->get('grade');
-    		$serialNum = $request->get('serialNum');
+    		$data = $request->get();
+    		$grade = $data['grade'];
+    		$serialNum = $data['serialNum'];
 
     		if (Db::table('user_student_'.$grade)->where('serialNum','in',$serialNum)->delete()) {
     			return true;
@@ -548,9 +549,9 @@ class DepartmentHeadTutor extends BaseController {
     }
 
     public function studentList() {
-	   	$user = $this->auto_login();
+//	   	$user = $this->auto_login();
 
-	   	$department = $user['department'];
+//	   	$department = $user['department'];
     	$lastGrade = Db::table('tc_grade')->order('grade desc')->select();
     	$pageSize = 10;
 
@@ -559,9 +560,9 @@ class DepartmentHeadTutor extends BaseController {
     		$grade = $request->get('grade') != '' ? $request->get('grade') : $lastGrade[0]['grade'];
     		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 
-    		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('department',$department)->select())/$pageSize);
+    		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('department',"信息安全与网络工程系")->select())/$pageSize);
     		$studentList['amount'] = $totalPage;
-    		$studentList['information'] = Db::table('user_student_'.$grade)->where('department',$department)->field('sid,serialNum,name,department,grade,gpa,rank')->page($curPage,$pageSize)->select();
+    		$studentList['information'] = Db::table('user_student_'.$grade)->where('department',"信息安全与网络工程系")->field('sid,serialNum,name,department,grade,gpa,rank')->page($curPage,$pageSize)->select();
     		return json($studentList);
     	}
     }
