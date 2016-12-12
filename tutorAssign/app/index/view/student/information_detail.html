@@ -48,13 +48,10 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                     <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                        <p>提示：第一轮志愿填报时间为2016年10月19日至2016年10月22日，请在规定时间内完成志愿填报！</p>
+                        <p>提示1：<?php echo $message;?></p>
                     </div>
-                    <button type="button" id="closepop" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
                 <div class="my-information-title">
-                    <span>陈燊</span>
+                    <span>{{$tutor['name']}}</span>
                     
                 </div>
                 <div class="phpoto">
@@ -63,27 +60,30 @@
                 </div>
                 <div class="information-detail">
                     <ul>
-                        <li><span>系别：</span><span>计算机</span><span>性别：</span><span>男</span></li>
-                        <li><span>电话：</span><span>1330546785</span><span>邮箱：</span><span>5322222@qq.com</span></li>
-                        <li><span>职称：</span><span>教授</span><span>实验班导师：</span><span>是</span></li>
+                        <li><span>系别：</span><span>{{$tutor['department']}}</span><span>性别：</span><span>{{$tutor['sex']}}</span></li>
+                        <li><span>电话：</span><span>{{$tutor['telephone']}}</span><span>邮箱：</span><span>{{$tutor['email']}}</span></li>
+                        <li><span>职称：</span><span>$tutor['position']</span><span>实验班导师：</span><span><?php if($tutor['isExperial']!=0) echo "是";else echo "否"; ?></span></li>
+                        <li><span>所带自然班总人数：</span><span>{{$tutor['totalNatur']}}</span><span>自然班当前人数：</span><span>{{$tutor['naturNow']}}</span></li>
+                        <li><span>所带计算机实验班总人数：</span><span>{{$tutor['totalCompExper']}}</span><span>计算机实验班当前人数：</span><span>{{$tutor['compExperNow']}}</span></li>
+                        <li><span>所带数  学实验班总人数：</span><span>{{$tutor['totalMathExper']}}</span><span>数  学实验班当前人数：</span><span>{{$tutor['mathExperNow']}}</span></li>
                     </ul>
                 </div>
                 <div class="new-skill-title">
                     <p>个人简介：</p>
                 </div>
                 <div class="new-skill-detail">
-                    <p>毕业于某某高校，从事教学20余年</p>
+                    <p>{{$tutor['description']}}</p>
                 </div>
                 <div class="information-detail" style="padding:10px 250px;">
                     <ul>
-                         <li><span>标题：</span><span>关于电信缴费的数据挖掘</span>
+                         <li><span>标题：</span><span>{{$tutor['title']}}</span>
                          <li><span>内容介绍</span></li>
-                         <li><p>shshshhshshshshsh</p></li>
+                         <li><p>{{$tutor['content']}}</p></li>
                     </ul>
                 </div>
                 
                 <div class="edit-btn">
-                    <button class="btn btn-info button-size" type="submit" >选择</button>
+                    <button class="btn btn-info button-size" type="submit" ><a href="{{:url('Student/tutor_list')}}">返回</a></button>
                     
                 </div>
 
