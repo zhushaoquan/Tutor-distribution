@@ -523,15 +523,27 @@ class DepartmentHeadTutor extends BaseController {
     	$request = Request::instance();
     	if ($request->isPost()) {
     		$student = $request->post();
+    		$student['password'] = $student['serialNum'];
 
-    		return json($student);
+    		if (Db::table('user_student_'.$student['grade'])->insert($student)) {
+    			return true;
+    		} else {
+    			return false;
+    		}
     	}
     }
 
     public function deleteStudent() {
     	$request = Request::instance();
-    	if ($request->isPost()) {
-    		
+    	if ($request->isGet()) {
+    		$grade = $request->get('grade');
+    		$serialNum = $request->get('serialNum');
+
+    		if (Db::table('user_student_'.$grade)->where('serialNum','in',$serialNum)->delete()) {
+    			return true;
+    		} else {
+    			return false;
+    		}
     	}
     }
 
@@ -566,6 +578,17 @@ class DepartmentHeadTutor extends BaseController {
     		$teacherList['amount'] = count(Db::table('user_teacher')->where('department',$user['department'])->select());
     		$teacherList['information'] = Db::table('user_teacher')->where('department',$user['department'])->field('workNumber,name,sex')->page($curPage,$pageSize)->select();
     		return json($teacherList);
+    	}
+    }
+
+
+    public function gradeList() {
+    	$request = Request::instance();
+
+    	if ($request->isGet()) {
+    		$gradeList = Db::table('tc_grade')->limit(5)->select();
+
+    		return json($gradeList);
     	}
     }
 }
