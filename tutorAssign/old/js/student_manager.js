@@ -151,7 +151,13 @@ $("#btn-submit-add").click(function(){
     var department = $("#studepart").val();
     var rank = $("#sturank").val();
     var grade = $("#stugrade").val();
-
+    console.log(serialNum);
+    console.log(name);
+    console.log(gender);
+    console.log(gpa);
+    console.log(department);
+    console.log(rank);
+    console.log(grade);
     $.ajax({
          type: "get",
          data: {
