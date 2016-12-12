@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:102:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\index.html";i:1481532664;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:102:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\index.html";i:1481547569;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +28,7 @@
             </div>
             <ul class="sider-navbar-nav">
                 <a href="<?php echo url('TeachingOfficeTutor/index'); ?>"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <a href="<?php echo url('TeachingOfficeTutor/tutor_manager'); ?>"><li ><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li></a>
+                <a href="<?php echo url('TeachingOfficeTutor/head_list'); ?>"><li ><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li></a>
                 <a href="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li></a>
                 <a href="<?php echo url('TeachingOfficeTutor/student_assign'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li></a>
             </ul>

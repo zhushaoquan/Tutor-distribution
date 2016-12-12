@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:100:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\show_result.html";i:1481514159;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:100:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\show_result.html";i:1481558598;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +25,7 @@
     <div id="siderbar">
         <nav class="sider-navbar">
             <div class="sider-navbar-header">
-                <img src="<?php echo OLD; ?>/image/mainpage-logo.png" alt="" width="240">
+                <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
                 <a href="<?php echo url('TeacherTutor/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
@@ -50,25 +50,44 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p><?php echo $message;?></p>
+                    <p>提示1：<?php echo $message;?></p>
                 </div>
                 <div class="my-information-title">
                     <span>志愿结果</span>
                 </div>
                 <hr>
+                <div class="form-horizontal" role="form" >
+                    <div class="form-group">
+                        <label  class="col-md-2 control-label" style="text-align:center; font-size:16px;">选择年级</label>
+                        <div class="col-sm-2" >
+                            <select  class="form-control" name="totalNatur" >
+                            <option>全部年级</option>
+                            <option>2013级</option>
+                            <option>2014级</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="display: inline;margin-left:40px;" id="sub-confirm" >确定</button>
+                    </div>
+                 </div>         
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered">
+                        <thead>
                         <tr>
                             <th>#</th>
+                            <th>年级</th>
+                            <th>学号</th>
                             <th>姓名</th>
                             <th>性别</th>
                             <th>绩点</th>
                             <th>专业</th>
                             <th>电子邮箱</th>
                         </tr>
+                        </thead>
                         <tbody>
                         <?php foreach ($students as $key => $value):?>
                         <tr>
+                            <td>#赋值处</td>
+                            <td>年级赋值处</td>
                             <td><?php echo $value['serialNum']?></td>
                             <td><?php echo $value['name']?></td>
                             <td><?php if($value['gender'])echo "男";else echo "女"; ?></td>
@@ -87,10 +106,10 @@
             </div>
         </div>
     </div>
-<script type="text/javascript" src="<?php echo OLD; ?>/js/index.js"></script>
-<script type="text/javascript" src="<?php echo OLD; ?>/js/jquery2.14.min.js"></script>
-<script type="text/javascript" src="<?php echo OLD; ?>/js/bootstrap.js"></script>
-<script type="text/javascript" src="<?php echo OLD; ?>/js/backstage.js"></script>
+<script type="text/javascript" src="__STATIC__/js/index.js"></script>
+<script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
+<script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
+<script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
 </body>
 </html>
 

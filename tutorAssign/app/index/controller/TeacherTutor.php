@@ -39,7 +39,7 @@ class TeacherTutor extends BaseController {
         $this->user = $this->auto_login();    
         $this->grades = Db::table('tc_grade')->order('grade desc')->limit(5)->select();
         $this->issue = Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber', $this->user['workNumber'])->find();
-  
+        
         if($this->user['isExperial']==0) {
             $data = Db::table('tc_voluntaryinfosetting')->where('grade',$this->grades[0]['grade'])->where('department',$this->user['department'])->find();
         }else if($this->user['isExperial']==1) {
@@ -90,36 +90,34 @@ class TeacherTutor extends BaseController {
 /*
                 $data['message'] = "当前为导师"."<font color='#FF0000'>填报课题</font>时间：".date('Y-m-d',$data['issueStart'])."至".date('Y-m-d',$data['issueEnd'])."！"."<font color='#FF0000'>第一轮志愿填报</font>时间为".date('Y-m-d',$data['firstStart'])."至".date('Y-m-d',$data['firstEnd'])."! <font color='#FF0000'>第二轮志愿填报</font>时间为".date('Y-m-d',$data['secondStart'])."至".date('Y-m-d',$data['secondEnd'])."!";*/
 
-                $data['message'] = "当前为导师"."<font color='#FF0000'>填报课题</font>时间：".date('Y-m-d',$data['issueStart'])."至".date('Y-m-d',$data['issueEnd'])."！";
+                $data['message'] = "当前为导师"."<font color='#FF0000'>填报课题</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['issueStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['issueEnd'])."</font>！";
                 $data['voluntaryinfosetting'] = $this->voluntaryinfosetting;
                 $data['message1'] = "导师所带学生总数不得超过 <font color='#FF0000'>".$data['voluntaryinfosetting']['totalMax']." </font>名，不得少于 <font color='#FF0000'> ".$data['voluntaryinfosetting']['totalMin']."</font>名";
                  if($this->user['isExperial']!=0) $data['message1'].="，实验班总人数不超过<font color='#FF0000'>".$data['voluntaryinfosetting']['experialMax']."</font>名！";
                  $this->assign('message1',$data['message1']);
 
-            }else if($nowtime < $data['firstEnd'] && $nowtime > $data['firstStart']) {
+            }else if($nowtime <= $data['firstEnd'] && $nowtime >= $data['firstStart']) {
                 //第一轮志愿填报
                 $data['ontime'] = 1;
-                $data['message'] = "当前为<font color='#FF0000'>第一轮的志愿填报</font>时间：".date('Y-m-d',$data['firstStart'])."至".date('Y-m-d',$data['firstEnd'])."！";
-             } else if($nowtime  < $data['secondEnd'] && $nowtime > $data['secondStart']) {
+                $data['message'] = "当前为<font color='#FF0000'>第一轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['firstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['firstEnd'])."</font>！";
+             } else if($nowtime  <= $data['secondEnd'] && $nowtime >= $data['secondStart']) {
                 //第二轮志愿填报时间
                 $data['ontime'] = 2;
-                $data['message'] = "当前为<font color='#FF0000'>第二轮的志愿填报</font>时间：".date('Y-m-d',$data['secondStart'])."至".date('Y-m-d',$data['secondEnd'])."！";
+                $data['message'] = "当前为<font color='#FF0000'>第二轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['secondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['secondEnd'])."</font>！";
 
              }else if($nowtime >= $data['confirmFirstStart'] && $nowtime <= $data['confirmFirstEnd']) {
                 //第一轮导师选择学生时间
                 $data['ontime'] = 11;
-                $data['message'] = "当前为<font color='#FF0000'>第一轮的导师选择学生</font>时间：".date('Y-m-d',$data['confirmFirstStart'])."至".date('Y-m-d',$data['confirmFirstEnd']).",请导师们尽快选择学生！";
+                $data['message'] = "当前为<font color='#FF0000'>第一轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['confirmFirstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['confirmFirstEnd'])."</font>,请导师们尽快选择学生！";
 
              } else if($nowtime >= $data['confirmSecondStart'] && $nowtime <= $data['confirmSecondEnd']) {
                 //第二轮导师选择学生时间
                 $data['ontime'] = 22;
-                $data['message'] = "当前为<font color='#FF0000'>第二轮的导师选择学生</font>时间：".date('Y-m-d',$data['confirmSecondStart'])."至".date('Y-m-d',$data['confirmSecondEnd']).",请导师们尽快选择学生！";
+                $data['message'] = "当前为<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['confirmSecondEnd'])."</font>,请导师们尽快选择学生！";
 
              }else {
                 $data['message'] = "当前不在填报志愿时间段内！";
-                
              }
-
              $this->ontime = $data['ontime'];
              $this->assign('message',$data['message']);
              $this->assign('ontime',$data['ontime']);
@@ -142,14 +140,7 @@ class TeacherTutor extends BaseController {
         $user = $this->auto_login();
         $this->assign('user',$user);
         return $this->fetch('test123');
-       //  exit;
-       //  $user = $this->auto_login();
-       //  $where['department'] = $this->department1;
-       //  $where['wishFirst'] = $user['workNumber'];
-       //  $students = Db::table('tc_voluntary')->alias('v')->join('user_student s','v.sid = s.sid')->where($where)->select();
-       // var_dump( $students );
-       // exit;
-
+      
     }
 
     public function test123($it,$jt) {
@@ -216,9 +207,9 @@ class TeacherTutor extends BaseController {
 
             $bool = '';
             if(($data1['totalMathExper']+$data1['totalCompExper'])>$data['voluntaryinfosetting']['experialMax']) {$this->showNotice('所带实验班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));exit;}
-            if($data1['totalNatur']>($data['voluntaryinfosetting']['totalMax']-$data1['totalMathExper']-$data1['totalCompExper'])) {$this->showNotice('所带自然班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));exit;}
-            if(($data1['totalCompExper']+$data1['totalMathExper']+$data1['totalNatur'])>$data['voluntaryinfosetting']['totalMax']) {$this->showNotice('所带学生总人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));exit;}
-            if(($data1['totalCompExper']+$data1['totalMathExper']+$data1['totalNatur'])<=$data['voluntaryinfosetting']['totalMin']) {$this->showNotice('所带学生总人数未达下限，请重新输入', url('TeacherTutor/issue_submit'));exit;}
+            if($data1['totalNatur']>($data['voluntaryinfosetting']['totalMax']-$data1['totalMathExper']-$data1['totalCompExper'])) {$this->showNotice('所带自然班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));}
+            if(($data1['totalCompExper']+$data1['totalMathExper']+$data1['totalNatur'])>$data['voluntaryinfosetting']['totalMax']) {$this->showNotice('所带学生总人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));}
+            if(($data1['totalCompExper']+$data1['totalMathExper']+$data1['totalNatur'])<=$data['voluntaryinfosetting']['totalMin']) {$this->showNotice('所带学生总人数未达下限，请重新输入', url('TeacherTutor/issue_submit'));}
 /*
              if(isset($data['issue']['pid'])) {
                 $data1['pid'] = $data['issue']['pid'];
@@ -247,25 +238,6 @@ class TeacherTutor extends BaseController {
 
     public function student_list($page=1) {
         $user = $this->auto_login();
-/*
-        $data = Db::table('tc_voluntaryinfosetting')->find();
-        $data['nowtime'] = time();
-        $data['message'] = '';
-        $data['ontime']=1;
-        if($data['nowtime'] < $data['firstEnd'] && $data['nowtime'] > $data['firstStart']) {
-            $data['message'] = "当前为第一轮的导师确认学生时间：".date('Y-m-d',$data['firstStart'])."至".date('Y-m-d',$data['firstEnd']).",请导师们按时确认学生！";
-
-         } else if($data['nowtime'] < $data['secondEnd'] && $data['nowtime'] > $data['secondStart']) {
-            $data['message'] = "当前为第二轮的导师确认学生时间：".date('Y-m-d',$data['secondStart'])."至".date('Y-m-d',$data['secondEnd']).",请导师们按时确认学生！";
-
-         } else {
-            $data['message'] = "当前不在导师确认学生时间段内！";
-            $data['ontime'] = 0;
-         }
-
-         $this->assign('message', $data['message']);
-         $this->assign('ontime', $data['ontime']);
-        */
 
         $where['wishFirst|wishSecond|wishThird|wishForth|wishFifth'] = $user['workNumber'];
         $students = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->alias('v')->join('user_student_'.$this->grades[0]['grade'].' s','v.sid = s.sid')
@@ -296,8 +268,7 @@ class TeacherTutor extends BaseController {
             $accept = $request->post('choise','');
             if($accept=="选择") {
                 $where['workNumber'] = $user['workNumber'];
-                //$where['department'] = $department;
-                $stu = Db::table('user_student_'.$this->grades[0]['grade'])->where('sid',$data1['sid']);
+                $stu = Db::table('user_student_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->find();
                 $issue = $this->issue;
                 /*
                 if(($stu['department']==$this->department1||$stu['department']==$this->department2)&&$issue['totalExprNow'] >= ($issue['totalExper']+$issue['totalNatur'])) {
@@ -321,12 +292,13 @@ class TeacherTutor extends BaseController {
                     } 
                     *******
                 }*/
-                if($stu['department']==$this->department1 && $issue['compExprNow'] >= $issue['totalCompExper']) {
-                    $this->showNotice('目前所带计算机实验班人数达到上限，选择失败！','TeacherTutor/student_list');
+        
+                if($stu['department']==$this->department1 && $issue['compExperNow'] >= $issue['totalCompExper']) {
+                    $this->showNotice('目前所带计算机实验班人数达到上限，选择失败！',url('TeacherTutor/student_list'));
                 } else if($stu['department']==$this->department2 && $issue['mathExprNow'] >= $issue['totalMathExper']) {
-                    $this->showNotice('目前所带数学实验班人数达到上限，选择失败！','TeacherTutor/student_list');
+                    $this->showNotice('目前所带数学实验班人数达到上限，选择失败！',url('TeacherTutor/student_list'));
                 } else if($issue['naturNow'] >= $issue['totalNatur']) { 
-                    $this->showNotice('目前所带自然班人数达到上限，选择失败！','TeacherTutor/student_list');
+                    $this->showNotice('目前所带自然班人数达到上限，选择失败！',url('TeacherTutor/student_list'));
                 }
 
                 if($stu['chosen']==0) {
@@ -347,25 +319,28 @@ class TeacherTutor extends BaseController {
                     } else {
                         $this->showNotice('一不小心被其他导师抢走楼~',url('TeacherTutor/student_list'));
                     }
-                }  
+                } else {
+                        $this->showNotice('一不小心被其他导师抢走楼~',url('TeacherTutor/student_list'));
+                    }  
 
             } else {
-                $tmp = Db::table('tc_voluntary')->where('sid',$data1['sid'])->find();
+                //拒绝
+                $tmp = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->find();
                 $bool = 1;
                 if($tmp['wishFirst']==$data1['workNumber']) {
-                    $bool = $bool && Db::table('tc_voluntary')->where('sid',$data1['sid'])->setField('firstReject',1);
+                    $bool = $bool && Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->setField('firstReject',1);
                 } 
                 if($tmp['wishSecond']==$data1['workNumber']) {
-                    $bool = $bool && Db::table('tc_voluntary')->where('sid',$data1['sid'])->setField('SecondReject',1);
+                    $bool = $bool && Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->setField('secondReject',1);
                 } 
                 if($tmp['wishThird']==$data1['workNumber']) {
-                    $bool = $bool && Db::table('tc_voluntary')->where('sid',$data1['sid'])->setField('ThirdReject',1);
+                    $bool = $bool && Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->setField('thirdReject',1);
                 } 
                 if($tmp['wishForth']==$data1['workNumber']) {
-                    $bool = $bool && Db::table('tc_voluntary')->where('sid',$data1['sid'])->setField('ForthReject',1);
+                    $bool = $bool && Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->setField('forthReject',1);
                 } 
                 if($tmp['wishFifth']==$data1['workNumber']) {
-                    $bool = $bool && Db::table('tc_voluntary')->where('sid',$data1['sid'])->setField('FifthReject',1);
+                    $bool = $bool && Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->setField('fifthReject',1);
                 } 
                 if($bool) {
                     $this->showNotice('拒绝成功',url('TeacherTutor/student_list'));
@@ -644,7 +619,7 @@ class TeacherTutor extends BaseController {
         $student = Db::table('user_student_'.$this->grades[0]['grade'])->where('sid', $sid)->find();
         $this->assign('student', $student);
         $this->assign('user', $user);
-        return $this->fetch('show_resultdetail');
+        return $this->fetch('information_detail');
     }
 
 

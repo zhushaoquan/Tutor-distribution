@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_assign.html";i:1481532695;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_assign.html";i:1481547600;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +28,7 @@
             </div>
             <ul class="sider-navbar-nav">
                 <a href="<?php echo url('/index/TeachingOfficeTutor/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <a href="<?php echo url('TeachingOfficeTutor/tutor_manager'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li></a>
+                <a href="<?php echo url('TeachingOfficeTutor/head_list'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li></a>
                 <a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change'); ?>"><li ><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li></a>
                 <a href="<?php echo url('/index/TeachingOfficeTutor/student_assign'); ?>"><li class="active"><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li></a>
             </ul>
@@ -122,61 +122,6 @@
                             <?php endforeach; endif; else: echo "" ;endif; ?>
 
                         </tbody>
-                        <!--
-                        <tbody>
-
-                        <td>1</td>
-                            <td>031402203</td>
-                            <td>陈齐民</td>
-                            <td>00023</td>
-                            <td>廖祥文</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>031402209</td>
-                            <td>黄伟炜</td>
-                            <td>00024</td>
-                            <td>陈欢</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>031402233</td>
-                            <td>郑扬涛</td>
-                            <td>00019</td>
-                            <td>牛玉贞</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>031402304</td>
-                            <td>陈燊</td>
-                            <td>00020</td>
-                            <td>叶东毅</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>031402337</td>
-                            <td>胡心颖</td>
-                            <td>00021</td>
-                            <td>郭龙坤</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>031402341</td>
-                            <td>王婷婷</td>
-                            <td>00022</td>
-                            <td>叶少珍</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>031402342</td>
-                            <td>许玲玲</td>
-                            <td>00025</td>
-                            <td>郭坤</td>
-                        </tr>
-
-                        </tbody>
-                        -->
-
                     </table>
 
                     <div class="submit-area">
@@ -194,13 +139,13 @@
                         <ul class="pagination" style="float: right;">
                           <?php if($curPage != 1): ?>
                               <li><a href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage-1).'/dep/'.$dep.'/grade/'.$grade); ?>">&laquo;</a></li>
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_18953__=$curPage-2;$__FOR_END_18953__=$curPage+3;for($i=$__FOR_START_18953__;$i < $__FOR_END_18953__;$i+=1){ ?>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_8317__=$curPage-2;$__FOR_END_8317__=$curPage+3;for($i=$__FOR_START_8317__;$i < $__FOR_END_8317__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_7952__=$totalPage-5;$__FOR_END_7952__=$totalPage;for($i=$__FOR_START_7952__;$i < $__FOR_END_7952__;$i+=1){ ?>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_14036__=$totalPage-5;$__FOR_END_14036__=$totalPage;for($i=$__FOR_START_14036__;$i < $__FOR_END_14036__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_6099__=1;$__FOR_END_6099__=6;for($i=$__FOR_START_6099__;$i < $__FOR_END_6099__;$i+=1){ ?>
+                            <?php } elseif($totalPage > 5): $__FOR_START_25639__=1;$__FOR_END_25639__=6;for($i=$__FOR_START_25639__;$i < $__FOR_END_25639__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_15810__=1;$__FOR_END_15810__=$totalPage;for($i=$__FOR_START_15810__;$i < $__FOR_END_15810__;$i+=1){ ?>
+                            <?php } else: $__FOR_START_30438__=1;$__FOR_END_30438__=$totalPage;for($i=$__FOR_START_30438__;$i < $__FOR_END_30438__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage+1).'/dep/'.$dep.'/grade/'.$grade); ?>">&raquo;</a></li>
