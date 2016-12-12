@@ -332,7 +332,7 @@ class TeachingOfficeTutor extends BaseController {
 		$R6=DB::table('user_department_head')->where('department',"计算机实验班")->field('workNumber,name')->find();
 		$R7=DB::table('user_department_head')->where('department',"数学实验班")->field('workNumber,name')->find();
 
-
+		$this->assign('R1',$R1);
 		$this->assign('user', $officer);
 		return $this->fetch('head_list');
 	}
