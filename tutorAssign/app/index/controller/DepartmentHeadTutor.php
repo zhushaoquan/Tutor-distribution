@@ -471,6 +471,21 @@ class DepartmentHeadTutor extends BaseController {
     	}
     }
 
+
+    //学生管理界面的搜索接口
+    public function searchStudent() {
+    	$request = Request::instance();
+    	if ($request->isGet()) {
+    		$data = $request->get();
+
+    		$grade = $data['grade'];
+    		$condition = $data['condition']
+
+    		$student = Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->find();
+    		return json($student);
+    	}
+    }
+
     public function teacherList() {
     	$user = $this->auto_login();
 
@@ -496,7 +511,7 @@ class DepartmentHeadTutor extends BaseController {
     		$teacher['password'] = $data['workNumber'];
     		$teacher['name'] = $data['name'];
     		$teacher['sex'] = $data['gender'];
-    		$teacher['birthday'] = "1970-01-01"
+    		$teacher['birthday'] = "1970-01-01";
     		$teacher['department'] = $data['department'];
     		$teacher['telephone'] = "12345678901";
     		$teacher['email'] = "fzu@edu.cn";
