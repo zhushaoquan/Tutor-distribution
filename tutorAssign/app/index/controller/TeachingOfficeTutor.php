@@ -246,9 +246,10 @@ class TeachingOfficeTutor extends BaseController {
 	} */
 	public function delete()
 	{
-		$sid=Db::table('user_student_2014')->where('serialNum',$_POST['student_id'])->field('sid')->find();
-		$flag1=Db::table('tc_result_2014')->where('sid',$sid['sid'])->where('workNumber',$_POST['teacher_id'])->delete();
-		$flag2=Db::table('user_student_2014')->where('sid',$sid['sid'])->setField('chosen',0);
+	//	return $_POST['grade'];
+		$sid=Db::table('user_student_'.$_POST['grade'])->where('serialNum',$_POST['student_id'])->field('sid')->find();
+		$flag1=Db::table('tc_result_'.$_POST['grade'])->where('sid',$sid['sid'])->where('workNumber',$_POST['teacher_id'])->delete();
+		$flag2=Db::table('user_student_'.$_POST['grade'])->where('sid',$sid['sid'])->setField('chosen',0);
 		if($flag1&&$flag2)return "success";
 		return "fail";
 	}
@@ -259,13 +260,13 @@ class TeachingOfficeTutor extends BaseController {
 		foreach ($_POST['stus'] as $value) 
 		{
 	//		var_dump($value);
-			$sid=Db::table('user_student_2014')->where('serialNum',$value)->field('sid')->find();
+			$sid=Db::table('user_student_'.$_POST['grade'])->where('serialNum',$value)->field('sid')->find();
 		//	$have=count(Db::table('tc_result')->where('sid',$sid)->select());
 		//	if($have == 0)
 		//	{
-				$flag=Db::table('tc_result_2014')->insert(["sid" => $sid['sid'] , 'workNumber' => $_POST['teacher_id']]);
+				$flag=Db::table('tc_result_'.$_POST['grade'])->insert(["sid" => $sid['sid'] , 'workNumber' => $_POST['teacher_id']]);
 				if($flag == 0)$this->error('增加失败','TeachingOfficesTutor/tutor_assign');
-		 		Db::table('user_student_2014')->where('serialNum',$value)->setField('chosen',1);
+		 		Db::table('user_student_'.$_POST['grade'])->where('serialNum',$value)->setField('chosen',1);
 		 //	}
 		}
 		 // $flag1=Db::table('tc_result')->insert(["sid" => $_POST['student'] , 'workNumber' => $_POST['teacher']]);
@@ -276,9 +277,13 @@ class TeachingOfficeTutor extends BaseController {
 
 	public function select_student()
 	{
+	//	return json($_POST['grade']);
+	//	exit();
+	//	return $_POST['teacher_id'];
 		$dep=DB::table('user_teacher')->where('workNumber',$_GET['teacher_id'])->field('department')->find();
 	//	var_dump($dep);
-		$data=DB::table('user_student_2014')->where('chosen',0)->where('department',$dep['department'])->field('name,serialNum')->select();
+	//	return json($dep);
+		$data=DB::table('user_student_'.$_GET['grade'])->where('chosen',0)->where('department',$dep['department'])->field('name,serialNum')->select();
 		$d['result']= $data;
 	//	var_dump($data);
 		return json($d);

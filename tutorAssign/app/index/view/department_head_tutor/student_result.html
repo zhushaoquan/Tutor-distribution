@@ -6,6 +6,10 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>毕设导师智能分配系统</title>
+  <!--  <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.TUTOR_STATIC}}/css/student.css">
+    !-->
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student.css">
@@ -34,7 +38,7 @@
                 <a href="{{:url('DepartmentHeadTutor/timeSetting')}}"><li><i class="glyphicon glyphicon-time"></i> 匹配设置</li></a>
                 <a href="{{:url('DepartmentHeadTutor/matchSetting')}}"><li><i class="glyphicon glyphicon-ok"></i> 匹配结果</li></a>
                 <a href="{{:url('DepartmentHeadTutor/student_result')}}"> <li class="active"><i class="glyphicon glyphicon-download-alt"></i> 学生结果</li> </a>
-                <a href="{{:url('DepartmentHeadTutor/tutor_result')}}"> <li><i class="glyphicon glyphicon-download-alt"></i> 导师结果</li> </a>
+                <a href="{{:url('DepartmentHeadTutor/tutor_result')}}"> <li ><i class="glyphicon glyphicon-download-alt"></i> 导师结果</li> </a>
             </ul>
         </nav>
     </div>
@@ -56,38 +60,52 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示：您可以查看本系学生分配情况.</p>
+                    <p>提示：您可以修改选课结果.</p>
                 </div>
 
                 <div class="page-header">
                     <h3>学生分配情况
                     </h3>
                 </div>
-
-                <div class="form-horizontal" role="form">
+                 <div class="form-horizontal" role="form">
                 <div class="form-group">
-                    <form action="{{:url('DepartmentHeadTutor/student_result')}}" method="post">
-                        <label class="col-md-1 control-label"  >选择年级：</label>
+                                        <form action="{{:url('DepartmentHeadTutor/student_result')}}" method="post">
+                        <label class="col-md-2 control-label"  >选择年级：</label>
                         <div class="col-xs-2" >
                             <select id="gradeSelect" class="form-control" name="grade" style="display: inline; width: 80%">
-                                    <option value="全部年级">全部年级</option>
-                                    <option value="2014级" selected="selected">2014级</option>
-                                    <option value="2015级">2015级</option>
-                                    <option value="2016级">2016级</option>
-                                    <option value="2017级">2017级</option>
-                                    <option value="2018级">2018级</option>
+                                   
+                                    {volist name="gg" id="v"}
+                                        <option value="{{$v.grade}}" <?php if($grade == $v['grade']) echo 'selected="true"';?>>{{$v.grade}}级</option>
+                                    {/volist}
                             </select>
-                            <input type="hidden" name="gradeMsg" value="modify">
+                            
                         </div>
-
+                     
+                        <label class="col-md-2 control-label"  >选择系别：</label>
+                        <div class="col-xs-2" >
+                            <select id="departSelect" class="form-control" name="department" style="display: inline; width: 100%">
+                                 <option value="应用数学系" <?php if($dep == "应用数学系") echo'selected = "true"';?>>应用数学系</option>
+                            <option value="信息与计算科学系" <?php if($dep == "信息与计算科学系") echo'selected = "true"';?>>信息与计算科学系</option>
+                            <option value="计算机系" <?php if($dep == "计算机系") echo'selected = "true"';?>>计算机系</option>
+                            <option value="软件工程系" <?php if($dep == "软件工程系") echo'selected = "true"';?>>软件工程系</option>
+                            <option value="信息安全与网络工程系" <?php if($dep == "信息安全与网络工程系") echo'selected = "true"';?>>信息安全与网络工程系</option>
+                            <option value="计算机实验班" <?php if($dep == "计算机实验班") echo'selected = "true"';?>>计算机实验班</option>
+                            <option value="数学实验班" <?php if($dep == "数学实验班") echo'selected = "true"';?>>数学实验班</option>
+                            </select>  
+                            <input type="hidden" name="stu" value="assign">
+                        </div>
+                        
                         <button type="submit" class="btn btn-primary" style="display: inline;" id="sub-confirm" >确定</button>
 
                     </form>
-                </div>
-                </div>
 
-                <br />
-                <div class="table-responsive">
+                    </div>
+                    
+
+                </div>
+                <!-- </div> -->
+                <!-- <br /> -->
+                <!-- <div class="table-responsive"> -->
                     <table id="sresult" class="table">
                         <thead>
                             <tr>
@@ -112,41 +130,45 @@
                             {/volist}
 
                         </tbody>
-
+                       
                     </table>
 
                     <div class="submit-area">
-                        <div class="col-md-5"> </div>
+                        <div class="col-md-2"> </div>
+                        <div class="col-md-2"> </div>
                         <div class="col-md-2"> 
-                            <button type="submit" class="btn btn-primary" id="sub-result-export">导&nbsp;&nbsp;&nbsp;&nbsp;出</button>
+                            <button type="submit" class="btn btn-primary" id="sub-result-export" onClick ="$('#sresult').tableExport({type:'excel',escape:'false'});">导&nbsp;&nbsp;出</button>
+                        </div>
+                        <div class="col-md-2"> 
+                     <!--   <button type="submit" class="btn btn-danger" id="sub-result-change"><a style="color:white;" href="{{:url('/index/TeachingOfficeTutor/student_to_modify/dep/'.$dep.'/grade/'.$grade)}}">修&nbsp;&nbsp;改</a></button>  -->
                         </div>
                     </div>
 
                     <nav>
                         <ul class="pagination" style="float: right;">
                           {if condition="$curPage neq 1 "}
-                              <li><a href="{{:url('/index/DepartmentHeadTutor/student_result/page/'.($curPage-1).'/dep/'.$dep)}}">&laquo;</a></li>
+                              <li><a href="{{:url('/index/DepartmentHeadTutor/student_result/page/'.($curPage-1).'/dep/'.$dep.'/grade/'.$grade)}}">&laquo;</a></li>
                           {/if}
                             
                           {if condition="($curPage gt 3) AND ($curPage lt $totalPage-2)"}
                             {for start="$curPage-2" end="$curPage+3"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/DepartmentHeadTutor/student_result/page/'.$i.'/dep/'.$dep)}}" >{{$i}}</a></li>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/DepartmentHeadTutor/student_result/page/'.$i.'/dep/'.$dep.'/grade/'.$grade)}}" >{{$i}}</a></li>
                             {/for}
                           {elseif condition="($curPage gt $totalPage-3) AND ($totalPage gt 5)" /}
                             {for start="$totalPage-5" end="$totalPage"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/DepartmentHeadTutor/student_result/page/'.$i.'/dep/'.$dep)}}" >{{$i}}</a></li>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/DepartmentHeadTutor/student_result/page/'.$i.'/dep/'.$dep.'/grade/'.$grade)}}" >{{$i}}</a></li>
                             {/for}
                           {elseif condition="$totalPage gt 5" /}
                             {for start="1" end="6"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/DepartmentHeadTutor/student_result/page/'.$i.'/dep/'.$dep)}}" >{{$i}}</a></li>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/DepartmentHeadTutor/student_result/page/'.$i.'/dep/'.$dep.'/grade/'.$grade)}}" >{{$i}}</a></li>
                             {/for}
                           {else /}
                             {for start="1" end="$totalPage"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/DepartmentHeadTutor/student_result/page/'.$i.'/dep/'.$dep)}}" >{{$i}}</a></li>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/DepartmentHeadTutor/student_result/page/'.$i.'/dep/'.$dep.'/grade/'.$grade)}}" >{{$i}}</a></li>
                             {/for}
                           {/if}
                           {if condition="$curPage lt $totalPage-1"}
-                            <li><a href="{{:url('/index/DepartmentHeadTutor/student_result/page/'.($curPage+1).'/dep/'.$dep)}}">&raquo;</a></li>
+                            <li><a href="{{:url('/index/DepartmentHeadTutor/student_result/page/'.($curPage+1).'/dep/'.$dep.'/grade/'.$grade)}}">&raquo;</a></li>
                           {/if}
                             
                         </ul>
@@ -168,21 +190,5 @@
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/backstage.js"></script>
 <!--导出excel-->
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/tableExport.js"></script>
-
-
-
- <script type="text/javascript">
-    //确认
-    $("#sub-confirm").click(function(){
-        console.log("click");
-    });
-
-    $("#sub-result-export").click(function(){
-        console.log("click");
-    });
-
-
- </script>
-
 </body>
 </html>

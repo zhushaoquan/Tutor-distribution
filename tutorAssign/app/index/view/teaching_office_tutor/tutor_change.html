@@ -67,9 +67,9 @@
                     </div>
 
 
-                    <div class="form-horizontal" role="form">
-                <div class="form-group">
-                                        <form action="{{:url('TeachingOfficeTutor/tutor_change')}}" method="post">
+                <div class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <form action="{{:url('TeachingOfficeTutor/tutor_change')}}" method="post">
                         <label class="col-md-2 control-label"  >选择年级：</label>
                         <div class="col-xs-2" >
                             <select id="gradeSelect" class="form-control" name="grade" style="display: inline; width: 80%">
@@ -83,12 +83,11 @@
                         <label class="col-md-2 control-label"  >选择系别：</label>
                         <div class="col-xs-2" >
                             <select id="departSelect" class="form-control" name="department" style="display: inline; width: 100%">
-                                 <option value="应用数学系" <?php if($dep == "应用数学系") echo'selected = "true"';?>>应用数学系</option>
-                            <option value="信息与计算科学系" <?php if($dep == "信息与计算科学系") echo'selected = "true"';?>>信息与计算科学系</option>
-                            <option value="计算机系" <?php if($dep == "计算机系") echo'selected = "true"';?>>计算机系</option>
-                            <option value="软件工程系" <?php if($dep == "软件工程系") echo'selected = "true"';?>>软件工程系</option>
-                            <option value="信息安全与网络工程系" <?php if($dep == "信息安全与网络工程系") echo'selected = "true"';?>>信息安全与网络工程系</option>
-                           
+                                <option value="应用数学系" <?php if($dep == "应用数学系") echo'selected = "true"';?>>应用数学系</option>
+                                <option value="信息与计算科学系" <?php if($dep == "信息与计算科学系") echo'selected = "true"';?>>信息与计算科学系</option>
+                                <option value="计算机系" <?php if($dep == "计算机系") echo'selected = "true"';?>>计算机系</option>
+                                <option value="软件工程系" <?php if($dep == "软件工程系") echo'selected = "true"';?>>软件工程系</option>
+                                <option value="信息安全与网络工程系" <?php if($dep == "信息安全与网络工程系") echo'selected = "true"';?>>信息安全与网络工程系</option>
                             </select>  
                             <input type="hidden" name="stu" value="assign">
                         </div>
@@ -98,11 +97,8 @@
                     </form>
 
                     </div>
-                    
-
-                </div>
-
-                    
+                    </div>
+                    <br />
                     <div class="table-responsive">
                         
 
@@ -284,7 +280,20 @@
     var teacher_name;
     var student_id;
     var student_name;
-    var grade;
+    var gradeSelected;
+    var departmentSelected;
+
+    $("#sub-confirm").click(function() {
+        
+        gradeSelected = document.getElementById("gradeSelect").value;
+        departmentSelected = document.getElementById("departSelect").value;
+        console.log(gradeSelected + "级" + departmentSelected);
+        $.get("{{$Think.const.PREFIX}}/TeachingOfficeTutor/select_student",
+            {
+                grade: gradeSelected,
+                department: departmentSelected
+            });
+    });
 
     //点击修改按钮
     $("#sub-result-change").click(function() {
@@ -300,10 +309,15 @@
     $(".btn-add").click(function() {
         teacher_id = $(this).val();
         teacher_name = $(this).attr('name');
-
+        gradeSelected = document.getElementById("gradeSelect").value;
+        departmentSelected = document.getElementById("departSelect").value;
+        console.log(gradeSelected + "级" + departmentSelected);
+        $.get("{{$Think.const.PREFIX}}/TeachingOfficeTutor/select_student",
+            {
+                grade: gradeSelected,
+            });
         console.log($(this).val());
         $("#addModalLabel").text(teacher_name + '(' + teacher_id + ')');
-
         getUnassignStu(true,teacher_id);
     });
 
@@ -321,14 +335,16 @@
                 isAnyChecked = true;
             }
         }
-
+        gradeSelected = document.getElementById("gradeSelect").value;
         if(isAnyChecked){
             //向服务器提交新增数据
             $.post("{{$Think.const.PREFIX}}/TeachingOfficeTutor/insert",
             {
                 teacher_id: teacher_id,
-                stus: selectedStudent
-            }, function(data,status){
+                stus: selectedStudent,
+                grade: gradeSelected
+            },
+                function(data,status){
                   console.log(data);
                   if(status === "success"){
                     $("#info-load").css("color","green")
@@ -351,8 +367,7 @@
 
     function getUnassignStu(isFirstTime=true,teacher_id){
         //将未匹配学生显示在表格上
-
-        $.getJSON("{{$Think.const.PREFIX}}/TeachingOfficeTutor/select_student",{teacher_id:teacher_id},function(data, status){
+        $.getJSON("{{$Think.const.PREFIX}}/TeachingOfficeTutor/select_student",{teacher_id:teacher_id, grade: gradeSelected},function(data, status){
             if(status === "success"){
                 console.log('json');
                 if(isFirstTime){
@@ -387,16 +402,21 @@
         // $("#workNum2").val(teacher_id);
         $("#deleteinfo").css("color","black");
         $("#deleteinfo").text("确认删除  "+student_name + '(' + student_id + ')?');
+
     });
 
     //向服务器提交删除信息
     $("#btn-del-student").click(function(){
+        gradeSelected = document.getElementById("gradeSelect").value;
+        departmentSelected = document.getElementById("departSelect").value;
+        console.log(gradeSelected + "级" + departmentSelected);
         $(this).attr("disabled","disabled");
         //向服务器提交数据
         $.post("{{$Think.const.PREFIX}}/TeachingOfficeTutor/delete",
         {
             teacher_id: teacher_id,
-            student_id: student_id 
+            student_id: student_id,
+            grade: gradeSelected
         },
             function(data,status){
               console.log(data);
