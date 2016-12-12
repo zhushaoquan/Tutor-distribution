@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/teacher.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/teacher_tutor.css">
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
@@ -25,7 +24,7 @@
     <div id="siderbar">
         <nav class="sider-navbar">
             <div class="sider-navbar-header">
-                <img src="{{$Think.const.OLD}}/image/mainpage-logo.png" alt="" width="240">
+                <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
                 <a href="{{:url('TeacherTutor/index')}}"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
@@ -50,13 +49,15 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示：第一轮导师确认学生时间为2016年10月19日至2016年10月22日，请导师在规定时间内完成学生的选择和确认！</p>
+                    <p><?php echo $message;?></p>
                 </div>
-
+<?php if($ontime==11 || $ontime==22) {?>
                 <div class="my-information-title">
                     <span>可选学生</span>
                 </div>
                 <hr>
+<!--
+
                 <?php if($user['isExperial']) {?>
                  <div class="dropdown" style="padding: 0 50px 0 50px;">
                     <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">请选择方向
@@ -67,6 +68,7 @@
                     </ul>
                 </div>
                 <?php }?>
+-->
                 <div class="table-responsive">
                     <table class="table">
                         <tr>
@@ -85,13 +87,15 @@
                                 <tr>
                                 <form method="post" action="{{:url('TeacherTutor/student_list')}}">
                                     <td><input style="display: none;" type="text" value="{{$t.sid}}" name="sid">{{$t.sid}}</td>
-                                    <td>{{$t.name}}</td>
+                                    <td><a href="{{:url('/index/TeacherTutor/show_resultdetail/sid/'.$t.sid)}}">{{$t.name}}</a></td>
                                     <td>{{$t.gender}}</td>
                                     <td>{{$t.rank}}</td>
                                     <td>{{$t.gpa}}</td>
                                     <td><?php if($t['wishFirst'] == $user['workNumber'])echo "第一志愿";else if($t['wishSecond'] == $user['workNumber'])echo "第二志愿"; else if($t['wishThird'] == $user['workNumber'])echo "第三志愿"; else if($t['wishForth'] == $user['workNumber'])echo "第四志愿";else echo "第五志愿"?></td>
-                                    <td><input class="btn btn-default"data-toggle="modal" data-backdrop="static" data-target="#choiceModal" type="submit" value="选择" name="choise"></td>
-                                    <td><input class="btn btn-default" data-toggle="modal" data-backdrop="static" data-target="#rejectExcelModal" type="submit" value="拒绝" name="choise"></td>
+                                    <?php if($ontime == 11 || $ontime == 22) {?>
+                                    <td><input class="btn btn-default" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="选择" name="choise"></td>
+                                    <td><input class="btn btn-default" data-toggle="modal" data-backdrop="static" data-target="#rejectModal"  value="拒绝" name="choise"></td>
+                                    <?php }?>
                                 </form>    
                                 </tr>
                             {/volist}
@@ -99,6 +103,7 @@
                     </table>
                     <nav>
                       <ul class="pagination" style="float: right;">
+                      <a href="{{:url('/index/index/TeacherTutor/student_list/'.($curPage-1))}}">&laquo;</a>
                           {if condition="$curPage neq 1 "}
                               <li><a href="{{:url('/index/index/TeacherTutor/student_list/'.($curPage-1))}}">&laquo;</a></li>
                           {/if}
@@ -123,12 +128,17 @@
                           {if condition="$curPage lt $totalPage-1"}
                             <li><a href="#">&raquo;</a></li>
                           {/if}
+                            <li><a href="#">共{{$total}}名学生</a></li>
                       </ul>
                     </nav>
                 </div>
+<?php }?>                
+                <!-- <div class="button-position">
+                    <button class="btn btn-info" type="submit">修改</button>
+                </div> -->
 
             </div>
-            
+            <button></button>
             <div class="footer"  style="border-radius: 10px;">
                 Designed by Lin & 我说的都队
             </div>
@@ -144,22 +154,23 @@
                     &times;
                 </button>
                 <h4 class="modal-title" id="choiceModalLabel">
-                    确定学生信息
+                   确定学生信息
                 </h4>
             </div>
             <div class="modal-body">
+        
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                     <div class="modal">
+                     <div>
                          <ul>
                              <li><span>姓名：</span><span></span><span>性别: </span><span></span></li>
                              <li><span>排名：</span><span></span><span>绩点：</span><span></span></li>
                              <li><span>志愿顺序：</span><span></span></li>
                          </ul>
-                     </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" value="选择">
                     确认选择
                 </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
@@ -184,13 +195,12 @@
             </div>
             <div class="modal-body">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                     <div class="modal">
                          <ul>
                              <li><span>姓名：</span><span></span><span>性别: </span><span></span></li>
                              <li><span>排名：</span><span></span><span>绩点：</span><span></span></li>
                              <li><span>志愿顺序：</span><span></span></li>
                          </ul>
-                     </div>
+            
                 </div>
             </div>
             <div class="modal-footer">
@@ -203,12 +213,11 @@
         </div>
         <!-- /.modal-content -->
     </div>
-    <!-- /.modal -->
 </div>
-<script type="text/javascript" src="{{$Think.const.OLD}}/js/index.js"></script>
-<script type="text/javascript" src="{{$Think.const.OLD}}/js/jquery2.14.min.js"></script>
-<script type="text/javascript" src="{{$Think.const.OLD}}/js/bootstrap.js"></script>
-<script type="text/javascript" src="{{$Think.const.OLD}}/js/backstage.js"></script>
+<script type="text/javascript" src="__STATIC__/js/index.js"></script>
+<script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
+<script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
+<script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
 </body>
 </html>
 
