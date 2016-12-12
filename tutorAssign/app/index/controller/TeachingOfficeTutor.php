@@ -27,13 +27,6 @@ class TeachingOfficeTutor extends BaseController {
         $this->assign('user',$user);
         return $this->fetch('head_manager');
 	}
-	 public function test1() {
-		
-		$user = $this->auto_login();
-
-        $this->assign('user',$user);
-        return $this->fetch('head_list');
-	}
 	public function student_assign($page=1,$dep="",$to="",$grade=0)
 	{
 		$user = $this->auto_login();

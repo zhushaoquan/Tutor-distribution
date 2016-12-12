@@ -27,7 +27,7 @@
             </div>
             <ul class="sider-navbar-nav">
                 <a href="{{:url('TeachingOfficeTutor/index')}}"><li ><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <a href="{{:url('TeachingOfficeTutor/tutor_manager')}}"><li class="active"><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li></a>
+                <a href="{{:url('TeachingOfficeTutor/head_list')}}"><li class="active"><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li></a>
                 <a href="{{:url('TeachingOfficeTutor/tutor_change')}}"><li><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li></a>
                 <a href="{{:url('TeachingOfficeTutor/student_assign')}}"><li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li></a>
             </ul>
@@ -51,7 +51,7 @@
                     <p>提示：您还未设置系负责人！</p>
                 </div>
                 <div class="page-header">
-                        <h3>导师分配情况
+                        <h3>系负责人列表
                         </h3>
                 </div>
                 <div class="table-responsive">
@@ -64,14 +64,62 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="teacher-name"  style="vertical-align:middle">计算机科学与技术</td>
+                                 <tr>
+                                    <td class="teacher-name"  style="vertical-align:middle">应用数学系</td>
                                     <td></td>
                                     <td> 
                                          <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;" >
                                          <button type="submit" class="btn btn-primary" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                                     </td>
-                                    
+                                </tr>  
+                                 <tr>
+                                    <td class="teacher-name"  style="vertical-align:middle">信息与计算科学系</td>
+                                    <td></td>
+                                    <td> 
+                                         <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;" >
+                                         <button type="submit" class="btn btn-primary" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                                    </td>
+                                </tr>  
+                                 <tr>
+                                    <td class="teacher-name"  style="vertical-align:middle">计算机系</td>
+                                    <td></td>
+                                    <td> 
+                                         <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;" >
+                                         <button type="submit" class="btn btn-primary" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td class="teacher-name"  style="vertical-align:middle">软件工程系</td>
+                                    <td></td>
+                                    <td> 
+                                         <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;" >
+                                         <button type="submit" class="btn btn-primary" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                                    </td>
+                                </tr>   
+                                 <tr>
+                                    <td class="teacher-name"  style="vertical-align:middle">信息安全与网络系</td>
+                                    <td></td>
+                                    <td> 
+                                         <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;" >
+                                         <button type="submit" class="btn btn-primary" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                                    </td>
+                                </tr>  
+                                 <tr>
+                                    <td class="teacher-name"  style="vertical-align:middle">计算机实验班</td>
+                                    <td></td>
+                                    <td> 
+                                         <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;" >
+                                         <button type="submit" class="btn btn-primary" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                                    </td>
+                                </tr>  
+                                 <tr>
+                                    <td class="teacher-name"  style="vertical-align:middle">数学实验班</td>
+                                    <td></td>
+                                    <td> 
+                                         <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;" >
+                                         <button type="submit" class="btn btn-primary" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                                    </td>
+                                </tr>  
                             </tbody>
                         </table>
                     </div>
@@ -109,13 +157,13 @@
                              <tr>
                                  <td><input type="radio" ></td>
                                  <td>00001</td>
-                                 <td>张栋</td>
+                                 <td>陈齐民</td>
                             </tr>
                             </tbody>
                         </table>
                     </form>
                     <div class="modal-footer">
-                        <a href="{{:url('/index/TeachingOfficeTutor/tutor_change')}}" id="btn-colse-add" class="btn btn-default" >关闭
+                        <a href="{{:url('/index/TeachingOfficeTutor/head_list')}}" id="btn-colse-add" class="btn btn-default" >关闭
                         </a>
                         <button id="btn-add-student" form="addStudent" class="btn btn-primary">
                             确认
