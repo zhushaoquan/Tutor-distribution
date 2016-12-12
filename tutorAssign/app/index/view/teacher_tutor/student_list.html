@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/teacher.css">
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/teacher_tutor.css">
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
@@ -89,8 +90,8 @@
                                     <td>{{$t.rank}}</td>
                                     <td>{{$t.gpa}}</td>
                                     <td><?php if($t['wishFirst'] == $user['workNumber'])echo "第一志愿";else if($t['wishSecond'] == $user['workNumber'])echo "第二志愿"; else if($t['wishThird'] == $user['workNumber'])echo "第三志愿"; else if($t['wishForth'] == $user['workNumber'])echo "第四志愿";else echo "第五志愿"?></td>
-                                    <td><input class="btn btn-default" type="submit" value="选择" name="choise"></td>
-                                    <td><input class="btn btn-default" type="submit" value="拒绝" name="choise"></td>
+                                    <td><input class="btn btn-default"data-toggle="modal" data-backdrop="static" data-target="#choiceModal" type="submit" value="选择" name="choise"></td>
+                                    <td><input class="btn btn-default" data-toggle="modal" data-backdrop="static" data-target="#rejectExcelModal" type="submit" value="拒绝" name="choise"></td>
                                 </form>    
                                 </tr>
                             {/volist}
@@ -125,20 +126,6 @@
                       </ul>
                     </nav>
                 </div>
-                
-
-
-
-
-
-
-
-
-
-
-                <!-- <div class="button-position">
-                    <button class="btn btn-info" type="submit">修改</button>
-                </div> -->
 
             </div>
             
@@ -147,6 +134,76 @@
             </div>
         </div>
     </div>
+</div>
+<div class="modal fade" id="choiceModal" tabindex="-1" role="dialog" aria-labelledby="choiceModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="closepop" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="choiceModalLabel">
+                    确定学生信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div role="alert" class="alert alert-info" style="margin-bottom: 0">
+                     <div class="modal">
+                         <ul>
+                             <li><span>姓名：</span><span></span><span>性别: </span><span></span></li>
+                             <li><span>排名：</span><span></span><span>绩点：</span><span></span></li>
+                             <li><span>志愿顺序：</span><span></span></li>
+                         </ul>
+                     </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">
+                    确认选择
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+<div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="closepop" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="rejectModalLabel">
+                    确定学生信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div role="alert" class="alert alert-info" style="margin-bottom: 0">
+                     <div class="modal">
+                         <ul>
+                             <li><span>姓名：</span><span></span><span>性别: </span><span></span></li>
+                             <li><span>排名：</span><span></span><span>绩点：</span><span></span></li>
+                             <li><span>志愿顺序：</span><span></span></li>
+                         </ul>
+                     </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">
+                    确认拒绝
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
 </div>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/index.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/jquery2.14.min.js"></script>

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:87:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\common\login.html";i:1480930647;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:87:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\common\login.html";i:1481537468;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +53,7 @@
                 </label>
             </div>
             <div class="form-group">
-                <button class="btn btn-success btn-block" id="sub-login">登录教师报课系统</button>
+                <button class="btn btn-success btn-block" id="sub-login">登录教学系统</button>
             </div>
         </form>
         <!-- <form action="#" class="form-signin" method="post">
@@ -67,7 +67,7 @@
     <p>Designed by Lin</p>
 </div>
 </body>
-<!-- <script>
+<script>
     api = {
         "login":"<?php echo url('baseController/login'); ?>"
     };
@@ -101,5 +101,5 @@
         });
         return jsonStr;
     }
-</script> -->
+</script>
 </html>

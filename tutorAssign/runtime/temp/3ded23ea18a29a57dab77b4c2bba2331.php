@@ -1,4 +1,8 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_change.html";i:1481467353;}*/ ?>
+<<<<<<< HEAD
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_change.html";i:1481533038;}*/ ?>
+=======
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_change.html";i:1481538755;}*/ ?>
+>>>>>>> 809d5f727cf74af793836540261b2526f655cf7d
 <!DOCTYPE html>
 <html>
 
@@ -35,7 +39,7 @@
                     <a href="<?php echo url('/index/TeachingOfficeTutor/index'); ?>">
                         <li><i class="glyphicon glyphicon-user"></i> 个人信息</li>
                     </a>
-                    <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
+                    <a href="<?php echo url('TeachingOfficeTutor/tutor_manager'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li></a>
                     <a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change'); ?>">
                         <li class="active"><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
                     </a>
@@ -68,9 +72,9 @@
                     </div>
 
 
-                    <div class="form-horizontal" role="form">
-                <div class="form-group">
-                                        <form action="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>" method="post">
+                <div class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <form action="<?php echo url('TeachingOfficeTutor/tutor_change'); ?>" method="post">
                         <label class="col-md-2 control-label"  >选择年级：</label>
                         <div class="col-xs-2" >
                             <select id="gradeSelect" class="form-control" name="grade" style="display: inline; width: 80%">
@@ -84,12 +88,11 @@
                         <label class="col-md-2 control-label"  >选择系别：</label>
                         <div class="col-xs-2" >
                             <select id="departSelect" class="form-control" name="department" style="display: inline; width: 100%">
-                                 <option value="应用数学系" <?php if($dep == "应用数学系") echo'selected = "true"';?>>应用数学系</option>
-                            <option value="信息与计算科学系" <?php if($dep == "信息与计算科学系") echo'selected = "true"';?>>信息与计算科学系</option>
-                            <option value="计算机系" <?php if($dep == "计算机系") echo'selected = "true"';?>>计算机系</option>
-                            <option value="软件工程系" <?php if($dep == "软件工程系") echo'selected = "true"';?>>软件工程系</option>
-                            <option value="信息安全与网络工程系" <?php if($dep == "信息安全与网络工程系") echo'selected = "true"';?>>信息安全与网络工程系</option>
-                           
+                                <option value="应用数学系" <?php if($dep == "应用数学系") echo'selected = "true"';?>>应用数学系</option>
+                                <option value="信息与计算科学系" <?php if($dep == "信息与计算科学系") echo'selected = "true"';?>>信息与计算科学系</option>
+                                <option value="计算机系" <?php if($dep == "计算机系") echo'selected = "true"';?>>计算机系</option>
+                                <option value="软件工程系" <?php if($dep == "软件工程系") echo'selected = "true"';?>>软件工程系</option>
+                                <option value="信息安全与网络工程系" <?php if($dep == "信息安全与网络工程系") echo'selected = "true"';?>>信息安全与网络工程系</option>
                             </select>  
                             <input type="hidden" name="stu" value="assign">
                         </div>
@@ -99,11 +102,8 @@
                     </form>
 
                     </div>
-                    
-
-                </div>
-
-                    
+                    </div>
+                    <br />
                     <div class="table-responsive">
                         
 
@@ -164,13 +164,23 @@
                         <ul class="pagination" style="float: right;">
                            <?php if($curPage != 1): ?>
                               <li><a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage-1).'/dep/'.$dep.'/grade/'.$grade); ?>">&laquo;</a></li>
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_5532__=$curPage-2;$__FOR_END_5532__=$curPage+3;for($i=$__FOR_START_5532__;$i < $__FOR_END_5532__;$i+=1){ ?>
+<<<<<<< HEAD
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_24582__=$curPage-2;$__FOR_END_24582__=$curPage+3;for($i=$__FOR_START_24582__;$i < $__FOR_END_24582__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_24847__=$totalPage-5;$__FOR_END_24847__=$totalPage;for($i=$__FOR_START_24847__;$i < $__FOR_END_24847__;$i+=1){ ?>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_2785__=$totalPage-5;$__FOR_END_2785__=$totalPage;for($i=$__FOR_START_2785__;$i < $__FOR_END_2785__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_13934__=1;$__FOR_END_13934__=6;for($i=$__FOR_START_13934__;$i < $__FOR_END_13934__;$i+=1){ ?>
+                            <?php } elseif($totalPage > 5): $__FOR_START_31816__=1;$__FOR_END_31816__=6;for($i=$__FOR_START_31816__;$i < $__FOR_END_31816__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_6633__=1;$__FOR_END_6633__=$totalPage;for($i=$__FOR_START_6633__;$i < $__FOR_END_6633__;$i+=1){ ?>
+                            <?php } else: $__FOR_START_18155__=1;$__FOR_END_18155__=$totalPage;for($i=$__FOR_START_18155__;$i < $__FOR_END_18155__;$i+=1){ ?>
+=======
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_23760__=$curPage-2;$__FOR_END_23760__=$curPage+3;for($i=$__FOR_START_23760__;$i < $__FOR_END_23760__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_13459__=$totalPage-5;$__FOR_END_13459__=$totalPage;for($i=$__FOR_START_13459__;$i < $__FOR_END_13459__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
+                            <?php } elseif($totalPage > 5): $__FOR_START_21890__=1;$__FOR_END_21890__=6;for($i=$__FOR_START_21890__;$i < $__FOR_END_21890__;$i+=1){ ?>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
+                            <?php } else: $__FOR_START_14541__=1;$__FOR_END_14541__=$totalPage;for($i=$__FOR_START_14541__;$i < $__FOR_END_14541__;$i+=1){ ?>
+>>>>>>> 809d5f727cf74af793836540261b2526f655cf7d
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage+1).'/dep/'.$dep.'/grade/'.$grade); ?>">&raquo;</a></li>
@@ -271,6 +281,24 @@
     var teacher_name;
     var student_id;
     var student_name;
+<<<<<<< HEAD
+    var grade;
+=======
+    var gradeSelected;
+    var departmentSelected;
+
+    $("#sub-confirm").click(function() {
+        
+        gradeSelected = document.getElementById("gradeSelect").value;
+        departmentSelected = document.getElementById("departSelect").value;
+        console.log(gradeSelected + "级" + departmentSelected);
+        $.get("<?php echo PREFIX; ?>/TeachingOfficeTutor/select_student",
+            {
+                grade: gradeSelected,
+                department: departmentSelected
+            });
+    });
+>>>>>>> 809d5f727cf74af793836540261b2526f655cf7d
 
     //点击修改按钮
     $("#sub-result-change").click(function() {
@@ -286,9 +314,16 @@
     $(".btn-add").click(function() {
         teacher_id = $(this).val();
         teacher_name = $(this).attr('name');
-
+        gradeSelected = document.getElementById("gradeSelect").value;
+        departmentSelected = document.getElementById("departSelect").value;
+        console.log(gradeSelected + "级" + departmentSelected);
+        $.get("<?php echo PREFIX; ?>/TeachingOfficeTutor/select_student",
+            {
+                grade: gradeSelected,
+            });
         console.log($(this).val());
         $("#addModalLabel").text(teacher_name + '(' + teacher_id + ')');
+
         getUnassignStu(true,teacher_id);
     });
 
@@ -306,15 +341,21 @@
                 isAnyChecked = true;
             }
         }
-
+        gradeSelected = document.getElementById("gradeSelect").value;
         if(isAnyChecked){
             //向服务器提交新增数据
             $.post("<?php echo PREFIX; ?>/TeachingOfficeTutor/insert",
             {
                 teacher_id: teacher_id,
+<<<<<<< HEAD
                 stus: selectedStudent
+            }, function(data,status){
+=======
+                stus: selectedStudent,
+                grade: gradeSelected
             },
                 function(data,status){
+>>>>>>> 809d5f727cf74af793836540261b2526f655cf7d
                   console.log(data);
                   if(status === "success"){
                     $("#info-load").css("color","green")
@@ -337,7 +378,12 @@
 
     function getUnassignStu(isFirstTime=true,teacher_id){
         //将未匹配学生显示在表格上
+<<<<<<< HEAD
+
         $.getJSON("<?php echo PREFIX; ?>/TeachingOfficeTutor/select_student",{teacher_id:teacher_id},function(data, status){
+=======
+        $.getJSON("<?php echo PREFIX; ?>/TeachingOfficeTutor/select_student",{teacher_id:teacher_id, grade: gradeSelected},function(data, status){
+>>>>>>> 809d5f727cf74af793836540261b2526f655cf7d
             if(status === "success"){
                 console.log('json');
                 if(isFirstTime){
@@ -372,16 +418,21 @@
         // $("#workNum2").val(teacher_id);
         $("#deleteinfo").css("color","black");
         $("#deleteinfo").text("确认删除  "+student_name + '(' + student_id + ')?');
+
     });
 
     //向服务器提交删除信息
     $("#btn-del-student").click(function(){
+        gradeSelected = document.getElementById("gradeSelect").value;
+        departmentSelected = document.getElementById("departSelect").value;
+        console.log(gradeSelected + "级" + departmentSelected);
         $(this).attr("disabled","disabled");
         //向服务器提交数据
         $.post("<?php echo PREFIX; ?>/TeachingOfficeTutor/delete",
         {
             teacher_id: teacher_id,
-            student_id: student_id 
+            student_id: student_id,
+            grade: gradeSelected
         },
             function(data,status){
               console.log(data);

@@ -6,10 +6,6 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>毕设导师智能分配系统</title>
-  <!--  <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.TUTOR_STATIC}}/css/student.css">
-    !-->
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student.css">
@@ -31,7 +27,7 @@
             </div>
             <ul class="sider-navbar-nav">
                 <a href="{{:url('/index/TeachingOfficeTutor/index')}}"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
+                <a href="{{:url('TeachingOfficeTutor/tutor_manager')}}"><li><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li></a>
                 <a href="{{:url('/index/TeachingOfficeTutor/tutor_change')}}"><li ><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li></a>
                 <a href="{{:url('/index/TeachingOfficeTutor/student_assign')}}"><li class="active"><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li></a>
             </ul>
