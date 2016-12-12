@@ -49,38 +49,36 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示：第一轮导师确认学生时间为2016年10月19日至2016年10月22日，请导师在规定时间内完成学生的选择和确认！</p>
+                    <p><?php echo $message;?></p>
                 </div>
-                <button type="button" id="closepop" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
                 <div class="my-information-title">
-                   
-                        <span>陈燊</span>
-                               
-        
+
+                        <span>{{$student['name']}}</span>
                 </div>
                 <div class="phpoto">
                       <img src="{{$Think.const.OLD}}/image/defaultAvator.png" class="avatorPre">
                 </div>
                 <div class="information-detail" >
                     <ul>
-                        <li><span>学号：</span><span>031402342</span><span>年级：</span><span>2014级</span></li>
-                        <li><span>系别：</span><span>计算机</span><span>方向：</span><span>计算机科学与技术</span></li>
-                        <li><span>绩点：</span><span>3.5</span><span>排名：</span><span>2/72</span></li>
-                        <li><span>电话：</span><span>1333332525</span><span>邮箱：</span><span>553521233@qq.com</span></li>
+                        <li><span>学号：</span><span>{{$student['serialNum']}}</span><span>年级：</span><span>{{$student['grade']}}级</span></li>
+                        <li><span>系别：</span><span>{{$student['department']}}</span><span>方向：</span><span>{{$student['field']}}</span></li>
+                        <li><span>绩点：</span><span>{{$student['gpa']}}</span><span>排名：</span><span>{{$student['rank']}}</span></li>
+                        <li><span>电话：</span><span>{{$student['telephone']}}</span><span>邮箱：</span><span>{{$student['email']}}</span></li>
                     </ul>
                 </div>
                  <div class="new-skill-title">
                     <p>技能与经历：</p>
                 </div>
                 <div class="new-skill-detail">
-                    <p>冷死了算了算了算了算了冷死了算了算了</p>
+                    <p>{{$student['skill']}}</p>
                 </div>
 
                 <div class="edit-btn">
-                     <button class="btn btn-info button-size" type="submit" style ="margin-right:100px">选择</button>
-                     <button class="btn btn-info button-size" type="submit" >拒绝</button>  
+                    <form method="post" action="{{:url('TeacherTutor/student_list')}}">
+                     <input style="display: none;" type="text" value="{{$student['sid']}}" name="sid">
+                     <button class="btn btn-info button-size" type="submit" style ="margin-right:100px" value="选择" name="choise" >选择</button>
+                     <button class="btn btn-info button-size" type="submit" style ="margin-right:100px" value="拒绝" name="choise" >拒绝</button>  
+                    </form>
                 </div> 
             </div>
             
