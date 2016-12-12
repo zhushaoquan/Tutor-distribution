@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:101:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\student_list.html";i:1479472168;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:101:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\student_list.html";i:1481518526;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/student.css">
     <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/teacher.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/teacher_tutor.css">
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
@@ -25,7 +26,7 @@
     <div id="siderbar">
         <nav class="sider-navbar">
             <div class="sider-navbar-header">
-                <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
+                <img src="<?php echo OLD; ?>/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
                 <a href="<?php echo url('TeacherTutor/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
@@ -90,8 +91,8 @@
                                     <td><?php echo $t['rank']; ?></td>
                                     <td><?php echo $t['gpa']; ?></td>
                                     <td><?php if($t['wishFirst'] == $user['workNumber'])echo "第一志愿";else if($t['wishSecond'] == $user['workNumber'])echo "第二志愿"; else if($t['wishThird'] == $user['workNumber'])echo "第三志愿"; else if($t['wishForth'] == $user['workNumber'])echo "第四志愿";else echo "第五志愿"?></td>
-                                    <td><input class="btn btn-default" type="submit" value="选择" name="choise"></td>
-                                    <td><input class="btn btn-default" type="submit" value="拒绝" name="choise"></td>
+                                    <td><input class="btn btn-default"data-toggle="modal" data-backdrop="static" data-target="#choiceModal" type="submit" value="选择" name="choise"></td>
+                                    <td><input class="btn btn-default" data-toggle="modal" data-backdrop="static" data-target="#rejectExcelModal" type="submit" value="拒绝" name="choise"></td>
                                 </form>    
                                 </tr>
                             <?php endforeach; endif; else: echo "" ;endif; ?>
@@ -99,38 +100,22 @@
                     </table>
                     <nav>
                       <ul class="pagination" style="float: right;">
-                      <a href="<?php echo url('/index/index/TeacherTutor/student_list/'.($curPage-1)); ?>">&laquo;</a>
                           <?php if($curPage != 1): ?>
                               <li><a href="<?php echo url('/index/index/TeacherTutor/student_list/'.($curPage-1)); ?>">&laquo;</a></li>
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_10029__=$curPage-2;$__FOR_END_10029__=$curPage+3;for($i=$__FOR_START_10029__;$i < $__FOR_END_10029__;$i+=1){ ?>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_13733__=$curPage-2;$__FOR_END_13733__=$curPage+3;for($i=$__FOR_START_13733__;$i < $__FOR_END_13733__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeacherTutor/student_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_27204__=$totalPage-5;$__FOR_END_27204__=$totalPage;for($i=$__FOR_START_27204__;$i < $__FOR_END_27204__;$i+=1){ ?>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_18332__=$totalPage-5;$__FOR_END_18332__=$totalPage;for($i=$__FOR_START_18332__;$i < $__FOR_END_18332__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('index/TeacherTutor/student_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_32599__=1;$__FOR_END_32599__=6;for($i=$__FOR_START_32599__;$i < $__FOR_END_32599__;$i+=1){ ?>
+                            <?php } elseif($totalPage > 5): $__FOR_START_6927__=1;$__FOR_END_6927__=6;for($i=$__FOR_START_6927__;$i < $__FOR_END_6927__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeacherTutor/student_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_16598__=1;$__FOR_END_16598__=$totalPage;for($i=$__FOR_START_16598__;$i < $__FOR_END_16598__;$i+=1){ ?>
+                            <?php } else: $__FOR_START_6254__=1;$__FOR_END_6254__=$totalPage;for($i=$__FOR_START_6254__;$i < $__FOR_END_6254__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeacherTutor/student_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="#">&raquo;</a></li>
                           <?php endif; ?>
-                            <li><a href="#">共<?php echo $total; ?>名学生</a></li>
                       </ul>
                     </nav>
                 </div>
-                
-
-
-
-
-
-
-
-
-
-
-                <!-- <div class="button-position">
-                    <button class="btn btn-info" type="submit">修改</button>
-                </div> -->
 
             </div>
             
@@ -140,10 +125,80 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="__STATIC__/js/index.js"></script>
-<script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
-<script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
-<script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
+<div class="modal fade" id="choiceModal" tabindex="-1" role="dialog" aria-labelledby="choiceModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="closepop" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="choiceModalLabel">
+                    确定学生信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div role="alert" class="alert alert-info" style="margin-bottom: 0">
+                     <div class="modal">
+                         <ul>
+                             <li><span>姓名：</span><span></span><span>性别: </span><span></span></li>
+                             <li><span>排名：</span><span></span><span>绩点：</span><span></span></li>
+                             <li><span>志愿顺序：</span><span></span></li>
+                         </ul>
+                     </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">
+                    确认选择
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+<div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="closepop" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="rejectModalLabel">
+                    确定学生信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div role="alert" class="alert alert-info" style="margin-bottom: 0">
+                     <div class="modal">
+                         <ul>
+                             <li><span>姓名：</span><span></span><span>性别: </span><span></span></li>
+                             <li><span>排名：</span><span></span><span>绩点：</span><span></span></li>
+                             <li><span>志愿顺序：</span><span></span></li>
+                         </ul>
+                     </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">
+                    确认拒绝
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/index.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/jquery2.14.min.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/bootstrap.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/backstage.js"></script>
 </body>
 </html>
 

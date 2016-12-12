@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:101:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\issue_submit.html";i:1479472808;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:101:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\issue_submit.html";i:1481514159;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +25,7 @@
     <div id="siderbar">
         <nav class="sider-navbar">
             <div class="sider-navbar-header">
-                <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
+                <img src="<?php echo OLD; ?>/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
                 <a href="<?php echo url('TeacherTutor/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
@@ -65,26 +65,28 @@
                                  <label for="firstname" class="col-sm-2 control-label">自然班人数</label>
                                  <div class="col-xs-3">
                                      <select class="form-control" name="totalNatur">
-                                     <option <?php if($issue['totalNatur'] == 0 ) {?> selected="selected" <?php }?> value=0>0</option>
-                                     <option <?php if($issue['totalNatur'] == 1 ) {?> selected="selected" <?php }?> value=1>1</option>
-                                     <option <?php if($issue['totalNatur'] == 2 ) {?> selected="selected" <?php }?> >2</option>
-                                     <option <?php if($issue['totalNatur'] == 3 ) {?> selected="selected" <?php }?> >3</option>
-                                     <option <?php if($issue['totalNatur'] == 4 ) {?> selected="selected" <?php }?> >4</option>
-                                     <option <?php if($issue['totalNatur'] == 5 ) {?> selected="selected" <?php }?> >5</option>
-                                     <option <?php if($issue['totalNatur'] == 6 ) {?> selected="selected" <?php }?> >6</option>
-                                     <option <?php if($issue['totalNatur'] == 7 ) {?> selected="selected" <?php }?> >7</option>
+                                     <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 0 ) {?> selected="selected" <?php }}?> value=0>0</option>
+                                     <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 1 ) {?> selected="selected" <?php }}?> value=1>1</option>
+                                     <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 2 ) {?> selected="selected" <?php }}?> value=2>2</option>
+                                     <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 3 ) {?> selected="selected" <?php }}?> value=3>3</option>
+                                     <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 4 ) {?> selected="selected" <?php }}?> value=4>4</option>
+                                     <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 5 ) {?> selected="selected" <?php }}?> value=5>5</option>
+                                     <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 6 ) {?> selected="selected" <?php }}?> value=6>6</option>
+                                     <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 7 ) {?> selected="selected" <?php }}?> value=7>7</option>
+
                                      </select>
                                  </div> 
                                  <?php if($user['isExperial']) {?>
                                  <label for="firstname" class="col-sm-2 control-label">实验班人数</label>
                                  <div class="col-xs-3">
                                      <select class="form-control" name="totalExper" >
-                                     <option <?php if($issue['totalExper'] == 0 ) {?> selected="selected" <?php }?> >0</option>
-                                     <option <?php if($issue['totalExper'] == 1 ) {?> selected="selected" <?php }?> >1</option>
-                                     <option <?php if($issue['totalExper'] == 2 ) {?> selected="selected" <?php }?> >2</option>
-                                     <option <?php if($issue['totalExper'] == 3 ) {?> selected="selected" <?php }?> >3</option>
-                                     <option <?php if($issue['totalExper'] == 4 ) {?> selected="selected" <?php }?> >4</option>
-                                     <option <?php if($issue['totalExper'] == 5 ) {?> selected="selected" <?php }?> >5</option>
+                                     <option <?php if(isset($issue['totalExper'])) { if($issue['totalExper'] == 0 ) {?> selected="selected" <?php }}?> >0</option>
+                                     <option <?php if(isset($issue['totalExper'])) { if($issue['totalExper'] == 1 ) {?> selected="selected" <?php }}?> >1</option>
+                                     <option <?php if(isset($issue['totalExper'])) { if($issue['totalExper'] == 2 ) {?> selected="selected" <?php }}?> >2</option>
+                                     <option <?php if(isset($issue['totalExper'])) { if($issue['totalExper'] == 3 ) {?> selected="selected" <?php }}?> >3</option>
+                                     <option <?php if(isset($issue['totalExper'])) { if($issue['totalExper'] == 4 ) {?> selected="selected" <?php }}?> >4</option>
+                                     <option <?php if(isset($issue['totalExper'])) { if($issue['totalExper'] == 5 ) {?> selected="selected" <?php }}?> >5</option>
+                                     <option <?php if(isset($issue['totalExper'])) { if($issue['totalExper'] == 6 ) {?> selected="selected" <?php }}?> >6</option>
                                      </select>
                                  </div>
                                  <?php }?>
@@ -96,7 +98,7 @@
                                <div class="row">
                                <label for="inputissuename" class="col-sm-2 control-label">课题名称</label>
                                <div class="col-sm-8">
-                                     <input type="text" class="form-control" id="inputissuename" placeholder="请输入课题名称" name="title" value="<?php echo $issue['title'];?>">
+                                     <input type="text" class="form-control" id="inputissuename" placeholder="请输入课题名称" name="title" value="<?php if(isset($issue['title']))echo $issue['title'];?>">
                                </div>
                                </div>
                         </div>
@@ -104,7 +106,7 @@
                                 <div class="row">
                                 <label for="inputissueintroduction" class="col-sm-2 control-label">课题介绍</label>
                                 <div class="col-sm-8">
-                                     <textarea class="form-control" rows="3" input type="text" value=<?php echo $issue['content']; ?> id="inputissueintroduction" placeholder="请填写具体的课题介绍" name="content" ></textarea>
+                                 <textarea class="form-control" rows="3" input type="text" id="inputissueintroduction" placeholder="请填写具体的课题介绍" name="content" ><?php if($issue['content'])echo $issue['content']; ?></textarea>
                                  </div>
                                  </div>
                         </div>
@@ -115,16 +117,16 @@
                 </form>
             </div>
             <?php }?>
-            <div class="footer"  style="border-radius: 10px;">
+        </div>
+        <div class="footer"  style="border-radius: 10px;">
                 Designed by Lin & 我说的都队
             </div>
-        </div>
     </div>
 </div>
-<script type="text/javascript" src="__STATIC__/js/index.js"></script>
-<script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
-<script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
-<script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/index.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/jquery2.14.min.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/bootstrap.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/backstage.js"></script>
 </body>
 </html>
 
