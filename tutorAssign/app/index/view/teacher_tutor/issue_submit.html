@@ -58,12 +58,12 @@
                 </div>
                 <hr>
                 <form method="post" action="{{:url('TeacherTutor/issue_submit')}}">
-                    <div class="form-horizontal" role="form">
+                    <div class="form-horizontal" role="form" >
                          <div class="form-group">
-                             <div class="row">
-                                 <label for="firstname" class="col-sm-2 control-label">自然班人数</label>
-                                 <div class="col-xs-3">
-                                     <select class="form-control" name="totalNatur">
+                             <div class="row" style ="margin:5px auto;">
+                                 <label  class="col-md-2 control-label" >自然班人数</label>
+                                 <div class="col-sm-2" style="width:120px">
+                                     <select  class="form-control" name="totalNatur">
                                      <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 0 ) {?> selected="selected" <?php }}?> value=0>0</option>
                                      <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 1 ) {?> selected="selected" <?php }}?> value=1>1</option>
                                      <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 2 ) {?> selected="selected" <?php }}?> value=2>2</option>
@@ -77,8 +77,8 @@
                                  </div> 
 
                                  <?php if($user['isExperial']==1 || $user['isExperial']==3) {?>
-                                 <label for="firstname" class="col-sm-2 control-label">计算机实验班人数</label>
-                                 <div class="col-xs-3">
+                                 <label  class="col-md-2 control-label">计算机实验班人数</label>
+                                 <div class="col-sm-2" style="width:120px">
                                      <select class="form-control" name="totalCompExper" >
                                      <option <?php if(isset($issue['totalCompExper'])) { if($issue['totalCompExper'] == 0 ) {?> selected="selected" <?php }}?> >0</option>
                                      <option <?php if(isset($issue['totalCompExper'])) { if($issue['totalCompExper'] == 1 ) {?> selected="selected" <?php }}?> >1</option>
@@ -94,8 +94,8 @@
                                  <?php }?>
 
                                  <?php if($user['isExperial']==2 || $user['isExperial']==3) {?>
-                                 <label for="firstname" class="col-sm-2 control-label">数学实验班人数</label>
-                                 <div class="col-xs-3">
+                                 <label  class="col-md-2 control-label">数学实验班人数</label>
+                                 <div class="col-sm-2" style="width:120px">
                                      <select class="form-control" name="totalMathExper" >
                                      <option <?php if(isset($issue['totalMathExper'])) { if($issue['totalMathExper'] == 0 ) {?> selected="selected" <?php }}?> >0</option>
                                      <option <?php if(isset($issue['totalMathExper'])) { if($issue['totalMathExper'] == 1 ) {?> selected="selected" <?php }}?> >1</option>
@@ -116,7 +116,7 @@
                     <div class="form-horizontal" role="form">
                         <div class="form-group">
                                <div class="row">
-                               <label for="inputissuename" class="col-sm-2 control-label">课题名称</label>
+                               <label for="inputissuename" class="col-md-2 control-label">课题名称</label>
                                <div class="col-sm-8">
                                      <input type="text" class="form-control" id="inputissuename" placeholder="请输入课题名称" name="title" value="<?php if(isset($issue['title']))echo $issue['title'];?>">
                                </div>
@@ -124,7 +124,7 @@
                         </div>
                         <div class="form-group">
                                 <div class="row">
-                                <label for="inputissueintroduction" class="col-sm-2 control-label">课题介绍</label>
+                                <label for="inputissueintroduction" class="col-md-2 control-label">课题介绍</label>
                                 <div class="col-sm-8">
                                  <textarea class="form-control" rows="3" input type="text" id="inputissueintroduction" placeholder="请填写具体的课题介绍" name="content" ><?php if($issue['content'])echo $issue['content']; ?></textarea>
                                  </div>
