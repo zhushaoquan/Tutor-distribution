@@ -1,6 +1,5 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\time_setting.html";i:1479472168;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\time_setting.html";i:1481514159;}*/ ?>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,12 +17,18 @@
             text-align: center;
             padding-top: 10px;
         }
+        #warn-alert-close:hover {
+            background-color: pink;
+        }
     </style>
 </head>
 
 <body cz-shortcut-listen="true">
 
-
+<div id="warn-alert" class="alert alert-info" style="display: none; position:fixed; top:10px; left: 300px;right: 300px; margin:auto; border: 2px solid red; opacity: 1; z-index: 4">
+    <p id="warn-alert-text" style="display: inline-block;float: left;">提示：你还未设置毕设导师分配的时间</p>
+    <span id="warn-alert-close" style="display: inline-block; float: right;" class="glyphicon glyphicon-remove" style="margin-right: 50px"></span>
+</div>
 <div id="container-backstage" class="clearfix">
     <div id="siderbar">
         <nav class="sider-navbar">
@@ -32,9 +37,9 @@
             </div>
             <ul class="sider-navbar-nav">
                 <a href="<?php echo url('DepartmentHeadTutor/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <li><i class="glyphicon glyphicon-th-list"></i> 学生管理</li>
+                <a href="<?php echo url('DepartmentHeadTutor/studentManager'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 学生管理</li></a>
                 <li><i class="glyphicon glyphicon-pencil"></i> 导师管理</li>
-                <a href="<?php echo url('DepartmentHeadTutor/timeSetting'); ?>"><li class="active"><i class="glyphicon glyphicon-time"></i> 时间设置</li></a>
+                <a href="<?php echo url('DepartmentHeadTutor/timeSetting'); ?>"><li class="active"><i class="glyphicon glyphicon-time"></i> 匹配设置</li></a>
                 <a href="<?php echo url('DepartmentHeadTutor/matchSetting'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 匹配结果</li></a>
                 <li><i class="glyphicon glyphicon-download-alt"></i> 结果导出</li>
             </ul>
@@ -109,6 +114,36 @@
                                     <label class="control-label col-md-4 col-sm-12"><br/></label>
                                     <div class="input-group col-md-8 col-sm-12">
                                         
+                                    </div>
+                                </div>
+                                <div class="blank"></div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="separate form-horizontal">
+                        <fieldset>
+                            <legend>年级设置</legend>
+                            <div class="div-flex">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-12">当前年级</label>
+                                    <div class="input-group col-md-8 col-sm-12">
+                                        <!-- <input class="form-control" type="number" id="wish-num" name="wish-num" round="" style="border-radius: 3px"> -->
+                                        <select class="form-control" name="grade" style="border-radius:3px;background-color:#fcfcfc">
+                                            <option>2016级</option>
+                                            <option>2015级</option>
+                                            <option>2014级</option>
+                                            <option>2013级</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-12">
+                                        <br/>
+                                    </label>
+                                    <div class="input-group col-md-8 col-sm-12">
                                     </div>
                                 </div>
                                 <div class="blank"></div>
@@ -290,6 +325,11 @@
 <script type="text/javascript" src="<?php echo OLD; ?>/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="<?php echo OLD; ?>/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 <script type="text/javascript">
+    $("#warn-alert-close").click(function() {
+        $("#warn-alert").hide(300);
+    });
+</script>
+<script type="text/javascript">
     $('.form_datetime').datetimepicker({
         language: 'zh-CN',
         weekStart: 1,
@@ -300,47 +340,155 @@
         forceParse: 0,
         showMeridian: 1
     });
+    $('.form_datetime').datetimepicker('setStartDate', new Date());
 </script>
 <script type="text/javascript">
     function validate() {
-        var form2to4 = $("input:hidden");
-        var form1 = $("input[type='number']");
+        var formDate = $("input:hidden");
+        var formNum = $("input[type='number']");
 
-        var form1_flag = validateForm(form1, 1)
-        var form2to4_flag = validateForm(form2to4, 2);
-        return form1_flag && form2to4_flag;
+        var isNumEmpty = validateForm(formNum, 1);
+        var isDateEmpty = validateForm(formDate, 2);
+        var isEndBigger = checkDate(formDate);
+        var isSecondRoundBigger = checkDateOfTwoRound(formDate);
+        var isNegative = numIsNegative(formNum);
+
+        showWarnInfo(isNumEmpty, isDateEmpty, isEndBigger, isSecondRoundBigger, isNegative);
+        return !isNumEmpty && !isDateEmpty && isEndBigger && isSecondRoundBigger && !isNegative;
+    }
+
+    function numIsNegative(formNum) {
+        var idSet = new Array();
+        var isNegative = false;
+        for (var i = 0; i < formNum.length; ++i) {
+            if (formNum[i].value !== "" &&
+                    formNum[i].value < 0) {
+                idSet.push(formNum[i].id);
+                isNegative = true;
+            }
+        }
+
+        displayWarnStyleNum(idSet);
+        return isNegative;
+    }
+
+    function checkDateOfTwoRound(formDate) {
+        var idSet = new Array();
+        var isSecondRoundBigger = true;
+        var volRound1 = formDate[3];
+        var volRound2 = formDate[4];
+        var tutorRound1 = formDate[7];
+        var tutorRound2 = formDate[8];
+
+        if (new Date(volRound1.value) > new Date(volRound2.value)) {
+            idSet.push(volRound1.id);
+            idSet.push(volRound2.id);
+            isSecondRoundBigger = false;
+        }
+
+        if (new Date(tutorRound1.value) > new Date(tutorRound2.value)) {
+            idSet.push(tutorRound1.id);
+            idSet.push(tutorRound2.id);
+            isSecondRoundBigger = false;
+        }
+
+        displayWarnStyleDate(idSet);
+        return isSecondRoundBigger;
     }
 
     function validateForm(form, option) {
-        var flag = false;
-        console.log(form.length);
+        var idSetNum = new Array();
+        var idSetDate = new Array();
+        var isEmpty = false;
+
         for (var i = 0; i < form.length; ++i) {
             var item = form[i];
             if (item.value === "") {
                 if (option === 2) {
-                    $("#" + item.id).prev().addClass("has-error");
+                    // $("#" + item.id).prev().addClass("has-error");
+                    idSetDate.push(item.id);
                 } else if (option == 1) {
-                    $("#" + item.id).parent().addClass("has-error");
+                    // $("#" + item.id).parent().addClass("has-error");
+                    idSetNum.push(item.id);
                 }
-                console.log(item.id);
-                flag = true;
+                isEmpty = true;
             }
         }
-        if (flag) {
-            return false;
-        }
-        return true;
+        displayWarnStyleNum(idSetNum)
+        displayWarnStyleDate(idSetDate);
+        return isEmpty;
     }
 
+    function checkDate(form) {
+        var idSet = new Array();
+        var isEndBigger = true;
+
+        //检查起始时间小于截止时间
+        var index = 0;
+        for (var j = 0; j < 5; ++j) {
+            dateStart = new Date(form[index].value);
+            dateEnd = new Date(form[index + 1].value);
+
+            if (dateStart > dateEnd) {
+                idSet.push(form[index].id);
+                idSet.push(form[index + 1].id);
+                isEndBigger = false;
+            }
+            index += 2;
+        }
+
+        displayWarnStyleDate(idSet);
+        return isEndBigger;
+    }
+
+    function displayWarnStyleDate(idSet) {
+        for (var i = 0; i < idSet.length; ++i) {
+            $("#" + idSet[i]).prev().addClass("has-error");
+        }
+    }
+
+    function displayWarnStyleNum(idSet) {
+        for (var i = 0; i < idSet.length; ++i) {
+            $("#" + idSet[i]).parent().addClass("has-error");
+        }
+    }
+
+    function showWarnInfo(isNumEmpty, isDateEmpty, isEndBigger, isSecondRoundBigger, isNegative) {
+        var finalText = "提示：";
+        var order = 0;
+        if (isDateEmpty || isNumEmpty) {
+            order++;
+            finalText = finalText.concat("<br>" + order + ".输入框不能为空！");
+            console.log("judge1");
+        }
+
+        if (!isEndBigger) {
+            order++;
+            finalText = finalText.concat("<br>" + order + ".起始时间不得大于截止时间！");
+            console.log("judge2");
+        }
+
+        if (!isSecondRoundBigger) {
+            order++;
+            finalText = finalText.concat("<br>" + order + ".第一轮时间不得大于第二轮时间！");
+        }
+
+        if (isNegative) {
+            order++;
+            finalText = finalText.concat("<br>" + order + ".人数不能为负！")
+        }
+
+        $("#warn-alert-text").html(finalText);
+        $("#warn-alert").show(300);
+        console.log(finalText);
+    }
 </script>
 <script type="text/javascript">
-    $("input").click(function () {
+    $("input").click(function() {
         $(this).parent().removeClass("has-error");
-        console.log($(this).parent().parent());
     });
-    $("span.input-group-addon").click(function () {
+    $("span.input-group-addon").click(function() {
         $(this).parent().removeClass("has-error");
-        console.log($(this).parent().parent());
     });
 </script>
 </body>
