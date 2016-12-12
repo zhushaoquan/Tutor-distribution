@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:96:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head\index.html";i:1479472168;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:96:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head\index.html";i:1481514159;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +21,7 @@
 <body>
 
 <div id="container-backstage" class="clearfix">
-    <div id="mainpage">
+    <div id="mainpage" style="margin-left: 0px">
         <div class="top-nav">
             <div class="user-area">
                 <div class="hello-user">

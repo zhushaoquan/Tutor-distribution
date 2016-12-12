@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_modify.html";i:1479476360;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_modify.html";i:1481467323;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -8,8 +8,8 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>毕设导师智能分配系统</title>
-    <!--  <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/backstage.css">
+    <!--  <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="<?php echo TUTOR_STATIC; ?>/css/student.css">
     !-->
     <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
@@ -33,7 +33,7 @@
         <div id="siderbar">
             <nav class="sider-navbar">
                 <div class="sider-navbar-header">
-                    <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
+                    <img src="<?php echo OLD; ?>/image/mainpage-logo.png" alt="" width="240">
                 </div>
                 <ul class="sider-navbar-nav">
                     <a href="<?php echo url('TeachingOfficeTutor/index'); ?>">
@@ -70,25 +70,41 @@
                         <h3>学生分配结果修改
                     </h3>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label" style="width: 100px;display: inline-block; text-align: center; vertical-align: middle;">选择系别：</label>
-                        <div style="display: inline-block;">
-                            <form id="department-submit" action="<?php echo url('TeachingOfficeTutor/student_assign'); ?>" method="post">
-                                <select class="form-control" name="department" style="display: inline-block; width: 200px">
-                                    <option value="计算机系" <?php if($dep == "计算机系") echo'selected = "true"';?>>计算机系</option>
-                                    <option value="数学系" <?php if($dep == "数学系") echo'selected = "true"';?>>数学系</option>
-                                    <option value="网络工程系" <?php if($dep == "网络工程系") echo'selected = "true"';?>>网络工程系</option>
-                                    <option value="软件工程系" <?php if($dep == "软件工程系") echo'selected = "true"';?>>软件工程系</option>
-                                    <option value="信息安全系" <?php if($dep == "信息安全系") echo'selected = "true"';?>>信息安全系</option>
-                                    <option value="系统结构系" <?php if($dep == "系统结构系") echo'selected = "true"';?>>系统结构系</option>
-                                    <option value="计算机实验班" <?php if($dep == "计算机实验") echo'selected = "true"';?>>计算机实验班</option>
-                                    <option value="数学实验班" <?php if($dep == "数学实验班") echo'selected = "true"';?>>数学实验班</option>
-                                </select>
-                                <input type="hidden" name="stu" value="modify">
-                                <button type="submit" class="btn btn-primary" id="sub-result-confirm" form="department-submit">确&nbsp;&nbsp;认</button>
-                            </form>
+                    <div class="form-horizontal" role="form">
+                <div class="form-group">
+                                        <form action="<?php echo url('TeachingOfficeTutor/student_assign'); ?>" method="post">
+                        <label class="col-md-2 control-label"  >选择年级：</label>
+                        <div class="col-xs-2" >
+                            <select id="gradeSelect" class="form-control" name="grade" style="display: inline; width: 80%">
+                                    <?php if(is_array($gg) || $gg instanceof \think\Collection): $i = 0; $__LIST__ = $gg;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
+                                        <option value="<?php echo $v['grade']; ?>" <?php if($grade == $v['grade']) echo 'selected="true"';?>><?php echo $v['grade']; ?>级</option>
+                                    <?php endforeach; endif; else: echo "" ;endif; ?>
+                            </select>
+                            
                         </div>
+
+                        <label class="col-md-2 control-label"  >选择系别：</label>
+                        <div class="col-xs-2" >
+                            <select id="departSelect" class="form-control" name="department" style="display: inline; width: 100%">
+                                 <option value="应用数学系" <?php if($dep == "应用数学系") echo'selected = "true"';?>>应用数学系</option>
+                            <option value="信息与计算科学系" <?php if($dep == "信息与计算科学系") echo'selected = "true"';?>>信息与计算科学系</option>
+                            <option value="计算机系" <?php if($dep == "计算机系") echo'selected = "true"';?>>计算机系</option>
+                            <option value="软件工程系" <?php if($dep == "软件工程系") echo'selected = "true"';?>>软件工程系</option>
+                            <option value="信息安全与网络工程系" <?php if($dep == "信息安全与网络工程系") echo'selected = "true"';?>>信息安全与网络工程系</option>
+                            <option value="计算机实验班" <?php if($dep == "计算机实验班") echo'selected = "true"';?>>计算机实验班</option>
+                            <option value="数学实验班" <?php if($dep == "数学实验班") echo'selected = "true"';?>>数学实验班</option>
+                            </select>  
+                            <input type="hidden" name="stu" value="assign">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="display: inline;" id="sub-confirm" >确定</button>
+
+                    </form>
+
                     </div>
+                    
+
+                </div>
                     <br />
                     <div class="table-responsive">
                         <form action="<?php echo url('TeachingOfficeTutor/student_modify'); ?>" method="post" id="modify-info">
@@ -138,17 +154,17 @@
                         <nav style="margin-bottom: 100px">
                             <ul class="pagination" style="float: right;">
                                 <?php if($curPage != 1): ?>
-                              <li><a href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage-1).'/dep/'.$dep.'/to/'.'modify'); ?>">&laquo;</a></li>
-                              <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_8249__=$curPage-2;$__FOR_END_8249__=$curPage+3;for($i=$__FOR_START_8249__;$i < $__FOR_END_8249__;$i+=1){ ?>
-                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'); ?>" ><?php echo $i; ?></a></li>
-                                <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_12288__=$totalPage-5;$__FOR_END_12288__=$totalPage;for($i=$__FOR_START_12288__;$i < $__FOR_END_12288__;$i+=1){ ?>
-                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'); ?>" ><?php echo $i; ?></a></li>
-                                <?php } elseif($totalPage > 5): $__FOR_START_5763__=1;$__FOR_END_5763__=6;for($i=$__FOR_START_5763__;$i < $__FOR_END_5763__;$i+=1){ ?>
-                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'); ?>" ><?php echo $i; ?></a></li>
-                                <?php } else: $__FOR_START_18738__=1;$__FOR_END_18738__=$totalPage;for($i=$__FOR_START_18738__;$i < $__FOR_END_18738__;$i+=1){ ?>
-                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'); ?>" ><?php echo $i; ?></a></li>
+                              <li><a href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage-1).'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade); ?>">&laquo;</a></li>
+                              <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_17008__=$curPage-2;$__FOR_END_17008__=$curPage+3;for($i=$__FOR_START_17008__;$i < $__FOR_END_17008__;$i+=1){ ?>
+                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
+                                <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_11443__=$totalPage-5;$__FOR_END_11443__=$totalPage;for($i=$__FOR_START_11443__;$i < $__FOR_END_11443__;$i+=1){ ?>
+                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
+                                <?php } elseif($totalPage > 5): $__FOR_START_6690__=1;$__FOR_END_6690__=6;for($i=$__FOR_START_6690__;$i < $__FOR_END_6690__;$i+=1){ ?>
+                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
+                                <?php } else: $__FOR_START_11245__=1;$__FOR_END_11245__=$totalPage;for($i=$__FOR_START_11245__;$i < $__FOR_END_11245__;$i+=1){ ?>
+                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
                                 <?php } endif; if($curPage < $totalPage-1): ?>
-                                <li><a href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage+11).'/dep/'.$dep.'/to/'.'modify'); ?>">&raquo;</a></li>
+                                <li><a href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage+11).'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade); ?>">&raquo;</a></li>
                               <?php endif; ?>
                                 
                             </ul>
@@ -162,10 +178,10 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="__STATIC__/js/index.js"></script>
-    <script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
-    <script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
-    <script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
+    <script type="text/javascript" src="<?php echo OLD; ?>/js/index.js"></script>
+    <script type="text/javascript" src="<?php echo OLD; ?>/js/jquery2.14.min.js"></script>
+    <script type="text/javascript" src="<?php echo OLD; ?>/js/bootstrap.js"></script>
+    <script type="text/javascript" src="<?php echo OLD; ?>/js/backstage.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:87:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\common\login.html";i:1479472168;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:87:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\common\login.html";i:1481514159;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +7,11 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>教师报课系统-登录</title>
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="__STATIC__/css/login.css" />
-    <script type="text/javascript" src="__STATIC__/js/index.js"></script>
-    <script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
-    <script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/login.css">
+    <script type="text/javascript" src="<?php echo OLD; ?>/js/index.js"></script>
+    <script type="text/javascript" src="<?php echo OLD; ?>/js/jquery2.14.min.js"></script>
+    <script type="text/javascript" src="<?php echo OLD; ?>/js/bootstrap.js"></script>
 </head>
 <body>
 
@@ -28,7 +28,7 @@
     <div id="login-box">
         <form action="<?php echo url('baseController/login'); ?>" class="form-signin" id="login-form" role="form" method="post">
             <div id="login-head">
-                <img src="__STATIC__/image/form-logo1.png"></div>
+                <img src="<?php echo OLD; ?>/image/form-logo1.png"></div>
             <div class="form-group">
                 <input type="text" placeholder="工号:"  class="form-control"  name="login-user" required ></div>
             <div class="form-group">

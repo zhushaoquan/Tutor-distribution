@@ -2,3 +2,5 @@
 .idea
 tutorAssign/uploads/*
 tutorAssign/runtime/*
+*.log
+tutorAssign/runtime/log/201612/11.log
