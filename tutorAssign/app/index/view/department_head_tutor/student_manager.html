@@ -17,6 +17,7 @@
     }
     </style>
 </head>
+
 <body>
     <div id="container-backstage" class="clearfix">
         <div id="siderbar">
@@ -173,20 +174,74 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <button type="button" id="btn-close-add-above" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
                     <h4 class="modal-title" id="addItemLabel">
-                    模态框（Modal）标题
+                    添加学生
                 </h4>
                 </div>
                 <div class="modal-body">
-                    在这里添加一些文本
+                    <div id="addinfo" style="width: 80%; text-align: center;font-size: 20px">
+                    </div>
+                    <div class="input-div clearfix">
+                        <div class="wrapper">
+                            <label class="control-label input-label">学号</label>
+                        </div>
+                        <input id="stuid" class="form-control input-add" placeholder="如：031402201" type="text">
+                    </div>
+                    <div class="input-div clearfix">
+                        <div class="wrapper">
+                            <label class="control-label input-label">姓名</label>
+                        </div>
+                        <input id="stuname" class="form-control input-add">
+                    </div>
+                    <div class="input-div clearfix">
+                        <div class="wrapper">
+                            <label class="control-label input-label">性别</label>
+                        </div>
+                        <select id="stugender" class="form-control input-add">
+                            <option>男</option>
+                            <option>女</option> 
+                        </select>
+                    </div>
+                    <div class="input-div clearfix">
+                        <div class="wrapper">
+                            <label class="control-label input-label">绩点</label>
+                        </div>
+                        <input id="stugpa" class="form-control input-add" placeholder="如：3.5" type="text">
+                    </div>
+                    <div class="input-div clearfix">
+                        <div class="wrapper">
+                            <label class="control-label input-label">系别</label>
+                        </div>
+                        <select id="studepart" class="form-control input-add">
+                            <option>应用数学系</option>
+                            <option>信息与计算科学系</option> 
+                            <option>计算机系</option> 
+                            <option>信息安全与网络系</option>
+                            <option>软件工程系</option>
+                            <option>计算机实验班</option>
+                            <option>数学实验班</option> 
+                        </select>
+                    </div>
+                    <div class="input-div clearfix">
+                        <div class="wrapper">
+                            <label class="control-label input-label">排名</label>
+                        </div>
+                        <input id="sturank" class="form-control input-add" placeholder="如：1/180" type="text">
+                    </div>
+                    <div class="input-div clearfix">
+                        <div class="wrapper">
+                            <label class="control-label input-label">年级</label>
+                        </div>
+                        <input id="stugrade" class="form-control input-add" placeholder="如：2014" type="text">
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    <button id="btn-close-add-bottom" type="button" class="btn btn-default" data-dismiss="modal">关闭
                     </button>
-                    <button type="button" class="btn btn-primary">
+                    <button id="btn-submit-add" type="button" class="btn btn-primary">
                         提交更改
                     </button>
                 </div>
@@ -200,7 +255,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <button type="button" id="btn-close-del-above" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
                     <h4 class="modal-title" id="deleteModalLabel">
@@ -211,8 +266,7 @@
                     <div id="deleteinfo" style="width: 80%; text-align: center;font-size: 20px">
                     </div>
                     <div class="modal-footer">
-                        <a href="#" id="btn-colse-del" class="btn btn-default">关闭
-                    </a>
+                        <a href="#" id="btn-colse-del" class="btn btn-default">关闭</a>
                         <button type="button" id="btn-del-student" class="btn btn-primary">
                             确认
                         </button>
@@ -230,10 +284,12 @@
     <script type="text/javascript" src="{{$Think.const.OLD}}/js/vue.min.js"></script>
     <script type="text/javascript" src="{{$Think.const.OLD}}/js/jqPaginator.min.js"></script>
     <script type="text/javascript">
-        var deleteStu = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/deleteStudent";
-        var stuList = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/studentList";
-        var gradeList = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/gradeList";
+    var deleteStu = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/deleteStudent";
+    var stuList = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/studentList";
+    var gradeList = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/gradeList";
+    var addStu = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/addStudent";
     </script>
     <script type="text/javascript" src="{{$Think.const.OLD}}/js/student_manager.js"></script>
 </body>
+
 </html>

@@ -1,24 +1,46 @@
-.module{
+.module {
     width: 90%;
     margin: 20px auto;
     /*border: 3px solid orange;*/
 }
 
-.module button{
+.module button {
     width: 100%;
     padding: 6px 0;
 }
 
-#delete-item{
+#delete-item {
     background-color: #D95043;
     border: none;
 }
 
-#delete-item:hover{
+#delete-item:hover {
     background-color: #FF7373;
     border: none;
 }
 
-.modal-lg{
+.modal-lg {
     width: 900px;
+}
+
+.wrapper{
+    height: 34px;
+    display: table;
+    float: left;
+}
+
+.input-add {
+    border-radius: 3px;
+    width: 200px;
+    float: right;
+}
+
+.input-label {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.input-div{
+    width: 60%;
+    margin-bottom: 5px;
 }
