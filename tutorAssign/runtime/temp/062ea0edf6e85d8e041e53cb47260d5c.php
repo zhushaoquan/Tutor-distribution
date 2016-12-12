@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:94:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\show_result.html";i:1480930769;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:94:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\show_result.html";i:1481553755;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +24,7 @@
     <div id="siderbar">
         <nav class="sider-navbar">
             <div class="sider-navbar-header">
-                <img src="<?php echo OLD; ?>/image/mainpage-logo.png" alt="" width="240">
+                <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
                 <a href="<?php echo url('Student/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
@@ -49,8 +49,7 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p><?php echo $message;?></p>
-                    <!--<p>提示2：志愿选择不可为空，但同一老师可以多次选择！</p>-->
+                    <p>提示1：<?php echo $message;?></p>
                 </div>
                 <div class="my-information-title">
                     <span>最终结果</span>
@@ -77,7 +76,7 @@
                             <?php if(isset($voluntory_students)) {foreach ($voluntory_students as $key => $value):?>
                             <tr>
                                 <td><?php echo $value['name'];?></td>
-                                <td><?php echo $value['sid'];?></td>
+                                <td><?php echo $value['serialNum'];?></td>
                                 <td><?php echo $value['email'];?></td>
                             </tr>
                             <?php endforeach;}?>
@@ -97,10 +96,10 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo OLD; ?>/js/index.js"></script>
-<script type="text/javascript" src="<?php echo OLD; ?>/js/jquery2.14.min.js"></script>
-<script type="text/javascript" src="<?php echo OLD; ?>/js/bootstrap.js"></script>
-<script type="text/javascript" src="<?php echo OLD; ?>/js/backstage.js"></script>
+<script type="text/javascript" src="__STATIC__/js/index.js"></script>
+<script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
+<script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
+<script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
 </body>
 </html>
 

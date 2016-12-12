@@ -416,8 +416,18 @@ class DepartmentHeadTutor extends BaseController {
     public function addStudent() {
     	$request = Request::instance();
     	if ($request->isPost()) {
-    		$student = $request->post();
-    		$student['password'] = $student['serialNum'];
+    		$data = $request->post();
+
+    		$student['serialNum'] = $data['serialNum'];
+    		$student['password'] = $data['serialNum'];
+    		$student['name'] = $data['name'];
+    		$student['gender'] = $data['gender'];
+    		$student['gpa'] = $data['gpa'];
+    		$student['college'] = "数学与计算机科学学院";
+    		$student['department'] = $data['department'];
+    		$student['field'] = "暂无";
+    		$student['rank'] = $data['rank'];
+    		$student['grade'] = $data['grade'];
 
     		if (Db::table('user_student_'.$student['grade'])->insert($student)) {
     			return true;
@@ -461,6 +471,21 @@ class DepartmentHeadTutor extends BaseController {
     	}
     }
 
+
+    //学生管理界面的搜索接口
+    public function searchStudent() {
+    	$request = Request::instance();
+    	if ($request->isGet()) {
+    		$data = $request->get();
+
+    		$grade = $data['grade'];
+    		$condition = $data['condition']
+
+    		$student = Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->find();
+    		return json($student);
+    	}
+    }
+
     public function teacherList() {
     	$user = $this->auto_login();
 
@@ -480,10 +505,17 @@ class DepartmentHeadTutor extends BaseController {
     public function addTeacher() {
     	$request = Request::instance();
     	if ($request->isPost()) {
-    		$teacher = $request->post();
+    		$data = $request->post();
 
-    		$teacher['password'] = $teacher['workNumber'];
-
+    		$teacher['workNumber'] = $data['workNumber'];
+    		$teacher['password'] = $data['workNumber'];
+    		$teacher['name'] = $data['name'];
+    		$teacher['sex'] = $data['gender'];
+    		$teacher['birthday'] = "1970-01-01";
+    		$teacher['department'] = $data['department'];
+    		$teacher['telephone'] = "12345678901";
+    		$teacher['email'] = "fzu@edu.cn";
+    		$teacher['isExperial'] = $data['isExperial'];
 
     		if (Db::table('user_teacher')->insert($teacher)) {
     			return true;
@@ -497,7 +529,8 @@ class DepartmentHeadTutor extends BaseController {
     public function deleteTeacher() {
     	$request = Request::instance();
     	if ($request->isGet()) {
-    		$workNumber = $request->get('workNumber');
+    		$data = $request->get();
+    		$workNumber = $data['workNumber'];
 
     		if (Db::table('user_teacher')->where('workNumber','in',$workNumber)->delete()) {
     			return true;
