@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:112:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\student_manager.html";i:1481520694;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:112:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\student_manager.html";i:1481544514;}*/ ?>
 <html>
 
 <head>
@@ -40,7 +40,8 @@
                 <a href="<?php echo url('DepartmentHeadTutor/matchSetting'); ?>">
                     <li><i class="glyphicon glyphicon-ok"></i> 匹配结果</li>
                 </a>
-                <li><i class="glyphicon glyphicon-download-alt"></i> 结果导出</li>
+                <a href="<?php echo url('DepartmentHeadTutor/student_result'); ?>"> <li><i class="glyphicon glyphicon-download-alt"></i> 学生结果</li> </a>
+                <a href="<?php echo url('DepartmentHeadTutor/tutor_result'); ?>"> <li><i class="glyphicon glyphicon-download-alt"></i> 导师结果</li> </a>
             </ul>
         </nav>
     </div>

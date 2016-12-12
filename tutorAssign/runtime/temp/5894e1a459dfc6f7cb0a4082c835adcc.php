@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:110:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\assign_result.html";i:1481534020;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:110:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\assign_result.html";i:1481534042;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,14 +71,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <!-- <?php if(is_array($studentElectedResult) || $studentElectedResult instanceof \think\Collection): $i = 0; $__LIST__ = $studentElectedResult;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$r): $mod = ($i % 2 );++$i;?> -->
+                            <?php if(is_array($studentElectedResult) || $studentElectedResult instanceof \think\Collection): $i = 0; $__LIST__ = $studentElectedResult;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$r): $mod = ($i % 2 );++$i;?>
                                 <tr>
                                     <td><?php echo $i; ?></td>
                                     <td>学号</td>
                                     <td>姓名</td>
                                     <td>导师</td>
                                 </tr>
-                                <!-- <?php endforeach; endif; else: echo "" ;endif; ?> -->
+                                <?php endforeach; endif; else: echo "" ;endif; ?>
                             </tbody>
                         </table>
                         <div class="submit-area">
