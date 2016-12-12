@@ -68,24 +68,39 @@
 
 
                     <div class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label for="firstname"  class="col-md-2 control-label"  >选择年级：</label>
-                            <div class="col-xs-5" >
-                                <form action="{{:url('TeachingOfficeTutor/student_assign')}}"  method="post">
-                                    <select class="form-control" name="grade" style="display: inline; width: 45%">
-                                        <option value="全部年级">全部年级</option>
-                                        <option value="2014级" selected="selected">2014级</option>
-                                        <option value="2015级">2015级</option>
-                                        <option value="2016级">2016级</option>
-                                        <option value="2017级">2017级</option>
-                                        <option value="2018级">2018级</option>
-                                    </select>  
-                                    <input type="hidden" name="stu" value="assign">
-                                    <button type="submit" class="btn btn-primary" style="display: inline;" id="sub-confirm" >确定</button>
-                                </form>
-                            </div>
+                <div class="form-group">
+                                        <form action="{{:url('TeachingOfficeTutor/tutor_change')}}" method="post">
+                        <label class="col-md-2 control-label"  >选择年级：</label>
+                        <div class="col-xs-2" >
+                            <select id="gradeSelect" class="form-control" name="grade" style="display: inline; width: 80%">
+                                    {volist name="gg" id="v"}
+                                        <option value="{{$v.grade}}" <?php if($grade == $v['grade']) echo 'selected="true"';?>>{{$v.grade}}级</option>
+                                    {/volist}
+                            </select>
+                            
                         </div>
+
+                        <label class="col-md-2 control-label"  >选择系别：</label>
+                        <div class="col-xs-2" >
+                            <select id="departSelect" class="form-control" name="department" style="display: inline; width: 100%">
+                                 <option value="应用数学系" <?php if($dep == "应用数学系") echo'selected = "true"';?>>应用数学系</option>
+                            <option value="信息与计算科学系" <?php if($dep == "信息与计算科学系") echo'selected = "true"';?>>信息与计算科学系</option>
+                            <option value="计算机系" <?php if($dep == "计算机系") echo'selected = "true"';?>>计算机系</option>
+                            <option value="软件工程系" <?php if($dep == "软件工程系") echo'selected = "true"';?>>软件工程系</option>
+                            <option value="信息安全与网络工程系" <?php if($dep == "信息安全与网络工程系") echo'selected = "true"';?>>信息安全与网络工程系</option>
+                           
+                            </select>  
+                            <input type="hidden" name="stu" value="assign">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="display: inline;" id="sub-confirm" >确定</button>
+
+                    </form>
+
                     </div>
+                    
+
+                </div>
 
                     
                     <div class="table-responsive">
@@ -150,28 +165,28 @@
                     <nav>
                         <ul class="pagination" style="float: right;">
                            {if condition="$curPage neq 1 "}
-                              <li><a href="{{:url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage-1))}}">&laquo;</a></li>
+                              <li><a href="{{:url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage-1).'/dep/'.$dep.'/grade/'.$grade)}}">&laquo;</a></li>
                           {/if}
                             
                           {if condition="($curPage gt 3) AND ($curPage lt $totalPage-2)"}
                             {for start="$curPage-2" end="$curPage+3"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/index/TeachingOfficeTutor/tutor_change/page/'.$i)}}" >{{$i}}</a></li>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade)}}" >{{$i}}</a></li>
                             {/for}
                           {elseif condition="($curPage gt $totalPage-3) AND ($totalPage gt 5)" /}
                             {for start="$totalPage-5" end="$totalPage"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/index/TeachingOfficeTutor/tutor_change/page/'.$i)}}" >{{$i}}</a></li>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade)}}" >{{$i}}</a></li>
                             {/for}
                           {elseif condition="$totalPage gt 5" /}
                             {for start="1" end="6"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/index/TeachingOfficeTutor/tutor_change/page/'.$i)}}" >{{$i}}</a></li>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade)}}" >{{$i}}</a></li>
                             {/for}
                           {else /}
                             {for start="1" end="$totalPage"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/index/TeachingOfficeTutor/tutor_change/page/'.$i)}}" >{{$i}}</a></li>
+                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade)}}" >{{$i}}</a></li>
                             {/for}
                           {/if}
                           {if condition="$curPage lt $totalPage-1"}
-                            <li><a href="{{:url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage+1))}}">&raquo;</a></li>
+                            <li><a href="{{:url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage+1).'/dep/'.$dep.'/grade/'.$grade)}}">&raquo;</a></li>
                           {/if}
                         </ul>
                     </nav>
@@ -269,6 +284,7 @@
     var teacher_name;
     var student_id;
     var student_name;
+    var grade;
 
     //点击修改按钮
     $("#sub-result-change").click(function() {
@@ -287,7 +303,8 @@
 
         console.log($(this).val());
         $("#addModalLabel").text(teacher_name + '(' + teacher_id + ')');
-        getUnassignStu(teacher_id);
+
+        getUnassignStu(true,teacher_id);
     });
 
 
@@ -334,11 +351,8 @@
 
     function getUnassignStu(isFirstTime=true,teacher_id){
         //将未匹配学生显示在表格上
-        $.getJSON("{{$Think.const.PREFIX}}/TeachingOfficeTutor/select_student",
-                {
-                    teacher_id: teacher_id
-                },
-                function(data, status){
+
+        $.getJSON("{{$Think.const.PREFIX}}/TeachingOfficeTutor/select_student",{teacher_id:teacher_id},function(data, status){
             if(status === "success"){
                 console.log('json');
                 if(isFirstTime){

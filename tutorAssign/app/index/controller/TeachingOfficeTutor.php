@@ -21,21 +21,26 @@ class TeachingOfficeTutor extends BaseController {
 		return $this->fetch('index');
 	}
 
-	public function student_assign($page=1,$dep="",$to="")
+	public function student_assign($page=1,$dep="",$to="",$grade=0)
 	{
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
 		$pageSize=8;
-
-		if($_SERVER["REQUEST_METHOD"] == "POST")$dep=$_POST['department'];
+		$gg=DB::table('tc_grade')->field('grade')->select();
+		$grade=$gg[0]['grade'];
+		if($_SERVER["REQUEST_METHOD"] == "POST")
+		{
+			$grade=$_POST['grade'];
+			$dep=$_POST['department'];
+		}
 	//	var_dump($dep);
-		$data=Db::table('user_teacher t,user_student s,tc_result r')
-		->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)
+		$data=Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
+		->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
 		->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
 		->order('s.serialNum')->page($page,$pageSize)->select();
 
-		$total=	count(Db::table('user_teacher t,user_student s,tc_result r')
-				->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)
+		$total=	count(Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
+				->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
 				->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
 				->order('s.serialNum')->select());
 		$totalPage = ceil($total/$pageSize);
@@ -59,7 +64,10 @@ class TeachingOfficeTutor extends BaseController {
 			'pageSize'  => $pageSize,
 			'curPage'   => $page
 			];
+		$this->assign('gg',$gg);
 		$this->assign('dep',$dep);
+		// var_dump($grade);
+		$this->assign('grade',$grade);
 		$this->assign($pageBar);
 	 	$this->assign('teacher',$tealist);
 	    $this->assign('data',$data);
@@ -70,24 +78,32 @@ class TeachingOfficeTutor extends BaseController {
 		return $this->fetch('student_assign');
 	}
 
-	public function tutor_change($page=1)
+	public function tutor_change($page=1,$dep="",$grade=0)
 	{
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
 		$pageSize=4;
-		$tea=Db::table('user_teacher t')
+		$gg=DB::table('tc_grade')->field('grade')->select();
+		$grade=$gg[0]['grade'];
+		if($_SERVER["REQUEST_METHOD"] == "POST")
+		{
+			$grade=$_POST['grade'];
+			$dep=$_POST['department'];
+		}
+		$tea=Db::table('user_teacher t')->where('department',$dep)
 		->field('t.workNumber as tnum,t.name as tname')->distinct(true)->page($page,$pageSize)->select();
 		
-		$total=count(Db::table('user_teacher t')
+		$total=count(Db::table('user_teacher t')->where('department',$dep)
 		->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
 		$totalPage = ceil($total/$pageSize);
 		$i=0;
 		foreach($tea as $value)
 		{
-			$stu=Db::query("select s.serialNum snum,s.name sname from user_student s,tc_result r where  r.workNumber=?  and s.sid=r.sid",[$value['tnum']]);
+			$stu=Db::query("select s.serialNum snum,s.name sname from user_student_" .$grade." s,tc_result_".$grade. " r where  r.workNumber=?  and s.sid=r.sid ",[$value['tnum']]);
 			$tea[$i]['tstudentL'] = $stu;
 			$tea[$i]['lenth'] =count($stu);
 			$i++;	
+			//var_dump($tea[$i]['grade']);
 		}
 
 		$pageBar = [
@@ -96,7 +112,9 @@ class TeachingOfficeTutor extends BaseController {
 			'pageSize'  => $pageSize,
 			'curPage'   => $page
 			];
-
+		$this->assign('gg',$gg);
+		$this->assign('dep',$dep);
+		$this->assign('grade',$grade);
 		$this->assign($pageBar);
 		$this->assign('data',$tea);
 		$this->assign('user', $officer);
@@ -104,6 +122,8 @@ class TeachingOfficeTutor extends BaseController {
 	}
 	public function student_modify()
 	{
+		$gg=DB::table('tc_grade')->field('grade')->select();
+		$grade=$gg[0]['grade'];
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
 		
@@ -114,9 +134,9 @@ class TeachingOfficeTutor extends BaseController {
 		//	var_dump($str);
 		//	var_dump($str1);
 		//	var_dump($_POST[$str1]);
-			$seri=DB::table('user_student')->where('serialNum',$_POST[$str1])->field('sid')->find();
+			$seri=DB::table('user_student_'.$grade)->where('serialNum',$_POST[$str1])->field('sid')->find();
 		//	var_dump($seri['sid']);
-			Db::table('tc_result')->where('sid',$seri['sid'])->setField('workNumber',$_POST[$str]);
+			Db::table('tc_result_'.$grade)->where('sid',$seri['sid'])->setField('workNumber',$_POST[$str]);
 		}
 	//exit();
 		$pageBar = [
@@ -128,27 +148,34 @@ class TeachingOfficeTutor extends BaseController {
 		$this->assign($pageBar);
 		$dep="";
 
-		$list=Db::table('user_teacher t,user_student s,tc_result r')->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')->order('s.serialNum')->paginate(8);
+		$list=Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')->order('s.serialNum')->paginate(8);
 	   	$data=$list->toArray()['data'];	 
 	   	$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
+	 	$this->assign('gg',$gg);
 	 	$this->assign('teacher',$tealist);
 	    $this->assign('data',$data);	
 		$this->assign('user', $officer);
 		$this->success('修改成功','TeachingOfficeTutor/student_assign');
 	}
-	public function student_to_modify($dep="")
+	public function student_to_modify($dep="",$grade=0)
 	{
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
 		$pageSize=8;
 		$page=1;
-		if($_SERVER["REQUEST_METHOD"] == "POST")$dep=$_POST['department'];
-		$data=Db::table('user_teacher t,user_student s,tc_result r')
+		$gg=DB::table('tc_grade')->field('grade')->select();
+		$grade=$gg[0]['grade'];
+		if($_SERVER["REQUEST_METHOD"] == "POST")
+		{
+		//	$grade=$_POST['grade'];
+			$dep=$_POST['department'];
+		}
+		$data=Db::table('user_teacher t,user_student_' .$grade.' s,tc_result_'.$grade.' r')
 		->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)
 		->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
 		->order('s.serialNum')->page($page,$pageSize)->select();
 
-		$total=	count(Db::table('user_teacher t,user_student s,tc_result r')
+		$total=	count(Db::table('user_teacher t,user_student_' .$grade.' s,tc_result_'.$grade.' r')
 				->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)
 				->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
 				->order('s.serialNum')->select());
@@ -176,10 +203,12 @@ class TeachingOfficeTutor extends BaseController {
 		$this->assign($pageBar);
 
 		//$dep="";
-		$list=Db::table('user_teacher t,user_student s,tc_result r')->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')->order('s.serialNum')->paginate(8);
+		$list=Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')->order('s.serialNum')->paginate(8);
 	   	$data=$list->toArray()['data'];	 
 	   	$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
+	 	$this->assign('gg',$gg);
 	 	$this->assign('dep',$dep);
+	 	$this->assign('grade',$grade);
 	 	$this->assign('teacher',$tealist);
 	    $this->assign('data',$data);
 		$this->assign('user', $officer);	
@@ -217,9 +246,9 @@ class TeachingOfficeTutor extends BaseController {
 	} */
 	public function delete()
 	{
-		$sid=Db::table('user_student')->where('serialNum',$_POST['student_id'])->field('sid')->find();
-		$flag1=Db::table('tc_result')->where('sid',$sid['sid'])->where('workNumber',$_POST['teacher_id'])->delete();
-		$flag2=Db::table('user_student')->where('sid',$sid['sid'])->setField('chosen',0);
+		$sid=Db::table('user_student_2014')->where('serialNum',$_POST['student_id'])->field('sid')->find();
+		$flag1=Db::table('tc_result_2014')->where('sid',$sid['sid'])->where('workNumber',$_POST['teacher_id'])->delete();
+		$flag2=Db::table('user_student_2014')->where('sid',$sid['sid'])->setField('chosen',0);
 		if($flag1&&$flag2)return "success";
 		return "fail";
 	}
@@ -230,13 +259,13 @@ class TeachingOfficeTutor extends BaseController {
 		foreach ($_POST['stus'] as $value) 
 		{
 	//		var_dump($value);
-			$sid=Db::table('user_student')->where('serialNum',$value)->field('sid')->find();
+			$sid=Db::table('user_student_2014')->where('serialNum',$value)->field('sid')->find();
 		//	$have=count(Db::table('tc_result')->where('sid',$sid)->select());
 		//	if($have == 0)
 		//	{
-				$flag=Db::table('tc_result')->insert(["sid" => $sid['sid'] , 'workNumber' => $_POST['teacher_id']]);
-				if($flag == 0)$this->error('增加失败','TeachingOfficeTutor/tutor_assign');
-		 		Db::table('user_student')->where('serialNum',$value)->setField('chosen',1);
+				$flag=Db::table('tc_result_2014')->insert(["sid" => $sid['sid'] , 'workNumber' => $_POST['teacher_id']]);
+				if($flag == 0)$this->error('增加失败','TeachingOfficesTutor/tutor_assign');
+		 		Db::table('user_student_2014')->where('serialNum',$value)->setField('chosen',1);
 		 //	}
 		}
 		 // $flag1=Db::table('tc_result')->insert(["sid" => $_POST['student'] , 'workNumber' => $_POST['teacher']]);
@@ -247,8 +276,11 @@ class TeachingOfficeTutor extends BaseController {
 
 	public function select_student()
 	{
-		$data=DB::table('user_student')->where('chosen',0)->field('name,serialNum')->select();
+		$dep=DB::table('user_teacher')->where('workNumber',$_GET['teacher_id'])->field('department')->find();
+	//	var_dump($dep);
+		$data=DB::table('user_student_2014')->where('chosen',0)->where('department',$dep['department'])->field('name,serialNum')->select();
 		$d['result']= $data;
+	//	var_dump($data);
 		return json($d);
 	}
 

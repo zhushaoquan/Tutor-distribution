@@ -265,10 +265,10 @@
             },
             url: "http://localhost/public/index.php/index/DepartmentHeadTutor/studentList",
             success: function (data) {
-                $.each(data, function (index, value) {
-                    console.log(value);
-                })
-                vm.datas = data;
+                vm.datas = data.information;
+                $('#tab-pagination').jqPaginator('option', {
+                    totalPages: data.amount
+                });
             },
             dataType: "json"
         });
