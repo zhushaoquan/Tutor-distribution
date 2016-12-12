@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_change.html";i:1481533038;}*/ ?>
-=======
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_change.html";i:1481538755;}*/ ?>
->>>>>>> 809d5f727cf74af793836540261b2526f655cf7d
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_change.html";i:1481544192;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -151,7 +147,7 @@
                         <div class="col-md-2"> </div>
                         <div class="col-md-2"> </div>
                         <div class="col-md-2"> 
-                            <button type="submit" class="btn btn-primary" id="sub-result-export" onClick ="$('#sresult').tableExport({type:'excel',escape:'false'});">导&nbsp;&nbsp;出</button>
+                            <button type="submit" class="btn btn-primary" id="sub-result-export"> <a id="downloadFile" href="<?php echo OLD; ?>/../教师初始账号表.xls" download="result" style="color: #fff; text-decoration: none;">导&nbsp;&nbsp;出</a></button>
                         </div>
 
                         <div class="col-md-2"> 
@@ -164,23 +160,13 @@
                         <ul class="pagination" style="float: right;">
                            <?php if($curPage != 1): ?>
                               <li><a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage-1).'/dep/'.$dep.'/grade/'.$grade); ?>">&laquo;</a></li>
-<<<<<<< HEAD
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_24582__=$curPage-2;$__FOR_END_24582__=$curPage+3;for($i=$__FOR_START_24582__;$i < $__FOR_END_24582__;$i+=1){ ?>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_32197__=$curPage-2;$__FOR_END_32197__=$curPage+3;for($i=$__FOR_START_32197__;$i < $__FOR_END_32197__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_2785__=$totalPage-5;$__FOR_END_2785__=$totalPage;for($i=$__FOR_START_2785__;$i < $__FOR_END_2785__;$i+=1){ ?>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_7228__=$totalPage-5;$__FOR_END_7228__=$totalPage;for($i=$__FOR_START_7228__;$i < $__FOR_END_7228__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_31816__=1;$__FOR_END_31816__=6;for($i=$__FOR_START_31816__;$i < $__FOR_END_31816__;$i+=1){ ?>
+                            <?php } elseif($totalPage > 5): $__FOR_START_24111__=1;$__FOR_END_24111__=6;for($i=$__FOR_START_24111__;$i < $__FOR_END_24111__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_18155__=1;$__FOR_END_18155__=$totalPage;for($i=$__FOR_START_18155__;$i < $__FOR_END_18155__;$i+=1){ ?>
-=======
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_23760__=$curPage-2;$__FOR_END_23760__=$curPage+3;for($i=$__FOR_START_23760__;$i < $__FOR_END_23760__;$i+=1){ ?>
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_13459__=$totalPage-5;$__FOR_END_13459__=$totalPage;for($i=$__FOR_START_13459__;$i < $__FOR_END_13459__;$i+=1){ ?>
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_21890__=1;$__FOR_END_21890__=6;for($i=$__FOR_START_21890__;$i < $__FOR_END_21890__;$i+=1){ ?>
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_14541__=1;$__FOR_END_14541__=$totalPage;for($i=$__FOR_START_14541__;$i < $__FOR_END_14541__;$i+=1){ ?>
->>>>>>> 809d5f727cf74af793836540261b2526f655cf7d
+                            <?php } else: $__FOR_START_29710__=1;$__FOR_END_29710__=$totalPage;for($i=$__FOR_START_29710__;$i < $__FOR_END_29710__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage+1).'/dep/'.$dep.'/grade/'.$grade); ?>">&raquo;</a></li>
@@ -281,9 +267,6 @@
     var teacher_name;
     var student_id;
     var student_name;
-<<<<<<< HEAD
-    var grade;
-=======
     var gradeSelected;
     var departmentSelected;
 
@@ -298,7 +281,6 @@
                 department: departmentSelected
             });
     });
->>>>>>> 809d5f727cf74af793836540261b2526f655cf7d
 
     //点击修改按钮
     $("#sub-result-change").click(function() {
@@ -323,7 +305,6 @@
             });
         console.log($(this).val());
         $("#addModalLabel").text(teacher_name + '(' + teacher_id + ')');
-
         getUnassignStu(true,teacher_id);
     });
 
@@ -347,15 +328,10 @@
             $.post("<?php echo PREFIX; ?>/TeachingOfficeTutor/insert",
             {
                 teacher_id: teacher_id,
-<<<<<<< HEAD
-                stus: selectedStudent
-            }, function(data,status){
-=======
                 stus: selectedStudent,
                 grade: gradeSelected
             },
                 function(data,status){
->>>>>>> 809d5f727cf74af793836540261b2526f655cf7d
                   console.log(data);
                   if(status === "success"){
                     $("#info-load").css("color","green")
@@ -378,12 +354,7 @@
 
     function getUnassignStu(isFirstTime=true,teacher_id){
         //将未匹配学生显示在表格上
-<<<<<<< HEAD
-
-        $.getJSON("<?php echo PREFIX; ?>/TeachingOfficeTutor/select_student",{teacher_id:teacher_id},function(data, status){
-=======
         $.getJSON("<?php echo PREFIX; ?>/TeachingOfficeTutor/select_student",{teacher_id:teacher_id, grade: gradeSelected},function(data, status){
->>>>>>> 809d5f727cf74af793836540261b2526f655cf7d
             if(status === "success"){
                 console.log('json');
                 if(isFirstTime){
