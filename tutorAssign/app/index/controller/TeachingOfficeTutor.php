@@ -283,10 +283,45 @@ class TeachingOfficeTutor extends BaseController {
 		$dep=DB::table('user_teacher')->where('workNumber',$_GET['teacher_id'])->field('department')->find();
 	//	var_dump($dep);
 	//	return json($dep);
+		$ise=DB::table('user_teacher')->where('workNumber',$_GET['teacher_id'])->field('isExperial')->find();
 		$data=DB::table('user_student_'.$_GET['grade'])->where('chosen',0)->where('department',$dep['department'])->field('name,serialNum')->select();
+		if($ise==1)
+		{
+			$data1=DB::table('user_student_'.$_GET['grade'])->where('chosen',0)->where('department',"计算机实验班")->field('name,serialNum')->select();
+			$data=array_merge($data,$data1);
+		}
+		else if($ise==2)
+		{
+			$data1=DB::table('user_student_'.$_GET['grade'])->where('chosen',0)->where('department',"数学实验班")->field('name,serialNum')->select();
+			$data=array_merge($data,$data1);
+		}
+		else if($ise==3)
+		{
+			$data1=DB::table('user_student_'.$_GET['grade'])->where('chosen',0)->where('department',"计算机实验班")->field('name,serialNum')->select();
+			$data=array_merge($data,$data1);
+			$data1=DB::table('user_student_'.$_GET['grade'])->where('chosen',0)->where('department',"数学实验班")->field('name,serialNum')->select();
+			$data=array_merge($data,$data1);
+		}
 		$d['result']= $data;
 	//	var_dump($data);
 		return json($d);
+	}
+
+	public function head_list()
+	{
+		$user = $this->auto_login();
+		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
+		$R1=DB::table('user_department_head')->where('department',"信息安全与网络工程系")->field('workNumber,name')->find();
+		$R2=DB::table('user_department_head')->where('department',"应用数学系")->field('workNumber,name')->find();
+		$R3=DB::table('user_department_head')->where('department',"计算机系")->field('workNumber,name')->find();
+		$R4=DB::table('user_department_head')->where('department',"软件工程系")->field('workNumber,name')->find();
+		$R5=DB::table('user_department_head')->where('department',"信息与计算科学系")->field('workNumber,name')->find();
+		$R6=DB::table('user_department_head')->where('department',"计算机实验班")->field('workNumber,name')->find();
+		$R7=DB::table('user_department_head')->where('department',"数学实验班")->field('workNumber,name')->find();
+
+
+		$this->assign('user', $officer);
+		return $this->fetch('head_list');
 	}
 
 	public function modify() {
