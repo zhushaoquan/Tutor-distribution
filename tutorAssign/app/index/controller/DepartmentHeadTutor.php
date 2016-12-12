@@ -522,7 +522,9 @@ class DepartmentHeadTutor extends BaseController {
     public function addStudent() {
     	$request = Request::instance();
     	if ($request->isPost()) {
-    		
+    		$student = $request->post();
+
+    		return json($student);
     	}
     }
 
