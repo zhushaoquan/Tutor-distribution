@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student.css">
+    
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
@@ -63,9 +64,9 @@
                         <li><span>系别：</span><span>{{$tutor['department']}}</span><span>性别：</span><span>{{$tutor['sex']}}</span></li>
                         <li><span>电话：</span><span>{{$tutor['telephone']}}</span><span>邮箱：</span><span>{{$tutor['email']}}</span></li>
                         <li><span>职称：</span><span>$tutor['position']</span><span>实验班导师：</span><span><?php if($tutor['isExperial']!=0) echo "是";else echo "否"; ?></span></li>
-                        <li><span>所带自然班总人数：</span><span>{{$tutor['totalNatur']}}</span><span>自然班当前人数：</span><span>{{$tutor['naturNow']}}</span></li>
-                        <li><span>所带计算机实验班总人数：</span><span>{{$tutor['totalCompExper']}}</span><span>计算机实验班当前人数：</span><span>{{$tutor['compExperNow']}}</span></li>
-                        <li><span>所带数  学实验班总人数：</span><span>{{$tutor['totalMathExper']}}</span><span>数  学实验班当前人数：</span><span>{{$tutor['mathExperNow']}}</span></li>
+                        <li><span style ="width:30%;">自然班总人数：</span><span style="width:11%;">{{$tutor['totalNatur']}}</span><span style ="width:30%;">自然班已选人数：</span><span style="width:11%;">{{$tutor['naturNow']}}</span></li>
+                        <li><span style ="width:30%;">计算机实验班总人数：</span><span style="width:11%;">{{$tutor['totalCompExper']}}</span><span style ="width:30%;">计算机实验班已选人数：</span><span style="width:11%;">{{$tutor['compExperNow']}}</span></li>
+                        <li><span style ="width:30%;">数学实验班总人数：</span><span style="width:11%;">{{$tutor['totalMathExper']}}</span><span style ="width:30%;">数学实验班已选人数：</span><span style="width:11%;">{{$tutor['mathExperNow']}}</span></li>
                     </ul>
                 </div>
                 <div class="new-skill-title">
@@ -76,8 +77,9 @@
                 </div>
                 <div class="information-detail" style="padding:10px 250px;">
                     <ul>
-                         <li><span>标题：</span><span>{{$tutor['title']}}</span>
-                         <li><span>内容介绍</span></li>
+                         <li><span>课题名称：</span></li>
+                         <li><p>{{$tutor['title']}}</p></li>
+                         <li><span>课题内容：</span></li>
                          <li><p>{{$tutor['content']}}</p></li>
                     </ul>
                 </div>

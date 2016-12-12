@@ -479,10 +479,28 @@ class DepartmentHeadTutor extends BaseController {
     		$data = $request->get();
 
     		$grade = $data['grade'];
-    		$condition = $data['condition']
+    		$condition = $data['condition'];
 
-    		$student = Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->find();
+    		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->select())/10);
+    		$student['totalPage'] = $totalPage;
+    		$student['result'] = Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->select();
     		return json($student);
+    	}
+    }
+
+
+    //导师管理界面的搜索接口
+    public function searchTeacher() {
+    	$request = Request::instance();
+    	if ($request->isGet()) {
+    		$data = $request->get();
+
+    		$condition = $data['condition'];
+
+    		$totalPage = ceil(count(Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->select())/10);
+    		$teacher['totalPage'] = $totalPage;
+    		$teacher['result'] = Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->select();
+    		return json($teacher);
     	}
     }
 
