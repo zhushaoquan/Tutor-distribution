@@ -29,12 +29,13 @@
              grade: grade,
              curPage: page
          },
-         url: "http://localhost/public/index.php/index/DepartmentHeadTutor/studentList",
+         url: stuList,
          success: function(data) {
              tab_body.datas = data.information;
              $('#tab-pagination').jqPaginator('option', {
                  totalPages: data.amount
              });
+             console.log(data.information);
          },
          dataType: "json"
      });
@@ -64,7 +65,7 @@
 
      $.ajax({
          type: "get",
-         url: "http://localhost/public/index.php/index/DepartmentHeadTutor/gradeList",
+         url: gradeList,
          success: function(data) {
              selectGrade.grades = data;
          },
@@ -83,7 +84,7 @@ $("#btn-del-student").click(function(){
             grade: grade,
             serialNum: ids
          },
-         url: "http://localhost/public/index.php/index/DepartmentHeadTutor/deleteStudent",
+         url: deleteStu,
          success: function(data) {
              console.log(data);
          },
