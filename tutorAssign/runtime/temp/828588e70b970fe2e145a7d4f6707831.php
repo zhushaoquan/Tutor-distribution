@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:94:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\show_result.html";i:1479478453;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:94:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\show_result.html";i:1481552370;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,11 +49,10 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p><?php echo $message;?></p>
-                    <!--<p>提示2：志愿选择不可为空，但同一老师可以多次选择！</p>-->
+                    <p>提示1：<?php echo $message;?></p>
                 </div>
                 <div class="my-information-title">
-                    <span>志愿结果</span>
+                    <span>最终结果</span>
 
                 </div>
                 <hr>
@@ -77,7 +76,7 @@
                             <?php if(isset($voluntory_students)) {foreach ($voluntory_students as $key => $value):?>
                             <tr>
                                 <td><?php echo $value['name'];?></td>
-                                <td><?php echo $value['sid'];?></td>
+                                <td><?php echo $value['serialNum'];?></td>
                                 <td><?php echo $value['email'];?></td>
                             </tr>
                             <?php endforeach;}?>
@@ -90,10 +89,10 @@
 
             </div>
 
-        
-            <div class="footer"  style="border-radius: 10px;">
-            Designed by Lin & 我说的都队
             </div>
+        <div class="footer"  style="border-radius: 10px;">
+            Designed by Lin & 我说的都队
+        </div>
         </div>
     </div>
 </div>
