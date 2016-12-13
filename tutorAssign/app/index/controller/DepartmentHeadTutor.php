@@ -416,13 +416,29 @@ class DepartmentHeadTutor extends BaseController {
     public function addStudent() {
     	$request = Request::instance();
     	if ($request->isPost()) {
-    		$student = $request->post();
-    		$student['password'] = $student['serialNum'];
+    		$data = $request->post();
 
-    		if (Db::table('user_student_'.$student['grade'])->insert($student)) {
-    			return true;
+    		$student['serialNum'] = $data['serialNum'];
+    		$student['password'] = $data['serialNum'];
+    		$student['name'] = $data['name'];
+    		$student['gender'] = $data['gender'];
+    		$student['gpa'] = $data['gpa'];
+    		$student['college'] = "数学与计算机科学学院";
+    		$student['department'] = $data['department'];
+    		$student['field'] = "暂无";
+    		$student['rank'] = $data['rank'];
+    		$student['grade'] = $data['grade'];
+
+    		if ((Db::table('user_student_'.$student['grade'])->where('serialNum',$data['serialNum'])->find()) == "") {
+    			if (Db::table('user_student_'.$student['grade'])->insert($student)) {
+    				$add['msg'] = "学生添加成功";
+    				$add['status'] = true;
+    				return json($add);
+    			}
     		} else {
-    			return false;
+    			$add['msg'] = "该学生已存在";
+    			$add['status'] = false;
+    			return json($add);
     		}
     	}
     }
@@ -430,8 +446,9 @@ class DepartmentHeadTutor extends BaseController {
     public function deleteStudent() {
     	$request = Request::instance();
     	if ($request->isGet()) {
-    		$grade = $request->get('grade');
-    		$serialNum = $request->get('serialNum');
+    		$data = $request->get();
+    		$grade = $data['grade'];
+    		$serialNum = $data['serialNum'];
 
     		if (Db::table('user_student_'.$grade)->where('serialNum','in',$serialNum)->delete()) {
     			return true;
@@ -442,9 +459,9 @@ class DepartmentHeadTutor extends BaseController {
     }
 
     public function studentList() {
-	   	$user = $this->auto_login();
+//	   	$user = $this->auto_login();
 
-	   	$department = $user['department'];
+//	   	$department = $user['department'];
     	$lastGrade = Db::table('tc_grade')->order('grade desc')->select();
     	$pageSize = 10;
 
@@ -453,10 +470,43 @@ class DepartmentHeadTutor extends BaseController {
     		$grade = $request->get('grade') != '' ? $request->get('grade') : $lastGrade[0]['grade'];
     		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 
-    		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('department',$department)->select())/$pageSize);
+    		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('department',"信息安全与网络工程系")->select())/$pageSize);
     		$studentList['amount'] = $totalPage;
-    		$studentList['information'] = Db::table('user_student_'.$grade)->where('department',$department)->field('sid,serialNum,name,department,grade,gpa,rank')->page($curPage,$pageSize)->select();
+    		$studentList['information'] = Db::table('user_student_'.$grade)->where('department',"信息安全与网络工程系")->field('sid,serialNum,name,department,grade,gpa,rank')->page($curPage,$pageSize)->select();
     		return json($studentList);
+    	}
+    }
+
+
+    //学生管理界面的搜索接口
+    public function searchStudent() {
+    	$request = Request::instance();
+    	if ($request->isGet()) {
+    		$data = $request->get();
+
+    		$grade = $data['grade'];
+    		$condition = $data['condition'];
+
+    		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->select())/10);
+    		$student['totalPage'] = $totalPage;
+    		$student['result'] = Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->select();
+    		return json($student);
+    	}
+    }
+
+
+    //导师管理界面的搜索接口
+    public function searchTeacher() {
+    	$request = Request::instance();
+    	if ($request->isGet()) {
+    		$data = $request->get();
+
+    		$condition = $data['condition'];
+
+    		$totalPage = ceil(count(Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->select())/10);
+    		$teacher['totalPage'] = $totalPage;
+    		$teacher['result'] = Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->select();
+    		return json($teacher);
     	}
     }
 
@@ -479,15 +529,28 @@ class DepartmentHeadTutor extends BaseController {
     public function addTeacher() {
     	$request = Request::instance();
     	if ($request->isPost()) {
-    		$teacher = $request->post();
+    		$data = $request->post();
 
-    		$teacher['password'] = $teacher['workNumber'];
+    		$teacher['workNumber'] = $data['workNumber'];
+    		$teacher['password'] = $data['workNumber'];
+    		$teacher['name'] = $data['name'];
+    		$teacher['sex'] = $data['gender'];
+    		$teacher['birthday'] = "1970-01-01";
+    		$teacher['department'] = $data['department'];
+    		$teacher['telephone'] = "12345678901";
+    		$teacher['email'] = "fzu@edu.cn";
+    		$teacher['isExperial'] = $data['isExperial'];
 
-
-    		if (Db::table('user_teacher')->insert($teacher)) {
-    			return true;
+    		if ((Db::table('user_teacher')->where('workNumber',$data['workNumber'])->find()) == "") {
+    			if (Db::table('user_teacher')->insert($teacher)) {
+    				$add['msg'] = "导师添加成功";
+    				$add['status'] = true;
+    				return json($add);
+    			}
     		} else {
-    			return false;
+    			$add['msg'] = "该学生已存在";
+    			$add['status'] = false;
+    			return json($add);
     		}
     	}
     }
@@ -496,7 +559,8 @@ class DepartmentHeadTutor extends BaseController {
     public function deleteTeacher() {
     	$request = Request::instance();
     	if ($request->isGet()) {
-    		$workNumber = $request->get('workNumber');
+    		$data = $request->get();
+    		$workNumber = $data['workNumber'];
 
     		if (Db::table('user_teacher')->where('workNumber','in',$workNumber)->delete()) {
     			return true;
@@ -621,5 +685,11 @@ class DepartmentHeadTutor extends BaseController {
     		return json($gradeList);
     	}
 
+    }
+
+
+    public function teacherManager(){
+    	$user = $this->auto_login();
+    	return $this->fetch('teacher_manager');
     }
 }

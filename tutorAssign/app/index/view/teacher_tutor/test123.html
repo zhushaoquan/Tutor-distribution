@@ -9,13 +9,13 @@
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student.css">
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/teacher.css">
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
             text-align: center;
             padding-top: 10px;
         }
-
     </style>
 </head>
 <body>
@@ -27,13 +27,10 @@
                 <img src="{{$Think.const.OLD}}/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="{{:url('DepartmentHeadTutor/index')}}"><li class="active"><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <a href="{{:url('DepartmentHeadTutor/studentManager')}}"><li><i class="glyphicon glyphicon-th-list"></i> 学生管理</li></a>
-                <a href="{{:url('DepartmentHeadTutor/teacherManager')}}"><li><i class="glyphicon glyphicon-pencil"></i> 导师管理</li></a>
-                <a href="{{:url('DepartmentHeadTutor/timeSetting')}}"><li><i class="glyphicon glyphicon-time"></i> 匹配设置</li></a>
-                <a href="{{:url('DepartmentHeadTutor/matchSetting')}}"><li><i class="glyphicon glyphicon-ok"></i> 匹配结果</li></a>
-                <a href="{{:url('DepartmentHeadTutor/student_result')}}"> <li><i class="glyphicon glyphicon-download-alt"></i> 学生结果</li> </a>
-                <a href="{{:url('DepartmentHeadTutor/tutor_result')}}"> <li><i class="glyphicon glyphicon-download-alt"></i> 导师结果</li> </a>
+                <a href="{{:url('/index/teacher_tutor/test123/it/'.'2swewe2'.'/jt/'.'33')}}"><li class="active"><i class="glyphicon glyphicon-user"></i>个人信息</li></a>
+                <a href="{{:url('Index/teacher_tutor/test123/it/22/jt/33')}}"><li><i class="glyphicon glyphicon-th-list"></i> 可选学生</li></a>
+                <a href="{{:url('teacher_tutor/issue_submit')}}"><li><i class="glyphicon glyphicon-pencil"></i> 课题提交</li></a>
+                <a href="{{:url('teacher_tutor/show_result')}}"><li><i class="glyphicon glyphicon-ok"></i> 志愿结果</li></a>
             </ul>
         </nav>
     </div>
@@ -52,10 +49,12 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示：导师互选尚未开始，您还未设置导师分配系统的时间设置！</p>
+                    <p>提示：第一轮导师确认学生时间为2016年10月19日至2016年10月22日，请导师在规定时间内完成学生的选择和确认！</p>
                 </div>
+
                 <div class="my-information-title">
                     <span>我的信息</span>
+                    
                 </div>
                 <div class="my-information-subtitle">
                     <span>您可以在这里查看或修改自己的个人信息</span>
@@ -64,23 +63,24 @@
                     <ul>
                         <li><span>姓名：</span><span>{{$user.name}}</span><span>工号：</span><span>{{$user.workNumber}}</span><span>性别：</span><span>{{$user.sex}}</span></li>
                         <li><span>系别：</span><span>{{$user.department}}</span><span>电话：</span><span>{{$user.telephone}}</span><span>邮箱：</span><span>{{$user.email}}</span></li>
-                        <li><span>生日：</span><span>{{$user.birthday}}</span></li>
+                        <li><span>生日：</span><span>{{$user.birthday}}</span><span>职称：</span><span>{{$user.title}}</span><span style="width: 100px;">实验班导师：</span><span>{{$user.isExperial}}</span></li>
                     </ul>
                 </div>
+                <div class="skill-title">
+                    <p>个人简介：</p>
+                </div>
+                <div class="skill-detail">
+                    <p>{{$user.description}}</p>
+                </div>
+                <!-- <div class="button-position">
+                    <button class="btn btn-info" type="submit">修改</button>
+                </div> -->
                 <div class="edit-btn">
-                    <a href="{{:url('DepartmentHeadTutor/modify')}}">
-                        <button class="btn btn-info button-size" type="submit" style="margin-top: 160px;">修改</button>
+                    <a href="{{:url('TeacherTutor/modify')}}">
+                        <button class="btn btn-info button-size" type="submit">修改</button>
                     </a>
                 </div>
-
-                <div class="avator-positon">
-                    {if condition="$user.avatorIsEmpty eq 0"}
-                      <img src="{{$Think.const.COMMON_PATH}}{{$user.avator}}" class="avatorPre">
-                    {elseif condition="$user.avatorIsEmpty eq 1"}
-                      <img src="{{$Think.const.OLD}}/image/defaultAvator.png" class="avatorPre">
-                    {/if}
-                </div>
-
+                
             </div>
             
             <div class="footer"  style="border-radius: 10px;">

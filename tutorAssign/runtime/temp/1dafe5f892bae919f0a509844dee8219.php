@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:97:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\edit_voluntary.html";i:1479478416;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:97:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\edit_voluntary.html";i:1481611725;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,25 +48,26 @@
         </div>
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
-                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                     <p>提示1：<?php echo $message;?></p>
-                        <?php if($user['chosen']==0){?><p>提示2：志愿选择不可为空，但同一老师可以多次选择！</p><?php }?>
-                 </div>
-                 <div class="my-information-title">
+                    <div role="alert" class="alert alert-info" style="margin-bottom: 0">
+                        <p>提示1：<?php echo $message;?></p>
+                        <?php if($user['chosen']==0 && ($ontime ==1||$ontime==2 )){?><p>提示2：志愿选择不可为空，但同一老师可以多次选择！</p><?php }?>
+                    </div>
+                <div class="my-information-title">
                    
-                     <span>志愿填报</span>
-                 </div>
+                        <span>志愿填报</span>
+                </div>
                  <hr>
-                   <?php if($ontime==1&&$user['chosen']==0){?>                   
+            <div class ="center-block" >
+            <?php if(($ontime ==1||$ontime==2 )&&$user['chosen']==0){?>                   
             <form method="post" action="<?php echo url('student/edit_voluntary'); ?>" style="margin:0px auto; width:90%" > 
-
-                    <div class="form-horizontal" role="form" style="margin:10px auto;width:50%">
+                <?php if($voluntaryinfosetting['voluntaryNum'] >=1) {?>
+                    <div class="form-horizontal" role="form" style="margin:0 auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第一志愿：</label>
 
                             <div class="col-md-8">
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishFirst">
-                                    <!--<option value="">==请选择==</option>-->
+                                    <option value="">==请选择==</option>
                                     <?php foreach($tutors as $key => $value): ?>
                                     <option value="<?php echo $value['workNumber']?>" <?php if($value['workNumber'] == $voluntary['wishFirst']) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
@@ -74,13 +75,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-horizontal" role="form" style="margin:10px auto;width:50%">
+                <?php }if($voluntaryinfosetting['voluntaryNum'] >=2) {?>
+                    <div class="form-horizontal" role="form" style="margin:0 auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第二志愿：</label>
 
                             <div class="col-md-8">
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishSecond">
-                                    <!--<option value="">==请选择==</option>-->
+                                    <option value="">==请选择==</option>
                                     <?php foreach($tutors as $key => $value): ?>
                                     <option value="<?php echo $value['workNumber']?>" <?php if($value['workNumber'] == $voluntary['wishSecond']) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
@@ -88,13 +90,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-horizontal" role="form" style="margin:10px auto;width:50%">
+                <?php }if($voluntaryinfosetting['voluntaryNum'] >=3) {?>
+                    <div class="form-horizontal" role="form" style="margin:0 auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第三志愿：</label>
 
                             <div class="col-md-8">
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishThird">
-                                    <!--<option value="">==请选择==</option>-->
+                                    <option value="">==请选择==</option>
                                     <?php foreach($tutors as $key => $value): ?>
                                     <option value="<?php echo $value['workNumber']?>" <?php if($value['workNumber'] == $voluntary['wishThird']) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
@@ -102,13 +105,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-horizontal" role="form" style="margin:10px auto;width:50%">
+                <?php }if($voluntaryinfosetting['voluntaryNum'] >=4) {?>
+                    <div class="form-horizontal" role="form" style="margin:0 auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第四志愿：</label>
 
                             <div class="col-md-8">
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishForth">
-                                    <!--<option value="">==请选择==</option>-->
+                                    <option value="">==请选择==</option>
                                     <?php foreach($tutors as $key => $value): ?>
                                     <option value="<?php echo $value['workNumber']?>" <?php if($value['workNumber'] == $voluntary['wishForth']) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
@@ -116,33 +120,35 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-horizontal" role="form" style="margin:10px auto;width:50%">
+                <?php } if($voluntaryinfosetting['voluntaryNum'] >=5) {?>
+                    <div class="form-horizontal" role="form" style="margin:0 auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第五志愿：</label>
 
                             <div class="col-md-8">
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishFifth">
-                                    <!--<option value="">==请选择==</option>-->
+                                    <option value="">==请选择==</option>
                                     <?php foreach($tutors as $key => $value): ?>
                                     <option value="<?php echo $value['workNumber']?>" <?php if($value['workNumber'] == $voluntary['wishFifth']) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
                                 </select>
                             </div>
-                        </div>   
+                        </div>
                     </div>
-                    <p class="text-center">
-                    <button type="button" class="btn btn-info" style="width:20%">确定</button>
-                    </p>
-
-                       <!--<button class="btn btn-info" type="submit" style="margin: 10px auto; width: 50%;" >提交</button>-->
-             </form>
-                
+                <?php }?>
+                    <div class="button-position" style="margin:0 auto; width: 200px;">
+                    <button class="btn btn-info" type="submit" style="margin: 0px auto; width: 150px;" >提交</button>
+                    </div>
+                </form>
+                </div>
             <?php }?>
             </div>
-             <div class="footer"  style="border-radius: 10px;">
+
+
+        </div>
+        <div class="footer"  style="border-radius: 10px;">
                 Designed by Lin & 我说的都队
-             </div>
-         </div>       
+        </div>
     </div>
 </div>
 <script type="text/javascript" src="__STATIC__/js/index.js"></script>

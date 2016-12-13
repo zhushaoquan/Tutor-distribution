@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\index.html";i:1479472168;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\index.html";i:1481552370;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +49,7 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                     <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                        <p>提示：第一轮志愿填报时间为2016年10月19日至2016年10月22日，请在规定时间内完成志愿填报！</p>
+                        <p>提示1：<?php echo $message;?></p>
                     </div>
                 <div class="my-information-title">
                    

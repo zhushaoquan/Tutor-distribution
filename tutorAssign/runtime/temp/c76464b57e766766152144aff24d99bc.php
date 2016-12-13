@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:97:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\edit_voluntary.html";i:1480930739;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:97:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\edit_voluntary.html";i:1481553755;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +24,7 @@
     <div id="siderbar">
         <nav class="sider-navbar">
             <div class="sider-navbar-header">
-                <img src="<?php echo OLD; ?>/image/mainpage-logo.png" alt="" width="240">
+                <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
             </div>
              <ul class="sider-navbar-nav">
                 <a href="<?php echo url('Student/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
@@ -50,7 +50,7 @@
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                     <div role="alert" class="alert alert-info" style="margin-bottom: 0">
                         <p>提示1：<?php echo $message;?></p>
-                        <?php if($user['chosen']==0){?><p>提示2：志愿选择不可为空，但同一老师可以多次选择！</p><?php }?>
+                        <?php if($user['chosen']==0 && ($ontime ==1||$ontime==2 )){?><p>提示2：志愿选择不可为空，但同一老师可以多次选择！</p><?php }?>
                     </div>
                 <div class="my-information-title">
                    
@@ -58,16 +58,16 @@
                 </div>
                  <hr>
             <div class ="center-block" >
-            <?php if($ontime==1&&$user['chosen']==0){?>                   
+            <?php if(($ontime ==1||$ontime==2 )&&$user['chosen']==0){?>                   
             <form method="post" action="<?php echo url('student/edit_voluntary'); ?>" style="margin:0px auto; width:90%" > 
-
+                <?php if($voluntaryinfosetting['voluntaryNum'] >=1) {?>
                     <div class="form-horizontal" role="form" style="margin:10px auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第一志愿：</label>
 
                             <div class="col-md-8">
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishFirst">
-                                    <!--<option value="">==请选择==</option>-->
+                                    <option value="">==请选择==</option>
                                     <?php foreach($tutors as $key => $value): ?>
                                     <option value="<?php echo $value['workNumber']?>" <?php if($value['workNumber'] == $voluntary['wishFirst']) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
@@ -75,13 +75,14 @@
                             </div>
                         </div>
                     </div>
+                <?php }if($voluntaryinfosetting['voluntaryNum'] >=2) {?>
                     <div class="form-horizontal" role="form" style="margin:10px auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第二志愿：</label>
 
                             <div class="col-md-8">
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishSecond">
-                                    <!--<option value="">==请选择==</option>-->
+                                    <option value="">==请选择==</option>
                                     <?php foreach($tutors as $key => $value): ?>
                                     <option value="<?php echo $value['workNumber']?>" <?php if($value['workNumber'] == $voluntary['wishSecond']) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
@@ -89,13 +90,14 @@
                             </div>
                         </div>
                     </div>
+                <?php }if($voluntaryinfosetting['voluntaryNum'] >=3) {?>
                     <div class="form-horizontal" role="form" style="margin:10px auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第三志愿：</label>
 
                             <div class="col-md-8">
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishThird">
-                                    <!--<option value="">==请选择==</option>-->
+                                    <option value="">==请选择==</option>
                                     <?php foreach($tutors as $key => $value): ?>
                                     <option value="<?php echo $value['workNumber']?>" <?php if($value['workNumber'] == $voluntary['wishThird']) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
@@ -103,13 +105,14 @@
                             </div>
                         </div>
                     </div>
+                <?php }if($voluntaryinfosetting['voluntaryNum'] >=4) {?>
                     <div class="form-horizontal" role="form" style="margin:10px auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第四志愿：</label>
 
                             <div class="col-md-8">
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishForth">
-                                    <!--<option value="">==请选择==</option>-->
+                                    <option value="">==请选择==</option>
                                     <?php foreach($tutors as $key => $value): ?>
                                     <option value="<?php echo $value['workNumber']?>" <?php if($value['workNumber'] == $voluntary['wishForth']) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
@@ -117,13 +120,14 @@
                             </div>
                         </div>
                     </div>
+                <?php } if($voluntaryinfosetting['voluntaryNum'] >=5) {?>
                     <div class="form-horizontal" role="form" style="margin:10px auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第五志愿：</label>
 
                             <div class="col-md-8">
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishFifth">
-                                    <!--<option value="">==请选择==</option>-->
+                                    <option value="">==请选择==</option>
                                     <?php foreach($tutors as $key => $value): ?>
                                     <option value="<?php echo $value['workNumber']?>" <?php if($value['workNumber'] == $voluntary['wishFifth']) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
@@ -131,6 +135,7 @@
                             </div>
                         </div>
                     </div>
+                <?php }?>
                     <div class="button-position" style="margin: 10px 500px; width: 200px;">
                     <button class="btn btn-info" type="submit" style="margin: 0px auto; width: 150px;" >提交</button>
                     </div>
@@ -146,10 +151,10 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo OLD; ?>/js/index.js"></script>
-<script type="text/javascript" src="<?php echo OLD; ?>/js/jquery2.14.min.js"></script>
-<script type="text/javascript" src="<?php echo OLD; ?>/js/bootstrap.js"></script>
-<script type="text/javascript" src="<?php echo OLD; ?>/js/backstage.js"></script>
+<script type="text/javascript" src="__STATIC__/js/index.js"></script>
+<script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
+<script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
+<script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
 </body>
 </html>
 
