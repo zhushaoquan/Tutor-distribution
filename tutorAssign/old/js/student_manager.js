@@ -334,15 +334,65 @@
  }
 
 
+ var response;
  $(document).ready(function() {
      $("#fileuploader").uploadFile({
-         url: "http://localhost/public/index.php/index/DepartmentHeadTutor/excel_import",
+         url: excel_upload,
          fileName: "excel_file",
+         dragDropStr: "<span><b>拖拽文件到这里</b></span>",
+         uploadStr:"上传文件",
+         abortStr: "停止",
+         cancelStr: "取消",
+         deletelStr: "删除",
+         doneStr: "完成",
          onSuccess: function(files, data, xhr, pd) {
             console.log(data);
-            console.log(files);
-            console.log(pd);
-            console.log(xhr);
+             response = data;
+            $("#uploadinfo").text("文件上传成功！请确认是否导入！").css("color","green");
+             $("input[type='file']").attr("disabled","disabled");
+         },
+         onError: function (files, status, message, pd) {
+             $("#uploadinfo").text("文件上传失败！").css("color","red");
+         },
+         onSelect: function (files) {
+             console.log(files);
+             if(files[0].name.split(".")[1] == "xls"){
+                 return true;
+             }
+             else{
+                 $("#uploadinfo").text("请选择 .xls 文件！").css("color","red");
+                 return false;
+             }
          }
      });
+ });
+
+ $("#confirm-import").click(function () {
+     $("#confirm-import").attr("disabled","disabled");
+     $.ajax({
+         type: "post",
+         data: {
+             file_path: response.file_path
+         },
+         url: excel_import,
+         success: function(data) {
+             console.log(data);
+             $("#uploadinfo").text("文件导入成功！").css("color","green");
+             location.reload();
+         },
+         complete: function(response, status) {
+             console.log(response);
+         },
+         error: function (response, status) {
+             console.log(response);
+             $("#uploadinfo").text("文件导入失败！请重新导入！").css("color","red");
+             $("#confirm-import").attr("disabled","false");
+         },
+         dataType: "json"
+     });
+
+ });
+
+ $("#exit-import").click(function () {
+    location.reload();
  });

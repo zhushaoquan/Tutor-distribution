@@ -154,16 +154,13 @@
                         <p>模板下载：<a href="#">点击下载</a>导入模板</p>
                     </div>
                     <div id="fileuploader">Upload</div>
-                    <!-- <input type="file"> -->
-                    <button style="margin: 10px 0" type="submit" class="btn btn-primary">
-                        确认上传
-                    </button>
+                    <div id="uploadinfo"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        确认已导入
+                    <a id="exit-import" type="button" class="btn btn-default">放弃导入
+                    </a>
+                    <button id="confirm-import" type="button" class="btn btn-primary">
+                        确认导入
                     </button>
                 </div>
             </div>
@@ -241,8 +238,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="btn-close-add-bottom" type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
+                    <a id="btn-close-add-bottom" class="btn btn-default" >关闭
+                    </a>
                     <button id="btn-submit-add" type="button" class="btn btn-primary">
                         提交更改
                     </button>
@@ -268,7 +265,7 @@
                     <div id="deleteinfo" style="width: 80%; text-align: center;font-size: 20px">
                     </div>
                     <div class="modal-footer">
-                        <a href="#" id="btn-colse-del" class="btn btn-default">关闭</a>
+                        <a id="btn-colse-del" class="btn btn-default">关闭</a>
                         <button type="button" id="btn-del-student" class="btn btn-primary">
                             确认
                         </button>
@@ -285,13 +282,15 @@
     <script type="text/javascript" src="{{$Think.const.OLD}}/js/backstage.js"></script>
     <script type="text/javascript" src="{{$Think.const.OLD}}/js/vue.min.js"></script>
     <script type="text/javascript" src="{{$Think.const.OLD}}/js/jqPaginator.min.js"></script>
-    <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.min.js"></script>
+    <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.js"></script>
     <script type="text/javascript">
     var deleteStu = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/deleteStudent";
     var stuList = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/studentList";
     var gradeList = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/gradeList";
     var addStu = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/addStudent";
-    var searchStu = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/searchStudent"
+    var searchStu = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/searchStudent";
+    var excel_upload = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/student_excel_import";
+    var excel_import = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/student_excel_add";
     </script>
     <script type="text/javascript" src="{{$Think.const.OLD}}/js/student_manager.js"></script>
 </body>
