@@ -334,10 +334,15 @@
  }
 
 
-$(document).ready(function()
-{
-    $("#fileuploader").uploadFile({
-    url:"http://hayageek.com",
-    fileName:"excel_file"
-    });
-});
+ $(document).ready(function() {
+     $("#fileuploader").uploadFile({
+         url: "http://localhost/public/index.php/index/DepartmentHeadTutor/excel_import",
+         fileName: "excel_file",
+         onSuccess: function(files, data, xhr, pd) {
+            console.log(data);
+            console.log(files);
+            console.log(pd);
+            console.log(xhr);
+         }
+     });
+ });
