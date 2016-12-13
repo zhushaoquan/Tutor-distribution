@@ -94,8 +94,8 @@
                                     <td>{{$t.gpa}}</td>
                                     <td><?php if($t['wishFirst'] == $user['workNumber'])echo "第一志愿";else if($t['wishSecond'] == $user['workNumber'])echo "第二志愿"; else if($t['wishThird'] == $user['workNumber'])echo "第三志愿"; else if($t['wishForth'] == $user['workNumber'])echo "第四志愿";else echo "第五志愿"?></td>
                                     <?php if($ontime == 11 || $ontime == 22) {?>
-                                    <td><input class="btn btn-primary" style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="选&nbsp;择" name="choise"></td>
-                                    <td><input class="btn btn-primary" style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#rejectModal"  value="拒&nbsp;绝" name="choise"></td>
+                                    <td><input class="btn btn-info " style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="选&nbsp;择" name="choise"></td>
+                                    <td><input class="btn btn-info " style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#rejectModal"  value="拒&nbsp;绝" name="choise"></td>
                                     <?php }?>
                                 </form>    
                                 </tr>
@@ -159,8 +159,7 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <div class="table-responsive">
+                <div class="table-responsive">
                     <table class="table">
                         <tr>
                             <th>#</th>
@@ -179,10 +178,7 @@
                             <td></td>
                         </tbody>
                     </table>
-                    </div>
-                </div>
-                
-               
+                </div>  
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" value="选择">
@@ -209,8 +205,7 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <div class="table-responsive">
+                <div class="table-responsive">
                     <table class="table">
                         <tr>
                             <th>#</th>
@@ -229,8 +224,6 @@
                             <td></td>
                         </tbody>
                     </table>
-                    </div>
-            
                 </div>
             </div>
             <div class="modal-footer">
