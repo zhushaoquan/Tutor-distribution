@@ -53,16 +53,16 @@ class TeachingOfficeTutor extends BaseController {
 
 	 	if($dep =='计算机实验班')
 	 	{
-	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','计算机系')->where('isExperial','=',1)->field('workNumber,name')->select();
+	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','计算机系')->where('isExperial','=',1)->field('workNumber,name')->order('workNumber')->select();
 	 		$dep ='计算机实验班';
 	 	}
 	 	else if($dep =='数学实验班')
 	 	{
-	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','应用数学系')->where('isExperial','=',1)->field('workNumber,name')->select();
+	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','应用数学系')->where('isExperial','=',1)->field('workNumber,name')->order('workNumber')->select();
 	 		$dep ='数学实验班';
 	 	}
 	 	else 
-	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
+	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->order('workNumber')->select();
 	
 		$pageBar = [
 			'total'     => $total,
@@ -188,16 +188,16 @@ class TeachingOfficeTutor extends BaseController {
 		$totalPage = ceil($total/$pageSize);
 	 	if($dep =='计算机实验班')
 	 	{
-	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','计算机系')->where('isExperial','=',1)->field('workNumber,name')->select();
+	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','计算机系')->where('isExperial','=',1)->field('workNumber,name')->order('workNumber')->select();
 	 		$dep ='计算机实验班';
 	 	}
 	 	else if($dep =='数学实验班')
 	 	{
-	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','应用数学系')->where('isExperial','=',1)->field('workNumber,name')->select();
+	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','应用数学系')->where('isExperial','=',1)->field('workNumber,name')->order('workNumber')->select();
 	 		$dep ='数学实验班';
 	 	}
 	 	else 
-	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
+	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->order('workNumber')->select();
 	
 		$pageBar = [
 			'total'     => $total,
@@ -290,22 +290,22 @@ class TeachingOfficeTutor extends BaseController {
 	//	var_dump($dep);
 	//	return json($dep);
 		$ise=DB::table('user_teacher')->where('workNumber',$_GET['teacher_id'])->field('isExperial')->find();
-		$data=DB::table('user_student_'.$_GET['grade'])->where('chosen',0)->where('department',$dep['department'])->field('name,serialNum')->select();
+		$data=DB::table('user_student_'.$_GET['grade'])->where('chosen',0)->where('department',$dep['department'])->field('name,serialNum')->order('serialNum')->select();
 		if($ise==1)
 		{
-			$data1=DB::table('user_student_'.$_GET['grade'])->where('chosen',0)->where('department',"计算机实验班")->field('name,serialNum')->select();
+			$data1=DB::table('user_student_'.$_GET['grade'])->where('chosen',0)->where('department',"计算机实验班")->field('name,serialNum')->order('serialNum')->select();
 			$data=array_merge($data,$data1);
 		}
 		else if($ise==2)
 		{
-			$data1=DB::table('user_student_'.$_GET['grade'])->where('chosen',0)->where('department',"数学实验班")->field('name,serialNum')->select();
+			$data1=DB::table('user_student_'.$_GET['grade'])->where('chosen',0)->where('department',"数学实验班")->field('name,serialNum')->order('serialNum')->select();
 			$data=array_merge($data,$data1);
 		}
 		else if($ise==3)
 		{
-			$data1=DB::table('user_student_'.$_GET['grade'])->where('chosen',0)->where('department',"计算机实验班")->field('name,serialNum')->select();
+			$data1=DB::table('user_student_'.$_GET['grade'])->where('chosen',0)->where('department',"计算机实验班")->field('name,serialNum')->order('serialNum')->select();
 			$data=array_merge($data,$data1);
-			$data1=DB::table('user_student_'.$_GET['grade'])->where('chosen',0)->where('department',"数学实验班")->field('name,serialNum')->select();
+			$data1=DB::table('user_student_'.$_GET['grade'])->where('chosen',0)->where('department',"数学实验班")->field('name,serialNum')->order('serialNum')->select();
 			$data=array_merge($data,$data1);
 		}
 		$d['result']= $data;
@@ -336,13 +336,28 @@ class TeachingOfficeTutor extends BaseController {
 		return $this->fetch('head_list');
 	}
 
-	// public function to_head_manager()
-	// {
-	// 	$user = $this->auto_login();
-	// 	$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
-	// 	$this->assign('user', $officer);
-	// 	return fetch('head_manager');
-	// }
+	public function to_head_manager()
+	{
+		$user = $this->auto_login();
+		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
+		$R1=DB::table('user_department_head')->where('department',"应用数学系")->field('workNumber,name')->find();
+		$R2=DB::table('user_department_head')->where('department',"信息与计算科学系")->field('workNumber,name')->find();
+		$R3=DB::table('user_department_head')->where('department',"计算机系")->field('workNumber,name')->find();
+		$R4=DB::table('user_department_head')->where('department',"信息安全与网络系")->field('workNumber,name')->find();
+		$R5=DB::table('user_department_head')->where('department',"软件工程系")->field('workNumber,name')->find();
+		$R6=DB::table('user_department_head')->where('department',"计算机实验班")->field('workNumber,name')->find();
+		$R7=DB::table('user_department_head')->where('department',"数学实验班")->field('workNumber,name')->find();
+
+		$this->assign('R1',$R1);
+		$this->assign('R2',$R2);
+		$this->assign('R3',$R3);
+		$this->assign('R4',$R4);
+		$this->assign('R5',$R5);
+		$this->assign('R6',$R6);
+		$this->assign('R7',$R7);
+		$this->assign('user', $officer);
+		return $this->fetch('head_manager');
+	}
 
 	public function modify() {
 		$user = $this->auto_login();
