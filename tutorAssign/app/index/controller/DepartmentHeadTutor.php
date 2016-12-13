@@ -776,4 +776,42 @@ class DepartmentHeadTutor extends BaseController {
             return json($addInfo);
     	}
     }
+
+    //获取导师信息Excel表格，进行处理并添加入数据表中
+    public function teacher_excel_add() {
+    	$request = Request::instance();
+    	if ($request->isPost()) {
+    		$feedback = $request->post();
+    		$realPath = $feedback['file_path'];
+
+    		require_once 'extend/reader.php';
+            $data = new \Spreadsheet_Excel_Reader();
+            $data->setOutputEncoding('utf-8');  //设置在页面中输出的编码方式
+            $data->read($realPath);             //读取上传到当前目录下名叫$filename的文件
+
+            error_reporting(E_ALL ^ E_NOTICE);
+
+            //循环处理Excel表格里的每一行数据，并插入数据库
+            for ($i=3; $i <=$data->sheets[0]['numRows'] ; $i++) { 
+            	$insert = [];
+            	$insert['workNumber'] = $data->sheets[0]['cells'][$i][1];
+            	$insert['password'] = $data->sheets[0]['cells'][$i][1];
+            	$insert['name'] = $data->sheets[0]['cells'][$i][2];
+            	$insert['sex'] = $data->sheets[0]['cells'][$i][3];
+            	$insert['department'] = $data->sheets[0]['cells'][$i][4];
+            	$insert['isExperial'] = $data->sheets[0]['cells'][$i][5];
+            	$insert['title'] = $data->sheets[0]['cells'][$i][6];
+            	//插入数据库中
+            	Db::table('user_teacher')->insert($insert);
+            }
+
+            $addInfo['totalNum'] = $data->sheets[0]['numRows']-3;
+            $addInfo['status'] = true;
+            return json($addInfo);	
+    	}
+    }
+
+
+
+
 }
