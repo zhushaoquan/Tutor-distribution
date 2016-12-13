@@ -483,13 +483,14 @@ class DepartmentHeadTutor extends BaseController {
     	$request = Request::instance();
     	if ($request->isGet()) {
     		$data = $request->get();
+    		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 
     		$grade = $data['grade'];
     		$condition = $data['condition'];
 
     		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->select())/10);
     		$student['amount'] = $totalPage;
-    		$student['information'] = Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->field('sid,serialNum,name,department,grade,gpa,rank')->select();
+    		$student['information'] = Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->field('sid,serialNum,name,department,grade,gpa,rank')->page($curPage,10)->select();
     		return json($student);
     	}
     }
@@ -500,12 +501,13 @@ class DepartmentHeadTutor extends BaseController {
     	$request = Request::instance();
     	if ($request->isGet()) {
     		$data = $request->get();
+    		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 
     		$condition = $data['condition'];
 
     		$totalPage = ceil(count(Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->select())/10);
     		$teacher['amount'] = $totalPage;
-    		$teacher['information'] = Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->select();
+    		$teacher['information'] = Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->page($curPage,10)->select();
     		return json($teacher);
     	}
     }
@@ -581,8 +583,9 @@ class DepartmentHeadTutor extends BaseController {
 		if($_SERVER["REQUEST_METHOD"] == "POST")
 		{
 			$grade=$_POST['grade'];
-			$dep=$_POST['department'];
 		}
+		$finddep=DB::table('user_department_head')->where('workNumber',$user['workNumber'])->field('department')->find();
+		$dep=$finddep['department'];
 	//	var_dump($dep);
 		$data=Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
 		->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
@@ -621,11 +624,6 @@ class DepartmentHeadTutor extends BaseController {
 		$this->assign($pageBar);
 	 	$this->assign('teacher',$tealist);
 	    $this->assign('data',$data);
-		if( $_SERVER["REQUEST_METHOD"] == "POST" && $_POST["stu"] == 'modify')
-			return $this->fetch('student_modify');
-		if($to=="modify") return $this->fetch('student_modify');
-		
-
 		$this->assign('user', $head);
 		return $this->fetch('student_result');
     }
@@ -641,8 +639,9 @@ class DepartmentHeadTutor extends BaseController {
 		if($_SERVER["REQUEST_METHOD"] == "POST")
 		{
 			$grade=$_POST['grade'];
-			$dep=$_POST['department'];
 		}
+		$finddep=DB::table('user_department_head')->where('workNumber',$user['workNumber'])->field('department')->find();
+		$dep=$finddep['department'];
 		$tea=Db::table('user_teacher t')->where('department',$dep)
 		->field('t.workNumber as tnum,t.name as tname')->distinct(true)->page($page,$pageSize)->select();
 		
@@ -691,5 +690,90 @@ class DepartmentHeadTutor extends BaseController {
     public function teacherManager(){
     	$user = $this->auto_login();
     	return $this->fetch('teacher_manager');
+    }
+
+    //学生信息Excel表格导入
+    public function student_excel_import() {
+    	$request = Request::instance();
+    	if ($request->isPost()) {
+    		$file = $request->file('excel_file');
+    		$info = $file->move('../uploads/excel/student');
+    		$type = explode('.', $info->getFilename())[1];
+
+    		//判断excel的文件类型，接收.xls 拒绝.xlsx
+    		if ($type == "xlsx") {
+    			$uploadInfo['file_type'] = '.'.$type;
+    			$uploadInfo['msg'] = "文件上传失败，无法上传.xlsx文件";
+    			$uploadInfo['status'] = false;
+    			return json($uploadInfo);
+    		} elseif ($type == "xls") {
+    			$uploadInfo['file_type'] = '.'.$type;
+    			$uploadInfo['file_path'] = $info->getRealPath();
+    			$uploadInfo['msg'] = "文件上传成功";
+    			$uploadInfo['status'] = true;
+    			return json($uploadInfo);
+    		}
+    	}
+    }
+
+    //导师信息Excel表格导入
+    public function teacher_excel_import() {
+    	$request = Request::instance();
+    	if ($request->isPost()) {
+    		$file = $request->file('excel_file');
+    		$info = $file->move('../uploads/excel/teacher');
+    		$type = explode('.', $info->getFilename())[1];
+
+    		//判断excel的文件类型，接收.xls 拒绝.xlsx
+    		if ($type == "xlsx") {
+    			$uploadInfo['file_type'] = '.'.$type;
+    			$uploadInfo['msg'] = "文件上传失败，无法上传.xlsx文件";
+    			$uploadInfo['status'] = false;
+    			return json($uploadInfo);
+    		} elseif ($type == "xls") {
+    			$uploadInfo['file_type'] = '.'.$type;
+    			$uploadInfo['file_path'] = $info->getRealPath();
+    			$uploadInfo['msg'] = "文件上传成功";
+    			$uploadInfo['status'] = true;
+    			return json($uploadInfo);
+    		}
+    	}
+    }
+
+    //获取学生信息Excel表格，进行处理并添加入数据表中
+    public function student_excel_add() {
+    	$request = Request::instance();
+    	if ($request->isPost()) {
+    		$feedback = $request->post();
+    		$realPath = $feedback['file_path'];
+
+    		require_once 'extend/reader.php';
+            $data = new \Spreadsheet_Excel_Reader();
+            $data->setOutputEncoding('utf-8');  //设置在页面中输出的编码方式
+            $data->read($realPath);             //读取上传到当前目录下名叫$filename的文件
+
+            error_reporting(E_ALL ^ E_NOTICE);
+
+            //循环处理Excel表格里的每一行数据，并插入数据库
+            for ($i=3; $i <=$data->sheets[0]['numRows'] ; $i++) { 
+            	$insert = [];
+            	$insert['grade'] = $data->sheets[0]['cells'][$i][1];
+            	$insert['serialNum'] = $data->sheets[0]['cells'][$i][2];
+            	$insert['password'] = $data->sheets[0]['cells'][$i][2];
+            	$insert['name'] = $data->sheets[0]['cells'][$i][3];
+            	$insert['gender'] = $data->sheets[0]['cells'][$i][4];
+            	$insert['college'] = $data->sheets[0]['cells'][$i][5];
+            	$insert['department'] = $data->sheets[0]['cells'][$i][6];
+            	$insert['gpa'] = $data->sheets[0]['cells'][$i][7];
+            	$insert['rank'] = $data->sheets[0]['cells'][$i][8];
+            	$insert['chosen'] = 0;
+            	//插入数据库中
+            	Db('user_student_'.$insert['grade'])->insert($insert);
+            }
+
+            $addInfo['totalNum'] = $data->sheets[0]['numRows']-3;
+            $addInfo['status'] = true;
+            return json($addInfo);
+    	}
     }
 }

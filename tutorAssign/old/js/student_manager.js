@@ -1,8 +1,6 @@
  var onSearch = false;
- //设置年级下拉框
- setGradeList();
-
- //使用vue绑定数据到表格
+ //===============================
+ // vue model初始化
  var tab_body = new Vue({
      el: '#tab',
      data: {
@@ -10,41 +8,68 @@
      }
  });
 
- //初始化分页
- $('#tab-pagination').jqPaginator({
-     totalPages: 9,
-     visiblePages: 8,
-     currentPage: 1,
-     first: '<li class="first"><a href="javascript:void(0);">首页<\/a><\/li>',
-     prev: '<li class="prev"><a href="javascript:void(0);">‹<\/a><\/li>',
-     next: '<li class="next"><a href="javascript:void(0);">›<\/a><\/li>',
-     last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
-     page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
-     onPageChange: function(n) {
-        console.log("page"+n);
-        var grade = getCurrentGrade();
-        loadTabData({grade:grade,curPage:n});
+ var selectGrade = new Vue({
+     el: '#grade-selector',
+     data: {
+         grades: []
      }
  });
 
- function loadTabData(datas, url = stuList) {
-    console.log("loaddata");
+
+ initGradeSelect();
+ initPaginator();
+ listenEventDel();
+ listenEventAdd();
+ listenSelectChage();
+ listenSearchEvent();
+
+
+
+ //===============================
+ //初始化分页组件
+ function initPaginator() {
+     $('#tab-pagination').jqPaginator({
+         totalPages: 9,
+         visiblePages: 8,
+         currentPage: 1,
+         first: '<li class="first"><a href="javascript:void(0);">首页<\/a><\/li>',
+         prev: '<li class="prev"><a href="javascript:void(0);">‹<\/a><\/li>',
+         next: '<li class="next"><a href="javascript:void(0);">›<\/a><\/li>',
+         last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
+         page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
+         onPageChange: function(page) {
+             var grade = selectedGrade();
+             var request = { grade: grade, curPage: page };
+             refreshTable(request);
+         }
+     });
+ }
+
+ //=================================
+ // 加载表格数据
+ // @param requset 
+ //        请求参数
+ // @param url
+ //        请求地址
+ function refreshTable(request, url = stuList) {
+     console.log("loaddata");
      $.ajax({
          type: "get",
-         data: datas,
+         data: request,
          url: url,
          success: function(data) {
              tab_body.datas = data.information;
-             $('#tab-pagination').jqPaginator('option', {
-                 totalPages: data.amount
-             });
-             console.log(data.information);
+             setTotalpages(data.amount);
+             // setCurrentPage(currentPage);
          },
          dataType: "json"
      });
  }
 
- function getCurrentGrade() {
+
+ //===============================
+ // 获取年级下拉框当前选中项
+ function selectedGrade() {
      if ($("#grade-selector").val() != null) {
          return $("#grade-selector").val().split("级")[0];
      } else {
@@ -53,20 +78,22 @@
  }
 
 
+ //=============================
  //下拉框年级改变，刷新表格
- $("#grade-selector").change(function() {
-     var grade = getCurrentGrade();
-     loadTabData({grade:grade,curPage:1});
- });
-
- function setGradeList() {
-     var selectGrade = new Vue({
-         el: '#grade-selector',
-         data: {
-             grades: []
-         }
+ function listenSelectChage() {
+     $("#grade-selector").change(function() {
+         var grade = selectedGrade();
+         var requset = { grade: grade, curPage: 1 };
+         refreshTable(requset);
+         setNormalCallback();
      });
+ }
 
+
+
+ //================================
+ // 初始化年级下拉框
+ function initGradeSelect() {
      $.ajax({
          type: "get",
          url: gradeList,
@@ -78,44 +105,72 @@
  }
 
 
-
- //点击删除按钮
- $("#btn-del-student").click(function() {
-     $("#btn-del-student").attr("disabled", "disabled");
-     var grade = getCurrentGrade();
-     var ids = getSelectedStus();
-     $.ajax({
-         type: "get",
-         data: {
-             grade: grade,
-             serialNum: ids
-         },
-         url: deleteStu,
-         success: function(data) {
-             if (data) {
-                 $("#deleteinfo").text("删除成功!").css("color", "green");
-             } else {
-                 $("#deleteinfo").text("删除失败!").css("color", "red");
-                 $("#btn-del-student").attr("disabled", "false");
-             }
-         },
-         dataType: "json"
+ //================================
+ // 监听删除弹出框事件
+ function listenEventDel() {
+     $("#btn-colse-del").click(function() {
+         location.reload();
      });
- });
+
+     // $("#btn-close-del-above").click(function() {
+     //     refreshAfterAddOrDel();
+     // });
+
+     $("#btn-del-student").click(function() {
+         $("#btn-del-student").attr("disabled", "disabled");
+         var grade = selectedGrade();
+         var ids = selectedStuIDs();
+         $.ajax({
+             type: "get",
+             data: {
+                 grade: grade,
+                 serialNum: ids
+             },
+             url: deleteStu,
+             success: function(data) {
+                 if (data) {
+                     $("#deleteinfo").text("删除成功!").css("color", "green");
+                 } else {
+                     $("#deleteinfo").text("删除失败!").css("color", "red");
+                     $("#btn-del-student").attr("disabled", "false");
+                 }
+             },
+             dataType: "json"
+         });
+     });
+ }
 
 
- //点击关闭按钮
- $("#btn-colse-del").click(function() {
-     location.reload();
- });
- $("#btn-close-del-above").click(function() {
-     location.reload();
- });
+ function refreshAfterAddOrDel() {
+     console.log("above");
+     if (onSearch) {
+         console.log("true");
+         var searchStr = searchCondition();
+         var grade = selectedGrade();
+         var page = getCurrentPage();
+         var request = {
+                 condition: searchStr,
+                 grade: grade,
+                 page: page
+             }
+             //加载搜索数据
+         refreshTable(request, searchStu);
+     } else {
+         console.log("false");
+         var grade = selectedGrade();
+         var page = getCurrentPage();
+         var request = {
+                 grade: grade,
+                 page: page
+             }
+             //加载搜索数据
+         refreshTable(request, stuList);
+     }
+ }
 
-
-
- //获取选中学生的学号
- function getSelectedStus() {
+ //=================================
+ // 获得选中学生的学号数组
+ function selectedStuIDs() {
      var stus = $(".chb");
      var ids = new Array();
      for (var i = 0; i < stus.length; ++i) {
@@ -133,67 +188,161 @@
  });
 
 
- $("#btn-close-add-bottom").click(function() {
-     location.reload();
- });
+ //===============================
+ // 监听添加弹出框的关闭按钮
+ function listenEventAdd() {
+     $("#btn-close-add-bottom").click(function() {
+         location.reload();
 
- $("#btn-close-add-above").click(function() {
-     location.reload();
- });
-
- $("#btn-submit-add").click(function() {
-     console.log("submit");
-     $("#btn-submit-add").attr("disabled", "disabled");
-     var serialNum = $("#stuid").val();
-     var name = $("#stuname").val();
-     var gender = $("#stugender").val();
-     var gpa = $("#stugpa").val();
-     var department = $("#studepart").val();
-     var rank = $("#sturank").val();
-     var grade = $("#stugrade").val();
-     console.log(serialNum);
-     console.log(name);
-     console.log(gender);
-     console.log(gpa);
-     console.log(department);
-     console.log(rank);
-     console.log(grade);
-     $.ajax({
-         type: "post",
-         data: {
-             serialNum: serialNum,
-             name: name,
-             gender: gender,
-             gpa: gpa,
-             department: department,
-             rank: rank,
-             grade: grade
-         },
-         url: addStu,
-         success: function(data) {
-             console.log(data);
-             if (data) {
-                 $("#addinfo").text("添加成功!").css("color", "green");
-             } else {
-                 $("#addinfo").text("添加失败!请重新提交").css("color", "red");
-                 $("#btn-submit-add").attr("disabled", "false");
-             }
-         },
-         complete: function(response, status) {
-             console.log(response);
-         },
-         dataType: "json"
      });
- });
+
+     // $("#btn-close-add-above").click(function() {
+     //     refreshAfterAddOrDel();
+     // });
+
+     $("#btn-submit-add").click(function() {
+         console.log("submit");
+         $("#btn-submit-add").attr("disabled", "disabled");
+         var serialNum = $("#stuid").val();
+         var name = $("#stuname").val();
+         var gender = $("#stugender").val();
+         var gpa = $("#stugpa").val();
+         var department = $("#studepart").val();
+         var rank = $("#sturank").val();
+         var grade = $("#stugrade").val();
+         console.log(serialNum);
+         console.log(name);
+         console.log(gender);
+         console.log(gpa);
+         console.log(department);
+         console.log(rank);
+         console.log(grade);
+         $.ajax({
+             type: "post",
+             data: {
+                 serialNum: serialNum,
+                 name: name,
+                 gender: gender,
+                 gpa: gpa,
+                 department: department,
+                 rank: rank,
+                 grade: grade
+             },
+             url: addStu,
+             success: function(data) {
+                 console.log(data);
+                 if (data) {
+                     $("#addinfo").text("添加成功!").css("color", "green");
+                 } else {
+                     $("#addinfo").text("添加失败!请重新提交").css("color", "red");
+                     $("#btn-submit-add").attr("disabled", "false");
+                 }
+             },
+             complete: function(response, status) {
+                 console.log(response);
+             },
+             dataType: "json"
+         });
+     });
+ }
 
 
- //搜索
- $("#searchstu").keydown(function(event) {
-     isOnsearch = true;
-     if (event.which == "13") {
-         var searchStr = $(this).val();
-         var grade = getCurrentGrade();
-         var page = 1;
-         l
+ function listenSearchEvent() {
+     $("#searchstu").keydown(function(event) {
+         if (event.which == "13") {
+             console.log("enter");
+
+             var searchStr = searchCondition();
+             var grade = selectedGrade();
+             var page = 1;
+
+             if (searchStr === "") {
+                 onSearch = false;
+                 setNormalCallback();
+                 var grade = selectedGrade();
+                 var page = getCurrentPage();
+                 var request = { grade: grade, curPage: 1 };
+                 setCurrentPage(1);
+                 refreshTable(request);
+             } else {
+                 onSearch = true;
+                 var request = {
+                         condition: searchStr,
+                         grade: grade,
+                         page: page
+                     }
+                     //加载搜索数据
+                 refreshTable(request, searchStu);
+                 setCurrentPage(1)
+                 setSearchCallback();
+             }
+         }
+     });
+ }
+
+
+ function setSearchCallback() {
+     var onPageChange = function(page) {
+         var grade = selectedGrade();
+         var searchStr = searchCondition();
+         var request = {
+             grade: grade,
+             curPage: page,
+             condition: searchStr
+         };
+         refreshTable(request, searchStu);
      }
+     $('#tab-pagination').jqPaginator('option', {
+         onPageChange: onPageChange
+     });
+ }
+
+
+ function setNormalCallback() {
+     var onPageChange = function(page) {
+         var grade = selectedGrade();
+         var request = { grade: grade, curPage: page };
+         refreshTable(request);
+     }
+     $('#tab-pagination').jqPaginator('option', {
+         onPageChange: onPageChange
+     });
+ }
+
+
+ function setTotalpages(totalPages) {
+     $('#tab-pagination').jqPaginator('option', {
+         totalPages: totalPages
+     });
+ }
+
+
+ function getCurrentPage() {
+     return $("#tab-pagination > .active ").attr("jp-data");
+ }
+
+
+ function setCurrentPage(currentPage) {
+     $('#tab-pagination').jqPaginator('option', {
+         currentPage: currentPage
+     });
+ }
+
+
+ function searchCondition() {
+     return $("#searchstu").val();
+ }
+
+
+ $(document).ready(function() {
+     $("#fileuploader").uploadFile({
+         url: "http://localhost/public/index.php/index/DepartmentHeadTutor/excel_import",
+         fileName: "excel_file",
+         onSuccess: function(files, data, xhr, pd) {
+            console.log(data);
+            console.log(files);
+            console.log(pd);
+            console.log(xhr);
+         }
+     });
  });

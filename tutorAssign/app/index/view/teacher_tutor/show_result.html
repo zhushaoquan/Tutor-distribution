@@ -57,9 +57,10 @@
                 <hr>
                 <div class="form-horizontal" role="form" >
                     <div class="form-group">
-                        <label  class="col-md-2 control-label" style="text-align:center; font-size:16px;">选择年级</label>
+                        <label  class="col-md-1 control-label" style="text-align:right; font-size:16px;">选择年级</label>
                         <div class="col-sm-2" >
                             <select  class="form-control" name="totalNatur" >
+
                             <?php foreach($grades as $key => $value) {?>
                             <option>
                             <a role="menuitem" tabindex="-1" href="{{:url('/index/TeacherTutor/show_result/grade_now/'.$value['grade'])}}">
@@ -70,6 +71,13 @@
                             </select>
                         </div>
                         <!--<button type="submit" class="btn btn-info" style="display: inline;margin-left:40px;" id="sub-confirm" >确定</button>-->
+
+                            <option>2014级</option>
+                            <option>2013级</option>
+                            <option>全部年级</option>
+                            </select>
+                        </div>
+
                     </div>
                  </div>         
                 <div class="table-responsive">

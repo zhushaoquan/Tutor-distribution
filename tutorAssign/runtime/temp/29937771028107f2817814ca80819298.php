@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:93:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\tutor_list.html";i:1481552370;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:93:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\tutor_list.html";i:1481631254;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,6 +55,13 @@
                     <h3>导师列表
                     </h3>
                 </div>
+                <div class="search-teacher" >
+                <div class="col-md-3" style="margin-left:700px;margin-right:20px;">
+                    <input class="form-control"  id="searchstu" placeholder="搜索导师姓名..." type="text" style="display: inline;">
+                    
+                </div>
+                <button class="btn btn-info">搜索</button>
+                </div>
                 <div class="table-responsive">
                     <table class="table">
                         <tr>
@@ -83,13 +90,13 @@
                       <ul class="pagination" style="float: right;">
                           <?php if($curPage != 1): ?>
                               <li><a href="<?php echo url('/index/Student/tutor_list/'.($curPage-1)); ?>">&laquo;</a></li>
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_595__=$curPage-2;$__FOR_END_595__=$curPage+3;for($i=$__FOR_START_595__;$i < $__FOR_END_595__;$i+=1){ ?>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_16335__=$curPage-2;$__FOR_END_16335__=$curPage+3;for($i=$__FOR_START_16335__;$i < $__FOR_END_16335__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/Student/tutor_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_16962__=$totalPage-5;$__FOR_END_16962__=$totalPage;for($i=$__FOR_START_16962__;$i < $__FOR_END_16962__;$i+=1){ ?>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_22574__=$totalPage-5;$__FOR_END_22574__=$totalPage;for($i=$__FOR_START_22574__;$i < $__FOR_END_22574__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('index/Student/tutor_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_24717__=1;$__FOR_END_24717__=6;for($i=$__FOR_START_24717__;$i < $__FOR_END_24717__;$i+=1){ ?>
+                            <?php } elseif($totalPage > 5): $__FOR_START_10921__=1;$__FOR_END_10921__=6;for($i=$__FOR_START_10921__;$i < $__FOR_END_10921__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/Student/tutor_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_11556__=1;$__FOR_END_11556__=$totalPage;for($i=$__FOR_START_11556__;$i < $__FOR_END_11556__;$i+=1){ ?>
+                            <?php } else: $__FOR_START_7728__=1;$__FOR_END_7728__=$totalPage;for($i=$__FOR_START_7728__;$i < $__FOR_END_7728__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/Student/tutor_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="#">&raquo;</a></li>
@@ -98,6 +105,7 @@
                       </ul>
                     </nav>      
                 </div>
+
                 
             </div>
             

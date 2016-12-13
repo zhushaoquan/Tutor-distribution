@@ -1,23 +1,12 @@
 <?php
 namespace app\index\controller;
+use think\Controller;
+use think\Db;
+use think\Request;
+use think\response\Redirect;
 
-class Test extends Teacher {
-
-    public function _empty($name) {
-        $this->_initialize();
-        $user = $this->auto_login();
-        $this->assign('user', $user);
-        return $this->fetch($name);
-    }
-
-    public function index() {
-        $this->_initialize();
-        $user = $this->auto_login();
-        $this->assign('user', $user);
-        return $this->fetch();
-    }
-
-
-
-
+class Test extends BaseController {
+        public function index() {
+        return $this->fetch("test_head_manager");
+        }
 }
