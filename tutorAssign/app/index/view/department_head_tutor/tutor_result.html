@@ -69,17 +69,24 @@
                     <form action="{{:url('DepartmentHeadTutor/student_result')}}" method="post">
                         <label class="col-md-1 control-label"  >选择年级：</label>
                         <div class="col-xs-2" >
-                            <select id="gradeSelect" class="form-control" name="grade" style="display: inline; width: 80%">
-                                    <option value="全部年级">全部年级</option>
-                                    <option value="2014级" selected="selected">2014级</option>
-                                    <option value="2015级">2015级</option>
-                                    <option value="2016级">2016级</option>
-                                    <option value="2017级">2017级</option>
-                                    <option value="2018级">2018级</option>
+                             <select id="gradeSelect" class="form-control" name="grade" style="display: inline; width: 80%">
+                                    {volist name="gg" id="v"}
+                                        <option value="{{$v.grade}}" <?php if($grade == $v['grade']) echo 'selected="true"';?>>{{$v.grade}}级</option>
+                                    {/volist}
                             </select>
                             <input type="hidden" name="gradeMsg" value="modify">
                         </div>
-
+                        <label class="col-md-2 control-label"  >选择系别：</label>
+                        <div class="col-xs-2" >
+                            <select id="departSelect" class="form-control" name="department" style="display: inline; width: 100%">
+                                <option value="应用数学系" <?php if($dep == "应用数学系") echo'selected = "true"';?>>应用数学系</option>
+                                <option value="信息与计算科学系" <?php if($dep == "信息与计算科学系") echo'selected = "true"';?>>信息与计算科学系</option>
+                                <option value="计算机系" <?php if($dep == "计算机系") echo'selected = "true"';?>>计算机系</option>
+                                <option value="软件工程系" <?php if($dep == "软件工程系") echo'selected = "true"';?>>软件工程系</option>
+                                <option value="信息安全与网络系" <?php if($dep == "信息安全与网络系") echo'selected = "true"';?>>信息安全与网络系</option>
+                            </select>  
+                            <input type="hidden" name="stu" value="assign">
+                        </div>
                         <button type="submit" class="btn btn-primary" style="display: inline;" id="sub-confirm" >确定</button>
 
                     </form>
