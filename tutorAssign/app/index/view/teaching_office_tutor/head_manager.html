@@ -23,13 +23,21 @@
     <div id="siderbar">
         <nav class="sider-navbar">
             <div class="sider-navbar-header">
-               <img src="{{$Think.const.OLD}}/image/mainpage-logo.png" alt="" width="240">
+                <img src="{{$Think.const.OLD}}/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="{{:url('TeachingOfficeTutor/index')}}"><li ><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <a href="{{:url('TeachingOfficeTutor/head_list')}}"><li class="active"><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li></a>
-                <a href="{{:url('TeachingOfficeTutor/tutor_change')}}"><li><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li></a>
-                <a href="{{:url('TeachingOfficeTutor/student_assign')}}"><li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li></a>
+                <a href="{{:url('TeachingOfficeTutor/index')}}">
+                    <li><i class="glyphicon glyphicon-user"></i> 个人信息</li>
+                </a>
+                <a href="{{:url('TeachingOfficeTutor/head_list')}}">
+                    <li class="active"><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
+                </a>
+                <a href="{{:url('TeachingOfficeTutor/tutor_change')}}">
+                    <li><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
+                </a>
+                <a href="{{:url('TeachingOfficeTutor/student_assign')}}">
+                    <li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
+                </a>
             </ul>
         </nav>
     </div>
@@ -42,7 +50,7 @@
                 </div>
             </div>
             <div class="login-out-area">
-                <a href="{{:url('BaseController/logout')}}"><i class = "glyphicon glyphicon-off"></i>退出</a>
+                <a href="{{:url('BaseController/logout')}}"><i class="glyphicon glyphicon-off"></i>退出</a>
             </div>
         </div>
         <div class="page-content">
@@ -51,136 +59,151 @@
                     <p>提示：您还未设置系负责人！</p>
                 </div>
                 <div class="page-header">
-                        <h3>系负责人列表
-                        </h3>
+                    <h3>系负责人列表
+                    </h3>
                 </div>
                 <div class="table-responsive">
-                     <table id="tresult" class="table table-bordered">
-                        <thead> 
-                            <tr>
-                                <th>系名称</th>
-                                <th>系负责人工号</th>
-                                <th>系负责人姓名</th>
-                                <th>操作</th>
-                            </tr>
+                    <table id="tresult" class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>系名称</th>
+                            <th>系负责人工号</th>
+                            <th>系负责人姓名</th>
+                            <th>操作</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="teacher-name"  style="vertical-align:middle">应用数学系</td>
-                                <td>22</td>
-                                <td>22</td>
-                                <td> 
-                                    <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;" >
-                                    <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
-                                </td>
-                            </tr>  
-                            <tr>
-                                <td class="teacher-name"  style="vertical-align:middle">信息与计算科学系</td>
-                                <td></td>
-                                <td></td>
-                                <td> 
-                                    <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;" >
-                                    <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
-                                </td>
-                            </tr>  
-                            <tr>
-                                <td class="teacher-name"  style="vertical-align:middle">计算机系</td>
-                                <td>22</td>
-                                <td>22</td>
-                                <td> 
-                                    <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;" >
-                                    <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
-                                </td>
-                            </tr> 
-                            <tr>
-                                <td class="teacher-name"  style="vertical-align:middle">软件工程系</td>
-                                <td></td>
-                                <td></td>
-                                <td> 
-                                    <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;" >
-                                    <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
-                                </td>
-                            </tr>   
-                             <tr>
-                                <td class="teacher-name"  style="vertical-align:middle">信息安全与网络系</td>
-                                <td></td>
-                                <td></td>
-                                <td> 
-                                    <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;" >
-                                    <button type="submit" class="btn btn-primary" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
-                                </td>
-                            </tr>  
-                            <tr>
-                                <td class="teacher-name"  style="vertical-align:middle">计算机实验班</td>
-                                <td></td>
-                                <td></td>
-                                <td> 
-                                    <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;" >
-                                    <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
-                                </td>
-                            </tr>  
-                             <tr>
-                                <td class="teacher-name"  style="vertical-align:middle">数学实验班</td>
-                                <td></td>
-                                <td></td>
-                                <td> 
-                                    <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;" >
-                                    <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
-                                </td>
-                            </tr>  
+                        <tr>
+                            <td class="teacher-name" style="vertical-align:middle">应用数学系</td>
+                            <td>00001</td>
+                            <td>
+                                陈齐民
+                            </td>
+                            <td>
+                                <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
+                                  <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="teacher-name" style="vertical-align:middle">信息与计算科学系</td>
+                            <td>00002</td>
+                            <td>
+                                黄伟炜
+                            </td>
+                            <td>
+                                <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
+                                 <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="teacher-name" style="vertical-align:middle">计算机系</td>
+                            <td>00003</td>
+                            <td>
+                                郑杨涛
+                            </td>
+                            <td>
+                                <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
+                                 <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="teacher-name" style="vertical-align:middle">信息安全与网络系</td>
+                            <td>00004</td>
+                            <td>
+                                陈燊
+                            </td>
+                            <td>
+                                <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
+                                  <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="teacher-name" style="vertical-align:middle">软件工程系</td>
+                            <td>00005</td>
+                            <td>
+                                胡心颖
+                            </td>
+                            <td>
+                                <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
+                                 <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="teacher-name" style="vertical-align:middle">计算机实验班</td>
+                            <td>00006</td>
+                            <td>
+                                王婷婷
+                            </td>
+                            <td>
+                                <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
+                                 <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="teacher-name" style="vertical-align:middle">数学实验班</td>
+                            <td>00007</td>
+                            <td>
+                                许玲玲
+                            </td>
+                            <td>
+                                <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
+                                 <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
+
             </div>
-            <div class="footer"  style="border-radius: 10px;">
+            <div class="footer" style="border-radius: 10px;">
                 Designed by Lin & 我说的都队
             </div>
         </div>
     </div>
 </div>
- <!-- 搜索弹出框 -->
-    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="searchModalLabel">
-                    搜索结果
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="workNum" id="workNum">
-                    <div>
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>工号</th>
-                                <th>姓名</th>
-                            </tr>
-                            </thead>
-                            <tbody id="student_unassign">
-                             <tr>
-                                 <td><input type="radio" checked ></td>
-                                 <td>00001</td>
-                                 <td>陈齐民</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </form>
+
+
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;</button>
+                <h4 class="modal-title" id="searchModalLabel">
+                    搜索结果</h4>
+
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="workNum" id="workNum">
+                <div>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>工号</th>
+                            <th>姓名</th>
+                        </tr>
+                        </thead>
+                        <tbody id="student_unassign">
+                        <tr>
+                            <td><input type="radio" checked></td>
+                            <td>00001</td>
+                            <td>陈齐民</td>
+                        </tr>
+                        </tbody>
+                    </table>
                     <div class="modal-footer">
-                        <a href="{{:url('/index/TeachingOfficeTutor/head_list')}}" id="btn-colse-add" class="btn btn-default" >关闭
+                        <a href="{{:url('/index/TeachingOfficeTutor/head_list')}}" id="btn-colse-add"
+                           class="btn btn-default">关闭
                         </a>
-                        <button id="btn-add-student" form="addStudent" class="btn btn-primary">
-                            确认
-                        </button>
+                        <button type="button" class="btn btn-info">确认</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/index.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/jquery2.14.min.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/bootstrap.js"></script>

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_assign.html";i:1481614903;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:111:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\student_assign.html";i:1481616090;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -139,13 +139,13 @@
                         <ul class="pagination" style="float: right;">
                           <?php if($curPage != 1): ?>
                               <li><a href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage-1).'/dep/'.$dep.'/grade/'.$grade); ?>">&laquo;</a></li>
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_27282__=$curPage-2;$__FOR_END_27282__=$curPage+3;for($i=$__FOR_START_27282__;$i < $__FOR_END_27282__;$i+=1){ ?>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_21375__=$curPage-2;$__FOR_END_21375__=$curPage+3;for($i=$__FOR_START_21375__;$i < $__FOR_END_21375__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_14365__=$totalPage-5;$__FOR_END_14365__=$totalPage;for($i=$__FOR_START_14365__;$i < $__FOR_END_14365__;$i+=1){ ?>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_11422__=$totalPage-5;$__FOR_END_11422__=$totalPage;for($i=$__FOR_START_11422__;$i < $__FOR_END_11422__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_26868__=1;$__FOR_END_26868__=6;for($i=$__FOR_START_26868__;$i < $__FOR_END_26868__;$i+=1){ ?>
+                            <?php } elseif($totalPage > 5): $__FOR_START_19161__=1;$__FOR_END_19161__=6;for($i=$__FOR_START_19161__;$i < $__FOR_END_19161__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_2759__=1;$__FOR_END_2759__=$totalPage;for($i=$__FOR_START_2759__;$i < $__FOR_END_2759__;$i+=1){ ?>
+                            <?php } else: $__FOR_START_24864__=1;$__FOR_END_24864__=$totalPage;for($i=$__FOR_START_24864__;$i < $__FOR_END_24864__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="<?php echo url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage+1).'/dep/'.$dep.'/grade/'.$grade); ?>">&raquo;</a></li>
