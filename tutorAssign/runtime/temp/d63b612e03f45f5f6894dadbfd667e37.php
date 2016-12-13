@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:100:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\show_result.html";i:1481558598;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:100:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\show_result.html";i:1481613609;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,7 +66,7 @@
                             <option>2014级</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="display: inline;margin-left:40px;" id="sub-confirm" >确定</button>
+                        <button type="submit" class="btn btn-info" style="display: inline;margin-left:40px;" id="sub-confirm" >确定</button>
                     </div>
                  </div>         
                 <div class="table-responsive">
