@@ -170,24 +170,7 @@ class Student extends BaseController {
 	}
 
 	public function tutor_list($page=1) {
-/*
-		$data = Db::table('tc_voluntaryinfoSetting')->find();
-        $data['nowtime'] = time();
-        $data['message'] = '';
-        $data['ontime']=1;
-        if($data['nowtime'] < $data['firstEnd'] && $data['nowtime'] > $data['firstStart']) {
-            $data['message'] = "当前为第一轮的志愿填报时间：".date('Y-m-d',$data['firstStart'])."至".date('Y-m-d',$data['firstEnd']).",请同学们按时填报、修改志愿！";
-         } else if($data['nowtime'] < $data['secondEnd'] && $data['nowtime'] > $data['secondStart']) {
-         	$data['message'] = "当前为第二轮的志愿填报时间：".date('Y-m-d',$data['secondStart'])."至".date('Y-m-d',$data['secondEnd']).",请同学们按时填报、修改志愿！";
 
-         } else {
-            $data['message'] = "当前不在填报志愿时间段内！";
-            $data['ontime'] = 0;
-         }
-         $this->assign('message',$data['message']);
-         $this->assign('ontime',$data['ontime']);
-
-*/
 		if($this->user['department'] == $this->department_1) {
 			//计算机实验班
 			$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
@@ -347,7 +330,7 @@ class Student extends BaseController {
             $data1['wishThird'] = $request->post('wishThird', '');
             $data1['wishForth'] = $request->post('wishForth', '');
             $data1['wishFifth'] = $request->post('wishFifth', '');  
-            $data1['round'] = intval($ontime);
+            $data1['round'] = intval($this->ontime);
 
             $volunNum = $this->voluntaryinfosetting['voluntaryNum'];
             if($data1['wishFirst'] == '') {
