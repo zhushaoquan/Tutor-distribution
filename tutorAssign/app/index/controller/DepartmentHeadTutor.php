@@ -483,13 +483,14 @@ class DepartmentHeadTutor extends BaseController {
     	$request = Request::instance();
     	if ($request->isGet()) {
     		$data = $request->get();
+    		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 
     		$grade = $data['grade'];
     		$condition = $data['condition'];
 
     		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->select())/10);
     		$student['amount'] = $totalPage;
-    		$student['information'] = Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->field('sid,serialNum,name,department,grade,gpa,rank')->select();
+    		$student['information'] = Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->field('sid,serialNum,name,department,grade,gpa,rank')->page($curPage,10)->select();
     		return json($student);
     	}
     }
@@ -500,12 +501,13 @@ class DepartmentHeadTutor extends BaseController {
     	$request = Request::instance();
     	if ($request->isGet()) {
     		$data = $request->get();
+    		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 
     		$condition = $data['condition'];
 
     		$totalPage = ceil(count(Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->select())/10);
     		$teacher['amount'] = $totalPage;
-    		$teacher['information'] = Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->select();
+    		$teacher['information'] = Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->page($curPage,10)->select();
     		return json($teacher);
     	}
     }
