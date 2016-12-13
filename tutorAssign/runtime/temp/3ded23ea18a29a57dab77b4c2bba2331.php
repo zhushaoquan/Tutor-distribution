@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_change.html";i:1481547620;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teaching_office_tutor\tutor_change.html";i:1481613621;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -88,7 +88,7 @@
                                 <option value="信息与计算科学系" <?php if($dep == "信息与计算科学系") echo'selected = "true"';?>>信息与计算科学系</option>
                                 <option value="计算机系" <?php if($dep == "计算机系") echo'selected = "true"';?>>计算机系</option>
                                 <option value="软件工程系" <?php if($dep == "软件工程系") echo'selected = "true"';?>>软件工程系</option>
-                                <option value="信息安全与网络工程系" <?php if($dep == "信息安全与网络工程系") echo'selected = "true"';?>>信息安全与网络工程系</option>
+                                <option value="信息安全与网络系" <?php if($dep == "信息安全与网络系") echo'selected = "true"';?>>信息安全与网络系</option>
                             </select>  
                             <input type="hidden" name="stu" value="assign">
                         </div>
@@ -160,13 +160,13 @@
                         <ul class="pagination" style="float: right;">
                            <?php if($curPage != 1): ?>
                               <li><a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage-1).'/dep/'.$dep.'/grade/'.$grade); ?>">&laquo;</a></li>
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_30354__=$curPage-2;$__FOR_END_30354__=$curPage+3;for($i=$__FOR_START_30354__;$i < $__FOR_END_30354__;$i+=1){ ?>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_10238__=$curPage-2;$__FOR_END_10238__=$curPage+3;for($i=$__FOR_START_10238__;$i < $__FOR_END_10238__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_29725__=$totalPage-5;$__FOR_END_29725__=$totalPage;for($i=$__FOR_START_29725__;$i < $__FOR_END_29725__;$i+=1){ ?>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_6073__=$totalPage-5;$__FOR_END_6073__=$totalPage;for($i=$__FOR_START_6073__;$i < $__FOR_END_6073__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_5364__=1;$__FOR_END_5364__=6;for($i=$__FOR_START_5364__;$i < $__FOR_END_5364__;$i+=1){ ?>
+                            <?php } elseif($totalPage > 5): $__FOR_START_21888__=1;$__FOR_END_21888__=6;for($i=$__FOR_START_21888__;$i < $__FOR_END_21888__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_26311__=1;$__FOR_END_26311__=$totalPage;for($i=$__FOR_START_26311__;$i < $__FOR_END_26311__;$i+=1){ ?>
+                            <?php } else: $__FOR_START_25091__=1;$__FOR_END_25091__=$totalPage;for($i=$__FOR_START_25091__;$i < $__FOR_END_25091__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.$i.'/dep/'.$dep.'/grade/'.$grade); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="<?php echo url('/index/TeachingOfficeTutor/tutor_change/page/'.($curPage+1).'/dep/'.$dep.'/grade/'.$grade); ?>">&raquo;</a></li>

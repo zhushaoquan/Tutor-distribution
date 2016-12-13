@@ -317,17 +317,31 @@ class TeachingOfficeTutor extends BaseController {
 	{
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
-		$R1=DB::table('user_department_head')->where('department',"信息安全与网络工程系")->field('workNumber,name')->find();
-		$R2=DB::table('user_department_head')->where('department',"应用数学系")->field('workNumber,name')->find();
+		$R1=DB::table('user_department_head')->where('department',"应用数学系")->field('workNumber,name')->find();
+		$R2=DB::table('user_department_head')->where('department',"信息与计算科学系")->field('workNumber,name')->find();
 		$R3=DB::table('user_department_head')->where('department',"计算机系")->field('workNumber,name')->find();
-		$R4=DB::table('user_department_head')->where('department',"软件工程系")->field('workNumber,name')->find();
-		$R5=DB::table('user_department_head')->where('department',"信息与计算科学系")->field('workNumber,name')->find();
+		$R4=DB::table('user_department_head')->where('department',"信息安全与网络系")->field('workNumber,name')->find();
+		$R5=DB::table('user_department_head')->where('department',"软件工程系")->field('workNumber,name')->find();
 		$R6=DB::table('user_department_head')->where('department',"计算机实验班")->field('workNumber,name')->find();
 		$R7=DB::table('user_department_head')->where('department',"数学实验班")->field('workNumber,name')->find();
 
 		$this->assign('R1',$R1);
+		$this->assign('R2',$R2);
+		$this->assign('R3',$R3);
+		$this->assign('R4',$R4);
+		$this->assign('R5',$R5);
+		$this->assign('R6',$R6);
+		$this->assign('R7',$R7);
 		$this->assign('user', $officer);
 		return $this->fetch('head_list');
+	}
+
+	public function to_head_manager()
+	{
+		$user = $this->auto_login();
+		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
+		$this->assign('user', $officer);
+		return fetch('head_manager');
 	}
 
 	public function modify() {
