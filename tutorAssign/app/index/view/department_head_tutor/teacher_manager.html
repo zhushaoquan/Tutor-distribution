@@ -30,9 +30,9 @@
                         <li><i class="glyphicon glyphicon-user"></i> 个人信息</li>
                     </a>
                     <a href="{{:url('DepartmentHeadTutor/studentManager')}}">
-                        <li class="active"><i class="glyphicon glyphicon-th-list"></i> 学生管理</li>
+                        <li ><i class="glyphicon glyphicon-th-list"></i> 学生管理</li>
                     </a>
-                    <a href="{{:url('DepartmentHeadTutor/teacherManager')}}"><li><i class="glyphicon glyphicon-pencil"></i> 导师管理</li></a>
+                    <a href="{{:url('DepartmentHeadTutor/teacherManager')}}"><li class="active"><i class="glyphicon glyphicon-pencil"></i> 导师管理</li></a>
                     <a href="{{:url('DepartmentHeadTutor/timeSetting')}}">
                         <li><i class="glyphicon glyphicon-time"></i> 匹配设置</li>
                     </a>
@@ -82,7 +82,7 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <input class="form-control" id="searchstu" placeholder="搜索姓名或学号..." type="text" style="display: inline;">
+                            <input class="form-control" id="searchstu" placeholder="搜索姓名或工号..." type="text" style="display: inline;">
                         </div>
                     </div>
                     <div class="module">
@@ -93,11 +93,9 @@
                                         <th>
                                             #
                                         </th>
-                                        <th>学号</th>
+                                        <th>工号</th>
                                         <th>姓名</th>
-                                        <th>年级</th>
-                                        <th>绩点</th>
-                                        <th>排名</th>
+                                        <th>密码</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tab">
@@ -105,11 +103,9 @@
                                         <td>
                                             <input id="{{ item.serialNum }}" type="checkbox" class="chb">
                                         </td>
-                                        <td>{{ item.serialNum }}</td>
+                                        <td>{{ item.workNum }}</td>
                                         <td>{{ item.name }}</td>
-                                        <td>{{ item.grade }}</td>
-                                        <td>{{ item.gpa }}</td>
-                                        <td>{{ item.rank }}</td>
+                                        <td>{{ item.passwd }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -137,7 +133,7 @@
                         &times;
                     </button>
                     <h4 class="modal-title" id="exportExcelLabel">
-                    导入学生名单
+                    导入导师名单
                 </h4>
                 </div>
                 <div class="modal-body">
@@ -180,7 +176,7 @@
                         &times;
                     </button>
                     <h4 class="modal-title" id="addItemLabel">
-                    添加学生
+                    添加导师
                 </h4>
                 </div>
                 <div class="modal-body">
@@ -188,9 +184,9 @@
                     </div>
                     <div class="input-div clearfix">
                         <div class="wrapper">
-                            <label class="control-label input-label">学号</label>
+                            <label class="control-label input-label">工号</label>
                         </div>
-                        <input id="stuid" class="form-control input-add" placeholder="如：031402201" type="text">
+                        <input id="teaid" class="form-control input-add" placeholder="如：031402201" type="text">
                     </div>
                     <div class="input-div clearfix">
                         <div class="wrapper">
@@ -202,42 +198,22 @@
                         <div class="wrapper">
                             <label class="control-label input-label">性别</label>
                         </div>
-                        <select id="stugender" class="form-control input-add">
+                        <select id="teagender" class="form-control input-add">
                             <option>男</option>
                             <option>女</option>
                         </select>
                     </div>
                     <div class="input-div clearfix">
                         <div class="wrapper">
-                            <label class="control-label input-label">绩点</label>
+                            <label class="control-label input-label">密码</label>
                         </div>
-                        <input id="stugpa" class="form-control input-add" placeholder="如：3.5" type="text">
-                    </div>
-                    <div class="input-div clearfix">
-                        <div class="wrapper">
-                            <label class="control-label input-label">系别</label>
-                        </div>
-                        <select id="studepart" class="form-control input-add">
-                            <option>应用数学系</option>
-                            <option>信息与计算科学系</option>
-                            <option>计算机系</option>
-                            <option>信息安全与网络系</option>
-                            <option>软件工程系</option>
-                            <option>计算机实验班</option>
-                            <option>数学实验班</option>
-                        </select>
-                    </div>
-                    <div class="input-div clearfix">
-                        <div class="wrapper">
-                            <label class="control-label input-label">排名</label>
-                        </div>
-                        <input id="sturank" class="form-control input-add" placeholder="如：1/180" type="text">
+                        <input id="teapasswd" class="form-control input-add">
                     </div>
                     <div class="input-div clearfix">
                         <div class="wrapper">
                             <label class="control-label input-label">年级</label>
                         </div>
-                        <input id="stugrade" class="form-control input-add" placeholder="如：2014" type="text">
+                        <input id="teagrade" class="form-control input-add">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -261,7 +237,7 @@
                         &times;
                     </button>
                     <h4 class="modal-title" id="deleteModalLabel">
-                    删除学生
+                    删除导师
                 </h4>
                 </div>
                 <div class="modal-body">
@@ -286,13 +262,13 @@
     <script type="text/javascript" src="{{$Think.const.OLD}}/js/vue.min.js"></script>
     <script type="text/javascript" src="{{$Think.const.OLD}}/js/jqPaginator.min.js"></script>
     <script type="text/javascript">
-    var deleteStu = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/deleteStudent";
-    var stuList = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/studentList";
-    var gradeList = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/gradeList";
-    var addStu = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/addStudent";
-    var searchStu = "";
+    var deleteTea = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/";
+    var teaList = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/";
+    var gradeList = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/";
+    var addTea = "{{$Think.const.PREFIX}}/DepartmentHeadTutor/";
+    var searchTea = "";
     </script>
-    <script type="text/javascript" src="{{$Think.const.OLD}}/js/student_manager.js"></script>
+    <script type="text/javascript" src="{{$Think.const.OLD}}/js/teacher_manager.js"></script>
 </body>
 
 </html>

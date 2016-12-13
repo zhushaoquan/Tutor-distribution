@@ -1,4 +1,4 @@
- var onSearch = false;
+         var onSearch = false;
  //设置年级下拉框
  setGradeList();
 
@@ -27,7 +27,7 @@
      }
  });
 
- function loadTabData(datas, url = stuList) {
+ function loadTabData(datas, url = teaList) {
     console.log("loaddata");
      $.ajax({
          type: "get",
@@ -134,40 +134,38 @@
 
 
  $("#btn-close-add-bottom").click(function() {
+     console.log("close0");
      location.reload();
  });
 
  $("#btn-close-add-above").click(function() {
+    console.log("close1")
      location.reload();
  });
 
  $("#btn-submit-add").click(function() {
      console.log("submit");
      $("#btn-submit-add").attr("disabled", "disabled");
-     var serialNum = $("#stuid").val();
-     var name = $("#stuname").val();
-     var gender = $("#stugender").val();
-     var gpa = $("#stugpa").val();
-     var department = $("#studepart").val();
-     var rank = $("#sturank").val();
-     var grade = $("#stugrade").val();
+
+     var serialNum = $("#teaid").val();
+     var name = $("#teaname").val();
+     var gender = $("#teagender").val();
+     var passwd = $("#teapasswd").val();
+     var grade = $("#teagrade").val();
+
      console.log(serialNum);
      console.log(name);
      console.log(gender);
-     console.log(gpa);
-     console.log(department);
-     console.log(rank);
-     console.log(grade);
+     console.log(passwd);
+
      $.ajax({
          type: "post",
          data: {
              serialNum: serialNum,
              name: name,
              gender: gender,
-             gpa: gpa,
-             department: department,
-             rank: rank,
-             grade: grade
+             grade: grade,
+             passwd: passwd
          },
          url: addStu,
          success: function(data) {

@@ -674,4 +674,10 @@ class DepartmentHeadTutor extends BaseController {
     	}
 
     }
+
+
+    public function teacherManager(){
+    	$user = $this->auto_login();
+    	return $this->fetch('teacher_manager');
+    }
 }
