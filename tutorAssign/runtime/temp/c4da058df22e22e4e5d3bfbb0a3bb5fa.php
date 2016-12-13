@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\time_setting.html";i:1481514159;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:109:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\time_setting.html";i:1481610215;}*/ ?>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -38,10 +38,11 @@
             <ul class="sider-navbar-nav">
                 <a href="<?php echo url('DepartmentHeadTutor/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <a href="<?php echo url('DepartmentHeadTutor/studentManager'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 学生管理</li></a>
-                <li><i class="glyphicon glyphicon-pencil"></i> 导师管理</li>
+                <a href="<?php echo url('DepartmentHeadTutor/teacherManager'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 导师管理</li></a>
                 <a href="<?php echo url('DepartmentHeadTutor/timeSetting'); ?>"><li class="active"><i class="glyphicon glyphicon-time"></i> 匹配设置</li></a>
                 <a href="<?php echo url('DepartmentHeadTutor/matchSetting'); ?>"><li><i class="glyphicon glyphicon-ok"></i> 匹配结果</li></a>
-                <li><i class="glyphicon glyphicon-download-alt"></i> 结果导出</li>
+                <a href="<?php echo url('DepartmentHeadTutor/student_result'); ?>"> <li><i class="glyphicon glyphicon-download-alt"></i> 学生结果</li> </a>
+                <a href="<?php echo url('DepartmentHeadTutor/tutor_result'); ?>"> <li><i class="glyphicon glyphicon-download-alt"></i> 导师结果</li> </a>
             </ul>
         </nav>
     </div>

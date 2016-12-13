@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:110:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\match_setting.html";i:1481544514;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:110:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\match_setting.html";i:1481607459;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +30,7 @@
             <ul class="sider-navbar-nav">
                 <a href="<?php echo url('DepartmentHeadTutor/index'); ?>"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
                 <a href="<?php echo url('DepartmentHeadTutor/studentManager'); ?>"><li><i class="glyphicon glyphicon-th-list"></i> 学生管理</li></a>
-                <li><i class="glyphicon glyphicon-pencil"></i> 导师管理</li>
+                <a href="<?php echo url('DepartmentHeadTutor/teacherManager'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 导师管理</li></a>
                 <a href="<?php echo url('DepartmentHeadTutor/timeSetting'); ?>"><li><i class="glyphicon glyphicon-time"></i> 匹配设置</li></a>
                 <a href="<?php echo url('DepartmentHeadTutor/matchSetting'); ?>"><li class="active"><i class="glyphicon glyphicon-ok"></i> 匹配结果</li></a>
                 <a href="<?php echo url('DepartmentHeadTutor/student_result'); ?>"> <li><i class="glyphicon glyphicon-download-alt"></i> 学生结果</li> </a>
@@ -101,13 +101,13 @@
                       <ul class="pagination" style="float: right;">
                           <?php if($curPage != 1): ?>
                               <li><a href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/'.($curPage-1)); ?>">&laquo;</a></li>
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_19274__=$curPage-2;$__FOR_END_19274__=$curPage+3;for($i=$__FOR_START_19274__;$i < $__FOR_END_19274__;$i+=1){ ?>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_9389__=$curPage-2;$__FOR_END_9389__=$curPage+3;for($i=$__FOR_START_9389__;$i < $__FOR_END_9389__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='now'"; ?> href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_18613__=$totalPage-5;$__FOR_END_18613__=$totalPage;for($i=$__FOR_START_18613__;$i < $__FOR_END_18613__;$i+=1){ ?>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_28100__=$totalPage-5;$__FOR_END_28100__=$totalPage;for($i=$__FOR_START_28100__;$i < $__FOR_END_28100__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='now'"; ?> href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_31980__=1;$__FOR_END_31980__=6;for($i=$__FOR_START_31980__;$i < $__FOR_END_31980__;$i+=1){ ?>
+                            <?php } elseif($totalPage > 5): $__FOR_START_24791__=1;$__FOR_END_24791__=6;for($i=$__FOR_START_24791__;$i < $__FOR_END_24791__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='now'"; ?> href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_5023__=1;$__FOR_END_5023__=$totalPage;for($i=$__FOR_START_5023__;$i < $__FOR_END_5023__;$i+=1){ ?>
+                            <?php } else: $__FOR_START_14422__=1;$__FOR_END_14422__=$totalPage;for($i=$__FOR_START_14422__;$i < $__FOR_END_14422__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='now'"; ?> href="<?php echo url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="#">&raquo;</a></li>

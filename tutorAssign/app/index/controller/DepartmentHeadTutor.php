@@ -431,10 +431,14 @@ class DepartmentHeadTutor extends BaseController {
 
     		if ((Db::table('user_student_'.$student['grade'])->where('serialNum',$data['serialNum'])->find()) == "") {
     			if (Db::table('user_student_'.$student['grade'])->insert($student)) {
-    				return true;
+    				$add['msg'] = "学生添加成功";
+    				$add['status'] = true;
+    				return json($add);
     			}
     		} else {
-    			return false;
+    			$add['msg'] = "该学生已存在";
+    			$add['status'] = false;
+    			return json($add);
     		}
     	}
     }
@@ -484,8 +488,8 @@ class DepartmentHeadTutor extends BaseController {
     		$condition = $data['condition'];
 
     		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->select())/10);
-    		$student['totalPage'] = $totalPage;
-    		$student['result'] = Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->select();
+    		$student['amount'] = $totalPage;
+    		$student['information'] = Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->field('sid,serialNum,name,department,grade,gpa,rank')->select();
     		return json($student);
     	}
     }
@@ -500,8 +504,8 @@ class DepartmentHeadTutor extends BaseController {
     		$condition = $data['condition'];
 
     		$totalPage = ceil(count(Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->select())/10);
-    		$teacher['totalPage'] = $totalPage;
-    		$teacher['result'] = Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->select();
+    		$teacher['amount'] = $totalPage;
+    		$teacher['information'] = Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->select();
     		return json($teacher);
     	}
     }
@@ -539,10 +543,14 @@ class DepartmentHeadTutor extends BaseController {
 
     		if ((Db::table('user_teacher')->where('workNumber',$data['workNumber'])->find()) == "") {
     			if (Db::table('user_teacher')->insert($teacher)) {
-    				return true;
+    				$add['msg'] = "导师添加成功";
+    				$add['status'] = true;
+    				return json($add);
     			}
     		} else {
-    			return false;
+    			$add['msg'] = "该学生已存在";
+    			$add['status'] = false;
+    			return json($add);
     		}
     	}
     }

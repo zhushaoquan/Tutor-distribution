@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:97:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\edit_voluntary.html";i:1481552370;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:97:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\student\edit_voluntary.html";i:1481611725;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,7 +61,7 @@
             <?php if(($ontime ==1||$ontime==2 )&&$user['chosen']==0){?>                   
             <form method="post" action="<?php echo url('student/edit_voluntary'); ?>" style="margin:0px auto; width:90%" > 
                 <?php if($voluntaryinfosetting['voluntaryNum'] >=1) {?>
-                    <div class="form-horizontal" role="form" style="margin:10px auto;width:50%">
+                    <div class="form-horizontal" role="form" style="margin:0 auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第一志愿：</label>
 
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                 <?php }if($voluntaryinfosetting['voluntaryNum'] >=2) {?>
-                    <div class="form-horizontal" role="form" style="margin:10px auto;width:50%">
+                    <div class="form-horizontal" role="form" style="margin:0 auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第二志愿：</label>
 
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                 <?php }if($voluntaryinfosetting['voluntaryNum'] >=3) {?>
-                    <div class="form-horizontal" role="form" style="margin:10px auto;width:50%">
+                    <div class="form-horizontal" role="form" style="margin:0 auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第三志愿：</label>
 
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                 <?php }if($voluntaryinfosetting['voluntaryNum'] >=4) {?>
-                    <div class="form-horizontal" role="form" style="margin:10px auto;width:50%">
+                    <div class="form-horizontal" role="form" style="margin:0 auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第四志愿：</label>
 
@@ -121,7 +121,7 @@
                         </div>
                     </div>
                 <?php } if($voluntaryinfosetting['voluntaryNum'] >=5) {?>
-                    <div class="form-horizontal" role="form" style="margin:10px auto;width:50%">
+                    <div class="form-horizontal" role="form" style="margin:0 auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第五志愿：</label>
 
@@ -136,7 +136,7 @@
                         </div>
                     </div>
                 <?php }?>
-                    <div class="button-position" style="margin: 10px 500px; width: 200px;">
+                    <div class="button-position" style="margin:0 auto; width: 200px;">
                     <button class="btn btn-info" type="submit" style="margin: 0px auto; width: 150px;" >提交</button>
                     </div>
                 </form>
