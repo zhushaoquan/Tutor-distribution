@@ -488,8 +488,8 @@ class DepartmentHeadTutor extends BaseController {
     		$condition = $data['condition'];
 
     		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->select())/10);
-    		$student['totalPage'] = $totalPage;
-    		$student['result'] = Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->select();
+    		$student['amount'] = $totalPage;
+    		$student['information'] = Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->field('sid,serialNum,name,department,grade,gpa,rank')->select();
     		return json($student);
     	}
     }
@@ -504,8 +504,8 @@ class DepartmentHeadTutor extends BaseController {
     		$condition = $data['condition'];
 
     		$totalPage = ceil(count(Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->select())/10);
-    		$teacher['totalPage'] = $totalPage;
-    		$teacher['result'] = Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->select();
+    		$teacher['amount'] = $totalPage;
+    		$teacher['information'] = Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->select();
     		return json($teacher);
     	}
     }

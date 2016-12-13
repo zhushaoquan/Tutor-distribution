@@ -47,27 +47,27 @@ class Student extends BaseController {
 
 	        if($this->user['chosen'] == 1) {
 	        	$data['ontime'] = 3;
-	        	$data['message'] = "志愿结果已出，请前往 最终结果 页面查看哦~~~";
+	        	$data['message'] = "<font color='#FF0000'>".$data['department']."</font>的志愿结果已出，请前往 最终结果 页面查看哦~~~";
 	        }else if($nowtime >= $data['issueStart'] && $nowtime <= $data['issueEnd']) {
 	        	//导师填报课题时段！
 	        	$data['ontime'] = 0;
-	        	$data['message'] = "当前为导师"."<font color='#FF0000'>填报课题</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['issueStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['issueEnd'])."</font>！";
+	        	$data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的导师<font color='#FF0000'>填报课题</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['issueStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['issueEnd'])."</font>！";
 	        }else if($nowtime < $data['firstEnd'] && $nowtime > $data['firstStart']) {
 	        	//第一轮志愿填报
 	        	$data['ontime'] = 1;
-	            $data['message'] = "当前为<font color='#FF0000'>第一轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['firstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['firstEnd'])."</font>,请同学们按时填报、修改志愿！";
+	            $data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['firstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['firstEnd'])."</font>,请同学们按时填报、修改志愿！";
 	         } else if($nowtime  < $data['secondEnd'] && $nowtime > $data['secondStart']) {
 	         	//第二轮志愿填报时间
 	         	$data['ontime'] = 2;
-	         	$data['message'] = "当前为<font color='#FF0000'>第二轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['secondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['secondEnd'])."</font>,请同学们按时填报、修改志愿！";
+	         	$data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['secondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['secondEnd'])."</font>,请同学们按时填报、修改志愿！";
 	         }else if($nowtime >= $data['confirmFirstStart'] && $nowtime <= $data['confirmFirstEnd']) {
 	         	//第一轮导师选择学生时间
 	         	$data['ontime'] = 11;
-	         	$data['message'] = "当前为<font color='#FF0000'>第一轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['confirmFirstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['confirmFirstEnd'])."</font>,请同学们耐心等候！";
+	         	$data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['confirmFirstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['confirmFirstEnd'])."</font>,请同学们耐心等候！";
 	         } else if($nowtime >= $data['confirmSecondStart'] && $nowtime <= $data['confirmSecondEnd']) {
 	         	//第二轮导师选择学生时间
 	         	$data['ontime'] = 22;
-	         	$data['message'] = "当前为<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['confirmSecondEnd'])."</font>,请同学们耐心等候！";
+	         	$data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['confirmSecondEnd'])."</font>,请同学们耐心等候！";
 	         }else {
 	            $data['message'] = "当前不在填报志愿时间段内！";      
 	         }
@@ -170,24 +170,7 @@ class Student extends BaseController {
 	}
 
 	public function tutor_list($page=1) {
-/*
-		$data = Db::table('tc_voluntaryinfoSetting')->find();
-        $data['nowtime'] = time();
-        $data['message'] = '';
-        $data['ontime']=1;
-        if($data['nowtime'] < $data['firstEnd'] && $data['nowtime'] > $data['firstStart']) {
-            $data['message'] = "当前为第一轮的志愿填报时间：".date('Y-m-d',$data['firstStart'])."至".date('Y-m-d',$data['firstEnd']).",请同学们按时填报、修改志愿！";
-         } else if($data['nowtime'] < $data['secondEnd'] && $data['nowtime'] > $data['secondStart']) {
-         	$data['message'] = "当前为第二轮的志愿填报时间：".date('Y-m-d',$data['secondStart'])."至".date('Y-m-d',$data['secondEnd']).",请同学们按时填报、修改志愿！";
 
-         } else {
-            $data['message'] = "当前不在填报志愿时间段内！";
-            $data['ontime'] = 0;
-         }
-         $this->assign('message',$data['message']);
-         $this->assign('ontime',$data['ontime']);
-
-*/
 		if($this->user['department'] == $this->department_1) {
 			//计算机实验班
 			$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
@@ -347,7 +330,7 @@ class Student extends BaseController {
             $data1['wishThird'] = $request->post('wishThird', '');
             $data1['wishForth'] = $request->post('wishForth', '');
             $data1['wishFifth'] = $request->post('wishFifth', '');  
-            $data1['round'] = intval($ontime);
+            $data1['round'] = intval($this->ontime);
 
             $volunNum = $this->voluntaryinfosetting['voluntaryNum'];
             if($data1['wishFirst'] == '') {
