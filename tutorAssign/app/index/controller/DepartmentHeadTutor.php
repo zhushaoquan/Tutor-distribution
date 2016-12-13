@@ -692,8 +692,8 @@ class DepartmentHeadTutor extends BaseController {
     	return $this->fetch('teacher_manager');
     }
 
-    //Excel导入
-    public function excel_import() {
+    //学生信息Excel表格导入
+    public function student_excel_import() {
     	$request = Request::instance();
     	if ($request->isPost()) {
     		$file = $request->file('excel_file');
@@ -713,6 +713,67 @@ class DepartmentHeadTutor extends BaseController {
     			$uploadInfo['status'] = true;
     			return json($uploadInfo);
     		}
+    	}
+    }
+
+    //导师信息Excel表格导入
+    public function teacher_excel_import() {
+    	$request = Request::instance();
+    	if ($request->isPost()) {
+    		$file = $request->file('excel_file');
+    		$info = $file->move('../uploads/excel/teacher');
+    		$type = explode('.', $info->getFilename())[1];
+
+    		//判断excel的文件类型，接收.xls 拒绝.xlsx
+    		if ($type == "xlsx") {
+    			$uploadInfo['file_type'] = '.'.$type;
+    			$uploadInfo['msg'] = "文件上传失败，无法上传.xlsx文件";
+    			$uploadInfo['status'] = false;
+    			return json($uploadInfo);
+    		} elseif ($type == "xls") {
+    			$uploadInfo['file_type'] = '.'.$type;
+    			$uploadInfo['file_path'] = $info->getRealPath();
+    			$uploadInfo['msg'] = "文件上传成功";
+    			$uploadInfo['status'] = true;
+    			return json($uploadInfo);
+    		}
+    	}
+    }
+
+    //获取学生信息Excel表格，进行处理并添加入数据表中
+    public function student_excel_add() {
+    	$request = Request::instance();
+    	if ($request->isPost()) {
+    		$feedback = $request->post();
+    		$realPath = $feedback['file_path'];
+
+    		require_once 'extend/reader.php';
+            $data = new \Spreadsheet_Excel_Reader();
+            $data->setOutputEncoding('utf-8');  //设置在页面中输出的编码方式
+            $data->read($realPath);             //读取上传到当前目录下名叫$filename的文件
+
+            error_reporting(E_ALL ^ E_NOTICE);
+
+            //循环处理Excel表格里的每一行数据，并插入数据库
+            for ($i=3; $i <=$data->sheets[0]['numRows'] ; $i++) { 
+            	$insert = [];
+            	$insert['grade'] = $data->sheets[0]['cells'][$i][1];
+            	$insert['serialNum'] = $data->sheets[0]['cells'][$i][2];
+            	$insert['password'] = $data->sheets[0]['cells'][$i][2];
+            	$insert['name'] = $data->sheets[0]['cells'][$i][3];
+            	$insert['gender'] = $data->sheets[0]['cells'][$i][4];
+            	$insert['college'] = $data->sheets[0]['cells'][$i][5];
+            	$insert['department'] = $data->sheets[0]['cells'][$i][6];
+            	$insert['gpa'] = $data->sheets[0]['cells'][$i][7];
+            	$insert['rank'] = $data->sheets[0]['cells'][$i][8];
+            	$insert['chosen'] = 0;
+            	//插入数据库中
+            	Db('user_student_'.$insert['grade'])->insert($insert);
+            }
+
+            $addInfo['totalNum'] = $data->sheets[0]['numRows']-3;
+            $addInfo['status'] = true;
+            return json($addInfo);
     	}
     }
 }
