@@ -67,7 +67,7 @@
                 <div class="form-horizontal" role="form">
                 <div class="form-group">
                     <form action="{{:url('DepartmentHeadTutor/student_result')}}" method="post">
-                        <label class="col-md-1 control-label"  >选择年级：</label>
+                        <label class="col-md-2 control-label"  >选择年级：</label>
                         <div class="col-xs-2" >
                              <select id="gradeSelect" class="form-control" name="grade" style="display: inline; width: 80%">
                                     {volist name="gg" id="v"}
@@ -76,18 +76,7 @@
                             </select>
                             <input type="hidden" name="gradeMsg" value="modify">
                         </div>
-                        <label class="col-md-2 control-label"  >选择系别：</label>
-                        <div class="col-xs-2" >
-                            <select id="departSelect" class="form-control" name="department" style="display: inline; width: 100%">
-                                <option value="应用数学系" <?php if($dep == "应用数学系") echo'selected = "true"';?>>应用数学系</option>
-                                <option value="信息与计算科学系" <?php if($dep == "信息与计算科学系") echo'selected = "true"';?>>信息与计算科学系</option>
-                                <option value="计算机系" <?php if($dep == "计算机系") echo'selected = "true"';?>>计算机系</option>
-                                <option value="软件工程系" <?php if($dep == "软件工程系") echo'selected = "true"';?>>软件工程系</option>
-                                <option value="信息安全与网络系" <?php if($dep == "信息安全与网络系") echo'selected = "true"';?>>信息安全与网络系</option>
-                            </select>  
-                            <input type="hidden" name="stu" value="assign">
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="display: inline;" id="sub-confirm" >确定</button>
+                        <button type="submit" class="btn btn-info" style="display: inline;" id="sub-confirm" >确定</button>
 
                     </form>
                 </div>
@@ -104,36 +93,32 @@
                         </tr>
 
                         <tbody>
-                        <?php foreach ($data as $value) 
-                        {
-                                  
-                            echo '<tr>
-
-                            <td style="vertical-align:middle" rowspan="'.count($value['tstudentL']).'">' . $value['tnum'].
-                            '</td>
-                            <td style="vertical-align:middle" rowspan="'.count($value['tstudentL']).'">'.$value['tname'].'</td>
-                            ';
-                            $i=0;
-                            foreach ($value['tstudentL'] as $value1) 
-                            {
+                                {volist name="data" id="v"}
+                                <tr>
+                                    <td id="{{$v.tnum}}" style="vertical-align:middle" rowspan="{{$v.lenth+1}}">{{$v.tnum}}</td>
+                                    <td class="teacher-name" rowspan="{{$v.lenth+1}}" style="vertical-align:middle">{{$v.tname}}</td>
                                
-                            if($i>0) echo '<tr>';
-                             echo   '<td>' .  $value1['snum'] .'</td>
-                                    <td>' . $value1['sname'].'</td>';
-                               echo '
-                               </tr>';
-                              $i++;
-                            }
+                               <?php  if($v['lenth' ]== 0)echo "<td>暂无结果</td><td>暂无结果</td>"; ?>
+
+                                    {volist name="v.tstudentL" id="v2"}
+                                       <if condition="$i eq )">
+                                        <else/><tr>
+                                        </if>
+                                    
+                                        <td>{{$v2.snum}}</td>
+                                        <td>{{$v2.sname}}</td>
+                                </tr>
+                                    {/volist}
+                                {/volist}
+                                
                            
-                        }
-                        ?> 
-                        </tbody>
+                            </tbody>
                     </table>
 
                     <div class="submit-area">
                         <div class="col-md-5"> </div>
                         <div class="col-md-2"> 
-                            <button type="submit" class="btn btn-primary" id="sub-result-export"> <a id="downloadFile" href="{{$Think.const.OLD}}/../教师初始账号表.xls" download="result" style="color: #fff; text-decoration: none;">导&nbsp;&nbsp;出</a></button>
+                            <button type="submit" class="btn btn-info" id="sub-result-export"> <a id="downloadFile" href="{{$Think.const.OLD}}/../教师初始账号表.xls" download="result" style="color: #fff; text-decoration: none;">导&nbsp;&nbsp;出</a></button>
                         </div>
                     </div>
 
