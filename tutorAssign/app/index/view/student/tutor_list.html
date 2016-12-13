@@ -68,7 +68,7 @@
                             {volist name="teachers" id="t"}
                             <?php $i=1;?>
                                 <tr>
-                                    <td><?php echo $i; $i++;?></td>
+                                    <td>{{$t.workNumber}}</td>
                                     <td><a href="{{:url('/index/Student/tutor_detail/workNumber/'.$t.workNumber)}}">{{$t.name}} </a></td>
                                     <td>{{$t.sex}}</td>
                                     <td>{{$t.title}}</td>
