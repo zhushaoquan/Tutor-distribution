@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:112:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\student_manager.html";i:1481547984;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:112:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\student_manager.html";i:1481607459;}*/ ?>
 <html>
 
 <head>
@@ -18,6 +18,7 @@
     }
     </style>
 </head>
+
 <body>
     <div id="container-backstage" class="clearfix">
         <div id="siderbar">
@@ -32,7 +33,7 @@
                     <a href="<?php echo url('DepartmentHeadTutor/studentManager'); ?>">
                         <li class="active"><i class="glyphicon glyphicon-th-list"></i> 学生管理</li>
                     </a>
-                    <li><i class="glyphicon glyphicon-pencil"></i> 导师管理</li>
+                    <a href="<?php echo url('DepartmentHeadTutor/teacherManager'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 导师管理</li></a>
                     <a href="<?php echo url('DepartmentHeadTutor/timeSetting'); ?>">
                         <li><i class="glyphicon glyphicon-time"></i> 匹配设置</li>
                     </a>
@@ -82,7 +83,7 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <input class="form-control" placeholder="搜索姓名或学号..." type="text" style="display: inline;">
+                            <input class="form-control" id="searchstu" placeholder="搜索姓名或学号..." type="text" style="display: inline;">
                         </div>
                     </div>
                     <div class="module">
@@ -150,12 +151,14 @@
                     <div style="width: 95%; margin: 10px auto;">
                         <p>模板下载：<a href="#">点击下载</a>导入模板</p>
                     </div>
-                    <div style="width: 95%; margin: 10px auto">
-                        <input type="file">
-                        <button style="margin: 10px 0" type="button" class="btn btn-primary">
-                            确认上传
-                        </button>
-                    </div>
+                    <form action="">
+                        <div style="width: 95%; margin: 10px auto">
+                            <input type="file">
+                            <button style="margin: 10px 0" type="submit" class="btn btn-primary">
+                                确认上传
+                            </button>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
@@ -174,20 +177,74 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <button type="button" id="btn-close-add-above" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
                     <h4 class="modal-title" id="addItemLabel">
-                    模态框（Modal）标题
+                    添加学生
                 </h4>
                 </div>
                 <div class="modal-body">
-                    在这里添加一些文本
+                    <div id="addinfo" style="width: 80%; text-align: center;font-size: 20px">
+                    </div>
+                    <div class="input-div clearfix">
+                        <div class="wrapper">
+                            <label class="control-label input-label">学号</label>
+                        </div>
+                        <input id="stuid" class="form-control input-add" placeholder="如：031402201" type="text">
+                    </div>
+                    <div class="input-div clearfix">
+                        <div class="wrapper">
+                            <label class="control-label input-label">姓名</label>
+                        </div>
+                        <input id="stuname" class="form-control input-add">
+                    </div>
+                    <div class="input-div clearfix">
+                        <div class="wrapper">
+                            <label class="control-label input-label">性别</label>
+                        </div>
+                        <select id="stugender" class="form-control input-add">
+                            <option>男</option>
+                            <option>女</option>
+                        </select>
+                    </div>
+                    <div class="input-div clearfix">
+                        <div class="wrapper">
+                            <label class="control-label input-label">绩点</label>
+                        </div>
+                        <input id="stugpa" class="form-control input-add" placeholder="如：3.5" type="text">
+                    </div>
+                    <div class="input-div clearfix">
+                        <div class="wrapper">
+                            <label class="control-label input-label">系别</label>
+                        </div>
+                        <select id="studepart" class="form-control input-add">
+                            <option>应用数学系</option>
+                            <option>信息与计算科学系</option>
+                            <option>计算机系</option>
+                            <option>信息安全与网络系</option>
+                            <option>软件工程系</option>
+                            <option>计算机实验班</option>
+                            <option>数学实验班</option>
+                        </select>
+                    </div>
+                    <div class="input-div clearfix">
+                        <div class="wrapper">
+                            <label class="control-label input-label">排名</label>
+                        </div>
+                        <input id="sturank" class="form-control input-add" placeholder="如：1/180" type="text">
+                    </div>
+                    <div class="input-div clearfix">
+                        <div class="wrapper">
+                            <label class="control-label input-label">年级</label>
+                        </div>
+                        <input id="stugrade" class="form-control input-add" placeholder="如：2014" type="text">
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    <button id="btn-close-add-bottom" type="button" class="btn btn-default" data-dismiss="modal">关闭
                     </button>
-                    <button type="button" class="btn btn-primary">
+                    <button id="btn-submit-add" type="button" class="btn btn-primary">
                         提交更改
                     </button>
                 </div>
@@ -201,7 +258,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <button type="button" id="btn-close-del-above" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
                     <h4 class="modal-title" id="deleteModalLabel">
@@ -212,8 +269,7 @@
                     <div id="deleteinfo" style="width: 80%; text-align: center;font-size: 20px">
                     </div>
                     <div class="modal-footer">
-                        <a href="#" id="btn-colse-del" class="btn btn-default">关闭
-                    </a>
+                        <a href="#" id="btn-colse-del" class="btn btn-default">关闭</a>
                         <button type="button" id="btn-del-student" class="btn btn-primary">
                             确认
                         </button>
@@ -231,10 +287,13 @@
     <script type="text/javascript" src="<?php echo OLD; ?>/js/vue.min.js"></script>
     <script type="text/javascript" src="<?php echo OLD; ?>/js/jqPaginator.min.js"></script>
     <script type="text/javascript">
-        var deleteStu = "<?php echo PREFIX; ?>/DepartmentHeadTutor/deleteStudent";
-        var stuList = "<?php echo PREFIX; ?>/DepartmentHeadTutor/studentList";
-        var gradeList = "<?php echo PREFIX; ?>/DepartmentHeadTutor/gradeList";
+    var deleteStu = "<?php echo PREFIX; ?>/DepartmentHeadTutor/deleteStudent";
+    var stuList = "<?php echo PREFIX; ?>/DepartmentHeadTutor/studentList";
+    var gradeList = "<?php echo PREFIX; ?>/DepartmentHeadTutor/gradeList";
+    var addStu = "<?php echo PREFIX; ?>/DepartmentHeadTutor/addStudent";
+    var searchStu = "";
     </script>
     <script type="text/javascript" src="<?php echo OLD; ?>/js/student_manager.js"></script>
 </body>
+
 </html>
