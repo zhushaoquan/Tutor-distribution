@@ -691,4 +691,28 @@ class DepartmentHeadTutor extends BaseController {
     	$user = $this->auto_login();
     	return $this->fetch('teacher_manager');
     }
+
+    //Excel导入
+    public function excel_import() {
+    	$request = Request::instance();
+    	if ($request->isPost()) {
+    		$file = $request->file('excel_file');
+    		$info = $file->move('../uploads/excel/student');
+    		$type = explode('.', $info->getFilename())[1];
+
+    		//判断excel的文件类型，接收.xls 拒绝.xlsx
+    		if ($type == "xlsx") {
+    			$uploadInfo['file_type'] = '.'.$type;
+    			$uploadInfo['msg'] = "文件上传失败，无法上传.xlsx文件";
+    			$uploadInfo['status'] = false;
+    			return json($uploadInfo);
+    		} elseif ($type == "xls") {
+    			$uploadInfo['file_type'] = '.'.$type;
+    			$uploadInfo['file_path'] = $info->getRealPath();
+    			$uploadInfo['msg'] = "文件上传成功";
+    			$uploadInfo['status'] = true;
+    			return json($uploadInfo);
+    		}
+    	}
+    }
 }
