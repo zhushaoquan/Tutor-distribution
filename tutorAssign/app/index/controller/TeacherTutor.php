@@ -357,7 +357,7 @@ class TeacherTutor extends BaseController {
                 $i++;
             }
         }
-
+        $this->assign('grades', $this->grades);
         $this->assign('user', $user);
         $this->assign('students',$students);
         return $this->fetch('show_result');
