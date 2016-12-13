@@ -345,21 +345,33 @@ class TeacherTutor extends BaseController {
 
 
 
-    public function show_result($grade_now = null) {
-        if($grade_now == null) $grade_now = $this->grades[0]['grade'];
+    public function show_result() {
         $user = $this->auto_login();
+        $grade_now = "";
+
+        $request = Request::instance();
+         if ($request->isPost()) {
+          $grade_now = $request->post('grade_now');
+         } else {
+          $grade_now = $this->grades[0]['grade'];
+         }
+        
+
+        $studentList = Db::table('tc_result_'.$grade_now)->alias('r')->join('user_student_'.$grade_now.' s', 'r.sid=s.sid')->where('workNumber',$user['workNumber'])->order('serialNum asc')->select();
+        /*
         $studentList = Db::table('tc_result_'.$grade_now)->where('workNumber',$user['workNumber'])->select();
         $students = array();
         if($studentList!=NULL) {
             $i=1;
             foreach ($studentList as $key => $value) {
-                $students[$i] = Db::table('user_student_'.$grade_now)->where('sid',$value['sid'])->find();
+                $students[$i] = Db::table('user_student_'.$grade_now)->where('sid',$value['sid'])->order('serialNum desc')->find();
                 $i++;
             }
-        }
+        }*/
         $this->assign('grades', $this->grades);
+        $this->assign('grade_now', $grade_now);
         $this->assign('user', $user);
-        $this->assign('students',$students);
+        $this->assign('students',$studentList);
         return $this->fetch('show_result');
 
     }
