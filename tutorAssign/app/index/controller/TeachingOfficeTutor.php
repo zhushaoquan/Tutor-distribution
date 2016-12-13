@@ -336,13 +336,13 @@ class TeachingOfficeTutor extends BaseController {
 		return $this->fetch('head_list');
 	}
 
-	public function to_head_manager()
-	{
-		$user = $this->auto_login();
-		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
-		$this->assign('user', $officer);
-		return fetch('head_manager');
-	}
+	// public function to_head_manager()
+	// {
+	// 	$user = $this->auto_login();
+	// 	$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
+	// 	$this->assign('user', $officer);
+	// 	return fetch('head_manager');
+	// }
 
 	public function modify() {
 		$user = $this->auto_login();

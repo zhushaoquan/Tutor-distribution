@@ -583,8 +583,9 @@ class DepartmentHeadTutor extends BaseController {
 		if($_SERVER["REQUEST_METHOD"] == "POST")
 		{
 			$grade=$_POST['grade'];
-			$dep=$_POST['department'];
 		}
+		$finddep=DB::table('user_department_head')->where('workNumber',$user['workNumber'])->field('department')->find();
+		$dep=$finddep['department'];
 	//	var_dump($dep);
 		$data=Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
 		->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
@@ -623,11 +624,6 @@ class DepartmentHeadTutor extends BaseController {
 		$this->assign($pageBar);
 	 	$this->assign('teacher',$tealist);
 	    $this->assign('data',$data);
-		if( $_SERVER["REQUEST_METHOD"] == "POST" && $_POST["stu"] == 'modify')
-			return $this->fetch('student_modify');
-		if($to=="modify") return $this->fetch('student_modify');
-		
-
 		$this->assign('user', $head);
 		return $this->fetch('student_result');
     }
@@ -643,8 +639,9 @@ class DepartmentHeadTutor extends BaseController {
 		if($_SERVER["REQUEST_METHOD"] == "POST")
 		{
 			$grade=$_POST['grade'];
-			$dep=$_POST['department'];
 		}
+		$finddep=DB::table('user_department_head')->where('workNumber',$user['workNumber'])->field('department')->find();
+		$dep=$finddep['department'];
 		$tea=Db::table('user_teacher t')->where('department',$dep)
 		->field('t.workNumber as tnum,t.name as tname')->distinct(true)->page($page,$pageSize)->select();
 		
