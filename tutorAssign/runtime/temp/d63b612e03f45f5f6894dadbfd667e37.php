@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:100:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\show_result.html";i:1481614924;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:100:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\show_result.html";i:1481617694;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,7 +58,7 @@
                 <hr>
                 <div class="form-horizontal" role="form" >
                     <div class="form-group">
-                        <label  class="col-md-2 control-label" style="text-align:center; font-size:16px;">选择年级</label>
+                        <label  class="col-md-1 control-label" style="text-align:right; font-size:16px;">选择年级</label>
                         <div class="col-sm-2" >
                             <select  class="form-control" name="totalNatur" >
                             <option>2014级</option>
