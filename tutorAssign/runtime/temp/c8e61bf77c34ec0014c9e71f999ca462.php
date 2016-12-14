@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:112:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\student_manager.html";i:1481607459;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:112:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\student_manager.html";i:1481625886;}*/ ?>
 <html>
 
 <head>
@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="<?php echo OLD; ?>/css/student_manager.css">
+    <link href="https://rawgithub.com/hayageek/jquery-upload-file/master/css/uploadfile.css" rel="stylesheet">
     <style type="text/css">
     .sider-navbar-nav li {
         color: #fff;
@@ -33,7 +34,9 @@
                     <a href="<?php echo url('DepartmentHeadTutor/studentManager'); ?>">
                         <li class="active"><i class="glyphicon glyphicon-th-list"></i> 学生管理</li>
                     </a>
-                    <a href="<?php echo url('DepartmentHeadTutor/teacherManager'); ?>"><li><i class="glyphicon glyphicon-pencil"></i> 导师管理</li></a>
+                    <a href="<?php echo url('DepartmentHeadTutor/teacherManager'); ?>">
+                        <li><i class="glyphicon glyphicon-pencil"></i> 导师管理</li>
+                    </a>
                     <a href="<?php echo url('DepartmentHeadTutor/timeSetting'); ?>">
                         <li><i class="glyphicon glyphicon-time"></i> 匹配设置</li>
                     </a>
@@ -134,9 +137,9 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" id="closepop" class="close" data-dismiss="modal" aria-hidden="true">
+                    <!--  <button type="button" id="closepop" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
-                    </button>
+                    </button> -->
                     <h4 class="modal-title" id="exportExcelLabel">
                     导入学生名单
                 </h4>
@@ -151,14 +154,11 @@
                     <div style="width: 95%; margin: 10px auto;">
                         <p>模板下载：<a href="#">点击下载</a>导入模板</p>
                     </div>
-                    <form action="">
-                        <div style="width: 95%; margin: 10px auto">
-                            <input type="file">
-                            <button style="margin: 10px 0" type="submit" class="btn btn-primary">
-                                确认上传
-                            </button>
-                        </div>
-                    </form>
+                    <div id="fileuploader">Upload</div>
+                    <!-- <input type="file"> -->
+                    <button style="margin: 10px 0" type="submit" class="btn btn-primary">
+                        确认上传
+                    </button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
@@ -177,9 +177,9 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" id="btn-close-add-above" class="close" data-dismiss="modal" aria-hidden="true">
+                    <!-- <button type="button" id="btn-close-add-above" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
-                    </button>
+                    </button> -->
                     <h4 class="modal-title" id="addItemLabel">
                     添加学生
                 </h4>
@@ -258,9 +258,9 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" id="btn-close-del-above" class="close" data-dismiss="modal" aria-hidden="true">
+                    <!-- <button type="button" id="btn-close-del-above" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
-                    </button>
+                    </button> -->
                     <h4 class="modal-title" id="deleteModalLabel">
                     删除学生
                 </h4>
@@ -286,12 +286,13 @@
     <script type="text/javascript" src="<?php echo OLD; ?>/js/backstage.js"></script>
     <script type="text/javascript" src="<?php echo OLD; ?>/js/vue.min.js"></script>
     <script type="text/javascript" src="<?php echo OLD; ?>/js/jqPaginator.min.js"></script>
+    <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.min.js"></script>
     <script type="text/javascript">
     var deleteStu = "<?php echo PREFIX; ?>/DepartmentHeadTutor/deleteStudent";
     var stuList = "<?php echo PREFIX; ?>/DepartmentHeadTutor/studentList";
     var gradeList = "<?php echo PREFIX; ?>/DepartmentHeadTutor/gradeList";
     var addStu = "<?php echo PREFIX; ?>/DepartmentHeadTutor/addStudent";
-    var searchStu = "";
+    var searchStu = "<?php echo PREFIX; ?>/DepartmentHeadTutor/searchStudent"
     </script>
     <script type="text/javascript" src="<?php echo OLD; ?>/js/student_manager.js"></script>
 </body>

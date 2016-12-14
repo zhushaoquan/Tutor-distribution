@@ -248,6 +248,27 @@ class Student extends BaseController {
 				'curPage'   => $page
 				];
 		}
+        $request = Request::instance();
+		if ($request->isPost()) {
+            $teacher = $request->post('teacher', '');
+            $teachers = Db::table('user_teacher')->where('department|name|sex|department','like','%'.$teacher.'%')
+			                                     ->order('name desc')
+			                                     ->page($page,$this->pageSize)
+			                                     ->select();
+
+		    $total = count(Db::table('user_teacher')->where('department|name|sex|department','like','%'.$teacher.'%')
+			                                     ->order('name desc')
+			                                     ->select());
+		    $this->teachers = $teachers;
+			$page = $totalPage = ceil($total/$this->pageSize);
+			$pageBar = [
+				'total'     => $total,
+				'totalPage' => $totalPage+1,
+				'pageSize'  => $this->pageSize,
+				'curPage'   => $page
+				];           
+        }
+
 		$this->assign($pageBar);
 		$this->assign('teachers',$teachers);
 		$this->assign('user', $this->user);
