@@ -21,7 +21,7 @@ function refreshout(){
 				sid:sid,
 
 			},
-			url:show_studentdetail,
+			url:{{$Think.const.PREFIX}}/teacher_tutor/show_studentdetail,
 			success:function(data){
 				choice_out.datas =data.information;
 			},
@@ -52,7 +52,7 @@ function listenEventChoice(){
 			data:{
 				sid:radio;
 			},
-			url:show_studentdetail,
+			url:{{$Think.const.PREFIX}}/teacher_tutor/show_studentdetail,
 			success:function(data){
 				if(data){
 					$("#failed").text("选择失败!").css("color","res");

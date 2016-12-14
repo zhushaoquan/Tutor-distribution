@@ -94,8 +94,8 @@
                                     <td>{{$t.gpa}}</td>
                                     <td><?php if($t['wishFirst'] == $user['workNumber'])echo "第一志愿";else if($t['wishSecond'] == $user['workNumber'])echo "第二志愿"; else if($t['wishThird'] == $user['workNumber'])echo "第三志愿"; else if($t['wishForth'] == $user['workNumber'])echo "第四志愿";else echo "第五志愿"?></td>
                                     <?php if($ontime == 11 || $ontime == 22) {?>
-                                    <td><input class="btn btn-info " style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="选&nbsp;择" name="choise"></td>
-                                    <td><input class="btn btn-info " style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#rejectModal"  value="拒&nbsp;绝" name="choise"></td>
+                                    <td><button class="btn btn-info " id="choice" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="{{$t.sid}}" name="choise">选&nbsp;择123</button></td>
+                                    <td><button class="btn btn-info "  data-toggle="modal" data-backdrop="static" data-target="#rejectModal"  value="" name="choise">拒&nbsp;绝</button></td>
                                     <?php }?>
                                 </form>    
                                 </tr>
@@ -159,7 +159,7 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <div class="table-responsive">
+                <div class="table-responsive" id ="failed">
                     <table class="table">
                         <tr>
                             <th>#</th>
@@ -169,22 +169,24 @@
                             <th>绩点</th>
                             <th>志愿顺序</th>
                         </tr>
-                        <tbody>
-                            <td><input type="radio"  checked></td>
+                        <tbody id ="choiceout">
+                        <tr v-for="item in datas">
+                            <td id ="radio"><input type="radio"  checked></td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.gender}}</td>
+                            <td>{{item.gpa}}</td>
+                            <td>{{item.rank}}</td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>  
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" value="选择">
+                <button id="choiceagain" type="submit" class="btn btn-primary" value="选择">
                     确认选择
                 </button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                <button id="choiceclose" type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
             </div>
         </div>
@@ -241,6 +243,10 @@
 <script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
 <script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
 <script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/student_list.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/jqPaginator.min.js"></script>
+<script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/vue.min.js"></script>
 </body>
 </html>
 
