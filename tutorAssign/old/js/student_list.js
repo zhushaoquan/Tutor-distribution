@@ -11,7 +11,7 @@ function selectchoice(){
 	var value= $("#choicesss").val();
 	return value;
 }
-//加载弹出框里面的信息
+//  加载弹出框里面的信息
 function refreshout(){
 	$("#choicesss").click(function(){
 		var sid=selectchoice();
@@ -24,6 +24,7 @@ function refreshout(){
 			url:choicestu,
 			success:function(data){
 				choice_out.datas =data.information;
+				console.log(data.information);
 			},
 			datatype:"json"
 		});

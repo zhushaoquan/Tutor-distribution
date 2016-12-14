@@ -3,6 +3,7 @@ namespace app\index\controller;
 use think\Config;
 use think\Db;
 use think\Request;
+use think\Cache;
 
 class Student extends BaseController {
 	public $department_1 = "计算机实验班";
@@ -10,6 +11,7 @@ class Student extends BaseController {
 	public $voluntaryinfosetting;
 	public $ontime;
 	public $teachers ;
+	public $search_teacher;
 	public $time = "";
     public $pageSize = 5;
     public $user;
@@ -170,14 +172,120 @@ class Student extends BaseController {
 	}
 
 	public function tutor_list($page=1) {
+		$request = Request::instance();
 
-		if($this->user['department'] == $this->department_1) {
+		if ($request->isPost()) {
+            $this->search_teacher = $request->post('teacher', '');
+            Cache::set('search_teacher', $this->search_teacher ,3600);
+
+        } 
+
+        if(Cache::get('search_teacher')) {
+	        $this->search_teacher = Cache::get('search_teacher');
+        } 
+
+        if($this->search_teacher!="") {
+         //搜索导师
+        	$this->assign('search_teacher',$this->search_teacher);
+	        	if($this->user['department'] == $this->department_1) {
+				//计算机实验班
+				$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
+				                                     ->where('isExperial','in','1,3')
+				                                     ->where('compExperNow < totalCompExper')
+				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
+				                                     ->order('t.name desc')
+				                                     ->page($page,$this->pageSize)
+				                                     ->select();
+
+				$this->teachers = $teachers;
+		
+			    $total = count(Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
+				                                     ->where('isExperial','in','1,3')
+				                                     ->where('compExperNow < totalCompExper')
+				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
+				                                     ->order('t.name desc')
+				                                     ->select());
+				$page = $totalPage = ceil($total/$this->pageSize);
+				$pageBar = [
+					'total'     => $total,
+					'totalPage' => $totalPage+1,
+					'pageSize'  => $this->pageSize,
+					'curPage'   => $page
+					];
+
+
+			} else if($this->user['department'] == $this->department_2) {
+				//数学实验板
+				$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
+				                                     ->where('isExperial','in','2,3')
+				                                     ->where('mathExperNow < totalMathExper')
+				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
+				                                     ->order('t.name desc')
+				                                     ->page($page,$this->pageSize)->select();
+				$this->teachers = $teachers;
+
+			    $total = count(Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
+				                                     ->where('isExperial','in','2,3')
+				                                     ->where('mathExperNow < totalMathExper')
+				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
+				                                     ->order('t.name desc')
+				                                     ->select());
+				$page = $totalPage = ceil($total/$this->pageSize);
+				$pageBar = [
+					'total'     => $total,
+					'totalPage' => $totalPage+1,
+					'pageSize'  => $this->pageSize,
+					'curPage'   => $page
+					];
+			} else {
+				//自然班
+				$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
+				                                     ->where('department',$this->user['department'])
+				                                     ->where('naturNow < totalNatur')
+				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
+				                                     ->order('t.name desc')
+				                                     ->page($page,$this->pageSize)
+				                                     ->select();
+
+			    $total = count(Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
+				                                     ->where('department',$this->user['department'])
+				                                     ->where('naturNow < totalNatur')
+				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
+				                                     ->order('t.name desc')
+				                                     ->select());
+			    $this->teachers = $teachers;
+				$page = $totalPage = ceil($total/$this->pageSize);
+				$pageBar = [
+					'total'     => $total,
+					'totalPage' => $totalPage+1,
+					'pageSize'  => $this->pageSize,
+					'curPage'   => $page
+					];
+			}
+
+        	/*
+        	$teachers = Db::table('user_teacher')->where('department|name|sex','like','%'.$this->search_teacher.'%')
+			                                     ->order('name desc')
+			                                     ->page($page,$this->pageSize)
+			                                     ->select();
+		    $total = count(Db::table('user_teacher')->where('department|name|sex','like','%'.$this->search_teacher.'%')
+			                                     ->order('name desc')
+			                                     ->select());
+
+			$page = $totalPage = ceil($total/$this->pageSize);
+			$pageBar = [
+				'total'     => $total,
+				'totalPage' => $totalPage+1,
+				'pageSize'  => $this->pageSize,
+				'curPage'   => $page
+				]; 
+			$this->assign('search_teacher',$this->search_teacher);
+*/
+        } else if($this->user['department'] == $this->department_1) {
 			//计算机实验班
 			$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
-			                                     ->where(function ($query) {
-			                                     	$query->where('isExperial',1)->whereor('isExperial',3)->where('compExperNow', '<','totalCompExper');
-			                                     })
-			                                     //->where('compExperNow', '<','totalCompExper')
+			                                     ->where('isExperial','in','1,3')   
+			                                     ->where('compExperNow < totalCompExper')
 			                                     ->order('t.name desc')
 			                                     ->page($page,$this->pageSize)
 			                                     ->select();
@@ -185,12 +293,10 @@ class Student extends BaseController {
 			$this->teachers = $teachers;
 	
 		    $total = count(Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
-			                                     ->where(function ($query) {
-			                                     	$query->where('isExperial',1)->whereor('isExperial',3)->where('compExperNow', '<','totalCompExper');
-			                                     })
-			                                     //->where('compExperNow', '<','totalCompExper')
-			                                     ->order('t.name desc')
-			                                     ->select());
+			                                       ->where('isExperial','in','1,3')
+			                                       ->where('compExperNow < totalCompExper')
+			                                       ->order('t.name desc')
+			                                       ->select());
 			$page = $totalPage = ceil($total/$this->pageSize);
 			$pageBar = [
 				'total'     => $total,
@@ -203,19 +309,15 @@ class Student extends BaseController {
 		} else if($this->user['department'] == $this->department_2) {
 			//数学实验板
 			$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
-			                                     ->where(function ($query) {
-			                                     	$query->where('isExperial',2)->whereOr('isExperial',3)->where('mathExperNow','<','totalMathExper');
-			                                     })
-			                                     //->where('mathExperNow','<','totalMathExper')
+			                                     ->where('isExperial','in','2,3')
+			                                     ->where('mathExperNow < totalMathExper')
 			                                     ->order('t.name desc')
 			                                     ->page($page,$this->pageSize)->select();
 			$this->teachers = $teachers;
 
 		    $total = count(Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
-			                                     ->where(function ($query) {
-			                                     	$query->where('isExperial',2)->whereOr('isExperial',3)->where('mathExperNow','<','totalMathExper');
-			                                     })
-			                                   //  ->where('mathExperNow','<','totalMathExper')
+			                                     ->where('isExperial','in','2,3')
+			                                     ->where('mathExperNow < totalMathExper')
 			                                     ->order('t.name desc')
 			                                     ->select());
 			$page = $totalPage = ceil($total/$this->pageSize);
@@ -229,14 +331,14 @@ class Student extends BaseController {
 			//自然班
 			$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                     ->where('department',$this->user['department'])
-			                                     ->where('naturNow ','< ','totalNatur')
+			                                     ->where('naturNow < totalNatur')
 			                                     ->order('t.name desc')
 			                                     ->page($page,$this->pageSize)
 			                                     ->select();
 
 		    $total = count(Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                     ->where('department',$this->user['department'])
-			                                     ->where('naturNow ','< ','totalNatur')
+			                                     ->where('naturNow < totalNatur')
 			                                     ->order('t.name desc')
 			                                     ->select());
 		    $this->teachers = $teachers;
@@ -248,31 +350,68 @@ class Student extends BaseController {
 				'curPage'   => $page
 				];
 		}
-        $request = Request::instance();
+        
+
+		$this->assign($pageBar);
+		$this->assign('teachers',$teachers);
+		$this->assign('user', $this->user);
+		return $this->fetch('tutor_list');
+	}
+
+	public function tutor_list_search($page=1) {
+		$teacher="";
+		$request = Request::instance();
 		if ($request->isPost()) {
-            $teacher = $request->post('teacher', '');
-            $teachers = Db::table('user_teacher')->where('department|name|sex|department','like','%'.$teacher.'%')
+            $this->search_teacher = $request->post('teacher', '');
+        }
+
+        if($this->search_teacher!="") {
+        	$this->assign('search_teacher',$teacher);
+        	$teachers = Db::table('user_teacher')->where('department|name|sex','like','%'.$search_teacher.'%')
 			                                     ->order('name desc')
 			                                     ->page($page,$this->pageSize)
 			                                     ->select();
-
-		    $total = count(Db::table('user_teacher')->where('department|name|sex|department','like','%'.$teacher.'%')
+		    $total = count(Db::table('user_teacher')->where('department|name|sex','like','%'.$search_teacher.'%')
 			                                     ->order('name desc')
 			                                     ->select());
-		    $this->teachers = $teachers;
+
 			$page = $totalPage = ceil($total/$this->pageSize);
 			$pageBar = [
 				'total'     => $total,
 				'totalPage' => $totalPage+1,
 				'pageSize'  => $this->pageSize,
 				'curPage'   => $page
-				];           
+				]; 
         }
 
+
+
+        if($teacher!="") {
+        	$this->search_teacher = $teacher;
+        } else {
+        	$teacher = $this->search_teacher;
+        }
+
+        $teachers = Db::table('user_teacher')->where('department|name|sex','like','%'.$search_teacher.'%')
+			                                     ->order('name desc')
+			                                     ->page($page,$this->pageSize)
+			                                     ->select();
+	    $total = count(Db::table('user_teacher')->where('department|name|sex','like','%'.$search_teacher.'%')
+		                                     ->order('name desc')
+		                                     ->select());
+
+		$page = $totalPage = ceil($total/$this->pageSize);
+		$pageBar = [
+			'total'     => $total,
+			'totalPage' => $totalPage+1,
+			'pageSize'  => $this->pageSize,
+			'curPage'   => $page
+			]; 
 		$this->assign($pageBar);
+		$this->assign('search_teacher',$teacher);
 		$this->assign('teachers',$teachers);
 		$this->assign('user', $this->user);
-		return $this->fetch('tutor_list');
+		return $this->fetch('tutor_list');          
 	}
 
 //导师详细信息

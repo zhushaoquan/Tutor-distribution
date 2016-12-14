@@ -93,9 +93,8 @@
                                     <td>{{$t.rank}}</td>
                                     <td>{{$t.gpa}}</td>
                                     <td><?php if($t['wishFirst'] == $user['workNumber'])echo "第一志愿";else if($t['wishSecond'] == $user['workNumber'])echo "第二志愿"; else if($t['wishThird'] == $user['workNumber'])echo "第三志愿"; else if($t['wishForth'] == $user['workNumber'])echo "第四志愿";else echo "第五志愿"?></td>
-                                    <td><button class="btn btn-info " id="choicesss" style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="{{$t.sid}}" name="choise">选&nbsp;择</td>
+                                    <td><input class="btn btn-info " style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="选&nbsp;  择" name="choise"></td>
                                     <td><input class="btn btn-info " style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#rejectModal"  value="拒&nbsp;绝" name="choise"></td>
-                                    <?php ?>
                                 </form>    
                                 </tr>
                             {/volist}
@@ -246,10 +245,6 @@
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/jqPaginator.min.js"></script>
 <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/vue.min.js"></script>
- <script type="text/javascript">
- var choicestu ="{{$Think.const.PREFIX}}/TeacherTutor/"
- </script>
-
 </body>
 </html>
 
