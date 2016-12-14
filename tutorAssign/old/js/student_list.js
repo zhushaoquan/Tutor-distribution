@@ -8,7 +8,7 @@ var choice_out =new vue({
 //获得选择学生的sid
 function selectchoice(){
 
-	var value= $("#choice").val();
+	var value= $("#choicesss").val();
 	return value;
 }
 //加载弹出框里面的信息
