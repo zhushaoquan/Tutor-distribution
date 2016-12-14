@@ -94,8 +94,8 @@
                                     <td>{{$t.gpa}}</td>
                                     <td><?php if($t['wishFirst'] == $user['workNumber'])echo "第一志愿";else if($t['wishSecond'] == $user['workNumber'])echo "第二志愿"; else if($t['wishThird'] == $user['workNumber'])echo "第三志愿"; else if($t['wishForth'] == $user['workNumber'])echo "第四志愿";else echo "第五志愿"?></td>
                                     <?php if($ontime == 11 || $ontime == 22) {?>
-                                    <td><button class="btn btn-info " id="choice" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="" name="choise">选&nbsp;择</button></td>
-                                    <td><button class="btn btn-info "  data-toggle="modal" data-backdrop="static" data-target="#rejectModal"  value="{{$t.sid}}" name="choise">拒&nbsp;绝</button></td>
+                                    <td><input class="btn btn-info " style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="选&nbsp;择" name="choise"></td>
+                                    <td><input class="btn btn-info " style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#rejectModal"  value="拒&nbsp;绝" name="choise"></td>
                                     <?php }?>
                                 </form>    
                                 </tr>
@@ -169,24 +169,22 @@
                             <th>绩点</th>
                             <th>志愿顺序</th>
                         </tr>
-                        <tbody id="choiceout">
-                        <tr v-for="item in datas">
+                        <tbody>
                             <td><input type="radio"  checked></td>
-                            <td>{{item.name}}</td>
-                            <td>{{item.gender}}</td>
-                            <td>{{item.gpa}}</td>
-                            <td>{{item.rank}}</td>
                             <td></td>
-                        </tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tbody>
                     </table>
                 </div>  
             </div>
             <div class="modal-footer">
-                <button id="choiceagain" type="submit" class="btn btn-primary" value="选择">
+                <button type="submit" class="btn btn-primary" value="选择">
                     确认选择
                 </button>
-                <button id="choiceclose" type="button" class="btn btn-default" data-dismiss="modal">关闭
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
             </div>
         </div>
@@ -199,6 +197,9 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+                <button type="button" id="closepop" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
                 <h4 class="modal-title" id="rejectModalLabel">
                     确定学生信息
                 </h4>
@@ -215,7 +216,7 @@
                             <th>志愿顺序</th>
                         </tr>
                         <tbody>
-                            <td id="radio"><input type="radio"  checked></td>
+                            <td><input type="radio"  checked></td>
                             <td></td>
                             <td></td>
                             <td></td>
