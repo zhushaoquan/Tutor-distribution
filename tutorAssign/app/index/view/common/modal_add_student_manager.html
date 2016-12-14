@@ -1,0 +1,81 @@
+<!-- 添加弹出框（Modal） -->
+<div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <button type="button" id="btn-close-add-above" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button> -->
+                <h4 class="modal-title" id="addItemLabel">
+                    添加学生
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div id="addinfo" style="width: 80%; text-align: center;font-size: 20px">
+                </div>
+                <div class="input-div clearfix">
+                    <div class="wrapper">
+                        <label class="control-label input-label">学号</label>
+                    </div>
+                    <input id="stuid" class="form-control input-add" placeholder="如：031402201" type="text">
+                </div>
+                <div class="input-div clearfix">
+                    <div class="wrapper">
+                        <label class="control-label input-label">姓名</label>
+                    </div>
+                    <input id="stuname" class="form-control input-add">
+                </div>
+                <div class="input-div clearfix">
+                    <div class="wrapper">
+                        <label class="control-label input-label">性别</label>
+                    </div>
+                    <select id="stugender" class="form-control input-add">
+                        <option>男</option>
+                        <option>女</option>
+                    </select>
+                </div>
+                <div class="input-div clearfix">
+                    <div class="wrapper">
+                        <label class="control-label input-label">绩点</label>
+                    </div>
+                    <input id="stugpa" class="form-control input-add" placeholder="如：3.5" type="text">
+                </div>
+                <div class="input-div clearfix">
+                    <div class="wrapper">
+                        <label class="control-label input-label">系别</label>
+                    </div>
+                    <select id="studepart" class="form-control input-add">
+                        <option>应用数学系</option>
+                        <option>信息与计算科学系</option>
+                        <option>计算机系</option>
+                        <option>信息安全与网络系</option>
+                        <option>软件工程系</option>
+                        <option>计算机实验班</option>
+                        <option>数学实验班</option>
+                    </select>
+                </div>
+                <div class="input-div clearfix">
+                    <div class="wrapper">
+                        <label class="control-label input-label">排名</label>
+                    </div>
+                    <input id="sturank" class="form-control input-add" placeholder="如：1/180" type="text">
+                </div>
+                <div class="input-div clearfix">
+                    <div class="wrapper">
+                        <label class="control-label input-label">年级</label>
+                    </div>
+                    <input id="stugrade" class="form-control input-add" placeholder="如：2014" type="text">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="btn-close-add-bottom" class="btn btn-default" >关闭
+                </a>
+                <button id="btn-submit-add" type="button" class="btn btn-primary">
+                    提交更改
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
