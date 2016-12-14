@@ -69,6 +69,8 @@ class TeacherTutor extends BaseController {
 
         }
         $this->voluntaryinfosetting = $data;
+        //var_dump($data);
+        //exit;
         $nowtime = time();
         $data['message'] = '';
         $data['ontime']= -1;
@@ -96,10 +98,12 @@ class TeacherTutor extends BaseController {
 
 
                  $data['message2'] = "当前已带自然班学生<font color='#FF0000'>".$this->issue['naturNow']."</font>名";
-                 if($this->user['isExperial']==1||$this->user['isExperial']==3) {
+                 if($this->user['isExperial']==1) {
                   $data['message2'] .= ",已带计算机实验班学生<font color='#FF0000'>".$this->issue['compExperNow']."</font>名";
-                 } else if($this->user['isExperial']==2||$this->user['isExperial']==3) {
+                 } else if($this->user['isExperial']==2) {
                   $data['message2'] .= ",已带数学实验班学生<font color='#FF0000'>".$this->issue['mathExperNow']."</font>名";
+                 } else if($this->user['isExperial']==3) {
+                  $data['message2'] .= ",已带计算机实验班学生<font color='#FF0000'>".$this->issue['compExperNow']."</font>名,已带数学实验班学生<font color='#FF0000'>".$this->issue['mathExperNow']."</font>名";
                  }
                  $data['message2'] .="!";
                  $this->assign('message2',$data['message2']);
@@ -207,7 +211,7 @@ class TeacherTutor extends BaseController {
     
               $this->showNotice('所带实验班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));
 
-            } else if($this->voluntaryinfosetting['department']=="数学实验班" && ($data1['totalMathExper']+$data1['compExprNow']>$data['voluntaryinfosetting']['experialMax']) ) { 
+            } else if($this->voluntaryinfosetting['department']=="数学实验班" && ($data1['totalMathExper']+$data1['compExperNow']>$data['voluntaryinfosetting']['experialMax']) ) { 
       
               $this->showNotice('所带实验班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));
 
