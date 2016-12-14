@@ -71,7 +71,8 @@ function refreshTable(request, url = api_teacher_list) {
         url: url,
         success: function (data) {
             tab_body.datas = data.information;
-            setTotalpages(data.amount);
+            if(data.amount == 0) setTotalpages(1);
+            else setTotalpages(data.amount);
             // setCurrentPage(currentPage);
         },
         dataType: "json"
@@ -110,8 +111,12 @@ function listenEventDel() {
                     setTimeout('closeDeleteModal()',500);
                 } else {
                     $("#deleteinfo").text("删除失败!").css("color", "red");
-                    $("#btn-del-student").attr("disabled", "false");
+                    $("#btn-del-student").attr("disabled", false);
                 }
+            },
+            error:function () {
+                $("#deleteinfo").text("网络错误!").css("color", "red");
+                $("#btn-del-student").attr("disabled", false);
             },
             dataType: "json"
         });
@@ -161,49 +166,61 @@ $(".input-add").click(function () {
 });
 
 
+function checkFormdata() {
+    if(form_data.workNumber == ""
+        || form_data.name == ""
+        || form_data.telephone == ""
+        || form_data.position == ""){
+        return false;
+    }
+    return true;
+}
+
+
 //===============================
 // 监听添加弹出框的关闭按钮
 function listenEventAdd() {
     $("#btn-close-add-bottom").click(function () {
-        refreshAfterAddOrDel();
+        closeAddModal();
     });
-
-    // $("#btn-close-add-above").click(function() {
-    //     refreshAfterAddOrDel();
-    // });
 
     //提交数据
     $("#btn-submit-add").click(function () {
 
-
-        $("#btn-submit-add").attr("disabled", "disabled");
-        $.ajax({
-            type: "post",
-            data: {
-                workNumber: form_data.workNumber,
-                name: form_data.name,
-                gender: form_data.gender,
-                department: form_data.department,
-                isExperial: form_data.isExperial,
-                telephone: form_data.telephone,
-                position: form_data.position
-            },
-            url: api_teacher_add,
-            success: function (data) {
-                if (data.status) {
-                    $("#addinfo").text("添加成功!").css("color", "green");
-                    setTimeout('closeAddModal()',500);
-                } else {
-                    $("#addinfo").text(data.msg+"!").css("color", "red");
+        if(checkFormdata()){
+            $("#btn-submit-add").attr("disabled", "disabled");
+            $.ajax({
+                type: "post",
+                data: {
+                    workNumber: form_data.workNumber,
+                    name: form_data.name,
+                    gender: form_data.gender,
+                    department: form_data.department,
+                    isExperial: form_data.isExperial,
+                    telephone: form_data.telephone,
+                    position: form_data.position
+                },
+                url: api_teacher_add,
+                success: function (data) {
+                    if (data.status) {
+                        $("#addinfo").text("添加成功!").css("color", "green");
+                        setTimeout('closeAddModal()',500);
+                    } else {
+                        $("#addinfo").text(data.msg+"!").css("color", "red");
+                        $("#btn-submit-add").attr("disabled", false);
+                    }
+                },
+                error: function (response, status) {
+                    $("#addinfo").text("添加失败!").css("color", "red");
                     $("#btn-submit-add").attr("disabled", false);
-                }
-            },
-            error: function (response, status) {
-                $("#addinfo").text("添加失败!").css("color", "red");
-                $("#btn-submit-add").attr("disabled", false);
-            },
-            dataType: "json"
-        });
+                },
+                dataType: "json"
+            });
+        }
+        else {
+            $("#addinfo").text("不能有字段为空！").css("color", "red");
+            $("#btn-submit-add").attr("disabled", false);
+        }
     });
 }
 
@@ -336,7 +353,7 @@ function initUpload() {
                     console.log(data);
                     $("#uploadinfo").text("文件导入成功！").css("color", "green").css("text-align", "center");
 
-                    setTimeout('closeUploadModal()', 1000);
+                    setTimeout('closeUploadModal()', 500);
                     $("input[type='file']").attr("disabled", false);
                 },
                 complete: function (response, status) {
