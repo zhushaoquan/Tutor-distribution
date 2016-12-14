@@ -428,6 +428,7 @@ class DepartmentHeadTutor extends BaseController {
     		$student['field'] = "暂无";
     		$student['rank'] = $data['rank'];
     		$student['grade'] = $data['grade'];
+    		$student['telephone'] = $data['telephone'];
 
     		if ((Db::table('user_student_'.$student['grade'])->where('serialNum',$data['serialNum'])->find()) == "") {
     			if (Db::table('user_student_'.$student['grade'])->insert($student)) {
@@ -507,13 +508,14 @@ class DepartmentHeadTutor extends BaseController {
 
     		$totalPage = ceil(count(Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->select())/10);
     		$teacher['amount'] = $totalPage;
-    		$teacher['information'] = Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->page($curPage,10)->select();
+    		$teacher['information'] = Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->field('workNumber,name,password')->page($curPage,10)->select();
     		return json($teacher);
     	}
     }
 
     public function teacherList() {
-    	$user = $this->auto_login();
+    	// $user = $this->auto_login();
+    	$user['department'] = "信息安全与网络工程系";
 
     	$pageSize = 10;
 
@@ -523,7 +525,7 @@ class DepartmentHeadTutor extends BaseController {
 
     		$totalPage = ceil(count(Db::table('user_teacher')->where('department',$user['department'])->select())/$pageSize);
     		$teacherList['amount'] = $totalPage;
-    		$teacherList['information'] = Db::table('user_teacher')->where('department',$user['department'])->field('workNumber,name,sex')->page($curPage,$pageSize)->select();
+    		$teacherList['information'] = Db::table('user_teacher')->where('department',$user['department'])->field('workNumber,name,password')->page($curPage,$pageSize)->select();
     		return json($teacherList);
     	}
     }
@@ -539,9 +541,10 @@ class DepartmentHeadTutor extends BaseController {
     		$teacher['sex'] = $data['gender'];
     		$teacher['birthday'] = "1970-01-01";
     		$teacher['department'] = $data['department'];
-    		$teacher['telephone'] = "12345678901";
+    		$teacher['telephone'] = $data['telephone'];
     		$teacher['email'] = "fzu@edu.cn";
     		$teacher['isExperial'] = $data['isExperial'];
+    		$teacher['position'] = $data['position'];
 
     		if ((Db::table('user_teacher')->where('workNumber',$data['workNumber'])->find()) == "") {
     			if (Db::table('user_teacher')->insert($teacher)) {
@@ -550,7 +553,7 @@ class DepartmentHeadTutor extends BaseController {
     				return json($add);
     			}
     		} else {
-    			$add['msg'] = "该学生已存在";
+    			$add['msg'] = "该导师已存在";
     			$add['status'] = false;
     			return json($add);
     		}
@@ -766,6 +769,7 @@ class DepartmentHeadTutor extends BaseController {
             	$insert['department'] = $data->sheets[0]['cells'][$i][6];
             	$insert['gpa'] = $data->sheets[0]['cells'][$i][7];
             	$insert['rank'] = $data->sheets[0]['cells'][$i][8];
+            	$insert['telephone'] = $data->sheets[0]['cells'][$i][9];
             	$insert['chosen'] = 0;
             	//插入数据库中
             	Db('user_student_'.$insert['grade'])->insert($insert);
@@ -801,6 +805,7 @@ class DepartmentHeadTutor extends BaseController {
             	$insert['department'] = $data->sheets[0]['cells'][$i][4];
             	$insert['isExperial'] = $data->sheets[0]['cells'][$i][5];
             	$insert['title'] = $data->sheets[0]['cells'][$i][6];
+            	$insert['telephone'] = $data->sheets[0]['cells'][$i][7];
             	//插入数据库中
             	Db::table('user_teacher')->insert($insert);
             }
