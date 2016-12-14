@@ -57,14 +57,17 @@
                 <hr>
                 <div class="form-horizontal" role="form" >
                     <div class="form-group">
+                    <form action="{{:url('TeacherTutor/show_result')}}" method="post">
                         <label  class="col-md-1 control-label" style="text-align:right; font-size:16px;">选择年级</label>
                         <div class="col-sm-2" >
-                            <select  class="form-control" name="totalNatur" >
-                            <option>2014级</option>
-                            <option>2013级</option>
-                            <option>全部年级</option>
+                            <select  class="form-control" name="grade_now" >
+                                <?php foreach($grades as $key => $value) {?>
+                                    <option value="{{$value['grade']}}" >{{$value['grade']}}级</option>
+                                <?php }?>
                             </select>
                         </div>
+                        <button type="submit" class="btn btn-info" style="display: inline;margin-left:40px;" id="sub-confirm" >确定</button>
+                    </form>
                     </div>
                  </div>         
                 <div class="table-responsive">
@@ -84,8 +87,8 @@
                         <tbody>
                         <?php foreach ($students as $key => $value):?>
                         <tr>
-                            <td>#赋值处</td>
-                            <td>年级赋值处</td>
+                            <td>{{$key}}</td>
+                            <td>{{$grade_now}}级</td>
                             <td><?php echo $value['serialNum']?></td>
                             <td><?php echo $value['name']?></td>
                             <td><?php if($value['gender'])echo "男";else echo "女"; ?></td>

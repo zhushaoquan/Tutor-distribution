@@ -94,6 +94,17 @@ class TeacherTutor extends BaseController {
                  if($this->user['isExperial']!=0) $data['message1'].="，实验班总人数不超过<font color='#FF0000'>".$data['voluntaryinfosetting']['experialMax']."</font>名！";
                  $this->assign('message1',$data['message1']);
 
+
+                 $data['message2'] = "当前已带自然班学生<font color='#FF0000'>".$this->issue['naturNow']."</font>名";
+                 if($this->user['isExperial']==1||$this->user['isExperial']==3) {
+                  $data['message2'] .= ",已带计算机实验班学生<font color='#FF0000'>".$this->issue['compExperNow']."</font>名";
+                 } else if($this->user['isExperial']==2||$this->user['isExperial']==3) {
+                  $data['message2'] .= ",已带数学实验班学生<font color='#FF0000'>".$this->issue['mathExperNow']."</font>名";
+                 }
+                 $data['message2'] .="!";
+                 $this->assign('message2',$data['message2']);
+
+
             }else if($nowtime <= $data['firstEnd'] && $nowtime >= $data['firstStart']) {
                 //第一轮志愿填报
                 $data['ontime'] = 1;
@@ -185,10 +196,49 @@ class TeacherTutor extends BaseController {
             $data1['mathExperNow'] = $data['issue']['mathExperNow'];
 
             $bool = '';
-            if(($data1['totalMathExper']+$data1['totalCompExper'])>$data['voluntaryinfosetting']['experialMax']) {$this->showNotice('所带实验班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));exit;}
+            /*
+            if(($data1['totalMathExper']+$data1['totalCompExper'])>$data['voluntaryinfosetting']['experialMax']) {$this->showNotice('所带实验班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));}
             if($data1['totalNatur']>($data['voluntaryinfosetting']['totalMax']-$data1['totalMathExper']-$data1['totalCompExper'])) {$this->showNotice('所带自然班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));}
             if(($data1['totalCompExper']+$data1['totalMathExper']+$data1['totalNatur'])>$data['voluntaryinfosetting']['totalMax']) {$this->showNotice('所带学生总人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));}
             if(($data1['totalCompExper']+$data1['totalMathExper']+$data1['totalNatur'])<=$data['voluntaryinfosetting']['totalMin']) {$this->showNotice('所带学生总人数未达下限，请重新输入', url('TeacherTutor/issue_submit'));}
+            */
+
+            if($this->voluntaryinfosetting['department']=="计算机实验班" && ($data1['mathExperNow']+$data1['totalCompExper']>$data['voluntaryinfosetting']['experialMax']) ) {
+    
+              $this->showNotice('所带实验班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));
+
+            } else if($this->voluntaryinfosetting['department']=="数学实验班" && ($data1['totalMathExper']+$data1['compExprNow']>$data['voluntaryinfosetting']['experialMax']) ) { 
+      
+              $this->showNotice('所带实验班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));
+
+            } else if( $data1['totalNatur']>($data['voluntaryinfosetting']['totalMax']-$data1['mathExperNow']-$data1['compExperNow']) ) {
+            
+              $this->showNotice('所带自然班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));
+
+            } else if( ($data1['totalCompExper']+$data1['totalMathExper']+$data1['totalNatur'])<=$data['voluntaryinfosetting']['totalMin'] ) {
+              
+              $this->showNotice('所带学生总人数未达下限，请重新输入', url('TeacherTutor/issue_submit'));
+            } 
+
+
+            if($this->voluntaryinfosetting['department']=="计算机实验班") {
+
+              $data1['totalMathExper'] =  $data['issue']['totalMathExper'];
+              $data1['totalNatur'] = $data['issue']['totalNatur'];
+
+            } else if($this->voluntaryinfosetting['department']=="数学实验班") {
+
+              $data1['totalCompExper'] = $data['issue']['totalCompExper'];
+             // $data1['totalMathExper'] =  $data['issue']['totalMathExper'];
+              $data1['totalNatur'] = $data['issue']['totalNatur'];
+
+            } else {
+
+              $data1['totalCompExper'] = $data['issue']['totalCompExper'];
+              $data1['totalMathExper'] =  $data['issue']['totalMathExper'];
+            //  $data1['totalNatur'] = $data['issue']['totalNatur'];
+
+            }
 
              $data1['pid'] = $data['issue']['pid'];
              $bool = Db::table('tc_issue_'.$this->grades[0]['grade'])->update($data1);
@@ -345,21 +395,33 @@ class TeacherTutor extends BaseController {
 
 
 
-    public function show_result($grade_now = null) {
-        if($grade_now == null) $grade_now = $this->grades[0]['grade'];
+    public function show_result() {
         $user = $this->auto_login();
+        $grade_now = "";
+
+        $request = Request::instance();
+         if ($request->isPost()) {
+          $grade_now = $request->post('grade_now');
+         } else {
+          $grade_now = $this->grades[0]['grade'];
+         }
+        
+
+        $studentList = Db::table('tc_result_'.$grade_now)->alias('r')->join('user_student_'.$grade_now.' s', 'r.sid=s.sid')->where('workNumber',$user['workNumber'])->order('serialNum asc')->select();
+        /*
         $studentList = Db::table('tc_result_'.$grade_now)->where('workNumber',$user['workNumber'])->select();
         $students = array();
         if($studentList!=NULL) {
             $i=1;
             foreach ($studentList as $key => $value) {
-                $students[$i] = Db::table('user_student_'.$grade_now)->where('sid',$value['sid'])->find();
+                $students[$i] = Db::table('user_student_'.$grade_now)->where('sid',$value['sid'])->order('serialNum desc')->find();
                 $i++;
             }
-        }
-
+        }*/
+        $this->assign('grades', $this->grades);
+        $this->assign('grade_now', $grade_now);
         $this->assign('user', $user);
-        $this->assign('students',$students);
+        $this->assign('students',$studentList);
         return $this->fetch('show_result');
 
     }
