@@ -438,10 +438,10 @@ class TeacherTutor extends BaseController {
         return $this->fetch('information_detail');
     }
 
-    public function show_studentdetail($serialNum)
+    public function show_studentdetail($sid)
     {
-     if($serialNum!=NULL) {
-      $data['student']=DB::table('user_student_'.$this->grades[0]['grade'])->where('serialNum',$serialNum)
+     if($sid!=NULL) {
+      $data['student']=DB::table('user_student_'.$this->grades[0]['grade'])->where('sid',$sid)
                                                                 //->field('name,serialNum')
                                                                 ->find();
      } else {
