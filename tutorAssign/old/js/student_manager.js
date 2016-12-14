@@ -50,7 +50,7 @@ function initPaginator() {
 //        请求参数
 // @param url
 //        请求地址
-function refreshTable(request, url = stuList) {
+function refreshTable(request, url = api_student_list) {
     console.log("loaddata");
     $.ajax({
         type: "get",
@@ -94,7 +94,7 @@ function listenSelectChage() {
 function initGradeSelect() {
     $.ajax({
         type: "get",
-        url: gradeList,
+        url: api_grade_list,
         success: function (data) {
             selectGrade.grades = data;
         },
@@ -124,7 +124,7 @@ function listenEventDel() {
                 grade: grade,
                 serialNum: ids
             },
-            url: deleteStu,
+            url: api_student_delete,
             success: function (data) {
                 if (data) {
                     $("#deleteinfo").text("删除成功!").css("color", "green");
@@ -152,7 +152,7 @@ function refreshAfterAddOrDel() {
             page: page
         }
         //加载搜索数据
-        refreshTable(request, searchStu);
+        refreshTable(request, api_student_search);
     } else {
         console.log("false");
         var grade = selectedGrade();
@@ -162,7 +162,7 @@ function refreshAfterAddOrDel() {
             page: page
         }
         //加载搜索数据
-        refreshTable(request, stuList);
+        refreshTable(request, api_student_list);
     }
 }
 
@@ -226,7 +226,7 @@ function listenEventAdd() {
                 rank: rank,
                 grade: grade
             },
-            url: addStu,
+            url: api_student_add,
             success: function (data) {
                 console.log(data);
                 if (data) {
@@ -267,10 +267,10 @@ function listenSearchEvent() {
                 var request = {
                     condition: searchStr,
                     grade: grade,
-                    page: page
+                    curPage: page
                 }
                 //加载搜索数据
-                refreshTable(request, searchStu);
+                refreshTable(request, api_student_search);
                 setCurrentPage(1)
                 setSearchCallback();
             }
@@ -288,7 +288,7 @@ function setSearchCallback() {
             curPage: page,
             condition: searchStr
         };
-        refreshTable(request, searchStu);
+        refreshTable(request, api_student_search);
     }
     $('#tab-pagination').jqPaginator('option', {
         onPageChange: onPageChange
@@ -335,7 +335,7 @@ function searchCondition() {
 var response;
 $(document).ready(function () {
     $("#fileuploader").uploadFile({
-        url: excel_upload,
+        url: api_student_excel_upload,
         fileName: "excel_file",
         dragDropStr: "<span><b>拖拽文件到这里</b></span>",
         uploadStr: "上传文件",
@@ -372,7 +372,7 @@ $("#confirm-import").click(function () {
         data: {
             file_path: response.file_path
         },
-        url: excel_import,
+        url: api_student_excel_import,
         success: function (data) {
             console.log(data);
             $("#uploadinfo").text("文件导入成功！").css("color", "green");

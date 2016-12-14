@@ -2,18 +2,18 @@
 var choice_out =new vue({
 	el:'#choiceout',
 	data:{
-		datas:[]
+		datas: []
 	}
 });
 //获得选择学生的sid
 function selectchoice(){
 
-	var value= $("#choice").val();
+	var value= $("#choicesss").val();
 	return value;
 }
 //加载弹出框里面的信息
 function refreshout(){
-	$("#choice").click(function(){
+	$("#choicesss").click(function(){
 		var sid=selectchoice();
 		$.ajax({
 			type:"get",
@@ -21,7 +21,7 @@ function refreshout(){
 				sid:sid,
 
 			},
-			url:{{$Think.const.PREFIX}}/teacher_tutor/show_studentdetail,
+			url:choicestu,
 			success:function(data){
 				choice_out.datas =data.information;
 			},
@@ -52,7 +52,7 @@ function listenEventChoice(){
 			data:{
 				sid:radio;
 			},
-			url:{{$Think.const.PREFIX}}/teacher_tutor/show_studentdetail,
+			url:{{$Think.const.PREFIX}}/TeacherTutor/show_studentdetail,
 			success:function(data){
 				if(data){
 					$("#failed").text("选择失败!").css("color","res");

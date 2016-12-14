@@ -25,14 +25,17 @@
 
 .wrapper{
     height: 34px;
+    width: 10%;
     display: table;
     float: left;
+    margin-left: 20%;
 }
 
 .input-add {
     border-radius: 3px;
     width: 200px;
-    float: right;
+    /*float: right;*/
+
 }
 
 .input-label {
@@ -41,6 +44,5 @@
 }
 
 .input-div{
-    width: 60%;
     margin-bottom: 5px;
 }
