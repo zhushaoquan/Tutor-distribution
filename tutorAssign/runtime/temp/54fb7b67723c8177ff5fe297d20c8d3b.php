@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:101:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\student_list.html";i:1481612716;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:101:"D:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\teacher_tutor\student_list.html";i:1481715305;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +53,7 @@
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
                     <p>提示1：<?php echo $message;?></p>
                 </div>
-<?php if($ontime==11 || $ontime==22) {?>
+                <?php if($ontime==11 || $ontime==22) {?>
                 <div class="my-information-title">
                     <span>可选学生</span>
                 </div>
@@ -95,8 +95,8 @@
                                     <td><?php echo $t['gpa']; ?></td>
                                     <td><?php if($t['wishFirst'] == $user['workNumber'])echo "第一志愿";else if($t['wishSecond'] == $user['workNumber'])echo "第二志愿"; else if($t['wishThird'] == $user['workNumber'])echo "第三志愿"; else if($t['wishForth'] == $user['workNumber'])echo "第四志愿";else echo "第五志愿"?></td>
                                     <?php if($ontime == 11 || $ontime == 22) {?>
-                                    <td><input class="btn btn-info " style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="选&nbsp;择" name="choise"></td>
-                                    <td><input class="btn btn-info " style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#rejectModal"  value="拒&nbsp;绝" name="choise"></td>
+                                    <td><button class="btn btn-info " id="choice" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="" name="choise">选&nbsp;择</button></td>
+                                    <td><button class="btn btn-info "  data-toggle="modal" data-backdrop="static" data-target="#rejectModal"  value="<?php echo $t['sid']; ?>" name="choise">拒&nbsp;绝</button></td>
                                     <?php }?>
                                 </form>    
                                 </tr>
@@ -108,13 +108,13 @@
                       <a href="<?php echo url('/index/index/TeacherTutor/student_list/'.($curPage-1)); ?>">&laquo;</a>
                           <?php if($curPage != 1): ?>
                               <li><a href="<?php echo url('/index/index/TeacherTutor/student_list/'.($curPage-1)); ?>">&laquo;</a></li>
-                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_7663__=$curPage-2;$__FOR_END_7663__=$curPage+3;for($i=$__FOR_START_7663__;$i < $__FOR_END_7663__;$i+=1){ ?>
+                          <?php endif; if(($curPage > 3) AND ($curPage < $totalPage-2)): $__FOR_START_8257__=$curPage-2;$__FOR_END_8257__=$curPage+3;for($i=$__FOR_START_8257__;$i < $__FOR_END_8257__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeacherTutor/student_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_23246__=$totalPage-5;$__FOR_END_23246__=$totalPage;for($i=$__FOR_START_23246__;$i < $__FOR_END_23246__;$i+=1){ ?>
+                            <?php } elseif(($curPage > $totalPage-3) AND ($totalPage > 5)): $__FOR_START_2856__=$totalPage-5;$__FOR_END_2856__=$totalPage;for($i=$__FOR_START_2856__;$i < $__FOR_END_2856__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('index/TeacherTutor/student_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } elseif($totalPage > 5): $__FOR_START_5065__=1;$__FOR_END_5065__=6;for($i=$__FOR_START_5065__;$i < $__FOR_END_5065__;$i+=1){ ?>
+                            <?php } elseif($totalPage > 5): $__FOR_START_17739__=1;$__FOR_END_17739__=6;for($i=$__FOR_START_17739__;$i < $__FOR_END_17739__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeacherTutor/student_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
-                            <?php } else: $__FOR_START_30672__=1;$__FOR_END_30672__=$totalPage;for($i=$__FOR_START_30672__;$i < $__FOR_END_30672__;$i+=1){ ?>
+                            <?php } else: $__FOR_START_22042__=1;$__FOR_END_22042__=$totalPage;for($i=$__FOR_START_22042__;$i < $__FOR_END_22042__;$i+=1){ ?>
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="<?php echo url('/index/TeacherTutor/student_list/page/'.$i); ?>" ><?php echo $i; ?></a></li>
                             <?php } endif; if($curPage < $totalPage-1): ?>
                             <li><a href="#">&raquo;</a></li>
@@ -123,16 +123,14 @@
                       </ul>
                     </nav>
                 </div>
-<?php }?>                
+                   <?php }?>                
                 <!-- <div class="button-position">
                     <button class="btn btn-info" type="submit">修改</button>
                 </div> -->
-
-            </div>
-            <button></button>
-            <div class="footer"  style="border-radius: 10px;">
-                Designed by Lin & 我说的都队
-            </div>
+            </div>    
+        <div class="footer"  style="border-radius: 10px;">
+            Designed by Lin & 我说的都队
+        </div>
         </div>
     </div>
 </div>
@@ -149,7 +147,7 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <div class="table-responsive">
+                <div class="table-responsive" id="failed">
                     <table class="table">
                         <tr>
                             <th>#</th>
@@ -159,22 +157,24 @@
                             <th>绩点</th>
                             <th>志愿顺序</th>
                         </tr>
-                        <tbody>
-                            <td><input type="radio"  checked></td>
+                        <tbody id="choiceout">
+                        <tr v-for="item in datas" >
+                            <td id ="radio"><input type="radio"  checked></td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.gender}}</td>
+                            <td>{{item.gpa}}</td>
+                            <td>{{item.rank}}</td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>  
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" value="选择">
+                <button id="choiceagain" type="submit" class="btn btn-primary" value="选择">
                     确认选择
                 </button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                <button id="choiceclose" type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
             </div>
         </div>
@@ -187,9 +187,6 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" id="closepop" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
                 <h4 class="modal-title" id="rejectModalLabel">
                     确定学生信息
                 </h4>
@@ -206,7 +203,7 @@
                             <th>志愿顺序</th>
                         </tr>
                         <tbody>
-                            <td><input type="radio"  checked></td>
+                            <td id=""><input type="radio"  checked></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -227,10 +224,12 @@
         <!-- /.modal-content -->
     </div>
 </div>
-<script type="text/javascript" src="__STATIC__/js/index.js"></script>
-<script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
-<script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
-<script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/index.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/jquery2.14.min.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/bootstrap.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/backstage.js"></script>
+<script type="text/javascript" src="<?php echo OLD; ?>/js/student_list.js"></script>
+
 </body>
 </html>
 
