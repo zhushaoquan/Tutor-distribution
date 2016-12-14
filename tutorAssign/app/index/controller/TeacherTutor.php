@@ -94,6 +94,17 @@ class TeacherTutor extends BaseController {
                  if($this->user['isExperial']!=0) $data['message1'].="，实验班总人数不超过<font color='#FF0000'>".$data['voluntaryinfosetting']['experialMax']."</font>名！";
                  $this->assign('message1',$data['message1']);
 
+
+                 $data['message2'] = "当前已带自然班学生<font color='#FF0000'>".$this->issue['naturNow']."</font>名";
+                 if($this->user['isExperial']==1||$this->user['isExperial']==3) {
+                  $data['message2'] .= ",已带计算机实验班学生<font color='#FF0000'>".$this->issue['compExperNow']."</font>名";
+                 } else if($this->user['isExperial']==2||$this->user['isExperial']==3) {
+                  $data['message2'] .= ",已带数学实验班学生<font color='#FF0000'>".$this->issue['mathExperNow']."</font>名";
+                 }
+                 $data['message2'] .="!";
+                 $this->assign('message2',$data['message2']);
+
+
             }else if($nowtime <= $data['firstEnd'] && $nowtime >= $data['firstStart']) {
                 //第一轮志愿填报
                 $data['ontime'] = 1;
