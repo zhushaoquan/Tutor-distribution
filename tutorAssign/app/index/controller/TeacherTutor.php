@@ -185,10 +185,49 @@ class TeacherTutor extends BaseController {
             $data1['mathExperNow'] = $data['issue']['mathExperNow'];
 
             $bool = '';
-            if(($data1['totalMathExper']+$data1['totalCompExper'])>$data['voluntaryinfosetting']['experialMax']) {$this->showNotice('所带实验班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));exit;}
+            /*
+            if(($data1['totalMathExper']+$data1['totalCompExper'])>$data['voluntaryinfosetting']['experialMax']) {$this->showNotice('所带实验班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));}
             if($data1['totalNatur']>($data['voluntaryinfosetting']['totalMax']-$data1['totalMathExper']-$data1['totalCompExper'])) {$this->showNotice('所带自然班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));}
             if(($data1['totalCompExper']+$data1['totalMathExper']+$data1['totalNatur'])>$data['voluntaryinfosetting']['totalMax']) {$this->showNotice('所带学生总人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));}
             if(($data1['totalCompExper']+$data1['totalMathExper']+$data1['totalNatur'])<=$data['voluntaryinfosetting']['totalMin']) {$this->showNotice('所带学生总人数未达下限，请重新输入', url('TeacherTutor/issue_submit'));}
+            */
+
+            if($this->voluntaryinfosetting['department']=="计算机实验班" && ($data1['mathExperNow']+$data1['totalCompExper']>$data['voluntaryinfosetting']['experialMax']) ) {
+    
+              $this->showNotice('所带实验班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));
+
+            } else if($this->voluntaryinfosetting['department']=="数学实验班" && ($data1['totalMathExper']+$data1['compExprNow']>$data['voluntaryinfosetting']['experialMax']) ) { 
+      
+              $this->showNotice('所带实验班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));
+
+            } else if( $data1['totalNatur']>($data['voluntaryinfosetting']['totalMax']-$data1['mathExperNow']-$data1['compExperNow']) ) {
+            
+              $this->showNotice('所带自然班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));
+
+            } else if( ($data1['totalCompExper']+$data1['totalMathExper']+$data1['totalNatur'])<=$data['voluntaryinfosetting']['totalMin'] ) {
+              
+              $this->showNotice('所带学生总人数未达下限，请重新输入', url('TeacherTutor/issue_submit'));
+            } 
+
+
+            if($this->voluntaryinfosetting['department']=="计算机实验班") {
+
+              $data1['totalMathExper'] =  $data['issue']['totalMathExper'];
+              $data1['totalNatur'] = $data['issue']['totalNatur'];
+
+            } else if($this->voluntaryinfosetting['department']=="数学实验班") {
+
+              $data1['totalCompExper'] = $data['issue']['totalCompExper'];
+             // $data1['totalMathExper'] =  $data['issue']['totalMathExper'];
+              $data1['totalNatur'] = $data['issue']['totalNatur'];
+
+            } else {
+
+              $data1['totalCompExper'] = $data['issue']['totalCompExper'];
+              $data1['totalMathExper'] =  $data['issue']['totalMathExper'];
+            //  $data1['totalNatur'] = $data['issue']['totalNatur'];
+
+            }
 
              $data1['pid'] = $data['issue']['pid'];
              $bool = Db::table('tc_issue_'.$this->grades[0]['grade'])->update($data1);
