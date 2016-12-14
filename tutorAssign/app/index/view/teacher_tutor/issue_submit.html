@@ -51,6 +51,7 @@
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
                     <p>提示1：{{:$message}}</p>
                     <?php if(isset($message1)) {?><p>提示2：{{:$message1}}</p><?php }?>
+                    <?php if(isset($message2)) {?><p>提示3：{{:$message2}}</p><?php }?>
                 </div>
                 <?php if($ontime == 0) { ?>
                 <div class="my-information-title">
@@ -63,7 +64,7 @@
                              <div class="row" style ="margin:5px auto;">
                                  <label  class="col-md-2 control-label" >自然班人数</label>
                                  <div class="col-sm-2" style="width:120px">
-                                     <select  class="form-control" name="totalNatur" >
+                                     <select  class="form-control" name="totalNatur" <?php if($voluntaryinfosetting['department']=="计算机实验班"||$voluntaryinfosetting['department']=="数学实验班") { ?> disabled="disabled" <?php }?> >
                                      <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 0 ) {?> selected="selected" <?php }}?> value=0>0</option>
                                      <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 1 ) {?> selected="selected" <?php }}?> value=1>1</option>
                                      <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 2 ) {?> selected="selected" <?php }}?> value=2>2</option>
@@ -79,7 +80,7 @@
                                  <?php if($user['isExperial']==1 || $user['isExperial']==3) {?>
                                  <label  class="col-md-2 control-label">计算机实验班人数</label>
                                  <div class="col-sm-2" style="width:120px">
-                                     <select class="form-control" name="totalCompExper" >
+                                     <select class="form-control" name="totalCompExper" <?php if($voluntaryinfosetting['department']!="计算机实验班") { ?> disabled="disabled" <?php }?> >
                                      <option <?php if(isset($issue['totalCompExper'])) { if($issue['totalCompExper'] == 0 ) {?> selected="selected" <?php }}?> >0</option>
                                      <option <?php if(isset($issue['totalCompExper'])) { if($issue['totalCompExper'] == 1 ) {?> selected="selected" <?php }}?> >1</option>
                                      <option <?php if(isset($issue['totalCompExper'])) { if($issue['totalCompExper'] == 2 ) {?> selected="selected" <?php }}?> >2</option>
@@ -96,7 +97,7 @@
                                  <?php if($user['isExperial']==2 || $user['isExperial']==3) {?>
                                  <label  class="col-md-2 control-label">数学实验班人数</label>
                                  <div class="col-sm-2" style="width:120px">
-                                     <select class="form-control" name="totalMathExper" >
+                                     <select class="form-control" name="totalMathExper" <?php if($voluntaryinfosetting['department']!="数学实验班") { ?> disabled="disabled" <?php }?> >
                                      <option <?php if(isset($issue['totalMathExper'])) { if($issue['totalMathExper'] == 0 ) {?> selected="selected" <?php }}?> >0</option>
                                      <option <?php if(isset($issue['totalMathExper'])) { if($issue['totalMathExper'] == 1 ) {?> selected="selected" <?php }}?> >1</option>
                                      <option <?php if(isset($issue['totalMathExper'])) { if($issue['totalMathExper'] == 2 ) {?> selected="selected" <?php }}?> >2</option>
