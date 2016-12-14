@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:112:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\student_manager.html";i:1481625886;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:112:"C:\wamp64\www\Tutor-distribution\tutorAssign\public/../app/index\view\department_head_tutor\student_manager.html";i:1481703845;}*/ ?>
 <html>
 
 <head>
@@ -155,16 +155,13 @@
                         <p>模板下载：<a href="#">点击下载</a>导入模板</p>
                     </div>
                     <div id="fileuploader">Upload</div>
-                    <!-- <input type="file"> -->
-                    <button style="margin: 10px 0" type="submit" class="btn btn-primary">
-                        确认上传
-                    </button>
+                    <div id="uploadinfo"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        确认已导入
+                    <a id="exit-import" type="button" class="btn btn-default">放弃导入
+                    </a>
+                    <button id="confirm-import" type="button" class="btn btn-primary">
+                        确认导入
                     </button>
                 </div>
             </div>
@@ -219,14 +216,14 @@
                             <label class="control-label input-label">系别</label>
                         </div>
                         <select id="studepart" class="form-control input-add">
-                            <option>应用数学系</option>
-                            <option>信息与计算科学系</option>
-                            <option>计算机系</option>
-                            <option>信息安全与网络系</option>
-                            <option>软件工程系</option>
-                            <option>计算机实验班</option>
-                            <option>数学实验班</option>
-                        </select>
+                        <option>应用数学系</option>
+                        <option>信息与计算科学系</option>
+                        <option>计算机系</option>
+                        <option>信息安全与网络系</option>
+                        <option>软件工程系</option>
+                        <option>计算机实验班</option>
+                        <option>数学实验班</option>
+                    </select>
                     </div>
                     <div class="input-div clearfix">
                         <div class="wrapper">
@@ -242,8 +239,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="btn-close-add-bottom" type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
+                    <a id="btn-close-add-bottom" class="btn btn-default" >关闭
+                    </a>
                     <button id="btn-submit-add" type="button" class="btn btn-primary">
                         提交更改
                     </button>
@@ -269,7 +266,7 @@
                     <div id="deleteinfo" style="width: 80%; text-align: center;font-size: 20px">
                     </div>
                     <div class="modal-footer">
-                        <a href="#" id="btn-colse-del" class="btn btn-default">关闭</a>
+                        <a id="btn-colse-del" class="btn btn-default">关闭</a>
                         <button type="button" id="btn-del-student" class="btn btn-primary">
                             确认
                         </button>
@@ -286,15 +283,18 @@
     <script type="text/javascript" src="<?php echo OLD; ?>/js/backstage.js"></script>
     <script type="text/javascript" src="<?php echo OLD; ?>/js/vue.min.js"></script>
     <script type="text/javascript" src="<?php echo OLD; ?>/js/jqPaginator.min.js"></script>
-    <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.min.js"></script>
+    <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.js"></script>
     <script type="text/javascript">
     var deleteStu = "<?php echo PREFIX; ?>/DepartmentHeadTutor/deleteStudent";
     var stuList = "<?php echo PREFIX; ?>/DepartmentHeadTutor/studentList";
     var gradeList = "<?php echo PREFIX; ?>/DepartmentHeadTutor/gradeList";
     var addStu = "<?php echo PREFIX; ?>/DepartmentHeadTutor/addStudent";
-    var searchStu = "<?php echo PREFIX; ?>/DepartmentHeadTutor/searchStudent"
+    var searchStu = "<?php echo PREFIX; ?>/DepartmentHeadTutor/searchStudent";
+    var excel_upload = "<?php echo PREFIX; ?>/DepartmentHeadTutor/student_excel_import";
+    var excel_import = "<?php echo PREFIX; ?>/DepartmentHeadTutor/student_excel_add";
     </script>
     <script type="text/javascript" src="<?php echo OLD; ?>/js/student_manager.js"></script>
+
 </body>
 
 </html>
