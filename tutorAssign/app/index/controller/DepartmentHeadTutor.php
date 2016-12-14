@@ -769,6 +769,7 @@ class DepartmentHeadTutor extends BaseController {
             	$insert['department'] = $data->sheets[0]['cells'][$i][6];
             	$insert['gpa'] = $data->sheets[0]['cells'][$i][7];
             	$insert['rank'] = $data->sheets[0]['cells'][$i][8];
+            	$insert['telephone'] = $data->sheets[0]['cells'][$i][9];
             	$insert['chosen'] = 0;
             	//插入数据库中
             	Db('user_student_'.$insert['grade'])->insert($insert);
@@ -804,6 +805,7 @@ class DepartmentHeadTutor extends BaseController {
             	$insert['department'] = $data->sheets[0]['cells'][$i][4];
             	$insert['isExperial'] = $data->sheets[0]['cells'][$i][5];
             	$insert['title'] = $data->sheets[0]['cells'][$i][6];
+            	$insert['telephone'] = $data->sheets[0]['cells'][$i][7];
             	//插入数据库中
             	Db::table('user_teacher')->insert($insert);
             }
