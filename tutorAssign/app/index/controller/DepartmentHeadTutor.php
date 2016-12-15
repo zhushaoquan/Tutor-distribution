@@ -1081,4 +1081,133 @@ class DepartmentHeadTutor extends BaseController {
 
     }
 
+
+    //获取学生对应导师的结果
+    public function studentToTeacherResult()//学生结果查看
+    {
+        $user = $this->auto_login();
+
+        $request = Request::instance();
+        $gg=DB::table('tc_grade')->field('grade')->select();
+        $grade=$gg[0]['grade'];
+        $grade = $request->get('grade') != '' ? $request->get('grade') : $gg[0]['grade'];
+
+        $finddep=DB::table('user_department_head')->where('workNumber',$user['workNumber'])->field('department')->find(); //workNumber记得改
+        $dep=$finddep['department'];
+
+        $data=Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
+        ->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
+        ->field('t.workNumber as tnum,t.department as tdep,t.position as tposi,t.name as tname,t.telephone as ttele,s.serialNum as snum,s.name as sname,s.telephone as stele')
+        ->order('s.serialNum')->select();
+
+        $count = count($data);
+        for ($i=0; $i <$count ; $i++) { 
+            $title[$i] = Db::table('tc_issue_'.$grade)->where('workNumber',$data[$i]['tnum'])->field('title')->find();
+            $data[$i]['title'] = $title[$i]['title'];
+            $data[$i]['grade'] = $grade;
+        }
+
+        if($dep =='计算机实验班')
+        {
+            $tealist=Db::table('user_teacher')->where('user_teacher.department','=','计算机系')->where('isExperial','=',1)->field('workNumber,name')->select();
+            $dep ='计算机实验班';
+        }
+        else if($dep =='数学实验班')
+        {
+            $tealist=Db::table('user_teacher')->where('user_teacher.department','=','应用数学系')->where('isExperial','=',1)->field('workNumber,name')->select();
+            $dep ='数学实验班';
+        }
+        else 
+            $tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
+    
+        return $data;
+        
+    }
+
+    public function studentToTeacherExcelExport() {
+        //引入PHPExcel文件
+        require_once 'extend/PHPExcel_1.8.0_doc/Classes/PHPExcel.php';
+        $excel = new \PHPExcel();
+
+        //获得结果数组
+        $insert = $this->studentToTeacherResult();
+
+        //手动设置单元格宽度
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
+        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(25);
+        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(12);
+        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(16);
+        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(12);
+        $excel->getActiveSheet()->getColumnDimension('G')->setWidth(10);
+        $excel->getActiveSheet()->getColumnDimension('H')->setWidth(26);
+        $excel->getActiveSheet()->getColumnDimension('I')->setWidth(20);
+
+        //设置学号栏为文本格式
+        $excel->getActiveSheet()->getStyle('D')->getNumberFormat()->setFormatCode('000000000');
+
+        //设置表格标题，单独处理
+        $excel->getActiveSheet()->mergeCells('A1:I1');  //合并A1:I1单元格
+        $excel->getActiveSheet()->setCellValue('A1',$insert[0]['grade'].'级'.$insert[0]['tdep'].'导师分配结果');
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);  //加粗
+        $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER); //设置水平居中
+        $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_CENTER);     //设置垂直居中
+        
+        //设置边框和水平垂直居中
+        $styleArray = [ 
+            'alignment' => [
+                'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PHPExcel_Style_Alignment::VERTICAL_CENTER
+            ],
+            'borders' => [
+                'allborders' => [
+                    'style' => \PHPExcel_Style_Border::BORDER_THIN
+                ]
+            ]
+        ];
+
+        $letter = ['A','B','C','D','E','F','G','H','I'];
+        $tableHeader = ['序号','系别','学生姓名','学号','联系方式','导师姓名','职称','课题','联系方式'];    //设置表头数组，单独处理
+        for ($i=0; $i <9 ; $i++) { 
+            $excel->getActiveSheet()->setCellValue($letter[$i].'2',$tableHeader[$i]);            //设置单元格的值
+            $excel->getActiveSheet()->getStyle($letter[$i].'2')->applyFromArray($styleArray);    //设置单元格格式：水平、垂直居中、加边框
+            $excel->getActiveSheet()->getStyle($letter[$i].'2')->getFont()->setBold(true);       //设置单元格字体加粗
+        }
+
+        $totalInsert = count($insert);   //计算总插入数
+        for ($i=0; $i <$totalInsert ; $i++) { 
+            $excel->getActiveSheet()->setCellValue('A'.($i+3),($i+1));
+            $excel->getActiveSheet()->setCellValue('B'.($i+3),$insert[$i]['tdep']);
+            $excel->getActiveSheet()->setCellValue('C'.($i+3),$insert[$i]['sname']);
+            $excel->getActiveSheet()->setCellValue('D'.($i+3),$insert[$i]['snum']);
+            $excel->getActiveSheet()->setCellValue('E'.($i+3),$insert[$i]['stele']);
+            $excel->getActiveSheet()->setCellValue('F'.($i+3),$insert[$i]['tname']);
+            $excel->getActiveSheet()->setCellValue('G'.($i+3),$insert[$i]['tposi']);
+            $excel->getActiveSheet()->setCellValue('H'.($i+3),$insert[$i]['title']);
+            $excel->getActiveSheet()->setCellValue('I'.($i+3),$insert[$i]['ttele']);
+        }
+
+        for ($j=0; $j <9 ; $j++) { 
+                $excel->getActiveSheet()->getStyle($letter[$j].'3'.':'.$letter[$j].($totalInsert+2))->applyFromArray($styleArray); //设置单元格格式：水平、垂直居中、加边框
+            }
+
+        //将excel导出自动下载至本地
+        $write = new \PHPExcel_Writer_Excel5($excel);
+        header("Pragma: public");
+        header("Expires: 0");
+        header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
+        header("Content-Type:application/force-download");
+        header("Content-Type:application/vnd.ms-execl");
+        header("Content-Type:application/octet-stream");
+        header("Content-Type:application/download");;
+        header('Content-Disposition:attachment;filename='.'"'.$insert[0]['grade'].'级导师互选结果.xls"');
+        header("Content-Transfer-Encoding:binary");
+        $write->save('php://output');
+
+    }
+
+
+
+
+    
 }
