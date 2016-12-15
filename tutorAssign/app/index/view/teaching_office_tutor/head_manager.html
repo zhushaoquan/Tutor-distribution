@@ -175,7 +175,7 @@
 
             </div>
             <div class="modal-body" id ="modal-body">
-                <div v-for="item in datas">
+                <div >
                     <table class="table table-bordered" >
                         <thead>
                         <tr>
@@ -185,10 +185,10 @@
                         </tr>
                         </thead>
                         <tbody id="head_unassign">
-                        <tr>
+                        <tr >
                             <td><input type="radio" checked></td>
-                            <td>{{item.nums}}</td>
-                            <td>{{item.names}}</td>
+                            <td>{{result.workNumber}}</td>
+                            <td>{{result.name}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -207,7 +207,13 @@
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/jquery2.14.min.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/bootstrap.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/backstage.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/vue.min.js"></script>
+
+<script>
+var api_select_tutor="{{$Think.const.PREFIX}}/TeachingOfficeTutor/select_tutor";
+</script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/head_manager.js"></script>
+
 </body>
 </html>
 
