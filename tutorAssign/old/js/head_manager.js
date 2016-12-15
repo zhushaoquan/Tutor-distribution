@@ -2,48 +2,68 @@
 var search =new Vue({
     el:'#head_unassign';
     data:{
-        nums : [],
-        names: []
+        datas:[]
     }
 });
-//加载数据
-function refreshTable(request, url = ) {
-    console.log("loaddata");
-    $.ajax({
-        type: "get",
-        data: request,
-        url: url,
-        success: function (data) {
-            search.nums=data.nums;
-            search.names=data.names;
-        },
-        dataType: "json"
-    });
-}
-function listenSearchEvent() {
-    $("#searchbutton").click(function () {
+//点击输入框清楚placeholder
+$(".input-add").click(function () {
+    $(this).attr("placeholder", " ");
+});
+// //加载数据
+// function refreshTable() {
+//     console.log("loaddata");
+//     $.ajax({
+//         type: "get",
+//         data: {
+//             headname:headname
+//         }
+//         url: api_select_tutor,
+//         success: function (data) {
+//             search.nums=data.nums;
+//             search.names=data.names;
+//         },
+//         dataType: "json"
+//     });
+// }
 
-        var searchname = searchCondition();
-        if (searchtea === "") {
-            onSearch = false;
-            settroublrcallback();
-        } else {
-            onSearch = true;
-            var request = {
-            nums=searchname,
+function listenSearchEvent();
 
-            }
-            //加载搜索数据
-            refreshTable(request, url);
-            }
-    });
+//搜索内容
+function searchCondition() {
+    return $("#searchtea").val();
 }
+
 // 查询不到
 function settroublecallback() {
     $("#modal-body").text("未查询到相关教师！").css("color","red");
     }
 }
-//搜索内容
-function searchCondition() {
-    return $("#searchtea").val();
+
+function listenSearchEvent() {
+    $("#searchbutton").click(function (event) {
+
+        var searchname = searchCondition();
+        if (searchname === "") {
+            onSearch = false;
+        } else {
+            onSearch = true;
+            $.ajax({
+                type:"get"
+                data:{
+                    headname:searchname
+                },
+                url:api_select_tutor,
+                success:function(data){
+                    if(data){
+                        search.datas=data.result
+                    }else{
+                        settroublecallback();
+                    }
+                }
+            });
+
+            }
+            
+            }
+    });
 }
