@@ -10,6 +10,7 @@ class Student extends BaseController {
 	public $department_2 = "数学实验班";
 	public $voluntaryinfosetting;
 	public $ontime;
+	public $round;
 	public $teachers ;
 	public $search_teacher;
 	public $time = "";
@@ -55,18 +56,22 @@ class Student extends BaseController {
 	        	$data['ontime'] = 0;
 	        	$data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的导师<font color='#FF0000'>填报课题</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['issueStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['issueEnd'])."</font>！";
 	        }else if($nowtime < $data['firstEnd'] && $nowtime > $data['firstStart']) {
+	        	$this->round = 1;
 	        	//第一轮志愿填报
 	        	$data['ontime'] = 1;
 	            $data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['firstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['firstEnd'])."</font>,请同学们按时填报、修改志愿！";
 	         } else if($nowtime  < $data['secondEnd'] && $nowtime > $data['secondStart']) {
+	         	$this->round = 2;
 	         	//第二轮志愿填报时间
 	         	$data['ontime'] = 2;
 	         	$data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['secondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['secondEnd'])."</font>,请同学们按时填报、修改志愿！";
 	         }else if($nowtime >= $data['confirmFirstStart'] && $nowtime <= $data['confirmFirstEnd']) {
+	         	$this->round = 1;
 	         	//第一轮导师选择学生时间
 	         	$data['ontime'] = 11;
 	         	$data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['confirmFirstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['confirmFirstEnd'])."</font>,请同学们耐心等候！";
 	         } else if($nowtime >= $data['confirmSecondStart'] && $nowtime <= $data['confirmSecondEnd']) {
+	         	$this->round = 2;
 	         	//第二轮导师选择学生时间
 	         	$data['ontime'] = 22;
 	         	$data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['confirmSecondEnd'])."</font>,请同学们耐心等候！";
