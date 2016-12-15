@@ -1,5 +1,5 @@
 
-var search =new vue({
+var search =new Vue({
     el:'#head_unassign';
     data:{
         nums : [],
