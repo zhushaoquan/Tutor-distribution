@@ -1,6 +1,6 @@
 
-var search =new Vue({
-    el:'#head_unassign';
+var searchteacher =new Vue({
+    el:'#head_unassign',
     data:{
         datas:[]
     }
@@ -9,24 +9,6 @@ var search =new Vue({
 $(".input-add").click(function () {
     $(this).attr("placeholder", " ");
 });
-// //加载数据
-// function refreshTable() {
-//     console.log("loaddata");
-//     $.ajax({
-//         type: "get",
-//         data: {
-//             headname:headname
-//         }
-//         url: api_select_tutor,
-//         success: function (data) {
-//             search.nums=data.nums;
-//             search.names=data.names;
-//         },
-//         dataType: "json"
-//     });
-// }
-
-function listenSearchEvent();
 
 //搜索内容
 function searchCondition() {
@@ -36,34 +18,35 @@ function searchCondition() {
 // 查询不到
 function settroublecallback() {
     $("#modal-body").text("未查询到相关教师！").css("color","red");
-    }
 }
 
 function listenSearchEvent() {
-    $("#searchbutton").click(function (event) {
+    $("#searchbutton").click(function () {
 
-        var searchname = searchCondition();
-        if (searchname === "") {
+        var headname = searchCondition();
+        if (headname === "") {
             onSearch = false;
         } else {
             onSearch = true;
             $.ajax({
-                type:"get"
+                type:"get",
                 data:{
-                    headname:searchname
+                    headname: headname
                 },
                 url:api_select_tutor,
                 success:function(data){
+                    console.log(data);
                     if(data){
-                        search.datas=data.result
+                        console.log(data);
+                        searchteacher.datas=data.result
                     }else{
                         settroublecallback();
                     }
-                }
+                },
+                dataType:"json"
             });
 
-            }
-            
-            }
+            }      
     });
 }
+listenSearchEvent();
