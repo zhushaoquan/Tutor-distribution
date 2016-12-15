@@ -340,11 +340,11 @@ class TeacherTutor extends BaseController {
                 $where['workNumber'] = $user['workNumber'];
                 $stu = Db::table('user_student_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->find();
                 $issue = $this->issue;
-                if($stu['department']==$this->department1 && $issue['compExperNow'] >= $issue['totalCompExper']) {
+                if($this->voluntaryinfosetting['department']==$this->department1 && $stu['department']==$this->department1 && $issue['compExperNow'] >= $issue['totalCompExper']) {
                     $this->showNotice('目前所带计算机实验班人数达到上限，选择失败！',url('TeacherTutor/student_list'));
-                } else if($stu['department']==$this->department2 && $issue['mathExprNow'] >= $issue['totalMathExper']) {
+                } else if($this->voluntaryinfosetting['department']==$this->department2 && $stu['department']==$this->department2 && $issue['mathExprNow'] >= $issue['totalMathExper']) {
                     $this->showNotice('目前所带数学实验班人数达到上限，选择失败！',url('TeacherTutor/student_list'));
-                } else if($issue['naturNow'] >= $issue['totalNatur']) { 
+                } else if($this->voluntaryinfosetting['department']!=$this->department1 && $this->voluntaryinfosetting['department']!=$this->department2 && $issue['naturNow'] >= $issue['totalNatur']) { 
                     $this->showNotice('目前所带自然班人数达到上限，选择失败！',url('TeacherTutor/student_list'));
                 }
 
@@ -354,9 +354,9 @@ class TeacherTutor extends BaseController {
                     $bool = Db::table('tc_result_'.$this->grades[0]['grade'])->insert($data1);
 
                     if($stu['department']==$this->department1) {
-                         Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('compExprNow',1);
+                         Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('compExperNow',1);
                     } else if($stu['department']==$this->department2) {
-                         Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('mathExprNow',1);
+                         Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('mathExperNow',1);
                     } else { 
                          Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('naturNow',1);
                     }
@@ -432,7 +432,7 @@ class TeacherTutor extends BaseController {
 
     public function show_resultdetail($sid = null) {
         $user = $this->auto_login();
-        $student = Db::table('user_student_'.$this->grades[0]['grade'])->where('sid', $sid)->find();
+        $student = Db::table('user_student_'.$this->grades[0]['grade'])->alias('s')->join('tc_voluntary_'.$this->grades[0]['grade'].' v' ,'v.sid = s.sid')->where('s.sid', $sid)->find();
         $this->assign('student', $student);
         $this->assign('user', $user);
         return $this->fetch('information_detail');
@@ -449,6 +449,7 @@ class TeacherTutor extends BaseController {
      }
       return json($data);
     }
+
 
 
 

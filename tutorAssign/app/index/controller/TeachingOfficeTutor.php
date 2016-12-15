@@ -359,6 +359,34 @@ class TeachingOfficeTutor extends BaseController {
 		return $this->fetch('head_manager');
 	}
 
+	public function select_tutor()
+	{
+		$where['name']=array('like','%'.$_GET['headname'].'%');
+		$result['result']=DB::table('user_teacher')->where($where)->field('workNumber,name')->select();
+		return json($result);
+	}
+
+	public function add_head()
+	{
+		$tea=DB::table('user_teacher')->where('workNumber',$_GET['workNumber'])->find();
+		
+		$data=array('name' => $tea['name'],
+			'password' => $tea['password'],
+			'workNumber' => $tea['workNumber'],
+			'sex' => $tea['sex'],
+			'birthday' => $tea['birthday'],
+			'telephone' => $tea['telephone'],
+			'email' => $tea['email'],
+			'avator' => $tea['avator'],
+			'department' => $_GET['department']
+			);
+		var_dump($data);
+		$flag=DB::table('user_department_head')->insert($data);
+		DB::table('user_department_head')->where('department',$_GET['department'])->delete();
+		if($flag)return "success";
+		else return "fail";
+	}
+
 	public function modify() {
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();

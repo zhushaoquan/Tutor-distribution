@@ -80,8 +80,8 @@
                                 陈齐民
                             </td>
                             <td>
-                                <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
-                                  <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                                <input id="searchtea" class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
+                                  <button id="searchbutton" type="submit"  class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
                         </tr>
                         <tr>
@@ -174,10 +174,9 @@
                     搜索结果</h4>
 
             </div>
-            <div class="modal-body">
-                <input type="hidden" name="workNum" id="workNum">
-                <div>
-                    <table class="table table-bordered">
+            <div class="modal-body" id ="modal-body">
+                <div >
+                    <table class="table table-bordered" >
                         <thead>
                         <tr>
                             <th>#</th>
@@ -185,11 +184,11 @@
                             <th>姓名</th>
                         </tr>
                         </thead>
-                        <tbody id="student_unassign">
-                        <tr>
+                        <tbody id="head_unassign">
+                        <tr >
                             <td><input type="radio" checked></td>
-                            <td>00001</td>
-                            <td>陈齐民</td>
+                            <td>{{result.workNumber}}</td>
+                            <td>{{result.name}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -208,6 +207,13 @@
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/jquery2.14.min.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/bootstrap.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/backstage.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/vue.min.js"></script>
+
+<script>
+var api_select_tutor="{{$Think.const.PREFIX}}/TeachingOfficeTutor/select_tutor";
+</script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/head_manager.js"></script>
+
 </body>
 </html>
 

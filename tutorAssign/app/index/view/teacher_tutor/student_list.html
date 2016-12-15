@@ -93,8 +93,13 @@
                                     <td>{{$t.rank}}</td>
                                     <td>{{$t.gpa}}</td>
                                     <td><?php if($t['wishFirst'] == $user['workNumber'])echo "第一志愿";else if($t['wishSecond'] == $user['workNumber'])echo "第二志愿"; else if($t['wishThird'] == $user['workNumber'])echo "第三志愿"; else if($t['wishForth'] == $user['workNumber'])echo "第四志愿";else echo "第五志愿"?></td>
-                                    <td><input class="btn btn-info " style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="选&nbsp;  择" name="choise"></td>
-                                    <td><input class="btn btn-info " style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#rejectModal"  value="拒&nbsp;绝" name="choise"></td>
+
+                                    <td><a class="btn btn-info " id="select1" style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="{{$t.sid}}" name="choise">选&nbsp;择</a></td>
+                                    <td><a class="btn btn-info" id="reject" style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#rejectModal"  value="{{$t.sid}}" name="choise">拒&nbsp;绝</a></td>
+                                    <?php ?>
+
+                                   
+
                                 </form>    
                                 </tr>
                             {/volist}
@@ -149,9 +154,6 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" id="closepop" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
                 <h4 class="modal-title" id="choiceModalLabel">
                    确定学生信息
                 </h4>
@@ -168,13 +170,13 @@
                             <th>志愿顺序</th>
                         </tr>
                         <tbody id ="choiceout">
-                        <tr v-for="item in datas">
-                            <td id ="radio"><input type="radio"  checked></td>
-                            <td>{{item.name}}</td>
-                            <td>{{item.gender}}</td>
-                            <td>{{item.gpa}}</td>
-                            <td>{{item.rank}}</td>
-                            <td></td>
+                        <tr>
+                            <td id ="radio"><input type="radio"  checked value="{{data.sid}}"></td>
+                            <td>{{datas.name}}</td>
+                            <td>{{datas.gender}}</td>
+                            <td>{{datas.gpa}}</td>
+                            <td>{{datas.rank}}</td>
+                            <td>{{ }}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -197,9 +199,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" id="closepop" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
+                
                 <h4 class="modal-title" id="rejectModalLabel">
                     确定学生信息
                 </h4>
@@ -215,14 +215,15 @@
                             <th>绩点</th>
                             <th>志愿顺序</th>
                         </tr>
-                        <tbody>
-                            <td><input type="radio"  checked></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tbody>
+                        <tbody id="rejectout">
+                            <tr>
+                            <td id ="radio"><input type="radio"  checked value="{{data.sid}}"></td>
+                            <td>{{datas.name}}</td>
+                            <td>{{datas.gender}}</td>
+                            <td>{{datas.gpa}}</td>
+                            <td>{{datas.rank}}</td>
+                            <td>{{ }}</td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -241,10 +242,14 @@
 <script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
 <script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
 <script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
-<script type="text/javascript" src="{{$Think.const.OLD}}/js/student_list.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/jqPaginator.min.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/jquery.uploadfile.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/vue.min.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/student_list.js"></script>
+ <script type="text/javascript">
+ var api_show_student_detail ="{{$Think.const.PREFIX}}/TeacherTutor/show_studentdetail";
+ </script>
+
 </body>
 </html>
 
