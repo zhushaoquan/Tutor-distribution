@@ -383,8 +383,8 @@ class TeachingOfficeTutor extends BaseController {
 		var_dump($data);
 		$flag=DB::table('user_department_head')->insert($data);
 		DB::table('user_department_head')->where('department',$_GET['department'])->delete();
-		if($flag)return "success";
-		else return "fail";
+		if($flag)return "1";
+		else return "0";
 	}
 
 	public function modify() {

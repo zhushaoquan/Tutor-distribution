@@ -74,14 +74,14 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="teacher-name" style="vertical-align:middle">应用数学系</td>
+                            <td class="teacher-name" style="vertical-align:middle" >应用数学系</td>
                             <td>00001</td>
                             <td>
                                 陈齐民
                             </td>
                             <td>
                                 <input id="searchtea" class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
-                                  <button id="searchbutton" type="submit"  class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                                  <button id="searchbutton" type="submit"  class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
                         </tr>
                         <tr>
@@ -92,7 +92,7 @@
                             </td>
                             <td>
                                 <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
-                                 <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                                 <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
                         </tr>
                         <tr>
@@ -103,7 +103,7 @@
                             </td>
                             <td>
                                 <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
-                                 <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                                 <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
                         </tr>
                         <tr>
@@ -114,7 +114,7 @@
                             </td>
                             <td>
                                 <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
-                                  <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                                  <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
                         </tr>
                         <tr>
@@ -125,7 +125,7 @@
                             </td>
                             <td>
                                 <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
-                                 <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                                 <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
                         </tr>
                         <tr>
@@ -136,7 +136,7 @@
                             </td>
                             <td>
                                 <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
-                                 <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                                 <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
                         </tr>
                         <tr>
@@ -147,7 +147,7 @@
                             </td>
                             <td>
                                 <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
-                                 <button type="submit" class="btn btn-info" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                                 <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
                         </tr>
                         </tbody>
@@ -175,20 +175,22 @@
 
             </div>
             <div class="modal-body" id ="modal-body">
-                <div >
+                <div id="iden" class="checkbox">
                     <table class="table table-bordered" >
                         <thead>
-                        <tr>
+                        <tr >
                             <th>#</th>
+                            <th>系别</th>
                             <th>工号</th>
                             <th>姓名</th>
                         </tr>
                         </thead>
                         <tbody id="head_unassign">
-                        <tr >
-                            <td><input type="radio" checked></td>
-                            <td>{{result.workNumber}}</td>
-                            <td>{{result.name}}</td>
+                        <tr v-for="item in datas" >
+                            <td><input type="radio" class="radio"></td>
+                            <td>{[department}}</td>
+                            <td>{{item.workNumber}}</td>
+                            <td>{{item.name}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -196,7 +198,7 @@
                         <a href="{{:url('/index/TeachingOfficeTutor/head_list')}}" id="btn-colse-add"
                            class="btn btn-default">关闭
                         </a>
-                        <button type="button" class="btn btn-info">确认</button>
+                        <button type="button" class="btn btn-info " id ="result">确认</button>
                     </div>
                 </div>
             </div>
@@ -211,6 +213,7 @@
 
 <script>
 var api_select_tutor="{{$Think.const.PREFIX}}/TeachingOfficeTutor/select_tutor";
+var api_add_head="{{$Think.const.PREFIX}}/TeachingOfficeTutor/add_head";
 </script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/head_manager.js"></script>
 
