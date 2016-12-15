@@ -16,7 +16,7 @@ function selectchoice(){
 
 
 refreshout();
-//listenEventChoice();
+
 //  加载弹出框里面的信息
 function refreshout(){
 	$("#select1").click(function(){
@@ -86,7 +86,7 @@ var reject_out =new Vue({
 
 
 //获得拒绝学生的sid
-function selectreject(){
+function selectrejectchoice(){
 	var sid= $("#reject").attr("value");
 	return sid;
 }
@@ -95,7 +95,7 @@ refreshrejectout();
 //  加载拒绝弹出框里面的信息
 function refreshrejectout(){
 	$("#reject").click(function(){
-		var sid=selectreject();
+		var sid=selectrejectchoice();
 		$.ajax({
 			type:"get",
 			data:{

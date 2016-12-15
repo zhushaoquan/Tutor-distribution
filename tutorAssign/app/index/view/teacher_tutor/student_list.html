@@ -152,7 +152,7 @@
 <div class="modal fade" id="choiceModal" tabindex="-1" role="dialog" aria-labelledby="choiceModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content" id ="choiceout">
             <div class="modal-header">
                 <h4 class="modal-title" id="choiceModalLabel">
                    确定学生信息
@@ -169,25 +169,28 @@
                             <th>绩点</th>
                             <th>志愿顺序</th>
                         </tr>
-                        <tbody id ="choiceout">
+                        <tbody>
                         <tr>
-                            <td id ="radio"><input type="radio"  checked value="{{data.sid}}"></td>
+                            <td id ="radio"><input type="radio"  checked value="{{datas.sid}}"></td>
                             <td>{{datas.name}}</td>
                             <td>{{datas.gender}}</td>
                             <td>{{datas.gpa}}</td>
                             <td>{{datas.rank}}</td>
-                            <td>{{ }}</td>
+                            <td>{{datas.sid}}</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>  
             </div>
             <div class="modal-footer">
-                <button id="choiceagain" type="submit" class="btn btn-primary" value="选择">
+            <form method="post" action="{{:url('TeacherTutor/student_list')}}">
+                <input style="display: none;" type="text" value="{{datas.sid}}" name="sid">
+                <button id="choiceagain" type="submit" class="btn btn-primary" name="choise" value="选择">
                     确认选择
                 </button>
                 <button id="choiceclose" type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
+            </form>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -197,7 +200,7 @@
 <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content" id="rejectout">
             <div class="modal-header">
                 
                 <h4 class="modal-title" id="rejectModalLabel">
@@ -215,24 +218,29 @@
                             <th>绩点</th>
                             <th>志愿顺序</th>
                         </tr>
-                        <tbody id="rejectout">
+                        <tbody>
                             <tr>
                             <td id ="radio"><input type="radio"  checked value="{{data.sid}}"></td>
                             <td>{{datas.name}}</td>
                             <td>{{datas.gender}}</td>
                             <td>{{datas.gpa}}</td>
                             <td>{{datas.rank}}</td>
-                            <td>{{ }}</td>
+                            <td>{{datas.sid}}</td>
                         </tr>
                     </table>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">
-                    确认拒绝
+
+
+             <div class="modal-footer">
+            <form method="post" action="{{:url('TeacherTutor/student_list')}}">
+                <input style="display: none;" type="text" value="{{datas.sid}}" name="sid">
+                <button id="choiceagain" type="submit" class="btn btn-primary" name="choise" value="拒绝">
+                   确认拒绝
                 </button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                <button id="choiceclose" type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
+            </form>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -249,7 +257,6 @@
  <script type="text/javascript">
  var api_show_student_detail ="{{$Think.const.PREFIX}}/TeacherTutor/show_studentdetail";
  </script>
-
 </body>
 </html>
 
