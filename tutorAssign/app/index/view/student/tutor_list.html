@@ -56,8 +56,13 @@
                 </div>
                 <div class="search-teacher" >
                 <form method="post" action="{{:url('student/tutor_list')}}"  > 
+<<<<<<< HEAD
+                <div class="col-md-3" style="margin-left:700px;">
+                    <input class="form-control" name="teacher" id="searchstu" placeholder="输入导师姓名等信息..." type="text" style="display: inline;" <?php if(isset($search_teacher)) {?>value="{{$search_teacher}} <?php }?>">
+=======
                 <div class="col-md-3" style="margin-left:700px;" >
                     <input class="form-control" name="teacher" id="searchstu" placeholder="输入导师姓名等信息..." type="text" style="display: inline;">
+>>>>>>> dcdb161cacab52b60a649376b0fa46a762041101
                     
                 </div>
                 <button class="btn btn-info" type="submit">搜索</button>

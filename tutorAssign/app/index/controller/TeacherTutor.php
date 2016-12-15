@@ -432,7 +432,7 @@ class TeacherTutor extends BaseController {
 
     public function show_resultdetail($sid = null) {
         $user = $this->auto_login();
-        $student = Db::table('user_student_'.$this->grades[0]['grade'])->where('sid', $sid)->find();
+        $student = Db::table('user_student_'.$this->grades[0]['grade'])->alias('s')->join('tc_voluntary_'.$this->grades[0]['grade'].' v' ,'v.sid = s.sid')->where('s.sid', $sid)->find();
         $this->assign('student', $student);
         $this->assign('user', $user);
         return $this->fetch('information_detail');
@@ -449,6 +449,7 @@ class TeacherTutor extends BaseController {
      }
       return json($data);
     }
+
 
 
 

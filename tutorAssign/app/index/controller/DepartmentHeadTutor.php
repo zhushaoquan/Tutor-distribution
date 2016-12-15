@@ -473,7 +473,7 @@ class DepartmentHeadTutor extends BaseController {
 
     		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('department',"信息安全与网络工程系")->select())/$pageSize);
     		$studentList['amount'] = $totalPage;
-    		$studentList['information'] = Db::table('user_student_'.$grade)->where('department',"信息安全与网络工程系")->field('sid,serialNum,name,department,grade,gpa,rank')->page($curPage,$pageSize)->select();
+    		$studentList['information'] = Db::table('user_student_'.$grade)->where('department',"信息安全与网络工程系")->field('sid,serialNum,name,department,grade,gpa,rank')->order('serialNum asc')->page($curPage,$pageSize)->select();
     		return json($studentList);
     	}
     }
@@ -817,6 +817,132 @@ class DepartmentHeadTutor extends BaseController {
     }
 
 
+    //学生信息Excel导入模版接口
+    public function student_excel_template() {
+        require_once 'extend/PHPExcel_1.8.0_doc/Classes/PHPExcel.php';
+        $excel = new \PHPExcel();
+
+        //设置宽度
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(9);
+        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(10);
+        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(9);
+        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(16);
+        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(25);
+        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(114);
+        $excel->getActiveSheet()->getColumnDimension('G')->setWidth(25);
+        $excel->getActiveSheet()->getColumnDimension('H')->setWidth(25);
+        $excel->getActiveSheet()->getColumnDimension('I')->setWidth(12);
+
+        $excel->getActiveSheet()->mergeCells('A1:I1');  //合并A1:I1单元格
+        $excel->getActiveSheet()->setTitle('学生信息导入模版');
+        $excel->getActiveSheet()->setCellValue('A1','数计学院20xx级学生名单');
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+        $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+        //设置文本格式
+        $excel->getActiveSheet()->getStyle('B')->getNumberFormat()->setFormatCode(\PHPExcel_Style_NumberFormat::FORMAT_TEXT);
+
+        //设置边框和水平垂直居中
+        $styleArray = [
+            'alignment' => [
+                'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PHPExcel_Style_Alignment::VERTICAL_CENTER
+            ],
+            'borders' => [
+                'allborders' => [
+                    'style' => \PHPExcel_Style_Border::BORDER_THIN
+                ]
+            ]
+        ];
+
+        //设置表头数组
+        $letter = ['A','B','C','D','E','F','G','H','I'];
+        $tableHeader = ['年级','学号','姓名','性别（男、女）','学院','系别（应用数学系、信息与计算科学系、计算机系、信息安全与网络系、软件工程系、计算机实验班、数学实验班）','绩点（保留两位小数）','绩点排名（格式：1/78）','联系方式'];
+        for ($i=0; $i <9 ; $i++) { 
+            $excel->getActiveSheet()->setCellValue($letter[$i].'2',$tableHeader[$i]);
+            $excel->getActiveSheet()->getStyle($letter[$i].'2')->applyFromArray($styleArray);
+            $excel->getActiveSheet()->getStyle($letter[$i].'2')->getFont()->setBold(true);
+        }
+
+        //将excel导出自动下载至本地
+        $write = new \PHPExcel_Writer_Excel5($excel);
+        header("Pragma: public");
+        header("Expires: 0");
+        header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
+        header("Content-Type:application/force-download");
+        header("Content-Type:application/vnd.ms-execl");
+        header("Content-Type:application/octet-stream");
+        header("Content-Type:application/download");;
+        header('Content-Disposition:attachment;filename="数计学院20xx级学生名单导入模版.xls"');
+        header("Content-Transfer-Encoding:binary");
+        $write->save('php://output');
+    }
+
+    //导师信息Excel导入模版接口
+    public function teacher_excel_template() {
+        require_once 'extend/PHPExcel_1.8.0_doc/Classes/PHPExcel.php';
+        $excel = new \PHPExcel();
+
+        //设置宽度
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(9);
+        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(10);
+        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(16);
+        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(83);
+        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(60);
+        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(10);
+        $excel->getActiveSheet()->getColumnDimension('G')->setWidth(12);
+        
+
+        $excel->getActiveSheet()->mergeCells('A1:G1');  //合并A1:I1单元格
+        $excel->getActiveSheet()->setTitle('导师信息导入模版');
+        $excel->getActiveSheet()->setCellValue('A1','数计学院导师名单');
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+        $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $excel->getActiveSheet()->getRowDimension('1')->setRowHeight(25);
+
+        //设置文本格式
+        $excel->getActiveSheet()->getStyle('A')->getNumberFormat()->setFormatCode(\PHPExcel_Style_NumberFormat::FORMAT_TEXT);
+
+        //设置自动换行
+        $excel->getActiveSheet()->getStyle('E2')->getAlignment()->setWrapText(true);
+
+        //设置边框和水平垂直居中
+        $styleArray = [
+            'alignment' => [
+                'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PHPExcel_Style_Alignment::VERTICAL_CENTER
+            ],
+            'borders' => [
+                'allborders' => [
+                    'style' => \PHPExcel_Style_Border::BORDER_THIN
+                ]
+            ]
+        ];
+
+        //设置表头数组
+        $letter = ['A','B','C','D','E','F','G'];
+        $tableHeader = ['工号','姓名','性别（男、女）','系别（应用数学系、信息与计算科学系、计算机系、信息安全与网络系、软件工程系）','导师身份（0、可作为自然班导师 1、可作为自然班或者计算机实验班导师 2、可作为自然班或者数学实验班导师 3、可作为自然班或计算机实验班或数学实验班导师）','职称','联系方式'];
+        for ($i=0; $i <7 ; $i++) { 
+            $excel->getActiveSheet()->setCellValue($letter[$i].'2',$tableHeader[$i]);
+            $excel->getActiveSheet()->getStyle($letter[$i].'2')->applyFromArray($styleArray);
+            $excel->getActiveSheet()->getStyle($letter[$i].'2')->getFont()->setBold(true);
+        }
+
+        //将excel导出自动下载至本地
+        $write = new \PHPExcel_Writer_Excel5($excel);
+        header("Pragma: public");
+        header("Expires: 0");
+        header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
+        header("Content-Type:application/force-download");
+        header("Content-Type:application/vnd.ms-execl");
+        header("Content-Type:application/octet-stream");
+        header("Content-Type:application/download");;
+        header('Content-Disposition:attachment;filename="数计学院导师名单导入模版.xls"');
+        header("Content-Transfer-Encoding:binary");
+        $write->save('php://output');
+    }
 
 
 }

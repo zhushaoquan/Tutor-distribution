@@ -93,9 +93,13 @@
                                     <td>{{$t.rank}}</td>
                                     <td>{{$t.gpa}}</td>
                                     <td><?php if($t['wishFirst'] == $user['workNumber'])echo "第一志愿";else if($t['wishSecond'] == $user['workNumber'])echo "第二志愿"; else if($t['wishThird'] == $user['workNumber'])echo "第三志愿"; else if($t['wishForth'] == $user['workNumber'])echo "第四志愿";else echo "第五志愿"?></td>
+
                                     <td><a class="btn btn-info " id="select1" style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="{{$t.sid}}" name="choise">选&nbsp;择</a></td>
                                     <td><a class="btn btn-info" id="reject" style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#rejectModal"  value="{{$t.sid}}" name="choise">拒&nbsp;绝</a></td>
                                     <?php ?>
+
+                                   
+
                                 </form>    
                                 </tr>
                             {/volist}
@@ -242,11 +246,14 @@
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/jqPaginator.min.js"></script>
 <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/vue.min.js"></script>
+<<<<<<< HEAD
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/student_list.js"></script>
  <script type="text/javascript">
  var api_show_student_detail ="{{$Think.const.PREFIX}}/TeacherTutor/show_studentdetail";
  </script>
 
+=======
+>>>>>>> 6eb00dc6d62a21b1a08ab0d3321e89f2ea7a636a
 </body>
 </html>
 

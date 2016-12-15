@@ -42,7 +42,8 @@
                 <a href="{{:url('DepartmentHeadTutor/matchSetting')}}">
                     <li><i class="glyphicon glyphicon-ok"></i> 匹配结果</li>
                 </a>
-                <li><i class="glyphicon glyphicon-download-alt"></i> 结果导出</li>
+                <a href="{{:url('DepartmentHeadTutor/student_result')}}"> <li><i class="glyphicon glyphicon-download-alt"></i> 学生结果</li> </a>
+                <a href="{{:url('DepartmentHeadTutor/tutor_result')}}"> <li><i class="glyphicon glyphicon-download-alt"></i> 导师结果</li> </a>
             </ul>
         </nav>
     </div>
@@ -126,7 +127,7 @@
 </div>
 
 <!--弹出框-->
-{include file="common/modal_upload"}
+{include file="common/modal_teacher_upload"}
 {include file="common/modal_add_teacher_manager"}
 {include file="common/modal_delete_teacher_manager"}
 
