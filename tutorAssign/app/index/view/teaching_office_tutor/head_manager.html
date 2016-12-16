@@ -168,8 +168,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close-button" data-dismiss="modal" aria-hidden="true">
-                    &times;</button>
+            <a href="{{:url('/index/TeachingOfficeTutor/to_head_manager')}}">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;</button></a>
                 <h4 class="modal-title" id="searchModalLabel">
                     搜索结果</h4>
 
@@ -188,7 +189,7 @@
                         <tbody id="head_unassign">
                         <tr v-for="item in datas" >
                             <td><input type="radio" class="radio"></td>
-                            <td>{[item.department}}</td>
+                            <td>{{item.department}}</td>
                             <td>{{item.workNumber}}</td>
                             <td>{{item.name}}</td>
                         </tr>

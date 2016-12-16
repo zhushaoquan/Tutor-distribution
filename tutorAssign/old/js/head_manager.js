@@ -25,11 +25,12 @@ function listenSearchEvent() {
 
     $(".btn-search").click(function () {
         var data = $(this).parent().parent().children();
-        var department = data[0];
+        var department = data[0].innerText;
         // searchteacher.departments=department;
         var headname = searchCondition();
         if (headname === "") {
             onSearch = false;
+            settroublecallback();
         } else {
             onSearch = true;
             $.ajax({
@@ -81,9 +82,6 @@ function selectedHeadDepartment() {
 }
 
 function listenSureEvent() {
-    //  $(".colse-button").click(function () {
-    //     location.reload();
-    // });
     $("#result").click(function () {
         var department = selectedHeadDepartment();
         var workNumber =selectedHeadIDs();
