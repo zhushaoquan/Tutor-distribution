@@ -22,9 +22,11 @@ function settroublecallback() {
 }
 
 function listenSearchEvent() {
+
     $(".btn-search").click(function () {
         var data = $(this).parent().parent().children();
         var department = data[0];
+        // searchteacher.departments=department;
         var headname = searchCondition();
         if (headname === "") {
             onSearch = false;
@@ -33,7 +35,8 @@ function listenSearchEvent() {
             $.ajax({
                 type:"get",
                 data:{
-                    headname: headname
+                    headname: headname,
+                    department:department
                 },
                 url:api_select_tutor,
                 success:function(data){
@@ -78,6 +81,9 @@ function selectedHeadDepartment() {
 }
 
 function listenSureEvent() {
+    //  $(".colse-button").click(function () {
+    //     location.reload();
+    // });
     $("#result").click(function () {
         var department = selectedHeadDepartment();
         var workNumber =selectedHeadIDs();
