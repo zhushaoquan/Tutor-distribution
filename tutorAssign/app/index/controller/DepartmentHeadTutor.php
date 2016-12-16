@@ -411,6 +411,7 @@ class DepartmentHeadTutor extends BaseController {
 
 	public function studentManager(){
         $user = $this->auto_login();
+        $this->assign('user',$user);
 	    return $this->fetch('student_manager');
     }
 
@@ -462,9 +463,9 @@ class DepartmentHeadTutor extends BaseController {
     }
 
     public function studentList() {
-//	   	$user = $this->auto_login();
+	   	$user = $this->auto_login();
 
-//	   	$department = $user['department'];
+	   	$department = $user['department'];
     	$lastGrade = Db::table('tc_grade')->order('grade desc')->select();
     	$pageSize = 10;
 
@@ -473,9 +474,9 @@ class DepartmentHeadTutor extends BaseController {
     		$grade = $request->get('grade') != '' ? $request->get('grade') : $lastGrade[0]['grade'];
     		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 
-    		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('department',"信息安全与网络工程系")->select())/$pageSize);
+    		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('department',$department)->select())/$pageSize);
     		$studentList['amount'] = $totalPage;
-    		$studentList['information'] = Db::table('user_student_'.$grade)->where('department',"信息安全与网络工程系")->field('sid,serialNum,name,department,grade,gpa,rank')->order('serialNum asc')->page($curPage,$pageSize)->select();
+    		$studentList['information'] = Db::table('user_student_'.$grade)->where('department',$department)->field('sid,serialNum,name,department,grade,gpa,rank')->order('serialNum asc')->page($curPage,$pageSize)->select();
     		return json($studentList);
     	}
     }
@@ -516,8 +517,8 @@ class DepartmentHeadTutor extends BaseController {
     }
 
     public function teacherList() {
-    	// $user = $this->auto_login();
-    	$user['department'] = "信息安全与网络工程系";
+    	$user = $this->auto_login();
+    	$department = $user['department'];
 
     	$pageSize = 10;
 
@@ -525,9 +526,9 @@ class DepartmentHeadTutor extends BaseController {
     	if ($request->isGet()) {
     		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 
-    		$totalPage = ceil(count(Db::table('user_teacher')->where('department',$user['department'])->select())/$pageSize);
+    		$totalPage = ceil(count(Db::table('user_teacher')->where('department',$department)->select())/$pageSize);
     		$teacherList['amount'] = $totalPage;
-    		$teacherList['information'] = Db::table('user_teacher')->where('department',$user['department'])->field('workNumber,name,password')->order('workNumber asc')->page($curPage,$pageSize)->select();
+    		$teacherList['information'] = Db::table('user_teacher')->where('department',$department)->field('workNumber,name,password')->order('workNumber asc')->page($curPage,$pageSize)->select();
     		return json($teacherList);
     	}
     }
@@ -694,6 +695,7 @@ class DepartmentHeadTutor extends BaseController {
 
     public function teacherManager(){
     	$user = $this->auto_login();
+    	$this->assign('user',$user);
     	return $this->fetch('teacher_manager');
     }
 
