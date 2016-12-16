@@ -363,12 +363,12 @@ class TeachingOfficeTutor extends BaseController {
 	{
 		$where['name']=array('like','%'.$_GET['headname'].'%');
 		$result['result']=DB::table('user_teacher')->where($where)->field('workNumber,name')->select();
-		$result['result']['department']=$_GET['department'];
+	//	$result['result']['department']=$_GET['department'];
 		// foreach ($result['result'] as $value) 
 		// {
 		// 	$value['department']=$_GET['department'];
 		// }
-	//	$result['department']=$_GET['department'];
+		$result['department']=$_GET['department'];
 		return json($result);
 	}
 

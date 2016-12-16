@@ -2,7 +2,8 @@
 var searchteacher =new Vue({
     el:'#head_unassign',
     data:{
-        datas:[]
+        datas:[],
+        departmen:" "
     }
 });
 
@@ -18,7 +19,7 @@ function searchCondition() {
 
 // 查询不到
 function settroublecallback() {
-    $("#modal-body").text("未查询到相关教师！").css("color","red");
+    $("#head_unassign").text("未查询到相关教师！").css("color","red" );
 }
 
 function listenSearchEvent() {
@@ -45,6 +46,7 @@ function listenSearchEvent() {
                     if(data.result.length !== 0){
                         console.log(data);
                         searchteacher.datas=data.result;
+                        searchteacher.department=data.department;
                     }else{
                         settroublecallback();
                     }
@@ -61,7 +63,7 @@ function listenSearchEvent() {
 // 获得选中导师的工号数组
 function selectedHeadIDs() {
     var ids = new Array();
-    var teachers = searchteacher.datas;
+    var teachers = $(".checked");
     for (var i = 0; i < teachers.length; ++i) {
         if (teachers[i].checked) {
             ids.push(teachers[i].workNumber);
@@ -71,19 +73,20 @@ function selectedHeadIDs() {
 }
 //获得选中系别
 function selectedHeadDepartment() {
-    var depart = new Array();
-    var teachers = searchteacher.datas;
+    var department = new Array();
+    var teachers = $(".checked");
     for (var i = 0; i < teachers.length; ++i) {
         if (teachers[i].checked) {
-            ids.push(teachers[i].department);
+            department.push(teachers[i].workNumber);
         }
     }
-    return depart;
+    return department;
 }
 
 function listenSureEvent() {
     $("#result").click(function () {
         var department = selectedHeadDepartment();
+        console.log(department);
         var workNumber =selectedHeadIDs();
         $.ajax({
             type:"get",

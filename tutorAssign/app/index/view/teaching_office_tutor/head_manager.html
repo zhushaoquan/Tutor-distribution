@@ -168,16 +168,16 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-            <a href="{{:url('/index/TeachingOfficeTutor/to_head_manager')}}">
+            <!-- <a href="{{:url('/index/TeachingOfficeTutor/to_head_manager')}}">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;</button></a>
+                    &times;</button></a> -->
                 <h4 class="modal-title" id="searchModalLabel">
                     搜索结果</h4>
 
             </div>
             <div class="modal-body" id ="modal-body">
-                <div id="iden" class="checkbox">
-                    <table class="table table-bordered" >
+                <div  class="checkbox">
+                    <table class="table table-bordered" id="fail">
                         <thead>
                         <tr >
                             <th>#</th>
@@ -188,9 +188,9 @@
                         </thead>
                         <tbody id="head_unassign">
                         <tr v-for="item in datas" >
-                            <td><input type="radio" class="radio"></td>
+                            <td ><input type="radio" v-model="item.checked" class="checked" ></td>
                             <td>{{department}}</td>
-                            <td>{{item.workNumber}}</td>
+                            <td >{{item.workNumber}}</td>
                             <td>{{item.name}}</td>
                         </tr>
                         </tbody>
