@@ -34,6 +34,7 @@ function searchCondition() {
 // 查询不到
 function settroublecallback() {
     $("#head_unassign").text("未查询到相关教师！").css("color","red" );
+    $("#result").attr("disabled", true);
 }
 
 function listenSearchEvent() {
