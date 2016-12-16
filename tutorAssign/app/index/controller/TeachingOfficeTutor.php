@@ -363,6 +363,12 @@ class TeachingOfficeTutor extends BaseController {
 	{
 		$where['name']=array('like','%'.$_GET['headname'].'%');
 		$result['result']=DB::table('user_teacher')->where($where)->field('workNumber,name')->select();
+	//	$result['result']['department']=$_GET['department'];
+		// foreach ($result['result'] as $value) 
+		// {
+		// 	$value['department']=$_GET['department'];
+		// }
+		$result['department']=$_GET['department'];
 		return json($result);
 	}
 
@@ -383,8 +389,8 @@ class TeachingOfficeTutor extends BaseController {
 		var_dump($data);
 		$flag=DB::table('user_department_head')->insert($data);
 		DB::table('user_department_head')->where('department',$_GET['department'])->delete();
-		if($flag)return "success";
-		else return "fail";
+		if($flag)return "1";
+		else return "0";
 	}
 
 	public function modify() {

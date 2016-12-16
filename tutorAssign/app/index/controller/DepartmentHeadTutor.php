@@ -1207,7 +1207,40 @@ class DepartmentHeadTutor extends BaseController {
     }
 
 
+    //分配列表，未分配到导师的学生名单
+    public function unchosenStudentList() {
+    	// $user = $this->auto_login();
+    	// $head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
 
+    	$request = Request::instance();
+    	$lastGrade = Db::table('tc_grade')->order('grade desc')->select();
+    	$pageSize = 10;
+    	if ($request->isGet()) {
+    		$grade = $request->get('grade') != '' ? $request->get('grade') : $lastGrade[0]['grade'];
+
+    		$unchosenStudent = Db::table('user_student_'.$grade)->where('department','信息安全与网络工程系')->where('chosen',0)->select();
+    		$totalUnchosen = count($unchosenStudent);
+
+    		for ($i=0; $i <$totalUnchosen ; $i++) { 
+    			$wishList[$i]['wish'] = Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('sid,round,wishFirst,wishSecond,wishThird,wishForth,wishFifth')->select();
+    			if (count($wishList[$i]['wish']) == 2) {
+    				$data[$i] = $wishList[$i]['wish'][1];
+    			} else {
+    				$data[$i] = $wishList[$i]['wish'];
+    			}
+
+    //             $voluntary[$i]['firstTeacher'] = Db::table('user_teacher')->where('workNumber',$data[$i]['wishFirst'])->field('name')->find();
+				// $voluntary[$i]['secondTeacher'] = Db::table('user_teacher')->where('workNumber',$data[$i]['wishSecond'])->field('name')->find();
+				// $voluntary[$i]['thirdTeacher'] = Db::table('user_teacher')->where('workNumber',$data[$i]['wishThird'])->field('name')->find();
+				// $voluntary[$i]['forthTeacher'] = Db::table('user_teacher')->where('workNumber',$data[$i]['wishForth'])->field('name')->find();
+				// $voluntary[$i]['fifthTeacher'] = Db::table('user_teacher')->where('workNumber',$data[$i]['wishFifth'])->field('name')->find();
+
+    		}
+    		return json($data);
+    	}
+
+
+    }
 
     
 }

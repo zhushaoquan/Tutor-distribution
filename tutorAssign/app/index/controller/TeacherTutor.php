@@ -8,7 +8,7 @@ class TeacherTutor extends BaseController {
     public $pageSize = 5;
     public $department1 = "计算机实验班";
     public $department2 = "数学实验班";
-
+    public $round;
     public $user;
     public $grades;
     public $issue;
@@ -110,20 +110,24 @@ class TeacherTutor extends BaseController {
 
 
             }else if($nowtime <= $data['firstEnd'] && $nowtime >= $data['firstStart']) {
+                $this->round = 1;
                 //第一轮志愿填报
                 $data['ontime'] = 1;
                 $data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['firstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['firstEnd'])."</font>！";
              } else if($nowtime  <= $data['secondEnd'] && $nowtime >= $data['secondStart']) {
+                $this->round = 2;
                 //第二轮志愿填报时间
                 $data['ontime'] = 2;
                 $data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['secondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['secondEnd'])."</font>！";
 
              }else if($nowtime >= $data['confirmFirstStart'] && $nowtime <= $data['confirmFirstEnd']) {
+                $this->round = 1;
                 //第一轮导师选择学生时间
                 $data['ontime'] = 11;
                 $data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['confirmFirstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['confirmFirstEnd'])."</font>,请导师们尽快选择学生！";
 
              } else if($nowtime >= $data['confirmSecondStart'] && $nowtime <= $data['confirmSecondEnd']) {
+                $this->round = 2;
                 //第二轮导师选择学生时间
                 $data['ontime'] = 22;
                 $data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['confirmSecondEnd'])."</font>,请导师们尽快选择学生！";
@@ -267,27 +271,32 @@ class TeacherTutor extends BaseController {
                                             ->where(function ($query) {
                                                 $query->where('v.wishFirst', $this->user['workNumber'])
                                                       ->where('v.firstReject', 0)
-                                                      ->where('s.chosen' ,0);
+                                                      ->where('s.chosen' ,0)
+                                                      ->where('v.round',$this->round);
                                              })
                                             ->whereOr(function ($query) {
                                                 $query->where('v.wishSecond', $this->user['workNumber'])
                                                       ->where('v.secondReject', 0)
-                                                      ->where('s.chosen' ,0);
+                                                      ->where('s.chosen' ,0)
+                                                      ->where('v.round',$this->round);
                                              })
                                             ->whereOr(function ($query) {
                                                 $query->where('v.wishThird', $this->user['workNumber'])
                                                       ->where('v.thirdReject', 0)
-                                                      ->where('s.chosen' ,0);
+                                                      ->where('s.chosen' ,0)
+                                                      ->where('v.round',$this->round);
                                              })
                                             ->whereOr(function ($query) {
                                                 $query->where('v.wishForth', $this->user['workNumber'])
                                                       ->where('v.forthReject', 0)
-                                                      ->where('s.chosen' ,0);
+                                                      ->where('s.chosen' ,0)
+                                                      ->where('v.round',$this->round);
                                              })
                                             ->whereOr(function ($query) {
                                                 $query->where('v.wishFifth', $this->user['workNumber'])
                                                       ->where('v.fifthReject', 0)
-                                                      ->where('s.chosen' ,0);
+                                                      ->where('s.chosen' ,0)
+                                                      ->where('v.round',$this->round);
                                              })
                                             
                                             ->page($page,$this->pageSize)->select();
@@ -295,27 +304,32 @@ class TeacherTutor extends BaseController {
                                             ->where(function ($query) {
                                                 $query->where('v.wishFirst', $this->user['workNumber'])
                                                       ->where('v.firstReject', 0)
-                                                      ->where('s.chosen' ,0);
+                                                      ->where('s.chosen' ,0)
+                                                      ->where('v.round',$this->round);
                                              })
                                             ->whereOr(function ($query) {
                                                 $query->where('v.wishSecond', $this->user['workNumber'])
                                                       ->where('v.secondReject', 0)
-                                                      ->where('s.chosen' ,0);
+                                                      ->where('s.chosen' ,0)
+                                                      ->where('v.round',$this->round);
                                              })
                                             ->whereOr(function ($query) {
                                                 $query->where('v.wishThird', $this->user['workNumber'])
                                                       ->where('v.thirdReject', 0)
-                                                      ->where('s.chosen' ,0);
+                                                      ->where('s.chosen' ,0)
+                                                      ->where('v.round',$this->round);
                                              })
                                             ->whereOr(function ($query) {
                                                 $query->where('v.wishForth', $this->user['workNumber'])
                                                       ->where('v.forthReject', 0)
-                                                      ->where('s.chosen' ,0);
+                                                      ->where('s.chosen' ,0)
+                                                      ->where('v.round',$this->round);
                                              })
                                             ->whereOr(function ($query) {
                                                 $query->where('v.wishFifth', $this->user['workNumber'])
                                                       ->where('v.fifthReject', 0)
-                                                      ->where('s.chosen' ,0);
+                                                      ->where('s.chosen' ,0)
+                                                      ->where('v.round',$this->round);
                                              })
                                             ->select()
                       );
@@ -335,6 +349,7 @@ class TeacherTutor extends BaseController {
         if ($request->isPost()) {
             $data1['workNumber'] = $user['workNumber'];
             $data1['sid'] = $request->post('sid', '');
+
             $accept = $request->post('choise','');
             if($accept=="选择") {
                 $where['workNumber'] = $user['workNumber'];
@@ -342,7 +357,7 @@ class TeacherTutor extends BaseController {
                 $issue = $this->issue;
                 if($this->voluntaryinfosetting['department']==$this->department1 && $stu['department']==$this->department1 && $issue['compExperNow'] >= $issue['totalCompExper']) {
                     $this->showNotice('目前所带计算机实验班人数达到上限，选择失败！',url('TeacherTutor/student_list'));
-                } else if($this->voluntaryinfosetting['department']==$this->department2 && $stu['department']==$this->department2 && $issue['mathExprNow'] >= $issue['totalMathExper']) {
+                } else if($this->voluntaryinfosetting['department']==$this->department2 && $stu['department']==$this->department2 && $issue['mathExperNow'] >= $issue['totalMathExper']) {
                     $this->showNotice('目前所带数学实验班人数达到上限，选择失败！',url('TeacherTutor/student_list'));
                 } else if($this->voluntaryinfosetting['department']!=$this->department1 && $this->voluntaryinfosetting['department']!=$this->department2 && $issue['naturNow'] >= $issue['totalNatur']) { 
                     $this->showNotice('目前所带自然班人数达到上限，选择失败！',url('TeacherTutor/student_list'));
@@ -352,7 +367,6 @@ class TeacherTutor extends BaseController {
 
                     Db::table('user_student_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->setField('chosen',1);
                     $bool = Db::table('tc_result_'.$this->grades[0]['grade'])->insert($data1);
-
                     if($stu['department']==$this->department1) {
                          Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('compExperNow',1);
                     } else if($stu['department']==$this->department2) {
@@ -372,22 +386,22 @@ class TeacherTutor extends BaseController {
 
             } else {
                 //拒绝
-                $tmp = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->find();
+                $tmp = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->where('round',$this->round)->find();
                 $bool = 1;
                 if($tmp['wishFirst']==$data1['workNumber']) {
-                    $bool = $bool && Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->setField('firstReject',1);
+                    $bool = $bool && Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->where('round',$this->round)->setField('firstReject',1);
                 } 
                 if($tmp['wishSecond']==$data1['workNumber']) {
-                    $bool = $bool && Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->setField('secondReject',1);
+                    $bool = $bool && Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->where('round',$this->round)->setField('secondReject',1);
                 } 
                 if($tmp['wishThird']==$data1['workNumber']) {
-                    $bool = $bool && Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->setField('thirdReject',1);
+                    $bool = $bool && Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->where('round',$this->round)->setField('thirdReject',1);
                 } 
                 if($tmp['wishForth']==$data1['workNumber']) {
-                    $bool = $bool && Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->setField('forthReject',1);
+                    $bool = $bool && Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->where('round',$this->round)->setField('forthReject',1);
                 } 
                 if($tmp['wishFifth']==$data1['workNumber']) {
-                    $bool = $bool && Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->setField('fifthReject',1);
+                    $bool = $bool && Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->where('round',$this->round)->setField('fifthReject',1);
                 } 
                 if($bool) {
                     $this->showNotice('拒绝成功',url('TeacherTutor/student_list'));
