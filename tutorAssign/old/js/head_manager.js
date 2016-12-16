@@ -1,9 +1,23 @@
+var headworkNumber = ""
+var headdepartment = "";
 
 var searchteacher =new Vue({
     el:'#head_unassign',
     data:{
         datas:[],
-        departmen:" "
+        department:" "
+    },
+    methods:{
+        refresh:function (index) {
+            var radios = $(".check-btn");
+            for(var i=0; i<this.datas.length;i++){
+                if(i!=index) radios[i].checked=false;
+            }
+            headworkNumber = this.datas[index].workNumber;
+            headdepartment = this.department;
+            console.log(headworkNumber);
+            console.log(headdepartment);
+        }
     }
 });
 
@@ -60,50 +74,35 @@ function listenSearchEvent() {
             }      
     });
 }
-// 获得选中导师的工号数组
-function selectedHeadIDs() {
-    var ids = new Array();
-    var teachers = $(".checked");
-    for (var i = 0; i < teachers.length; ++i) {
-        if (teachers[i].checked) {
-            ids.push(teachers[i].workNumber);
-        }
-    }
-    return ids;
-}
-//获得选中系别
-function selectedHeadDepartment() {
-    var department = new Array();
-    var teachers = $(".checked");
-    for (var i = 0; i < teachers.length; ++i) {
-        if (teachers[i].checked) {
-            department.push(teachers[i].workNumber);
-        }
-    }
-    return department;
-}
 
 function listenSureEvent() {
     $("#result").click(function () {
-        var department = selectedHeadDepartment();
-        console.log(department);
-        var workNumber =selectedHeadIDs();
+        console.log(headworkNumber);
+        console.log(headdepartment);
         $.ajax({
             type:"get",
             data:{
-                workNumber:workNumber,
-                department:department
-            } ,
+                workNumber:headworkNumber,
+
+                department:headdepartment
+            } , 
+
             url:api_add_head,
             success:function(data){
-                console.log("success");
+                console.log(data);
                 if(data){
-                    $("#modal-body").text("选择成功！").css("color","green");
+                    $("#head_unassign").text("选择成功！").css("color","green");
+                    $("#result").attr("disabled", true);
                 }else{
-                    $("#modal-body").text("选择失败，请返回重新选择！").css("color","red");
+                    $("#head_unassign").text("选择失败，请返回重新选择！").css("color","red");
+                    $("#result").attr("disabled", true);
                 }
             },
-                dataType:"json"
+            error:function(response){
+                console.log(response);
+
+                
+            },dataType:"json"
         });
     
     });

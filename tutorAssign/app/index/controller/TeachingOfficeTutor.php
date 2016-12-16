@@ -386,7 +386,7 @@ class TeachingOfficeTutor extends BaseController {
 			'avator' => $tea['avator'],
 			'department' => $_GET['department']
 			);
-		var_dump($data);
+		// var_dump($data);
 		$flag=DB::table('user_department_head')->insert($data);
 		DB::table('user_department_head')->where('department',$_GET['department'])->delete();
 		if($flag)return "1";
