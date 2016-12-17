@@ -59,6 +59,10 @@
                     <p>提示：您还未设置系负责人！</p>
                 </div>
                 <div class="page-header">
+                
+                 <button type="button" id="btn-close-del-above" class="close" data-dismiss="modal" aria-hidden="true">
+                    返回
+                </button> 
                     <h3>系负责人列表
                     </h3>
                 </div>
@@ -188,7 +192,7 @@
                         </thead>
                         <tbody id="head_unassign">
                         <tr v-for="item in datas" >
-                            <td ><input type="radio" v-model="item.checked" class="checked" ></td>
+                            <td ><input type="radio" v-on:click="refresh($index)" class="check-btn"></td>
                             <td>{{department}}</td>
                             <td >{{item.workNumber}}</td>
                             <td>{{item.name}}</td>
@@ -217,7 +221,6 @@ var api_select_tutor="{{$Think.const.PREFIX}}/TeachingOfficeTutor/select_tutor";
 var api_add_head="{{$Think.const.PREFIX}}/TeachingOfficeTutor/add_head";
 </script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/head_manager.js"></script>
-
 </body>
 </html>
 

@@ -147,7 +147,9 @@ class DepartmentHeadTutor extends BaseController {
 			$info = $request->post();
 
 			$data['workNumber'] = $user['workNumber'];
+			$data['department'] = $user['department'];
 			$data['voluntaryNum'] = $info['voluntaryNum'];
+			$data['grade'] = date('Y',strtotime("-2 year"));
 
 			$data['issueStart'] = strtotime($info['issueStart']);
 			$data['issueEnd'] = strtotime($info['issueEnd']);
@@ -409,6 +411,7 @@ class DepartmentHeadTutor extends BaseController {
 
 	public function studentManager(){
         $user = $this->auto_login();
+        $this->assign('user',$user);
 	    return $this->fetch('student_manager');
     }
 
@@ -460,9 +463,9 @@ class DepartmentHeadTutor extends BaseController {
     }
 
     public function studentList() {
-//	   	$user = $this->auto_login();
+	   	$user = $this->auto_login();
 
-//	   	$department = $user['department'];
+	   	$department = $user['department'];
     	$lastGrade = Db::table('tc_grade')->order('grade desc')->select();
     	$pageSize = 10;
 
@@ -471,9 +474,9 @@ class DepartmentHeadTutor extends BaseController {
     		$grade = $request->get('grade') != '' ? $request->get('grade') : $lastGrade[0]['grade'];
     		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 
-    		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('department',"信息安全与网络工程系")->select())/$pageSize);
+    		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('department',$department)->select())/$pageSize);
     		$studentList['amount'] = $totalPage;
-    		$studentList['information'] = Db::table('user_student_'.$grade)->where('department',"信息安全与网络工程系")->field('sid,serialNum,name,department,grade,gpa,rank')->order('serialNum asc')->page($curPage,$pageSize)->select();
+    		$studentList['information'] = Db::table('user_student_'.$grade)->where('department',$department)->field('sid,serialNum,name,department,grade,gpa,rank')->order('serialNum asc')->page($curPage,$pageSize)->select();
     		return json($studentList);
     	}
     }
@@ -514,8 +517,8 @@ class DepartmentHeadTutor extends BaseController {
     }
 
     public function teacherList() {
-    	// $user = $this->auto_login();
-    	$user['department'] = "信息安全与网络工程系";
+    	$user = $this->auto_login();
+    	$department = $user['department'];
 
     	$pageSize = 10;
 
@@ -523,9 +526,9 @@ class DepartmentHeadTutor extends BaseController {
     	if ($request->isGet()) {
     		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 
-    		$totalPage = ceil(count(Db::table('user_teacher')->where('department',$user['department'])->select())/$pageSize);
+    		$totalPage = ceil(count(Db::table('user_teacher')->where('department',$department)->select())/$pageSize);
     		$teacherList['amount'] = $totalPage;
-    		$teacherList['information'] = Db::table('user_teacher')->where('department',$user['department'])->field('workNumber,name,password')->page($curPage,$pageSize)->select();
+    		$teacherList['information'] = Db::table('user_teacher')->where('department',$department)->field('workNumber,name,password')->order('workNumber asc')->page($curPage,$pageSize)->select();
     		return json($teacherList);
     	}
     }
@@ -692,6 +695,7 @@ class DepartmentHeadTutor extends BaseController {
 
     public function teacherManager(){
     	$user = $this->auto_login();
+    	$this->assign('user',$user);
     	return $this->fetch('teacher_manager');
     }
 
@@ -771,8 +775,12 @@ class DepartmentHeadTutor extends BaseController {
             	$insert['rank'] = $data->sheets[0]['cells'][$i][8];
             	$insert['telephone'] = $data->sheets[0]['cells'][$i][9];
             	$insert['chosen'] = 0;
-            	//插入数据库中
-            	Db('user_student_'.$insert['grade'])->insert($insert);
+            	//判断数据是否存在，并覆盖/插入数据库中
+            	if (Db::table('user_student_'.$insert['grade'])->where('serialNum',$insert['serialNum'])->find()) {
+            		Db::table('user_student_'.$insert['grade'])->where('serialNum',$insert['serialNum'])->update($insert);
+            	} else {
+            		Db::table('user_student_'.$insert['grade'])->insert($insert);
+            	}
             }
 
             $addInfo['totalNum'] = $data->sheets[0]['numRows']-3;
@@ -806,8 +814,12 @@ class DepartmentHeadTutor extends BaseController {
             	$insert['isExperial'] = $data->sheets[0]['cells'][$i][5];
             	$insert['title'] = $data->sheets[0]['cells'][$i][6];
             	$insert['telephone'] = $data->sheets[0]['cells'][$i][7];
-            	//插入数据库中
-            	Db::table('user_teacher')->insert($insert);
+            	//判断数据是否存在，并覆盖/插入数据库中
+            	if (Db::table('user_teacher')->where('workNumber',$insert['workNumber'])->find()) {
+            		Db::table('user_teacher')->update($insert);
+            	} else {
+            		Db::table('user_teacher')->insert($insert);
+            	}
             }
 
             $addInfo['totalNum'] = $data->sheets[0]['numRows']-3;
@@ -974,6 +986,7 @@ class DepartmentHeadTutor extends BaseController {
         return $tea;
     }
 
+    //导师对应学生结果Excel导出
     public function teacherToStudentExcelExport() {
 
         //引入PHPExcel文件
@@ -1124,6 +1137,7 @@ class DepartmentHeadTutor extends BaseController {
         
     }
 
+    //学生对应导师结果Excel导出
     public function studentToTeacherExcelExport() {
         //引入PHPExcel文件
         require_once 'extend/PHPExcel_1.8.0_doc/Classes/PHPExcel.php';

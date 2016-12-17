@@ -123,17 +123,14 @@
 
                     <div class="separate form-horizontal">
                         <fieldset>
-                            <legend>年级设置</legend>
+                            <legend>年级显示</legend>
                             <div class="div-flex">
                                 <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-12">当前年级</label>
                                     <div class="input-group col-md-8 col-sm-12">
                                         <!-- <input class="form-control" type="number" id="wish-num" name="wish-num" round="" style="border-radius: 3px"> -->
-                                        <select class="form-control" name="grade" style="border-radius:3px;background-color:#fcfcfc">
-                                            <option>2016级</option>
-                                            <option>2015级</option>
-                                            <option>2014级</option>
-                                            <option>2013级</option>
+                                        <select class="form-control" name="grade" style="border-radius:3px;background-color:#fcfcfc" disabled="disabled">
+                                            <option>{{$settingInfo.grade}}级</option>
                                         </select>
                                     </div>
                                 </div>

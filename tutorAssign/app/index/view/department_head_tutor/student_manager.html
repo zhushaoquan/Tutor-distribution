@@ -52,11 +52,11 @@
             <div class="user-area">
                 <div class="hello-user">
                     <span><i class="glyphicon glyphicon-user"></i>欢迎您,</span>
-                    <span class="user-name">负责人:大东东 </span>
+                    <span class="user-name">{{:user_type()}}: {{$user['name']|default="xxx"}}</span>
                 </div>
             </div>
             <div class="login-out-area">
-                <a href="/public/index.php/index/base_controller/logout.html"><i class="glyphicon glyphicon-off"></i>退出</a>
+                <a href="{{:url('BaseController/logout')}}"><i class="glyphicon glyphicon-off"></i>退出</a>
             </div>
         </div>
         <div class="page-content">
