@@ -8,7 +8,7 @@
     <title>毕设导师智能分配系统</title>
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student_manager.css">
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/auto_assign.css">
     <style type="text/css">
         .sider-navbar-nav li {
@@ -71,7 +71,7 @@
                 </div>
                 <div class="my-information-title">
                     <span>分配列表</span>
-                    <a href="{{:url('DepartmentHeadTutor/intelligentAlloc')}}" class="btn btn-info button-size btn-edit"
+                    <a href="{{:url('Test/auto_assign2')}}" class="btn btn-info button-size btn-edit"
                        style="width: 90px;">智能分配</a>
                 </div>
                 <div class="my-information-subtitle">
@@ -79,7 +79,7 @@
                 </div>
 
                 <div class="table-position">
-                    <table class="table table-hover">
+                    <table class="table table-bordered">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -93,25 +93,26 @@
                             <th>分配操作</th>
                         </tr>
                         </thead>
-                        <tbody id="assign-table">
-                        <tr v-for="item in ">
-                            <td>{{}}</td>
-                            <td>{{}}</td>
-                            <td>{{}}</td>
-                            <td>{{}}</td>
-                            <td>{{}}</td>
-                            <td>{{}}</td>
-                            <td>{{}}</td>
-                            <td>{{}}</td>
+                        <tbody id="table-student">
+                        <tr v-for="item in datas">
+                            <td>{{ item.sid }}</td>
+                            <td>{{ item.serialNum }}</td>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.vol1 }}</td>
+                            <td>{{ item.vol2 }}</td>
+                            <td>{{ item.vol3 }}</td>
+                            <td>{{ item.vol4 }}</td>
+                            <td>{{ item.vol5 }}</td>
                             <td>
-                                <button id="btn-teacher"><span>分配导师</span></button>
+                                <button v-on:click="assign($index)" data-toggle="modal" data-backdrop="static"
+                                        data-target="#assignModal"><span>分配导师</span></button>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="module" style="height: 60px">
+                <div class="module" style="height: 60px;">
                     <div class="fixed-table-pagination" style="display: block; float: right;">
                         <div id="tab-pagination" class="pagination ">
                         </div>
@@ -124,7 +125,7 @@
         </div>
     </div>
 </div>
-
+{{include file="common/modal_assign_student"}}
 {{include file="common/api"}}
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/index.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/jquery2.14.min.js"></script>

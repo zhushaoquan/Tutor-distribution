@@ -1,0 +1,55 @@
+<div class="modal fade" id="assignModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="assignModalLabel">
+                    分配导师
+                </h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>姓名</th>
+                        <th>是否带实验班</th>
+                        <th>所需计实班人数</th>
+                        <th>当前计实班人数</th>
+                        <th>所需数实班人数</th>
+                        <th>当前数实班人数</th>
+                        <th>所需自然班人数</th>
+                        <th>当前自然班人数</th>
+                        <th>分配操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="table-teacher">
+                    <tr v-for="item in datas">
+                        <td>{{item.sid}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.isExperial}}</td>
+                        <td>{{item.js_need}}</td>
+                        <td>{{item.js_cur}}</td>
+                        <td>{{item.ss_need}}</td>
+                        <td>{{item.ss_cur}}</td>
+                        <td>{{item.nature_need}}</td>
+                        <td>{{item.nature_cur}}</td>
+                        <td>
+                            <button v-on:click="confirm($index)">确认分配</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <!--data-dismiss="modal"-->
+                <a id="btn-close-assign"  class="btn btn-default">关闭</a>
+                <button type="button" id="btn--student" class="btn btn-primary">
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal -->
+</div>
