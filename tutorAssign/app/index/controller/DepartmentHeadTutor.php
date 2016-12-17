@@ -243,6 +243,7 @@ class DepartmentHeadTutor extends BaseController {
 	public function intelligentAlloc() {
 		$user = $this->auto_login();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
+		// $user['department'] = "信息安全与网络工程系";
 
 		//获取未分配到导师的学生信息
 		$student = Db::table('user_student_'.$grade[0]['grade'])->where('chosen',0)->where('department',$user['department'])->field('sid,serialNum,gpa,chosen')->select();
@@ -307,69 +308,9 @@ class DepartmentHeadTutor extends BaseController {
         system($fileNameWithParam);
 
         $studentElected = file_get_contents('student_elected.txt');      //获取通过算法得到分配的学生的结果，转换为string
-        $studentUnelected = file_get_contents('student_unelected.txt');  //获取通过算法仍然未得到分配的学生的结果，转换为string
-        $tutorAssign = file_get_contents('tutor_assign.txt');            //获取通过算法，生成的导师对应学生的结果，转换为string
 
-        //分割studentElected字符串，转换为数组
+        //分割studentElected字符串，转换为数组，并存到临时的结果表中
         if ($studentElected != "") {
-	        $studentElected = str_replace("\r\n", '', $studentElected);
-	        $studentElectedArr = explode(',', $studentElected);
-	        for ($i = 0; $i < count($studentElectedArr); $i++) {
-	            $studentElectedArr[$i] = explode(' ', $studentElectedArr[$i]);
-
-	            $studentElectedResult[$i]['serialNum'] = $studentElectedArr[$i][0];
-	            $studentElectedResult[$i]['sid'] = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum', $studentElectedResult[$i]['serialNum'])->field('sid')->find();
-	            $studentElectedResult[$i]['sname'] = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum', $studentElectedResult[$i]['serialNum'])->field('name')->find();
-	            $studentElectedResult[$i]['workNumber'] = $studentElectedArr[$i][1];
-	            $studentElectedResult[$i]['tname'] = Db::table('user_teacher')->where('workNumber', $studentElectedResult[$i]['workNumber'])->field('name')->find();
-	        }
-	        $this->assign('studentElectedResult', $studentElectedResult);
-	    }
-
-        //分割studentUnlected字符串，转换为数组
-        if ($studentUnelected != "") {
-	        $studentUnelected = str_replace("\r\n", '', $studentUnelected);
-	        $studentUnelectedArr = explode(',', $studentUnelected);
-	        for ($i = 0; $i < count($studentUnelectedArr); $i++) {
-	            $studentUnelectedArr[$i] = explode(' ', $studentUnelectedArr[$i]);
-
-	            $studentUnelectedResult[$i]['serialNum'] = $studentUnelectedArr[$i][0];
-	        }
-	        $this->assign('studentUnelectedResult', $studentUnelectedResult);
-	    }
-
-        //分割tutorAssign字符串，转换为数组
-        if ($tutorAssign != "") {
-	        $tutorAssign = str_replace("\r\n", '', $tutorAssign);
-	        $tutorAssignArr = explode(',', $tutorAssign);
-	        for ($i = 0; $i < count($tutorAssignArr); $i++) {
-	            $tutorAssignArr[$i] = explode(' ', $tutorAssignArr[$i]);
-
-	            $tutorAssignResult[$i]['workNumber'] = $tutorAssignArr[$i][0];
-	            $tutorAssignResult[$i]['count'] = $tutorAssignArr[$i][1];
-	            $tutorAssignResult[$i]['avaliableNumber'] = $tutorAssignArr[$i][2];
-	            if ($tutorAssignArr[$i][3] == "null") {
-	                $tutorAssignResult[$i]['student'] = null;
-	            } else {
-	                $tutorAssignResult[$i]['student'] = $tutorAssignArr[$i][3];
-
-	                $tutorAssignResult[$i]['student'] = explode('-', $tutorAssignResult[$i]['student']);
-	            }
-	        }
-	        $this->assign('tutorAssignResult', $tutorAssignResult);
-	    }
-
-        $this->assign('user', $user);
-        return $this->fetch('assign_result');
-
-	}
-
-	//智能分配结果学生列表
-	public function studentElected() {
-		$grade = Db::table('tc_grade')->order('grade desc')->select();
-		$studentElected = file_get_contents('student_elected.txt');      //获取通过算法得到分配的学生的结果，转换为string
-
-		if ($studentElected != "") {
 	        $studentElected = str_replace("\r\n", '', $studentElected);
 	        $studentElectedArr = explode(',', $studentElected);
 	        for ($i = 0; $i < count($studentElectedArr); $i++) {
@@ -379,9 +320,56 @@ class DepartmentHeadTutor extends BaseController {
 	            $studentElectedResult[$i]['stuInfo'] = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum', $studentElectedResult[$i]['serialNum'])->field('sid,serialNum,name,gpa')->find();
 	            $studentElectedResult[$i]['workNumber'] = $studentElectedArr[$i][1];
 	            $studentElectedResult[$i]['teaInfo'] = Db::table('user_teacher')->where('workNumber', $studentElectedResult[$i]['workNumber'])->field('workNumber,name')->find();
+
+	            $vol_num[$i] = array_keys(Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$studentElectedResult[$i]['stuInfo']['sid'])->find(),$studentElectedResult[$i]['teaInfo']['workNumber']);
+
+	            $insert[$i]['sid'] = $studentElectedResult[$i]['stuInfo']['sid'];
+	            $insert[$i]['serialNum'] = $studentElectedResult[$i]['stuInfo']['serialNum'];
+	            $insert[$i]['student_name'] = $studentElectedResult[$i]['stuInfo']['name'];
+	            $insert[$i]['vol_num'] = $vol_num[$i][0];
+	            $insert[$i]['gpa'] = $studentElectedResult[$i]['stuInfo']['gpa'];
+	            $insert[$i]['teacher_name'] = $studentElectedResult[$i]['teaInfo']['name'];
+	            $insert[$i]['workNumber'] = $studentElectedResult[$i]['teaInfo']['workNumber'];
+	            $insert[$i]['checked'] = 0;
+
+	            if (Db::table('tc_temp_result')->where('sid',$insert[$i]['sid'])->find()) {
+	            	Db::table('tc_temp_result')->update($insert[$i]);
+	            } else {
+	            	Db::table('tc_temp_result')->insert($insert[$i]);
+	            }
 	        }
-	        return json($studentElectedResult);
 	    }
+
+        $this->assign('user', $user);
+        // return $this->fetch('assign_result'); //跳转到某个页面，这里要修改
+
+	}
+
+	//智能分配结果学生列表
+	public function studentElectedList() {
+		$grade = Db::table('tc_grade')->order('grade desc')->select();
+		$pageSize = 10;
+
+		$request = Request::instance();
+		if ($request->isGet()) {
+			$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
+			$checkList = $request->get('check');
+
+			$totalPage = ceil(count(Db::table('tc_temp_result')->select())/$pageSize);
+			$student['amount'] = $totalPage;
+			$student['information'] = Db::table('tc_temp_result')->order('serialNum asc')->page($curPage,$pageSize)->select();
+
+			$count = count($checkList);
+			for ($i=0; $i <$count ; $i++) { 
+				if ($checkList[$i]['checked'] == true) {
+					$checkVal = 1;
+				} else {
+					$checkVal = 0;
+				}
+				Db::table('tc_temp_result')->where('serialNum',$checkList[$i]['serialNum'])->setField('checked',$checkVal);
+			}
+			return json($student);
+		}
 	}
 
 
@@ -1273,8 +1261,8 @@ class DepartmentHeadTutor extends BaseController {
 
     //获取未分配学生列表
     public function unchosenStudentList() {
-    	// $user = $this->auto_login();
-    	// $head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
+    	$user = $this->auto_login();
+    	$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
 
     	$request = Request::instance();
     	$lastGrade = Db::table('tc_grade')->order('grade desc')->select();
@@ -1283,8 +1271,8 @@ class DepartmentHeadTutor extends BaseController {
     		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
     		$grade = $request->get('grade') != '' ? $request->get('grade') : $lastGrade[0]['grade'];
 
-    		$unchosenStudent = Db::table('user_student_'.$grade)->where('department','信息安全与网络工程系')->page($curPage,$pageSize)->where('chosen',0)->select();
-    		$amount = ceil(count(Db::table('user_student_'.$grade)->where('department','信息安全与网络工程系')->where('chosen',0)->select())/$pageSize);
+    		$unchosenStudent = Db::table('user_student_'.$grade)->where('department',$head['department'])->page($curPage,$pageSize)->where('chosen',0)->select();
+    		$amount = ceil(count(Db::table('user_student_'.$grade)->where('department',$head['department'])->where('chosen',0)->select())/$pageSize);
     		$totalUnchosen = count($unchosenStudent);
 
     		for ($i=0; $i <$totalUnchosen ; $i++) { 
