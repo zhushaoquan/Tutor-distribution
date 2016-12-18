@@ -422,6 +422,8 @@ class Student extends BaseController {
 //导师详细信息
 	public function tutor_detail($workNumber) {
 		$user = $this->auto_login();
+		var_dump($workNumber);
+		exit;
 		//$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //
         $tutor = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i','t.workNumber = i.workNumber')->where('t.workNumber',$workNumber)->find();
         $this->assign('tutor', $tutor);
