@@ -1,0 +1,32 @@
+div .table-position {
+    min-height: 400px;
+}
+
+.module {
+    width: 90%;
+    margin: auto;
+}
+
+#assignModal {
+    width: 90%;
+    margin: auto;
+}
+
+#assignModal .modal-dialog{
+    width: 100%;
+}
+
+#teacherModal {
+    width: 90%;
+    margin: auto;
+}
+
+#teacherModal .modal-dialog{
+    width: 100%;
+}
+
+.info-modal{
+    text-align: center;
+    font-size: 20px;
+    height: 80px;
+}

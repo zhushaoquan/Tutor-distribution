@@ -1,0 +1,17 @@
+div .table-position {
+    min-height: 400px;
+}
+
+.module {
+    width: 90%;
+    margin: auto;
+}
+
+#teacherModal {
+    width: 90%;
+    margin: auto;
+}
+
+#teacherModal .modal-dialog{
+    width: 100%;
+}

@@ -6,9 +6,10 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>毕设导师智能分配系统</title>
-    <link rel="stylesheet" type="text/css" href="{{$Think.const.TUTOR_STATIC}}/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
     <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student.css">
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/auto_assign.css">
     <style type="text/css">
         .sider-navbar-nav li {
             color: #fff;
@@ -27,13 +28,27 @@
                 <img src="{{$Think.const.OLD}}/image/mainpage-logo.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="{{:url('DepartmentHeadTutor/index')}}"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <a href="{{:url('DepartmentHeadTutor/studentManager')}}"><li><i class="glyphicon glyphicon-th-list"></i> 学生管理</li></a>
-                <a href="{{:url('DepartmentHeadTutor/teacherManager')}}"><li><i class="glyphicon glyphicon-pencil"></i> 导师管理</li></a>
-                <a href="{{:url('DepartmentHeadTutor/timeSetting')}}"><li><i class="glyphicon glyphicon-time"></i> 匹配设置</li></a>
-                <a href="{{:url('DepartmentHeadTutor/matchSetting')}}"><li class="active"><i class="glyphicon glyphicon-ok"></i> 匹配结果</li></a>
-                <a href="{{:url('DepartmentHeadTutor/student_result')}}"> <li><i class="glyphicon glyphicon-download-alt"></i> 学生结果</li> </a>
-                <a href="{{:url('DepartmentHeadTutor/tutor_result')}}"> <li><i class="glyphicon glyphicon-download-alt"></i> 导师结果</li> </a>
+                <a href="{{:url('DepartmentHeadTutor/index')}}">
+                    <li><i class="glyphicon glyphicon-user"></i> 个人信息</li>
+                </a>
+                <a href="{{:url('DepartmentHeadTutor/studentManager')}}">
+                    <li><i class="glyphicon glyphicon-th-list"></i> 学生管理</li>
+                </a>
+                <a href="{{:url('DepartmentHeadTutor/teacherManager')}}">
+                    <li><i class="glyphicon glyphicon-pencil"></i> 导师管理</li>
+                </a>
+                <a href="{{:url('DepartmentHeadTutor/timeSetting')}}">
+                    <li><i class="glyphicon glyphicon-time"></i> 匹配设置</li>
+                </a>
+                <a href="{{:url('DepartmentHeadTutor/matchSetting')}}">
+                    <li class="active"><i class="glyphicon glyphicon-ok"></i> 智能匹配</li>
+                </a>
+                <a href="{{:url('DepartmentHeadTutor/student_result')}}">
+                    <li><i class="glyphicon glyphicon-download-alt"></i> 学生结果</li>
+                </a>
+                <a href="{{:url('DepartmentHeadTutor/tutor_result')}}">
+                    <li><i class="glyphicon glyphicon-download-alt"></i> 导师结果</li>
+                </a>
             </ul>
         </nav>
     </div>
@@ -46,7 +61,7 @@
                 </div>
             </div>
             <div class="login-out-area">
-                <a href="{{:url('BaseController/logout')}}"><i class = "glyphicon glyphicon-off"></i>退出</a>
+                <a href="{{:url('BaseController/logout')}}"><i class="glyphicon glyphicon-off"></i>退出</a>
             </div>
         </div>
         <div class="page-content">
@@ -56,174 +71,69 @@
                 </div>
                 <div class="my-information-title">
                     <span>分配列表</span>
-                    <a href="{{:url('DepartmentHeadTutor/intelligentAlloc')}}" class="btn btn-info button-size btn-edit" style="width: 90px;">智能分配</a>
+                    <button id="go-to-assign2" link="{{:url('Test/auto_assign2')}}" class="btn btn-info button-size btn-edit"
+                            data-toggle="modal" data-backdrop="static" data-target="#infoModal" style="width: 90px;">智能分配</button>
                 </div>
                 <div class="my-information-subtitle">
                     <span>为未分配到导师的学生进行导师分配</span>
                 </div>
 
                 <div class="table-position">
-                    <table class="table table-hover">
+                    <table class="table table-bordered">
                         <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>学号</th>
-                                <th>姓名</th>
-                                <th>第一志愿</th>
-                                <th>第二志愿</th>
-                                <th>第三志愿</th>
-                                <th>第四志愿</th>
-                                <th>第五志愿</th>
-                                <th>分配操作</th>
-                            </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>学号</th>
+                            <th>姓名</th>
+                            <th>第一志愿</th>
+                            <th>第二志愿</th>
+                            <th>第三志愿</th>
+                            <th>第四志愿</th>
+                            <th>第五志愿</th>
+                            <th>分配操作</th>
+                        </tr>
                         </thead>
-                        <tbody>
-                            {volist name="voluntary" id="v"}
-                                <tr>
-                                    <td>{{$i}}</td>
-                                    <td>{{$v.information.serialNum}}</td>
-                                    <td>{{$v.information.name}}</td>
-                                    <td>{{$v.firstTeacher.name}}</td>
-                                    <td>{{$v.secondTeacher.name}}</td>
-                                    <td>{{$v.thirdTeacher.name}}</td>
-                                    <td>{{$v.forthTeacher.name}}</td>
-                                    <td>{{$v.fifthTeacher.name}}</td>
-                                    <td>
-                                        <button id="btn-teacher" value="{{$v.information.sid}}" class="teacher-select" href="#" style="text-decoration: none;background-color: transparent;border-style: none;"><span>可选导师</span></button>
-                                    </td>
-                                </tr>
-                            {/volist}
-                        </tbody>
-                    </table> 
-
-                    <nav>
-                      <ul class="pagination" style="float: right;">
-                          {if condition="$curPage neq 1 "}
-                              <li><a href="{{:url('/index/index/DepartmentHeadTutor/matchSetting/'.($curPage-1))}}">&laquo;</a></li>
-                          {/if}
-                            
-                          {if condition="($curPage gt 3) AND ($curPage lt $totalPage-2)"}
-                            {for start="$curPage-2" end="$curPage+3"}
-                              <li><a <?php if($i==$curPage) echo "class='now'"; ?> href="{{:url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i)}}" >{{$i}}</a></li>
-                            {/for}
-                          {elseif condition="($curPage gt $totalPage-3) AND ($totalPage gt 5)" /}
-                            {for start="$totalPage-5" end="$totalPage"}
-                              <li><a <?php if($i==$curPage) echo "class='now'"; ?> href="{{:url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i)}}" >{{$i}}</a></li>
-                            {/for}
-                          {elseif condition="$totalPage gt 5" /}
-                            {for start="1" end="6"}
-                              <li><a <?php if($i==$curPage) echo "class='now'"; ?> href="{{:url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i)}}" >{{$i}}</a></li>
-                            {/for}
-                          {else /}
-                            {for start="1" end="$totalPage"}
-                              <li><a <?php if($i==$curPage) echo "class='now'"; ?> href="{{:url('/index/index/DepartmentHeadTutor/matchSetting/page/'.$i)}}" >{{$i}}</a></li>
-                            {/for}
-                          {/if}
-                          {if condition="$curPage lt $totalPage-1"}
-                            <li><a href="#">&raquo;</a></li>
-                          {/if}
-                      </ul>
-                    </nav>   
-                </div>
-
-                <div class="table-position-popup">
-                    <span class="close-custom"><strong>关闭</strong></span>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>姓名</th>
-                                <th>是否带实验班</th>
-                                <th>所需计实班人数</th>
-                                <th>所需数实班人数</th>
-                                <th>所需自然班人数</th>
-                                <th>当前计实班人数</th>
-                                <th>当前数实班人数</th>
-                                <th>当前自然班人数</th>
-                                <th>分配操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {volist name="teacher" id="t" key="k"}
-                                <tr>
-                                    <td>{{$k}}</td>
-                                    <td>{{$t.name}}</td>
-                                    <td>是</td>
-                                    <td style="text-align: center;">{{$t.isExperial}}</td>
-                                    <td style="text-align: center;">10</td>
-                                    <td style="text-align: center;">10</td>
-                                    <td style="text-align: center;">10</td>
-                                    <td style="text-align: center;">10</td>
-                                    <td style="text-align: center;">10</td>
-                                    <td>
-                                        <button href="#" class="btn-alloc" value="{{$t.workNumber}}" style="text-decoration: none;background-color: transparent;border-style: none;"><span>确认分配</span></button>
-                                    </td>
-                                </tr>
-                            {/volist}
+                        <tbody id="table-student">
+                        <tr v-for="item in datas">
+                            <td>{{ item.sid }}</td>
+                            <td>{{ item.serialNum }}</td>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.vol1 }}</td>
+                            <td>{{ item.vol2 }}</td>
+                            <td>{{ item.vol3 }}</td>
+                            <td>{{ item.vol4 }}</td>
+                            <td>{{ item.vol5 }}</td>
+                            <td>
+                                <button v-on:click="assign($index)" data-toggle="modal" data-backdrop="static"
+                                        data-target="#assignModal"><span>分配导师</span></button>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
-            
 
-            <div class="footer"  style="border-radius: 10px;">
+                <div class="module" style="height: 60px;">
+                    <div class="fixed-table-pagination" style="display: block; float: right;">
+                        <div id="tab-pagination" class="pagination ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer" style="border-radius: 10px;">
                 Designed by Lin & 我说的都队
             </div>
         </div>
     </div>
 </div>
+{{include file="common/modal_assign_student"}}
+{{include file="common/modal_info"}}
+{{include file="common/api"}}
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/index.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/jquery2.14.min.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/bootstrap.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/backstage.js"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        var popupID = $('.table-position-popup');
-        popupMarginLeft = ($('body').width() - popupID.width() - 50)/2;     
-        popupID.css('left',popupMarginLeft + 'px');
-
-        var mask = '<div class="mask"></div>';
-
-        $('.teacher-select').click(function(){
-            $('body').append(mask);
-            popupID.fadeIn(400).css('display','block');
-;        });
-
-        $('.close-custom').click(function(){
-            $('.mask').remove();
-            popupID.css('display','none');
-;        });
-    });
-
-
-</script>
-
-<script type="text/javascript">
-    var sid;
-    var workNumber;
-    $(".teacher-select").click(function(){
-        sid = $(this).val();
-        // console.log(sid);
-    });
-
-    $(".btn-alloc").click(function(){
-        workNumber = $(this).val();
-        // console.log(workNumber);
-        $.post("../DepartmentHeadTutor/allocStudent.html",
-    {
-        sid: sid,
-        workNumber: workNumber
-    },
-    function(data,status){
-        if(status == "success"){
-            // console.log(data);
-            location.href = "../DepartmentHeadTutor/matchSetting.html"
-        }
-    }
-    );
-    });
-</script>>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/vue.min.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/jqPaginator.min.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/auto_assign.js"></script>
 </body>
 </html>
-
-
