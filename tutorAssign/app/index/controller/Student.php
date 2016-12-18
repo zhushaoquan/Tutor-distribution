@@ -50,7 +50,7 @@ class Student extends BaseController {
 
 	        if($this->user['chosen'] == 1) {
 	        	$data['ontime'] = 3;
-	        	$data['message'] = "<font color='#FF0000'>".$data['department']."</font>的志愿结果已出，请前往 最终结果 页面查看哦~~~";
+	        	$data['message'] = "<font color='#FF0000'>"$this->user['name']."</font>同学，志愿结果已出，请前往 最终结果 页面查看哦~~~";
 	        }else if($nowtime >= $data['issueStart'] && $nowtime <= $data['issueEnd']) {
 	        	//导师填报课题时段！
 	        	$data['ontime'] = 0;
@@ -76,11 +76,11 @@ class Student extends BaseController {
 	         	$data['ontime'] = 22;
 	         	$data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['confirmSecondEnd'])."</font>,请同学们耐心等候！";
 	         }else {
-	            $data['message'] = "当前不在填报志愿时间段内！";      
+	            $data['message'] = "当前不在毕设互选时间段哟~~";      
 	         }
         } else {
         	$data['ontime'] = -1;
-        	$data['message'] = "当前不在填报志愿时间段内！";
+        	$data['message'] = "当前不在毕设互选时间段哟~~";
         }
         
          $this->ontime = $data['ontime'];
@@ -110,6 +110,12 @@ class Student extends BaseController {
 
 	public function showNotice($str, $smartMode) {
         $str = str_replace("\n", "", $str);
+       // $str = str_replace("\n", "", $str);
+        $data['info'] = $str;
+        $data['url'] = $smartMode;
+        return json($data);
+        
+        /*
         echo '<DOCTYPE HTML>';
         echo '<html>';
         echo '<head>';
@@ -123,6 +129,7 @@ class Student extends BaseController {
         echo '</script>';
         echo '</body>';
         echo '</html>';
+        */
         exit;
     }
 
@@ -372,11 +379,11 @@ class Student extends BaseController {
 
         if($this->search_teacher!="") {
         	$this->assign('search_teacher',$teacher);
-        	$teachers = Db::table('user_teacher')->where('department|name|sex','like','%'.$search_teacher.'%')
+        	$teachers = Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
 			                                     ->order('name desc')
 			                                     ->page($page,$this->pageSize)
 			                                     ->select();
-		    $total = count(Db::table('user_teacher')->where('department|name|sex','like','%'.$search_teacher.'%')
+		    $total = count(Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
 			                                     ->order('name desc')
 			                                     ->select());
 
@@ -397,11 +404,11 @@ class Student extends BaseController {
         	$teacher = $this->search_teacher;
         }
 
-        $teachers = Db::table('user_teacher')->where('department|name|sex','like','%'.$search_teacher.'%')
+        $teachers = Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
 			                                     ->order('name desc')
 			                                     ->page($page,$this->pageSize)
 			                                     ->select();
-	    $total = count(Db::table('user_teacher')->where('department|name|sex','like','%'.$search_teacher.'%')
+	    $total = count(Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
 		                                     ->order('name desc')
 		                                     ->select());
 

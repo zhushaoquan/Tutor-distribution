@@ -29,7 +29,7 @@ class DepartmentHeadTutor extends BaseController {
 		$user = $this->auto_login();
 
 		$this->assign('user', $user);
-		return $this->fetch('match_setting');
+		return $this->fetch('auto_assign');
 				// dump($teacher);
 			// dump($teacher);
 			// dump($voluntary);
@@ -197,6 +197,9 @@ class DepartmentHeadTutor extends BaseController {
 		}
 	}
 
+	public function auto_assign2(){
+        return $this->fetch("auto_assign2");
+    }
 
 	//手动分配导师接口
 	public function allocStudent() {
@@ -1283,7 +1286,7 @@ class DepartmentHeadTutor extends BaseController {
     public function unchosenStudentList() {
     	$user = $this->auto_login();
     	$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
-
+    	// $head['department'] = "信息安全与网络工程系";
     	$request = Request::instance();
     	$lastGrade = Db::table('tc_grade')->order('grade desc')->select();
     	$pageSize = 10;
