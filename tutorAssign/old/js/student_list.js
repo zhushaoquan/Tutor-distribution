@@ -8,11 +8,11 @@ var choice_out =new Vue({
 
 
 
-//获得选择学生的sid
-function selectchoice(){
-	var sid= $("#select1").attr("value");
-	return sid;
-}
+// //获得选择学生的sid
+// function selectchoice(){
+// 	var sid= $("#select1").attr("value");
+// 	return sid;
+// }
 
 
 refreshout();
@@ -20,7 +20,7 @@ refreshout();
 //  加载弹出框里面的信息
 function refreshout(){
 	$("#select1").click(function(){
-		var sid=selectchoice();
+		var sid=$(this).parent().children();
 		$.ajax({
 			type:"get",
 			data:{
