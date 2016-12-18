@@ -25,54 +25,9 @@ class DepartmentHeadTutor extends BaseController {
 	}
 
 
-	public function matchSetting($page=1) {
+	public function matchSetting() {
 		$user = $this->auto_login();
-		$grade = Db::table('tc_grade')->order('grade desc')->select();
-		$student = Db::table('user_student_'.$grade[0]['grade'])->where('chosen',0)->where('department',$user['department'])->page($page,$this->pageSize)->select();
 
-
-		for ($i=0; $i <count($student) ; $i++) { 
-			$voluntary[$i] = Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$student[$i]['sid'])->find();
-			$voluntary[$i]['information'] = Db::table('user_student_'.$grade[0]['grade'])->where('sid',$student[$i]['sid'])->field('sid,field,serialNum,name')->find();
-
-			$voluntary[$i]['firstTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishFirst'])->field('name')->find();
-			$voluntary[$i]['secondTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishSecond'])->field('name')->find();
-			$voluntary[$i]['thirdTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishThird'])->field('name')->find();
-			$voluntary[$i]['forthTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishForth'])->field('name')->find();
-			$voluntary[$i]['fifthTeacher'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishFifth'])->field('name')->find();
-		}
-
-		$teacher = Db::table('user_teacher')->where('department',$student[0]['department'])->select();
-		for ($i=0; $i <count($teacher) ; $i++) { 
-			$teacher[$i]['issue'] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$teacher[$i]['workNumber'])->find();
-
-		}
-
-		$total = count(Db::table('user_student_'.$grade[0]['grade'])->where('chosen',0)->where('department',$user['department'])->select());
-		$totalPage = ceil($total/$this->pageSize);
-		
-		$teacherTotal = count($teacher);
-		$teacherTotalPage = ceil($teacherTotal/$this->pageSize);
-
-		$pageBar = [
-			'total'     => $total,
-			'totalPage' => $totalPage+1,
-			'pageSize'  => $this->pageSize,
-			'curPage'   => $page
-			];
-
-		$teacherPageBar = [
-			'teacherTotal'     => $teacherTotal,
-			'teacherTotalPage' => $teacherTotalPage+1,
-			'teacherPageSize'  => $this->pageSize,
-			'teacherCurPage'   => $page
-			];
-
-		$this->assign($pageBar);
-		$this->assign($teacherPageBar);
-		$this->assign('student',$student);
-		$this->assign('voluntary',$voluntary);
-		$this->assign('teacher',$teacher);
 		$this->assign('user', $user);
 		return $this->fetch('match_setting');
 				// dump($teacher);
@@ -95,6 +50,7 @@ class DepartmentHeadTutor extends BaseController {
 			$settingInfo['totalMin'] = 0;
 			$settingInfo['defaultNum'] = 8;
 			$settingInfo['experialMax'] = 5;
+			$settingInfo['grade'] = $grade[0]['grade'];
 
 			$settingInfo['issueStart'] = NULL;
 			$settingInfo['issueEnd'] = NULL;
@@ -171,6 +127,59 @@ class DepartmentHeadTutor extends BaseController {
 			$data['defaultNum'] = $info['defaultNum'];
 			$data['experialMax'] = $info['experialMax'];
 
+			if ($user['department'] == "计算机实验班") {
+				$teacher = Db::table('user_teacher')->where('isExperial',1)->whereOr('isExperial',3)->select();
+				$count = count($teacher);
+				for ($i=0; $i <$count ; $i++) { 
+					if (!(Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$teacher[$i]['workNumber'])->find())) {
+						$defaultIssue['workNumber'] = $teacher[$i]['workNumber'];
+						$defaultIssue['time'] = time();
+						$defaultIssue['totalCompExper'] = 0;
+						$defaultIssue['totalMathExper'] = 0;
+						$defaultIssue['totalNatur'] = 0;
+						$defaultIssue['compExperNow'] = 0;
+						$defaultIssue['mathExperNow'] = 0;
+						$defaultIssue['naturNow'] = 0;
+
+						Db::table('tc_issue_'.$grade[0]['grade'])->insert($defaultIssue);
+					}
+				}
+			} elseif ($user['department'] == "数学实验班") {
+				$teacher = Db::table('user_teacher')->where('isExperial',2)->whereOr('isExperial',3)->select();
+				$count = count($teacher);
+				for ($i=0; $i <$count ; $i++) { 
+					if (!(Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$teacher[$i]['workNumber'])->find())) {
+						$defaultIssue['workNumber'] = $teacher[$i]['workNumber'];
+						$defaultIssue['time'] = time();
+						$defaultIssue['totalCompExper'] = 0;
+						$defaultIssue['totalMathExper'] = 0;
+						$defaultIssue['totalNatur'] = 0;
+						$defaultIssue['compExperNow'] = 0;
+						$defaultIssue['mathExperNow'] = 0;
+						$defaultIssue['naturNow'] = 0;
+
+						Db::table('tc_issue_'.$grade[0]['grade'])->insert($defaultIssue);
+					}
+				}
+			} else {
+				$teacher = Db::table('user_teacher')->where('department',$user['department'])->select();
+				$count = count($teacher);
+				for ($i=0; $i <$count ; $i++) { 
+					if (!(Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$teacher[$i]['workNumber'])->find())) {
+						$defaultIssue['workNumber'] = $teacher[$i]['workNumber'];
+						$defaultIssue['time'] = time();
+						$defaultIssue['totalCompExper'] = 0;
+						$defaultIssue['totalMathExper'] = 0;
+						$defaultIssue['totalNatur'] = 0;
+						$defaultIssue['compExperNow'] = 0;
+						$defaultIssue['mathExperNow'] = 0;
+						$defaultIssue['naturNow'] = 0;
+
+						Db::table('tc_issue_'.$grade[0]['grade'])->insert($defaultIssue);
+					}
+				}
+			}
+
 			if (empty($userExist)) {
 				if (Db::table('tc_voluntaryinfosetting')->insert($data)) {
 					$this->success("时间设置成功",url('timeSetting'));
@@ -184,8 +193,7 @@ class DepartmentHeadTutor extends BaseController {
 					$this->error("时间更新失败，请重新更新",url('timeSetting'));
 				}
 			}
-			// dump($data);
-			// dump($info);
+			
 		}
 	}
 
@@ -374,9 +382,10 @@ class DepartmentHeadTutor extends BaseController {
 
 
 
-	//确认本页的分配结果
-	public function assignResultConfirm($r) {
-		dump($r);
+	//确认分配结果
+	public function assignResultConfirm() {
+		$checkedList = Db::table('tc_temp_result')->where('checked',1)->select();
+
 	}
 
 
@@ -557,6 +566,7 @@ class DepartmentHeadTutor extends BaseController {
     public function teacherList() {
     	$user = $this->auto_login();
     	$department = $user['department'];
+    	// $department = "计算机实验班";
 
     	$pageSize = 10;
 
@@ -564,9 +574,19 @@ class DepartmentHeadTutor extends BaseController {
     	if ($request->isGet()) {
     		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 
-    		$totalPage = ceil(count(Db::table('user_teacher')->where('department',$department)->select())/$pageSize);
-    		$teacherList['amount'] = $totalPage;
-    		$teacherList['information'] = Db::table('user_teacher')->where('department',$department)->field('workNumber,name,password')->order('workNumber asc')->page($curPage,$pageSize)->select();
+    		if ($department == "计算机实验班") {
+    			$totalPage = ceil(count(Db::table('user_teacher')->where('isExperial',1)->whereOr('isExperial',3)->select())/$pageSize);
+    			$teacherList['amount'] = $totalPage;
+    			$teacherList['information'] = Db::table('user_teacher')->where('isExperial',1)->whereOr('isExperial',3)->field('workNumber,name,password')->order('workNumber asc')->page($curPage,$pageSize)->select();
+    		} elseif ($department == "数学实验班") {
+    			$totalPage = ceil(count(Db::table('user_teacher')->where('isExperial',2)->whereOr('isExperial',3)->select())/$pageSize);
+    			$teacherList['amount'] = $totalPage;
+    			$teacherList['information'] = Db::table('user_teacher')->where('isExperial',2)->whereOr('isExperial',3)->field('workNumber,name,password')->order('workNumber asc')->page($curPage,$pageSize)->select();
+    		} else {
+	    		$totalPage = ceil(count(Db::table('user_teacher')->where('department',$department)->select())/$pageSize);
+	    		$teacherList['amount'] = $totalPage;
+	    		$teacherList['information'] = Db::table('user_teacher')->where('department',$department)->field('workNumber,name,password')->order('workNumber asc')->page($curPage,$pageSize)->select();
+	    	}
     		return json($teacherList);
     	}
     }
@@ -850,7 +870,7 @@ class DepartmentHeadTutor extends BaseController {
             	$insert['sex'] = $data->sheets[0]['cells'][$i][3];
             	$insert['department'] = $data->sheets[0]['cells'][$i][4];
             	$insert['isExperial'] = $data->sheets[0]['cells'][$i][5];
-            	$insert['title'] = $data->sheets[0]['cells'][$i][6];
+            	$insert['position'] = $data->sheets[0]['cells'][$i][6];
             	$insert['telephone'] = $data->sheets[0]['cells'][$i][7];
             	//判断数据是否存在，并覆盖/插入数据库中
             	if (Db::table('user_teacher')->where('workNumber',$insert['workNumber'])->find()) {

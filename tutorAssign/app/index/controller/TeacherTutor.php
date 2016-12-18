@@ -223,7 +223,7 @@ class TeacherTutor extends BaseController {
             
               $this->showNotice('所带自然班人数超出上限，请重新输入', url('TeacherTutor/issue_submit'));
 
-            } else if( ($data1['totalCompExper']+$data1['totalMathExper']+$data1['totalNatur'])<=$data['voluntaryinfosetting']['totalMin'] ) {
+            } else if( ($data1['totalCompExper']+$data1['totalMathExper']+$data1['totalNatur'])<$data['voluntaryinfosetting']['totalMin'] ) {
               
               $this->showNotice('所带学生总人数未达下限，请重新输入', url('TeacherTutor/issue_submit'));
             } 
