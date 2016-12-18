@@ -110,7 +110,7 @@ class Student extends BaseController {
 
 	public function showNotice($str, $smartMode) {
         $str = str_replace("\n", "", $str);
-        $str = str_replace("\n", "", $str);
+       // $str = str_replace("\n", "", $str);
         $data['info'] = $str;
         $data['url'] = $smartMode;
         return json($data);
@@ -379,11 +379,11 @@ class Student extends BaseController {
 
         if($this->search_teacher!="") {
         	$this->assign('search_teacher',$teacher);
-        	$teachers = Db::table('user_teacher')->where('department|name|sex','like','%'.$search_teacher.'%')
+        	$teachers = Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
 			                                     ->order('name desc')
 			                                     ->page($page,$this->pageSize)
 			                                     ->select();
-		    $total = count(Db::table('user_teacher')->where('department|name|sex','like','%'.$search_teacher.'%')
+		    $total = count(Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
 			                                     ->order('name desc')
 			                                     ->select());
 
@@ -404,11 +404,11 @@ class Student extends BaseController {
         	$teacher = $this->search_teacher;
         }
 
-        $teachers = Db::table('user_teacher')->where('department|name|sex','like','%'.$search_teacher.'%')
+        $teachers = Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
 			                                     ->order('name desc')
 			                                     ->page($page,$this->pageSize)
 			                                     ->select();
-	    $total = count(Db::table('user_teacher')->where('department|name|sex','like','%'.$search_teacher.'%')
+	    $total = count(Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
 		                                     ->order('name desc')
 		                                     ->select());
 
