@@ -511,8 +511,9 @@ class DepartmentHeadTutor extends BaseController {
     }
 
     public function teacherList() {
-    	$user = $this->auto_login();
-    	$department = $user['department'];
+    	// $user = $this->auto_login();
+    	// $department = $user['department'];
+    	$department = "计算机实验班";
 
     	$pageSize = 10;
 
@@ -520,9 +521,19 @@ class DepartmentHeadTutor extends BaseController {
     	if ($request->isGet()) {
     		$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
 
-    		$totalPage = ceil(count(Db::table('user_teacher')->where('department',$department)->select())/$pageSize);
-    		$teacherList['amount'] = $totalPage;
-    		$teacherList['information'] = Db::table('user_teacher')->where('department',$department)->field('workNumber,name,password')->order('workNumber asc')->page($curPage,$pageSize)->select();
+    		if ($department == "计算机实验班") {
+    			$totalPage = ceil(count(Db::table('user_teacher')->where('isExperial',1)->whereOr('isExperial',3)->select())/$pageSize);
+    			$teacherList['amount'] = $totalPage;
+    			$teacherList['information'] = Db::table('user_teacher')->where('isExperial',1)->whereOr('isExperial',3)->field('workNumber,name,password')->order('workNumber asc')->page($curPage,$pageSize)->select();
+    		} elseif ($department == "数学实验班") {
+    			$totalPage = ceil(count(Db::table('user_teacher')->where('isExperial',2)->whereOr('isExperial',3)->select())/$pageSize);
+    			$teacherList['amount'] = $totalPage;
+    			$teacherList['information'] = Db::table('user_teacher')->where('isExperial',2)->whereOr('isExperial',3)->field('workNumber,name,password')->order('workNumber asc')->page($curPage,$pageSize)->select();
+    		} else {
+	    		$totalPage = ceil(count(Db::table('user_teacher')->where('department',$department)->select())/$pageSize);
+	    		$teacherList['amount'] = $totalPage;
+	    		$teacherList['information'] = Db::table('user_teacher')->where('department',$department)->field('workNumber,name,password')->order('workNumber asc')->page($curPage,$pageSize)->select();
+	    	}
     		return json($teacherList);
     	}
     }
