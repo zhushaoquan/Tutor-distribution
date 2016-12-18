@@ -127,6 +127,59 @@ class DepartmentHeadTutor extends BaseController {
 			$data['defaultNum'] = $info['defaultNum'];
 			$data['experialMax'] = $info['experialMax'];
 
+			if ($user['department'] == "计算机实验班") {
+				$teacher = Db::table('user_teacher')->where('isExperial',1)->whereOr('isExperial',3)->select();
+				$count = count($teacher);
+				for ($i=0; $i <$count ; $i++) { 
+					if (!(Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$teacher[$i]['workNumber'])->find())) {
+						$defaultIssue['workNumber'] = $teacher[$i]['workNumber'];
+						$defaultIssue['time'] = time();
+						$defaultIssue['totalCompExper'] = 0;
+						$defaultIssue['totalMathExper'] = 0;
+						$defaultIssue['totalNatur'] = 0;
+						$defaultIssue['compExperNow'] = 0;
+						$defaultIssue['mathExperNow'] = 0;
+						$defaultIssue['naturNow'] = 0;
+
+						Db::table('tc_issue_'.$grade[0]['grade'])->insert($defaultIssue);
+					}
+				}
+			} elseif ($user['department'] == "数学实验班") {
+				$teacher = Db::table('user_teacher')->where('isExperial',2)->whereOr('isExperial',3)->select();
+				$count = count($teacher);
+				for ($i=0; $i <$count ; $i++) { 
+					if (!(Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$teacher[$i]['workNumber'])->find())) {
+						$defaultIssue['workNumber'] = $teacher[$i]['workNumber'];
+						$defaultIssue['time'] = time();
+						$defaultIssue['totalCompExper'] = 0;
+						$defaultIssue['totalMathExper'] = 0;
+						$defaultIssue['totalNatur'] = 0;
+						$defaultIssue['compExperNow'] = 0;
+						$defaultIssue['mathExperNow'] = 0;
+						$defaultIssue['naturNow'] = 0;
+
+						Db::table('tc_issue_'.$grade[0]['grade'])->insert($defaultIssue);
+					}
+				}
+			} else {
+				$teacher = Db::table('user_teacher')->where('department',$user['department'])->select();
+				$count = count($teacher);
+				for ($i=0; $i <$count ; $i++) { 
+					if (!(Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$teacher[$i]['workNumber'])->find())) {
+						$defaultIssue['workNumber'] = $teacher[$i]['workNumber'];
+						$defaultIssue['time'] = time();
+						$defaultIssue['totalCompExper'] = 0;
+						$defaultIssue['totalMathExper'] = 0;
+						$defaultIssue['totalNatur'] = 0;
+						$defaultIssue['compExperNow'] = 0;
+						$defaultIssue['mathExperNow'] = 0;
+						$defaultIssue['naturNow'] = 0;
+
+						Db::table('tc_issue_'.$grade[0]['grade'])->insert($defaultIssue);
+					}
+				}
+			}
+
 			if (empty($userExist)) {
 				if (Db::table('tc_voluntaryinfosetting')->insert($data)) {
 					$this->success("时间设置成功",url('timeSetting'));
@@ -140,8 +193,7 @@ class DepartmentHeadTutor extends BaseController {
 					$this->error("时间更新失败，请重新更新",url('timeSetting'));
 				}
 			}
-			// dump($data);
-			// dump($info);
+			
 		}
 	}
 
@@ -512,9 +564,9 @@ class DepartmentHeadTutor extends BaseController {
     }
 
     public function teacherList() {
-    	// $user = $this->auto_login();
-    	// $department = $user['department'];
-    	$department = "计算机实验班";
+    	$user = $this->auto_login();
+    	$department = $user['department'];
+    	// $department = "计算机实验班";
 
     	$pageSize = 10;
 
