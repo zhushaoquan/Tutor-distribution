@@ -15,6 +15,19 @@ var selectGrade = new Vue({
     }
 });
 
+var info_student = new Vue({
+    el: '#info_student',
+    data:{
+        serialNum:"",
+        name:"",
+        gender:"",
+        gpa:"",
+        department:"",
+        rank:"",
+        grade:""
+    }
+});
+
 
 initGradeSelect();
 initPaginator();
@@ -201,30 +214,30 @@ function listenEventAdd() {
     $("#btn-submit-add").click(function () {
         console.log("submit");
         $("#btn-submit-add").attr("disabled", "disabled");
-        var serialNum = $("#stuid").val();
-        var name = $("#stuname").val();
-        var gender = $("#stugender").val();
-        var gpa = $("#stugpa").val();
-        var department = $("#studepart").val();
-        var rank = $("#sturank").val();
-        var grade = $("#stugrade").val();
-        console.log(serialNum);
-        console.log(name);
-        console.log(gender);
-        console.log(gpa);
-        console.log(department);
-        console.log(rank);
-        console.log(grade);
+        // var serialNum = $("#stuid").val();
+        // var name = $("#stuname").val();
+        // var gender = $("#stugender").val();
+        // var gpa = $("#stugpa").val();
+        // var department = $("#studepart").val();
+        // var rank = $("#sturank").val();
+        // var grade = $("#stugrade").val();
+        // console.log(serialNum);
+        // console.log(name);
+        // console.log(gender);
+        // console.log(gpa);
+        // console.log(department);
+        // console.log(rank);
+        // console.log(grade);
         $.ajax({
             type: "post",
             data: {
-                serialNum: serialNum,
-                name: name,
-                gender: gender,
-                gpa: gpa,
-                department: department,
-                rank: rank,
-                grade: grade
+                serialNum: info_student.serialNum,
+                name: info_student.name,
+                gender: info_student.gender,
+                gpa: info_student.gpa,
+                department: info_student.department,
+                rank: info_student.rank,
+                grade: info_student.grade
             },
             url: api_student_add,
             success: function (data) {
