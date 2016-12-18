@@ -54,7 +54,7 @@
                     <?php if(isset($message1)) {?><p>提示2：{{:$message1}}</p><?php }?>
                     <?php if(isset($message2)) {?><p>提示3：{{:$message2}}</p><?php }?>
                 </div>
-<?php if($ontime==11 || $ontime==22) {?>
+                <?php if($ontime==11 || $ontime==22) {?>
                 <div class="my-information-title">
                     <span>可选学生</span>
                 </div>
@@ -103,14 +103,14 @@
 
                                    
                                 </tr>
-                                </form>    
+                            </form>
                                
                             {/volist}
                         </tbody>
                     </table>
                     <nav>
-                      <ul class="pagination" style="float: right;">
-                      <a href="{{:url('/index/index/TeacherTutor/student_list/'.($curPage-1))}}">&laquo;</a>
+                        <ul class="pagination" style="float: right;">
+                          <a href="{{:url('/index/index/TeacherTutor/student_list/'.($curPage-1))}}">&laquo;</a>
                           {if condition="$curPage neq 1 "}
                               <li><a href="{{:url('/index/index/TeacherTutor/student_list/'.($curPage-1))}}">&laquo;</a></li>
                           {/if}
@@ -132,22 +132,12 @@
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeacherTutor/student_list/page/'.$i)}}" >{{$i}}</a></li>
                             {/for}
                           {/if}
-                          <!--
-                          {if condition="$curPage lt $totalPage-1"}
-                            <li><a href="#">&raquo;</a></li>
-                          {/if}
-                            <li><a href="#">共{{$total}}名学生</a></li>
-                          -->
+
                       </ul>
                     </nav>
                 </div>
-<?php }?>                
-                <!-- <div class="button-position">
-                    <button class="btn btn-info" type="submit">修改</button>
-                </div> -->
-
+                <?php }?>
             </div>
-            <button></button>
             <div class="footer"  style="border-radius: 10px;">
                 Designed by Lin & 我说的都队
             </div>
@@ -198,9 +188,7 @@
             </form>
             </div>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal -->
 </div>
 <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel"
      aria-hidden="true">
@@ -231,7 +219,8 @@
                             <td>{{datas.gpa}}</td>
                             <td>{{datas.rank}}</td>
                             <td>{{datas.sid}}</td>
-                        </tr>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
