@@ -126,6 +126,23 @@ class TeacherTutor extends BaseController {
                 $data['ontime'] = 11;
                 $data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['confirmFirstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['confirmFirstEnd'])."</font>,请导师们尽快选择学生！";
 
+                $data['message1'] = "导师所带学生总数不得超过 <font color='#FF0000'>".$data['voluntaryinfosetting']['totalMax']." </font>名，不得少于 <font color='#FF0000'> ".$data['voluntaryinfosetting']['totalMin']."</font>名";
+               if($this->user['isExperial']!=0) $data['message1'].="，实验班总人数不超过<font color='#FF0000'>".$data['voluntaryinfosetting']['experialMax']."</font>名！";
+                $this->assign('message1',$data['message1']);
+
+
+               $data['message2'] = "当前已带自然班学生<font color='#FF0000'>".$this->issue['naturNow']."</font>名";
+                if($this->user['isExperial']==1) {
+                  $data['message2'] .= ",已带计算机实验班学生<font color='#FF0000'>".$this->issue['compExperNow']."</font>名";
+                } else if($this->user['isExperial']==2) {
+                  $data['message2'] .= ",已带数学实验班学生<font color='#FF0000'>".$this->issue['mathExperNow']."</font>名";
+                } else if($this->user['isExperial']==3) {
+                  $data['message2'] .= ",已带计算机实验班学生<font color='#FF0000'>".$this->issue['compExperNow']."</font>名,已带数学实验班学生<font color='#FF0000'>".$this->issue['mathExperNow']."</font>名";
+               }
+                 $data['message2'] .="!";
+                 $this->assign('message2',$data['message2']);
+
+
              } else if($nowtime >= $data['confirmSecondStart'] && $nowtime <= $data['confirmSecondEnd']) {
                 $this->round = 2;
                 //第二轮导师选择学生时间
@@ -167,6 +184,10 @@ class TeacherTutor extends BaseController {
     }
     public function showNotice($str, $smartMode) {
         $str = str_replace("\n", "", $str);
+        $data['info'] = $str;
+        $data['url'] = $smartMode;
+        return json($data);
+/*
         echo '<DOCTYPE HTML>';
         echo '<html>';
         echo '<head>';
@@ -180,6 +201,7 @@ class TeacherTutor extends BaseController {
         echo '</script>';
         echo '</body>';
         echo '</html>';
+*/
         exit;
     }
 

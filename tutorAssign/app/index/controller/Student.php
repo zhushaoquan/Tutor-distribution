@@ -50,7 +50,7 @@ class Student extends BaseController {
 
 	        if($this->user['chosen'] == 1) {
 	        	$data['ontime'] = 3;
-	        	$data['message'] = "<font color='#FF0000'>"$this->user['name']."同学， "."</font>的志愿结果已出，请前往 最终结果 页面查看哦~~~";
+	        	$data['message'] = "<font color='#FF0000'>"$this->user['name']."同学，"."</font>志愿结果已出，请前往 最终结果 页面查看哦~~~";
 	        }else if($nowtime >= $data['issueStart'] && $nowtime <= $data['issueEnd']) {
 	        	//导师填报课题时段！
 	        	$data['ontime'] = 0;
@@ -110,6 +110,12 @@ class Student extends BaseController {
 
 	public function showNotice($str, $smartMode) {
         $str = str_replace("\n", "", $str);
+        $str = str_replace("\n", "", $str);
+        $data['info'] = $str;
+        $data['url'] = $smartMode;
+        return json($data);
+        
+        /*
         echo '<DOCTYPE HTML>';
         echo '<html>';
         echo '<head>';
@@ -123,6 +129,7 @@ class Student extends BaseController {
         echo '</script>';
         echo '</body>';
         echo '</html>';
+        */
         exit;
     }
 
