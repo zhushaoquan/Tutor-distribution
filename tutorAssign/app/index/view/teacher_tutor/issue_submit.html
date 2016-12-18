@@ -49,11 +49,11 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示<?php if(isset($message1)) {?>1<?php }?>：{{:$message}}</p>
-                    <?php if(isset($message1)) {?><p>提示2：{{:$message1}}</p><?php }?>
-                    <?php if(isset($message2)) {?><p>提示3<?php }?>：{{:$message2}}</p><?php }?>
+                    <p>提示<?php if(isset($message1) && $ontime == 0) {?>1<?php }?>：{{:$message}}</p>
+                    <?php if(isset($message1) && $ontime == 0) {?><p>提示2：{{:$message1}}</p><?php }?>
+                    <?php if(isset($message2) && $ontime == 0) {?><p>提示3：{{:$message2}}</p><?php }?>
                 </div>
-                <?php if($ontime == 0) { ?>
+                
                 <div class="my-information-title">
                     <span>课题提交</span>
                 </div>
@@ -64,7 +64,7 @@
                              <div class="row" style ="margin:5px auto;">
                                  <label  class="col-md-2 control-label" >自然班人数</label>
                                  <div class="col-sm-2" style="width:120px">
-                                     <select  class="form-control" name="totalNatur" <?php if($voluntaryinfosetting['department']=="计算机实验班"||$voluntaryinfosetting['department']=="数学实验班") { ?> disabled="disabled" <?php }?> >
+                                     <select  class="form-control" name="totalNatur" <?php if($voluntaryinfosetting['department']=="计算机实验班"||$voluntaryinfosetting['department']=="数学实验班"|| $ontime !=0) { ?> disabled="disabled" <?php }?> >
                                      <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 0 ) {?> selected="selected" <?php }}?> value=0>0</option>
                                      <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 1 ) {?> selected="selected" <?php }}?> value=1>1</option>
                                      <option <?php if(isset($issue['totalNatur'])) {if($issue['totalNatur'] == 2 ) {?> selected="selected" <?php }}?> value=2>2</option>
@@ -80,7 +80,7 @@
                                  <?php if($user['isExperial']==1 || $user['isExperial']==3) {?>
                                  <label  class="col-md-2 control-label">计算机实验班人数</label>
                                  <div class="col-sm-2" style="width:120px">
-                                     <select class="form-control" name="totalCompExper" <?php if($voluntaryinfosetting['department']!="计算机实验班") { ?> disabled="disabled" <?php }?> >
+                                     <select class="form-control" name="totalCompExper" <?php if($voluntaryinfosetting['department']!="计算机实验班" || $ontime !=0) { ?> disabled="disabled" <?php }?> >
                                      <option <?php if(isset($issue['totalCompExper'])) { if($issue['totalCompExper'] == 0 ) {?> selected="selected" <?php }}?> >0</option>
                                      <option <?php if(isset($issue['totalCompExper'])) { if($issue['totalCompExper'] == 1 ) {?> selected="selected" <?php }}?> >1</option>
                                      <option <?php if(isset($issue['totalCompExper'])) { if($issue['totalCompExper'] == 2 ) {?> selected="selected" <?php }}?> >2</option>
@@ -97,7 +97,7 @@
                                  <?php if($user['isExperial']==2 || $user['isExperial']==3) {?>
                                  <label  class="col-md-2 control-label">数学实验班人数</label>
                                  <div class="col-sm-2" style="width:120px">
-                                     <select class="form-control" name="totalMathExper" <?php if($voluntaryinfosetting['department']!="数学实验班") { ?> disabled="disabled" <?php }?> >
+                                     <select class="form-control" name="totalMathExper" <?php if($voluntaryinfosetting['department']!="数学实验班" || $ontime !=0 ) { ?> disabled="disabled" <?php }?> >
                                      <option <?php if(isset($issue['totalMathExper'])) { if($issue['totalMathExper'] == 0 ) {?> selected="selected" <?php }}?> >0</option>
                                      <option <?php if(isset($issue['totalMathExper'])) { if($issue['totalMathExper'] == 1 ) {?> selected="selected" <?php }}?> >1</option>
                                      <option <?php if(isset($issue['totalMathExper'])) { if($issue['totalMathExper'] == 2 ) {?> selected="selected" <?php }}?> >2</option>
@@ -119,7 +119,7 @@
                                <div class="row">
                                <label for="inputissuename" class="col-md-2 control-label">课题名称</label>
                                <div class="col-sm-8">
-                                     <input type="text" class="form-control" id="inputissuename" placeholder="请输入课题名称" name="title" value="<?php if(isset($issue['title']))echo $issue['title'];?>">
+                                     <input type="text" class="form-control" id="inputissuename" placeholder="请输入课题名称" name="title" value="<?php if(isset($issue['title']))echo $issue['title'];?>" <?php if($ontime !=0 ) { ?> disabled="disabled" <?php }?> >
                                </div>
                                </div>
                         </div>
@@ -127,16 +127,18 @@
                                 <div class="row">
                                 <label for="inputissueintroduction" class="col-md-2 control-label">课题介绍</label>
                                 <div class="col-sm-8">
-                                 <textarea class="form-control" rows="3" input type="text" id="inputissueintroduction" placeholder="请填写具体的课题介绍" name="content" ><?php if($issue['content'])echo $issue['content']; ?></textarea>
+                                 <textarea class="form-control" rows="3" input type="text" id="inputissueintroduction" placeholder="请填写具体的课题介绍" name="content" <?php if($ontime !=0 ) { ?> disabled="disabled" <?php }?> ><?php if($issue['content'])echo $issue['content']; ?></textarea>
                                  </div>
                                  </div>
                         </div>
                     </div>
+                    <?php if($ontime == 0) { ?>
                         <div class="button-position" style="margin: 10px auto; width: 200px;">
                             <button id="submit" class="btn btn-info" type="submit" style="margin: 0px auto; width: 150px;" data-toggle='modal' data-backdrop="static" data-target="#submitModal">修改</button>
                         </div>
+                    <?php }?>
                 </form>
-            <?php }?>
+        
             </div>
             <div class="footer"  style="border-radius: 10px;">
                 Designed by Lin & 我说的都队
