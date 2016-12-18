@@ -133,7 +133,7 @@ class TeacherTutor extends BaseController {
                 $data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['confirmSecondEnd'])."</font>,请导师们尽快选择学生！";
 
              }else {
-                $data['message'] = "当前不在填报志愿时间段内！";
+                $data['message'] = "当前不在毕设互选时间段哟~~";
              }
              $this->ontime = $data['ontime'];
              $this->assign('message',$data['message']);
@@ -143,7 +143,7 @@ class TeacherTutor extends BaseController {
 
         } else {
              $ontime = -1;
-             $data['message'] = "当前不在填报志愿时间段内！";
+             $data['message'] = "当前不在毕设互选时间段哟~~";
              $this->assign('message',$data['message']);
              $this->assign('ontime',$data['ontime']);
              $this->assign('voluntaryinfosetting',$data);
