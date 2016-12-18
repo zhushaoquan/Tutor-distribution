@@ -50,6 +50,7 @@ class DepartmentHeadTutor extends BaseController {
 			$settingInfo['totalMin'] = 0;
 			$settingInfo['defaultNum'] = 8;
 			$settingInfo['experialMax'] = 5;
+			$settingInfo['grade'] = $grade[0]['grade'];
 
 			$settingInfo['issueStart'] = NULL;
 			$settingInfo['issueEnd'] = NULL;
