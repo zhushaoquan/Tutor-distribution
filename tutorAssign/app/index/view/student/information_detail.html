@@ -63,7 +63,7 @@
                     <ul>
                         <li><span>系别：</span><span>{{$tutor['department']}}</span><span>性别：</span><span>{{$tutor['sex']}}</span></li>
                         <li><span>电话：</span><span>{{$tutor['telephone']}}</span><span>邮箱：</span><span>{{$tutor['email']}}</span></li>
-                        <li><span>职称：</span><span>$tutor['position']</span><span>实验班导师：</span><span><?php if($tutor['isExperial']!=0) echo "是";else echo "否"; ?></span></li>
+                        <li><span>职称：</span><span>{{$tutor['position']}}</span><span>实验班导师：</span><span><?php if($tutor['isExperial']!=0) echo "是";else echo "否"; ?></span></li>
                         <?php if($user['department']!= "计算机实验班" && $user['department']!= "数学实验班" ) {?><li><span style ="width:200px;">自然班人数上限：</span><span style="width:100px;">{{$tutor['totalNatur']}}</span><span style ="width:200px;">自然班已选人数：</span><span style="width:100px;">{{$tutor['naturNow']}}</span></li>
 
                         <?php }else if($user['department'] == "计算机实验班" ) {?><li><span style ="width:200px;">计算机实验班人数限：</span><span style="width:100px;">{{$tutor['totalCompExper']}}</span><span style ="width:200px;;">计算机实验班已选人数：</span><span style="width:100px;">{{$tutor['compExperNow']}}</span></li>

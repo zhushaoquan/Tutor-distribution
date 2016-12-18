@@ -436,27 +436,23 @@ class Student extends BaseController {
 		if($this->user['department'] == $this->department_1) {
 			//计算机实验吧
 			$tutors = Db::table('user_teacher') ->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
-			                                    ->where(function ($query) {
-			                                     	$query->where('isExperial',1)->whereOr('isExperial',3)->where('compExperNow', '<','totalCompExper');
-			                                     })
-			                                    //->where('compExperNow ','< ','totalCompExper')
+			                                    ->where('isExperial','in','1,3')   
+			                                    ->where('compExperNow < totalCompExper')
 			                                    ->order('t.name desc')
 			                                    ->select();
 
 		} else if($this->user['department'] == $this->department_2) {
 			//数学实验板
 			$tutors = Db::table('user_teacher') ->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
-			                                    ->where(function ($query) {
-			                                     	$query->where('isExperial',2)->whereOr('isExperial',3)->where('mathExperNow ','< ','totalMathExper');
-			                                     })
-			                                    //->where('mathExperNow ','< ','totalMathExper')
+			                                    ->where('isExperial','in','2,3')
+			                                    ->where('mathExperNow < totalMathExper')
 			                                    ->order('t.name desc')
 			                                    ->select();
 		} else {
 			//自然班
 			$tutors = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                   ->where('department',$this->user['department'])
-			                                   ->where('naturNow ','<','totalNatur')
+			                                   ->where('naturNow < totalNatur')
 			                                   ->order('t.name desc')
 			                                   ->select();
 		}
