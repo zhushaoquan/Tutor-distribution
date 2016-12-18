@@ -114,10 +114,12 @@
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/Student/tutor_list/page/'.$i)}}" >{{$i}}</a></li>
                             {/for}
                           {/if}
+                          <!--
                           {if condition="$curPage lt $totalPage-1"}
                             <li><a href="#">&raquo;</a></li>
                           {/if}
-                            <li><a href="#">共{{$total}}名导师</a></li>
+                          -->
+                            <!--<li><a href="#">共{{$total}}名导师</a></li>-->
                       </ul>
                     </nav>      
                 </div>
