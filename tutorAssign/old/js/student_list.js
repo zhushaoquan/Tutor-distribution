@@ -20,7 +20,9 @@ refreshout();
 //  加载弹出框里面的信息
 function refreshout(){
 	$("#select1").click(function(){
-		var sid=$(this).parent().children();
+		var sid=$($("#select1").parent().parent().children().get(0)).children().val();
+		console.log(sid);
+		
 		$.ajax({
 			type:"get",
 			data:{
@@ -40,40 +42,6 @@ function refreshout(){
      });
 }
 
-// //弹出框里中选学生的sid
-// function selectsid(){
-// 	var radio = $(".radio");
-// 	if (radio.checked){
-// 		radio.push(radio.sid);
-// 	}
-// 	return radio;
-// }
-
-// //监听选择弹出框事件
-// function listenEventChoice(){
-// 	$("#choiceclose").click(function(){
-// 		location.reload();
-// 	});
-// 	$("#choiceagain").click(function(){
-// 		$("#choiceagain").attr("disabled","disabled");
-// 		var sid=selectsid();
-// 		$.ajax({
-// 			type:"get",
-// 			data:{
-// 				sid:radio
-// 			},
-// 			url:"{{$Think.const.PREFIX}}/TeacherTutor/show_studentdetail",
-// 			success:function(data){
-// 				if(data){
-// 					$("#failed").text("选择失败!").css("color","res");
-// 				}else{
-// 					$("#failed").text("选择成功!").css("color","green");
-// 					$("#choiceagain").attr("disabled","false");
-// 				}
-// 			},
-// 		});
-// 	});
-// }
 
 //vue modal初始化
 var reject_out =new Vue({
