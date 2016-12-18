@@ -72,6 +72,7 @@ class TeacherTutor extends BaseController {
         //var_dump($data);
         //exit;
         $nowtime = time();
+        $data['voluntaryinfosetting'] = $data;
         $data['message'] = '';
         $data['ontime']= -1;
 
