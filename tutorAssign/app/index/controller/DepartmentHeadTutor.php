@@ -1297,6 +1297,7 @@ class DepartmentHeadTutor extends BaseController {
     		$unchosenStudent = Db::table('user_student_'.$grade)->where('department',$head['department'])->page($curPage,$pageSize)->where('chosen',0)->select();
     		$amount = ceil(count(Db::table('user_student_'.$grade)->where('department',$head['department'])->where('chosen',0)->select())/$pageSize);
     		$totalUnchosen = count($unchosenStudent);
+    		$data['amount'] = $amount;
 
     		for ($i=0; $i <$totalUnchosen ; $i++) { 
     			$voluntary[$i] = Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('round,wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
@@ -1307,15 +1308,14 @@ class DepartmentHeadTutor extends BaseController {
 				$temp[$i]['vol4'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishForth'])->field('name')->find();
 				$temp[$i]['vol5'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishFifth'])->field('name')->find();
 
-				$data[$i]['amount'] = $amount;
-				$data[$i]['information']['sid'] = $voluntary[$i]['information']['sid'];
-				$data[$i]['information']['serialNum'] = $voluntary[$i]['information']['serialNum'];
-				$data[$i]['information']['name'] = $voluntary[$i]['information']['name'];
-				$data[$i]['information']['vol1'] = $temp[$i]['vol1']['name'];
-				$data[$i]['information']['vol2'] = $temp[$i]['vol2']['name'];
-				$data[$i]['information']['vol3'] = $temp[$i]['vol3']['name'];
-				$data[$i]['information']['vol4'] = $temp[$i]['vol4']['name'];
-				$data[$i]['information']['vol5'] = $temp[$i]['vol5']['name'];
+				$data['information'][$i]['sid'] = $voluntary[$i]['information']['sid'];
+				$data['information'][$i]['serialNum'] = $voluntary[$i]['information']['serialNum'];
+				$data['information'][$i]['name'] = $voluntary[$i]['information']['name'];
+				$data['information'][$i]['vol1'] = $temp[$i]['vol1']['name'];
+				$data['information'][$i]['vol2'] = $temp[$i]['vol2']['name'];
+				$data['information'][$i]['vol3'] = $temp[$i]['vol3']['name'];
+				$data['information'][$i]['vol4'] = $temp[$i]['vol4']['name'];
+				$data['information'][$i]['vol5'] = $temp[$i]['vol5']['name'];
     		}
     		return json($data);
     	}

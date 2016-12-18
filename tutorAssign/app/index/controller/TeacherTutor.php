@@ -287,9 +287,9 @@ class TeacherTutor extends BaseController {
              $data1['pid'] = $data['issue']['pid'];
              $bool = Db::table('tc_issue_'.$this->grades[0]['grade'])->update($data1);
              if($bool == 1) {
-                 $data3['info'] = '所带自然班人数超出上限，请重新输入';
+                 $data3['info'] = '课题修改成功';
                  $data3['url'] = url('TeacherTutor/issue_submit');
-                 return json($data3);
+              //   return json($data3);
              //   $this->showNotice('课题修改成功', url('TeacherTutor/issue_submit'));      
              } 
              
