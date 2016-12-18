@@ -1329,7 +1329,7 @@ class DepartmentHeadTutor extends BaseController {
     	// $user['department'] = "信息安全与网络工程系";
     	$grade = Db::table('tc_grade')->order('grade desc')->select();
 
-    	$issue = Db::table('user_teacher t,tc_issue_'.$grade[0]['grade'].' i')->where('t.workNumber=i.workNumber')->where('t.department',$user['department'])->field('t.name as name,i.workNumber as workNumber,t.isExperial as isExperial,i.totalCompExper as js_need,i.compExperNow as js_cur,i.totalMathExper as ss_need,i.mathExperNow as ss_cur,i.totalNatur as nature_need,i.naturNow as nature_cur')->select();
+    	$issue['information'] = Db::table('user_teacher t,tc_issue_'.$grade[0]['grade'].' i')->where('t.workNumber=i.workNumber')->where('t.department',$user['department'])->field('t.name as name,i.workNumber as workNumber,t.isExperial as isExperial,i.totalCompExper as js_need,i.compExperNow as js_cur,i.totalMathExper as ss_need,i.mathExperNow as ss_cur,i.totalNatur as nature_need,i.naturNow as nature_cur')->select();
 
     	return json($issue);
     }
