@@ -24,3 +24,9 @@ div .table-position {
 #teacherModal .modal-dialog{
     width: 100%;
 }
+
+.info-modal{
+    text-align: center;
+    font-size: 20px;
+    height: 80px;
+}

@@ -74,10 +74,9 @@
                 </div>
                 <div class="my-information-subtitle">
                     <span>请对分配结果进行微调及确认</span>
-                    <!--<div style="display: inline-block; float: right">-->
-                        <!--<button class="btn btn-info">学生视角</button>-->
-                        <!--<button class="btn btn-info">导师视角</button>-->
-                    <!--</div>-->
+                    <div style="display: inline-block; float: right">
+                        <a class="btn btn-info" href="{{:url('DepartmentHeadTutor/matchSetting')}}">返回</a>
+                    </div>
                 </div>
 
                 <div class="table-position">
@@ -112,7 +111,7 @@
                     </table>
                 </div>
                 <div class="module" style="height: 60px;overflow: visible;">
-                    <button id="confirm-this-page-btn" class="btn btn-info" style="float: left;margin-top: 10px">确认结果</button>
+                    <button id="confirm-result" data-toggle="modal" data-backdrop="static" data-target="#infoModal" class="btn btn-info" style="float: left;margin-top: 10px">确认结果</button>
                     <div class="fixed-table-pagination" style="display: block; float: right;">
                         <div id="tab-pagination" class="pagination ">
                         </div>
@@ -126,6 +125,7 @@
     </div>
 </div>
 {{include file="common/modal_assign2_teacher"}}
+{{include file="common/modal_info"}}
 {{include file="common/api"}}
 
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/index.js"></script>

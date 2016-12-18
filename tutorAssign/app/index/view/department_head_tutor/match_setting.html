@@ -71,8 +71,8 @@
                 </div>
                 <div class="my-information-title">
                     <span>分配列表</span>
-                    <a href="{{:url('Test/auto_assign2')}}" class="btn btn-info button-size btn-edit"
-                       style="width: 90px;">智能分配</a>
+                    <button id="go-to-assign2" link="{{:url('Test/auto_assign2')}}" class="btn btn-info button-size btn-edit"
+                            data-toggle="modal" data-backdrop="static" data-target="#infoModal" style="width: 90px;">智能分配</button>
                 </div>
                 <div class="my-information-subtitle">
                     <span>为未分配到导师的学生进行导师分配</span>
@@ -126,6 +126,7 @@
     </div>
 </div>
 {{include file="common/modal_assign_student"}}
+{{include file="common/modal_info"}}
 {{include file="common/api"}}
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/index.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/jquery2.14.min.js"></script>

@@ -11,7 +11,6 @@ var stu_main_index = "";
 
 $("#confirm-this-page").click(function () {
     var info = new Array();
-
     $.ajax({
         type: "get",
         data: {
@@ -68,7 +67,31 @@ var vm_table_teacher_modal = new Vue({
         datas: [
             {
                 sid:"01",
+                name:"大东东",
+                isExperial:"是",
+                js_need:"2",
+                js_cur:"2",
+                ss_need:"2",
+                ss_cur:"2",
+                nature_need:"2",
+                nature_cur:"2",
+                workNumber:"00001"
+            },
+            {
+                sid:"02",
                 name:"黄伟炜",
+                isExperial:"是",
+                js_need:"2",
+                js_cur:"2",
+                ss_need:"2",
+                ss_cur:"2",
+                nature_need:"2",
+                nature_cur:"2",
+                workNumber:"00002"
+            },
+            {
+                sid:"03",
+                name:"小东东",
                 isExperial:"是",
                 js_need:"2",
                 js_cur:"2",
@@ -78,6 +101,7 @@ var vm_table_teacher_modal = new Vue({
                 nature_cur:"2",
                 workNumber:"00003"
             }
+
         ]
     },
     methods: {
@@ -91,7 +115,7 @@ var vm_table_teacher_modal = new Vue({
                 = this.datas[index].workNumber;
 
             //关闭模态框
-            $("teacherModal").modal('hide');
+            $("#teacherModal").modal('hide');
         }
     }
 });
@@ -174,7 +198,12 @@ function getCurrentPage() {
 }
 
 
-$("#confirm-this-page-btn").click(function () {
+$("#confirm-result").click(function () {
+    $("#info").text("对 48/52 条结果进行确认？").addClass("info-modal");
+});
+
+
+$("#confirm-skip").click(function () {
     var arr = new Array();
     for(var i = 0; i < vm_table_student_main.datas.length; ++i){
         var item = vm_table_student_main.datas[i];
