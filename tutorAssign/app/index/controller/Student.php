@@ -205,7 +205,7 @@ class Student extends BaseController {
 				                                     ->where('isExperial','in','1,3')
 				                                     ->where('compExperNow < totalCompExper')
 				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
-				                                     ->order('t.name desc')
+				                                     ->order('t.workNumber asc')
 				                                     ->page($page,$this->pageSize)
 				                                     ->select();
 
@@ -215,7 +215,7 @@ class Student extends BaseController {
 				                                     ->where('isExperial','in','1,3')
 				                                     ->where('compExperNow < totalCompExper')
 				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
-				                                     ->order('t.name desc')
+				                                     ->order('t.workNumber asc')
 				                                     ->select());
 				$page = $totalPage = ceil($total/$this->pageSize);
 				$pageBar = [
@@ -232,7 +232,7 @@ class Student extends BaseController {
 				                                     ->where('isExperial','in','2,3')
 				                                     ->where('mathExperNow < totalMathExper')
 				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
-				                                     ->order('t.name desc')
+				                                     ->order('t.workNumber asc')
 				                                     ->page($page,$this->pageSize)->select();
 				$this->teachers = $teachers;
 
@@ -240,7 +240,7 @@ class Student extends BaseController {
 				                                     ->where('isExperial','in','2,3')
 				                                     ->where('mathExperNow < totalMathExper')
 				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
-				                                     ->order('t.name desc')
+				                                     ->order('t.workNumber asc')
 				                                     ->select());
 				$page = $totalPage = ceil($total/$this->pageSize);
 				$pageBar = [
@@ -255,7 +255,7 @@ class Student extends BaseController {
 				                                     ->where('department',$this->user['department'])
 				                                     ->where('naturNow < totalNatur')
 				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
-				                                     ->order('t.name desc')
+				                                     ->order('t.workNumber asc')
 				                                     ->page($page,$this->pageSize)
 				                                     ->select();
 
@@ -263,7 +263,7 @@ class Student extends BaseController {
 				                                     ->where('department',$this->user['department'])
 				                                     ->where('naturNow < totalNatur')
 				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
-				                                     ->order('t.name desc')
+				                                     ->order('t.workNumber asc')
 				                                     ->select());
 			    $this->teachers = $teachers;
 				$page = $totalPage = ceil($total/$this->pageSize);
@@ -298,7 +298,7 @@ class Student extends BaseController {
 			$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                     ->where('isExperial','in','1,3')   
 			                                     ->where('compExperNow < totalCompExper')
-			                                     ->order('t.name desc')
+			                                     ->order('t.workNumber asc')
 			                                     ->page($page,$this->pageSize)
 			                                     ->select();
 
@@ -307,7 +307,7 @@ class Student extends BaseController {
 		    $total = count(Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                       ->where('isExperial','in','1,3')
 			                                       ->where('compExperNow < totalCompExper')
-			                                       ->order('t.name desc')
+			                                       ->order('t.workNumber asc')
 			                                       ->select());
 			$page = $totalPage = ceil($total/$this->pageSize);
 			$pageBar = [
@@ -323,14 +323,14 @@ class Student extends BaseController {
 			$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                     ->where('isExperial','in','2,3')
 			                                     ->where('mathExperNow < totalMathExper')
-			                                     ->order('t.name desc')
+			                                     ->order('t.workNumber asc')
 			                                     ->page($page,$this->pageSize)->select();
 			$this->teachers = $teachers;
 
 		    $total = count(Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                     ->where('isExperial','in','2,3')
 			                                     ->where('mathExperNow < totalMathExper')
-			                                     ->order('t.name desc')
+			                                     ->order('t.workNumber asc')
 			                                     ->select());
 			$page = $totalPage = ceil($total/$this->pageSize);
 			$pageBar = [
@@ -344,14 +344,14 @@ class Student extends BaseController {
 			$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                     ->where('department',$this->user['department'])
 			                                     ->where('naturNow < totalNatur')
-			                                     ->order('t.name desc')
+			                                     ->order('t.workNumber asc')
 			                                     ->page($page,$this->pageSize)
 			                                     ->select();
 
 		    $total = count(Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                     ->where('department',$this->user['department'])
 			                                     ->where('naturNow < totalNatur')
-			                                     ->order('t.name desc')
+			                                     ->order('t.workNumber asc')
 			                                     ->select());
 		    $this->teachers = $teachers;
 			$page = $totalPage = ceil($total/$this->pageSize);
@@ -445,7 +445,7 @@ class Student extends BaseController {
 			$tutors = Db::table('user_teacher') ->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                    ->where('isExperial','in','1,3')   
 			                                    ->where('compExperNow < totalCompExper')
-			                                    ->order('t.name desc')
+			                                    ->order("convert(t.name using gb2312) ASC")
 			                                    ->select();
 
 		} else if($this->user['department'] == $this->department_2) {
@@ -453,14 +453,14 @@ class Student extends BaseController {
 			$tutors = Db::table('user_teacher') ->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                    ->where('isExperial','in','2,3')
 			                                    ->where('mathExperNow < totalMathExper')
-			                                    ->order('t.name desc')
+			                                    ->order("convert(t.name using gb2312) ASC")
 			                                    ->select();
 		} else {
 			//自然班
 			$tutors = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                   ->where('department',$this->user['department'])
 			                                   ->where('naturNow < totalNatur')
-			                                   ->order('t.name desc')
+			                                   ->order("convert(t.name using gb2312) ASC")
 			                                   ->select();
 		}
 	
