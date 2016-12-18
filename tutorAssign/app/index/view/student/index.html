@@ -53,8 +53,6 @@
                 <div class="my-information-title">
                    
                         <span>我的信息</span>
-                                    
-                        <a href="{{:url('Student/modify')}}"><button class="btn btn-info button-size btn-edit" type="submit">修改</button></a>
         
                 </div>
                 <div class="my-information-subtitle">
@@ -62,10 +60,10 @@
                 </div>
                 <div class="my-information-detail-1">
                     <ul>
-                        <li><span>姓名：</span><span class="span-value">{{$user.name}}</span><span>学号：</span><span class="span-value">{{$user.serialNum}}</span><span>性别：</span><span class="span-value">{{$user.gender}}</span></li>
-                        <li><span>学院：</span><span class="span-value">{{$user.college}}</span><span>系别：</span><span class="span-value">{{$user.department}}</span><span>方向：</span><span class="span-value">{{$user.field}}</span></li>
-                        <li><span>绩点：</span><span class="span-value">{{$user.gpa}}</span><span>排名：</span><span class="span-value">{{$user.rank}}</span><span>中选：</span><span class="span-value">{{$user.chosen}}</span></li>
-                        <li><span>电话：</span><span class="span-value">{{$user.telephone}}</span><span>邮箱：</span><span class="span-value">{{$user.email}}</span></li>
+                        <li><span>姓名：</span><span>{{$user.name}}</span><span>学号：</span><span>{{$user.serialNum}}</span><span>性别：</span><span>{{$user.gender}}</span></li>
+                        <li><span>学院：</span><span>{{$user.college}}</span><span>系别：</span><span>{{$user.department}}</span><span>方向：</span><span>{{$user.field}}</span></li>
+                        <li><span>绩点：</span><span>{{$user.gpa}}</span><span>排名：</span><span>{{$user.rank}}</span><span>中选：</span><span>{{$user.chosen}}</span></li>
+                        <li><span>电话：</span><span>{{$user.telephone}}</span><span>邮箱：</span><span>{{$user.email}}</span></li>
                     </ul>
                 </div>
                 <div class="skill-title">
@@ -74,9 +72,20 @@
                 <div class="skill-detail">
                     <p>{{$user.skill}}</p>
                 </div>
-                <!-- <div class="time-reminder">
-                    <i class="glyphicon glyphicon-star-empty"></i>&nbsp;<span>提示：第一轮志愿填报时间为2016年10月19日至2016年10月22日，请同学们在规定时间内完成志愿填报</span>
-                </div> -->
+
+                <div class="edit-btn">
+                    <a href="{{:url('Student/modify')}}">
+                        <button class="btn btn-info button-size" type="submit">修改</button>
+                    </a>
+                </div>
+
+                <div class="avator-positon">
+                    {if condition="$user.avatorIsEmpty eq 0"}
+                      <img src="{{$Think.const.COMMON_PATH}}{{$user.avator}}" class="avatorPre">
+                    {elseif condition="$user.avatorIsEmpty eq 1"}
+                      <img src="{{$Think.const.OLD}}/image/defaultAvator.png" class="avatorPre">
+                    {/if}
+                </div>
 
             </div>
             
