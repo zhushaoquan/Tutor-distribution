@@ -31,7 +31,7 @@ class TeachingOfficeTutor extends BaseController {
 	{
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
-		$pageSize=8;
+		$pageSize=7;
 		$gg=DB::table('tc_grade')->field('grade')->select();
 		$grade=$gg[0]['grade'];
 		if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -148,7 +148,7 @@ class TeachingOfficeTutor extends BaseController {
 		$pageBar = [
 			'total'     => 0,
 			'totalPage' => 1,
-			'pageSize'  => 8,
+			'pageSize'  => 7,
 			'curPage'   => 1
 			];
 		$this->assign($pageBar);
@@ -167,7 +167,7 @@ class TeachingOfficeTutor extends BaseController {
 	{
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
-		$pageSize=8;
+		$pageSize=7;
 		$page=1;
 		$gg=DB::table('tc_grade')->field('grade')->select();
 		$grade=$gg[0]['grade'];
@@ -369,6 +369,7 @@ class TeachingOfficeTutor extends BaseController {
 		// 	$value['department']=$_GET['department'];
 		// }
 		$result['department']=$_GET['department'];
+		//var_dump($result);
 		return json($result);
 	}
 
