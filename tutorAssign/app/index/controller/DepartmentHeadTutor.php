@@ -357,7 +357,7 @@ class DepartmentHeadTutor extends BaseController {
 	        }
 	    }
      //    $this->assign('user', $user);
-     //    return $this->fetch('auto_assign2');
+        return $this->fetch('auto_assign2');
 
 	}
 
