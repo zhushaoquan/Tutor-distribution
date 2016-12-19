@@ -499,10 +499,10 @@ class Student extends BaseController {
             $data1['wishForth'] = $request->post('wishForth', '');
             $data1['wishFifth'] = $request->post('wishFifth', '');  
             $data1['round'] = intval($this->ontime);
-
             $volunNum = $this->voluntaryinfosetting['voluntaryNum'];
             if($data1['wishFirst'] == '') {
             	$this->showNotice("第一志愿不得为空",url('Student/edit_voluntary'));
+            	
             } else if($data1['wishSecond'] == '' && $volunNum >=2) {
             	$this->showNotice("第二志愿不得为空",url('Student/edit_voluntary'));
             } else if($data1['wishThird'] == '' && $volunNum >=3) {
