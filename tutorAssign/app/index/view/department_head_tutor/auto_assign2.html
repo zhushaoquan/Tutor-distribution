@@ -96,7 +96,7 @@
                         <tbody id="table-student-main">
                         <tr v-for="item in datas">
                             <td><input type="checkbox" v-model="item.checked"></td>
-                            <td>{{ item.serialNumber }}</td>
+                            <td>{{ item.serialNum }}</td>
                             <td>{{ item.student_name }}</td>
                             <td>{{ item.vol_num }}</td>
                             <td>{{ item.gpa }}</td>
@@ -104,7 +104,7 @@
                             <td>{{ item.workNumber}}</td>
                             <td>
                                 <button v-on:click="changeTeacher($index)" data-toggle="modal" data-backdrop="static"
-                                        data-target="#teacherModal"><span>修改</span></button>
+                                        data-target="#teacherModal"><span>更改导师</span></button>
                             </td>
                         </tr>
                         </tbody>

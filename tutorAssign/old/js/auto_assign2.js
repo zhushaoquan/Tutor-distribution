@@ -177,39 +177,14 @@ function initPaginator() {
         last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
         page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
         onPageChange: function (page) {
+
             var request;
             request = {
                 curPage:page,
             };
-            // if(isInit){
-            //     //是否第一次加载表格
-            //      request = {
-            //         curPage:page,
-            //         check:[]
-            //     };
-            // }else{
-            //     var check = [];
-            //     for(item of vm_table_student_main.datas){
-            //         if(item.checked){
-            //             check.push({
-            //                 serialNum:item.serialNum,
-            //                 workNumber:item.workNumber,
-            //                 checked:true
-            //             });
-            //         }else {
-            //             check.push({
-            //                 serialNum:item.serialNum,
-            //                 workNumber:item.workNumber,
-            //                 checked:false
-            //             });
-            //         }
-            //     }
-            //     request = {
-            //         curPage:last_page,
-            //         check:check
-            //     };
-            // }
             refreshStudentTable(request,api_assigned_student_list,"get");
+
+            last_page = page;
         }
     });
 }
@@ -231,18 +206,49 @@ function getCurrentPage() {
 }
 
 
-
 //=====================================
 // 确认所有结果
-
 $("#btn-confirm-result-pop").click(function () {
+
+    //触发弹窗
     $("#info").text("对 48/52 条结果进行确认？").addClass("info-modal");
+    $.ajax({
+        type:"get",
+        data:{
+
+        },
+        url:api_confirm_cur_page,
+        success:function (response) {
+            if(response.status){
+
+            }else {
+
+            }
+        },
+        error:function () {
+
+        },
+        dataType:"json"
+    });
 });
 
 
 $("#btn-confirm-all-result").click(function () {
-    $.ajax({
 
+    //确认最终结果
+    $.ajax({
+        type:"get",
+        data:{
+
+        },
+        url:api_confirm_all_result,
+        success:function () {
+
+        },
+        error:function () {
+
+        },
+        dataType:"json"
     });
 });
 
@@ -250,11 +256,16 @@ $("#btn-confirm-all-result").click(function () {
 
 //====================================
 // 确认当前页结果
-function confirmThisPage(request,url,method) {
+function confirmThisPage() {
+    var request = {
+        curPage:getCurrentPage(),
+        check:getCurPageInfo()
+    };
+
     $.ajax({
-        type:method,
+        type:"get",
         data:request,
-        url:url,
+        url:api_confirm_cur_page,
         success:function (response) {
 
         },
@@ -263,7 +274,7 @@ function confirmThisPage(request,url,method) {
 }
 
 
-$("#btn-confirm-cur-page").click(function () {
+function getCurPageInfo() {
     var check = [];
     for(item of vm_table_student_main.datas){
         if(item.checked){
@@ -280,9 +291,11 @@ $("#btn-confirm-cur-page").click(function () {
             });
         }
     }
-    var request = {
-        curPage:getCurrentPage(),
-        check:check
-    };
-    confirmThisPage(request,api_confirm_cur_page,"get");
+
+    return check;
+}
+
+
+$("#btn-confirm-cur-page").click(function () {
+
 });
