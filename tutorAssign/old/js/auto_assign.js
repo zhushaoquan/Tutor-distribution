@@ -144,7 +144,7 @@ function refreshStudentTable(request,url,method) {
         url: url,
         success: function (response) {
             vm_table_student.datas = response.information;
-            refreshTotalpages(data.amount);
+            refreshTotalpages(response.amount);
         },
         error: function (response) {
 
@@ -204,9 +204,9 @@ function initPaginator() {
         page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
         onPageChange: function (page) {
             var request = {
-                
+                curPage:page
             };
-            // refreshStudentTable(request,api_unassigned_student_list,"get");
+            refreshStudentTable(request,api_unassigned_student_list,"get");
         }
     });
 }

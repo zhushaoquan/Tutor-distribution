@@ -132,12 +132,12 @@
                                  </div>
                         </div>
                     </div>
-                    <?php if($ontime == 0) { ?>
+                    
+                </form><?php if($ontime == 0) { ?>
                         <div class="button-position" style="margin: 10px auto; width: 200px;">
-                            <button id="submit" class="btn btn-info" style="margin: 0px auto; width: 150px;" data-toggle='modal' data-backdrop="static" data-target="#submitsModal">修改</button>
+                            <button id="submit" class="btn btn-info" type="submit" style="margin: 0px auto; width: 150px;" data-toggle='modal' data-backdrop="static" data-target="#submitsModal">修改</button>
                         </div>
                     <?php }?>
-                </form>
         
             </div>
             <div class="footer"  style="border-radius: 10px;">
@@ -155,10 +155,11 @@
                     提交课题</h4>
             </div>
             <div class="modal-body" id ="modal-body">
+                <p>{{datas}}</p>
                 <div class="modal-footer">
-                    <!-- <a href="{{:url('/index/teacher_tutor/issue_submit')}}" id="btn-colse-add"
+                    <a href="{{:url('/index/teacher_tutor/issue_submit')}}" id="btn-colse-add"
                            class="btn btn-default">关闭
-                        </a> -->
+                        </a> 
                 </div>
             </div>
         </div>
@@ -169,9 +170,9 @@
 <script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
 <script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/vue.min.js"></script>
-<!-- <script type="text/javascript" src="__STATIC__/js/issue_submit.js"></script> -->
-<!-- <script>
-var api_tutor_submit="{{$Think.const.PREFIX}}/TeacherTutor/issue_submit";</script> -->
+<script type="text/javascript" src="__STATIC__/js/issue_submit.js"></script>
+<script>
+var api_tutor_submit="{{$Think.const.PREFIX}}/TeacherTutor/issue_submit";</script>
 </body>
 </html>
 

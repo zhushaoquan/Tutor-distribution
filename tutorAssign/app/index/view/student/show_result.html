@@ -67,33 +67,31 @@
                         <li><span>同选学生</span>
                             <table class="table table-bordered">
                             <thead>
-                            <tr>
+                                <tr>
                                 <th>名字</th>
                                 <th>学号</th>
                                 <th>电子邮箱</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php if(isset($voluntory_students)) {foreach ($voluntory_students as $key => $value):?>
-                            <tr>
+                                <?php if(isset($voluntory_students)) {foreach ($voluntory_students as $key => $value):?>
+                                <tr>
                                 <td><?php echo $value['name'];?></td>
                                 <td><?php echo $value['serialNum'];?></td>
                                 <td><?php echo $value['email'];?></td>
-                            </tr>
-                            <?php endforeach;}?>
+                                </tr>
+                                <?php endforeach;}?>
                             </tbody>
-                        </table></li>
+                            </table></li>
                     </ul>
                     <?php }?>
 
                 </div>
 
             </div>
-
-            </div>
-        <div class="footer"  style="border-radius: 10px;">
+            <div class="footer"  style="border-radius: 10px;">
             Designed by Lin & 我说的都队
-        </div>
+             </div>
         </div>
     </div>
 </div>

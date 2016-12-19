@@ -183,7 +183,10 @@ class TeacherTutor extends BaseController {
         exit;
      
     }
+
+  
     public function showNotice($str, $smartMode) {
+
         $str = str_replace("\n", "", $str);
          $str = str_replace("\n", "", $str);
         echo '<DOCTYPE HTML>';
@@ -271,6 +274,12 @@ class TeacherTutor extends BaseController {
              $data1['pid'] = $data['issue']['pid'];
              $bool = Db::table('tc_issue_'.$this->grades[0]['grade'])->update($data1);
              if($bool == 1) {
+<<<<<<< HEAD
+=======
+                 $data3['info'] = '课题修改成功';
+                 $data3['url'] = url('TeacherTutor/issue_submit');
+              //   return json($data3);
+>>>>>>> 234dc7ecacc4596410bff565db633e0bbd8436c8
                 $this->showNotice('课题修改成功', url('TeacherTutor/issue_submit'));      
              } 
              

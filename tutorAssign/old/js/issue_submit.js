@@ -1,7 +1,7 @@
 var teachersubmit =new Vue({
     el:'#modal_body',
     data:{
-    datas[]
+    	datas:[]
     }
 	
 });
@@ -9,14 +9,21 @@ teachersubmits();
 function teachersubmits(){
 	$("#submit").click(function(event) {
 		$.ajax({
-			typr:"post",
+			type:"get",
 			data:{
+				demo:data3.info
 
 			},
 			url:api_tutor_submit,
-			success:function(data){
-				teachersubmit.datas=data.data3;
+			success:function(demo){
+				console.log(demo);
+				teachersubmit.datas=demo;
+				console.log(teachersubmit.datas);
+
 			},
+			error:function(response){
+				console.log(response);
+			}
 			dataType:"json"
 		});
 	});
