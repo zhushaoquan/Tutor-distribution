@@ -6,15 +6,19 @@
 #include <string>
 #include <ctime>
 #include <queue>
+#include <vector>
 #include <map>
 
 using namespace std;
+
+int MAXWANT = 5;
 
 struct Student {
     int student_id; // 学生编号
     int teacher_id; // 中选的导师编号
     int cur;        // 当前分配进程正在考虑第cur个志愿
-    int want[5];    // 五个志愿
+    vector<int> want; 
+    //int want[5];    // 五个志愿
     float point;    // 绩点
 };
 
@@ -22,7 +26,8 @@ struct Teacher {
     int teacher_id; // 导师编号
     int want_num;   // 期望的学生数
     int chose_num;  // 已中选的学生数
-    int student_id[10]; // 中选的学生编号
+    vector<int> student_id;
+    //int student_id[10]; // 中选的学生编号
 };
 
 class DistributeSystem {
@@ -87,7 +92,9 @@ public:
             // 考虑学生s的第cur个志愿（导师为t）
             Teacher& t = tch[get_teacher_index(s.want[s.cur++])];
             if (t.want_num > t.chose_num) { // 如果导师t还有剩余名额，直接中选
-                t.student_id[t.chose_num++] = s.student_id;
+                t.student_id.push_back(s.student_id);
+                t.chose_num++;
+                //t.student_id[t.chose_num++] = s.student_id;
                 s.teacher_id = t.teacher_id;
             }
             else {
@@ -104,14 +111,13 @@ public:
                 }
                 // 如果导师t不带学生 或者 学生s的绩点比导师t所有已经中选学生的最低绩点还低，那么学生t只好再等下轮
                 if (t.want_num == 0 || s.point < min_point) {
-                    if (s.cur < 5) { // 如果五个志愿还没考虑完毕的话，放入队列中继续参与分配
+                    if (s.cur < MAXWANT) { // 如果五个志愿还没考虑完毕的话，放入队列中继续参与分配
                         Que.push(s);
                     }
-                }
-                else { // 不然学生t就直接替换掉绩点最低的那个学生
+                } else { // 不然学生t就直接替换掉绩点最低的那个学生
                     Student& min_stu = stu[get_student_index(min_stu_id)];
                     min_stu.teacher_id = -1;
-                    if (min_stu.cur < 5) { // 被替换掉的学生再放入未分配的队列中去
+                    if (min_stu.cur < MAXWANT) { // 被替换掉的学生再放入未分配的队列中去
                         Que.push(min_stu);
                     }
                     t.student_id[pos] = s.student_id;
@@ -130,6 +136,8 @@ int main(int argc, char* argv[]) {
     
     int student_number = atoi(argv[1]);
     int teacher_number = atoi(argv[2]);
+    MAXWANT = atoi(argv[3]);
+
 
     Student* student = new Student[student_number];
     Teacher* teacher = new Teacher[teacher_number];
@@ -144,8 +152,11 @@ int main(int argc, char* argv[]) {
             student[i].teacher_id = -1;
             student[i].cur = 0; // 初始都从志愿1（下标为0）开始考虑
             fin >> student[i].point; // 绩点[1.0, 5.0]
-            for (int j = 0; j < 5; ++j) { // 生成5个志愿
-                fin >> student[i].want[j];
+            int tchID;
+            student[i].want.clear();
+            for (int j = 0; j < MAXWANT; ++j) { // 生成5个志愿
+                fin >> tchID;
+                student[i].want.push_back(tchID);
             }       
         }
         fin.close();
@@ -158,6 +169,7 @@ int main(int argc, char* argv[]) {
         cout << "打开文件失败！" << endl;
     } else {
         for (int i = 0; i < teacher_number; ++i) {
+            teacher[i].student_id.clear();
             fin >> teacher[i].teacher_id;
             fin >> teacher[i].want_num;
             teacher[i].chose_num = 0;
