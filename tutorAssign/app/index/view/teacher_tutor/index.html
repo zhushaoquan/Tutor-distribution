@@ -54,27 +54,37 @@
 
                 <div class="my-information-title">
                     <span>我的信息</span>
-                    <button class="btn btn-info button-size btn-edit" type="submit">修改</button>
                 </div>
                 <div class="my-information-subtitle">
                     <span>您可以在这里查看或修改自己的个人信息</span>
                 </div>
                 <div class="my-information-detail-1">
                     <ul>
-                        <li><span>姓名：</span><span class="span-value">{{$user.name}}</span><span>工号：</span><span class="span-value">{{$user.workNumber}}</span><span>性别：</span><span class="span-value">{{$user.sex}}</span></li>
-                        <li><span>系别：</span><span class="span-value">{{$user.department}}</span><span>电话：</span><span class="span-value">{{$user.telephone}}</span><span>邮箱：</span><span class="span-value">{{$user.email}}</span></li>
-                        <li><span>生日：</span><span class="span-value">{{$user.birthday}}</span><span>职称：</span><span class="span-value">{{$user.position}}</span><span style="width: 100px;">实验班导师：</span><span class="span-value">{{$user.isExperial}}</span></li>
+                        <li><span>姓名：</span><span>{{$user.name}}</span><span>工号：</span><span>{{$user.workNumber}}</span><span>性别：</span><span>{{$user.sex}}</span></li>
+                        <li><span>系别：</span><span>{{$user.department}}</span><span>电话：</span><span>{{$user.telephone}}</span><span>邮箱：</span><span>{{$user.email}}</span></li>
+                        <li><span>生日：</span><span>{{$user.birthday}}</span><span>职称：</span><span>{{$user.position}}</span><span style="width: 100px;">实验班导师：</span><span>{{$user.isExperial}}</span></li>
                     </ul>
                 </div>
-                <div class="description-title">
+                <div class="skill-title">
                     <p>个人简介：</p>
                 </div>
-                <div class="description-detail">
+                <div class="skill-detail">
                     <p>{{$user.description}}</p>
                 </div>
-                <!-- <div class="button-position">
-                    <button class="btn btn-info" type="submit">修改</button>
-                </div> -->
+
+                <div class="edit-btn">
+                    <a href="{{:url('TeacherTutor/modify')}}">
+                        <button class="btn btn-info button-size" type="submit">修改</button>
+                    </a>
+                </div>
+
+                <div class="avator-positon">
+                    {if condition="$user.avatorIsEmpty eq 0"}
+                      <img src="{{$Think.const.COMMON_PATH}}{{$user.avator}}" class="avatorPre">
+                    {elseif condition="$user.avatorIsEmpty eq 1"}
+                      <img src="{{$Think.const.OLD}}/image/defaultAvator.png" class="avatorPre">
+                    {/if}
+                </div>
 
             </div>
             

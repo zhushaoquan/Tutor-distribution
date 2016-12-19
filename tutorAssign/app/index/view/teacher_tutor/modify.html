@@ -49,8 +49,7 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示1：<?php echo $message;?></p>
-                    <p>提示2：部分信息通过教务系统导入，无法修改！点击头像即可上传修改头像！</p>
+                    <p>提示：部分信息通过教务系统导入，无法修改！点击头像即可上传修改头像！</p>
                 </div>
 
                 <div class="my-information-title">
@@ -85,7 +84,7 @@
                       </div>
                       <div class="form-group my-modify-detail" style="height: 140px;">
                         <div class="skill-modify-title"><span>个人简介：</span></div>
-                        <div class="skill-modify-text"><textarea class="form-control skill-width" name="description" rows="5">{{$user.description}}</textarea></div>
+                        <div class="skill-modify-text"><textarea class="form-control skill-width" name="description" rows="3">{{$user.description}}</textarea></div>
                       </div>
                       <div class="modify-btn-position">
                         <button type="submit" id="modifyConfirm" class="btn btn-info button-size" disabled="true">确认</button>
