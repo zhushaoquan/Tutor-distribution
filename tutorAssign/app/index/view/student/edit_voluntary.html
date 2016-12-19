@@ -60,7 +60,7 @@
                  <hr>
                 <div class ="my-information-detail-1" >
                 <?php if(($ontime ==1||$ontime==2 )&&$user['chosen']==0){?>
-                <form method="post" action="{{:url('student/edit_voluntary')}}" style="margin:0px auto; width:90%" >
+                <form method="post" id="edit" action="{{:url('student/edit_voluntary')}}" style="margin:0px auto;height: 50%; width:90%" >
                     <?php if($voluntaryinfosetting['voluntaryNum'] >=1) {?>
                     <div class="form-horizontal" role="form" style="margin:0 auto;width:50%">
                         <div class="form-group">
@@ -141,15 +141,19 @@
                         </div>
                     </div>
                     <?php }?>
-                    <div class="button-position" style="margin:0 auto; width: 200px;">
-                    <button id="submit" class="btn btn-info" type="submit" style="margin-bottom: 28%; width: 70%;" ><?php if(isset($voluntary['wishFirst'])) {?>修改<?php } else {?>提交<?php }?></button>
-                    </div>
+
+                    <!-- <div class="button-position" style="margin:0 auto; width: 200px;"> -->
+                    <button id="submit" form="edit" class="btn btn-info" type="submit" style="margin-top:8%;margin-left:45%;font-size:18px;width: 10%;" ><?php if(isset($voluntary['wishFirst'])) {?>修 改<?php } else {?>提 交<?php }?></button>
+                    <!-- </div> -->
+
                 </form>
 
                 <?php }?>
-                </div>
-            </div>
 
+                </div>
+                
+            </div>
+            
             <div class="footer"  style="border-radius: 10px;">
                 Designed by Lin & 我说的都队
             </div>
