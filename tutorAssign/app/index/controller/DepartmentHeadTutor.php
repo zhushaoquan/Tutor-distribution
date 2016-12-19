@@ -428,6 +428,22 @@ class DepartmentHeadTutor extends BaseController {
 				Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$checkedList[$i]['workNumber'])->setInc('naturNow',1);  //导师当前自然班人数加1
 			}
 		}
+		Db::table('tc_temp_result')->where('1=1')->delete(); //清空临时结果表
+	}
+
+
+	//经过智能分配算法后，返回已选择的学生数和总的学生数
+	public function checkNumAndAllNum() {
+		$request = Request::instance();
+		if ($request->isGet()) {
+			$allNum = count(Db::table('tc_temp_result')->select());
+			$checkNum = count(Db::table('tc_temp_result')->where('checked',1)->select());
+
+			$data['check'] = $checkNum;
+			$data['total'] = $allNum;
+
+			return json($data);
+		}
 	}
 
 
