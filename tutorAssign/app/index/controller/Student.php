@@ -502,7 +502,6 @@ class Student extends BaseController {
             $volunNum = $this->voluntaryinfosetting['voluntaryNum'];
             if($data1['wishFirst'] == '') {
             	$this->showNotice("第一志愿不得为空",url('Student/edit_voluntary'));
-            	
             } else if($data1['wishSecond'] == '' && $volunNum >=2) {
             	$this->showNotice("第二志愿不得为空",url('Student/edit_voluntary'));
             } else if($data1['wishThird'] == '' && $volunNum >=3) {
@@ -511,19 +510,21 @@ class Student extends BaseController {
             	$this->showNotice("第四志愿不得为空",url('Student/edit_voluntary'));
             } else if($data1['wishFifth'] == '' && $volunNum >=5) {
             	$this->showNotice("第五志愿不得为空",url('Student/edit_voluntary'));
+            } else {
+            	$result = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid', $this->user['sid'])->where('round', $data1['round'])->find();
+	            $bool=0;
+		        if($result==NULL) {
+		        	$bool = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->insert($data1);
+		        } else {
+		        	$data1['vid'] = $result['vid'];
+		        	$bool = DB::table('tc_voluntary_'.$this->grades[0]['grade'])->update($data1);
+		        }
+
+		        if($bool) $this->showNotice("志愿填报成功，静候佳音吧！",url('Student/edit_voluntary'));
+
             }
 
-            $result = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid', $this->user['sid'])->where('round', $data1['round'])->find();
-
-            $bool;
-	        if($result==NULL) {
-	        	$bool = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->insert($data1);
-	        } else {
-	        	$data1['vid'] = $result['vid'];
-	        	$bool = DB::table('tc_voluntary_'.$this->grades[0]['grade'])->update($data1);
-	        }
-
-	        if($bool) $this->showNotice("志愿填报成功，静候佳音吧！",url('Student/edit_voluntary'));
+            
 
 
         }
