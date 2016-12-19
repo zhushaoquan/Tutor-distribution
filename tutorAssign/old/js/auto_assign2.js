@@ -5,9 +5,9 @@
 /**
  * Created by wythe on 2016/12/15.
  */
-
+var isInit = true;
 var stu_main_index = "";
-
+var last_page = 1;
 
 $("#confirm-this-page").click(function () {
     var info = new Array();
@@ -18,7 +18,7 @@ $("#confirm-this-page").click(function () {
         },
         url: "",
         success: function (response) {
-            refreshStudentTable();
+
         },
         error: function (response) {
 
@@ -55,8 +55,9 @@ var vm_table_student_main = new Vue({
         changeTeacher: function (index) {
             console.log("change");
             stu_main_index = index;
+
             var request = {};
-            // loadTeacherModalTable();
+            loadTeacherModalTable(request,api_unassigned_teacher_list,"get");
         }
     }
 });
@@ -134,7 +135,8 @@ function refreshStudentTable(request, url, method) {
         url: url,
         success: function (response) {
             vm_table_student_main.datas = response.information;
-            refreshTotalpages(data.amount);
+            if(response.amount != 0) refreshTotalpages(response.amount);
+            else refreshTotalpages(1);
         },
         error: function (response) {
 
@@ -175,8 +177,37 @@ function initPaginator() {
         last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
         page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
         onPageChange: function (page) {
-            var request = {};
-            // refreshStudentTable(request,api_show_unassigned_student,"get");
+            var request;
+            if(isInit){
+                //是否第一次加载表格
+                 request = {
+                    curPage:page,
+                    check:[]
+                };
+            }else{
+                var check = [];
+                for(item of vm_table_student_main.datas){
+                    if(item.checked){
+                        check.push({
+                            serialNum:item.serialNum,
+                            workNumber:item.workNumber,
+                            checked:true
+                        });
+                    }else {
+                        check.push({
+                            serialNum:item.serialNum,
+                            workNumber:item.workNumber,
+                            checked:false
+                        });
+                    }
+                }
+                request = {
+                    curPage:last_page,
+                    check:check
+                };
+            }
+            console.log("check arr:\n"+request);
+            refreshStudentTable(request,api_assigned_student_list,"get");
         }
     });
 }

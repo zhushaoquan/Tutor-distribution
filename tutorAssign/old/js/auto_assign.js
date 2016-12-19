@@ -219,7 +219,7 @@ $("#go-to-assign2").click(function () {
     $("#info").text("确认进行智能分配？").addClass("info-modal");
 });
 
-$("#confirm-skip").click(function () {
-    window.location.href=$("#go-to-assign2").attr("link");
-    console.log($("#go-to-assign2").attr("link"));
-});
+// $("#confirm-skip").click(function () {
+//     window.location.href=$("#go-to-assign2").attr("link");
+//     console.log($("#go-to-assign2").attr("link"));
+// });
