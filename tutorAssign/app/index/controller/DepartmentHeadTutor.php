@@ -405,7 +405,7 @@ class DepartmentHeadTutor extends BaseController {
 			Db::table('user_student_'.$grade[0]['grade'])->where('serialNum',$checkedList[$i]['serialNum'])->setField('chosen',1);  //对应的学生中选状态置为1
 
 			if ($student['department'] == "计算机实验班") {
-				Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$checkedList[$i]['workNumber'])->
+				// Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$checkedList[$i]['workNumber'])->
 			} elseif ($student['department'] == "数学实验班") {
 				
 			} else {
