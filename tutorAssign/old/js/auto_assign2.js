@@ -178,13 +178,30 @@ function initPaginator() {
         page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
         onPageChange: function (page) {
 
-            var request;
-            request = {
-                curPage:page,
-            };
-            refreshStudentTable(request,api_assigned_student_list,"get");
-
-            last_page = page;
+            if(isInit){
+                refreshStudentTable({
+                    curPage:page,
+                    check:""
+                },
+                api_assigned_student_list,
+                "get");
+                isInit = false;
+            }else {
+                console.log(getCurPageInfo());
+                refreshStudentTable({
+                    curPage:page,
+                    check:getCurPageInfo()
+                },
+                api_assigned_student_list,
+                "get");
+            }
+            // var request;
+            // request = {
+            //     curPage:page,
+            // };
+            // refreshStudentTable(request,api_assigned_student_list,"get");
+            //
+            // last_page = page;
         }
     });
 }
@@ -254,24 +271,24 @@ $("#btn-confirm-all-result").click(function () {
 
 
 
-//====================================
-// 确认当前页结果
-function confirmThisPage() {
-    var request = {
-        curPage:getCurrentPage(),
-        check:getCurPageInfo()
-    };
-
-    $.ajax({
-        type:"get",
-        data:request,
-        url:api_confirm_cur_page,
-        success:function (response) {
-
-        },
-        dataType:"json"
-    });
-}
+// //====================================
+// // 确认当前页结果
+// function confirmThisPage(page) {
+//     var request = {
+//         curPage:page,
+//         check:getCurPageInfo()
+//     };
+//
+//     $.ajax({
+//         type:"get",
+//         data:request,
+//         url:api_confirm_cur_page,
+//         success:function (response) {
+//
+//         },
+//         dataType:"json"
+//     });
+// }
 
 
 function getCurPageInfo() {
@@ -280,13 +297,13 @@ function getCurPageInfo() {
         if(item.checked){
             check.push({
                 serialNum:item.serialNum,
-                workNumber:item.workNumber,
+                // workNumber:item.workNumber,
                 checked:true
             });
         }else {
             check.push({
                 serialNum:item.serialNum,
-                workNumber:item.workNumber,
+                // workNumber:item.workNumber,
                 checked:false
             });
         }

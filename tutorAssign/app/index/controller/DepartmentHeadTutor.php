@@ -380,8 +380,9 @@ class DepartmentHeadTutor extends BaseController {
 
 		$request = Request::instance();
 		if ($request->isGet()) {
-			$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
-			$checkList = $request->get('check');
+		    $data = $request->get();
+			$curPage = $data['curPage'] != '' ? $data['curPage'] : 1;
+			$checkList = $data['check'];
 
 			$totalPage = ceil(count(Db::table('tc_temp_result')->select())/$pageSize);
 			$student['amount'] = $totalPage;
@@ -389,13 +390,13 @@ class DepartmentHeadTutor extends BaseController {
 
 			if ($checkList != "") {
 				$count = count($checkList);
-				for ($i=0; $i <$count ; $i++) { 
-					if ($checkList['check'][$i]['checked'] == true) {
+				for ($i=0; $i <$count ; $i++) {
+					if ($checkList[$i]['checked'] == "true") {
 						$checkVal = 1;
-					} else {
+					} elseif ($checkList[$i]['checked'] == "false") {
 						$checkVal = 0;
 					}
-					Db::table('tc_temp_result')->where('serialNum',$checkList['check'][$i]['serialNum'])->setField('checked',$checkVal);
+					Db::table('tc_temp_result')->where('serialNum',$checkList[$i]['serialNum'])->setField('checked',$checkVal);
 				}
 			}
 			return json($student);
