@@ -1,6 +1,11 @@
 
 /**
  * Created by wythe on 2016/12/15.
+ *
+ * 踩坑提示:
+ * 1、jqPaginator 的总页数不能为0
+ * 2、jqPaginator 在初始化时，会调用一次onPageChange
+ *
  */
 
 var serialNum = "";
@@ -41,7 +46,7 @@ var vm_table_teacher = new Vue({
         datas: [
             {
                 sid:"01",
-                name:"黄伟炜",
+                name:"Jack",
                 isExperial:"是",
                 js_need:"2",
                 js_cur:"2",
@@ -195,15 +200,19 @@ function getCurrentPage() {
 }
 
 
+//=============================
+// 按钮的禁用与启用
 function enableConfirmBtns() {
     $(".btn-modal-assign-confirm").attr("disabled",false);
 }
-
 function disableConfirmBtns() {
     $(".btn-modal-assign-confirm").attr("disabled",true);
 }
 
 
+
+//===============================
+// 关闭弹窗
 $("#btn-close-assign").click(function () {
     // location.reload();
     $("#alert-info").text("");
@@ -215,11 +224,27 @@ $("#btn-close-assign").click(function () {
     refreshStudentTable(request,api_unassigned_student_list,"get");
 });
 
+//==================================
+//弹窗提示
 $("#go-to-assign2").click(function () {
     $("#info").text("确认进行智能分配？").addClass("info-modal");
 });
 
-// $("#confirm-skip").click(function () {
-//     window.location.href=$("#go-to-assign2").attr("link");
-//     console.log($("#go-to-assign2").attr("link"));
-// });
+
+//==================================
+// 确认进行智能分配
+$("#confirm-skip").click(function () {
+    var result_link = $("#go-to-assign2").attr("link");
+    $.ajax({
+        type:"get",
+        data:{},
+        url:api_auto_assign,
+        success:function (response) {
+            location.href = result_link;
+        },
+        error:function () {
+
+        },
+        dataType:"json"
+    });
+});

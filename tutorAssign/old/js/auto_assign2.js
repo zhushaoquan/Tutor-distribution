@@ -1,30 +1,15 @@
 /**
- * Created by wythe on 2016/12/17.
+ * Created by weeway on 2016/12/17.
+ *
+ * 踩坑提示:
+ * 1、jqPaginator 的总页数不能为0
+ * 2、jqPaginator 在初始化时，会调用一次onPageChange
+ *
  */
 
-/**
- * Created by wythe on 2016/12/15.
- */
+
 var isInit = true;
 var stu_main_index = "";
-var last_page = 1;
-
-$("#confirm-this-page").click(function () {
-    var info = new Array();
-    $.ajax({
-        type: "get",
-        data: {
-
-        },
-        url: "",
-        success: function (response) {
-
-        },
-        error: function (response) {
-
-        }
-    });
-});
 
 
 //==============================
@@ -32,24 +17,7 @@ $("#confirm-this-page").click(function () {
 var vm_table_student_main = new Vue({
     el: "#table-student-main",
     data: {
-        datas: [
-            {
-                serialNumber:"031402209",
-                student_name:"黄伟炜",
-                vol_num:"2",
-                gpa:"4.5",
-                teacher_name:"张东",
-                workNumber:"00001"
-            },
-            {
-                serialNumber:"031402209",
-                student_name:"黄伟炜",
-                vol_num:"2",
-                gpa:"4.5",
-                teacher_name:"张东",
-                workNumber:"00001"
-            }
-        ]
+        datas: []
     },
     methods: {
         changeTeacher: function (index) {
@@ -65,45 +33,7 @@ var vm_table_student_main = new Vue({
 var vm_table_teacher_modal = new Vue({
     el: "#table-teacher-modal",
     data: {
-        datas: [
-            {
-                sid:"01",
-                name:"大东东",
-                isExperial:"是",
-                js_need:"2",
-                js_cur:"2",
-                ss_need:"2",
-                ss_cur:"2",
-                nature_need:"2",
-                nature_cur:"2",
-                workNumber:"00001"
-            },
-            {
-                sid:"02",
-                name:"黄伟炜",
-                isExperial:"是",
-                js_need:"2",
-                js_cur:"2",
-                ss_need:"2",
-                ss_cur:"2",
-                nature_need:"2",
-                nature_cur:"2",
-                workNumber:"00002"
-            },
-            {
-                sid:"03",
-                name:"小东东",
-                isExperial:"是",
-                js_need:"2",
-                js_cur:"2",
-                ss_need:"2",
-                ss_cur:"2",
-                nature_need:"2",
-                nature_cur:"2",
-                workNumber:"00003"
-            }
-
-        ]
+        datas: []
     },
     methods: {
         confirm: function (index) {
@@ -128,15 +58,17 @@ initPaginator();
 
 //===============================
 // 刷新学生表格
-function refreshStudentTable(request, url, method) {
+function refreshStudentTable(request, url, method,reject_data=false) {
     $.ajax({
         type: method,
         data: request,
         url: url,
         success: function (response) {
-            vm_table_student_main.datas = response.information;
-            if(response.amount != 0) refreshTotalpages(response.amount);
-            else refreshTotalpages(1);
+            if(!reject_data){
+                vm_table_student_main.datas = response.information;
+                if(response.amount != 0) {refreshTotalpages(response.amount);}
+                else {refreshTotalpages(1);}
+            }
         },
         error: function (response) {
 
@@ -195,13 +127,6 @@ function initPaginator() {
                 api_assigned_student_list,
                 "get");
             }
-            // var request;
-            // request = {
-            //     curPage:page,
-            // };
-            // refreshStudentTable(request,api_assigned_student_list,"get");
-            //
-            // last_page = page;
         }
     });
 }
@@ -226,30 +151,47 @@ function getCurrentPage() {
 //=====================================
 // 确认所有结果
 $("#btn-confirm-result-pop").click(function () {
-
     //触发弹窗
-    $.ajax({
-        type:"get",
-        data:{
-        },
-        url:api_final_result,
-        success:function (response) {
-            $("#info").text("对"+
-                response.check+
-                "/"+
-                response.total+
-                "条结果进行确认？")
-                .addClass("info-modal");
-        },
-        error:function () {
 
+    //更新本页值到服务器，保持本地数据不变
+    refreshStudentTable({
+            curPage:getCurrentPage(),
+            check:getCurPageInfo()
         },
-        dataType:"json"
-    });
+        api_assigned_student_list,
+        "get",true);
+
+    //等待数据插入数据库，再调用接口，保证数据一致
+    setTimeout(getResult, 500);
+
+    function getResult() {
+        $.ajax({
+            type:"get",
+            data:{
+            },
+            url:api_final_result,
+            success:function (response) {
+                $("#info").text("对"+
+                    response.check+
+                    "/"+
+                    response.total+
+                    "条结果进行确认？")
+                    .addClass("info-modal");
+            },
+            error:function () {
+
+            },
+            dataType:"json"
+        });
+    }
 });
 
 
 $("#btn-confirm-all-result").click(function () {
+    // console.log(getCurPageInfo());
+
+
+
     //确认最终结果
     var auto_assign_link = $(this).attr("link");
     $(this).attr("disabled",true);
@@ -272,6 +214,13 @@ $("#btn-confirm-all-result").click(function () {
 //========================================
 // 关闭弹窗清除提示信息
 $("#btn-close-cancel").click(function () {
+    console.log("close");
+    refreshStudentTable({
+            curPage:getCurrentPage(),
+            check:""
+        },
+        api_assigned_student_list,
+        "get");
     $("#info").text("");
 });
 
