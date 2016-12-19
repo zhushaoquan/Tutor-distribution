@@ -369,7 +369,7 @@ class DepartmentHeadTutor extends BaseController {
 	    }
 	    // return json($insert);
         $this->assign('user', $user);
-        return $this->fetch('auto_assign2');
+        return json('success');
 
 	}
 
