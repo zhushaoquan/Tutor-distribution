@@ -6,21 +6,12 @@ var choice_out =new Vue({
 	}
 });
 
-
-
-// //获得选择学生的sid
-// function selectchoice(){
-// 	var sid= $("#select1").attr("value");
-// 	return sid;
-// }
-
-
 refreshout();
-
+var sid="";
 //  加载弹出框里面的信息
 function refreshout(){
-	$("#select1").click(function(){
-		var sid=$($("#select1").parent().parent().children().get(0)).children().val();
+	$('.select').click(function(){
+		 sid=$(this).parent().parent().children().get(0).innerText;
 		console.log(sid);
 		
 		$.ajax({
@@ -51,19 +42,11 @@ var reject_out =new Vue({
 	}
 });
 
-
-
-//获得拒绝学生的sid
-function selectrejectchoice(){
-	var sid= $("#reject").attr("value");
-	return sid;
-}
-
 refreshrejectout();
 //  加载拒绝弹出框里面的信息
 function refreshrejectout(){
-	$("#reject").click(function(){
-		var sid=selectrejectchoice();
+	$('.reject').click(function(){
+		sid=$(this).parent().parent().children().get(0).innerText;
 		$.ajax({
 			type:"get",
 			data:{
