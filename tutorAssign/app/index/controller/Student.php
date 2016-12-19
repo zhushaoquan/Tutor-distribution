@@ -110,29 +110,38 @@ class Student extends BaseController {
 
 	public function showNotice($str, $smartMode) {
         $str = str_replace("\n", "", $str);
-       // $str = str_replace("\n", "", $str);
-        $data['info'] = $str;
-        $data['url'] = $smartMode;
-        return json($data);
-        
-        /*
         echo '<DOCTYPE HTML>';
         echo '<html>';
         echo '<head>';
         echo '<meta charset="UTF-8" />';
         echo '<title>提示信息</title>';
-        echo '</head>';
+        echo '</head>'; 
         echo '<body>';
         echo '<script language="javascript">';
-        echo "alert('".addslashes($str)."');";
-        echo 'window.location.href="'.$smartMode.'";';
+        echo 'window.alert=function (txt)
+			{
+			    document.write ("<table width=\'350px\' height=\'170px\' border=\'0\' align=\'center\' cellpadding=\'0\' cellspacing=\'1\' bgcolor=\'#CCCCCC\'>");
+			    document.write ("  <tr>");
+			    document.write ("    <td align=\'center\' bgcolor=\'#73A2D6\' height=\'25px\'><span >信息提示</span></td>");
+			    document.write ("  </tr>");
+			    document.write ("  <tr>");
+			    document.write (" <td bgcolor=\'#FFFFFF\' height=\'100px\' style=\'font-size:13px; color:rgb(27,111,181); font-family:Verdana;\'>"+txt+"</td>");
+			    document.write ("  </tr>");
+			    document.write ("  <tr> ");
+			    document.write (" <td align=\'right\' height=\'30px\'>");
+			    document.write ("    <input type=\'button\' name=\'Submit2\' value=\'确定\' onclick=\'location.href = \"'.$smartMode.'\" \' /></td>");
+			    document.write ("  </tr>");
+			    document.write (" </table>");
+			}
+			';
+        echo "alert('".addslashes($str)."');";      
         echo '</script>';
         echo '</body>';
-        echo '</html>';
-        */
-        exit;
+        echo '</html>';    
     }
-
+    public function test123() {
+    	$this->showNotice("志愿填报成功，静候佳音吧！",url('Student/index'));
+    }
 	public function modify() {
 		$user = $this->auto_login();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
