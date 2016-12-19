@@ -50,7 +50,7 @@ class Student extends BaseController {
 
 	        if($this->user['chosen'] == 1) {
 	        	$data['ontime'] = 3;
-	        	$data['message'] = "<font color='#FF0000'>".$data['department']."</font>的志愿结果已出，请前往 最终结果 页面查看哦~~~";
+	        	$data['message'] = "<font color='#FF0000'>".$this->user['name']."</font>同学，志愿结果已出，请前往 最终结果 页面查看哦~~~";
 	        }else if($nowtime >= $data['issueStart'] && $nowtime <= $data['issueEnd']) {
 	        	//导师填报课题时段！
 	        	$data['ontime'] = 0;
@@ -76,11 +76,11 @@ class Student extends BaseController {
 	         	$data['ontime'] = 22;
 	         	$data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d',$data['confirmSecondEnd'])."</font>,请同学们耐心等候！";
 	         }else {
-	            $data['message'] = "当前不在填报志愿时间段内！";      
+	            $data['message'] = "当前不在毕设互选时间段哟~~";      
 	         }
         } else {
         	$data['ontime'] = -1;
-        	$data['message'] = "当前不在填报志愿时间段内！";
+        	$data['message'] = "当前不在毕设互选时间段哟~~";
         }
         
          $this->ontime = $data['ontime'];
@@ -115,17 +115,33 @@ class Student extends BaseController {
         echo '<head>';
         echo '<meta charset="UTF-8" />';
         echo '<title>提示信息</title>';
-        echo '</head>';
+        echo '</head>'; 
         echo '<body>';
         echo '<script language="javascript">';
-        echo "alert('".addslashes($str)."');";
-        echo 'window.location.href="'.$smartMode.'";';
+        echo 'window.alert=function (txt)
+			{
+			    document.write ("<table width=\'350px\' height=\'170px\' border=\'0\' align=\'center\' cellpadding=\'0\' cellspacing=\'1\' bgcolor=\'#CCCCCC\'>");
+			    document.write ("  <tr>");
+			    document.write ("    <td align=\'center\' bgcolor=\'#73A2D6\' height=\'25px\'><span >信息提示</span></td>");
+			    document.write ("  </tr>");
+			    document.write ("  <tr>");
+			    document.write (" <td bgcolor=\'#FFFFFF\' height=\'100px\' style=\'font-size:13px; color:rgb(27,111,181); font-family:Verdana;\'>"+txt+"</td>");
+			    document.write ("  </tr>");
+			    document.write ("  <tr> ");
+			    document.write (" <td align=\'right\' height=\'30px\'>");
+			    document.write ("    <input type=\'button\' name=\'Submit2\' value=\'确定\' onclick=\'location.href = \"'.$smartMode.'\" \' /></td>");
+			    document.write ("  </tr>");
+			    document.write (" </table>");
+			}
+			';
+        echo "alert('".addslashes($str)."');";      
         echo '</script>';
         echo '</body>';
-        echo '</html>';
-        exit;
+        echo '</html>';    
     }
-
+    public function test123() {
+    	$this->showNotice("志愿填报成功，静候佳音吧！",url('Student/index'));
+    }
 	public function modify() {
 		$user = $this->auto_login();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
@@ -198,7 +214,7 @@ class Student extends BaseController {
 				                                     ->where('isExperial','in','1,3')
 				                                     ->where('compExperNow < totalCompExper')
 				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
-				                                     ->order('t.name desc')
+				                                     ->order('t.workNumber asc')
 				                                     ->page($page,$this->pageSize)
 				                                     ->select();
 
@@ -208,7 +224,7 @@ class Student extends BaseController {
 				                                     ->where('isExperial','in','1,3')
 				                                     ->where('compExperNow < totalCompExper')
 				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
-				                                     ->order('t.name desc')
+				                                     ->order('t.workNumber asc')
 				                                     ->select());
 				$page = $totalPage = ceil($total/$this->pageSize);
 				$pageBar = [
@@ -225,7 +241,7 @@ class Student extends BaseController {
 				                                     ->where('isExperial','in','2,3')
 				                                     ->where('mathExperNow < totalMathExper')
 				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
-				                                     ->order('t.name desc')
+				                                     ->order('t.workNumber asc')
 				                                     ->page($page,$this->pageSize)->select();
 				$this->teachers = $teachers;
 
@@ -233,7 +249,7 @@ class Student extends BaseController {
 				                                     ->where('isExperial','in','2,3')
 				                                     ->where('mathExperNow < totalMathExper')
 				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
-				                                     ->order('t.name desc')
+				                                     ->order('t.workNumber asc')
 				                                     ->select());
 				$page = $totalPage = ceil($total/$this->pageSize);
 				$pageBar = [
@@ -248,7 +264,7 @@ class Student extends BaseController {
 				                                     ->where('department',$this->user['department'])
 				                                     ->where('naturNow < totalNatur')
 				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
-				                                     ->order('t.name desc')
+				                                     ->order('t.workNumber asc')
 				                                     ->page($page,$this->pageSize)
 				                                     ->select();
 
@@ -256,7 +272,7 @@ class Student extends BaseController {
 				                                     ->where('department',$this->user['department'])
 				                                     ->where('naturNow < totalNatur')
 				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
-				                                     ->order('t.name desc')
+				                                     ->order('t.workNumber asc')
 				                                     ->select());
 			    $this->teachers = $teachers;
 				$page = $totalPage = ceil($total/$this->pageSize);
@@ -291,7 +307,7 @@ class Student extends BaseController {
 			$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                     ->where('isExperial','in','1,3')   
 			                                     ->where('compExperNow < totalCompExper')
-			                                     ->order('t.name desc')
+			                                     ->order('t.workNumber asc')
 			                                     ->page($page,$this->pageSize)
 			                                     ->select();
 
@@ -300,7 +316,7 @@ class Student extends BaseController {
 		    $total = count(Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                       ->where('isExperial','in','1,3')
 			                                       ->where('compExperNow < totalCompExper')
-			                                       ->order('t.name desc')
+			                                       ->order('t.workNumber asc')
 			                                       ->select());
 			$page = $totalPage = ceil($total/$this->pageSize);
 			$pageBar = [
@@ -316,14 +332,14 @@ class Student extends BaseController {
 			$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                     ->where('isExperial','in','2,3')
 			                                     ->where('mathExperNow < totalMathExper')
-			                                     ->order('t.name desc')
+			                                     ->order('t.workNumber asc')
 			                                     ->page($page,$this->pageSize)->select();
 			$this->teachers = $teachers;
 
 		    $total = count(Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                     ->where('isExperial','in','2,3')
 			                                     ->where('mathExperNow < totalMathExper')
-			                                     ->order('t.name desc')
+			                                     ->order('t.workNumber asc')
 			                                     ->select());
 			$page = $totalPage = ceil($total/$this->pageSize);
 			$pageBar = [
@@ -337,14 +353,14 @@ class Student extends BaseController {
 			$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                     ->where('department',$this->user['department'])
 			                                     ->where('naturNow < totalNatur')
-			                                     ->order('t.name desc')
+			                                     ->order('t.workNumber asc')
 			                                     ->page($page,$this->pageSize)
 			                                     ->select();
 
 		    $total = count(Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                     ->where('department',$this->user['department'])
 			                                     ->where('naturNow < totalNatur')
-			                                     ->order('t.name desc')
+			                                     ->order('t.workNumber asc')
 			                                     ->select());
 		    $this->teachers = $teachers;
 			$page = $totalPage = ceil($total/$this->pageSize);
@@ -372,11 +388,11 @@ class Student extends BaseController {
 
         if($this->search_teacher!="") {
         	$this->assign('search_teacher',$teacher);
-        	$teachers = Db::table('user_teacher')->where('department|name|sex','like','%'.$search_teacher.'%')
+        	$teachers = Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
 			                                     ->order('name desc')
 			                                     ->page($page,$this->pageSize)
 			                                     ->select();
-		    $total = count(Db::table('user_teacher')->where('department|name|sex','like','%'.$search_teacher.'%')
+		    $total = count(Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
 			                                     ->order('name desc')
 			                                     ->select());
 
@@ -397,11 +413,11 @@ class Student extends BaseController {
         	$teacher = $this->search_teacher;
         }
 
-        $teachers = Db::table('user_teacher')->where('department|name|sex','like','%'.$search_teacher.'%')
+        $teachers = Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
 			                                     ->order('name desc')
 			                                     ->page($page,$this->pageSize)
 			                                     ->select();
-	    $total = count(Db::table('user_teacher')->where('department|name|sex','like','%'.$search_teacher.'%')
+	    $total = count(Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
 		                                     ->order('name desc')
 		                                     ->select());
 
@@ -436,28 +452,24 @@ class Student extends BaseController {
 		if($this->user['department'] == $this->department_1) {
 			//计算机实验吧
 			$tutors = Db::table('user_teacher') ->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
-			                                    ->where(function ($query) {
-			                                     	$query->where('isExperial',1)->whereOr('isExperial',3)->where('compExperNow', '<','totalCompExper');
-			                                     })
-			                                    //->where('compExperNow ','< ','totalCompExper')
-			                                    ->order('t.name desc')
+			                                    ->where('isExperial','in','1,3')   
+			                                    ->where('compExperNow < totalCompExper')
+			                                    ->order("convert(t.name using gb2312) ASC")
 			                                    ->select();
 
 		} else if($this->user['department'] == $this->department_2) {
 			//数学实验板
 			$tutors = Db::table('user_teacher') ->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
-			                                    ->where(function ($query) {
-			                                     	$query->where('isExperial',2)->whereOr('isExperial',3)->where('mathExperNow ','< ','totalMathExper');
-			                                     })
-			                                    //->where('mathExperNow ','< ','totalMathExper')
-			                                    ->order('t.name desc')
+			                                    ->where('isExperial','in','2,3')
+			                                    ->where('mathExperNow < totalMathExper')
+			                                    ->order("convert(t.name using gb2312) ASC")
 			                                    ->select();
 		} else {
 			//自然班
 			$tutors = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 			                                   ->where('department',$this->user['department'])
-			                                   ->where('naturNow ','<','totalNatur')
-			                                   ->order('t.name desc')
+			                                   ->where('naturNow < totalNatur')
+			                                   ->order("convert(t.name using gb2312) ASC")
 			                                   ->select();
 		}
 	

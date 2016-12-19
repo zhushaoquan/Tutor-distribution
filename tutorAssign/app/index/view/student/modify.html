@@ -56,29 +56,44 @@
                 <div class="my-information-subtitle">
                     <span>你可以在这里修改自己的个人信息</span>
                 </div>
-                <div class="my-information-detail-1">
-                    <ul>
-                        <li><span>姓名：</span><span class="span-value">{{$user.name}}</span><span>学号：</span><span class="span-value">{{$user.serialNum}}</span><span>性别：</span><span class="span-value">{{$user.gender}}</span></li>
-                        <li><span>学院：</span><span class="span-value">{{$user.college}}</span><span>系别：</span><span class="span-value">{{$user.department}}</span><span>方向：</span><span class="span-value">{{$user.field}}</span></li>
-                        <li><span>绩点：</span><span class="span-value">{{$user.gpa}}</span><span>排名：</span><span class="span-value">{{$user.rank}}</span><span>中选：</span><span class="span-value">{{$user.chosen}}</span></li>
-                </div>
                 
-                <form role="form">
-                      <div class="form-group">
-                        <span>旧密码：</span>
-                        <input type="email" class="form-control-1" id="exampleInputEmail1" placeholder="Enter email">
+                <form role="form" action="{{:url('Student/saveModify')}}" name="modify" method="post" enctype="multipart/form-data" onsubmit="return checkall()">
+                      <div class="form-group my-modify-detail">
+                        <div class="pw-title"><span>旧密码：</span></div>
+                        <div class="pw-modify"><input type="password" name="oldPassword" class="form-control-1 pw-form-width" id="oldPassword" placeholder="旧密码" value=""><p id="oldPwWrong" style="font-size: 12px;float: right;padding-right: 48px;padding-top: 8px;display: none;color: red;">*旧密码输入错误</p></div>
                       </div>
-                      <div class="form-group pw-position">
-                        <span>新密码：</span>
-                        <input type="password" class="form-control-1" id="exampleInputPassword1" placeholder="Password">
+                      <div class="form-group pw-position my-modify-detail">
+                        <div class="pw-title"><span>新密码：</span></div>
+                        <div class="pw-modify"><input type="password" name="newPassword" class="form-control-1 pw-form-width" id="newPassword" placeholder="新密码"><p id="passwordSame" style="font-size: 12px;float: right;padding-right: 0px;padding-top: 8px;display: none;color: red;">*新密码与旧密码不能相同</p></div>
                       </div>
-                      <div class="form-group  pw-position">
-                        <span>确认密码：</span>
-                        <input type="password" class="form-control-1" id="exampleInputPassword1" placeholder="Password">
+                      <div class="form-group  pw-position my-modify-detail">
+                        <div class="pw-title"><span>确认密码：</span></div>
+                        <div class="pw-modify"><input type="password" name="newPasswordConfirm" class="form-control-1 pw-form-width" id="newPasswordConfirm" placeholder="新密码"><p id="newPw" style="font-size: 12px;float: right;padding-right: 48px;padding-top: 8px;display: none;color: red;">*请输入确认密码</p><p id="newPwConfirmWrong" style="font-size: 12px;float: right;padding-right: 36px;padding-top: 8px;display: none;color: red;">*两次密码输入不同</p></div>
                       </div>
-                  <button type="submit" class="btn btn-info button-size">修改</button>
+                      <div class="form-group my-modify-detail">
+                        <div class="tel-title"><span>联系方式：</span></div>
+                        <div class="pw-modify"><input type="text" name="telephone" class="form-control-1 pw-form-width" id="telephone" placeholder="联系方式" value="{{$user.telephone}}"><p id="telWrong" style="font-size: 12px;float: right;padding-right: 36px;padding-top: 8px;display: none;color: red;">*联系方式格式错误</p></div>
+                      </div>
+                      <div class="form-group my-modify-detail">
+                        <div class="email-title"><span>邮&nbsp;&nbsp;&nbsp;箱：</span></div>
+                        <div class="pw-modify"><input type="email" name="email" class="form-control-1 pw-form-width" id="exampleInputEmail1" placeholder="邮箱" value="{{$user.email}}"></div>
+                      </div>
+                      <div class="modify-btn-position">
+                        <button type="submit" id="modifyConfirm" class="btn btn-info button-size" disabled="true" style="margin-top: 50px;">确认</button>
+                      </div>
+                      <div class="avator-positon">
+                          <input type="file" id="avator" name="avator" class="fileInput" style="cursor: pointer;">
+                          {if condition="$user.avatorIsEmpty eq 0"}
+                            <img src="{{$Think.const.COMMON_PATH}}{{$user.avator}}" id="avatorPre" class="avatorPre" style="cursor: pointer;">
+                          {elseif condition="$user.avatorIsEmpty eq 1"}
+                            <img src="{{$Think.const.OLD}}/image/defaultAvator.png" class="avatorPre">
+                          {/if}
+                      </div>
                 </form>
-                <a href="{{:url('Student/index')}}"><button class="btn btn-info button-size" type="submit">返回</button></a></a>
+                <div class="return-btn-position"><a href="{{:url('Student/index')}}"><button class="btn btn-info button-size" type="submit"  style="margin-top: 50px;">返回</button></a></a></div>
+                
+                
+                
             </div>
             
             <div class="footer"  style="border-radius: 10px;">

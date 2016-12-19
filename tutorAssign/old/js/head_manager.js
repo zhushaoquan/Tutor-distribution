@@ -26,10 +26,10 @@ $(".input-add").click(function () {
     $(this).attr("placeholder", " ");
 });
 
-//搜索内容
-function searchCondition() {
-    return $("#searchtea").val();
-}
+// //搜索内容
+// function searchCondition() {
+//     return $("#searchtea").val();
+// }
 
 // 查询不到
 function settroublecallback() {
@@ -43,7 +43,8 @@ function listenSearchEvent() {
         var data = $(this).parent().parent().children();
         var department = data[0].innerText;
         // searchteacher.departments=department;
-        var headname = searchCondition();
+        var selectinformation = $(this).parent().children();
+        var headname=selectinformation[0].value;
         if (headname === "") {
             onSearch = false;
             settroublecallback();

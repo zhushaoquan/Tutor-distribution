@@ -47,19 +47,21 @@
         </div>
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
-                    <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                        <p>提示1：<?php echo $message;?></p>
+                <div role="alert" class="alert alert-info" style="margin-bottom: 0">
+                        <p>提示<?php if($ontime==1||$ontime==2) {?>1<?php }?>：{{:$message}}</p>
+                    <?php if(isset($message1)) {?><p>提示2：{{:$message1}}</p><?php }?>
+                    <?php if(isset($message2)) {?><p>提示3：{{:$message2}}</p><?php }?>
                         <?php if($user['chosen']==0 && ($ontime ==1||$ontime==2 )){?><p>提示2：志愿选择不可为空，但同一老师可以多次选择！</p><?php }?>
-                    </div>
+                </div>
                 <div class="my-information-title">
                    
                         <span>志愿填报</span>
                 </div>
                  <hr>
-            <div class ="center-block" >
-            <?php if(($ontime ==1||$ontime==2 )&&$user['chosen']==0){?>                   
-            <form method="post" action="{{:url('student/edit_voluntary')}}" style="margin:0px auto; width:90%" > 
-                <?php if($voluntaryinfosetting['voluntaryNum'] >=1) {?>
+                <div class ="center-block" >
+                <?php if(($ontime ==1||$ontime==2 )&&$user['chosen']==0){?>
+                <form method="post" action="{{:url('student/edit_voluntary')}}" style="margin:0px auto; width:90%" >
+                    <?php if($voluntaryinfosetting['voluntaryNum'] >=1) {?>
                     <div class="form-horizontal" role="form" style="margin:0 auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第一志愿：</label>
@@ -74,8 +76,8 @@
                             </div>
                         </div>
                     </div>
-                <?php }?>
-                <?php if($voluntaryinfosetting['voluntaryNum'] >=2) {?>
+                    <?php }?>
+                    <?php if($voluntaryinfosetting['voluntaryNum'] >=2) {?>
                     <div class="form-horizontal" role="form" style="margin:0 auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第二志愿：</label>
@@ -90,8 +92,8 @@
                             </div>
                         </div>
                     </div>
-                <?php }?>
-                <?php if($voluntaryinfosetting['voluntaryNum'] >=3) {?>
+                    <?php }?>
+                    <?php if($voluntaryinfosetting['voluntaryNum'] >=3) {?>
                     <div class="form-horizontal" role="form" style="margin:0 auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第三志愿：</label>
@@ -106,8 +108,8 @@
                             </div>
                         </div>
                     </div>
-                <?php }?>
-                <?php if($voluntaryinfosetting['voluntaryNum'] >=4) {?>
+                    <?php }?>
+                    <?php if($voluntaryinfosetting['voluntaryNum'] >=4) {?>
                     <div class="form-horizontal" role="form" style="margin:0 auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第四志愿：</label>
@@ -122,8 +124,8 @@
                             </div>
                         </div>
                     </div>
-                <?php } ?>
-                <?php if($voluntaryinfosetting['voluntaryNum'] >=5) {?>
+                    <?php } ?>
+                    <?php if($voluntaryinfosetting['voluntaryNum'] >=5) {?>
                     <div class="form-horizontal" role="form" style="margin:0 auto;width:50%">
                         <div class="form-group">
                             <label for="basic" class="col-md-4 control-label">第五志愿：</label>
@@ -138,19 +140,20 @@
                             </div>
                         </div>
                     </div>
-                <?php }?>
+                    <?php }?>
                     <div class="button-position" style="margin:0 auto; width: 200px;">
-                    <button class="btn btn-info" type="submit" style="margin: 0px auto; width: 150px;" >提交</button>
+                    <button id="submit" class="btn btn-info" type="submit" style="margin-top: 28%; width: 70%;" ><?php if(isset($voluntary['wishFirst'])) {?>修改<?php } else {?>提交<?php }?></button>
                     </div>
                 </form>
                 </div>
-            <?php }?>
+                <?php }?>
             </div>
 
 
-        </div>
+
         <div class="footer"  style="border-radius: 10px;">
                 Designed by Lin & 我说的都队
+        </div>
         </div>
     </div>
 </div>

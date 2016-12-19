@@ -50,9 +50,11 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px;padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示1：<?php echo $message;?></p>
+                   <p>提示<?php if(isset($message1)) {?>1<?php }?>：{{:$message}}</p>
+                    <?php if(isset($message1)) {?><p>提示2：{{:$message1}}</p><?php }?>
+                    <?php if(isset($message2)) {?><p>提示3：{{:$message2}}</p><?php }?>
                 </div>
-<?php if($ontime==11 || $ontime==22) {?>
+                <?php if($ontime==11 || $ontime==22) {?>
                 <div class="my-information-title">
                     <span>可选学生</span>
                 </div>
@@ -84,30 +86,31 @@
                         </tr>
 
                         <tbody>
-                            {volist name="students" id="t"}
+                            {volist name="students" id="t"} 
+                            <form method="post" action="{{:url('TeacherTutor/student_list')}}">
                                 <tr>
-                                <form method="post" action="{{:url('TeacherTutor/student_list')}}">
-                                    <td><input style="display: none;" type="text" value="{{$t.sid}}" name="sid">{{$t.sid}}</td>
+                               
+                                    <td  ><input  style="display: none;" type="text" value="{{$t.sid}}" name="sid">{{$t.sid}}</td>
                                     <td><a href="{{:url('/index/TeacherTutor/show_resultdetail/sid/'.$t.sid)}}">{{$t.name}}</a></td>
                                     <td>{{$t.gender}}</td>
                                     <td>{{$t.rank}}</td>
                                     <td>{{$t.gpa}}</td>
                                     <td><?php if($t['wishFirst'] == $user['workNumber'])echo "第一志愿";else if($t['wishSecond'] == $user['workNumber'])echo "第二志愿"; else if($t['wishThird'] == $user['workNumber'])echo "第三志愿"; else if($t['wishForth'] == $user['workNumber'])echo "第四志愿";else echo "第五志愿"?></td>
 
-                                    <td><a class="btn btn-info " id="select1" style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="{{$t.sid}}" name="choise">选&nbsp;择</a></td>
-                                    <td><a class="btn btn-info" id="reject" style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#rejectModal"  value="{{$t.sid}}" name="choise">拒&nbsp;绝</a></td>
+                                    <td><a class="btn btn-info select " style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="{{$t.sid}}" name="choise">选&nbsp;择</a></td>
+                                    <td><a class="btn btn-info reject" style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#rejectModal"  value="{{$t.sid}}" name="choise">拒&nbsp;绝</a></td>
                                     <?php ?>
 
                                    
-
-                                </form>    
                                 </tr>
+                            </form>
+                               
                             {/volist}
                         </tbody>
                     </table>
                     <nav>
-                      <ul class="pagination" style="float: right;">
-                      <a href="{{:url('/index/index/TeacherTutor/student_list/'.($curPage-1))}}">&laquo;</a>
+                        <ul class="pagination" style="float: right;">
+                          <a href="{{:url('/index/index/TeacherTutor/student_list/'.($curPage-1))}}">&laquo;</a>
                           {if condition="$curPage neq 1 "}
                               <li><a href="{{:url('/index/index/TeacherTutor/student_list/'.($curPage-1))}}">&laquo;</a></li>
                           {/if}
@@ -129,20 +132,12 @@
                               <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeacherTutor/student_list/page/'.$i)}}" >{{$i}}</a></li>
                             {/for}
                           {/if}
-                          {if condition="$curPage lt $totalPage-1"}
-                            <li><a href="#">&raquo;</a></li>
-                          {/if}
-                            <li><a href="#">共{{$total}}名学生</a></li>
+
                       </ul>
                     </nav>
                 </div>
-<?php }?>                
-                <!-- <div class="button-position">
-                    <button class="btn btn-info" type="submit">修改</button>
-                </div> -->
-
+                <?php }?>
             </div>
-            <button></button>
             <div class="footer"  style="border-radius: 10px;">
                 Designed by Lin & 我说的都队
             </div>
@@ -193,9 +188,7 @@
             </form>
             </div>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal -->
 </div>
 <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel"
      aria-hidden="true">
@@ -226,7 +219,8 @@
                             <td>{{datas.gpa}}</td>
                             <td>{{datas.rank}}</td>
                             <td>{{datas.sid}}</td>
-                        </tr>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -246,12 +240,10 @@
         <!-- /.modal-content -->
     </div>
 </div>
-<script type="text/javascript" src="__STATIC__/js/index.js"></script>
-<script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
-<script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
-<script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
-<script type="text/javascript" src="{{$Think.const.OLD}}/js/jqPaginator.min.js"></script>
-<script type="text/javascript" src="{{$Think.const.OLD}}/js/jquery.uploadfile.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/index.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/jquery2.14.min.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/bootstrap.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/backstage.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/vue.min.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/student_list.js"></script>
  <script type="text/javascript">
