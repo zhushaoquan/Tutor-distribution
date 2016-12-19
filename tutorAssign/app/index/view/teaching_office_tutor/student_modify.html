@@ -93,7 +93,7 @@
                             <option value="计算机实验班" <?php if($dep == "计算机实验班") echo'selected = "true"';?>>计算机实验班</option>
                             <option value="数学实验班" <?php if($dep == "数学实验班") echo'selected = "true"';?>>数学实验班</option>
                             </select>  
-                            <input type="hidden" name="stu" value="assign">
+                            <input type="hidden" name="stu" value="modify">
                         </div>
                         
                         <button type="submit" class="btn btn-primary" style="display: inline;" id="sub-confirm" >确定</button>
@@ -174,7 +174,7 @@
                                 {/for}
                               {/if}
                               {if condition="$curPage lt $totalPage-1"}
-                                <li><a href="{{:url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage+11).'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade)}}">&raquo;</a></li>
+                                <li><a href="{{:url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage+1).'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade)}}">&raquo;</a></li>
                               {/if}
                                 
                             </ul>

@@ -273,8 +273,7 @@ class DepartmentHeadTutor extends BaseController {
 
         //获取导师信息
         if ($user['department'] == "计算机实验班") {
-        	$isExperial = 1;
-        	$teacher = Db::table('user_teacher')->where('isExperial',$isExperial)->select();
+        	$teacher = Db::table('user_teacher')->where('isExperial',1)->whereOr('isExperial',3)->select();
         	$countTeacher = count($teacher);
 
         	for ($i=0; $i <$countTeacher ; $i++) { 
@@ -286,8 +285,7 @@ class DepartmentHeadTutor extends BaseController {
         		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
         	}
         } elseif ($user['department'] == "数学实验班") {
-        	$isExperial = 2;
-        	$teacher = Db::table('user_teacher')->where('isExperial',$isExperial)->select();
+        	$teacher = Db::table('user_teacher')->where('isExperial',2)->whereOr('isExperial',3)->select();
         	$countTeacher = count($teacher);
 
         	for ($i=0; $i <$countTeacher ; $i++) { 
@@ -299,8 +297,7 @@ class DepartmentHeadTutor extends BaseController {
         		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
         	}
         } else {
-        	$isExperial = 0;
-        	$teacher = Db::table('user_teacher')->where('isExperial',$isExperial)->where('department',$user['department'])->select();
+        	$teacher = Db::table('user_teacher')->where('department',$user['department'])->select();
         	$countTeacher = count($teacher);
 
         	for ($i=0; $i <$countTeacher ; $i++) { 
@@ -353,7 +350,7 @@ class DepartmentHeadTutor extends BaseController {
 	    }
 
         $this->assign('user', $user);
-        // return $this->fetch('assign_result'); //跳转到某个页面，这里要修改
+        return $this->fetch('auto_assign2');
 
 	}
 
@@ -371,14 +368,16 @@ class DepartmentHeadTutor extends BaseController {
 			$student['amount'] = $totalPage;
 			$student['information'] = Db::table('tc_temp_result')->order('serialNum asc')->page($curPage,$pageSize)->select();
 
-			$count = count($checkList);
-			for ($i=0; $i <$count ; $i++) { 
-				if ($checkList[$i]['checked'] == true) {
-					$checkVal = 1;
-				} else {
-					$checkVal = 0;
+			if ($checkList != "") {
+				$count = count($checkList);
+				for ($i=0; $i <$count ; $i++) { 
+					if ($checkList['check'][$i]['checked'] == true) {
+						$checkVal = 1;
+					} else {
+						$checkVal = 0;
+					}
+					Db::table('tc_temp_result')->where('serialNum',$checkList['check'][$i]['serialNum'])->setField('checked',$checkVal);
 				}
-				Db::table('tc_temp_result')->where('serialNum',$checkList[$i]['serialNum'])->setField('checked',$checkVal);
 			}
 			return json($student);
 		}
@@ -396,7 +395,18 @@ class DepartmentHeadTutor extends BaseController {
 			$result['sid'] = $checkedList[$i]['sid'];
 			$result['workNumber'] = $checkedList[$i]['workNumber'];
 
-			Db::table('tc_result_'.$grade[0]['grade']);
+			$student = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum',$checkedList[$i]['serialNum'])->find();
+
+			Db::table('tc_result_'.$grade[0]['grade'])->insert($result);  //向结果表插入数据
+			Db::table('user_student_'.$grade[0]['grade'])->where('serialNum',$checkedList[$i]['serialNum'])->setField('chosen',1);  //对应的学生中选状态置为1
+
+			if ($student['department'] == "计算机实验班") {
+				Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$checkedList[$i]['workNumber'])->setInc('compExperNow',1);  //导师当前计算机实验班人数加1
+			} elseif ($student['department'] == "数学实验班") {
+				Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$checkedList[$i]['workNumber'])->setInc('mathExperNow',1);  //导师当前数学实验班人数加1
+			} else {
+				Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$checkedList[$i]['workNumber'])->setInc('naturNow',1);  //导师当前自然班人数加1
+			}
 		}
 	}
 
