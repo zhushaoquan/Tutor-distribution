@@ -114,7 +114,6 @@ var vm_table_teacher_modal = new Vue({
                 = this.datas[index].name;
             vm_table_student_main.datas[stu_main_index].workNumber
                 = this.datas[index].workNumber;
-
             //关闭模态框
             $("#teacherModal").modal('hide');
         }
@@ -124,6 +123,7 @@ var vm_table_teacher_modal = new Vue({
 //===============================
 // 初始化
 initPaginator();
+
 
 
 //===============================
@@ -228,19 +228,18 @@ function getCurrentPage() {
 $("#btn-confirm-result-pop").click(function () {
 
     //触发弹窗
-    $("#info").text("对 48/52 条结果进行确认？").addClass("info-modal");
     $.ajax({
         type:"get",
         data:{
-
         },
-        url:api_confirm_cur_page,
+        url:api_final_result,
         success:function (response) {
-            if(response.status){
-
-            }else {
-
-            }
+            $("#info").text("对"+
+                response.check+
+                "/"+
+                response.total+
+                "条结果进行确认？")
+                .addClass("info-modal");
         },
         error:function () {
 
@@ -251,46 +250,34 @@ $("#btn-confirm-result-pop").click(function () {
 
 
 $("#btn-confirm-all-result").click(function () {
-
     //确认最终结果
+    var auto_assign_link = $(this).attr("link");
+    $(this).attr("disabled",true);
     $.ajax({
         type:"get",
         data:{
-
         },
         url:api_confirm_all_result,
         success:function () {
-
+            location.href = auto_assign_link;
         },
         error:function () {
-
+            $("#info").text("服务器出错！处理失败！").css("color","red").css("text-align","center");
+            $(this).attr("disabled",false);
         },
         dataType:"json"
     });
 });
 
+//========================================
+// 关闭弹窗清除提示信息
+$("#btn-close-cancel").click(function () {
+    $("#info").text("");
+});
 
 
-// //====================================
-// // 确认当前页结果
-// function confirmThisPage(page) {
-//     var request = {
-//         curPage:page,
-//         check:getCurPageInfo()
-//     };
-//
-//     $.ajax({
-//         type:"get",
-//         data:request,
-//         url:api_confirm_cur_page,
-//         success:function (response) {
-//
-//         },
-//         dataType:"json"
-//     });
-// }
-
-
+//========================================
+// 获取当前页的选中信息
 function getCurPageInfo() {
     var check = [];
     for(item of vm_table_student_main.datas){
@@ -308,11 +295,5 @@ function getCurPageInfo() {
             });
         }
     }
-
     return check;
 }
-
-
-$("#btn-confirm-cur-page").click(function () {
-
-});
