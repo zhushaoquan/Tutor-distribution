@@ -178,35 +178,37 @@ function initPaginator() {
         page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
         onPageChange: function (page) {
             var request;
-            if(isInit){
-                //是否第一次加载表格
-                 request = {
-                    curPage:page,
-                    check:[]
-                };
-            }else{
-                var check = [];
-                for(item of vm_table_student_main.datas){
-                    if(item.checked){
-                        check.push({
-                            serialNum:item.serialNum,
-                            workNumber:item.workNumber,
-                            checked:true
-                        });
-                    }else {
-                        check.push({
-                            serialNum:item.serialNum,
-                            workNumber:item.workNumber,
-                            checked:false
-                        });
-                    }
-                }
-                request = {
-                    curPage:last_page,
-                    check:check
-                };
-            }
-            console.log("check arr:\n"+request);
+            request = {
+                curPage:page,
+            };
+            // if(isInit){
+            //     //是否第一次加载表格
+            //      request = {
+            //         curPage:page,
+            //         check:[]
+            //     };
+            // }else{
+            //     var check = [];
+            //     for(item of vm_table_student_main.datas){
+            //         if(item.checked){
+            //             check.push({
+            //                 serialNum:item.serialNum,
+            //                 workNumber:item.workNumber,
+            //                 checked:true
+            //             });
+            //         }else {
+            //             check.push({
+            //                 serialNum:item.serialNum,
+            //                 workNumber:item.workNumber,
+            //                 checked:false
+            //             });
+            //         }
+            //     }
+            //     request = {
+            //         curPage:last_page,
+            //         check:check
+            //     };
+            // }
             refreshStudentTable(request,api_assigned_student_list,"get");
         }
     });
@@ -229,42 +231,58 @@ function getCurrentPage() {
 }
 
 
-$("#confirm-result").click(function () {
+
+//=====================================
+// 确认所有结果
+
+$("#btn-confirm-result-pop").click(function () {
     $("#info").text("对 48/52 条结果进行确认？").addClass("info-modal");
 });
 
 
-$("#confirm-skip").click(function () {
-    var arr = new Array();
-    for(var i = 0; i < vm_table_student_main.datas.length; ++i){
-        var item = vm_table_student_main.datas[i];
-        if(item.checked){
-            var pair = {
-                serialNumber:item.serialNumber,
-                workNumber:item.workNumber
-            };
-            arr.push(pair);
-        }
-    }
-    var request = {
-        arr:arr
-    };
-    console.log(arr);
-    // confirmThisPage(request,api_confirm_cur_page,"get");
+$("#btn-confirm-all-result").click(function () {
+    $.ajax({
+
+    });
 });
 
 
+
+//====================================
+// 确认当前页结果
 function confirmThisPage(request,url,method) {
     $.ajax({
         type:method,
         data:request,
         url:url,
         success:function (response) {
-            var request = {
-                curPage:getCurrentPage()
-            };
-            // refreshStudentTable(request,api_confirm_cur_page,"get");
+
         },
         dataType:"json"
     });
 }
+
+
+$("#btn-confirm-cur-page").click(function () {
+    var check = [];
+    for(item of vm_table_student_main.datas){
+        if(item.checked){
+            check.push({
+                serialNum:item.serialNum,
+                workNumber:item.workNumber,
+                checked:true
+            });
+        }else {
+            check.push({
+                serialNum:item.serialNum,
+                workNumber:item.workNumber,
+                checked:false
+            });
+        }
+    }
+    var request = {
+        curPage:getCurrentPage(),
+        check:check
+    };
+    confirmThisPage(request,api_confirm_cur_page,"get");
+});

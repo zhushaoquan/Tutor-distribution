@@ -63,9 +63,12 @@ div .table-position {
 }
 
 #confirm-result{
-    float: left;
-    margin-top: 10px;
+    margin-right: 20px;
     background: #337ab7
+}
+
+.left{
+    float: left;
 }
 
 #table-student-main > tr > td > button{
