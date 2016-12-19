@@ -112,7 +112,7 @@
                             <tbody id="tab">
                             <tr v-for="item in datas">
                                 <td>
-                                    <input id="{{ item.serialNum }}" type="checkbox" class="chb">
+                                    <input v-model="item.checked" type="checkbox" class="chb">
                                 </td>
                                 <td>{{ item.serialNum }}</td>
                                 <td>{{ item.name }}</td>

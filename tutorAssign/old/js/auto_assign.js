@@ -3,6 +3,8 @@
  * Created by wythe on 2016/12/15.
  */
 
+var serialNum = "";
+
 //==============================
 // Vue 绑定到表格
 var vm_table_student = new Vue({
@@ -18,86 +20,15 @@ var vm_table_student = new Vue({
                 vol3:"导师",
                 vol4:"导师",
                 vol5:"导师"
-            },
-            {
-                sid:"1",
-                serialNum:"031402209",
-                name:"Mike",
-                vol1:"导师",
-                vol2:"导师",
-                vol3:"导师",
-                vol4:"导师",
-                vol5:"导师"
-            },
-            {
-                sid:"1",
-                serialNum:"031402209",
-                name:"Mike",
-                vol1:"导师",
-                vol2:"导师",
-                vol3:"导师",
-                vol4:"导师",
-                vol5:"导师"
-            },
-            {
-                sid:"1",
-                serialNum:"031402209",
-                name:"Mike",
-                vol1:"导师",
-                vol2:"导师",
-                vol3:"导师",
-                vol4:"导师",
-                vol5:"导师"
-            },
-            {
-                sid:"1",
-                serialNum:"031402209",
-                name:"Mike",
-                vol1:"导师",
-                vol2:"导师",
-                vol3:"导师",
-                vol4:"导师",
-                vol5:"导师"
-            },
-            {
-                sid:"1",
-                serialNum:"031402209",
-                name:"Mike",
-                vol1:"导师",
-                vol2:"导师",
-                vol3:"导师",
-                vol4:"导师",
-                vol5:"导师"
-            },
-            {
-                sid:"1",
-                serialNum:"031402209",
-                name:"Mike",
-                vol1:"导师",
-                vol2:"导师",
-                vol3:"导师",
-                vol4:"导师",
-                vol5:"导师"
-            },
-            {
-                sid:"1",
-                serialNum:"031402209",
-                name:"Mike",
-                vol1:"导师",
-                vol2:"导师",
-                vol3:"导师",
-                vol4:"导师",
-                vol5:"导师"
             }
         ]
     },
     methods: {
         assign:function (index) {
-            console.log("assign");
-            var request = {
-
-            };
-            // loadTeacherTable();
+            serialNum = this.datas[index].serialNum;
+            // console.log("assign");
+            var request = {};
+            loadTeacherTable(request,api_unassigned_teacher_list,"get");
         }
     }
 });
@@ -121,9 +52,11 @@ var vm_table_teacher = new Vue({
     },
     methods: {
         confirm:function (index) {
-            console.log("confirm");
+            // console.log("confirm");
+            disableConfirmBtns();
             var requset = {
-
+                serialNum:serialNum,
+                workNumber:this.datas[index].workNumber
             };
             assignTeacher(requset,api_assign_page1_confirm,"get");
         }
@@ -156,7 +89,7 @@ function refreshStudentTable(request,url,method) {
 
 //===============================
 // 加载导师列表
-function loadTeacherTable() {
+function loadTeacherTable(request,url,method) {
     $.ajax({
         type:method,
         data:request,
@@ -179,11 +112,25 @@ function assignTeacher(request, url, method) {
         url:url,
         data:request,
         success:function (response) {
-            $(".modal-body").text("分配成功").css("color","green").css("text-align","center");
-            location.reload();
+            console.log("success"+response);
+            $("#teacher-table").css("display","none");
+            $("#alert-info").text("分配成功").css("color","green").css("text-align","center");
+            // location.reload();
+            var page = getCurrentPage();
+            var request = {
+                curPage:page
+            };
+            enableConfirmBtns();
+            refreshStudentTable(request,api_unassigned_student_list,"get");
+            setTimeout('$("#assignModal").modal("hide")',300);
+            $("#alert-info").text("");
+            $("#teacher-table").css("display","block");
         },
         error:function (response) {
-            $(".modal-body").text("网络错误").css("color","red").css("text-align","center");
+            console.log("failed");
+            $("#teacher-table").css("display","none");
+            $("#alert-info").text("网络错误").css("color","red").css("text-align","center");
+            enableConfirmBtns();
         },
         dataType: "json"
     });
@@ -214,9 +161,16 @@ function initPaginator() {
 //==============================
 // 更新分页组件总页数
 function refreshTotalpages(totalPages) {
-    $('#tab-pagination').jqPaginator('option', {
-        totalPages: totalPages
-    });
+    if(totalPages != 0){
+        $('#tab-pagination').jqPaginator('option', {
+            totalPages: totalPages
+        });
+    }
+    else {
+        $('#tab-pagination').jqPaginator('option', {
+            totalPages: 1
+        });
+    }
 }
 
 
@@ -228,17 +182,19 @@ function getCurrentPage() {
 
 
 function enableConfirmBtns() {
-
+    $(".btn-modal-assign-confirm").attr("disabled",false);
 }
 
 
 function disableConfirmBtns() {
-
+    $(".btn-modal-assign-confirm").attr("disabled",true);
 }
 
 
 $("#btn-close-assign").click(function () {
-    location.reload();
+    // location.reload();
+    $("#alert-info").text("");
+    $("#teacher-table").css("display","block");
 });
 
 $("#go-to-assign2").click(function () {

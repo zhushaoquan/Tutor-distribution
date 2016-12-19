@@ -7,7 +7,8 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <table class="table table-bordered">
+                <div id="alert-info"></div>
+                <table id="teacher-table" class="table table-bordered">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -34,7 +35,7 @@
                         <td>{{item.nature_need}}</td>
                         <td>{{item.nature_cur}}</td>
                         <td>
-                            <button v-on:click="confirm($index)">确认分配</button>
+                            <button class="btn-modal-assign-confirm" v-on:click="confirm($index)">确认分配</button>
                         </td>
                     </tr>
                     </tbody>
@@ -42,10 +43,10 @@
             </div>
             <div class="modal-footer">
                 <!--data-dismiss="modal"-->
-                <a id="btn-close-assign"  class="btn btn-default">关闭</a>
-                <button type="button" id="btn--student" class="btn btn-primary">
-                    确认
-                </button>
+                <a id="btn-close-assign"  class="btn btn-default" data-dismiss="modal">关闭</a>
+                <!--<button type="button" id="btn&#45;&#45;student" class="btn btn-primary">-->
+                    <!--确认-->
+                <!--</button>-->
             </div>
         </div>
     </div>
