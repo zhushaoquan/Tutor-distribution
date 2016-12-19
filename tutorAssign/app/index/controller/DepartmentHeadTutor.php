@@ -253,10 +253,10 @@ class DepartmentHeadTutor extends BaseController {
 
 	//智能分配 —— 核心功能
 	public function intelligentAlloc() {
-		// $user = $this->auto_login();
+		$user = $this->auto_login();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
-		$user['department'] = "信息安全与网络工程系";
-		$user['workNumber'] = "00001";
+		// $user['department'] = "信息安全与网络工程系";
+		// $user['workNumber'] = "00001";
 		$wishList = ['wishFirst','wishSecond','wishThird','wishForth','wishFifth'];
 		$voluntaryNum = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
 
@@ -338,12 +338,23 @@ class DepartmentHeadTutor extends BaseController {
 	            $studentElectedResult[$i]['workNumber'] = $studentElectedArr[$i][1];
 	            $studentElectedResult[$i]['teaInfo'] = Db::table('user_teacher')->where('workNumber', $studentElectedResult[$i]['workNumber'])->field('workNumber,name')->find();
 
-	            $vol_num[$i] = array_keys(Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$studentElectedResult[$i]['stuInfo']['sid'])->find(),$studentElectedResult[$i]['teaInfo']['workNumber']);
+	            $vol_num[$i] = array_keys(Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$studentElectedResult[$i]['stuInfo']['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find(),$studentElectedResult[$i]['teaInfo']['workNumber']);
+	            if ($vol_num[$i][0] == "wishFirst") {
+	            	$volOrder = "第一志愿";
+	            } elseif ($vol_num[$i][0] == "wishSecond") {
+	            	$volOrder = "第二志愿";
+	            } elseif ($vol_num[$i][0] == "wishThird") {
+	            	$volOrder = "第三志愿";
+	            } elseif ($vol_num[$i][0] == "wishForth") {
+	            	$volOrder = "第四志愿";
+	            } elseif ($vol_num[$i][0] == "wishFifth") {
+	            	$volOrder = "第五志愿";
+	            }
 
 	            $insert[$i]['sid'] = $studentElectedResult[$i]['stuInfo']['sid'];
 	            $insert[$i]['serialNum'] = $studentElectedResult[$i]['stuInfo']['serialNum'];
 	            $insert[$i]['student_name'] = $studentElectedResult[$i]['stuInfo']['name'];
-	            $insert[$i]['vol_num'] = $vol_num[$i][0];
+	            $insert[$i]['vol_num'] = $volOrder;
 	            $insert[$i]['gpa'] = $studentElectedResult[$i]['stuInfo']['gpa'];
 	            $insert[$i]['teacher_name'] = $studentElectedResult[$i]['teaInfo']['name'];
 	            $insert[$i]['workNumber'] = $studentElectedResult[$i]['teaInfo']['workNumber'];
@@ -356,7 +367,8 @@ class DepartmentHeadTutor extends BaseController {
 	            }
 	        }
 	    }
-     //    $this->assign('user', $user);
+	    // return json($insert);
+        $this->assign('user', $user);
         return $this->fetch('auto_assign2');
 
 	}
