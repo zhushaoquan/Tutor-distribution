@@ -206,17 +206,18 @@ class DepartmentHeadTutor extends BaseController {
 		$request = Request::instance();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
 
-		if ($request->isPOST()) {
-			$data = $request->post();
+		if ($request->isGet()) {
+			$data = $request->get();
 
 			$student = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum',$data['serialNum'])->field('sid,department,chosen')->find();
 			$teacher = Db::table('user_teacher')->where('workNumber',$data['workNumber'])->find();
+			$issue = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$data['workNumber'])->find();
 
 			$insert['sid'] = $student['sid'];
 			$insert['workNumber'] = $data['workNumber'];
 			
 			if ($student['department'] == "计算机实验班") {
-				if (($teacher['compExperNow']+1) <= $teacher['totalCompExper']) {
+				if (($issue['compExperNow']+1) <= $issue['totalCompExper']) {
 					Db::table('tc_result_'.$grade[0]['grade'])->insert($insert);  //插入结果表
 					Db::table('user_student_'.$grade[0]['grade'])->where('serialNum',$data['serialNum'])->setField('chosen',1); //是否中选设置为已中选
 					Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$data['workNumber'])->setInc('compExperNow',1); //导师的计算机实验班当前学生数加1
@@ -225,7 +226,7 @@ class DepartmentHeadTutor extends BaseController {
 					return json($status);
 				}
 			} elseif ($student['department'] == "数学实验班") {
-				if (($teacher['mathExperNow']+1) <= $teacher['totalMathExper']) {
+				if (($issue['mathExperNow']+1) <= $issue['totalMathExper']) {
 					Db::table('tc_result_'.$grade[0]['grade'])->insert($insert);  //插入结果表
 					Db::table('user_student_'.$grade[0]['grade'])->where('serialNum',$data['serialNum'])->setField('chosen',1); //是否中选设置为已中选
 					Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$data['workNumber'])->setInc('mathExperNow',1); //导师的数学实验班当前学生数加1
@@ -234,7 +235,7 @@ class DepartmentHeadTutor extends BaseController {
 					return json($status);
 				}
 			} else {
-				if (($teacher['naturNow']+1) <= $teacher['totalNatur']) {
+				if (($issue['naturNow']+1) <= $issue['totalNatur']) {
 					Db::table('tc_result_'.$grade[0]['grade'])->insert($insert);  //插入结果表
 					Db::table('user_student_'.$grade[0]['grade'])->where('serialNum',$data['serialNum'])->setField('chosen',1); //是否中选设置为已中选
 					Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$data['workNumber'])->setInc('naturNow',1); //导师的自然班当前学生数加1
