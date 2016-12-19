@@ -58,7 +58,7 @@
                         <span>志愿填报</span>
                 </div>
                  <hr>
-                <div class ="center-block" >
+                <div class ="my-information-detail-1" >
                 <?php if(($ontime ==1||$ontime==2 )&&$user['chosen']==0){?>
                 <form method="post" action="{{:url('student/edit_voluntary')}}" style="margin:0px auto; width:90%" >
                     <?php if($voluntaryinfosetting['voluntaryNum'] >=1) {?>
@@ -142,19 +142,18 @@
                     </div>
                     <?php }?>
                     <div class="button-position" style="margin:0 auto; width: 200px;">
-                    <button id="submit" class="btn btn-info" type="submit" style="margin-top: 28%; width: 70%;" ><?php if(isset($voluntary['wishFirst'])) {?>修改<?php } else {?>提交<?php }?></button>
+                    <button id="submit" class="btn btn-info" type="submit" style="margin-bottom: 28%; width: 70%;" ><?php if(isset($voluntary['wishFirst'])) {?>修改<?php } else {?>提交<?php }?></button>
                     </div>
                 </form>
-                </div>
+
                 <?php }?>
+                </div>
             </div>
 
-
-        </div>
-        <div class="footer"  style="border-radius: 10px;">
+            <div class="footer"  style="border-radius: 10px;">
                 Designed by Lin & 我说的都队
+            </div>
         </div>
-        
     </div>
 </div>
 <script type="text/javascript" src="__STATIC__/js/index.js"></script>
