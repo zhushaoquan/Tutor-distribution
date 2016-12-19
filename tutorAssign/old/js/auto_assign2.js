@@ -18,7 +18,7 @@ $("#confirm-this-page").click(function () {
         },
         url: "",
         success: function (response) {
-            // refreshStudentTable()
+            refreshStudentTable();
         },
         error: function (response) {
 

@@ -8,38 +8,41 @@
             </div>
             <div class="modal-body">
                 <div id="alert-info"></div>
-                <table id="teacher-table" class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>姓名</th>
-                        <th>是否带实验班</th>
-                        <th>所需计实班人数</th>
-                        <th>当前计实班人数</th>
-                        <th>所需数实班人数</th>
-                        <th>当前数实班人数</th>
-                        <th>所需自然班人数</th>
-                        <th>当前自然班人数</th>
-                        <th>分配操作</th>
-                    </tr>
-                    </thead>
-                    <tbody id="table-teacher">
-                    <tr v-for="item in datas">
-                        <td>{{item.sid}}</td>
-                        <td>{{item.name}}</td>
-                        <td>{{item.isExperial}}</td>
-                        <td>{{item.js_need}}</td>
-                        <td>{{item.js_cur}}</td>
-                        <td>{{item.ss_need}}</td>
-                        <td>{{item.ss_cur}}</td>
-                        <td>{{item.nature_need}}</td>
-                        <td>{{item.nature_cur}}</td>
-                        <td>
-                            <button class="btn-modal-assign-confirm" v-on:click="confirm($index)">确认分配</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div id="teacher-table">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>姓名</th>
+                            <th>是否带实验班</th>
+                            <th>所需计实班人数</th>
+                            <th>当前计实班人数</th>
+                            <th>所需数实班人数</th>
+                            <th>当前数实班人数</th>
+                            <th>所需自然班人数</th>
+                            <th>当前自然班人数</th>
+                            <th>分配操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="table-teacher">
+                        <tr v-for="item in datas">
+                            <td>{{item.sid}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.isExperial}}</td>
+                            <td>{{item.js_need}}</td>
+                            <td>{{item.js_cur}}</td>
+                            <td>{{item.ss_need}}</td>
+                            <td>{{item.ss_cur}}</td>
+                            <td>{{item.nature_need}}</td>
+                            <td>{{item.nature_cur}}</td>
+                            <td>
+                                <button class="btn-modal-assign-confirm" v-on:click="confirm($index)">确认分配</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
             <div class="modal-footer">
                 <!--data-dismiss="modal"-->

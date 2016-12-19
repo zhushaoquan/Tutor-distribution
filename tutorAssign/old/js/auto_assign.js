@@ -29,6 +29,8 @@ var vm_table_student = new Vue({
             // console.log("assign");
             var request = {};
             loadTeacherTable(request,api_unassigned_teacher_list,"get");
+            $("#teacher-table").css("display","block");
+            $("#alert-info").css("display","none");
         }
     }
 });
@@ -52,6 +54,7 @@ var vm_table_teacher = new Vue({
     },
     methods: {
         confirm:function (index) {
+
             // console.log("confirm");
             disableConfirmBtns();
             var requset = {
@@ -59,6 +62,7 @@ var vm_table_teacher = new Vue({
                 workNumber:this.datas[index].workNumber
             };
             assignTeacher(requset,api_assign_page1_confirm,"get");
+
         }
     }
 });
@@ -114,7 +118,14 @@ function assignTeacher(request, url, method) {
         success:function (response) {
             console.log("success"+response);
             $("#teacher-table").css("display","none");
-            $("#alert-info").text("分配成功").css("color","green").css("text-align","center");
+
+            $("#alert-info").css("display","block");
+            if(response.status){
+                $("#alert-info").text("分配成功").css("color","green").css("text-align","center");
+            }
+            else{
+                $("#alert-info").text("分配失败").css("color","red").css("text-align","center");
+            }
             // location.reload();
             var page = getCurrentPage();
             var request = {
@@ -122,14 +133,17 @@ function assignTeacher(request, url, method) {
             };
             enableConfirmBtns();
             refreshStudentTable(request,api_unassigned_student_list,"get");
-            setTimeout('$("#assignModal").modal("hide")',300);
-            $("#alert-info").text("");
-            $("#teacher-table").css("display","block");
+            setTimeout('$("#assignModal").modal("hide")',1000);
+            // $("#teacher-table").css("display","block");
         },
         error:function (response) {
             console.log("failed");
+
             $("#teacher-table").css("display","none");
+
+            $("#alert-info").css("display","block");
             $("#alert-info").text("网络错误").css("color","red").css("text-align","center");
+
             enableConfirmBtns();
         },
         dataType: "json"
@@ -185,7 +199,6 @@ function enableConfirmBtns() {
     $(".btn-modal-assign-confirm").attr("disabled",false);
 }
 
-
 function disableConfirmBtns() {
     $(".btn-modal-assign-confirm").attr("disabled",true);
 }
@@ -194,7 +207,12 @@ function disableConfirmBtns() {
 $("#btn-close-assign").click(function () {
     // location.reload();
     $("#alert-info").text("");
+    $("#alert-info").css("display","none");
     $("#teacher-table").css("display","block");
+    var request = {
+        curPage:getCurrentPage()
+    };
+    refreshStudentTable(request,api_unassigned_student_list,"get");
 });
 
 $("#go-to-assign2").click(function () {
