@@ -255,123 +255,140 @@ class DepartmentHeadTutor extends BaseController {
 
 	//智能分配 —— 核心功能
 	public function intelligentAlloc() {
-		$user = $this->auto_login();
+		// $user = $this->auto_login();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
-		// $user['department'] = "信息安全与网络工程系";
-		// $user['workNumber'] = "00001";
+		$user['department'] = "信息安全与网络工程系";
+		$user['workNumber'] = "00001";
 		$wishList = ['wishFirst','wishSecond','wishThird','wishForth','wishFifth'];
 		$voluntaryNum = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
 
 		//获取未分配到导师的学生信息
 		$student = Db::table('user_student_'.$grade[0]['grade'])->where('chosen',0)->where('department',$user['department'])->field('sid,serialNum,gpa,chosen')->select();
 		$countStudent = count($student);
+		$inputStudent = [];
 
 		for ($i=0; $i <$countStudent ; $i++) {
-			//获取每个学生的志愿信息 
-			$student[$i]['voluntary'] = Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid', $student[$i]['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
+			//获取每个学生的志愿信息
+			if (Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid', $student[$i]['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find()) { 
+				$student[$i]['voluntary'] = Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid', $student[$i]['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
 
 			//将每个学生的志愿信息转换成规定格式的txt文件
-			$inputStudent[$i] = $student[$i]['serialNum'] . ' ' . $student[$i]['gpa'] . PHP_EOL;
-	        for ($j=0; $j <$voluntaryNum['voluntaryNum'] ; $j++) { 
-	            $inputStudent[$i] = $inputStudent[$i] . $student[$i]['voluntary'][$wishList[$j]] . PHP_EOL;
-	        }
-	        $inputStudent[$i] = $inputStudent[$i] . PHP_EOL;
+				$inputStudent[$i] = $student[$i]['serialNum'] . ' ' . $student[$i]['gpa'] . PHP_EOL;
+		        for ($j=0; $j <$voluntaryNum['voluntaryNum'] ; $j++) {
+		            $inputStudent[$i] = $inputStudent[$i] . $student[$i]['voluntary'][$wishList[$j]] . PHP_EOL;
+		        }
+		        if (($i+1) != $countStudent) {
+			        $inputStudent[$i] = $inputStudent[$i] . PHP_EOL;
+			    }
+		    }
 		}
-		//将获取的学生信息转换为.txt文件
-        file_put_contents('student.txt', $inputStudent);
 
-        //获取导师信息
-        if ($user['department'] == "计算机实验班") {
-        	$teacher = Db::table('user_teacher')->where('isExperial',1)->whereOr('isExperial',3)->select();
-        	$countTeacher = count($teacher);
+		$countInputStudent = count($inputStudent);
+		if ($countInputStudent != 0) {
+			//将获取的学生信息转换为.txt文件
+	        file_put_contents('student.txt', $inputStudent);
 
-        	for ($i=0; $i <$countTeacher ; $i++) { 
-        		//获取每个老师的当前可带的计算机实验班的学生数
-        		$teacherIssue[$i] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber', $teacher[$i]['workNumber'])->find();
-        		$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalCompExper'] - $teacherIssue[$i]['compExperNow'];
+	        //获取导师信息
+	        if ($user['department'] == "计算机实验班") {
+	        	$teacher = Db::table('user_teacher')->where('isExperial',1)->whereOr('isExperial',3)->select();
+	        	$countTeacher = count($teacher);
 
-        		//将每个导师的信息转换成规定格式的txt文件
-        		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
-        	}
-        } elseif ($user['department'] == "数学实验班") {
-        	$teacher = Db::table('user_teacher')->where('isExperial',2)->whereOr('isExperial',3)->select();
-        	$countTeacher = count($teacher);
+	        	for ($i=0; $i <$countTeacher ; $i++) { 
+	        		//获取每个老师的当前可带的计算机实验班的学生数
+	        		$teacherIssue[$i] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber', $teacher[$i]['workNumber'])->find();
+	        		$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalCompExper'] - $teacherIssue[$i]['compExperNow'];
 
-        	for ($i=0; $i <$countTeacher ; $i++) { 
-        		//获取每个老师的当前可带的数学实验班的学生数
-        		$teacherIssue[$i] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber', $teacher[$i]['workNumber'])->find();
-        		$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalMathExper'] - $teacherIssue[$i]['mathExperNow'];
+	        		//将每个导师的信息转换成规定格式的txt文件
+	        		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
+	        	}
+	        } elseif ($user['department'] == "数学实验班") {
+	        	$teacher = Db::table('user_teacher')->where('isExperial',2)->whereOr('isExperial',3)->select();
+	        	$countTeacher = count($teacher);
 
-        		//将每个导师的信息转换成规定格式的txt文件
-        		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
-        	}
-        } else {
-        	$teacher = Db::table('user_teacher')->where('department',$user['department'])->select();
-        	$countTeacher = count($teacher);
+	        	for ($i=0; $i <$countTeacher ; $i++) { 
+	        		//获取每个老师的当前可带的数学实验班的学生数
+	        		$teacherIssue[$i] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber', $teacher[$i]['workNumber'])->find();
+	        		$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalMathExper'] - $teacherIssue[$i]['mathExperNow'];
 
-        	for ($i=0; $i <$countTeacher ; $i++) { 
-        		//获取每个老师的当前可带的自然班的学生数
-        		$teacherIssue[$i] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber', $teacher[$i]['workNumber'])->find();
-        		$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalNatur'] - $teacherIssue[$i]['naturNow'];
+	        		//将每个导师的信息转换成规定格式的txt文件
+	        		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
+	        	}
+	        } else {
+	        	$teacher = Db::table('user_teacher')->where('department',$user['department'])->select();
+	        	$countTeacher = count($teacher);
 
-        		//将每个导师的信息转换成规定格式的txt文件
-        		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
-        	}
-        }
-        //将获取的老师信息转换为.txt文件
-        file_put_contents('teacher.txt', $inputTeacher);
+	        	for ($i=0; $i <$countTeacher ; $i++) { 
+	        		//获取每个老师的当前可带的自然班的学生数
+	        		$teacherIssue[$i] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber', $teacher[$i]['workNumber'])->find();
+	        		$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalNatur'] - $teacherIssue[$i]['naturNow'];
 
-        //调用算法进行分配
-        $fileNameWithParam = 'distribute.exe ' . $countStudent . ' ' . $countTeacher . ' ' . $voluntaryNum['voluntaryNum'];
-        system($fileNameWithParam);
-
-        $studentElected = file_get_contents('student_elected.txt');      
-        //获取通过算法得到分配的学生的结果，转换为string
-
-        //分割studentElected字符串，转换为数组，并存到临时的结果表中
-        if ($studentElected != "") {
-	        $studentElected = str_replace("\r\n", '', $studentElected);
-	        $studentElectedArr = explode(',', $studentElected);
-	        for ($i = 0; $i < count($studentElectedArr); $i++) {
-	            $studentElectedArr[$i] = explode(' ', $studentElectedArr[$i]);
-
-	            $studentElectedResult[$i]['serialNum'] = $studentElectedArr[$i][0];
-	            $studentElectedResult[$i]['stuInfo'] = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum', $studentElectedResult[$i]['serialNum'])->field('sid,serialNum,name,gpa')->find();
-	            $studentElectedResult[$i]['workNumber'] = $studentElectedArr[$i][1];
-	            $studentElectedResult[$i]['teaInfo'] = Db::table('user_teacher')->where('workNumber', $studentElectedResult[$i]['workNumber'])->field('workNumber,name')->find();
-
-	            $vol_num[$i] = array_keys(Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$studentElectedResult[$i]['stuInfo']['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find(),$studentElectedResult[$i]['teaInfo']['workNumber']);
-	            if ($vol_num[$i][0] == "wishFirst") {
-	            	$volOrder = "第一志愿";
-	            } elseif ($vol_num[$i][0] == "wishSecond") {
-	            	$volOrder = "第二志愿";
-	            } elseif ($vol_num[$i][0] == "wishThird") {
-	            	$volOrder = "第三志愿";
-	            } elseif ($vol_num[$i][0] == "wishForth") {
-	            	$volOrder = "第四志愿";
-	            } elseif ($vol_num[$i][0] == "wishFifth") {
-	            	$volOrder = "第五志愿";
-	            }
-
-	            $insert[$i]['sid'] = $studentElectedResult[$i]['stuInfo']['sid'];
-	            $insert[$i]['serialNum'] = $studentElectedResult[$i]['stuInfo']['serialNum'];
-	            $insert[$i]['student_name'] = $studentElectedResult[$i]['stuInfo']['name'];
-	            $insert[$i]['vol_num'] = $volOrder;
-	            $insert[$i]['gpa'] = $studentElectedResult[$i]['stuInfo']['gpa'];
-	            $insert[$i]['teacher_name'] = $studentElectedResult[$i]['teaInfo']['name'];
-	            $insert[$i]['workNumber'] = $studentElectedResult[$i]['teaInfo']['workNumber'];
-	            $insert[$i]['checked'] = 0;
-
-	            if (Db::table('tc_temp_result')->where('sid',$insert[$i]['sid'])->find()) {
-	            	Db::table('tc_temp_result')->update($insert[$i]);
-	            } else {
-	            	Db::table('tc_temp_result')->insert($insert[$i]);
-	            }
+	        		//将每个导师的信息转换成规定格式的txt文件
+	        		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
+	        	}
 	        }
-	    }
+	        //将获取的老师信息转换为.txt文件
+	        file_put_contents('teacher.txt', $inputTeacher);
+
+	        //调用算法进行分配
+	        $fileNameWithParam = 'distribute.exe ' . $countStudent . ' ' . $countTeacher . ' ' . $voluntaryNum['voluntaryNum'];
+	        system($fileNameWithParam);
+
+	        $studentElected = file_get_contents('student_elected.txt');      
+	        //获取通过算法得到分配的学生的结果，转换为string
+
+	        //分割studentElected字符串，转换为数组，并存到临时的结果表中
+	        if ($studentElected != "") {
+		        $studentElected = str_replace("\r\n", '', $studentElected);
+		        $studentElectedArr = explode(',', $studentElected);
+		        for ($i = 0; $i < count($studentElectedArr); $i++) {
+		            $studentElectedArr[$i] = explode(' ', $studentElectedArr[$i]);
+
+		            $studentElectedResult[$i]['serialNum'] = $studentElectedArr[$i][0];
+		            $studentElectedResult[$i]['stuInfo'] = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum', $studentElectedResult[$i]['serialNum'])->field('sid,serialNum,name,gpa')->find();
+		            $studentElectedResult[$i]['workNumber'] = $studentElectedArr[$i][1];
+		            $studentElectedResult[$i]['teaInfo'] = Db::table('user_teacher')->where('workNumber', $studentElectedResult[$i]['workNumber'])->field('workNumber,name')->find();
+
+		            if (Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$studentElectedResult[$i]['stuInfo']['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find()) {
+			            $vol_num[$i] = array_keys(Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$studentElectedResult[$i]['stuInfo']['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find(),$studentElectedResult[$i]['teaInfo']['workNumber']);
+			            if ($vol_num[$i][0] == "wishFirst") {
+			            	$volOrder = "第一志愿";
+			            } elseif ($vol_num[$i][0] == "wishSecond") {
+			            	$volOrder = "第二志愿";
+			            } elseif ($vol_num[$i][0] == "wishThird") {
+			            	$volOrder = "第三志愿";
+			            } elseif ($vol_num[$i][0] == "wishForth") {
+			            	$volOrder = "第四志愿";
+			            } elseif ($vol_num[$i][0] == "wishFifth") {
+			            	$volOrder = "第五志愿";
+			            }
+
+			            $insert[$i]['sid'] = $studentElectedResult[$i]['stuInfo']['sid'];
+			            $insert[$i]['serialNum'] = $studentElectedResult[$i]['stuInfo']['serialNum'];
+			            $insert[$i]['student_name'] = $studentElectedResult[$i]['stuInfo']['name'];
+			            $insert[$i]['vol_num'] = $volOrder;
+			            $insert[$i]['gpa'] = $studentElectedResult[$i]['stuInfo']['gpa'];
+			            $insert[$i]['teacher_name'] = $studentElectedResult[$i]['teaInfo']['name'];
+			            $insert[$i]['workNumber'] = $studentElectedResult[$i]['teaInfo']['workNumber'];
+			            $insert[$i]['checked'] = 0;
+
+			            if (Db::table('tc_temp_result')->where('sid',$insert[$i]['sid'])->find()) {
+			            	Db::table('tc_temp_result')->update($insert[$i]);
+			            } else {
+			            	Db::table('tc_temp_result')->insert($insert[$i]);
+			            }
+			        }
+		        }
+		    }
+		    $data['status'] = "success";
+		    return json($data);
+		} else {
+			$data['amount'] = 0;
+			$data['msg'] = "所有学生均未填报志愿，无法进行智能分配";
+			$data['student'] = "";
+			return json($data);
+		}
 	    // return json($insert);
         $this->assign('user', $user);
-        return json('success');
 
 	}
 
