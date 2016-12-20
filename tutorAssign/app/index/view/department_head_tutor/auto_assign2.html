@@ -94,7 +94,8 @@
                         </tr>
                         </thead>
                         <tbody id="table-student-main">
-                        <tr v-for="item in datas">
+                        <tr v-if="isNull"><td class="table-empty-style" colspan="8">没有更多数据了~</td></tr>
+                        <tr v-else v-for="item in datas">
                             <td><input type="checkbox" v-model="item.checked"></td>
                             <td>{{ item.serialNum }}</td>
                             <td>{{ item.student_name }}</td>

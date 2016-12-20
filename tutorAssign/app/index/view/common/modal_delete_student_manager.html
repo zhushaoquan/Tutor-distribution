@@ -22,14 +22,13 @@
                         </tr>
                         </thead>
                         <tbody id="info-del">
-                        <tr v-for="item in datas">
-                            <template v-if="item.checked">
+                        <tr v-if="isNull"><td class="table-empty-style" colspan="5">未选中学生~</td></tr>
+                        <tr v-else v-for="item in datas">
                                 <td>{{ item.serialNum }}</td>
                                 <td>{{ item.name }}</td>
                                 <td>{{ item.grade }}</td>
                                 <td>{{ item.gpa }}</td>
                                 <td>{{ item.rank }}</td>
-                            </template>
                         </tr>
                         </tbody>
                     </table>

@@ -38,7 +38,7 @@
                         <div class="wrapper">
                             <label class="control-label input-label">绩点</label>
                         </div>
-                        <input v-model="gpa" class="form-control input-add" placeholder="如：3.5" type="text">
+                        <input onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false" v-model="gpa" class="form-control input-add" placeholder="如：3.5" type="text">
                     </div>
                     <div class="input-div clearfix">
                         <div class="wrapper">
@@ -74,7 +74,6 @@
                     </div>
                 </div>
                 <div id="addinfo"  style="height: 20px; width: 80%; text-align: center;font-size: 14px">
-
                 </div>
             </div>
             <div class="modal-footer">
