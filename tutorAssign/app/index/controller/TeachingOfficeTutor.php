@@ -362,8 +362,21 @@ class TeachingOfficeTutor extends BaseController {
 	public function select_tutor()
 	{
 		$where['name']=array('like','%'.$_GET['headname'].'%');
-		$result['result']=DB::table('user_teacher')->where($where)->where('department',$_GET['department'])->field('workNumber,name')->select();
-	//	$result['result']['department']=$_GET['department'];
+
+		if($_GET['department']=='计算机实验班')
+		{
+			$result['result']=DB::table('user_teacher')->where($where)->where('isExperial',1)->whereor('isExperial',3)->field('workNumber,name')->select();
+		}
+		else if($_GET['department']=='数学实验班')
+		{
+			$result['result']=DB::table('user_teacher')->where($where)->where('isExperial',2)->whereor('isExperial',3)->field('workNumber,name')->select();
+		
+		}
+		else
+		{
+			$result['result']=DB::table('user_teacher')->where($where)->where('department',$_GET['department'])->field('workNumber,name')->select();
+		}
+		//	$result['result']['department']=$_GET['department'];
 		// foreach ($result['result'] as $value) 
 		// {
 		// 	$value['department']=$_GET['department'];
