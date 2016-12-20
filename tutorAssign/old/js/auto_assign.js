@@ -16,7 +16,13 @@ var vm_table_student = new Vue({
     el: "#table-student",
     data: {
         datas: [],
-        isNull:false
+        isNull:false,
+        isError:false
+    },
+    computed:{
+        isOk:function () {
+            return this.isNull || this.isError;
+        }
     },
     methods: {
         assign:function (index) {
@@ -64,6 +70,7 @@ function refreshStudentTable(request,url,method) {
         data: request,
         url: url,
         success: function (response) {
+            vm_table_student.isError = false;
             vm_table_student.datas = response.information;
             if(response.amount !=0 ){
                 refreshTotalpages(response.amount);
@@ -74,7 +81,7 @@ function refreshStudentTable(request,url,method) {
             }
         },
         error: function (response) {
-
+            vm_table_student.isError = true;
         },
         dataType: "json"
     });

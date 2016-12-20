@@ -18,7 +18,13 @@ var vm_table_student_main = new Vue({
     el: "#table-student-main",
     data: {
         datas: [],
-        isNull:false
+        isNull:false,
+        isError:false
+    },
+    computed:{
+        isOk:function () {
+            return this.isNull || this.isError;
+        }
     },
     methods: {
         changeTeacher: function (index) {
@@ -66,6 +72,7 @@ function refreshStudentTable(request, url, method,reject_data=false) {
         data: request,
         url: url,
         success: function (response) {
+            vm_table_student_main.isError = false;
             if(!reject_data){
                 vm_table_student_main.datas = response.information;
                 if(response.amount != 0) {
@@ -79,7 +86,7 @@ function refreshStudentTable(request, url, method,reject_data=false) {
             }
         },
         error: function (response) {
-
+            vm_table_student_main.isError = true;
         },
         dataType: "json"
     });
