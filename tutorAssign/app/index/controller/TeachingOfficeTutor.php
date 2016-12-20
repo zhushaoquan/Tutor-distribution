@@ -362,7 +362,7 @@ class TeachingOfficeTutor extends BaseController {
 	public function select_tutor()
 	{
 		$where['name']=array('like','%'.$_GET['headname'].'%');
-		$result['result']=DB::table('user_teacher')->where($where)->field('workNumber,name')->select();
+		$result['result']=DB::table('user_teacher')->where($where)->where('department',$_GET['department'])->field('workNumber,name')->select();
 	//	$result['result']['department']=$_GET['department'];
 		// foreach ($result['result'] as $value) 
 		// {
@@ -376,7 +376,7 @@ class TeachingOfficeTutor extends BaseController {
 	public function add_head()
 	{
 		$tea=DB::table('user_teacher')->where('workNumber',$_GET['workNumber'])->find();
-		
+		DB::table('user_department_head')->where('workNumber',$_GET['workNumber'])->delete();
 		$data=array('name' => $tea['name'],
 			'password' => $tea['password'],
 			'workNumber' => $tea['workNumber'],
