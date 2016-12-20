@@ -198,6 +198,8 @@ class DepartmentHeadTutor extends BaseController {
 	}
 
 	public function auto_assign2(){
+		$user = $this->auto_login();
+		$this->assign('user',$user);
         return $this->fetch("auto_assign2");
     }
 
