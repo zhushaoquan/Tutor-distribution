@@ -1,6 +1,6 @@
 var onSearch = false;
 //===============================
-// vue model初始化
+// 导师列表
 var tab_body = new Vue({
     el: '#tab',
     data: {
@@ -9,6 +9,8 @@ var tab_body = new Vue({
     }
 });
 
+//==============================
+// 增加导师
 var form_data = new Vue({
     el: '#form_data',
     data: {
@@ -21,11 +23,13 @@ var form_data = new Vue({
         position: ""
     }
 });
-
+//=============================
+// 删除导师
 var delete_data = new Vue({
     el: '#delete_data',
     data: {
-        datas: []
+        datas: [],
+        isNull:false
     }
 });
 
@@ -88,7 +92,20 @@ function refreshTable(request, url = api_teacher_list) {
 //===============================
 // 点击删除按钮 更新弹出框数据
 $("#delete-item").click(function () {
-    delete_data.datas = tab_body.datas;
+    // delete_data.datas = tab_body.datas;
+    var arr = [];
+    for(item of tab_body.datas){
+        if(item.checked){
+            arr.push(item);
+        }
+    }
+    delete_data.datas = arr;
+
+    if(delete_data.datas.length != 0){
+        delete_data.isNull = false;
+    }else {
+        delete_data.isNull = true;
+    }
 });
 
 
@@ -327,10 +344,11 @@ function initUpload() {
             console.log(data);
             response = data;
             $("#uploadinfo").text("文件上传成功！请确认是否导入！").css("color", "green").css("text-align","center");
-            $("input[type='file']").attr("disabled", "disabled");
+            $("input[type='file']").attr("disabled", true);
         },
         onError: function (files, status, message, pd) {
             $("#uploadinfo").text("文件上传失败！").css("color", "red").css("text-align","center");
+            $("input[type='file']").attr("disabled", false);
         },
         onSelect: function (files) {
             console.log(files);
@@ -347,7 +365,7 @@ function initUpload() {
     //确认上传
     $("#confirm-import").click(function () {
         if(response !== "") {
-            $("#confirm-import").attr("disabled", "disabled");
+            $("#confirm-import").attr("disabled", true);
             $.ajax({
                 type: "post",
                 data: {
@@ -399,6 +417,7 @@ function closeDeleteModal() {
 }
 
 function closeUploadModal() {
+    $("input[type='file']").attr("disabled", false);
     $("#exportExcelModal").modal("hide");
     $("#confirm-import").attr("disabled", false);
     $("#uploadinfo").text("");
