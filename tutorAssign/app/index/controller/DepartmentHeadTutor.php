@@ -767,9 +767,15 @@ class DepartmentHeadTutor extends BaseController {
 		}
 		$finddep=DB::table('user_department_head')->where('workNumber',$user['workNumber'])->field('department')->find();
 		$dep=$finddep['department'];
-		$tea=Db::table('user_teacher t')->where('department',$dep)
-		->field('t.workNumber as tnum,t.name as tname')->distinct(true)->page($page,$pageSize)->select();
-		
+
+		if ($user['department'] == "计算机实验班") {
+			$tea=Db::table('user_teacher t')->where('isExperial',1)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->page($page,$pageSize)->select();
+		} elseif ($user['department'] == "数学实验班") {
+			$tea=Db::table('user_teacher t')->where('isExperial',2)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->page($page,$pageSize)->select();
+		} else {
+			$tea=Db::table('user_teacher t')->where('department',$dep)
+			->field('t.workNumber as tnum,t.name as tname')->distinct(true)->page($page,$pageSize)->select();
+		}
 		$total=count(Db::table('user_teacher t')->where('department',$dep)
 		->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
 		$totalPage = ceil($total/$pageSize);
@@ -1078,7 +1084,9 @@ class DepartmentHeadTutor extends BaseController {
 
     //获取导师对应学生的结果
     public function teacherToStudentResult() {
-    	$user = $this->auto_login();
+    	// $user = $this->auto_login();
+    	$user['workNumber'] = "00001";
+    	$user['department'] = "计算机实验班";
 
     	$request = Request::instance();
         $gg=DB::table('tc_grade')->field('grade')->select();
@@ -1086,7 +1094,14 @@ class DepartmentHeadTutor extends BaseController {
         
         $finddep=DB::table('user_department_head')->where('workNumber',$user['workNumber'])->field('department')->find();
         $dep=$finddep['department'];
-        $tea=Db::table('user_teacher t')->where('department',$dep)->field('t.workNumber as tnum,t.name as tname,t.department as dep,t.position as position')->distinct(true)->select();
+        if ($user['department'] == "计算机实验班") {
+	        $tea=Db::table('user_teacher t')->where('isExperial',1)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname,t.department as dep,t.position as position')->distinct(true)->select();
+        } elseif ($user['department'] == "数学实验班") {
+        	$tea=Db::table('user_teacher t')->where('isExperial',2)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname,t.department as dep,t.position as position')->distinct(true)->select();
+        } else {
+        	$tea=Db::table('user_teacher t')->where('department',$dep)->field('t.workNumber as tnum,t.name as tname,t.department as dep,t.position as position')->distinct(true)->select();
+        }
+
         $count = count($tea);
         for ($i=0; $i <$count ; $i++) { 
             $title[$i] = Db::table('tc_issue_'.$grade)->where('workNumber',$tea[$i]['tnum'])->field('title')->find();
