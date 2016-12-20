@@ -273,33 +273,25 @@ class TeacherTutor extends BaseController {
 
             } else if( ($data1['totalCompExper']+$data1['totalMathExper']+$data1['totalNatur'])<$data['voluntaryinfosetting']['totalMin'] ) {
               $this->showNotice('所带学生总人数未达下限，请重新输入', url('TeacherTutor/issue_submit'));
-            } 
+            } else {   
+                if($this->voluntaryinfosetting['department']=="计算机实验班") {
+                  $data1['totalMathExper'] =  $data['issue']['totalMathExper'];
+                  $data1['totalNatur'] = $data['issue']['totalNatur'];
+                } else if($this->voluntaryinfosetting['department']=="数学实验班") {
+                  $data1['totalCompExper'] = $data['issue']['totalCompExper'];
+                  $data1['totalNatur'] = $data['issue']['totalNatur'];
+                } else {
+                  $data1['totalCompExper'] = $data['issue']['totalCompExper'];
+                  $data1['totalMathExper'] =  $data['issue']['totalMathExper'];
+                }
 
- 
-            if($this->voluntaryinfosetting['department']=="计算机实验班") {
-
-              $data1['totalMathExper'] =  $data['issue']['totalMathExper'];
-              $data1['totalNatur'] = $data['issue']['totalNatur'];
-
-            } else if($this->voluntaryinfosetting['department']=="数学实验班") {
-
-              $data1['totalCompExper'] = $data['issue']['totalCompExper'];
-             // $data1['totalMathExper'] =  $data['issue']['totalMathExper'];
-              $data1['totalNatur'] = $data['issue']['totalNatur'];
-
-            } else {
-
-              $data1['totalCompExper'] = $data['issue']['totalCompExper'];
-              $data1['totalMathExper'] =  $data['issue']['totalMathExper'];
-            //  $data1['totalNatur'] = $data['issue']['totalNatur'];
+                 $data1['pid'] = $data['issue']['pid'];
+                 $bool = Db::table('tc_issue_'.$this->grades[0]['grade'])->update($data1);
+                 if($bool == 1) {
+                    $this->showNotice('课题修改成功', url('TeacherTutor/issue_submit'));      
+                 } 
 
             }
-
-             $data1['pid'] = $data['issue']['pid'];
-             $bool = Db::table('tc_issue_'.$this->grades[0]['grade'])->update($data1);
-             if($bool == 1) {
-                $this->showNotice('课题修改成功', url('TeacherTutor/issue_submit'));      
-             } 
              
         }
         $this->assign('voluntaryinfosetting',$data['voluntaryinfosetting']);
@@ -408,28 +400,27 @@ class TeacherTutor extends BaseController {
                     $this->showNotice('目前所带数学实验班人数达到上限，选择失败！',url('TeacherTutor/student_list'));
                 } else if($this->voluntaryinfosetting['department']!=$this->department1 && $this->voluntaryinfosetting['department']!=$this->department2 && $issue['naturNow'] >= $issue['totalNatur']) { 
                     $this->showNotice('目前所带自然班人数达到上限，选择失败！',url('TeacherTutor/student_list'));
-                }
-
-                if($stu['chosen']==0) {
-
-                    Db::table('user_student_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->setField('chosen',1);
-                    $bool = Db::table('tc_result_'.$this->grades[0]['grade'])->insert($data1);
-                    if($stu['department']==$this->department1) {
-                         Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('compExperNow',1);
-                    } else if($stu['department']==$this->department2) {
-                         Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('mathExperNow',1);
-                    } else { 
-                         Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('naturNow',1);
-                    }
-
-                    if($bool) {
-                        $this->showNotice('选择成功',url('TeacherTutor/student_list'));
-                    } else {
-                        $this->showNotice('一不小心被其他导师抢走楼~',url('TeacherTutor/student_list'));
-                    }
                 } else {
-                        $this->showNotice('一不小心被其他导师抢走楼~',url('TeacherTutor/student_list'));
-                    }  
+                    if($stu['chosen']==0) {
+                        Db::table('user_student_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->setField('chosen',1);
+                        $bool = Db::table('tc_result_'.$this->grades[0]['grade'])->insert($data1);
+                        if($stu['department']==$this->department1) {
+                             Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('compExperNow',1);
+                        } else if($stu['department']==$this->department2) {
+                             Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('mathExperNow',1);
+                        } else { 
+                             Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('naturNow',1);
+                        }
+                        if($bool) {
+                            $this->showNotice('选择成功',url('TeacherTutor/student_list'));
+                        } else {
+                            $this->showNotice('一不小心被其他导师抢走楼~',url('TeacherTutor/student_list'));
+                        }
+                    } else {
+                            $this->showNotice('一不小心被其他导师抢走楼~',url('TeacherTutor/student_list'));
+                        } 
+
+                }
 
             } else {
                 //拒绝
@@ -494,6 +485,12 @@ class TeacherTutor extends BaseController {
     public function show_resultdetail($sid = null) {
         $user = $this->auto_login();
         $student = Db::table('user_student_'.$this->grades[0]['grade'])->alias('s')->join('tc_voluntary_'.$this->grades[0]['grade'].' v' ,'v.sid = s.sid')->where('s.sid', $sid)->find();
+        if ($student['avator'] == "") {
+          $student['avatorIsEmpty'] = 1;
+        }
+        if ($student['avator'] != "") {
+          $student['avatorIsEmpty'] = 0;
+        }
         $this->assign('student', $student);
         $this->assign('user', $user);
         return $this->fetch('information_detail');

@@ -61,7 +61,11 @@
                 </button>
                 </div>
                 <div class="phpoto">
+                    {if condition="$student.avatorIsEmpty eq 0"}
+                      <img src="{{$Think.const.COMMON_PATH}}{{$student.avator}}" class="avatorPre">
+                    {elseif condition="$student.avatorIsEmpty eq 1"}
                       <img src="{{$Think.const.OLD}}/image/defaultAvator.png" class="avatorPre">
+                    {/if}
                 </div>
                 <div class="information-detail" >
                     <ul>

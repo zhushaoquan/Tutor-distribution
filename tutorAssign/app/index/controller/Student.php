@@ -451,6 +451,12 @@ class Student extends BaseController {
 		$user = $this->auto_login();
 		//$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //
         $tutor = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i','t.workNumber = i.workNumber')->where('t.workNumber',$workNumber)->find();
+        if ($tutor['avator'] == "") {
+        	$tutor['avatorIsEmpty'] = 1;
+        }
+        if ($tutor['avator'] != "") {
+        	$tutor['avatorIsEmpty'] = 0;
+        }
         $this->assign('tutor', $tutor);
         $this->assign('user', $user);
 		return $this->fetch('information_detail');
