@@ -1,103 +1,31 @@
 
 /**
  * Created by wythe on 2016/12/15.
+ *
+ * 踩坑提示:
+ * 1、jqPaginator 的总页数不能为0
+ * 2、jqPaginator 在初始化时，会调用一次onPageChange
+ *
  */
+
+var serialNum = "";
 
 //==============================
 // Vue 绑定到表格
 var vm_table_student = new Vue({
     el: "#table-student",
     data: {
-        datas: [
-            {
-                sid:"1",
-                serialNum:"031402209",
-                name:"Mike",
-                vol1:"导师",
-                vol2:"导师",
-                vol3:"导师",
-                vol4:"导师",
-                vol5:"导师"
-            },
-            {
-                sid:"1",
-                serialNum:"031402209",
-                name:"Mike",
-                vol1:"导师",
-                vol2:"导师",
-                vol3:"导师",
-                vol4:"导师",
-                vol5:"导师"
-            },
-            {
-                sid:"1",
-                serialNum:"031402209",
-                name:"Mike",
-                vol1:"导师",
-                vol2:"导师",
-                vol3:"导师",
-                vol4:"导师",
-                vol5:"导师"
-            },
-            {
-                sid:"1",
-                serialNum:"031402209",
-                name:"Mike",
-                vol1:"导师",
-                vol2:"导师",
-                vol3:"导师",
-                vol4:"导师",
-                vol5:"导师"
-            },
-            {
-                sid:"1",
-                serialNum:"031402209",
-                name:"Mike",
-                vol1:"导师",
-                vol2:"导师",
-                vol3:"导师",
-                vol4:"导师",
-                vol5:"导师"
-            },
-            {
-                sid:"1",
-                serialNum:"031402209",
-                name:"Mike",
-                vol1:"导师",
-                vol2:"导师",
-                vol3:"导师",
-                vol4:"导师",
-                vol5:"导师"
-            },
-            {
-                sid:"1",
-                serialNum:"031402209",
-                name:"Mike",
-                vol1:"导师",
-                vol2:"导师",
-                vol3:"导师",
-                vol4:"导师",
-                vol5:"导师"
-            },
-            {
-                sid:"1",
-                serialNum:"031402209",
-                name:"Mike",
-                vol1:"导师",
-                vol2:"导师",
-                vol3:"导师",
-                vol4:"导师",
-                vol5:"导师"
-            }
-        ]
+        datas: [],
+        isNull:false
     },
     methods: {
         assign:function (index) {
-            console.log("assign");
-            var request = {
-
-            };
-            // loadTeacherTable();
+            serialNum = this.datas[index].serialNum;
+            // console.log("assign");
+            var request = {};
+            loadTeacherTable(request,api_unassigned_teacher_list,"get");
+            $("#teacher-table").css("display","block");
+            $("#alert-info").css("display","none");
         }
     }
 });
@@ -105,27 +33,20 @@ var vm_table_student = new Vue({
 var vm_table_teacher = new Vue({
     el: "#table-teacher",
     data: {
-        datas: [
-            {
-                sid:"01",
-                name:"黄伟炜",
-                isExperial:"是",
-                js_need:"2",
-                js_cur:"2",
-                ss_need:"2",
-                ss_cur:"2",
-                nature_need:"2",
-                nature_cur:"2"
-            }
-        ]
+        datas: [],
+        isNull:false
     },
     methods: {
         confirm:function (index) {
-            console.log("confirm");
-            var requset = {
 
+            // console.log("confirm");
+            disableConfirmBtns();
+            var requset = {
+                serialNum:serialNum,
+                workNumber:this.datas[index].workNumber
             };
             assignTeacher(requset,api_assign_page1_confirm,"get");
+
         }
     }
 });
@@ -144,7 +65,13 @@ function refreshStudentTable(request,url,method) {
         url: url,
         success: function (response) {
             vm_table_student.datas = response.information;
-            refreshTotalpages(response.amount);
+            if(response.amount !=0 ){
+                refreshTotalpages(response.amount);
+                vm_table_student.isNull = false;
+            }else{
+                refreshTotalpages(1);
+                vm_table_student.isNull = true;
+            }
         },
         error: function (response) {
 
@@ -156,7 +83,7 @@ function refreshStudentTable(request,url,method) {
 
 //===============================
 // 加载导师列表
-function loadTeacherTable() {
+function loadTeacherTable(request,url,method) {
     $.ajax({
         type:method,
         data:request,
@@ -179,11 +106,35 @@ function assignTeacher(request, url, method) {
         url:url,
         data:request,
         success:function (response) {
-            $(".modal-body").text("分配成功").css("color","green").css("text-align","center");
-            location.reload();
+            console.log("success"+response);
+            $("#teacher-table").css("display","none");
+
+            $("#alert-info").css("display","block");
+            if(response.status){
+                $("#alert-info").text("分配成功").css("color","green").css("text-align","center");
+            }
+            else{
+                $("#alert-info").text("分配失败").css("color","red").css("text-align","center");
+            }
+            // location.reload();
+            var page = getCurrentPage();
+            var request = {
+                curPage:page
+            };
+            enableConfirmBtns();
+            refreshStudentTable(request,api_unassigned_student_list,"get");
+            setTimeout('$("#assignModal").modal("hide")',1000);
+            // $("#teacher-table").css("display","block");
         },
         error:function (response) {
-            $(".modal-body").text("网络错误").css("color","red").css("text-align","center");
+            console.log("failed");
+
+            $("#teacher-table").css("display","none");
+
+            $("#alert-info").css("display","block");
+            $("#alert-info").text("网络错误").css("color","red").css("text-align","center");
+
+            enableConfirmBtns();
         },
         dataType: "json"
     });
@@ -214,9 +165,16 @@ function initPaginator() {
 //==============================
 // 更新分页组件总页数
 function refreshTotalpages(totalPages) {
-    $('#tab-pagination').jqPaginator('option', {
-        totalPages: totalPages
-    });
+    if(totalPages != 0){
+        $('#tab-pagination').jqPaginator('option', {
+            totalPages: totalPages
+        });
+    }
+    else {
+        $('#tab-pagination').jqPaginator('option', {
+            totalPages: 1
+        });
+    }
 }
 
 
@@ -227,25 +185,51 @@ function getCurrentPage() {
 }
 
 
+//=============================
+// 按钮的禁用与启用
 function enableConfirmBtns() {
-
+    $(".btn-modal-assign-confirm").attr("disabled",false);
 }
-
-
 function disableConfirmBtns() {
-
+    $(".btn-modal-assign-confirm").attr("disabled",true);
 }
 
 
+
+//===============================
+// 关闭弹窗
 $("#btn-close-assign").click(function () {
-    location.reload();
+    // location.reload();
+    $("#alert-info").text("");
+    $("#alert-info").css("display","none");
+    $("#teacher-table").css("display","block");
+    var request = {
+        curPage:getCurrentPage()
+    };
+    refreshStudentTable(request,api_unassigned_student_list,"get");
 });
 
+//==================================
+//弹窗提示
 $("#go-to-assign2").click(function () {
     $("#info").text("确认进行智能分配？").addClass("info-modal");
 });
 
+
+//==================================
+// 确认进行智能分配
 $("#confirm-skip").click(function () {
-    window.location.href=$("#go-to-assign2").attr("link");
-    console.log($("#go-to-assign2").attr("link"));
+    var result_link = $("#go-to-assign2").attr("link");
+    $.ajax({
+        type:"get",
+        data:{},
+        url:api_auto_assign,
+        success:function (response) {
+            location.href = result_link;
+        },
+        error:function () {
+
+        },
+        dataType:"json"
+    });
 });

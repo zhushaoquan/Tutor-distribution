@@ -198,6 +198,8 @@ class DepartmentHeadTutor extends BaseController {
 	}
 
 	public function auto_assign2(){
+		$user = $this->auto_login();
+		$this->assign('user',$user);
         return $this->fetch("auto_assign2");
     }
 
@@ -256,6 +258,9 @@ class DepartmentHeadTutor extends BaseController {
 		$user = $this->auto_login();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
 		// $user['department'] = "信息安全与网络工程系";
+		// $user['workNumber'] = "00001";
+		$wishList = ['wishFirst','wishSecond','wishThird','wishForth','wishFifth'];
+		$voluntaryNum = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
 
 		//获取未分配到导师的学生信息
 		$student = Db::table('user_student_'.$grade[0]['grade'])->where('chosen',0)->where('department',$user['department'])->field('sid,serialNum,gpa,chosen')->select();
@@ -266,7 +271,11 @@ class DepartmentHeadTutor extends BaseController {
 			$student[$i]['voluntary'] = Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid', $student[$i]['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
 
 			//将每个学生的志愿信息转换成规定格式的txt文件
-			$inputStudent[$i] = $student[$i]['serialNum'] . ' ' . $student[$i]['gpa'] . PHP_EOL . $student[$i]['voluntary']['wishFirst'] . PHP_EOL . $student[$i]['voluntary']['wishSecond'] . PHP_EOL . $student[$i]['voluntary']['wishThird'] . PHP_EOL . $student[$i]['voluntary']['wishForth'] . PHP_EOL . $student[$i]['voluntary']['wishFifth'] . PHP_EOL . PHP_EOL;
+			$inputStudent[$i] = $student[$i]['serialNum'] . ' ' . $student[$i]['gpa'] . PHP_EOL;
+	        for ($j=0; $j <$voluntaryNum['voluntaryNum'] ; $j++) { 
+	            $inputStudent[$i] = $inputStudent[$i] . $student[$i]['voluntary'][$wishList[$j]] . PHP_EOL;
+	        }
+	        $inputStudent[$i] = $inputStudent[$i] . PHP_EOL;
 		}
 		//将获取的学生信息转换为.txt文件
         file_put_contents('student.txt', $inputStudent);
@@ -313,10 +322,11 @@ class DepartmentHeadTutor extends BaseController {
         file_put_contents('teacher.txt', $inputTeacher);
 
         //调用算法进行分配
-        $fileNameWithParam = 'distribute.exe ' . $countStudent . ' ' . $countTeacher;
+        $fileNameWithParam = 'distribute.exe ' . $countStudent . ' ' . $countTeacher . ' ' . $voluntaryNum['voluntaryNum'];
         system($fileNameWithParam);
 
-        $studentElected = file_get_contents('student_elected.txt');      //获取通过算法得到分配的学生的结果，转换为string
+        $studentElected = file_get_contents('student_elected.txt');      
+        //获取通过算法得到分配的学生的结果，转换为string
 
         //分割studentElected字符串，转换为数组，并存到临时的结果表中
         if ($studentElected != "") {
@@ -330,12 +340,23 @@ class DepartmentHeadTutor extends BaseController {
 	            $studentElectedResult[$i]['workNumber'] = $studentElectedArr[$i][1];
 	            $studentElectedResult[$i]['teaInfo'] = Db::table('user_teacher')->where('workNumber', $studentElectedResult[$i]['workNumber'])->field('workNumber,name')->find();
 
-	            $vol_num[$i] = array_keys(Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$studentElectedResult[$i]['stuInfo']['sid'])->find(),$studentElectedResult[$i]['teaInfo']['workNumber']);
+	            $vol_num[$i] = array_keys(Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$studentElectedResult[$i]['stuInfo']['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find(),$studentElectedResult[$i]['teaInfo']['workNumber']);
+	            if ($vol_num[$i][0] == "wishFirst") {
+	            	$volOrder = "第一志愿";
+	            } elseif ($vol_num[$i][0] == "wishSecond") {
+	            	$volOrder = "第二志愿";
+	            } elseif ($vol_num[$i][0] == "wishThird") {
+	            	$volOrder = "第三志愿";
+	            } elseif ($vol_num[$i][0] == "wishForth") {
+	            	$volOrder = "第四志愿";
+	            } elseif ($vol_num[$i][0] == "wishFifth") {
+	            	$volOrder = "第五志愿";
+	            }
 
 	            $insert[$i]['sid'] = $studentElectedResult[$i]['stuInfo']['sid'];
 	            $insert[$i]['serialNum'] = $studentElectedResult[$i]['stuInfo']['serialNum'];
 	            $insert[$i]['student_name'] = $studentElectedResult[$i]['stuInfo']['name'];
-	            $insert[$i]['vol_num'] = $vol_num[$i][0];
+	            $insert[$i]['vol_num'] = $volOrder;
 	            $insert[$i]['gpa'] = $studentElectedResult[$i]['stuInfo']['gpa'];
 	            $insert[$i]['teacher_name'] = $studentElectedResult[$i]['teaInfo']['name'];
 	            $insert[$i]['workNumber'] = $studentElectedResult[$i]['teaInfo']['workNumber'];
@@ -348,9 +369,9 @@ class DepartmentHeadTutor extends BaseController {
 	            }
 	        }
 	    }
-
+	    // return json($insert);
         $this->assign('user', $user);
-        return $this->fetch('auto_assign2');
+        return json('success');
 
 	}
 
@@ -361,8 +382,9 @@ class DepartmentHeadTutor extends BaseController {
 
 		$request = Request::instance();
 		if ($request->isGet()) {
-			$curPage = $request->get('curPage') != '' ? $request->get('curPage') : 1;
-			$checkList = $request->get('check');
+		    $data = $request->get();
+			$curPage = $data['curPage'] != '' ? $data['curPage'] : 1;
+			$checkList = $data['check'];
 
 			$totalPage = ceil(count(Db::table('tc_temp_result')->select())/$pageSize);
 			$student['amount'] = $totalPage;
@@ -370,13 +392,13 @@ class DepartmentHeadTutor extends BaseController {
 
 			if ($checkList != "") {
 				$count = count($checkList);
-				for ($i=0; $i <$count ; $i++) { 
-					if ($checkList['check'][$i]['checked'] == true) {
+				for ($i=0; $i <$count ; $i++) {
+					if ($checkList[$i]['checked'] == "true") {
 						$checkVal = 1;
-					} else {
+					} elseif ($checkList[$i]['checked'] == "false") {
 						$checkVal = 0;
 					}
-					Db::table('tc_temp_result')->where('serialNum',$checkList['check'][$i]['serialNum'])->setField('checked',$checkVal);
+					Db::table('tc_temp_result')->where('serialNum',$checkList[$i]['serialNum'])->setField('checked',$checkVal);
 				}
 			}
 			return json($student);
@@ -407,6 +429,23 @@ class DepartmentHeadTutor extends BaseController {
 			} else {
 				Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$checkedList[$i]['workNumber'])->setInc('naturNow',1);  //导师当前自然班人数加1
 			}
+		}
+		Db::table('tc_temp_result')->where('1=1')->delete(); //清空临时结果表
+		return json('success');
+	}
+
+
+	//经过智能分配算法后，返回已选择的学生数和总的学生数
+	public function checkNumAndAllNum() {
+		$request = Request::instance();
+		if ($request->isGet()) {
+			$allNum = count(Db::table('tc_temp_result')->select());
+			$checkNum = count(Db::table('tc_temp_result')->where('checked',1)->select());
+
+			$data['check'] = $checkNum;
+			$data['total'] = $allNum;
+
+			return json($data);
 		}
 	}
 
@@ -1305,7 +1344,10 @@ class DepartmentHeadTutor extends BaseController {
     public function unchosenStudentList() {
     	$user = $this->auto_login();
     	$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
+    	$voluntaryNum = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
+    	$wishList = ['wishFirst','wishSecond','wishThird','wishForth','wishFifth'];
     	// $head['department'] = "信息安全与网络工程系";
+
     	$request = Request::instance();
     	$lastGrade = Db::table('tc_grade')->order('grade desc')->select();
     	$pageSize = 10;
@@ -1321,20 +1363,15 @@ class DepartmentHeadTutor extends BaseController {
     		for ($i=0; $i <$totalUnchosen ; $i++) { 
     			$voluntary[$i] = Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('round,wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
 				$voluntary[$i]['information'] = Db::table('user_student_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('sid,serialNum,name')->find();
-				$temp[$i]['vol1'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishFirst'])->field('name')->find();
-				$temp[$i]['vol2'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishSecond'])->field('name')->find();
-				$temp[$i]['vol3'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishThird'])->field('name')->find();
-				$temp[$i]['vol4'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishForth'])->field('name')->find();
-				$temp[$i]['vol5'] = Db::table('user_teacher')->where('workNumber',$voluntary[$i]['wishFifth'])->field('name')->find();
+				
+				for ($j=0; $j <$voluntaryNum['voluntaryNum'] ; $j++) { 
+		            $temp[$i]['vol'.($j+1)] = Db::table('user_teacher')->where('workNumber',$voluntary[$i][$wishList[$j]])->field('name')->find();
+		            $data['information'][$i]['vol'.($j+1)] = $temp[$i]['vol'.($j+1)]['name'];
+		        }
 
 				$data['information'][$i]['sid'] = $voluntary[$i]['information']['sid'];
 				$data['information'][$i]['serialNum'] = $voluntary[$i]['information']['serialNum'];
 				$data['information'][$i]['name'] = $voluntary[$i]['information']['name'];
-				$data['information'][$i]['vol1'] = $temp[$i]['vol1']['name'];
-				$data['information'][$i]['vol2'] = $temp[$i]['vol2']['name'];
-				$data['information'][$i]['vol3'] = $temp[$i]['vol3']['name'];
-				$data['information'][$i]['vol4'] = $temp[$i]['vol4']['name'];
-				$data['information'][$i]['vol5'] = $temp[$i]['vol5']['name'];
     		}
     		return json($data);
     	}

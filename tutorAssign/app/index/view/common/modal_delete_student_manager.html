@@ -10,15 +10,33 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <div id="deleteinfo" style="width: 80%; text-align: center;font-size: 20px">
-                </div>
                 <div>
-                    <table>
-
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>学号</th>
+                            <th>姓名</th>
+                            <th>年级</th>
+                            <th>绩点</th>
+                            <th>排名</th>
+                        </tr>
+                        </thead>
+                        <tbody id="info-del">
+                        <tr v-if="isNull"><td class="table-empty-style" colspan="5">未选中学生~</td></tr>
+                        <tr v-else v-for="item in datas">
+                                <td>{{ item.serialNum }}</td>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.grade }}</td>
+                                <td>{{ item.gpa }}</td>
+                                <td>{{ item.rank }}</td>
+                        </tr>
+                        </tbody>
                     </table>
                 </div>
+                <div id="deleteinfo" style="width: 80%; text-align: center;font-size: 14px">
+                </div>
                 <div class="modal-footer">
-                    <a id="btn-colse-del" class="btn btn-default">关闭</a>
+                    <a id="btn-colse-del" class="btn btn-default" data-dismiss="modal">关闭</a>
                     <button type="button" id="btn-del-student" class="btn btn-primary">
                         确认
                     </button>

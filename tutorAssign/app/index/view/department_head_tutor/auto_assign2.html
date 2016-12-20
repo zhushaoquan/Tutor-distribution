@@ -94,9 +94,10 @@
                         </tr>
                         </thead>
                         <tbody id="table-student-main">
-                        <tr v-for="item in datas">
+                        <tr v-if="isNull"><td class="table-empty-style" colspan="8">没有更多数据了~</td></tr>
+                        <tr v-else v-for="item in datas">
                             <td><input type="checkbox" v-model="item.checked"></td>
-                            <td>{{ item.serialNumber }}</td>
+                            <td>{{ item.serialNum }}</td>
                             <td>{{ item.student_name }}</td>
                             <td>{{ item.vol_num }}</td>
                             <td>{{ item.gpa }}</td>
@@ -104,16 +105,19 @@
                             <td>{{ item.workNumber}}</td>
                             <td>
                                 <button v-on:click="changeTeacher($index)" data-toggle="modal" data-backdrop="static"
-                                        data-target="#teacherModal"><span>修改</span></button>
+                                        data-target="#teacherModal"><span>更改导师</span></button>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="module" style="height: 60px;overflow: visible;">
-                    <button id="confirm-result" data-toggle="modal" data-backdrop="static" data-target="#infoModal" class="btn btn-info" style="float: left;margin-top: 10px">确认结果</button>
-                    <div class="fixed-table-pagination" style="display: block; float: right;">
-                        <div id="tab-pagination" class="pagination ">
+                <div class="module" style="height:80px;overflow: visible;">
+                    <div>
+                        <button id="btn-confirm-result-pop" style="margin-top: 10px" data-toggle="modal" data-backdrop="static" data-target="#infoModal" class="btn btn-info" >确认所有结果</button>
+                        <!--<button id="btn-confirm-cur-page" style="margin-top: 10px" class="btn btn-info">确认本页</button>-->
+                        <div class="fixed-table-pagination" style="display: block; margin-bottom:10px;float: right;">
+                            <div id="tab-pagination" class="pagination ">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -125,7 +129,7 @@
     </div>
 </div>
 {{include file="common/modal_assign2_teacher"}}
-{{include file="common/modal_info"}}
+{{include file="common/modal_info_assign2"}}
 {{include file="common/api"}}
 
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/index.js"></script>

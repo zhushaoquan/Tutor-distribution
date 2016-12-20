@@ -21,12 +21,11 @@
                         </tr>
                         </thead>
                         <tbody id="delete_data">
-                        <template v-for="item in datas">
-                            <tr v-if="item.checked">
-                                <td>{{ item.workNumber }}</td>
-                                <td>{{ item.name }}</td>
-                            </tr>
-                        </template>
+                        <tr v-if="isNull"><td class="table-empty-style" colspan="2">未选中导师~</td></tr>
+                        <tr v-else v-for="item in datas">
+                            <td>{{ item.workNumber }}</td>
+                            <td>{{ item.name }}</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

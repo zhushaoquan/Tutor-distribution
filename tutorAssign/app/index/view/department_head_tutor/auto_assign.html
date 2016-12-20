@@ -94,7 +94,8 @@
                         </tr>
                         </thead>
                         <tbody id="table-student">
-                        <tr v-for="item in datas">
+                        <tr v-if="isNull"><td class="table-empty-style" colspan="9">没有更多数据了~</td></tr>
+                        <tr v-else v-for="item in datas">
                             <td>{{ item.sid }}</td>
                             <td>{{ item.serialNum }}</td>
                             <td>{{ item.name }}</td>
@@ -125,9 +126,10 @@
         </div>
     </div>
 </div>
-{{include file="common/modal_assign_student"}}
-{{include file="common/modal_info"}}
+{{include file="common/modal_assign_teacher_list"}}
+{{include file="common/modal_info_assign"}}
 {{include file="common/api"}}
+
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/index.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/jquery2.14.min.js"></script>
 <script type="text/javascript" src="{{$Think.const.OLD}}/js/bootstrap.js"></script>

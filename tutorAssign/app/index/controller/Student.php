@@ -14,7 +14,7 @@ class Student extends BaseController {
 	public $teachers ;
 	public $search_teacher;
 	public $time = "";
-    public $pageSize = 5;
+    public $pageSize = 11;
     public $user;
     public $grades;
 
@@ -110,37 +110,48 @@ class Student extends BaseController {
 
 	public function showNotice($str, $smartMode) {
         $str = str_replace("\n", "", $str);
-        echo '<DOCTYPE HTML>';
+        echo '<!DOCTYPE HTML>';
         echo '<html>';
         echo '<head>';
         echo '<meta charset="UTF-8" />';
         echo '<title>提示信息</title>';
-        echo '</head>'; 
-        echo '<body>';
-        echo '<script language="javascript">';
-        echo 'window.alert=function (txt)
-			{
-			    document.write ("<table width=\'350px\' height=\'170px\' border=\'0\' align=\'center\' cellpadding=\'0\' cellspacing=\'1\' bgcolor=\'#CCCCCC\'>");
-			    document.write ("  <tr>");
-			    document.write ("    <td align=\'center\' bgcolor=\'#73A2D6\' height=\'25px\'><span >信息提示</span></td>");
-			    document.write ("  </tr>");
-			    document.write ("  <tr>");
-			    document.write (" <td bgcolor=\'#FFFFFF\' height=\'100px\' style=\'font-size:13px; color:rgb(27,111,181); font-family:Verdana;\'>"+txt+"</td>");
-			    document.write ("  </tr>");
-			    document.write ("  <tr> ");
-			    document.write (" <td align=\'right\' height=\'30px\'>");
-			    document.write ("    <input type=\'button\' name=\'Submit2\' value=\'确定\' onclick=\'location.href = \"'.$smartMode.'\" \' /></td>");
-			    document.write ("  </tr>");
-			    document.write (" </table>");
-			}
-			';
-        echo "alert('".addslashes($str)."');";      
-        echo '</script>';
+        echo     '<link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">';
+        echo     '<script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>';
+        echo     '<script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>';
+        echo '</head>';
+        echo '<body style="background: #ddd">';
         echo '</body>';
-        echo '</html>';    
+        echo '<script language="javascript">
+
+                    $(document).ready(function () {
+                        var popUp =
+                                \'<div style="width:100%;height:500px;text-align: center;position: absolute;top: 2%;">\' +
+                                \'<div class ="popStyle">\' +
+                                \'<div class="modal-dialog">\' +
+                                \'<div class="modal-content">\' +
+                                \'<div class="modal-header">\' + \'<h4 class="modal-title" id="myModalLabel">提示信息</h4>\' +
+                                \'</div>\' +
+                                \'<div class="modal-body">\' + \'<p>{{$str}}</p>\' +
+                                \'</div>\' +
+                                \'<div class="modal-footer">\' +
+                                \'<a href = "'.$smartMode.'"><button type="button" class="btn btn-info "> 关闭</button></a>\' +
+                                \'</div>\' +
+                                \'</div>\' +
+                                \'</div>\' +
+                                \'</div>\' +
+                                \'</div>\'
+        
+                        $(\'body\').append(popUp);
+                        $(\'.modal-body\').find(\'p\').text("'.addslashes($str).'");
+        
+                    });
+                </script>';
+        echo '</html>';
+
+       
     }
     public function test123() {
-    	$this->showNotice("志愿填报成功，静候佳音吧！",url('Student/index'));
+    	$this->showNotice("志愿填报成功，静候佳音吧！",url('Student/edit_voluntary'));
     }
 	public function modify() {
 		$user = $this->auto_login();
@@ -213,7 +224,7 @@ class Student extends BaseController {
 				$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 				                                     ->where('isExperial','in','1,3')
 				                                     ->where('compExperNow < totalCompExper')
-				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
+				                                     ->where('department|name|sex|position','like','%'.$this->search_teacher.'%')
 				                                     ->order('t.workNumber asc')
 				                                     ->page($page,$this->pageSize)
 				                                     ->select();
@@ -223,7 +234,7 @@ class Student extends BaseController {
 			    $total = count(Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 				                                     ->where('isExperial','in','1,3')
 				                                     ->where('compExperNow < totalCompExper')
-				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
+				                                     ->where('department|name|sex|position','like','%'.$this->search_teacher.'%')
 				                                     ->order('t.workNumber asc')
 				                                     ->select());
 				$page = $totalPage = ceil($total/$this->pageSize);
@@ -240,7 +251,7 @@ class Student extends BaseController {
 				$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 				                                     ->where('isExperial','in','2,3')
 				                                     ->where('mathExperNow < totalMathExper')
-				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
+				                                     ->where('department|name|sex|position','like','%'.$this->search_teacher.'%')
 				                                     ->order('t.workNumber asc')
 				                                     ->page($page,$this->pageSize)->select();
 				$this->teachers = $teachers;
@@ -248,7 +259,7 @@ class Student extends BaseController {
 			    $total = count(Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 				                                     ->where('isExperial','in','2,3')
 				                                     ->where('mathExperNow < totalMathExper')
-				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
+				                                     ->where('department|name|sex|position','like','%'.$this->search_teacher.'%')
 				                                     ->order('t.workNumber asc')
 				                                     ->select());
 				$page = $totalPage = ceil($total/$this->pageSize);
@@ -263,7 +274,7 @@ class Student extends BaseController {
 				$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 				                                     ->where('department',$this->user['department'])
 				                                     ->where('naturNow < totalNatur')
-				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
+				                                     ->where('department|name|sex|position','like','%'.$this->search_teacher.'%')
 				                                     ->order('t.workNumber asc')
 				                                     ->page($page,$this->pageSize)
 				                                     ->select();
@@ -271,7 +282,7 @@ class Student extends BaseController {
 			    $total = count(Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i', 't.workNumber = i.workNumber')
 				                                     ->where('department',$this->user['department'])
 				                                     ->where('naturNow < totalNatur')
-				                                     ->where('department|name|sex','like','%'.$this->search_teacher.'%')
+				                                     ->where('department|name|sex|position','like','%'.$this->search_teacher.'%')
 				                                     ->order('t.workNumber asc')
 				                                     ->select());
 			    $this->teachers = $teachers;
@@ -440,6 +451,12 @@ class Student extends BaseController {
 		$user = $this->auto_login();
 		//$student = Db::table('user_student')->where('serialNum',$user['serialNum'])->find(); //
         $tutor = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades[0]['grade'].' i','t.workNumber = i.workNumber')->where('t.workNumber',$workNumber)->find();
+        if ($tutor['avator'] == "") {
+        	$tutor['avatorIsEmpty'] = 1;
+        }
+        if ($tutor['avator'] != "") {
+        	$tutor['avatorIsEmpty'] = 0;
+        }
         $this->assign('tutor', $tutor);
         $this->assign('user', $user);
 		return $this->fetch('information_detail');
@@ -488,7 +505,6 @@ class Student extends BaseController {
             $data1['wishForth'] = $request->post('wishForth', '');
             $data1['wishFifth'] = $request->post('wishFifth', '');  
             $data1['round'] = intval($this->ontime);
-
             $volunNum = $this->voluntaryinfosetting['voluntaryNum'];
             if($data1['wishFirst'] == '') {
             	$this->showNotice("第一志愿不得为空",url('Student/edit_voluntary'));
@@ -500,19 +516,21 @@ class Student extends BaseController {
             	$this->showNotice("第四志愿不得为空",url('Student/edit_voluntary'));
             } else if($data1['wishFifth'] == '' && $volunNum >=5) {
             	$this->showNotice("第五志愿不得为空",url('Student/edit_voluntary'));
+            } else {
+            	$result = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid', $this->user['sid'])->where('round', $data1['round'])->find();
+	            $bool=0;
+		        if($result==NULL) {
+		        	$bool = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->insert($data1);
+		        } else {
+		        	$data1['vid'] = $result['vid'];
+		        	$bool = DB::table('tc_voluntary_'.$this->grades[0]['grade'])->update($data1);
+		        }
+
+		        if($bool) $this->showNotice("志愿填报成功，静候佳音吧！",url('Student/edit_voluntary'));
+
             }
 
-            $result = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid', $this->user['sid'])->where('round', $data1['round'])->find();
-
-            $bool;
-	        if($result==NULL) {
-	        	$bool = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->insert($data1);
-	        } else {
-	        	$data1['vid'] = $result['vid'];
-	        	$bool = DB::table('tc_voluntary_'.$this->grades[0]['grade'])->update($data1);
-	        }
-
-	        if($bool) $this->showNotice("志愿填报成功，静候佳音吧！",url('Student/edit_voluntary'));
+            
 
 
         }

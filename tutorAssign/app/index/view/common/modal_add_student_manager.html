@@ -11,9 +11,7 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <div id="addinfo" style="width: 80%; text-align: center;font-size: 20px">
 
-                </div>
                 <div id="info-student">
                     <div class="input-div clearfix">
                         <div class="wrapper">
@@ -25,14 +23,14 @@
                         <div class="wrapper">
                             <label class="control-label input-label">姓名</label>
                         </div>
-                        <input v-model="name" class="form-control input-add">
+                        <input v-model="name" placeholder="请填写姓名" class="form-control input-add">
                     </div>
                     <div class="input-div clearfix">
                         <div class="wrapper">
                             <label class="control-label input-label">性别</label>
                         </div>
                         <select v-model="gender" class="form-control input-add">
-                            <option>男</option>
+                            <option selected>男</option>
                             <option>女</option>
                         </select>
                     </div>
@@ -40,14 +38,14 @@
                         <div class="wrapper">
                             <label class="control-label input-label">绩点</label>
                         </div>
-                        <input v-model="gpa" class="form-control input-add" placeholder="如：3.5" type="text">
+                        <input onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false" v-model="gpa" class="form-control input-add" placeholder="如：3.5" type="text">
                     </div>
                     <div class="input-div clearfix">
                         <div class="wrapper">
                             <label class="control-label input-label">系别</label>
                         </div>
                         <select v-model="department" class="form-control input-add">
-                            <option>应用数学系</option>
+                            <option selected>应用数学系</option>
                             <option>信息与计算科学系</option>
                             <option>计算机系</option>
                             <option>信息安全与网络系</option>
@@ -55,6 +53,12 @@
                             <option>计算机实验班</option>
                             <option>数学实验班</option>
                         </select>
+                    </div>
+                    <div class="input-div clearfix">
+                        <div class="wrapper">
+                            <label class="control-label input-label">手机</label>
+                        </div>
+                        <input v-model="telephone" class="form-control input-add" placeholder="请填写手机号" type="text">
                     </div>
                     <div class="input-div clearfix">
                         <div class="wrapper">
@@ -69,9 +73,11 @@
                         <input v-model="grade" class="form-control input-add" placeholder="如：2014" type="text">
                     </div>
                 </div>
+                <div id="addinfo"  style="height: 20px; width: 80%; text-align: center;font-size: 14px">
+                </div>
             </div>
             <div class="modal-footer">
-                <a id="btn-close-add-bottom" class="btn btn-default" >关闭
+                <a id="btn-close-add-bottom" class="btn btn-default" data-dismiss="modal">关闭
                 </a>
                 <button id="btn-submit-add" type="button" class="btn btn-primary">
                     提交更改

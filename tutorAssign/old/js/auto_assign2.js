@@ -1,30 +1,15 @@
 /**
- * Created by wythe on 2016/12/17.
+ * Created by weeway on 2016/12/17.
+ *
+ * 踩坑提示:
+ * 1、jqPaginator 的总页数不能为0
+ * 2、jqPaginator 在初始化时，会调用一次onPageChange
+ *
  */
 
-/**
- * Created by wythe on 2016/12/15.
- */
 
+var isInit = true;
 var stu_main_index = "";
-
-
-$("#confirm-this-page").click(function () {
-    var info = new Array();
-    $.ajax({
-        type: "get",
-        data: {
-
-        },
-        url: "",
-        success: function (response) {
-            // refreshStudentTable()
-        },
-        error: function (response) {
-
-        }
-    });
-});
 
 
 //==============================
@@ -32,31 +17,16 @@ $("#confirm-this-page").click(function () {
 var vm_table_student_main = new Vue({
     el: "#table-student-main",
     data: {
-        datas: [
-            {
-                serialNumber:"031402209",
-                student_name:"黄伟炜",
-                vol_num:"2",
-                gpa:"4.5",
-                teacher_name:"张东",
-                workNumber:"00001"
-            },
-            {
-                serialNumber:"031402209",
-                student_name:"黄伟炜",
-                vol_num:"2",
-                gpa:"4.5",
-                teacher_name:"张东",
-                workNumber:"00001"
-            }
-        ]
+        datas: [],
+        isNull:false
     },
     methods: {
         changeTeacher: function (index) {
             console.log("change");
             stu_main_index = index;
+
             var request = {};
-            // loadTeacherModalTable();
+            loadTeacherModalTable(request,api_unassigned_teacher_list,"get");
         }
     }
 });
@@ -64,45 +34,8 @@ var vm_table_student_main = new Vue({
 var vm_table_teacher_modal = new Vue({
     el: "#table-teacher-modal",
     data: {
-        datas: [
-            {
-                sid:"01",
-                name:"大东东",
-                isExperial:"是",
-                js_need:"2",
-                js_cur:"2",
-                ss_need:"2",
-                ss_cur:"2",
-                nature_need:"2",
-                nature_cur:"2",
-                workNumber:"00001"
-            },
-            {
-                sid:"02",
-                name:"黄伟炜",
-                isExperial:"是",
-                js_need:"2",
-                js_cur:"2",
-                ss_need:"2",
-                ss_cur:"2",
-                nature_need:"2",
-                nature_cur:"2",
-                workNumber:"00002"
-            },
-            {
-                sid:"03",
-                name:"小东东",
-                isExperial:"是",
-                js_need:"2",
-                js_cur:"2",
-                ss_need:"2",
-                ss_cur:"2",
-                nature_need:"2",
-                nature_cur:"2",
-                workNumber:"00003"
-            }
-
-        ]
+        datas: [],
+        isNull:false
     },
     methods: {
         confirm: function (index) {
@@ -113,7 +46,6 @@ var vm_table_teacher_modal = new Vue({
                 = this.datas[index].name;
             vm_table_student_main.datas[stu_main_index].workNumber
                 = this.datas[index].workNumber;
-
             //关闭模态框
             $("#teacherModal").modal('hide');
         }
@@ -125,16 +57,26 @@ var vm_table_teacher_modal = new Vue({
 initPaginator();
 
 
+
 //===============================
 // 刷新学生表格
-function refreshStudentTable(request, url, method) {
+function refreshStudentTable(request, url, method,reject_data=false) {
     $.ajax({
         type: method,
         data: request,
         url: url,
         success: function (response) {
-            vm_table_student_main.datas = response.information;
-            refreshTotalpages(data.amount);
+            if(!reject_data){
+                vm_table_student_main.datas = response.information;
+                if(response.amount != 0) {
+                    refreshTotalpages(response.amount);
+                    vm_table_student_main.isNull = false;
+                }
+                else {
+                    refreshTotalpages(1);
+                    vm_table_student_main.isNull = true;
+                }
+            }
         },
         error: function (response) {
 
@@ -175,8 +117,24 @@ function initPaginator() {
         last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
         page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
         onPageChange: function (page) {
-            var request = {};
-            // refreshStudentTable(request,api_show_unassigned_student,"get");
+
+            if(isInit){
+                refreshStudentTable({
+                    curPage:page,
+                    check:""
+                },
+                api_assigned_student_list,
+                "get");
+                isInit = false;
+            }else {
+                console.log(getCurPageInfo());
+                refreshStudentTable({
+                    curPage:page,
+                    check:getCurPageInfo()
+                },
+                api_assigned_student_list,
+                "get");
+            }
         }
     });
 }
@@ -198,42 +156,101 @@ function getCurrentPage() {
 }
 
 
-$("#confirm-result").click(function () {
-    $("#info").text("对 48/52 条结果进行确认？").addClass("info-modal");
-});
+//=====================================
+// 确认所有结果
+$("#btn-confirm-result-pop").click(function () {
+    //触发弹窗
 
+    //更新本页值到服务器，保持本地数据不变
+    refreshStudentTable({
+            curPage:getCurrentPage(),
+            check:getCurPageInfo()
+        },
+        api_assigned_student_list,
+        "get",true);
 
-$("#confirm-skip").click(function () {
-    var arr = new Array();
-    for(var i = 0; i < vm_table_student_main.datas.length; ++i){
-        var item = vm_table_student_main.datas[i];
-        if(item.checked){
-            var pair = {
-                serialNumber:item.serialNumber,
-                workNumber:item.workNumber
-            };
-            arr.push(pair);
-        }
+    //等待数据插入数据库，再调用接口，保证数据一致
+    setTimeout(getResult, 500);
+
+    function getResult() {
+        $.ajax({
+            type:"get",
+            data:{
+            },
+            url:api_final_result,
+            success:function (response) {
+                $("#info").text("对"+
+                    response.check+
+                    "/"+
+                    response.total+
+                    "条结果进行确认？")
+                    .addClass("info-modal");
+            },
+            error:function () {
+
+            },
+            dataType:"json"
+        });
     }
-    var request = {
-        arr:arr
-    };
-    console.log(arr);
-    // confirmThisPage(request,api_confirm_cur_page,"get");
 });
 
 
-function confirmThisPage(request,url,method) {
+$("#btn-confirm-all-result").click(function () {
+    // console.log(getCurPageInfo());
+
+
+
+    //确认最终结果
+    var auto_assign_link = $(this).attr("link");
+    $(this).attr("disabled",true);
     $.ajax({
-        type:method,
-        data:request,
-        url:url,
-        success:function (response) {
-            var request = {
-                curPage:getCurrentPage()
-            };
-            // refreshStudentTable(request,api_confirm_cur_page,"get");
+        type:"get",
+        data:{
+        },
+        url:api_confirm_all_result,
+        success:function () {
+            location.href = auto_assign_link;
+        },
+        error:function () {
+            $("#info").text("服务器出错！处理失败！").css("color","red").css("text-align","center");
+            $(this).attr("disabled",false);
         },
         dataType:"json"
     });
+});
+
+//========================================
+// 关闭弹窗清除提示信息
+$("#btn-close-cancel").click(function () {
+    console.log("close");
+    refreshStudentTable({
+            curPage:getCurrentPage(),
+            check:""
+        },
+        api_assigned_student_list,
+        "get");
+    $("#info").text("");
+});
+
+
+//========================================
+// 获取当前页的选中信息
+function getCurPageInfo() {
+    var check = [];
+    for(item of vm_table_student_main.datas){
+        if(item.checked){
+            check.push({
+                serialNum:item.serialNum,
+                // workNumber:item.workNumber,
+                checked:true
+            });
+        }else {
+            check.push({
+                serialNum:item.serialNum,
+                // workNumber:item.workNumber,
+                checked:false
+            });
+        }
+    }
+    return check;
 }

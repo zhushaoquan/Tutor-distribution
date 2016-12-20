@@ -118,3 +118,11 @@ body{
 .sider-navbar-nav > a{
 	text-decoration: none;
 }
+
+.table-empty-style{
+	margin: auto;
+	height: 60%;
+	font-size: 20px;
+	text-align: center;
+	color: green;
+}
