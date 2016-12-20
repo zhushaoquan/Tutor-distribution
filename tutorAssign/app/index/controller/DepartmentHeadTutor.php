@@ -431,6 +431,7 @@ class DepartmentHeadTutor extends BaseController {
 			}
 		}
 		Db::table('tc_temp_result')->where('1=1')->delete(); //清空临时结果表
+		return json('success');
 	}
 
 
