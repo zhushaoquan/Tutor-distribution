@@ -17,13 +17,13 @@
                     <div class="wrapper">
                         <label class="control-label input-label">工号</label>
                     </div>
-                    <input class="form-control input-add" v-model="workNumber" placeholder="如：031402201" type="text">
+                    <input onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" class="form-control input-add" v-model="workNumber" placeholder="如：031402201" type="text">
                 </div>
                 <div class="input-div clearfix">
                     <div class="wrapper">
                         <label class="control-label input-label">姓名</label>
                     </div>
-                    <input v-model="name" class="form-control input-add">
+                    <input v-model="name" placeholder="请输入名字" class="form-control input-add">
                 </div>
                 <div class="input-div clearfix">
                     <div class="wrapper">
@@ -63,13 +63,20 @@
                     <div class="wrapper">
                         <label class="control-label input-label">手机</label>
                     </div>
-                    <input v-model="telephone" class="form-control input-add">
+                    <input placeholder="请输入手机号" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" v-model="telephone" class="form-control input-add">
                 </div>
                 <div class="input-div clearfix">
                     <div class="wrapper">
                         <label class="control-label input-label">职称</label>
                     </div>
-                    <input v-model="position" class="form-control input-add">
+                    <select v-model="position" class="form-control input-add">
+                        <option value="助教">助教</option>
+                        <option value="讲师">讲师</option>
+                        <option value="教授">教授</option>
+                        <option value="副教授">副教授</option>
+                        <option value="教授" selected>教授</option>
+                        <option value="博士生导师">博士生导师</option>
+                    </select>
                 </div>
             </div>
             <div class="modal-footer">
