@@ -17,7 +17,8 @@ var stu_main_index = "";
 var vm_table_student_main = new Vue({
     el: "#table-student-main",
     data: {
-        datas: []
+        datas: [],
+        isNull:false
     },
     methods: {
         changeTeacher: function (index) {
@@ -33,7 +34,8 @@ var vm_table_student_main = new Vue({
 var vm_table_teacher_modal = new Vue({
     el: "#table-teacher-modal",
     data: {
-        datas: []
+        datas: [],
+        isNull:false
     },
     methods: {
         confirm: function (index) {
@@ -66,8 +68,14 @@ function refreshStudentTable(request, url, method,reject_data=false) {
         success: function (response) {
             if(!reject_data){
                 vm_table_student_main.datas = response.information;
-                if(response.amount != 0) {refreshTotalpages(response.amount);}
-                else {refreshTotalpages(1);}
+                if(response.amount != 0) {
+                    refreshTotalpages(response.amount);
+                    vm_table_student_main.isNull = false;
+                }
+                else {
+                    refreshTotalpages(1);
+                    vm_table_student_main.isNull = true;
+                }
             }
         },
         error: function (response) {

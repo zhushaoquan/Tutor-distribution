@@ -5,7 +5,7 @@ var tab_body = new Vue({
     el: '#tab',
     data: {
         datas: [],
-        workNumbers: []
+        isNull:false
     }
 });
 
@@ -71,9 +71,14 @@ function refreshTable(request, url = api_teacher_list) {
         url: url,
         success: function (data) {
             tab_body.datas = data.information;
-            if(data.amount == 0) setTotalpages(1);
-            else setTotalpages(data.amount);
-            // setCurrentPage(currentPage);
+            if(data.amount == 0){
+                setTotalpages(1);
+                tab_body.isNull = true;
+            }
+            else{
+                setTotalpages(data.amount);
+                tab_body.isNull = false;
+            }
         },
         dataType: "json"
     });

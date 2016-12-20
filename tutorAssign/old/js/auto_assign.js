@@ -15,18 +15,8 @@ var serialNum = "";
 var vm_table_student = new Vue({
     el: "#table-student",
     data: {
-        datas: [
-            {
-                sid:"1",
-                serialNum:"031402209",
-                name:"Mike",
-                vol1:"导师",
-                vol2:"导师",
-                vol3:"导师",
-                vol4:"导师",
-                vol5:"导师"
-            }
-        ]
+        datas: [],
+        isNull:false
     },
     methods: {
         assign:function (index) {
@@ -43,19 +33,8 @@ var vm_table_student = new Vue({
 var vm_table_teacher = new Vue({
     el: "#table-teacher",
     data: {
-        datas: [
-            {
-                sid:"01",
-                name:"Jack",
-                isExperial:"是",
-                js_need:"2",
-                js_cur:"2",
-                ss_need:"2",
-                ss_cur:"2",
-                nature_need:"2",
-                nature_cur:"2"
-            }
-        ]
+        datas: [],
+        isNull:false
     },
     methods: {
         confirm:function (index) {
@@ -86,7 +65,13 @@ function refreshStudentTable(request,url,method) {
         url: url,
         success: function (response) {
             vm_table_student.datas = response.information;
-            refreshTotalpages(response.amount);
+            if(response.amount !=0 ){
+                refreshTotalpages(response.amount);
+                vm_table_student.isNull = false;
+            }else{
+                refreshTotalpages(1);
+                vm_table_student.isNull = true;
+            }
         },
         error: function (response) {
 

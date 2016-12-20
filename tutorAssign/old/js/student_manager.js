@@ -4,7 +4,8 @@ var onSearch = false;
 var tab_body = new Vue({
     el: '#tab',
     data: {
-        datas: []
+        datas: [],
+        isNull:false
     }
 });
 
@@ -79,8 +80,14 @@ function refreshTable(request, url = api_student_list) {
         url: url,
         success: function (data) {
             tab_body.datas = data.information;
-            if(data.amount!=0) setTotalpages(data.amount);
-            else setTotalpages(1);// setCurrentPage(currentPage);
+            if(data.amount!=0){
+                setTotalpages(data.amount);
+                tab_body.isNull = false;
+            }
+            else{
+                setTotalpages(1);
+                tab_body.isNull = true;
+            }
         },
         dataType: "json"
     });

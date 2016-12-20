@@ -89,29 +89,31 @@
                     </div>
                 </div>
                 <div class="module">
-                    <div style="min-height: 400px">
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>
-                                    #
-                                </th>
-                                <th>工号</th>
-                                <th>姓名</th>
-                                <th>密码</th>
-                            </tr>
-                            </thead>
-                            <tbody id="tab">
-                            <tr v-for="item in datas">
-                                <td>
-                                    <input v-model="item.checked" type="checkbox" class="chb">
-                                </td>
-                                <td>{{ item.workNumber }}</td>
-                                <td>{{ item.name }}</td>
-                                <td>{{ item.password }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div class="table-empty-style" id="tab" style="min-height: 400px">
+
+                            <table  class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        #
+                                    </th>
+                                    <th>工号</th>
+                                    <th>姓名</th>
+                                    <th>密码</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-if="isNull"><td class="table-empty-style" colspan="4">没有更多数据了~</td></tr>
+                                <tr v-else  v-for="item in datas">
+                                    <td>
+                                        <input v-model="item.checked" type="checkbox" class="chb">
+                                    </td>
+                                    <td>{{ item.workNumber }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.password }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
                     </div>
                 </div>
                 <div class="module" style="height: 60px">
