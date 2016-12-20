@@ -1107,6 +1107,7 @@ class DepartmentHeadTutor extends BaseController {
 
     //导师对应学生结果Excel导出
     public function teacherToStudentExcelExport() {
+    	$grade = Db::table('tc_grade')->order('grade desc')->select();
 
         //引入PHPExcel文件
         require_once 'extend/PHPExcel_1.8.0_doc/Classes/PHPExcel.php';
