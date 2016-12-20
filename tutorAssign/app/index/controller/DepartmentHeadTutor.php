@@ -255,10 +255,10 @@ class DepartmentHeadTutor extends BaseController {
 
 	//智能分配 —— 核心功能
 	public function intelligentAlloc() {
-		// $user = $this->auto_login();
+		$user = $this->auto_login();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
-		$user['department'] = "信息安全与网络工程系";
-		$user['workNumber'] = "00001";
+		// $user['department'] = "信息安全与网络工程系";
+		// $user['workNumber'] = "00001";
 		$wishList = ['wishFirst','wishSecond','wishThird','wishForth','wishFifth'];
 		$voluntaryNum = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
 
