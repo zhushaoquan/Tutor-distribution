@@ -134,9 +134,9 @@ class DepartmentHeadTutor extends BaseController {
 					if (!(Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$teacher[$i]['workNumber'])->find())) {
 						$defaultIssue['workNumber'] = $teacher[$i]['workNumber'];
 						$defaultIssue['time'] = time();
-						$defaultIssue['totalCompExper'] = 0;
+						$defaultIssue['totalCompExper'] = $info['experialMax'];
 						$defaultIssue['totalMathExper'] = 0;
-						$defaultIssue['totalNatur'] = 0;
+						$defaultIssue['totalNatur'] = $info['defaultNum']-$info['experialMax'];
 						$defaultIssue['compExperNow'] = 0;
 						$defaultIssue['mathExperNow'] = 0;
 						$defaultIssue['naturNow'] = 0;
@@ -152,8 +152,8 @@ class DepartmentHeadTutor extends BaseController {
 						$defaultIssue['workNumber'] = $teacher[$i]['workNumber'];
 						$defaultIssue['time'] = time();
 						$defaultIssue['totalCompExper'] = 0;
-						$defaultIssue['totalMathExper'] = 0;
-						$defaultIssue['totalNatur'] = 0;
+						$defaultIssue['totalMathExper'] = $info['experialMax'];
+						$defaultIssue['totalNatur'] = $info['defaultNum']-$info['experialMax'];
 						$defaultIssue['compExperNow'] = 0;
 						$defaultIssue['mathExperNow'] = 0;
 						$defaultIssue['naturNow'] = 0;
@@ -170,7 +170,7 @@ class DepartmentHeadTutor extends BaseController {
 						$defaultIssue['time'] = time();
 						$defaultIssue['totalCompExper'] = 0;
 						$defaultIssue['totalMathExper'] = 0;
-						$defaultIssue['totalNatur'] = 0;
+						$defaultIssue['totalNatur'] = $info['defaultNum'];
 						$defaultIssue['compExperNow'] = 0;
 						$defaultIssue['mathExperNow'] = 0;
 						$defaultIssue['naturNow'] = 0;
@@ -1363,12 +1363,12 @@ class DepartmentHeadTutor extends BaseController {
     		for ($i=0; $i <$totalUnchosen ; $i++) { 
     			$voluntary[$i] = Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('round,wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
 				$voluntary[$i]['information'] = Db::table('user_student_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('sid,serialNum,name')->find();
-				
-				for ($j=0; $j <$voluntaryNum['voluntaryNum'] ; $j++) { 
-		            $temp[$i]['vol'.($j+1)] = Db::table('user_teacher')->where('workNumber',$voluntary[$i][$wishList[$j]])->field('name')->find();
-		            $data['information'][$i]['vol'.($j+1)] = $temp[$i]['vol'.($j+1)]['name'];
-		        }
-
+                if ($voluntary[$i] != "") {
+                    for ($j = 0; $j < $voluntaryNum['voluntaryNum']; $j++) {
+                        $temp[$i]['vol' . ($j + 1)] = Db::table('user_teacher')->where('workNumber', $voluntary[$i][$wishList[$j]])->field('name')->find();
+                        $data['information'][$i]['vol' . ($j + 1)] = $temp[$i]['vol' . ($j + 1)]['name'];
+                    }
+                }
 				$data['information'][$i]['sid'] = $voluntary[$i]['information']['sid'];
 				$data['information'][$i]['serialNum'] = $voluntary[$i]['information']['serialNum'];
 				$data['information'][$i]['name'] = $voluntary[$i]['information']['name'];
