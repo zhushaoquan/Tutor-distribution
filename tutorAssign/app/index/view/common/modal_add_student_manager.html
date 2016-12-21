@@ -17,7 +17,7 @@
                         <div class="wrapper">
                             <label class="control-label input-label">学号</label>
                         </div>
-                        <input v-model="serialNum" class="form-control input-add" placeholder="如：031402201" type="text">
+                        <input maxlength="9" onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46)event.returnValue=false"  v-model="serialNum" class="form-control input-add" placeholder="如：031402201" type="text">
                     </div>
                     <div class="input-div clearfix">
                         <div class="wrapper">
@@ -39,6 +39,7 @@
                             <label class="control-label input-label">绩点</label>
                         </div>
                         <input onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false" v-model="gpa" class="form-control input-add" placeholder="如：3.5" type="text">
+                        <span id="gpaIsLegal"></span>
                     </div>
                     <div class="input-div clearfix">
                         <div class="wrapper">
@@ -58,19 +59,20 @@
                         <div class="wrapper">
                             <label class="control-label input-label">手机</label>
                         </div>
-                        <input v-model="telephone" class="form-control input-add" placeholder="请填写手机号" type="text">
+                        <input maxlength="11" onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46)event.returnValue=false"   v-model="telephone" class="form-control input-add" placeholder="请填写手机号" type="text">
                     </div>
                     <div class="input-div clearfix">
                         <div class="wrapper">
                             <label class="control-label input-label">排名</label>
                         </div>
                         <input v-model="rank" class="form-control input-add" placeholder="如：1/180" type="text">
+                        <span id="rankIsLegal"></span>
                     </div>
                     <div class="input-div clearfix">
                         <div class="wrapper">
-                            <label class="control-label input-label">年级</label>
+                            <label  class="control-label input-label">年级</label>
                         </div>
-                        <input v-model="grade" class="form-control input-add" placeholder="如：2014" type="text">
+                        <input maxlength="4" onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46)event.returnValue=false"   v-model="grade" class="form-control input-add" placeholder="如：2014" type="text">
                     </div>
                 </div>
                 <div id="addinfo"  style="height: 20px; width: 80%; text-align: center;font-size: 14px">

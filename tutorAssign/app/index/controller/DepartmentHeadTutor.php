@@ -384,7 +384,7 @@ class DepartmentHeadTutor extends BaseController {
 		} else {
 			$data['amount'] = 0;
 			$data['msg'] = "所有学生均未填报志愿，无法进行智能分配";
-			$data['student'] = "";
+			$data['information'] = "";
 			return json($data);
 		}
 	    // return json($insert);
