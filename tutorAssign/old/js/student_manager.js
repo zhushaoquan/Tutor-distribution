@@ -467,3 +467,10 @@ $("#delete-item").click(function () {
     }
 });
 
+$("#gpaIsLegal").change(function () {
+    $(this).text().css("","").css("","");
+});
+
+$("#gpaIsLegal").click(function () {
+    $(this).text().css("","").css("","");
+});

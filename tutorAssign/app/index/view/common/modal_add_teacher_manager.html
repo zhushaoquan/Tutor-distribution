@@ -17,7 +17,7 @@
                     <div class="wrapper">
                         <label class="control-label input-label">工号</label>
                     </div>
-                    <input onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" class="form-control input-add" v-model="workNumber" placeholder="如：031402201" type="text">
+                    <input maxlength="5" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" class="form-control input-add" v-model="workNumber" placeholder="如：00001" type="text">
                 </div>
                 <div class="input-div clearfix">
                     <div class="wrapper">
@@ -63,7 +63,7 @@
                     <div class="wrapper">
                         <label class="control-label input-label">手机</label>
                     </div>
-                    <input placeholder="请输入手机号" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" v-model="telephone" class="form-control input-add">
+                    <input maxlength="11" placeholder="请输入手机号" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" v-model="telephone" class="form-control input-add">
                 </div>
                 <div class="input-div clearfix">
                     <div class="wrapper">
