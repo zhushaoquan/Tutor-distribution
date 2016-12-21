@@ -1,14 +1,16 @@
 var onSearch = false;
 //===============================
-// vue model初始化
+// 导师列表
 var tab_body = new Vue({
     el: '#tab',
     data: {
         datas: [],
-        workNumbers: []
+        isNull:false
     }
 });
 
+//==============================
+// 增加导师
 var form_data = new Vue({
     el: '#form_data',
     data: {
@@ -21,11 +23,13 @@ var form_data = new Vue({
         position: ""
     }
 });
-
+//=============================
+// 删除导师
 var delete_data = new Vue({
     el: '#delete_data',
     data: {
-        datas: []
+        datas: [],
+        isNull:false
     }
 });
 
@@ -71,9 +75,14 @@ function refreshTable(request, url = api_teacher_list) {
         url: url,
         success: function (data) {
             tab_body.datas = data.information;
-            if(data.amount == 0) setTotalpages(1);
-            else setTotalpages(data.amount);
-            // setCurrentPage(currentPage);
+            if(data.amount == 0){
+                setTotalpages(1);
+                tab_body.isNull = true;
+            }
+            else{
+                setTotalpages(data.amount);
+                tab_body.isNull = false;
+            }
         },
         dataType: "json"
     });
@@ -83,7 +92,21 @@ function refreshTable(request, url = api_teacher_list) {
 //===============================
 // 点击删除按钮 更新弹出框数据
 $("#delete-item").click(function () {
-    delete_data.datas = tab_body.datas;
+    // delete_data.datas = tab_body.datas;
+    var arr = [];
+    for(item of tab_body.datas){
+        if(item.checked){
+            arr.push(item);
+        }
+    }
+    delete_data.datas = arr;
+    console.log(arr);
+
+    if(delete_data.datas.length != 0){
+        delete_data.isNull = false;
+    }else {
+        delete_data.isNull = true;
+    }
 });
 
 
@@ -123,7 +146,8 @@ function listenEventDel() {
     });
 }
 
-
+//===============================
+// 刷新导师列表
 function refreshAfterAddOrDel() {
     if (onSearch) {
         var searchStr = searchCondition();
@@ -165,7 +189,8 @@ $(".input-add").click(function () {
     $(this).attr("placeholder", " ");
 });
 
-
+//=================================
+// 检查添加信息
 function checkFormdata() {
     if(form_data.workNumber == ""
         || form_data.name == ""
@@ -224,7 +249,8 @@ function listenEventAdd() {
     });
 }
 
-
+//============================
+// 监听搜索事件（回车）
 function listenSearchEvent() {
     $("#searchstu").keydown(function (event) {
         if (event.which == "13") {
@@ -254,7 +280,8 @@ function listenSearchEvent() {
     });
 }
 
-
+//=============================
+// 搜索状态下的 onPageChange 回调
 function setSearchCallback() {
     var onPageChange = function (page) {
         var searchStr = searchCondition();
@@ -269,7 +296,8 @@ function setSearchCallback() {
     });
 }
 
-
+//=============================
+// 非搜索状态下的 onPageChange 回调
 function setNormalCallback() {
     var onPageChange = function (page) {
         var request = {curPage: page};
@@ -280,33 +308,37 @@ function setNormalCallback() {
     });
 }
 
-
+//=============================
+// 设置总页数
 function setTotalpages(totalPages) {
     $('#tab-pagination').jqPaginator('option', {
         totalPages: totalPages
     });
 }
-
-
+//=============================
+// 获得当前页
 function getCurrentPage() {
     return $("#tab-pagination > .active ").attr("jp-data");
 }
 
-
+//==============================
+// 设置当前页
 function setCurrentPage(currentPage) {
     $('#tab-pagination').jqPaginator('option', {
         currentPage: currentPage
     });
 }
 
-
+//===============================
+// 获得搜索字符串
 function searchCondition() {
     return $("#searchstu").val();
 }
 
-var uploadObj;
+
 //===================================
 //  文件上传
+var uploadObj;
 function initUpload() {
     var response = "";
     uploadObj = $("#fileuploader").uploadFile({
@@ -322,10 +354,11 @@ function initUpload() {
             console.log(data);
             response = data;
             $("#uploadinfo").text("文件上传成功！请确认是否导入！").css("color", "green").css("text-align","center");
-            $("input[type='file']").attr("disabled", "disabled");
+            $("input[type='file']").attr("disabled", true);
         },
         onError: function (files, status, message, pd) {
             $("#uploadinfo").text("文件上传失败！").css("color", "red").css("text-align","center");
+            $("input[type='file']").attr("disabled", false);
         },
         onSelect: function (files) {
             console.log(files);
@@ -342,7 +375,7 @@ function initUpload() {
     //确认上传
     $("#confirm-import").click(function () {
         if(response !== "") {
-            $("#confirm-import").attr("disabled", "disabled");
+            $("#confirm-import").attr("disabled", true);
             $.ajax({
                 type: "post",
                 data: {
@@ -378,7 +411,8 @@ function initUpload() {
     });
 }
 
-
+//=====================================
+// 模态框关闭
 function closeAddModal() {
     $("#addItemModal").modal("hide");
     $("#btn-submit-add").attr("disabled", false);
@@ -394,6 +428,7 @@ function closeDeleteModal() {
 }
 
 function closeUploadModal() {
+    $("input[type='file']").attr("disabled", false);
     $("#exportExcelModal").modal("hide");
     $("#confirm-import").attr("disabled", false);
     $("#uploadinfo").text("");

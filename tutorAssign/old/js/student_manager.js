@@ -1,21 +1,26 @@
 var onSearch = false;
 //===============================
-// vue model初始化
-var tab_body = new Vue({
+// 学生列表
+var table_student = new Vue({
     el: '#tab',
     data: {
-        datas: []
+        datas: [],
+        isNull:false
     }
 });
 
-var selectGrade = new Vue({
+//=========================
+// 年级下拉框
+var selector_grade = new Vue({
     el: '#grade-selector',
     data: {
         grades: []
     }
 });
 
-var info_student = new Vue({
+//===========================
+// 添加学生
+var student_added = new Vue({
     el: '#info-student',
     data:{
         serialNum:"",
@@ -29,16 +34,21 @@ var info_student = new Vue({
     }
 });
 
-var info_del = new Vue({
+//===========================
+// 删除学生
+var student_deleted = new Vue({
     el:"#info-del",
     data:{
-        datas:[]
+        datas:[],
+        isNull:false
     }
 });
 
-
+//==========================
+// 初始化
 initGradeSelect();
 initPaginator();
+initUpload();
 listenEventDel();
 listenEventAdd();
 listenSelectChage();
@@ -46,7 +56,7 @@ listenSearchEvent();
 
 
 //===============================
-//初始化分页组件
+// 分页组件
 function initPaginator() {
     $('#tab-pagination').jqPaginator({
         totalPages: 9,
@@ -78,9 +88,15 @@ function refreshTable(request, url = api_student_list) {
         data: request,
         url: url,
         success: function (data) {
-            tab_body.datas = data.information;
-            if(data.amount!=0) setTotalpages(data.amount);
-            else setTotalpages(1);// setCurrentPage(currentPage);
+            table_student.datas = data.information;
+            if(data.amount!=0){
+                setTotalpages(data.amount);
+                table_student.isNull = false;
+            }
+            else{
+                setTotalpages(1);
+                table_student.isNull = true;
+            }
         },
         dataType: "json"
     });
@@ -117,7 +133,7 @@ function initGradeSelect() {
         type: "get",
         url: api_grade_list,
         success: function (data) {
-            selectGrade.grades = data;
+            selector_grade.grades = data;
         },
         dataType: "json"
     });
@@ -163,7 +179,8 @@ function listenEventDel() {
     });
 }
 
-
+//==============================
+// 刷新学生列表
 function refreshAfterAddOrDel() {
     if (onSearch) {
         console.log("true");
@@ -185,7 +202,7 @@ function refreshAfterAddOrDel() {
             grade: grade,
             curPage: page
         }
-        //加载搜索数据
+        //加载正常数据
         refreshTable(request, api_student_list);
     }
 }
@@ -194,21 +211,21 @@ function refreshAfterAddOrDel() {
 // 获得选中学生的学号数组
 function selectedStuIDs() {
     var IDs = [];
-    for(item of tab_body.datas){
+    for(item of table_student.datas){
         if(item.checked) IDs.push(item.serialNum);
     }
     return IDs;
 }
 
-
-//点击输入框清楚placeholder
+//================================
+// 点击输入框清除 placeholder
 $(".input-add").click(function () {
     $(this).attr("placeholder", " ");
 });
 
 
 //===============================
-// 监听添加弹出框的关闭按钮
+// 监听添加学生弹出框
 function listenEventAdd() {
     $("#btn-close-add-bottom").click(function () {
         $("#addinfo").text("");
@@ -222,14 +239,14 @@ function listenEventAdd() {
         $.ajax({
             type: "post",
             data: {
-                serialNum: info_student.serialNum,
-                name: info_student.name,
-                gender: info_student.gender,
-                gpa: info_student.gpa,
-                department: info_student.department,
-                rank: info_student.rank,
-                telephone:info_student.telephone,
-                grade: info_student.grade
+                serialNum: student_added.serialNum,
+                name: student_added.name,
+                gender: student_added.gender,
+                gpa: student_added.gpa,
+                department: student_added.department,
+                rank: student_added.rank,
+                telephone:student_added.telephone,
+                grade: student_added.grade
             },
             url: api_student_add,
             success: function (data) {
@@ -250,7 +267,8 @@ function listenEventAdd() {
     });
 }
 
-
+//==============================
+// 监听搜索事件（回车）
 function listenSearchEvent() {
     $("#searchstu").keydown(function (event) {
         if (event.which == "13") {
@@ -284,7 +302,8 @@ function listenSearchEvent() {
     });
 }
 
-
+//===============================
+// 搜索情况下的 onPageChange 回调
 function setSearchCallback() {
     var onPageChange = function (page) {
         var grade = selectedGrade();
@@ -301,7 +320,8 @@ function setSearchCallback() {
     });
 }
 
-
+//=============================
+// 非搜索情况下的 onPageChange 回调
 function setNormalCallback() {
     var onPageChange = function (page) {
         var grade = selectedGrade();
@@ -313,34 +333,41 @@ function setNormalCallback() {
     });
 }
 
-
+//=================================
+// 设置总页数
 function setTotalpages(totalPages) {
     $('#tab-pagination').jqPaginator('option', {
         totalPages: totalPages
     });
 }
 
-
+//================================
+// 获得当前页
 function getCurrentPage() {
     return $("#tab-pagination > .active ").attr("jp-data");
 }
 
-
+//================================
+// 设置当前页
 function setCurrentPage(currentPage) {
     $('#tab-pagination').jqPaginator('option', {
         currentPage: currentPage
     });
 }
 
-
+//================================
+// 获得搜索字符串
 function searchCondition() {
     return $("#searchstu").val();
 }
 
 
-var response;
-$(document).ready(function () {
-    $("#fileuploader").uploadFile({
+var uploadObj;
+//===================================
+//  文件上传
+function initUpload() {
+    var response = "";
+    uploadObj = $("#fileuploader").uploadFile({
         url: api_student_excel_upload,
         fileName: "excel_file",
         dragDropStr: "<span><b>拖拽文件到这里</b></span>",
@@ -352,11 +379,12 @@ $(document).ready(function () {
         onSuccess: function (files, data, xhr, pd) {
             console.log(data);
             response = data;
-            $("#uploadinfo").text("文件上传成功！请确认是否导入！").css("color", "green");
-            $("input[type='file']").attr("disabled", "disabled");
+            $("#uploadinfo").text("文件上传成功！请确认是否导入！").css("color", "green").css("text-align","center");
+            $("input[type='file']").attr("disabled", true);
         },
         onError: function (files, status, message, pd) {
-            $("#uploadinfo").text("文件上传失败！").css("color", "red");
+            $("#uploadinfo").text("文件上传失败！").css("color", "red").css("text-align","center");
+            $("input[type='file']").attr("disabled", false);
         },
         onSelect: function (files) {
             console.log(files);
@@ -364,49 +392,78 @@ $(document).ready(function () {
                 return true;
             }
             else {
-                $("#uploadinfo").text("请选择 .xls 文件！").css("color", "red");
+                $("#uploadinfo").text("请选择 .xls 文件！").css("color", "red").css("text-align","center");
                 return false;
             }
         }
     });
-});
 
-$("#confirm-import").click(function () {
-    $("#confirm-import").attr("disabled", "disabled");
-    if(response != null){
-        $.ajax({
-            type: "post",
-            data: {
-                file_path: response.file_path
-            },
-            url: api_student_excel_import,
-            success: function (data) {
-                console.log(data);
-                $("#uploadinfo").text("文件导入成功！").css("color", "green");
-                location.reload();
-                $("input[type='file']").attr("disabled", false);
-            },
-            complete: function (response, status) {
-                console.log(response);
-            },
-            error: function (response, status) {
-                console.log(response);
-                $("#uploadinfo").text("文件导入失败！请重新导入！").css("color", "red");
-                $("#confirm-import").attr("disabled", false);
-            },
-            dataType: "json"
-        });
-    }
-    else{
-        $("#uploadinfo").text("请先上传文件！").css("color", "red").css("text-align", "center");
-        $("#confirm-import").attr("disabled", false);
-    }
-});
+    //确认上传
+    $("#confirm-import").click(function () {
+        if(response !== "") {
+            $("#confirm-import").attr("disabled", true);
+            $.ajax({
+                type: "post",
+                data: {
+                    file_path: response.file_path
+                },
+                url: api_student_excel_import,
+                success: function (data) {
+                    console.log(data);
+                    $("#uploadinfo").text("文件导入成功！").css("color", "green").css("text-align", "center");
 
-$("#exit-import").click(function () {
+                    setTimeout('closeUploadModal()', 500);
+                    $("input[type='file']").attr("disabled", false);
+                },
+                complete: function (response, status) {
+                    console.log(response);
+                },
+                error: function (response, status) {
+                    console.log(response);
+                    $("#uploadinfo").text("文件导入失败！请重新导入！").css("color", "red").css("text-align", "center");
+                    $("#confirm-import").attr("disabled", false);
+                },
+                dataType: "json"
+            });
+        }
+        else {
+            $("#uploadinfo").text("请先上传文件！").css("color", "red").css("text-align", "center");
+            $("#confirm-import").attr("disabled", false);
+        }
+    });
+
+    $("#exit-import").click(function () {
+        closeUploadModal();
+    });
+}
+
+//================================
+// 关闭文件上传弹窗
+function closeUploadModal() {
+    $("input[type='file']").attr("disabled", false);
+    $("#exportExcelModal").modal("hide");
+    $("#confirm-import").attr("disabled", false);
+    $("#uploadinfo").text("");
+    uploadObj.reset();
     refreshAfterAddOrDel();
+}
+
+
+//===============================
+// 触发删除学生弹窗
+$("#delete-item").click(function () {
+    var arr = [];
+    for(item of table_student.datas){
+        if(item.checked){
+            arr.push(item);
+        }
+    }
+    student_deleted.datas = arr;
+
+    if(student_deleted.datas.length != 0){
+        student_deleted.isNull = false;
+    }else {
+        student_deleted.isNull = true;
+    }
 });
 
-$("#delete-item").click(function () {
-   info_del.datas = tab_body.datas;
-});
