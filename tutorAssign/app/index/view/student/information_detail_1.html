@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>毕设导师智能分配系统</title>
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student.css">
+    
+    <style type="text/css">
+        .sider-navbar-nav li {
+            color: #fff;
+            text-align: center;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container-backstage" class="clearfix">
+    <div id="siderbar">
+        <nav class="sider-navbar">
+            <div class="sider-navbar-header">
+                <img src="{{$Think.const.OLD}}/image/mainpage-logo.png" alt="" width="240">
+            </div>
+            <ul class="sider-navbar-nav">
+                <a href="{{:url('Student/index')}}"><li ><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
+                <a href="{{:url('Student/tutor_list')}}"><li ><i class="glyphicon glyphicon-th-list"></i> 专业导师</li></a>
+                <a href="{{:url('Student/edit_voluntary')}}"><li><i class="glyphicon glyphicon-pencil"></i> 志愿填报</li></a>
+                <a href="{{:url('Student/show_result')}}"><li class="active"><i class="glyphicon glyphicon-ok"></i> 志愿结果</li></a>
+            </ul>
+        </nav>
+    </div>
+    <div id="mainpage">
+        <div class="top-nav">
+            <div class="user-area">
+                <div class="hello-user">
+                    <span><i class="glyphicon glyphicon-user"></i>欢迎您,</span>
+                    <span class="user-name">{{:user_type()}}: {{$user['name']|default="xxx"}}</span>
+                </div>
+            </div>
+            <div class="login-out-area">
+                <a href="{{:url('BaseController/logout')}}"><i class = "glyphicon glyphicon-off"></i>退出</a>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="main-content" style="border-radius: 10px;padding: 20px;">
+                    <div role="alert" class="alert alert-info" style="margin-bottom: 0">
+                        <p>提示：{{:$message}}</p>
+                    </div>
+                <div class="my-information-title">
+                    <span>{{$tutor['name']}}</span>
+                    
+                </div>
+                <div class="phpoto">
+                    {if condition="$tutor.avatorIsEmpty eq 0"}
+                      <img src="{{$Think.const.COMMON_PATH}}{{$tutor.avator}}" class="avatorPre">
+                    {elseif condition="$tutor.avatorIsEmpty eq 1"}
+                      <img src="{{$Think.const.OLD}}/image/defaultAvator.png" class="avatorPre">
+                    {/if}
+                </div>
+                <div class="information-detail">
+                    <ul>
+                        <li><span>系别：</span><span>{{$tutor['department']}}</span><span>性别：</span><span>{{$tutor['sex']}}</span></li>
+                        <li><span>电话：</span><span>{{$tutor['telephone']}}</span><span>邮箱：</span><span>{{$tutor['email']}}</span></li>
+                        <li><span>职称：</span><span>{{$tutor['position']}}</span><span>实验班导师：</span><span><?php if($tutor['isExperial']!=0) echo "是";else echo "否"; ?></span></li>
+                        <?php if($user['department']!= "计算机实验班" && $user['department']!= "数学实验班" ) {?><li><span style ="width:200px;">自然班人数上限：</span><span style="width:100px;">{{$tutor['totalNatur']}}</span><span style ="width:200px;">自然班已选人数：</span><span style="width:100px;">{{$tutor['naturNow']}}</span></li>
+
+                        <?php }else if($user['department'] == "计算机实验班" ) {?><li><span style ="width:200px;">计算机实验班人数限：</span><span style="width:100px;">{{$tutor['totalCompExper']}}</span><span style ="width:200px;;">计算机实验班已选人数：</span><span style="width:100px;">{{$tutor['compExperNow']}}</span></li>
+
+                        <?php }else { ?><li><span style ="width:200px;">数学实验班人数上限：</span><span style="width:100px;">{{$tutor['totalMathExper']}}</span><span style ="width:200px;;">数学实验班已选人数：</span><span style="width:100px;">{{$tutor['mathExperNow']}}</span></li><?php }?>
+                    </ul>
+                </div>
+                <div class="new-skill-title">
+                    <p>个人简介：</p>
+                </div>
+                <div class="new-skill-detail">
+                    <p>{{$tutor['description']}}</p>
+                </div>
+                <div class="information-detail" style="padding:10px 250px;">
+                    <ul>
+                         <li><span>课题名称：</span></li>
+                         <li><p>{{$tutor['title']}}</p></li>
+                         <li><span>课题内容：</span></li>
+                         <li><p>{{$tutor['content']}}</p></li>
+                    </ul>
+                </div>
+                
+                <div class="edit-btn">
+                <a  href="{{:url('Student/show_result')}}" style="color:white;">
+                    <button class="btn btn-info button-size" type="submit" >
+                    返回</button></a>
+                    
+                </div>
+
+                
+                
+            </div>
+            
+            <div class="footer"  style="border-radius: 10px;">
+                Designed by Lin & 我说的都队
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/index.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/jquery2.14.min.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/bootstrap.js"></script>
+<script type="text/javascript" src="{{$Think.const.OLD}}/js/backstage.js"></script>
+</body>
+</html>
+
+
