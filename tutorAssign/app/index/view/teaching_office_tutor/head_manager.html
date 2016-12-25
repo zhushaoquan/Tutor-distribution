@@ -88,11 +88,44 @@
                                   <button id="searchbutton" type="submit"  class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
                         </tr>
+                         <tr>
+                            <td class="teacher-name" style="vertical-align:middle" >应用数学系</td>
+                            <td><?php echo $R1['workNumber'];?></td>
+                                <td> 
+                                        <?php echo $R1['name'];?>
+                                </td>
+                            <td>
+                                <input id="searchtea" class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
+                                  <button id="searchbutton" type="submit"  class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                            </td>
+                        </tr>
                         <tr>
                             <td class="teacher-name" style="vertical-align:middle">信息与计算科学系</td>
                             <td><?php echo $R2['workNumber'];?></td>
                                 <td> 
                                     <?php echo $R2['name'];?>
+                                </td>
+                            <td>
+                                <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
+                                 <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="teacher-name" style="vertical-align:middle">信息与计算科学系</td>
+                            <td><?php echo $R2['workNumber'];?></td>
+                                <td> 
+                                    <?php echo $R2['name'];?>
+                                </td>
+                            <td>
+                                <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
+                                 <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="teacher-name" style="vertical-align:middle">计算机系</td>
+                           <td><?php echo $R3['workNumber'];?></td>
+                                <td> 
+                                    <?php echo $R3['name'];?>
                                 </td>
                             <td>
                                 <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
@@ -121,7 +154,29 @@
                                   <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
                         </tr>
+                         <tr>
+                            <td class="teacher-name" style="vertical-align:middle">信息安全与网络系</td>
+                            <td><?php echo $R4['workNumber'];?></td>
+                                <td> 
+                                    <?php echo $R4['name'];?>
+                                </td>
+                            <td>
+                                <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
+                                  <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                            </td>
+                        </tr>
                         <tr>
+                            <td class="teacher-name" style="vertical-align:middle">软件工程系</td>
+                            <td><?php echo $R5['workNumber'];?></td>
+                                <td> 
+                                    <?php echo $R5['name'];?>
+                                </td>
+                            <td>
+                                <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
+                                 <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                            </td>
+                        </tr>
+                         <tr>
                             <td class="teacher-name" style="vertical-align:middle">软件工程系</td>
                             <td><?php echo $R5['workNumber'];?></td>
                                 <td> 
@@ -137,6 +192,28 @@
                             <td><?php echo $R6['workNumber'];?></td>
                                 <td> 
                                     <?php echo $R6['name'];?>
+                                </td>
+                            <td>
+                                <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
+                                 <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="teacher-name" style="vertical-align:middle">计算机实验班</td>
+                            <td><?php echo $R6['workNumber'];?></td>
+                                <td> 
+                                    <?php echo $R6['name'];?>
+                                </td>
+                            <td>
+                                <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
+                                 <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="teacher-name" style="vertical-align:middle">数学实验班</td>
+                            <td><?php echo $R7['workNumber'];?></td>
+                                <td> 
+                                    <?php echo $R7['name'];?>
                                 </td>
                             <td>
                                 <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
@@ -193,7 +270,6 @@
                         <tbody id="head_unassign">
                         <tr v-for="item in datas" >
                             <td ><input type="radio" v-on:click="refresh($index)" class="check-btn"></td>
-                            <td>{{department}}</td>
                             <td >{{item.workNumber}}</td>
                             <td>{{item.name}}</td>
                         </tr>
