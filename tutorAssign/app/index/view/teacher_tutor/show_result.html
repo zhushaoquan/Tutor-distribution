@@ -90,7 +90,7 @@
                             <td>{{$key}}</td>
                             <td>{{$grade_now}}级</td>
                             <td><?php echo $value['serialNum']?></td>
-                            <td><?php echo $value['name']?></td>
+                            <td><a href="{{:url('/index/TeacherTutor/show_resultdetail_1/sid/'.$value['sid'].'/grade/'.$grade_now)}}"><?php echo $value['name']?></a></td>
                             <td><?php if($value['gender'])echo "男";else echo "女"; ?></td>
                             <td><?php echo $value['gpa']; ?></td>
                             <td><?php echo $value['department']?></td>

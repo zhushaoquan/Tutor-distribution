@@ -100,6 +100,7 @@ $("#delete-item").click(function () {
         }
     }
     delete_data.datas = arr;
+    console.log(arr);
 
     if(delete_data.datas.length != 0){
         delete_data.isNull = false;
@@ -145,7 +146,8 @@ function listenEventDel() {
     });
 }
 
-
+//===============================
+// 刷新导师列表
 function refreshAfterAddOrDel() {
     if (onSearch) {
         var searchStr = searchCondition();
@@ -187,7 +189,8 @@ $(".input-add").click(function () {
     $(this).attr("placeholder", " ");
 });
 
-
+//=================================
+// 检查添加信息
 function checkFormdata() {
     if(form_data.workNumber == ""
         || form_data.name == ""
@@ -246,7 +249,8 @@ function listenEventAdd() {
     });
 }
 
-
+//============================
+// 监听搜索事件（回车）
 function listenSearchEvent() {
     $("#searchstu").keydown(function (event) {
         if (event.which == "13") {
@@ -276,7 +280,8 @@ function listenSearchEvent() {
     });
 }
 
-
+//=============================
+// 搜索状态下的 onPageChange 回调
 function setSearchCallback() {
     var onPageChange = function (page) {
         var searchStr = searchCondition();
@@ -291,7 +296,8 @@ function setSearchCallback() {
     });
 }
 
-
+//=============================
+// 非搜索状态下的 onPageChange 回调
 function setNormalCallback() {
     var onPageChange = function (page) {
         var request = {curPage: page};
@@ -302,33 +308,37 @@ function setNormalCallback() {
     });
 }
 
-
+//=============================
+// 设置总页数
 function setTotalpages(totalPages) {
     $('#tab-pagination').jqPaginator('option', {
         totalPages: totalPages
     });
 }
-
-
+//=============================
+// 获得当前页
 function getCurrentPage() {
     return $("#tab-pagination > .active ").attr("jp-data");
 }
 
-
+//==============================
+// 设置当前页
 function setCurrentPage(currentPage) {
     $('#tab-pagination').jqPaginator('option', {
         currentPage: currentPage
     });
 }
 
-
+//===============================
+// 获得搜索字符串
 function searchCondition() {
     return $("#searchstu").val();
 }
 
-var uploadObj;
+
 //===================================
 //  文件上传
+var uploadObj;
 function initUpload() {
     var response = "";
     uploadObj = $("#fileuploader").uploadFile({
@@ -401,7 +411,8 @@ function initUpload() {
     });
 }
 
-
+//=====================================
+// 模态框关闭
 function closeAddModal() {
     $("#addItemModal").modal("hide");
     $("#btn-submit-add").attr("disabled", false);
