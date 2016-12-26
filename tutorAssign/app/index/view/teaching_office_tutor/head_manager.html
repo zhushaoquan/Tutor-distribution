@@ -185,7 +185,7 @@
                         <thead>
                         <tr >
                             <th>#</th>
-                            <th>系别</th>
+                            <!-- <th>系别</th> -->
                             <th>工号</th>
                             <th>姓名</th>
                         </tr>
@@ -193,7 +193,7 @@
                         <tbody id="head_unassign">
                         <tr v-for="item in datas" >
                             <td ><input type="radio" v-on:click="refresh($index)" class="check-btn"></td>
-                            <td>{{department}}</td>
+                            <!-- <td>{{department}}</td> -->
                             <td >{{item.workNumber}}</td>
                             <td>{{item.name}}</td>
                         </tr>

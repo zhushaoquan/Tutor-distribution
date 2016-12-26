@@ -407,7 +407,10 @@ class TeachingOfficeTutor extends BaseController {
 		if($flag)return "1";
 		else return "0";
 	}
-
+	public function up()
+	{
+		DB::table('user_student_2014')->where('department',"信息安全与网络工程系")->setField('department',"信息安全与网络系");
+	}
 	public function modify() {
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
