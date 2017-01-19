@@ -24,7 +24,7 @@ define('COMMON_PATH',"http://".$_SERVER['HTTP_HOST'].$_path[0]);
 //接口 前缀
 $_prefix = explode('index/',$_SERVER['SCRIPT_NAME']);
 //define('PREFIX', "https://".$_SERVER['HTTP_HOST'].$_prefix[0]."/index");
-define('PREFIX', "/index");
+define('PREFIX', "/".$_prefix[0]."/index");
 
 // 加载框架引导文件
 require __DIR__ . '/../thinkphp/start.php';
