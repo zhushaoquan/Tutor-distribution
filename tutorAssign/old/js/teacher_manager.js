@@ -1,4 +1,3 @@
-import * as $ from "../php/PHPExcel_1.8.0_doc/Documentation/API/js/jquery-1.7.1.min";
 var onSearch = false;
 //===============================
 // 导师列表
