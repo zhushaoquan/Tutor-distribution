@@ -70,7 +70,7 @@ function initPaginator() {
         onPageChange: function (page) {
             var grade = selectedGrade();
             var request = {grade: grade, curPage: page};
-            refreshTable(request);
+            refreshTable(request,api_student_list);
         }
     });
 }
@@ -81,7 +81,7 @@ function initPaginator() {
 //        请求参数
 // @param url
 //        请求地址
-function refreshTable(request, url=api_student_list) {
+function refreshTable(request, url) {
     $.ajax({
         type: "get",
         data: request,

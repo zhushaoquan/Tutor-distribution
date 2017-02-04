@@ -55,7 +55,7 @@ function initPaginator() {
         page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
         onPageChange: function (page) {
             var request = {curPage: page};
-            refreshTable(request);
+            refreshTable(request,api_teacher_list);
         }
     });
 }
@@ -67,7 +67,7 @@ function initPaginator() {
 //        请求参数
 // @param url
 //        请求地址
-function refreshTable(request, url=api_teacher_list) {
+function refreshTable(request) {
     $.ajax({
         type: "get",
         data: request,
