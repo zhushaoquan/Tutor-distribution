@@ -1,3 +1,4 @@
+import * as $ from "../../app/index/controller/extend/PHPExcel_1.8.0_doc/Documentation/API/js/jquery-1.7.1.min";
 var onSearch = false;
 //===============================
 // 学生列表
@@ -77,19 +78,21 @@ function initPaginator() {
 
 //=================================
 // 加载表格数据
-// @param requset
+// @param request
 //        请求参数
 // @param url
 //        请求地址
-function refreshTable(request, url = api_student_list) {
-    console.log("loaddata");
+function refreshTable(request, url=api_student_list) {
     $.ajax({
         type: "get",
         data: request,
         url: url,
         success: function (data) {
+            //noinspection JSUnresolvedVariable
             table_student.datas = data.information;
+            //noinspection JSUnresolvedVariable
             if(data.amount!=0){
+                //noinspection JSUnresolvedVariable
                 setTotalpages(data.amount);
                 table_student.isNull = false;
             }
@@ -101,6 +104,7 @@ function refreshTable(request, url = api_student_list) {
         dataType: "json"
     });
 }
+
 
 
 //===============================
@@ -465,12 +469,4 @@ $("#delete-item").click(function () {
     }else {
         student_deleted.isNull = true;
     }
-});
-
-$("#gpaIsLegal").change(function () {
-    $(this).text().css("","").css("","");
-});
-
-$("#gpaIsLegal").click(function () {
-    $(this).text().css("","").css("","");
 });

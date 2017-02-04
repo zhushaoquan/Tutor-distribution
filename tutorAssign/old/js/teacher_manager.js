@@ -1,3 +1,4 @@
+import * as $ from "../php/PHPExcel_1.8.0_doc/Documentation/API/js/jquery-1.7.1.min";
 var onSearch = false;
 //===============================
 // 导师列表
@@ -63,12 +64,11 @@ function initPaginator() {
 
 //=================================
 // 加载表格数据
-// @param requset
+// @param request
 //        请求参数
 // @param url
 //        请求地址
-function refreshTable(request, url = api_teacher_list) {
-    console.log("loaddata");
+function refreshTable(request, url=api_teacher_list) {
     $.ajax({
         type: "get",
         data: request,
