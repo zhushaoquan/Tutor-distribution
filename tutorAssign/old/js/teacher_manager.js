@@ -67,7 +67,7 @@ function initPaginator() {
 //        请求参数
 // @param url
 //        请求地址
-function refreshTable(request) {
+function refreshTable(request,url) {
     $.ajax({
         type: "get",
         data: request,
