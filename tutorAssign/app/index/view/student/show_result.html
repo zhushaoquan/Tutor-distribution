@@ -23,13 +23,13 @@
     <div id="siderbar">
         <nav class="sider-navbar">
             <div class="sider-navbar-header">
-                <img src="__STATIC__/image/mainpage-logo.png" alt="" width="240">
+                <img src="__STATIC__/image/mainpage-logo2.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
-                <a href="{{:url('Student/index')}}"><li><i class="glyphicon glyphicon-user"></i> 个人信息</li></a>
-                <a href="{{:url('Student/tutor_list')}}"><li><i class="glyphicon glyphicon-th-list"></i> 专业导师</li></a>
-                <a href="{{:url('Student/edit_voluntary')}}"><li><i class="glyphicon glyphicon-pencil"></i> 志愿填报</li></a>
-                <a href="{{:url('Student/show_result')}}"><li class="active"><i class="glyphicon glyphicon-ok"></i> 最终结果</li></a>
+                <a href="{{:url('Student/index')}}"><li><img src="__STATIC__/image/学生/个人信息.png" height="25px" width="25px"></img>  个人信息</li></a>
+                <a href="{{:url('Student/tutor_list')}}"><li><img src="__STATIC__/image/学生/专业导师.png" height="25px" width="25px">   专业导师</li></a>
+                <a href="{{:url('Student/edit_voluntary')}}"><li><img src="__STATIC__/image/学生/志愿填报.png" height="25px" width="25px">   志愿填报</li></a>
+                <a href="{{:url('Student/show_result')}}"><li class="active"> <img src="__STATIC__/image/学生/志愿结果.png" height="25px" width="25px">   志愿结果</li></a>
             </ul>
         </nav>
     </div>
@@ -60,7 +60,7 @@
                 <div class="my-information-detail-1">
                     <?php if(isset($voluntory_teacher['name'])&&$user['chosen']==1) { ?>
                     <ul>
-                        <li><span>导师名字：</span><span class="span-value"><?php if(isset($voluntory_teacher['name']))echo $voluntory_teacher['name']; ?></span></li>
+                        <li><span>导师名字：</span><span class="span-value"><a href="{{:url('/index/Student/tutor_detail_1/workNumber/'.$voluntory_teacher['workNumber'])}}"><?php if(isset($voluntory_teacher['name']))echo $voluntory_teacher['name']; ?></a></span></li>
                         <li><span>导师工号：</span><span class="span-value"><?php if(isset($voluntory_teacher['workNumber']))echo $voluntory_teacher['workNumber']; ?></span</li>
                         <li><span>毕设选题：</span><span class="span-value"><?php if(isset($voluntory_teacher['title']))echo $voluntory_teacher['title']; ?></span></li>
                         <li><span>电子邮箱：</span><span class="span-value"><?php if(isset($voluntory_teacher['email']))echo $voluntory_teacher['email']; ?></span></li>

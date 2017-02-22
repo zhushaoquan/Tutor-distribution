@@ -317,13 +317,27 @@ class TeachingOfficeTutor extends BaseController {
 	{
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
-		$R1=DB::table('user_department_head')->where('department',"应用数学系")->field('workNumber,name')->find();
-		$R2=DB::table('user_department_head')->where('department',"信息与计算科学系")->field('workNumber,name')->find();
-		$R3=DB::table('user_department_head')->where('department',"计算机系")->field('workNumber,name')->find();
-		$R4=DB::table('user_department_head')->where('department',"信息安全与网络系")->field('workNumber,name')->find();
-		$R5=DB::table('user_department_head')->where('department',"软件工程系")->field('workNumber,name')->find();
-		$R6=DB::table('user_department_head')->where('department',"计算机实验班")->field('workNumber,name')->find();
-		$R7=DB::table('user_department_head')->where('department',"数学实验班")->field('workNumber,name')->find();
+		$R1=DB::table('user_department_head')->where('department',"应用数学系")->field('workNumber,name')->select();
+		$size=count($R1);
+		$R1['size']=$size;
+		$R2=DB::table('user_department_head')->where('department',"信息与计算科学系")->field('workNumber,name')->select();
+		$size=count($R2);
+		$R2['size']=$size;
+		$R3=DB::table('user_department_head')->where('department',"计算机系")->field('workNumber,name')->select();
+		$size=count($R3);
+		$R3['size']=$size;
+		$R4=DB::table('user_department_head')->where('department',"信息安全与网络系")->field('workNumber,name')->select();
+		$size=count($R4);
+		$R4['size']=$size;
+		$R5=DB::table('user_department_head')->where('department',"软件工程系")->field('workNumber,name')->select();
+		$size=count($R5);
+		$R5['size']=$size;
+		$R6=DB::table('user_department_head')->where('department',"计算机实验班")->field('workNumber,name')->select();
+		$size=count($R6);
+		$R6['size']=$size;
+		$R7=DB::table('user_department_head')->where('department',"数学实验班")->field('workNumber,name')->select();
+		$size=count($R7);
+		$R7['size']=$size;
 
 		$this->assign('R1',$R1);
 		$this->assign('R2',$R2);
@@ -340,13 +354,20 @@ class TeachingOfficeTutor extends BaseController {
 	{
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
-		$R1=DB::table('user_department_head')->where('department',"应用数学系")->field('workNumber,name')->find();
-		$R2=DB::table('user_department_head')->where('department',"信息与计算科学系")->field('workNumber,name')->find();
-		$R3=DB::table('user_department_head')->where('department',"计算机系")->field('workNumber,name')->find();
-		$R4=DB::table('user_department_head')->where('department',"信息安全与网络系")->field('workNumber,name')->find();
-		$R5=DB::table('user_department_head')->where('department',"软件工程系")->field('workNumber,name')->find();
-		$R6=DB::table('user_department_head')->where('department',"计算机实验班")->field('workNumber,name')->find();
-		$R7=DB::table('user_department_head')->where('department',"数学实验班")->field('workNumber,name')->find();
+		$R1=DB::table('user_department_head')->where('department',"应用数学系")->field('workNumber,name')->select();
+		$size1=count($R1);
+		$R2=DB::table('user_department_head')->where('department',"信息与计算科学系")->field('workNumber,name')->select();
+		$size2=count($R2);
+		$R3=DB::table('user_department_head')->where('department',"计算机系")->field('workNumber,name')->select();
+		$size3=count($R3);
+		$R4=DB::table('user_department_head')->where('department',"信息安全与网络系")->field('workNumber,name')->select();
+		$size4=count($R4);
+		$R5=DB::table('user_department_head')->where('department',"软件工程系")->field('workNumber,name')->select();
+		$size5=count($R5);
+		$R6=DB::table('user_department_head')->where('department',"计算机实验班")->field('workNumber,name')->select();
+		$size6=count($R6);
+		$R7=DB::table('user_department_head')->where('department',"数学实验班")->field('workNumber,name')->select();
+		$size7=count($R7);
 
 		$this->assign('R1',$R1);
 		$this->assign('R2',$R2);
@@ -355,6 +376,13 @@ class TeachingOfficeTutor extends BaseController {
 		$this->assign('R5',$R5);
 		$this->assign('R6',$R6);
 		$this->assign('R7',$R7);
+		$this->assign('size1',$size1);
+		$this->assign('size2',$size2);
+		$this->assign('size3',$size3);
+		$this->assign('size4',$size4);
+		$this->assign('size5',$size5);
+		$this->assign('size6',$size6);
+		$this->assign('size7',$size7);
 		$this->assign('user', $officer);
 		return $this->fetch('head_manager');
 	}
@@ -407,7 +435,10 @@ class TeachingOfficeTutor extends BaseController {
 		if($flag)return "1";
 		else return "0";
 	}
-
+	public function up()
+	{
+		DB::table('user_student_2014')->where('department',"信息安全与网络工程系")->setField('department',"信息安全与网络系");
+	}
 	public function modify() {
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();

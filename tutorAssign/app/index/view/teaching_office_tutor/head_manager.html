@@ -23,20 +23,20 @@
     <div id="siderbar">
         <nav class="sider-navbar">
             <div class="sider-navbar-header">
-                <img src="{{$Think.const.OLD}}/image/mainpage-logo.png" alt="" width="240">
+                <img src="{{$Think.const.OLD}}/image/mainpage-logo2.png" alt="" width="240">
             </div>
             <ul class="sider-navbar-nav">
                 <a href="{{:url('TeachingOfficeTutor/index')}}">
-                    <li><i class="glyphicon glyphicon-user"></i> 个人信息</li>
+                    <li><img src="__STATIC__/image/院负责人/个人信息.png" height="22px" width="22px"> 个人信息</li>
                 </a>
                 <a href="{{:url('TeachingOfficeTutor/head_list')}}">
-                    <li class="active"><i class="glyphicon glyphicon-th-list"></i> 管理系负责人</li>
+                    <img src="__STATIC__/image/院负责人/管理系负责人.png" height="22px" width="22px"> 管理系负责人</li>
                 </a>
                 <a href="{{:url('TeachingOfficeTutor/tutor_change')}}">
-                    <li><i class="glyphicon glyphicon-pencil"></i> 导师分配情况</li>
+                    <li><img src="__STATIC__/image/院负责人/导师分配情况.png" height="22px" width="22px"> 导师分配情况</li>
                 </a>
                 <a href="{{:url('TeachingOfficeTutor/student_assign')}}">
-                    <li><i class="glyphicon glyphicon-ok"></i> 学生分配情况</li>
+                    <li><img src="__STATIC__/image/院负责人/学生分配情况.png" height="22px" width="22px"> 学生分配情况</li>
                 </a>
             </ul>
         </nav>
@@ -78,82 +78,97 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="teacher-name" style="vertical-align:middle" >应用数学系</td>
-                            <td><?php echo $R1['workNumber'];?></td>
-                                <td> 
-                                        <?php echo $R1['name'];?>
-                                </td>
+                            <td class="teacher-name" style="vertical-align:middle" rowspan="{{$size1+1}}" >应用数学系</td>
+                           
+                            {volist name="R1" id="v"}
+                            <?php if($i !=0) echo "</tr>";?>
+                            <td>{{$v.workNumber}}</td>
+                            <td>{{$v.name}}</td>
                             <td>
                                 <input id="searchtea" class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
                                   <button id="searchbutton" type="submit"  class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
+                            {/volist}
                         </tr>
+                         
                         <tr>
-                            <td class="teacher-name" style="vertical-align:middle">信息与计算科学系</td>
-                            <td><?php echo $R2['workNumber'];?></td>
-                                <td> 
-                                    <?php echo $R2['name'];?>
-                                </td>
+                            <td class="teacher-name" style="vertical-align:middle" rowspan="{{$size2+1}}">信息与计算科学系</td>
+                            {volist name="R2" id="v"}
+                            <?php if($i !=0) echo "</tr>";?>
+                            <td>{{$v.workNumber}}</td>
+                            <td>{{$v.name}}</td>
                             <td>
                                 <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
                                  <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
+                            {/volist}
                         </tr>
+                        
                         <tr>
-                            <td class="teacher-name" style="vertical-align:middle">计算机系</td>
-                           <td><?php echo $R3['workNumber'];?></td>
-                                <td> 
-                                    <?php echo $R3['name'];?>
-                                </td>
+                            <td class="teacher-name" style="vertical-align:middle" rowspan="{{$size3+1}}">计算机系</td>
+                           {volist name="R3" id="v"}
+                           <?php if($i !=0) echo "</tr>";?>
+                            <td>{{$v.workNumber}}</td>
+                            <td>{{$v.name}}</td>
                             <td>
                                 <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
                                  <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
+                            {/volist}
                         </tr>
+                        
                         <tr>
-                            <td class="teacher-name" style="vertical-align:middle">信息安全与网络系</td>
-                            <td><?php echo $R4['workNumber'];?></td>
-                                <td> 
-                                    <?php echo $R4['name'];?>
-                                </td>
+                            <td class="teacher-name" style="vertical-align:middle" rowspan="{{$size4+1}}">信息安全与网络系</td>
+                            {volist name="R4" id="v"}
+                            <?php if($i !=0) echo "</tr>";?>
+                            <td>{{$v.workNumber}}</td>
+                            <td>{{$v.name}}</td>
                             <td>
                                 <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
                                   <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
+                            {/volist}
                         </tr>
+                         
                         <tr>
-                            <td class="teacher-name" style="vertical-align:middle">软件工程系</td>
-                            <td><?php echo $R5['workNumber'];?></td>
-                                <td> 
-                                    <?php echo $R5['name'];?>
-                                </td>
+                            <td class="teacher-name" style="vertical-align:middle" rowspan="{{$size5+1}}">软件工程系</td>
+                            {volist name="R5" id="v"}
+                            <?php if($i !=0) echo "</tr>";?>
+                            <td>{{$v.workNumber}}</td>
+                            <td>{{$v.name}}</td>
                             <td>
                                 <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
                                  <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
+                            {/volist}
                         </tr>
+                         
                         <tr>
-                            <td class="teacher-name" style="vertical-align:middle">计算机实验班</td>
-                            <td><?php echo $R6['workNumber'];?></td>
-                                <td> 
-                                    <?php echo $R6['name'];?>
-                                </td>
+                            <td class="teacher-name" style="vertical-align:middle" rowspan="{{$size6+1}}">计算机实验班</td>
+                            {volist name="R6" id="v"}
+                            <?php if($i !=0) echo "</tr>";?>
+                            <td>{{$v.workNumber}}</td>
+                            <td>{{$v.name}}</td>
                             <td>
                                 <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
                                  <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
+                            {/volist}
                         </tr>
+                        
                         <tr>
-                            <td class="teacher-name" style="vertical-align:middle">数学实验班</td>
-                            <td><?php echo $R7['workNumber'];?></td>
-                                <td> 
-                                    <?php echo $R7['name'];?>
-                                </td>
+                            <td class="teacher-name" style="vertical-align:middle" rowspan="{{$size7+1}}">数学实验班</td>
+                            {volist name="R7" id="v"}
+                            <?php if($i !=0) echo "</tr>";?>
+                            <td>{{$v.workNumber}}</td>
+                            <td>{{$v.name}}</td>
                             <td>
                                 <input class="form-control" placeholder="输入导师姓名..." type="text" style="display: inline; width:70%;">
                                  <button type="submit" class="btn btn-info btn-search" style="display:inline;margin-left:20px;" data-toggle='modal' data-backdrop="static" data-target="#searchModal">搜索</button>
                             </td>
+                            {/volist}
                         </tr>
+                        
                         </tbody>
                     </table>
                 </div>
@@ -185,7 +200,7 @@
                         <thead>
                         <tr >
                             <th>#</th>
-                            <th>系别</th>
+                            <!-- <th>系别</th> -->
                             <th>工号</th>
                             <th>姓名</th>
                         </tr>
@@ -193,7 +208,7 @@
                         <tbody id="head_unassign">
                         <tr v-for="item in datas" >
                             <td ><input type="radio" v-on:click="refresh($index)" class="check-btn"></td>
-                            <td>{{department}}</td>
+
                             <td >{{item.workNumber}}</td>
                             <td>{{item.name}}</td>
                         </tr>
