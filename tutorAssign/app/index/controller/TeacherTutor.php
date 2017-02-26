@@ -431,10 +431,10 @@ class TeacherTutor extends BaseController {
                         if($bool) {
                             $this->showNotice('选择成功',url('TeacherTutor/student_list'));
                         } else {
-                            $this->showNotice('一不小心被其他导师抢走楼~',url('TeacherTutor/student_list'));
+                            $this->showNotice('对不起，您的手速太慢了，学生都被抢光啦！',url('TeacherTutor/student_list'));
                         }
                     } else {
-                            $this->showNotice('一不小心被其他导师抢走楼~',url('TeacherTutor/student_list'));
+                            $this->showNotice('对不起，您的手速太慢了，学生都被抢光啦！',url('TeacherTutor/student_list'));
                         } 
 
                 }

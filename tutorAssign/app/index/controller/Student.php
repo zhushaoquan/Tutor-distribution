@@ -524,6 +524,14 @@ class Student extends BaseController {
             $data1['wishFifth'] = $request->post('wishFifth', '');  
             $data1['round'] = intval($this->ontime);
             $volunNum = $this->voluntaryinfosetting['voluntaryNum'];
+
+            $_SESSION['wishFirst'] = $data1['wishFirst'];
+        	$_SESSION['wishSecond'] = $data1['wishSecond'];
+        	$_SESSION['wishThird'] = $data1['wishThird'];
+        	$_SESSION['wishForth'] = $data1['wishForth'];
+        	$_SESSION['wishFifth'] = $data1['wishFifth'];
+
+        	
             if($data1['wishFirst'] == '') {
             	$this->showNotice("第一志愿不得为空",url('Student/edit_voluntary'));
             } else if($data1['wishSecond'] == '' && $volunNum >=2) {
@@ -552,8 +560,34 @@ class Student extends BaseController {
 
 
         }
-        if($this->ontime == 1|| $this->ontime == 2)$voluntary = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$this->user['sid'])->where('round', $this->ontime)->find();
-        else $voluntary = array();
+        if($this->ontime == 1|| $this->ontime == 2) {
+        	$voluntary = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->where('sid',$this->user['sid'])->where('round', $this->ontime)->find();
+
+        	// $_SESSION['wishFirst'] = $voluntary['wishFirst'];
+        	// $_SESSION['wishSecond'] = $voluntary['wishSecond'];
+        	// $_SESSION['wishThird'] = $voluntary['wishThird'];
+        	// $_SESSION['wishForth'] = $voluntary['wishForth'];
+        	// $_SESSION['wishFifth'] = $voluntary['wishFifth'];
+/*
+        	Session::set('wishFirst', $voluntary['wishFirst']);
+            Session::set('wishSecond',$voluntary['wishSecond']);
+            Session::set('wishThird', $voluntary['wishThird']);
+            Session::set('wishForth', $voluntary['wishForth']);
+            Session::set('wishFifth', $voluntary['wishFifth']);
+
+ */
+
+        }
+        else  {
+        	$voluntary = array();
+        	// Session::set('wishFirst', '');
+         //    Session::set('wishSecond','');
+         //    Session::set('wishThird', '');
+         //    Session::set('wishThird', '');
+         //    Session::set('wishFifth', '');
+        }
+
+            
         
         $this->assign('voluntary',$voluntary);
         return $this->fetch('edit_voluntary');
