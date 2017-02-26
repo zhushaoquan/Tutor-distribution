@@ -1447,21 +1447,6 @@ class DepartmentHeadTutor extends BaseController {
     		$totalUnchosen = count($unchosenStudent);
     		$data['amount'] = $amount;
 
-//<<<<<<< HEAD
-//    		for ($i=0; $i <$totalUnchosen ; $i++) {
-//    			$voluntary[$i] = Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('round,wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
-//				$voluntary[$i]['information'] = Db::table('user_student_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('sid,serialNum,name')->find();
-//                if ($voluntary[$i] != "") {
-//                    for ($j = 0; $j < $voluntaryNum['voluntaryNum']; $j++) {
-//                        $temp[$i]['vol' . ($j + 1)] = Db::table('user_teacher')->where('workNumber', $voluntary[$i][$wishList[$j]])->field('name')->find();
-//                        $data['information'][$i]['vol' . ($j + 1)] = $temp[$i]['vol' . ($j + 1)]['name'];
-//                    }
-//                }
-//				$data['information'][$i]['sid'] = $voluntary[$i]['information']['sid'];
-//				$data['information'][$i]['serialNum'] = $voluntary[$i]['information']['serialNum'];
-//				$data['information'][$i]['name'] = $voluntary[$i]['information']['name'];
-//    		}
-//=======
     		if ($amount != 0) {
 	    		for ($i=0; $i <$totalUnchosen ; $i++) {
 	    		 	if (Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('round,wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find()) {
@@ -1491,7 +1476,6 @@ class DepartmentHeadTutor extends BaseController {
 	    	} else {
 	    		$data['information'] = "";
 	    	}
-//>>>>>>> master
     		return json($data);
     	}
     }
