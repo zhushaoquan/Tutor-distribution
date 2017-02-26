@@ -70,7 +70,7 @@
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishFirst">
                                     <option value="">==请选择==</option>
                                     <?php foreach($tutors as $key => $value): ?>
-                                    <option value="<?php echo $value['workNumber']?>" <?php if($value['workNumber'] == $voluntary['wishFirst']) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
+                                    <option value="<?php echo $value['workNumber']?>" <?php if($_SESSION['wishFirst'] !="" &&($_SESSION['wishFirst'] == $value['workNumber'] || $value['workNumber'] == $voluntary['wishFirst'])) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
                                 </select>
                             </div>
@@ -86,7 +86,7 @@
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishSecond">
                                     <option value="">==请选择==</option>
                                     <?php foreach($tutors as $key => $value): ?>
-                                    <option value="<?php echo $value['workNumber']?>" <?php if($value['workNumber'] == $voluntary['wishSecond']) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
+                                    <option value="<?php echo $value['workNumber']?>" <?php if($_SESSION['wishSecond'] !="" &&($_SESSION['wishSecond'] == $value['workNumber'] || $value['workNumber'] == $voluntary['wishSecond'])){?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
                                 </select>
                             </div>
@@ -102,7 +102,7 @@
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishThird">
                                     <option value="">==请选择==</option>
                                     <?php foreach($tutors as $key => $value): ?>
-                                    <option value="<?php echo $value['workNumber']?>" <?php if($value['workNumber'] == $voluntary['wishThird']) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
+                                    <option value="<?php echo $value['workNumber']?>" <?php if($_SESSION['wishThird'] !="" && ($_SESSION['wishThird'] == $value['workNumber'] || $value['workNumber'] == $voluntary['wishThird'])) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
                                 </select>
                             </div>
@@ -118,7 +118,7 @@
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishForth">
                                     <option value="">==请选择==</option>
                                     <?php foreach($tutors as $key => $value): ?>
-                                    <option value="<?php echo $value['workNumber']?>" <?php if($value['workNumber'] == $voluntary['wishForth']) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
+                                    <option value="<?php echo $value['workNumber']?>" <?php if($_SESSION['wishForth'] != "" && ($_SESSION['wishForth'] == $value['workNumber'] || $value['workNumber'] == $voluntary['wishForth'])){?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
                                 </select>
                             </div>
@@ -134,7 +134,7 @@
                                 <select id="basic" class="selectpicker show-tick form-control" name="wishFifth">
                                     <option value="">==请选择==</option>
                                     <?php foreach($tutors as $key => $value): ?>
-                                    <option value="<?php echo $value['workNumber']?>" <?php if($value['workNumber'] == $voluntary['wishFifth']) {?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
+                                    <option value="<?php echo $value['workNumber']?>" <?php if($_SESSION['wishFifth'] != "" && ($_SESSION['wishFifth'] == $value['workNumber'] || $value['workNumber'] == $voluntary['wishFifth']) ){?> selected="selected" <?php }?> ><?php echo $value['name'];?></option>
                                     <?php endforeach;?>
                                 </select>
                             </div>
