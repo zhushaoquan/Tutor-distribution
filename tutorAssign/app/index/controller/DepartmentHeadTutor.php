@@ -284,101 +284,84 @@ class DepartmentHeadTutor extends BaseController {
 		}
 
 		$countInputStudent = count($inputStudent);
+
 		if ($countInputStudent != 0) {
 			//将获取的学生信息转换为.txt文件
 	        file_put_contents('student.txt', $inputStudent);
 
-	        //获取导师信息
-	        if ($user['department'] == "计算机实验班") {
-	        	$teacher = Db::table('user_teacher')->where('isExperial',1)->whereOr('isExperial',3)->select();
-	        	$countTeacher = count($teacher);
+	        $inputTeacher = $this->getAvailableTeacher();
+	        $countInputTeacher = count($inputTeacher);
 
-	        	for ($i=0; $i <$countTeacher ; $i++) { 
-	        		//获取每个老师的当前可带的计算机实验班的学生数
-	        		$teacherIssue[$i] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber', $teacher[$i]['workNumber'])->find();
-	        		$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalCompExper'] - $teacherIssue[$i]['compExperNow'];
-
-	        		//将每个导师的信息转换成规定格式的txt文件
-	        		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
-	        	}
-	        } elseif ($user['department'] == "数学实验班") {
-	        	$teacher = Db::table('user_teacher')->where('isExperial',2)->whereOr('isExperial',3)->select();
-	        	$countTeacher = count($teacher);
-
-	        	for ($i=0; $i <$countTeacher ; $i++) { 
-	        		//获取每个老师的当前可带的数学实验班的学生数
-	        		$teacherIssue[$i] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber', $teacher[$i]['workNumber'])->find();
-	        		$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalMathExper'] - $teacherIssue[$i]['mathExperNow'];
-
-	        		//将每个导师的信息转换成规定格式的txt文件
-	        		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
-	        	}
-	        } else {
-	        	$teacher = Db::table('user_teacher')->where('department',$user['department'])->select();
-	        	$countTeacher = count($teacher);
-
-	        	for ($i=0; $i <$countTeacher ; $i++) { 
-	        		//获取每个老师的当前可带的自然班的学生数
-	        		$teacherIssue[$i] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber', $teacher[$i]['workNumber'])->find();
-	        		$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalNatur'] - $teacherIssue[$i]['naturNow'];
-
-	        		//将每个导师的信息转换成规定格式的txt文件
-	        		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
-	        	}
-	        }
 	        //将获取的老师信息转换为.txt文件
 	        file_put_contents('teacher.txt', $inputTeacher);
 
 	        //调用算法进行分配
-	        $fileNameWithParam = 'distribute.exe ' . $countStudent . ' ' . $countTeacher . ' ' . $voluntaryNum['voluntaryNum'];
+	        $fileNameWithParam = 'distribute.exe ' . $countInputStudent . ' ' . $countInputTeacher . ' ' . $voluntaryNum['voluntaryNum'];
 	        system($fileNameWithParam);
 
+	        //二次调用算法分配
+	        $studentUnElected = file_get_contents('student_unelected.txt');
+	        if ($studentUnElected != "") {
+	        	$studentUnElected = str_replace("\r\n", '', $studentUnElected);
+		        $studentUnElectedArr = explode(',', $studentUnElected);
+		        $countInputStudent2 = count($studentUnElectedArr);
+
+		        $inputTeacher2 = $this->getAvailableTeacher();
+		        $countInputTeacher2 = count($inputTeacher2);
+
+		        $fileNameWithParam2 = 'distribute2.exe ' . $countInputStudent2 . ' ' . $countInputTeacher2;
+		        system($fileNameWithParam2);
+
+		        $studentElected2 = file_get_contents('student_elected2.txt');
+		        $studentElected2 = str_replace("\r\n", '', $studentElected2);
+		        $studentElectedArr2 = explode(',', $studentElected2);
+	        }
+
 	        $studentElected = file_get_contents('student_elected.txt');      
-	        //获取通过算法得到分配的学生的结果，转换为string
+	        $studentElected = str_replace("\r\n", '', $studentElected);
+	        $studentElectedArr1 = explode(',', $studentElected);
+
+	        $studentElectedArr = array_merge($studentElectedArr1,$studentElectedArr2);
 
 	        //分割studentElected字符串，转换为数组，并存到临时的结果表中
-	        if ($studentElected != "") {
-		        $studentElected = str_replace("\r\n", '', $studentElected);
-		        $studentElectedArr = explode(',', $studentElected);
-		        for ($i = 0; $i < count($studentElectedArr); $i++) {
-		            $studentElectedArr[$i] = explode(' ', $studentElectedArr[$i]);
+	        for ($i = 0; $i < count($studentElectedArr); $i++) {
+	            $studentElectedArr[$i] = explode(' ', $studentElectedArr[$i]);
 
-		            $studentElectedResult[$i]['serialNum'] = $studentElectedArr[$i][0];
-		            $studentElectedResult[$i]['stuInfo'] = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum', $studentElectedResult[$i]['serialNum'])->field('sid,serialNum,name,gpa')->find();
-		            $studentElectedResult[$i]['workNumber'] = $studentElectedArr[$i][1];
-		            $studentElectedResult[$i]['teaInfo'] = Db::table('user_teacher')->where('workNumber', $studentElectedResult[$i]['workNumber'])->field('workNumber,name')->find();
+	            $studentElectedResult[$i]['serialNum'] = $studentElectedArr[$i][0];
+	            $studentElectedResult[$i]['stuInfo'] = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum', $studentElectedResult[$i]['serialNum'])->field('sid,serialNum,name,gpa')->find();
+	            $studentElectedResult[$i]['workNumber'] = $studentElectedArr[$i][1];
+	            $studentElectedResult[$i]['teaInfo'] = Db::table('user_teacher')->where('workNumber', $studentElectedResult[$i]['workNumber'])->field('workNumber,name')->find();
 
-		            if (Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$studentElectedResult[$i]['stuInfo']['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find()) {
-			            $vol_num[$i] = array_keys(Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$studentElectedResult[$i]['stuInfo']['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find(),$studentElectedResult[$i]['teaInfo']['workNumber']);
-			            if ($vol_num[$i][0] == "wishFirst") {
-			            	$volOrder = "第一志愿";
-			            } elseif ($vol_num[$i][0] == "wishSecond") {
-			            	$volOrder = "第二志愿";
-			            } elseif ($vol_num[$i][0] == "wishThird") {
-			            	$volOrder = "第三志愿";
-			            } elseif ($vol_num[$i][0] == "wishForth") {
-			            	$volOrder = "第四志愿";
-			            } elseif ($vol_num[$i][0] == "wishFifth") {
-			            	$volOrder = "第五志愿";
-			            }
+	            if (Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$studentElectedResult[$i]['stuInfo']['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find()) {
+		            $vol_num[$i] = array_keys(Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$studentElectedResult[$i]['stuInfo']['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find(),$studentElectedResult[$i]['teaInfo']['workNumber']);
+		            if ($vol_num[$i][0] == "wishFirst") {
+		            	$volOrder = "第一志愿";
+		            } elseif ($vol_num[$i][0] == "wishSecond") {
+		            	$volOrder = "第二志愿";
+		            } elseif ($vol_num[$i][0] == "wishThird") {
+		            	$volOrder = "第三志愿";
+		            } elseif ($vol_num[$i][0] == "wishForth") {
+		            	$volOrder = "第四志愿";
+		            } elseif ($vol_num[$i][0] == "wishFifth") {
+		            	$volOrder = "第五志愿";
+		            }
 
-			            $insert[$i]['sid'] = $studentElectedResult[$i]['stuInfo']['sid'];
-			            $insert[$i]['serialNum'] = $studentElectedResult[$i]['stuInfo']['serialNum'];
-			            $insert[$i]['student_name'] = $studentElectedResult[$i]['stuInfo']['name'];
-			            $insert[$i]['vol_num'] = $volOrder;
-			            $insert[$i]['gpa'] = $studentElectedResult[$i]['stuInfo']['gpa'];
-			            $insert[$i]['teacher_name'] = $studentElectedResult[$i]['teaInfo']['name'];
-			            $insert[$i]['workNumber'] = $studentElectedResult[$i]['teaInfo']['workNumber'];
-			            $insert[$i]['checked'] = 0;
+		            $insert[$i]['sid'] = $studentElectedResult[$i]['stuInfo']['sid'];
+		            $insert[$i]['serialNum'] = $studentElectedResult[$i]['stuInfo']['serialNum'];
+		            $insert[$i]['student_name'] = $studentElectedResult[$i]['stuInfo']['name'];
+		            $insert[$i]['vol_num'] = $volOrder;
+		            $insert[$i]['gpa'] = $studentElectedResult[$i]['stuInfo']['gpa'];
+		            $insert[$i]['teacher_name'] = $studentElectedResult[$i]['teaInfo']['name'];
+		            $insert[$i]['workNumber'] = $studentElectedResult[$i]['teaInfo']['workNumber'];
+		            $insert[$i]['checked'] = 0;
 
-			            if (Db::table('tc_temp_result')->where('sid',$insert[$i]['sid'])->find()) {
-			            	Db::table('tc_temp_result')->update($insert[$i]);
-			            } else {
-			            	Db::table('tc_temp_result')->insert($insert[$i]);
-			            }
-			        }
+		            if (Db::table('tc_temp_result')->where('sid',$insert[$i]['sid'])->find()) {
+		            	Db::table('tc_temp_result')->update($insert[$i]);
+		            } else {
+		            	Db::table('tc_temp_result')->insert($insert[$i]);
+		            }
 		        }
-		    }
+	        }
 		    $data['status'] = "success";
 		    return json($data);
 		} else {
@@ -390,6 +373,56 @@ class DepartmentHeadTutor extends BaseController {
 	    // return json($insert);
         $this->assign('user', $user);
 
+	}
+
+	public function getAvailableTeacher() {
+		$user = $this->auto_login();
+
+		//获取导师信息
+        if ($user['department'] == "计算机实验班") {
+        	$teacher = Db::table('user_teacher')->where('isExperial',1)->whereOr('isExperial',3)->select();
+        	$countTeacher = count($teacher);
+
+        	for ($i=0; $i <$countTeacher ; $i++) { 
+        		//获取每个老师的当前可带的计算机实验班的学生数
+        		$teacherIssue[$i] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber', $teacher[$i]['workNumber'])->find();
+        		$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalCompExper'] - $teacherIssue[$i]['compExperNow'];
+
+        		//将每个导师的信息转换成规定格式的字符串
+        		if ($teacher[$i]['avaliableNumber'] > 0) {
+	        		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
+        		}
+        	}
+        } elseif ($user['department'] == "数学实验班") {
+        	$teacher = Db::table('user_teacher')->where('isExperial',2)->whereOr('isExperial',3)->select();
+        	$countTeacher = count($teacher);
+
+        	for ($i=0; $i <$countTeacher ; $i++) { 
+        		//获取每个老师的当前可带的数学实验班的学生数
+        		$teacherIssue[$i] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber', $teacher[$i]['workNumber'])->find();
+        		$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalMathExper'] - $teacherIssue[$i]['mathExperNow'];
+
+        		//将每个导师的信息转换成规定格式的字符串
+        		if ($teacher[$i]['avaliableNumber'] > 0) {
+	        		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
+        		}
+        	}
+        } else {
+        	$teacher = Db::table('user_teacher')->where('department',$user['department'])->select();
+        	$countTeacher = count($teacher);
+
+        	for ($i=0; $i <$countTeacher ; $i++) { 
+        		//获取每个老师的当前可带的自然班的学生数
+        		$teacherIssue[$i] = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber', $teacher[$i]['workNumber'])->find();
+        		$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalNatur'] - $teacherIssue[$i]['naturNow'];
+
+        		//将每个导师的信息转换成规定格式的字符串
+        		if ($teacher[$i]['avaliableNumber'] > 0) {
+	        		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
+        		}
+        	}
+        }
+        return $inputTeacher;
 	}
 
 	//智能分配结果学生列表
@@ -542,6 +575,8 @@ class DepartmentHeadTutor extends BaseController {
 
 
     public function addStudent() {
+    	$user = $this->auto_login();
+
     	$request = Request::instance();
     	if ($request->isPost()) {
     		$data = $request->post();
@@ -551,24 +586,28 @@ class DepartmentHeadTutor extends BaseController {
     		$student['name'] = $data['name'];
     		$student['gender'] = $data['gender'];
     		$student['gpa'] = $data['gpa'];
-    		$student['college'] = "数学与计算机科学学院";
+    		$student['college'] = "数计学院";
     		$student['department'] = $data['department'];
     		$student['field'] = "暂无";
     		$student['rank'] = $data['rank'];
     		$student['grade'] = $data['grade'];
     		$student['telephone'] = $data['telephone'];
 
-    		if ((Db::table('user_student_'.$student['grade'])->where('serialNum',$data['serialNum'])->find()) == "") {
-    			if (Db::table('user_student_'.$student['grade'])->insert($student)) {
-    				$add['msg'] = "学生添加成功";
-    				$add['status'] = true;
-    				return json($add);
-    			}
-    		} else {
-    			$add['msg'] = "该学生已存在";
+    		if ($user['department'] == $data['department']) {
+	    		if ((Db::table('user_student_'.$student['grade'])->where('serialNum',$data['serialNum'])->find()) == "") {
+	    			if (Db::table('user_student_'.$student['grade'])->insert($student)) {
+	    				$add['msg'] = "学生添加成功";
+	    				$add['status'] = true;
+	    			}
+	    		} else {
+	    			$add['msg'] = "该学生已存在";
+	    			$add['status'] = false;
+	    		}
+	    	} else {
+	    		$add['msg'] = "您只能添加本系的学生";
     			$add['status'] = false;
-    			return json($add);
-    		}
+	    	}
+	    	return json($add);
     	}
     }
 
@@ -670,6 +709,7 @@ class DepartmentHeadTutor extends BaseController {
     }
 
     public function addTeacher() {
+    	$user = $this->auto_login();
     	$request = Request::instance();
     	if ($request->isPost()) {
     		$data = $request->post();
@@ -685,17 +725,21 @@ class DepartmentHeadTutor extends BaseController {
     		$teacher['isExperial'] = $data['isExperial'];
     		$teacher['position'] = $data['position'];
 
-    		if ((Db::table('user_teacher')->where('workNumber',$data['workNumber'])->find()) == "") {
-    			if (Db::table('user_teacher')->insert($teacher)) {
-    				$add['msg'] = "导师添加成功";
-    				$add['status'] = true;
-    				return json($add);
-    			}
-    		} else {
-    			$add['msg'] = "该导师已存在";
+    		if ($user['department'] == $data['department']) {
+	    		if ((Db::table('user_teacher')->where('workNumber',$data['workNumber'])->find()) == "") {
+	    			if (Db::table('user_teacher')->insert($teacher)) {
+	    				$add['msg'] = "导师添加成功";
+	    				$add['status'] = true;
+	    			}
+	    		} else {
+	    			$add['msg'] = "该导师已存在";
+	    			$add['status'] = false;
+	    		}
+	    	} else {
+	    		$add['msg'] = "您只能添加本系的导师";
     			$add['status'] = false;
-    			return json($add);
-    		}
+	    	}
+	    	return json($add);
     	}
     }
 
