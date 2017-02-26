@@ -147,28 +147,28 @@
                         <nav style="margin-bottom: 100px">
                             <ul class="pagination" style="float: right;">
                                 {if condition="$curPage neq 1 "}
-                              <li><a href="{{:url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage-1).'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade)}}">&laquo;</a></li>
+                              <li><a href="{{:url('/index/index/TeachingOfficeTutor/student_assign/page/'.($curPage-1).'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade)}}">&laquo;</a></li>
                               {/if}
                                 
                               {if condition="($curPage gt 3) AND ($curPage lt $totalPage-2)"}
                                 {for start="$curPage-2" end="$curPage+3"}
-                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade)}}" >{{$i}}</a></li>
+                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade)}}" >{{$i}}</a></li>
                                 {/for}
                               {elseif condition="($curPage gt $totalPage-3) AND ($totalPage gt 5)" /}
                                 {for start="$totalPage-5" end="$totalPage"}
-                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade)}}" >{{$i}}</a></li>
+                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade)}}" >{{$i}}</a></li>
                                 {/for}
                               {elseif condition="$totalPage gt 5" /}
                                 {for start="1" end="6"}
-                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade)}}" >{{$i}}</a></li>
+                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade)}}" >{{$i}}</a></li>
                                 {/for}
                               {else /}
                                 {for start="1" end="$totalPage"}
-                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade)}}" >{{$i}}</a></li>
+                                  <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/index/TeachingOfficeTutor/student_assign/page/'.$i.'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade)}}" >{{$i}}</a></li>
                                 {/for}
                               {/if}
                               {if condition="$curPage lt $totalPage-1"}
-                                <li><a href="{{:url('/index/TeachingOfficeTutor/student_assign/page/'.($curPage+1).'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade)}}">&raquo;</a></li>
+                                <li><a href="{{:url('/index/index/TeachingOfficeTutor/student_assign/page/'.($curPage+1).'/dep/'.$dep.'/to/'.'modify'.'/grade/'.$grade)}}">&raquo;</a></li>
                               {/if}
                                 
                             </ul>
