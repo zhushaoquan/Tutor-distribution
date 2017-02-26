@@ -201,7 +201,7 @@
                             <td>{{datas.gender}}</td>
                             <td>{{datas.gpa}}</td>
                             <td>{{datas.rank}}</td>
-                            <td>{{datas.sid}}</td>
+                            <td><?php if($t['wishFirst'] == $user['workNumber'])echo "第一志愿";else if($t['wishSecond'] == $user['workNumber'])echo "第二志愿"; else if($t['wishThird'] == $user['workNumber'])echo "第三志愿"; else if($t['wishForth'] == $user['workNumber'])echo "第四志愿";else echo "第五志愿"?></td>
                         </tr>
                         </tbody>
                     </table>
@@ -210,7 +210,8 @@
             <div class="modal-footer">
             <form method="post" action="{{:url('TeacherTutor/student_list')}}">
                 <input style="display: none;" type="text" value="{{datas.sid}}" name="sid">
-                <button id="choiceagain" type="submit" class="btn btn-primary" name="choise" value="选择">
+                <?php $i = '{{datas.sid}}'; ?>
+                <button <?php if($i == null) {?> disabled="disabled" <?php } ?> id="choiceagain" type="submit" class="btn btn-primary" name="choise" value="选择" >
                     确认选择
                 </button>
                 <button id="choiceclose" type="button" class="btn btn-default" data-dismiss="modal">关闭
@@ -248,7 +249,7 @@
                             <td>{{datas.gender}}</td>
                             <td>{{datas.gpa}}</td>
                             <td>{{datas.rank}}</td>
-                            <td>{{datas.sid}}</td>
+                            <td><?php if($t['wishFirst'] == $user['workNumber'])echo "第一志愿";else if($t['wishSecond'] == $user['workNumber'])echo "第二志愿"; else if($t['wishThird'] == $user['workNumber'])echo "第三志愿"; else if($t['wishForth'] == $user['workNumber'])echo "第四志愿";else echo "第五志愿"?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -259,7 +260,8 @@
              <div class="modal-footer">
             <form method="post" action="{{:url('TeacherTutor/student_list')}}">
                 <input style="display: none;" type="text" value="{{datas.sid}}" name="sid">
-                <button id="choiceagain" type="submit" class="btn btn-primary" name="choise" value="拒绝">
+                <?php $i = '{{datas.sid}}'; ?>
+                <button <?php if($i == null) {?> disabled="disabled" <?php } ?> id="choiceagain" type="submit" class="btn btn-primary" name="choise" value="拒绝">
                    确认拒绝
                 </button>
                 <button id="choiceclose" type="button" class="btn btn-default" data-dismiss="modal">关闭

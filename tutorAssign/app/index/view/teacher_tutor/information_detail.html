@@ -129,7 +129,8 @@
             <div class="modal-footer">
                 <form method="post" action="{{:url('TeacherTutor/student_list')}}">
                 <input style="display: none;" type="text" value="{{$student['sid']}}" name="sid">
-                <button type="submit" name ="choise" class="btn btn-primary" value="选择">
+                <?php $i = '{{datas.sid}}'; ?>
+                <button <?php if($i == null) {?> disabled="disabled" <?php } ?> type="submit" name ="choise" class="btn btn-primary" value="选择">
                     确认选择
                 </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
@@ -175,7 +176,8 @@
             <div class="modal-footer">
                 <form method="post" action="{{:url('TeacherTutor/student_list')}}">
                 <input style="display: none;" type="text" value="{{$student['sid']}}" name="sid">
-                <button type="submit" name ="choise" class="btn btn-primary" value="拒绝">
+                <?php $i = '{{datas.sid}}'; ?>
+                <button <?php if($i == null) {?> disabled="disabled" <?php } ?>  type="submit" name ="choise" class="btn btn-primary" value="拒绝">
                     确认拒绝
                 </button>
                 <button type="button"  class="btn btn-default" data-dismiss="modal">关闭
