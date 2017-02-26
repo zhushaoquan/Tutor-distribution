@@ -890,7 +890,10 @@ class DepartmentHeadTutor extends BaseController {
     }
 
     //获取学生信息Excel表格，进行处理并添加入数据表中
+    //文件批量导入学生
     public function student_excel_add() {
+    	$user = $this->auto_login();
+
     	$request = Request::instance();
     	if ($request->isPost()) {
     		$feedback = $request->post();
@@ -903,36 +906,42 @@ class DepartmentHeadTutor extends BaseController {
 
             error_reporting(E_ALL ^ E_NOTICE);
 
-            //循环处理Excel表格里的每一行数据，并插入数据库
-            for ($i=3; $i <=$data->sheets[0]['numRows'] ; $i++) { 
-            	$insert = [];
-            	$insert['grade'] = $data->sheets[0]['cells'][$i][1];
-            	$insert['serialNum'] = $data->sheets[0]['cells'][$i][2];
-            	$insert['password'] = $data->sheets[0]['cells'][$i][2];
-            	$insert['name'] = $data->sheets[0]['cells'][$i][3];
-            	$insert['gender'] = $data->sheets[0]['cells'][$i][4];
-            	$insert['college'] = $data->sheets[0]['cells'][$i][5];
-            	$insert['department'] = $data->sheets[0]['cells'][$i][6];
-            	$insert['gpa'] = $data->sheets[0]['cells'][$i][7];
-            	$insert['rank'] = $data->sheets[0]['cells'][$i][8];
-            	$insert['telephone'] = $data->sheets[0]['cells'][$i][9];
-            	$insert['chosen'] = 0;
-            	//判断数据是否存在，并覆盖/插入数据库中
-            	if (Db::table('user_student_'.$insert['grade'])->where('serialNum',$insert['serialNum'])->find()) {
-            		Db::table('user_student_'.$insert['grade'])->where('serialNum',$insert['serialNum'])->update($insert);
-            	} else {
-            		Db::table('user_student_'.$insert['grade'])->insert($insert);
-            	}
-            }
-
-            $addInfo['totalNum'] = $data->sheets[0]['numRows']-3;
-            $addInfo['status'] = true;
+            if ($user['department'] == $data->sheets[0]['cells'][3][5]) {
+	            //循环处理Excel表格里的每一行数据，并插入数据库
+	            for ($i=3; $i <=$data->sheets[0]['numRows'] ; $i++) { 
+	            	$insert = [];
+	            	$insert['grade'] = $data->sheets[0]['cells'][$i][1];
+	            	$insert['serialNum'] = $data->sheets[0]['cells'][$i][2];
+	            	$insert['password'] = $data->sheets[0]['cells'][$i][2];
+	            	$insert['name'] = $data->sheets[0]['cells'][$i][3];
+	            	$insert['gender'] = $data->sheets[0]['cells'][$i][4];
+	            	$insert['college'] = "数计学院";
+	            	$insert['department'] = $data->sheets[0]['cells'][$i][5];
+	            	$insert['gpa'] = $data->sheets[0]['cells'][$i][6];
+	            	$insert['rank'] = $data->sheets[0]['cells'][$i][7];
+	            	$insert['telephone'] = $data->sheets[0]['cells'][$i][8];
+	            	$insert['chosen'] = 0;
+	            	//判断数据是否存在，并覆盖/插入数据库中
+	            	if (Db::table('user_student_'.$insert['grade'])->where('serialNum',$insert['serialNum'])->find()) {
+	            		Db::table('user_student_'.$insert['grade'])->where('serialNum',$insert['serialNum'])->update($insert);
+	            	} else {
+	            		Db::table('user_student_'.$insert['grade'])->insert($insert);
+	            	}
+	            }
+	            $addInfo['totalNum'] = $data->sheets[0]['numRows']-3;
+	            $addInfo['status'] = true;
+			} else {
+				$addInfo['totalNum'] = 0;
+				$addInfo['status'] = false;
+			}
             return json($addInfo);
     	}
     }
 
     //获取导师信息Excel表格，进行处理并添加入数据表中
     public function teacher_excel_add() {
+    	$user = $this->auto_login();
+
     	$request = Request::instance();
     	if ($request->isPost()) {
     		$feedback = $request->post();
@@ -945,27 +954,31 @@ class DepartmentHeadTutor extends BaseController {
 
             error_reporting(E_ALL ^ E_NOTICE);
 
-            //循环处理Excel表格里的每一行数据，并插入数据库
-            for ($i=3; $i <=$data->sheets[0]['numRows'] ; $i++) { 
-            	$insert = [];
-            	$insert['workNumber'] = $data->sheets[0]['cells'][$i][1];
-            	$insert['password'] = $data->sheets[0]['cells'][$i][1];
-            	$insert['name'] = $data->sheets[0]['cells'][$i][2];
-            	$insert['sex'] = $data->sheets[0]['cells'][$i][3];
-            	$insert['department'] = $data->sheets[0]['cells'][$i][4];
-            	$insert['isExperial'] = $data->sheets[0]['cells'][$i][5];
-            	$insert['position'] = $data->sheets[0]['cells'][$i][6];
-            	$insert['telephone'] = $data->sheets[0]['cells'][$i][7];
-            	//判断数据是否存在，并覆盖/插入数据库中
-            	if (Db::table('user_teacher')->where('workNumber',$insert['workNumber'])->find()) {
-            		Db::table('user_teacher')->update($insert);
-            	} else {
-            		Db::table('user_teacher')->insert($insert);
-            	}
-            }
-
-            $addInfo['totalNum'] = $data->sheets[0]['numRows']-3;
-            $addInfo['status'] = true;
+            if ($user['department'] == $data->sheets[0]['cells'][3][4]) {
+	            //循环处理Excel表格里的每一行数据，并插入数据库
+	            for ($i=3; $i <=$data->sheets[0]['numRows'] ; $i++) { 
+	            	$insert = [];
+	            	$insert['workNumber'] = $data->sheets[0]['cells'][$i][1];
+	            	$insert['password'] = $data->sheets[0]['cells'][$i][1];
+	            	$insert['name'] = $data->sheets[0]['cells'][$i][2];
+	            	$insert['sex'] = $data->sheets[0]['cells'][$i][3];
+	            	$insert['department'] = $data->sheets[0]['cells'][$i][4];
+	            	$insert['isExperial'] = $data->sheets[0]['cells'][$i][5];
+	            	$insert['position'] = $data->sheets[0]['cells'][$i][6];
+	            	$insert['telephone'] = $data->sheets[0]['cells'][$i][7];
+	            	//判断数据是否存在，并覆盖/插入数据库中
+	            	if (Db::table('user_teacher')->where('workNumber',$insert['workNumber'])->find()) {
+	            		Db::table('user_teacher')->update($insert);
+	            	} else {
+	            		Db::table('user_teacher')->insert($insert);
+	            	}
+	            }
+	            $addInfo['totalNum'] = $data->sheets[0]['numRows']-3;
+	            $addInfo['status'] = true;
+	        } else {
+	        	$addInfo['totalNum'] = 0;
+	            $addInfo['status'] = false;
+	        }
             return json($addInfo);	
     	}
     }
@@ -981,13 +994,13 @@ class DepartmentHeadTutor extends BaseController {
         $excel->getActiveSheet()->getColumnDimension('B')->setWidth(10);
         $excel->getActiveSheet()->getColumnDimension('C')->setWidth(9);
         $excel->getActiveSheet()->getColumnDimension('D')->setWidth(16);
-        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(25);
-        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(114);
+        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(114);
+        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(25);
         $excel->getActiveSheet()->getColumnDimension('G')->setWidth(25);
-        $excel->getActiveSheet()->getColumnDimension('H')->setWidth(25);
-        $excel->getActiveSheet()->getColumnDimension('I')->setWidth(12);
+        $excel->getActiveSheet()->getColumnDimension('H')->setWidth(12);
+        // $excel->getActiveSheet()->getColumnDimension('I')->setWidth(12);
 
-        $excel->getActiveSheet()->mergeCells('A1:I1');  //合并A1:I1单元格
+        $excel->getActiveSheet()->mergeCells('A1:H1');  //合并A1:H1单元格
         $excel->getActiveSheet()->setTitle('学生信息导入模版');
         $excel->getActiveSheet()->setCellValue('A1','数计学院20xx级学生名单');
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
@@ -1011,9 +1024,9 @@ class DepartmentHeadTutor extends BaseController {
         ];
 
         //设置表头数组
-        $letter = ['A','B','C','D','E','F','G','H','I'];
-        $tableHeader = ['年级','学号','姓名','性别（男、女）','学院','系别（应用数学系、信息与计算科学系、计算机系、信息安全与网络系、软件工程系、计算机实验班、数学实验班）','绩点（保留两位小数）','绩点排名（格式：1/78）','联系方式'];
-        for ($i=0; $i <9 ; $i++) { 
+        $letter = ['A','B','C','D','E','F','G','H'];
+        $tableHeader = ['年级','学号','姓名','性别（男、女）','系别（应用数学系、信息与计算科学系、计算机系、信息安全与网络系、软件工程系、计算机实验班、数学实验班）','绩点（保留两位小数）','绩点排名（格式：1/78）','联系方式'];
+        for ($i=0; $i <8 ; $i++) { 
             $excel->getActiveSheet()->setCellValue($letter[$i].'2',$tableHeader[$i]);
             $excel->getActiveSheet()->getStyle($letter[$i].'2')->applyFromArray($styleArray);
             $excel->getActiveSheet()->getStyle($letter[$i].'2')->getFont()->setBold(true);
