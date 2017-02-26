@@ -208,10 +208,17 @@ int main(int argc, char* argv[]) {
     /***********写入未中选学生信息*******/
     fout.open("student_unelected.txt");
     // fout << "未中选学生人数：" << student_number - chose_num << endl;
+    vector<int> unelectedStu;
     for (int i = 0; i < student_number; ++i) {
         if (student[i].teacher_id == -1) {
-            fout << setfill('0') << setw(9) << student[i].student_id << endl;
+            unelectedStu.push_back(student[i].student_id);
         }
+    }
+    int unelectedStuNum = unelectedStu.size();
+    for (int i = 0; i < unelectedStuNum; ++i) {
+        fout << setfill('0') << setw(9) << unelectedStu[i];
+        if (i != unelectedStuNum - 1) fout << ",";
+        fout << endl;
     }
     fout.close();
     /************************************/
