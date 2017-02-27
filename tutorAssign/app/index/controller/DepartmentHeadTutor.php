@@ -308,6 +308,8 @@ class DepartmentHeadTutor extends BaseController {
 
 		        $inputTeacher2 = $this->getAvailableTeacher();
 		        $countInputTeacher2 = count($inputTeacher2);
+		        //将获取的老师信息转换为.txt文件
+		        file_put_contents('teacher2.txt', $inputTeacher2);
 
 		        $fileNameWithParam2 = 'distribute2.exe ' . $countInputStudent2 . ' ' . $countInputTeacher2;
 		        system($fileNameWithParam2);
@@ -377,6 +379,8 @@ class DepartmentHeadTutor extends BaseController {
 
 	public function getAvailableTeacher() {
 		$user = $this->auto_login();
+		// $user['department'] = "信息安全与网络工程系";
+		$grade = Db::table('tc_grade')->order('grade desc')->select();
 
 		//获取导师信息
         if ($user['department'] == "计算机实验班") {
@@ -389,9 +393,7 @@ class DepartmentHeadTutor extends BaseController {
         		$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalCompExper'] - $teacherIssue[$i]['compExperNow'];
 
         		//将每个导师的信息转换成规定格式的字符串
-        		if ($teacher[$i]['avaliableNumber'] > 0) {
 	        		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
-        		}
         	}
         } elseif ($user['department'] == "数学实验班") {
         	$teacher = Db::table('user_teacher')->where('isExperial',2)->whereOr('isExperial',3)->select();
@@ -403,9 +405,7 @@ class DepartmentHeadTutor extends BaseController {
         		$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalMathExper'] - $teacherIssue[$i]['mathExperNow'];
 
         		//将每个导师的信息转换成规定格式的字符串
-        		if ($teacher[$i]['avaliableNumber'] > 0) {
 	        		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
-        		}
         	}
         } else {
         	$teacher = Db::table('user_teacher')->where('department',$user['department'])->select();
@@ -417,9 +417,7 @@ class DepartmentHeadTutor extends BaseController {
         		$teacher[$i]['avaliableNumber'] = $teacherIssue[$i]['totalNatur'] - $teacherIssue[$i]['naturNow'];
 
         		//将每个导师的信息转换成规定格式的字符串
-        		if ($teacher[$i]['avaliableNumber'] > 0) {
 	        		$inputTeacher[$i] = $teacher[$i]['workNumber'] . ' ' . $teacher[$i]['avaliableNumber'] . PHP_EOL;
-        		}
         	}
         }
         return $inputTeacher;
