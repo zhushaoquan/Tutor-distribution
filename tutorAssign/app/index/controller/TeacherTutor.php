@@ -36,7 +36,18 @@ class TeacherTutor extends BaseController {
         初始化一些 时间设置（第几轮志愿时间等等）年级
         */
 
-        $this->user = $this->auto_login();    
+        // $this->user = $this->auto_login();  
+        $user = $this->auto_login();    
+  
+
+
+
+        $this->user = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
+
+        // var_dump($this->user['workNumber']);
+        // exit;
+
+
         $this->grades = Db::table('tc_grade')->order('grade desc')->limit(5)->select();
         $this->issue = Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber', $this->user['workNumber'])->find();
         
@@ -322,6 +333,7 @@ class TeacherTutor extends BaseController {
 
     public function student_list($page=1) {
         $user = $this->auto_login();
+        $teacher = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
 
         $students = Db::table('tc_voluntary_'.$this->grades[0]['grade'])->alias('v')->join('user_student_'.$this->grades[0]['grade'].' s','v.sid = s.sid')
                                             ->where(function ($query) {
@@ -399,7 +411,7 @@ class TeacherTutor extends BaseController {
 
         $this->assign($pageBar);
         $this->assign('students',$students);
-        $this->assign('user', $user);
+        $this->assign('user', $teacher);
 
         $request = Request::instance();
         if ($request->isPost()) {
@@ -536,15 +548,54 @@ class TeacherTutor extends BaseController {
 
     public function show_studentdetail($sid)
     {
+      //接口
      if($sid!=NULL) {
-      $data['student']=DB::table('user_student_'.$this->grades[0]['grade'])->where('sid',$sid)
-                                                                //->field('name,serialNum')
+      // $data['student']=DB::table('user_student_'.$this->grades[0]['grade'])->where('sid',$sid)
+      //                                                           //->field('name,serialNum')
+      //                                                           ->find();
+
+      $data['student']=DB::table('user_student_'.$this->grades[0]['grade'])->alias('s')->join('tc_voluntary_'.$this->grades[0]['grade'].'  v','s.sid = v.sid')->where('s.sid',$sid)
                                                                 ->find();
+
+      if($data['student']['wishFirst'] == $this->user['workNumber'])$data['student']['voluntary'] = "第一志愿";
+      else if($data['student']['wishSecond'] == $this->user['workNumber'])$data['student']['voluntary'] = "第二志愿";
+      else if($data['student']['wishThird'] == $this->user['workNumber'])$data['student']['voluntary'] = "第三志愿";
+      else if($data['student']['wishForth'] == $this->user['workNumber'])$data['student']['voluntary'] = "第四志愿";
+      else $data['student']['voluntary'] = "第五志愿";
+
      } else {
       $data['student'] = "学号不得为空！";
      }
       return json($data);
     }
+
+
+//meiyongde
+    public function show_student11()
+    {
+      $sid = 1;
+      $data['student']=DB::table('user_student_'.$this->grades[0]['grade'])->alias('s')->join('tc_voluntary_'.$this->grades[0]['grade'].'  v','s.sid = v.sid')->where('s.sid',$sid)
+                                                                ->find();
+      var_dump($data);
+      
+    }
+
+
+
+
+
+    //  public function show_studentdetail($sid)
+    // {
+    //   //接口
+    //  if($sid!=NULL) {
+    //   $data['student']=DB::table('user_student_'.$this->grades[0]['grade'])->alias('s')->join('tc_voluntary_'.$this->grades[0]['grade'].' v','v.sid = s.sid')->where('sid',$sid)
+    //                                                             //->field('name,serialNum')
+    //                                                             ->find();
+    //  } else {
+    //   $data['student'] = "学号不得为空！";
+    //  }
+    //   return json($data);
+    // }
 
 
 
