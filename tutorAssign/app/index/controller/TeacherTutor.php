@@ -5,7 +5,7 @@ use think\Db;
 use think\Request;
 
 class TeacherTutor extends BaseController {
-    public $pageSize = 5;
+    public $pageSize = 6;
     public $department1 = "计算机实验班";
     public $department2 = "数学实验班";
     public $round;
@@ -329,9 +329,11 @@ class TeacherTutor extends BaseController {
 
     }
 
-    
+   
 
-    public function student_list($page=1) {
+
+
+    public function student_list() {
         $user = $this->auto_login();
         $teacher = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
 
@@ -366,50 +368,7 @@ class TeacherTutor extends BaseController {
                                                       ->where('s.chosen' ,0)
                                                       ->where('v.round',$this->round);
                                              })
-                                            
-                                            ->page($page,$this->pageSize)->select();
-        $total = count(Db::table('tc_voluntary_'.$this->grades[0]['grade'])->alias('v')->join('user_student_'.$this->grades[0]['grade'].' s','v.sid = s.sid')
-                                            ->where(function ($query) {
-                                                $query->where('v.wishFirst', $this->user['workNumber'])
-                                                      ->where('v.firstReject', 0)
-                                                      ->where('s.chosen' ,0)
-                                                      ->where('v.round',$this->round);
-                                             })
-                                            ->whereOr(function ($query) {
-                                                $query->where('v.wishSecond', $this->user['workNumber'])
-                                                      ->where('v.secondReject', 0)
-                                                      ->where('s.chosen' ,0)
-                                                      ->where('v.round',$this->round);
-                                             })
-                                            ->whereOr(function ($query) {
-                                                $query->where('v.wishThird', $this->user['workNumber'])
-                                                      ->where('v.thirdReject', 0)
-                                                      ->where('s.chosen' ,0)
-                                                      ->where('v.round',$this->round);
-                                             })
-                                            ->whereOr(function ($query) {
-                                                $query->where('v.wishForth', $this->user['workNumber'])
-                                                      ->where('v.forthReject', 0)
-                                                      ->where('s.chosen' ,0)
-                                                      ->where('v.round',$this->round);
-                                             })
-                                            ->whereOr(function ($query) {
-                                                $query->where('v.wishFifth', $this->user['workNumber'])
-                                                      ->where('v.fifthReject', 0)
-                                                      ->where('s.chosen' ,0)
-                                                      ->where('v.round',$this->round);
-                                             })
-                                            ->select()
-                      );
-        $totalPage = ceil($total/$this->pageSize);
-        $pageBar = [
-            'total'     => $total,
-            'totalPage' => $totalPage+1,
-            'pageSize'  => $this->pageSize,
-            'curPage'   => $page
-            ];
-
-        $this->assign($pageBar);
+                                             ->paginate($this->pageSize);
         $this->assign('students',$students);
         $this->assign('user', $teacher);
 
