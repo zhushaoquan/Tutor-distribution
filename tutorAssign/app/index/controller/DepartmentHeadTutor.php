@@ -20,10 +20,39 @@ class DepartmentHeadTutor extends BaseController {
         	$head['avatorIsEmpty'] = 0;
         }
 
+        $timeStatus = $this->getTimeStatus();
+        $this->assign('timeStatus',$timeStatus);
 		$this->assign('user', $head);
 		return $this->fetch('index');
 	}
 
+	public function getTimeStatus() {
+		$user = $this->auto_login();
+
+		$timeSet = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
+        $currentTime = time();
+        if (!empty($timeSet)) {
+        	if ($currentTime < $timeSet['issueStart']) {
+        		$timeStatus = 1; //选导暂未开始
+        	} elseif ($currentTime > $timeSet['issueStart'] && $currentTime < $timeSet['issueEnd']) {
+        		$timeStatus = 2; //导师填报课题阶段
+        	} elseif ($currentTime > $timeSet['firstStart'] && $currentTime < $timeSet['firstEnd']) {
+        		$timeStatus = 3; //学生第一轮填报志愿阶段
+        	} elseif ($currentTime > $timeSet['secondStart'] && $currentTime < $timeSet['secondEnd']) {
+        		$timeStatus = 4; //学生第二轮填报志愿阶段
+        	} elseif ($currentTime > $timeSet['confirmFirstStart'] && $currentTime < $timeSet['confirmFirstEnd']) {
+        		$timeStatus = 5; //导师第一轮选择学生阶段
+        	} elseif ($currentTime > $timeSet['confirmSecondStart'] && $currentTime < $timeSet['confirmSecondEnd']) {
+        		$timeStatus = 6; //导师第二轮选择学生阶段
+        	} else {
+        		$timeStatus = 7; //选导已结束
+        	}
+        } else {
+        	$timeStatus = 0;  //未设置选导时间
+        }
+
+        return $timeStatus;
+	}
 
 	public function matchSetting() {
 		$user = $this->auto_login();
@@ -574,6 +603,9 @@ class DepartmentHeadTutor extends BaseController {
 
 	public function studentManager(){
         $user = $this->auto_login();
+
+        $timeStatus = $this->getTimeStatus();
+        $this->assign('timeStatus',$timeStatus);
         $this->assign('user',$user);
 	    return $this->fetch('student_manager');
     }
@@ -895,6 +927,9 @@ class DepartmentHeadTutor extends BaseController {
 
     public function teacherManager(){
     	$user = $this->auto_login();
+
+    	$timeStatus = $this->getTimeStatus();
+        $this->assign('timeStatus',$timeStatus);
     	$this->assign('user',$user);
     	return $this->fetch('teacher_manager');
     }
