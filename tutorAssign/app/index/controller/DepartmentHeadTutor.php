@@ -257,8 +257,8 @@ class DepartmentHeadTutor extends BaseController {
 	public function intelligentAlloc() {
 		$user = $this->auto_login();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
-		// $user['department'] = "信息安全与网络工程系";
-		// $user['workNumber'] = "00001";
+		// $user['department'] = "计算机系";
+		// $user['workNumber'] = "11061";
 		$wishList = ['wishFirst','wishSecond','wishThird','wishForth','wishFifth'];
 		$voluntaryNum = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
 
@@ -336,6 +336,10 @@ class DepartmentHeadTutor extends BaseController {
 
 	            if (Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$studentElectedResult[$i]['stuInfo']['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find()) {
 		            $vol_num[$i] = array_keys(Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$studentElectedResult[$i]['stuInfo']['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find(),$studentElectedResult[$i]['teaInfo']['workNumber']);
+		            if ($vol_num[$i] == null) {
+		            	$vol_num[$i] = "algorithmAlloced";
+		            	$vol_num[$i] = array($vol_num[$i]);
+		            }
 		            if ($vol_num[$i][0] == "wishFirst") {
 		            	$volOrder = "第一志愿";
 		            } elseif ($vol_num[$i][0] == "wishSecond") {
@@ -346,6 +350,8 @@ class DepartmentHeadTutor extends BaseController {
 		            	$volOrder = "第四志愿";
 		            } elseif ($vol_num[$i][0] == "wishFifth") {
 		            	$volOrder = "第五志愿";
+		            } elseif ($vol_num[$i][0] == "algorithmAlloced") {
+		            	$volOrder = "算法分配";
 		            }
 
 		            $insert[$i]['sid'] = $studentElectedResult[$i]['stuInfo']['sid'];
@@ -374,6 +380,7 @@ class DepartmentHeadTutor extends BaseController {
 		}
 	    // return json($insert);
         $this->assign('user', $user);
+        // return json($insert);
 
 	}
 
