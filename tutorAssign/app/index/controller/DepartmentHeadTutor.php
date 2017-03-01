@@ -1480,8 +1480,8 @@ class DepartmentHeadTutor extends BaseController {
 
     //获取未分配学生列表
     public function unchosenStudentList() {
-    	$user = $this->auto_login();
-    	// $user['workNumber'] = "06033";
+    	// $user = $this->auto_login();
+    	$user['workNumber'] = "11061";
     	$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
     	$voluntaryNum = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
     	$wishList = ['wishFirst','wishSecond','wishThird','wishForth','wishFifth'];
@@ -1502,7 +1502,15 @@ class DepartmentHeadTutor extends BaseController {
     		if ($amount != 0) {
 	    		for ($i=0; $i <$totalUnchosen ; $i++) {
 	    		 	if (Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('round,wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find()) {
-		    			$voluntary[$i] = Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('round,wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
+
+	    		 		$roundList = Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('round')->select();
+	    		 		if (count($roundList) == 1) {
+	    		 			$nowRound = 1;
+	    		 		} else {
+	    		 			$nowRound = 2;
+	    		 		}
+
+		    			$voluntary[$i] = Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->where('round',$nowRound)->field('round,wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
 						$voluntary[$i]['information'] = Db::table('user_student_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('sid,serialNum,name')->find();
 						
 						for ($j=0; $j <$voluntaryNum['voluntaryNum'] ; $j++) { 
@@ -1513,6 +1521,7 @@ class DepartmentHeadTutor extends BaseController {
 						$data['information'][$i]['sid'] = $voluntary[$i]['information']['sid'];
 						$data['information'][$i]['serialNum'] = $voluntary[$i]['information']['serialNum'];
 						$data['information'][$i]['name'] = $voluntary[$i]['information']['name'];
+						$data['information'][$i]['round'] = $voluntary[$i]['round'];
 					} else {
 						$voluntary[$i]['information'] = Db::table('user_student_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('sid,serialNum,name')->find();
 
