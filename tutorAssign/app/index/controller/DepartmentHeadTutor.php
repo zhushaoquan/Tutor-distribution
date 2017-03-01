@@ -1231,15 +1231,20 @@ class DepartmentHeadTutor extends BaseController {
     }
 
     //导师对应学生结果Excel导出
-    public function teacherToStudentExcelExport() {
+    public function teacherToStudentExcelExport($gradeForExport,$departmentForExport="") {
+    	$user = $this->auto_login();
     	$grade = Db::table('tc_grade')->order('grade desc')->select();
+
+    	if ($departmentForExport == "") {
+    		$departmentForExport = $user['department'];
+    	}
 
         //引入PHPExcel文件
         require_once 'extend/PHPExcel_1.8.0_doc/Classes/PHPExcel.php';
         $excel = new \PHPExcel();
 
         //获得结果数组
-        $insert = $this->teacherToStudentResult();
+        $insert = $this->getTeacherToStudentExportResult($gradeForExport,$departmentForExport);
 
         //手动设置单元格宽度
         $excel->getActiveSheet()->getColumnDimension('B')->setWidth(30);
@@ -1252,10 +1257,11 @@ class DepartmentHeadTutor extends BaseController {
 
         //设置学号栏为文本格式
         $excel->getActiveSheet()->getStyle('G')->getNumberFormat()->setFormatCode('000000000');
+        $excel->getActiveSheet()->getStyle('E')->getAlignment()->setWrapText(true);
 
         //设置表格标题，单独处理
         $excel->getActiveSheet()->mergeCells('A1:H1');  //合并A1:F1单元格
-        $excel->getActiveSheet()->setCellValue('A1',$insert[0]['grade'].'级'.$insert[0]['dep'].'导师分配结果');
+        $excel->getActiveSheet()->setCellValue('A1',$gradeForExport.'级'.$insert[0]['department'].'导师分配结果');
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);  //加粗
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER); //设置水平居中
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_CENTER);     //设置垂直居中
@@ -1294,9 +1300,9 @@ class DepartmentHeadTutor extends BaseController {
             }
             for ($j=0; $j <$tempCount ; $j++) {               //开始插入
                 if ($insert[$i]['stuNum'] != 0) {             //逐一插入导师的学生信息
-                    $excel->getActiveSheet()->setCellValue('F'.($j+$oldTemp),$insert[$i]['tstudentL'][$j]['sname']);
-                    $excel->getActiveSheet()->setCellValue('G'.($j+$oldTemp),$insert[$i]['tstudentL'][$j]['snum']);
-                    $excel->getActiveSheet()->setCellValue('H'.($j+$oldTemp),$insert[$i]['tstudentL'][$j]['stele']);
+                    $excel->getActiveSheet()->setCellValue('F'.($j+$oldTemp),$insert[$i]['students'][$j]['name']);
+                    $excel->getActiveSheet()->setCellValue('G'.($j+$oldTemp),$insert[$i]['students'][$j]['serialNum']);
+                    $excel->getActiveSheet()->setCellValue('H'.($j+$oldTemp),$insert[$i]['students'][$j]['telephone']);
                 }
 
                 $excel->getActiveSheet()->getStyle('F'.($j+$oldTemp))->applyFromArray($styleArray); //设置单元格格式：水平、垂直居中、加边框
@@ -1305,10 +1311,10 @@ class DepartmentHeadTutor extends BaseController {
             }
 
             $excel->getActiveSheet()->setCellValue('A'.$oldTemp,($i+1));                            //设置单元格的值
-            $excel->getActiveSheet()->setCellValue('B'.$oldTemp,$insert[$i]['dep']);
-            $excel->getActiveSheet()->setCellValue('C'.$oldTemp,$insert[$i]['tname']);
-            $excel->getActiveSheet()->setCellValue('D'.$oldTemp,$insert[$i]['position']);
-            $excel->getActiveSheet()->setCellValue('E'.$oldTemp,$insert[$i]['title']);
+            $excel->getActiveSheet()->setCellValue('B'.$oldTemp,$insert[$i]['teacher']['department']);
+            $excel->getActiveSheet()->setCellValue('C'.$oldTemp,$insert[$i]['teacher']['name']);
+            $excel->getActiveSheet()->setCellValue('D'.$oldTemp,$insert[$i]['teacher']['position']);
+            $excel->getActiveSheet()->setCellValue('E'.$oldTemp,$insert[$i]['teacher']['title']);
 
             $newTemp = $oldTemp + $tempCount;
             if ($insert[$i]['stuNum'] != 1 && $insert[$i]['stuNum'] != 0) {
@@ -1341,17 +1347,17 @@ class DepartmentHeadTutor extends BaseController {
 
 
     //获取学生对应导师的结果
-    public function studentToTeacherResult()//学生结果查看
+    public function studentToTeacherResult($gradeForExport,$departmentForExport)//学生结果查看
     {
         $user = $this->auto_login();
 
         $request = Request::instance();
-        $gg=DB::table('tc_grade')->field('grade')->select();
-        $grade=$gg[0]['grade'];
-        $grade = $request->get('grade') != '' ? $request->get('grade') : $gg[0]['grade'];
+        // $gg=DB::table('tc_grade')->field('grade')->select();
+        // $grade=$gg[0]['grade'];
+        $grade = $gradeForExport;
 
-        $finddep=DB::table('user_department_head')->where('workNumber',$user['workNumber'])->field('department')->find(); //workNumber记得改
-        $dep=$finddep['department'];
+        // $finddep=DB::table('user_department_head')->where('workNumber',$user['workNumber'])->field('department')->find(); //workNumber记得改
+        $dep=$departmentForExport;
 
         $data=Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
         ->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
@@ -1383,13 +1389,18 @@ class DepartmentHeadTutor extends BaseController {
     }
 
     //学生对应导师结果Excel导出
-    public function studentToTeacherExcelExport() {
+    public function studentToTeacherExcelExport($gradeForExport,$departmentForExport="") {
+    	$user = $this->auto_login();
         //引入PHPExcel文件
         require_once 'extend/PHPExcel_1.8.0_doc/Classes/PHPExcel.php';
         $excel = new \PHPExcel();
 
+        if ($departmentForExport == "") {
+    		$departmentForExport = $user['department'];
+    	}
+
         //获得结果数组
-        $insert = $this->studentToTeacherResult();
+        $insert = $this->studentToTeacherResult($gradeForExport,$departmentForExport);
 
         //手动设置单元格宽度
         $excel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
@@ -1404,10 +1415,11 @@ class DepartmentHeadTutor extends BaseController {
 
         //设置学号栏为文本格式
         $excel->getActiveSheet()->getStyle('D')->getNumberFormat()->setFormatCode('000000000');
+        $excel->getActiveSheet()->getStyle('H')->getAlignment()->setWrapText(true);
 
         //设置表格标题，单独处理
         $excel->getActiveSheet()->mergeCells('A1:I1');  //合并A1:I1单元格
-        $excel->getActiveSheet()->setCellValue('A1',$insert[0]['grade'].'级'.$insert[0]['tdep'].'导师分配结果');
+        $excel->getActiveSheet()->setCellValue('A1',$gradeForExport.'级'.$departmentForExport.'导师分配结果');
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);  //加粗
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER); //设置水平居中
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_CENTER);     //设置垂直居中
@@ -1538,5 +1550,31 @@ class DepartmentHeadTutor extends BaseController {
     	return json($issue);
     }
 
+
+    //获取导师对应学生的结果
+    public function getTeacherToStudentExportResult($gradeForExport,$departmentForExport) {
+    	$user = $this->auto_login();
+    	// $user['department'] = "计算机系";
+    	// $gradeForExport = "2014";
+
+    	$teacherList = Db::table('user_teacher t,tc_issue_'.$gradeForExport.' i')->where('t.workNumber=i.workNumber')->where('t.department',$departmentForExport)->field('t.name,t.department,t.position,t.workNumber,i.title')->select();
+    	$count = count($teacherList);
+
+    	for ($i=0; $i <$count ; $i++) { 
+    		$result[$i]['teacher'] = $teacherList[$i];
+
+    		$student[$i] = Db::table('tc_result_'.$gradeForExport)->where('workNumber',$teacherList[$i]['workNumber'])->field('sid')->select();
+    		$countStudent = count($student[$i]);
+
+    		for ($j=0; $j <$countStudent ; $j++) { 
+    			$result[$i]['students'][$j] = Db::table('user_student_'.$gradeForExport)->where('sid',$student[$i][$j]['sid'])->field('serialNum,name,telephone')->find();
+    		}
+    		$result[$i]['stuNum'] = $countStudent;
+    		$result[$i]['grade'] = $gradeForExport;
+    		$result[$i]['department'] = $departmentForExport;
+    	}
+
+    	return $result;
+    }
     
 }

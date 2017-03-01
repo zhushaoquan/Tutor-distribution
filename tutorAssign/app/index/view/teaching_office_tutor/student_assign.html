@@ -37,7 +37,7 @@
                 <a href="{{:url('/index/TeachingOfficeTutor/index')}}"><li><img src="__STATIC__/image/院负责人/个人信息.png" height="22px" width="22px"> 个人信息</li></a>
                 <a href="{{:url('TeachingOfficeTutor/head_list')}}"><li><img src="__STATIC__/image/院负责人/管理系负责人.png" height="22px" width="22px"> 管理系负责人</li></a>
                 <a href="{{:url('/index/TeachingOfficeTutor/tutor_change')}}"><li ><img src="__STATIC__/image/院负责人/导师分配情况.png" height="22px" width="22px"> 导师分配情况</li></a>
-                <a href="{{:url('/index/TeachingOfficeTutor/student_assign')}}"><li ><img src="__STATIC__/image/院负责人/学生分配情况.png" height="22px" width="22px"> 学生分配情况</li></a>
+                <a href="{{:url('/index/TeachingOfficeTutor/student_assign')}}"><li class="active"><img src="__STATIC__/image/院负责人/学生分配情况.png" height="22px" width="22px"> 学生分配情况</li></a>
             </ul>
         </nav>
     </div>
@@ -131,7 +131,7 @@
                         <div class="col-md-2"> </div>
                         <div class="col-md-2"> </div>
                         <div class="col-md-2"> 
-                            <button type="submit" class="btn btn-info" id="sub-result-export"> <a id="downloadFile" href="{{$Think.const.OLD}}/../教师初始账号表.xls" download="result" style="color: #fff; text-decoration: none;">导&nbsp;&nbsp;出</a></button>
+                            <button type="submit" class="btn btn-info" id="sub-result-export"> <a id="downloadFile" href="{{$Think.const.PREFIX}}/DepartmentHeadTutor/studentToTeacherExcelExport/gradeForExport/{{$grade}}/departmentForExport/{{$dep}}" download="result" style="color: #fff; text-decoration: none;">导&nbsp;&nbsp;出</a></button>
                         </div>
                         <div class="col-md-2"> 
                         <button type="submit" class="btn btn-danger" id="sub-result-change"><a style="color:white; text-decoration: none;" href="{{:url('/index/TeachingOfficeTutor/student_to_modify/dep/'.$dep.'/grade/'.$grade)}}">修&nbsp;&nbsp;改</a></button>  
