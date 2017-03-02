@@ -27,7 +27,7 @@ class TeachingOfficeTutor extends BaseController {
         $this->assign('user',$user);
         return $this->fetch('head_manager');
 	}
-	public function student_assign($page=1,$dep="",$to="",$grade=0)
+	public function student_assign($dep="",$to="",$grade=0)
 	{
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
@@ -40,16 +40,23 @@ class TeachingOfficeTutor extends BaseController {
 			$dep=$_POST['department'];
 		}
 	//	var_dump($dep);
+
 		$data=Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
 		->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
 		->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
-		->order('s.serialNum')->page($page,$pageSize)->select();
+		->order('s.serialNum')->paginate($listRows = $pageSize, $simple = false, $config = [
+				                                     	'query' => array('dep' => $dep, 'grade'=>$grade, 'to'=>$to)
+				                                     	]);
 
-		$total=	count(Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
-				->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
-				->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
-				->order('s.serialNum')->select());
-		$totalPage = ceil($total/$pageSize);
+		// $total=	count(Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
+		// 		->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
+		// 		->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
+		// 		->order('s.serialNum')->select());
+		// $totalPage = ceil($total/$pageSize);
+
+		// var_dump($data);
+		// exit;
+
 
 	 	if($dep =='计算机实验班')
 	 	{
@@ -64,27 +71,35 @@ class TeachingOfficeTutor extends BaseController {
 	 	else 
 	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->order('workNumber')->select();
 	
-		$pageBar = [
-			'total'     => $total,
-			'totalPage' => $totalPage+1,
-			'pageSize'  => $pageSize,
-			'curPage'   => $page
-			];
+		// $pageBar = [
+		// 	'total'     => $total,
+		// 	'totalPage' => $totalPage+1,
+		// 	'pageSize'  => $pageSize,
+		// 	'curPage'   => $page
+		// 	];
 		$this->assign('gg',$gg);
 		$this->assign('dep',$dep);
 		// var_dump($grade);
 		$this->assign('grade',$grade);
-		$this->assign($pageBar);
+		// $this->assign($pageBar);
 	 	$this->assign('teacher',$tealist);
-	    $this->assign('data',$data);
+	    
 		$this->assign('user', $officer);	
+		var_dump($_SERVER["REQUEST_METHOD"]);
+		//exit;
 		if( $_SERVER["REQUEST_METHOD"] == "POST" && $_POST["stu"] == 'modify')
+		{
+			$page=$data->render();
+			$this->assign('page',$page);
+			$this->assign('data',$data->all());
 			return $this->fetch('student_modify');
+		}
+		$this->assign('data',$data);
 		if($to=="modify") return $this->fetch('student_modify');
 		return $this->fetch('student_assign');
 	}
 
-	public function tutor_change($page=1,$dep="",$grade=0)
+	public function tutor_change($dep="应用数学系",$grade=0)
 	{
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
@@ -97,11 +112,19 @@ class TeachingOfficeTutor extends BaseController {
 			$dep=$_POST['department'];
 		}
 		$tea=Db::table('user_teacher t')->where('department',$dep)
-		->field('t.workNumber as tnum,t.name as tname')->distinct(true)->page($page,$pageSize)->select();
+		->field('t.workNumber as tnum,t.name as tname')->distinct(true)->paginate($listRows = $pageSize, $simple = false, $config = [
+				                                     	'query' => array('dep' => $dep, 'grade'=>$grade)
+				                                     	]);
+
+	//	var_dump($tea[0]);
+		$page = $tea->render();
+		//$tea = $tea->all();
+		// exit;
 		
-		$total=count(Db::table('user_teacher t')->where('department',$dep)
-		->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
-		$totalPage = ceil($total/$pageSize);
+		// $total=count(Db::table('user_teacher t')->where('department',$dep)
+		// ->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
+		// $totalPage = ceil($total/$pageSize);
+		$tea = $tea->all();
 		$i=0;
 		foreach($tea as $value)
 		{
@@ -112,16 +135,17 @@ class TeachingOfficeTutor extends BaseController {
 			//var_dump($tea[$i]['grade']);
 		}
 
-		$pageBar = [
-			'total'     => $total,
-			'totalPage' => $totalPage+1,
-			'pageSize'  => $pageSize,
-			'curPage'   => $page
-			];
+		// $pageBar = [
+		// 	'total'     => $total,
+		// 	'totalPage' => $totalPage+1,
+		// 	'pageSize'  => $pageSize,
+		// 	'curPage'   => $page
+		// 	];
+		$this->assign('page',$page);
 		$this->assign('gg',$gg);
 		$this->assign('dep',$dep);
 		$this->assign('grade',$grade);
-		$this->assign($pageBar);
+		// $this->assign($pageBar);
 		$this->assign('data',$tea);
 		$this->assign('user', $officer);
 		return $this->fetch('tutor_change');
@@ -163,7 +187,7 @@ class TeachingOfficeTutor extends BaseController {
 		$this->assign('user', $officer);
 		$this->success('修改成功','TeachingOfficeTutor/student_assign');
 	}
-	public function student_to_modify($dep="",$grade=0)
+	public function student_to_modify($dep="应用数学系",$grade=0)
 	{
 		$user = $this->auto_login();
 		$officer = Db::table('user_teaching_office')->where('workNumber',$user['workNumber'])->find();
@@ -179,13 +203,17 @@ class TeachingOfficeTutor extends BaseController {
 		$data=Db::table('user_teacher t,user_student_' .$grade.' s,tc_result_'.$grade.' r')
 		->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)
 		->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
-		->order('s.serialNum')->page($page,$pageSize)->select();
+		->order('s.serialNum')->paginate($listRows = $pageSize, $simple = false, $config = [
+				                                     	'query' => array('dep' => $dep, 'grade'=>$grade)
+				                                     	]);
 
-		$total=	count(Db::table('user_teacher t,user_student_' .$grade.' s,tc_result_'.$grade.' r')
-				->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)
-				->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
-				->order('s.serialNum')->select());
-		$totalPage = ceil($total/$pageSize);
+		$page = $data->render();
+
+		// $total=	count(Db::table('user_teacher t,user_student_' .$grade.' s,tc_result_'.$grade.' r')
+		// 		->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)
+		// 		->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
+		// 		->order('s.serialNum')->select());
+		// $totalPage = ceil($total/$pageSize);
 	 	if($dep =='计算机实验班')
 	 	{
 	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=','计算机系')->where('isExperial','=',1)->field('workNumber,name')->order('workNumber')->select();
@@ -199,23 +227,26 @@ class TeachingOfficeTutor extends BaseController {
 	 	else 
 	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->order('workNumber')->select();
 	
-		$pageBar = [
-			'total'     => $total,
-			'totalPage' => $totalPage+1,
-			'pageSize'  => $pageSize,
-			'curPage'   => $page
-			];
+		// $pageBar = [
+		// 	'total'     => $total,
+		// 	'totalPage' => $totalPage+1,
+		// 	'pageSize'  => $pageSize,
+		// 	'curPage'   => $page
+		// 	];
 		$this->assign('dep',$dep);
-		$this->assign($pageBar);
+		//$this->assign($pageBar);
 
 		//$dep="";
-		$list=Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')->order('s.serialNum')->paginate(8);
+		$list=Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')->order('s.serialNum')->paginate($listRows = $pageSize, $simple = false, $config = [
+				                                     	'query' => array('dep' => $dep, 'grade'=>$grade)
+				                                     	]);
 	   	$data=$list->toArray()['data'];	 
 	   	$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
 	 	$this->assign('gg',$gg);
 	 	$this->assign('dep',$dep);
 	 	$this->assign('grade',$grade);
 	 	$this->assign('teacher',$tealist);
+	 	$this->assign('page', $page);
 	    $this->assign('data',$data);
 		$this->assign('user', $officer);	
 		return $this->fetch('student_modify');

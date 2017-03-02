@@ -796,7 +796,7 @@ class DepartmentHeadTutor extends BaseController {
     }
 
 
-    public function student_result($page=1,$dep="",$to="",$grade=0)//学生结果查看
+    public function student_result($dep="",$to="",$grade=0)//学生结果查看
     {
     	$user = $this->auto_login();
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
@@ -813,13 +813,15 @@ class DepartmentHeadTutor extends BaseController {
 		$data=Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
 		->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
 		->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
-		->order('s.serialNum')->page($page,$pageSize)->select();
+		->order('s.serialNum')->paginate($listRows = $pageSize, $simple = false, $config = [
+				                                     	'query' => array('dep' => $dep, 'grade'=>$grade, 'to'=>$to)
+				                                     	]);
 
-		$total=	count(Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
-				->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
-				->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
-				->order('s.serialNum')->select());
-		$totalPage = ceil($total/$pageSize);
+		// $total=	count(Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
+		// 		->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
+		// 		->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
+		// 		->order('s.serialNum')->select());
+		// $totalPage = ceil($total/$pageSize);
 
 	 	if($dep =='计算机实验班')
 	 	{
@@ -834,24 +836,24 @@ class DepartmentHeadTutor extends BaseController {
 	 	else 
 	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
 	
-		$pageBar = [
-			'total'     => $total,
-			'totalPage' => $totalPage+1,
-			'pageSize'  => $pageSize,
-			'curPage'   => $page
-			];
+		// $pageBar = [
+		// 	'total'     => $total,
+		// 	'totalPage' => $totalPage+1,
+		// 	'pageSize'  => $pageSize,
+		// 	'curPage'   => $page
+		// 	];
 		$this->assign('gg',$gg);
 		$this->assign('dep',$dep);
 		// var_dump($grade);
 		$this->assign('grade',$grade);
-		$this->assign($pageBar);
+		// $this->assign($pageBar);
 	 	$this->assign('teacher',$tealist);
 	    $this->assign('data',$data);
 		$this->assign('user', $head);
 		return $this->fetch('student_result');
     }
 
-    public function tutor_result($page=1,$dep="",$grade=0)//导师结果查看
+    public function tutor_result($dep="",$grade=0)//导师结果查看
     {
     	$user = $this->auto_login();
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
@@ -868,25 +870,34 @@ class DepartmentHeadTutor extends BaseController {
 
 		if ($user['department'] == "计算机实验班") 
 		{
-			$tea=Db::table('user_teacher t')->where('isExperial',1)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->page($page,$pageSize)->select();
-			$total=count(Db::table('user_teacher t')->where('isExperial',1)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
+			$tea=Db::table('user_teacher t')->where('isExperial',1)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->paginate($listRows = $pageSize, $simple = false, $config = [
+				                                     	'query' => array('dep' => $dep, 'grade'=>$grade)
+				                                     	]);
+			//$total=count(Db::table('user_teacher t')->where('isExperial',1)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
 		} 
 		elseif ($user['department'] == "数学实验班") 
 		{
-			$tea=Db::table('user_teacher t')->where('isExperial',2)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->page($page,$pageSize)->select();
-			$total=count(Db::table('user_teacher t')->where('isExperial',2)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
+			$tea=Db::table('user_teacher t')->where('isExperial',2)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->paginate($listRows = $pageSize, $simple = false, $config = [
+				                                     	'query' => array('dep' => $dep, 'grade'=>$grade)
+				                                     	]);
+			//$total=count(Db::table('user_teacher t')->where('isExperial',2)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
 		} 
 		else 
 		{
 			$tea=Db::table('user_teacher t')->where('department',$dep)
-			->field('t.workNumber as tnum,t.name as tname')->distinct(true)->page($page,$pageSize)->select();
-			$total=count(Db::table('user_teacher t')->where('department',$dep)
-			->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
+			->field('t.workNumber as tnum,t.name as tname')->distinct(true)->paginate($listRows = $pageSize, $simple = false, $config = [
+				                                     	'query' => array('dep' => $dep, 'grade'=>$grade)
+				                                     	]);
+			// $total=count(Db::table('user_teacher t')->where('department',$dep)
+			// ->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
 		}
-		$total=count(Db::table('user_teacher t')->where('department',$dep)
-		->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
-		$totalPage = ceil($total/$pageSize);
-		$i=0;
+		// $total=count(Db::table('user_teacher t')->where('department',$dep)
+		// ->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
+		// $totalPage = ceil($total/$pageSize);
+		 $i=0;
+        $page = $tea->render();
+		$tea = $tea->all();
+   
 		foreach($tea as $value)
 		{
 			$stu=Db::query("select s.serialNum snum,s.name sname from user_student_" .$grade." s,tc_result_".$grade. " r where  r.workNumber=?  and s.sid=r.sid ",[$value['tnum']]);
@@ -896,17 +907,18 @@ class DepartmentHeadTutor extends BaseController {
 			//var_dump($tea[$i]['grade']);
 		}
 
-		$pageBar = [
-			'total'     => $total,
-			'totalPage' => $totalPage+1,
-			'pageSize'  => $pageSize,
-			'curPage'   => $page
-			];
+		// $pageBar = [
+		// 	'total'     => $total,
+		// 	'totalPage' => $totalPage+1,
+		// 	'pageSize'  => $pageSize,
+		// 	'curPage'   => $page
+		// 	];
 		$this->assign('gg',$gg);
 		$this->assign('dep',$dep);
 		$this->assign('grade',$grade);
-		$this->assign($pageBar);
+		// $this->assign($pageBar);
 		$this->assign('data',$tea);
+		$this->assign('page',$page);
 
 		$this->assign('user', $head);
 		return $this->fetch('tutor_result');

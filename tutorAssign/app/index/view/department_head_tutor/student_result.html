@@ -124,34 +124,8 @@
                     </div>
                     </div>
 
-                    <nav>
-                        <ul class="pagination" style="float: right;">
-                          {if condition="$curPage neq 1 "}
-                              <li><a href="{{:url('/index/index/DepartmentHeadTutor/student_result/page/'.($curPage-1).'/dep/'.$dep.'/grade/'.$grade)}}">&laquo;</a></li>
-                          {/if}
-                            
-                          {if condition="($curPage gt 3) AND ($curPage lt $totalPage-2)"}
-                            {for start="$curPage-2" end="$curPage+3"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/index/DepartmentHeadTutor/student_result/page/'.$i.'/dep/'.$dep.'/grade/'.$grade)}}" >{{$i}}</a></li>
-                            {/for}
-                          {elseif condition="($curPage gt $totalPage-3) AND ($totalPage gt 5)" /}
-                            {for start="$totalPage-5" end="$totalPage"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/index/DepartmentHeadTutor/student_result/page/'.$i.'/dep/'.$dep.'/grade/'.$grade)}}" >{{$i}}</a></li>
-                            {/for}
-                          {elseif condition="$totalPage gt 5" /}
-                            {for start="1" end="6"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/index/DepartmentHeadTutor/student_result/page/'.$i.'/dep/'.$dep.'/grade/'.$grade)}}" >{{$i}}</a></li>
-                            {/for}
-                          {else /}
-                            {for start="1" end="$totalPage"}
-                              <li><a <?php if($i==$curPage) echo "class='active'"; ?> href="{{:url('/index/index/DepartmentHeadTutor/student_result/page/'.$i.'/dep/'.$dep.'/grade/'.$grade)}}" >{{$i}}</a></li>
-                            {/for}
-                          {/if}
-                          {if condition="$curPage lt $totalPage-1"}
-                            <li><a href="{{:url('/index/index/DepartmentHeadTutor/student_result/page/'.($curPage+1).'/dep/'.$dep.'/grade/'.$grade)}}">&raquo;</a></li>
-                          {/if}
-                            
-                        </ul>
+                    <nav class="pagination" style="float: right;">
+                        {{$data->render()}}
                      </nav>
                 </div>
             </div>
