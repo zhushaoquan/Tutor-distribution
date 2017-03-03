@@ -227,6 +227,8 @@ $("#go-to-assign2").click(function () {
 // 确认进行智能分配
 $("#confirm-skip").click(function () {
     var result_link = $("#go-to-assign2").attr("link");
+    $("#info").text("智能匹配需要一会，稍候跳转到结果页面").addClass("info-modal");
+    this.disabled="disabled"
     $.ajax({
         type:"get",
         data:{},
