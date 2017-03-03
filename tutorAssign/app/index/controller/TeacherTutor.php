@@ -102,7 +102,7 @@ class TeacherTutor extends BaseController {
                 //导师填报课题时段！
                 $data['ontime'] = 0;
 
-                $data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的导师"."<font color='#FF0000'>填报课题</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['issueStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['issueEnd'])."</font>！";
+                $data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的导师"."<font color='#FF0000'>填报课题</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['issueStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['issueEnd'])."</font>！";
                 $data['voluntaryinfosetting'] = $this->voluntaryinfosetting;
                 $data['message1'] = "导师所带学生总数不得超过 <font color='#FF0000'>".$data['voluntaryinfosetting']['totalMax']." </font>名，不得少于 <font color='#FF0000'> ".$data['voluntaryinfosetting']['totalMin']."</font>";
                  if($this->user['isExperial']!=0) $data['message1'].="名，实验班总人数不超过<font color='#FF0000'>".$data['voluntaryinfosetting']['experialMax']."</font>";
@@ -126,18 +126,18 @@ class TeacherTutor extends BaseController {
                 $this->round = 1;
                 //第一轮志愿填报
                 $data['ontime'] = 1;
-                $data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['firstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['firstEnd'])."</font>！";
+                $data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['firstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['firstEnd'])."</font>！";
              } else if($nowtime  <= $data['secondEnd'] && $nowtime >= $data['secondStart']) {
                 $this->round = 2;
                 //第二轮志愿填报时间
                 $data['ontime'] = 2;
-                $data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['secondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['secondEnd'])."</font>！";
+                $data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['secondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['secondEnd'])."</font>！";
 
              }else if($nowtime >= $data['confirmFirstStart'] && $nowtime <= $data['confirmFirstEnd']) {
                 $this->round = 1;
                 //第一轮导师选择学生时间
                 $data['ontime'] = 11;
-                $data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmFirstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmFirstEnd'])."</font>,请导师们尽快选择学生！";
+                $data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmFirstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmFirstEnd'])."</font>,请导师们尽快选择学生！";
                 $data['message1'] = "导师所带学生总数不得超过 <font color='#FF0000'>".$this->issue['totalNatur']." </font>名，不得少于 <font color='#FF0000'> ".$data['voluntaryinfosetting']['totalMin']."</font>名";
                if($this->user['isExperial']!=0) $data['message1'].="，实验班总人数不超过<font color='#FF0000'>".($this->issue['totalCompExper']+$this->issue['totalMathExper'])."</font>名";
                $data['message1'] .="！"; 
@@ -160,7 +160,7 @@ class TeacherTutor extends BaseController {
                 $this->round = 2;
                 //第二轮导师选择学生时间
                 $data['ontime'] = 22;
-                $data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondEnd'])."</font>,请导师们尽快选择学生！";
+                $data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>"."</font>的<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondEnd'])."</font>,请导师们尽快选择学生！";
                 
                 $data['message1'] = "导师所带学生总数不得超过 <font color='#FF0000'>".$this->issue['totalNatur']." </font>名，不得少于 <font color='#FF0000'> ".$data['voluntaryinfosetting']['totalMin']."</font>名";
                if($this->user['isExperial']!=0) $data['message1'].="，实验班总人数不超过<font color='#FF0000'>".$this->issue['totalCompExper']+$this->issue['totalMathExper']."</font>名";
@@ -390,15 +390,39 @@ class TeacherTutor extends BaseController {
                     $this->showNotice('目前所带自然班人数达到上限，选择失败！',url('TeacherTutor/student_list'));
                 } else {
                     if($stu['chosen']==0) {
-                        Db::table('user_student_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->setField('chosen',1);
-                        $bool = Db::table('tc_result_'.$this->grades[0]['grade'])->insert($data1);
-                        if($stu['department']==$this->department1) {
-                             Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('compExperNow',1);
-                        } else if($stu['department']==$this->department2) {
-                             Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('mathExperNow',1);
-                        } else { 
-                             Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('naturNow',1);
+                        Db::startTrans();
+                        try{
+
+                            Db::table('user_student_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->setField('chosen',1);
+                            $bool = Db::table('tc_result_'.$this->grades[0]['grade'])->insert($data1);
+                            if($stu['department']==$this->department1) {
+                                 Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('compExperNow',1);
+                            } else if($stu['department']==$this->department2) {
+                                 Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('mathExperNow',1);
+                            } else { 
+                                 Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('naturNow',1);
+                            }
+                            // 提交事务
+                            Db::commit();    
+                        } catch (\Exception $e) {
+                            // 回滚事务
+                            Db::rollback();
                         }
+
+
+
+                        // Db::table('user_student_'.$this->grades[0]['grade'])->where('sid',$data1['sid'])->setField('chosen',1);
+                        // $bool = Db::table('tc_result_'.$this->grades[0]['grade'])->insert($data1);
+                        // if($stu['department']==$this->department1) {
+                        //      Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('compExperNow',1);
+                        // } else if($stu['department']==$this->department2) {
+                        //      Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('mathExperNow',1);
+                        // } else { 
+                        //      Db::table('tc_issue_'.$this->grades[0]['grade'])->where('workNumber',$data1['workNumber'])->setInc('naturNow',1);
+                        // }
+
+
+
                         if($bool) {
                             $this->showNotice('选择成功',url('TeacherTutor/student_list'));
                         } else {

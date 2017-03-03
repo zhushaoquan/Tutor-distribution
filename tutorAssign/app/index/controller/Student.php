@@ -54,27 +54,27 @@ class Student extends BaseController {
 	        }else if($nowtime >= $data['issueStart'] && $nowtime <= $data['issueEnd']) {
 	        	//导师填报课题时段！
 	        	$data['ontime'] = 0;
-	        	$data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的导师<font color='#FF0000'>填报课题</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['issueStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['issueEnd'])."</font>！";
+	        	$data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的导师<font color='#FF0000'>填报课题</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['issueStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['issueEnd'])."</font>！";
 	        }else if($nowtime < $data['firstEnd'] && $nowtime > $data['firstStart']) {
 	        	$this->round = 1;
 	        	//第一轮志愿填报
 	        	$data['ontime'] = 1;
-	            $data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['firstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['firstEnd'])."</font>,请同学们按时填报、修改志愿！";
+	            $data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['firstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['firstEnd'])."</font>,请同学们按时填报、修改志愿！";
 	         } else if($nowtime  < $data['secondEnd'] && $nowtime > $data['secondStart']) {
 	         	$this->round = 2;
 	         	//第二轮志愿填报时间
 	         	$data['ontime'] = 2;
-	         	$data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['secondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['secondEnd'])."</font>,请同学们按时填报、修改志愿！";
+	         	$data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['secondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['secondEnd'])."</font>,请同学们按时填报、修改志愿！";
 	         }else if($nowtime >= $data['confirmFirstStart'] && $nowtime <= $data['confirmFirstEnd']) {
 	         	$this->round = 1;
 	         	//第一轮导师选择学生时间
 	         	$data['ontime'] = 11;
-	         	$data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmFirstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmFirstEnd'])."</font>,请同学们耐心等候！";
+	         	$data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmFirstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmFirstEnd'])."</font>,请同学们耐心等候！";
 	         } else if($nowtime >= $data['confirmSecondStart'] && $nowtime <= $data['confirmSecondEnd']) {
 	         	$this->round = 2;
 	         	//第二轮导师选择学生时间
 	         	$data['ontime'] = 22;
-	         	$data['message'] = "当前为<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondEnd'])."</font>,请同学们耐心等候！";
+	         	$data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondEnd'])."</font>,请同学们耐心等候！";
 	         }else {
 	            $data['message'] = "当前不在毕设互选时间段哟~~";      
 	         }
@@ -274,61 +274,61 @@ class Student extends BaseController {
 		return $this->fetch('tutor_list');
 	}
 
-	public function tutor_list_search($page=1) {
-		$teacher="";
-		$request = Request::instance();
-		if ($request->isPost()) {
-            $this->search_teacher = $request->post('teacher', '');
-        }
+	// public function tutor_list_search($page=1) {
+	// 	$teacher="";
+	// 	$request = Request::instance();
+	// 	if ($request->isPost()) {
+ //            $this->search_teacher = $request->post('teacher', '');
+ //        }
 
-        if($this->search_teacher!="") {
-        	$this->assign('search_teacher',$teacher);
-        	$teachers = Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
-			                                     ->order('name desc')
-			                                     ->page($page,$this->pageSize)
-			                                     ->select();
-		    $total = count(Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
-			                                     ->order('name desc')
-			                                     ->select());
+ //        if($this->search_teacher!="") {
+ //        	$this->assign('search_teacher',$teacher);
+ //        	$teachers = Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
+	// 		                                     ->order('name desc')
+	// 		                                     ->page($page,$this->pageSize)
+	// 		                                     ->select();
+	// 	    $total = count(Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
+	// 		                                     ->order('name desc')
+	// 		                                     ->select());
 
-			$page = $totalPage = ceil($total/$this->pageSize);
-			$pageBar = [
-				'total'     => $total,
-				'totalPage' => $totalPage+1,
-				'pageSize'  => $this->pageSize,
-				'curPage'   => $page
-				]; 
-        }
+	// 		$page = $totalPage = ceil($total/$this->pageSize);
+	// 		$pageBar = [
+	// 			'total'     => $total,
+	// 			'totalPage' => $totalPage+1,
+	// 			'pageSize'  => $this->pageSize,
+	// 			'curPage'   => $page
+	// 			]; 
+ //        }
 
 
 
-        if($teacher!="") {
-        	$this->search_teacher = $teacher;
-        } else {
-        	$teacher = $this->search_teacher;
-        }
+ //        if($teacher!="") {
+ //        	$this->search_teacher = $teacher;
+ //        } else {
+ //        	$teacher = $this->search_teacher;
+ //        }
 
-        $teachers = Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
-			                                     ->order('name desc')
-			                                     ->page($page,$this->pageSize)
-			                                     ->select();
-	    $total = count(Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
-		                                     ->order('name desc')
-		                                     ->select());
+ //        $teachers = Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
+	// 		                                     ->order('name desc')
+	// 		                                     ->page($page,$this->pageSize)
+	// 		                                     ->select();
+	//     $total = count(Db::table('user_teacher')->where('department|name|sex|position','like','%'.$search_teacher.'%')
+	// 	                                     ->order('name desc')
+	// 	                                     ->select());
 
-		$page = $totalPage = ceil($total/$this->pageSize);
-		$pageBar = [
-			'total'     => $total,
-			'totalPage' => $totalPage+1,
-			'pageSize'  => $this->pageSize,
-			'curPage'   => $page
-			]; 
-		$this->assign($pageBar);
-		$this->assign('search_teacher',$teacher);
-		$this->assign('teachers',$teachers);
-		$this->assign('user', $this->user);
-		return $this->fetch('tutor_list');          
-	}
+	// 	$page = $totalPage = ceil($total/$this->pageSize);
+	// 	$pageBar = [
+	// 		'total'     => $total,
+	// 		'totalPage' => $totalPage+1,
+	// 		'pageSize'  => $this->pageSize,
+	// 		'curPage'   => $page
+	// 		]; 
+	// 	$this->assign($pageBar);
+	// 	$this->assign('search_teacher',$teacher);
+	// 	$this->assign('teachers',$teachers);
+	// 	$this->assign('user', $this->user);
+	// 	return $this->fetch('tutor_list');          
+	// }
 
 //导师详细信息
 	public function tutor_detail($workNumber) {
