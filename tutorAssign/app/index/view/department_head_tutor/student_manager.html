@@ -52,7 +52,17 @@
         <div class="page-content">
             <div class="main-content" style="border-radius: 10px; padding: 20px;">
                 <div role="alert" class="alert alert-info" style="margin-bottom: 0">
-                    <p>提示：你还未设置毕设导师分配的时间</p>
+                    {switch name="$timeStatus"}
+                        {case value="0"}<p>提示：导师互选尚未开始，您还未设置导师分配系统的时间设置！</p>{/case}
+                        {case value="1"}<p>提示：导师互选尚未开始，您已经设置导师分配系统的时间设置！</p>{/case}
+                        {case value="2"}<p>提示：导师互选已经开始，当前为导师填报课题时间段！</p>{/case}
+                        {case value="3"}<p>提示：导师互选已经开始，当前为第一轮学生填报志愿时间段！</p>{/case}
+                        {case value="4"}<p>提示：导师互选已经开始，当前为第二轮学生填报志愿时间段！</p>{/case}
+                        {case value="5"}<p>提示：导师互选已经开始，当前为第一轮导师选择学生时间段！</p>{/case}
+                        {case value="6"}<p>提示：导师互选已经开始，当前为第二轮导师选择学生时间段！</p>{/case}
+                        {case value="7"}<p>提示：导师互选已经结束，可前往 学生结果 及 导师结果 界面查看结果！</p>{/case}
+                        {default /}<p>提示：导师互选尚未开始，您还未设置导师分配系统的时间设置！</p>
+                    {/switch}
                 </div>
                 <div class="row module">
                     <div class="col-md-2">

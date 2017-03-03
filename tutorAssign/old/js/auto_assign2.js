@@ -261,3 +261,19 @@ function getCurPageInfo() {
     }
     return check;
 }
+
+//================================================
+//全选当前页结果
+$("#checkCurrentPage").click(function () {
+
+    if(this.checked){
+        for(item of vm_table_student_main.datas){
+            item.checked = true;
+        }
+    }else{
+        for(item of vm_table_student_main.datas){
+            item.checked = false;
+        }
+    }
+    
+});

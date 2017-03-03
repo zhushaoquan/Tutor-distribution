@@ -20,10 +20,39 @@ class DepartmentHeadTutor extends BaseController {
         	$head['avatorIsEmpty'] = 0;
         }
 
+        $timeStatus = $this->getTimeStatus();
+        $this->assign('timeStatus',$timeStatus);
 		$this->assign('user', $head);
 		return $this->fetch('index');
 	}
 
+	public function getTimeStatus() {
+		$user = $this->auto_login();
+
+		$timeSet = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
+        $currentTime = time();
+        if (!empty($timeSet)) {
+        	if ($currentTime < $timeSet['issueStart']) {
+        		$timeStatus = 1; //选导暂未开始
+        	} elseif ($currentTime > $timeSet['issueStart'] && $currentTime < $timeSet['issueEnd']) {
+        		$timeStatus = 2; //导师填报课题阶段
+        	} elseif ($currentTime > $timeSet['firstStart'] && $currentTime < $timeSet['firstEnd']) {
+        		$timeStatus = 3; //学生第一轮填报志愿阶段
+        	} elseif ($currentTime > $timeSet['secondStart'] && $currentTime < $timeSet['secondEnd']) {
+        		$timeStatus = 4; //学生第二轮填报志愿阶段
+        	} elseif ($currentTime > $timeSet['confirmFirstStart'] && $currentTime < $timeSet['confirmFirstEnd']) {
+        		$timeStatus = 5; //导师第一轮选择学生阶段
+        	} elseif ($currentTime > $timeSet['confirmSecondStart'] && $currentTime < $timeSet['confirmSecondEnd']) {
+        		$timeStatus = 6; //导师第二轮选择学生阶段
+        	} else {
+        		$timeStatus = 7; //选导已结束
+        	}
+        } else {
+        	$timeStatus = 0;  //未设置选导时间
+        }
+
+        return $timeStatus;
+	}
 
 	public function matchSetting() {
 		$user = $this->auto_login();
@@ -257,8 +286,8 @@ class DepartmentHeadTutor extends BaseController {
 	public function intelligentAlloc() {
 		$user = $this->auto_login();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
-		// $user['department'] = "信息安全与网络工程系";
-		// $user['workNumber'] = "00001";
+		// $user['department'] = "计算机系";
+		// $user['workNumber'] = "11061";
 		$wishList = ['wishFirst','wishSecond','wishThird','wishForth','wishFifth'];
 		$voluntaryNum = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
 
@@ -336,6 +365,10 @@ class DepartmentHeadTutor extends BaseController {
 
 	            if (Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$studentElectedResult[$i]['stuInfo']['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find()) {
 		            $vol_num[$i] = array_keys(Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid',$studentElectedResult[$i]['stuInfo']['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find(),$studentElectedResult[$i]['teaInfo']['workNumber']);
+		            if ($vol_num[$i] == null) {
+		            	$vol_num[$i] = "algorithmAlloced";
+		            	$vol_num[$i] = array($vol_num[$i]);
+		            }
 		            if ($vol_num[$i][0] == "wishFirst") {
 		            	$volOrder = "第一志愿";
 		            } elseif ($vol_num[$i][0] == "wishSecond") {
@@ -346,6 +379,8 @@ class DepartmentHeadTutor extends BaseController {
 		            	$volOrder = "第四志愿";
 		            } elseif ($vol_num[$i][0] == "wishFifth") {
 		            	$volOrder = "第五志愿";
+		            } elseif ($vol_num[$i][0] == "algorithmAlloced") {
+		            	$volOrder = "算法分配";
 		            }
 
 		            $insert[$i]['sid'] = $studentElectedResult[$i]['stuInfo']['sid'];
@@ -374,6 +409,7 @@ class DepartmentHeadTutor extends BaseController {
 		}
 	    // return json($insert);
         $this->assign('user', $user);
+        // return json($insert);
 
 	}
 
@@ -567,6 +603,9 @@ class DepartmentHeadTutor extends BaseController {
 
 	public function studentManager(){
         $user = $this->auto_login();
+
+        $timeStatus = $this->getTimeStatus();
+        $this->assign('timeStatus',$timeStatus);
         $this->assign('user',$user);
 	    return $this->fetch('student_manager');
     }
@@ -757,7 +796,7 @@ class DepartmentHeadTutor extends BaseController {
     }
 
 
-    public function student_result($page=1,$dep="",$to="",$grade=0)//学生结果查看
+    public function student_result($dep="",$to="",$grade=0)//学生结果查看
     {
     	$user = $this->auto_login();
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
@@ -774,13 +813,15 @@ class DepartmentHeadTutor extends BaseController {
 		$data=Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
 		->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
 		->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
-		->order('s.serialNum')->page($page,$pageSize)->select();
+		->order('s.serialNum')->paginate($listRows = $pageSize, $simple = false, $config = [
+				                                     	'query' => array('dep' => $dep, 'grade'=>$grade, 'to'=>$to)
+				                                     	]);
 
-		$total=	count(Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
-				->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
-				->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
-				->order('s.serialNum')->select());
-		$totalPage = ceil($total/$pageSize);
+		// $total=	count(Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
+		// 		->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
+		// 		->field('t.workNumber as tnum,t.name as tname,s.serialNum as snum,s.name as sname,s.sid as sid')
+		// 		->order('s.serialNum')->select());
+		// $totalPage = ceil($total/$pageSize);
 
 	 	if($dep =='计算机实验班')
 	 	{
@@ -795,24 +836,24 @@ class DepartmentHeadTutor extends BaseController {
 	 	else 
 	 		$tealist=Db::table('user_teacher')->where('user_teacher.department','=',$dep)->field('workNumber,name')->select();
 	
-		$pageBar = [
-			'total'     => $total,
-			'totalPage' => $totalPage+1,
-			'pageSize'  => $pageSize,
-			'curPage'   => $page
-			];
+		// $pageBar = [
+		// 	'total'     => $total,
+		// 	'totalPage' => $totalPage+1,
+		// 	'pageSize'  => $pageSize,
+		// 	'curPage'   => $page
+		// 	];
 		$this->assign('gg',$gg);
 		$this->assign('dep',$dep);
 		// var_dump($grade);
 		$this->assign('grade',$grade);
-		$this->assign($pageBar);
+		// $this->assign($pageBar);
 	 	$this->assign('teacher',$tealist);
 	    $this->assign('data',$data);
 		$this->assign('user', $head);
 		return $this->fetch('student_result');
     }
 
-    public function tutor_result($page=1,$dep="",$grade=0)//导师结果查看
+    public function tutor_result($dep="",$grade=0)//导师结果查看
     {
     	$user = $this->auto_login();
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
@@ -829,25 +870,34 @@ class DepartmentHeadTutor extends BaseController {
 
 		if ($user['department'] == "计算机实验班") 
 		{
-			$tea=Db::table('user_teacher t')->where('isExperial',1)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->page($page,$pageSize)->select();
-			$total=count(Db::table('user_teacher t')->where('isExperial',1)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
+			$tea=Db::table('user_teacher t')->where('isExperial',1)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->paginate($listRows = $pageSize, $simple = false, $config = [
+				                                     	'query' => array('dep' => $dep, 'grade'=>$grade)
+				                                     	]);
+			//$total=count(Db::table('user_teacher t')->where('isExperial',1)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
 		} 
 		elseif ($user['department'] == "数学实验班") 
 		{
-			$tea=Db::table('user_teacher t')->where('isExperial',2)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->page($page,$pageSize)->select();
-			$total=count(Db::table('user_teacher t')->where('isExperial',2)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
+			$tea=Db::table('user_teacher t')->where('isExperial',2)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->paginate($listRows = $pageSize, $simple = false, $config = [
+				                                     	'query' => array('dep' => $dep, 'grade'=>$grade)
+				                                     	]);
+			//$total=count(Db::table('user_teacher t')->where('isExperial',2)->whereOr('isExperial',3)->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
 		} 
 		else 
 		{
 			$tea=Db::table('user_teacher t')->where('department',$dep)
-			->field('t.workNumber as tnum,t.name as tname')->distinct(true)->page($page,$pageSize)->select();
-			$total=count(Db::table('user_teacher t')->where('department',$dep)
-			->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
+			->field('t.workNumber as tnum,t.name as tname')->distinct(true)->paginate($listRows = $pageSize, $simple = false, $config = [
+				                                     	'query' => array('dep' => $dep, 'grade'=>$grade)
+				                                     	]);
+			// $total=count(Db::table('user_teacher t')->where('department',$dep)
+			// ->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
 		}
-		$total=count(Db::table('user_teacher t')->where('department',$dep)
-		->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
-		$totalPage = ceil($total/$pageSize);
-		$i=0;
+		// $total=count(Db::table('user_teacher t')->where('department',$dep)
+		// ->field('t.workNumber as tnum,t.name as tname')->distinct(true)->select());
+		// $totalPage = ceil($total/$pageSize);
+		 $i=0;
+        $page = $tea->render();
+		$tea = $tea->all();
+   
 		foreach($tea as $value)
 		{
 			$stu=Db::query("select s.serialNum snum,s.name sname from user_student_" .$grade." s,tc_result_".$grade. " r where  r.workNumber=?  and s.sid=r.sid ",[$value['tnum']]);
@@ -857,17 +907,18 @@ class DepartmentHeadTutor extends BaseController {
 			//var_dump($tea[$i]['grade']);
 		}
 
-		$pageBar = [
-			'total'     => $total,
-			'totalPage' => $totalPage+1,
-			'pageSize'  => $pageSize,
-			'curPage'   => $page
-			];
+		// $pageBar = [
+		// 	'total'     => $total,
+		// 	'totalPage' => $totalPage+1,
+		// 	'pageSize'  => $pageSize,
+		// 	'curPage'   => $page
+		// 	];
 		$this->assign('gg',$gg);
 		$this->assign('dep',$dep);
 		$this->assign('grade',$grade);
-		$this->assign($pageBar);
+		// $this->assign($pageBar);
 		$this->assign('data',$tea);
+		$this->assign('page',$page);
 
 		$this->assign('user', $head);
 		return $this->fetch('tutor_result');
@@ -888,6 +939,9 @@ class DepartmentHeadTutor extends BaseController {
 
     public function teacherManager(){
     	$user = $this->auto_login();
+
+    	$timeStatus = $this->getTimeStatus();
+        $this->assign('timeStatus',$timeStatus);
     	$this->assign('user',$user);
     	return $this->fetch('teacher_manager');
     }
@@ -1189,15 +1243,20 @@ class DepartmentHeadTutor extends BaseController {
     }
 
     //导师对应学生结果Excel导出
-    public function teacherToStudentExcelExport() {
+    public function teacherToStudentExcelExport($gradeForExport,$departmentForExport="") {
+    	$user = $this->auto_login();
     	$grade = Db::table('tc_grade')->order('grade desc')->select();
+
+    	if ($departmentForExport == "") {
+    		$departmentForExport = $user['department'];
+    	}
 
         //引入PHPExcel文件
         require_once 'extend/PHPExcel_1.8.0_doc/Classes/PHPExcel.php';
         $excel = new \PHPExcel();
 
         //获得结果数组
-        $insert = $this->teacherToStudentResult();
+        $insert = $this->getTeacherToStudentExportResult($gradeForExport,$departmentForExport);
 
         //手动设置单元格宽度
         $excel->getActiveSheet()->getColumnDimension('B')->setWidth(30);
@@ -1210,10 +1269,11 @@ class DepartmentHeadTutor extends BaseController {
 
         //设置学号栏为文本格式
         $excel->getActiveSheet()->getStyle('G')->getNumberFormat()->setFormatCode('000000000');
+        $excel->getActiveSheet()->getStyle('E')->getAlignment()->setWrapText(true);
 
         //设置表格标题，单独处理
         $excel->getActiveSheet()->mergeCells('A1:H1');  //合并A1:F1单元格
-        $excel->getActiveSheet()->setCellValue('A1',$insert[0]['grade'].'级'.$insert[0]['dep'].'导师分配结果');
+        $excel->getActiveSheet()->setCellValue('A1',$gradeForExport.'级'.$insert[0]['department'].'导师分配结果');
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);  //加粗
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER); //设置水平居中
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_CENTER);     //设置垂直居中
@@ -1252,9 +1312,9 @@ class DepartmentHeadTutor extends BaseController {
             }
             for ($j=0; $j <$tempCount ; $j++) {               //开始插入
                 if ($insert[$i]['stuNum'] != 0) {             //逐一插入导师的学生信息
-                    $excel->getActiveSheet()->setCellValue('F'.($j+$oldTemp),$insert[$i]['tstudentL'][$j]['sname']);
-                    $excel->getActiveSheet()->setCellValue('G'.($j+$oldTemp),$insert[$i]['tstudentL'][$j]['snum']);
-                    $excel->getActiveSheet()->setCellValue('H'.($j+$oldTemp),$insert[$i]['tstudentL'][$j]['stele']);
+                    $excel->getActiveSheet()->setCellValue('F'.($j+$oldTemp),$insert[$i]['students'][$j]['name']);
+                    $excel->getActiveSheet()->setCellValue('G'.($j+$oldTemp),$insert[$i]['students'][$j]['serialNum']);
+                    $excel->getActiveSheet()->setCellValue('H'.($j+$oldTemp),$insert[$i]['students'][$j]['telephone']);
                 }
 
                 $excel->getActiveSheet()->getStyle('F'.($j+$oldTemp))->applyFromArray($styleArray); //设置单元格格式：水平、垂直居中、加边框
@@ -1263,10 +1323,10 @@ class DepartmentHeadTutor extends BaseController {
             }
 
             $excel->getActiveSheet()->setCellValue('A'.$oldTemp,($i+1));                            //设置单元格的值
-            $excel->getActiveSheet()->setCellValue('B'.$oldTemp,$insert[$i]['dep']);
-            $excel->getActiveSheet()->setCellValue('C'.$oldTemp,$insert[$i]['tname']);
-            $excel->getActiveSheet()->setCellValue('D'.$oldTemp,$insert[$i]['position']);
-            $excel->getActiveSheet()->setCellValue('E'.$oldTemp,$insert[$i]['title']);
+            $excel->getActiveSheet()->setCellValue('B'.$oldTemp,$insert[$i]['teacher']['department']);
+            $excel->getActiveSheet()->setCellValue('C'.$oldTemp,$insert[$i]['teacher']['name']);
+            $excel->getActiveSheet()->setCellValue('D'.$oldTemp,$insert[$i]['teacher']['position']);
+            $excel->getActiveSheet()->setCellValue('E'.$oldTemp,$insert[$i]['teacher']['title']);
 
             $newTemp = $oldTemp + $tempCount;
             if ($insert[$i]['stuNum'] != 1 && $insert[$i]['stuNum'] != 0) {
@@ -1299,17 +1359,17 @@ class DepartmentHeadTutor extends BaseController {
 
 
     //获取学生对应导师的结果
-    public function studentToTeacherResult()//学生结果查看
+    public function studentToTeacherResult($gradeForExport,$departmentForExport)//学生结果查看
     {
         $user = $this->auto_login();
 
         $request = Request::instance();
-        $gg=DB::table('tc_grade')->field('grade')->select();
-        $grade=$gg[0]['grade'];
-        $grade = $request->get('grade') != '' ? $request->get('grade') : $gg[0]['grade'];
+        // $gg=DB::table('tc_grade')->field('grade')->select();
+        // $grade=$gg[0]['grade'];
+        $grade = $gradeForExport;
 
-        $finddep=DB::table('user_department_head')->where('workNumber',$user['workNumber'])->field('department')->find(); //workNumber记得改
-        $dep=$finddep['department'];
+        // $finddep=DB::table('user_department_head')->where('workNumber',$user['workNumber'])->field('department')->find(); //workNumber记得改
+        $dep=$departmentForExport;
 
         $data=Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
         ->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
@@ -1341,13 +1401,18 @@ class DepartmentHeadTutor extends BaseController {
     }
 
     //学生对应导师结果Excel导出
-    public function studentToTeacherExcelExport() {
+    public function studentToTeacherExcelExport($gradeForExport,$departmentForExport="") {
+    	$user = $this->auto_login();
         //引入PHPExcel文件
         require_once 'extend/PHPExcel_1.8.0_doc/Classes/PHPExcel.php';
         $excel = new \PHPExcel();
 
+        if ($departmentForExport == "") {
+    		$departmentForExport = $user['department'];
+    	}
+
         //获得结果数组
-        $insert = $this->studentToTeacherResult();
+        $insert = $this->studentToTeacherResult($gradeForExport,$departmentForExport);
 
         //手动设置单元格宽度
         $excel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
@@ -1362,10 +1427,11 @@ class DepartmentHeadTutor extends BaseController {
 
         //设置学号栏为文本格式
         $excel->getActiveSheet()->getStyle('D')->getNumberFormat()->setFormatCode('000000000');
+        $excel->getActiveSheet()->getStyle('H')->getAlignment()->setWrapText(true);
 
         //设置表格标题，单独处理
         $excel->getActiveSheet()->mergeCells('A1:I1');  //合并A1:I1单元格
-        $excel->getActiveSheet()->setCellValue('A1',$insert[0]['grade'].'级'.$insert[0]['tdep'].'导师分配结果');
+        $excel->getActiveSheet()->setCellValue('A1',$gradeForExport.'级'.$departmentForExport.'导师分配结果');
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);  //加粗
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER); //设置水平居中
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_CENTER);     //设置垂直居中
@@ -1426,8 +1492,8 @@ class DepartmentHeadTutor extends BaseController {
 
     //获取未分配学生列表
     public function unchosenStudentList() {
-    	$user = $this->auto_login();
-    	// $user['workNumber'] = "06033";
+    	// $user = $this->auto_login();
+    	$user['workNumber'] = "11061";
     	$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
     	$voluntaryNum = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
     	$wishList = ['wishFirst','wishSecond','wishThird','wishForth','wishFifth'];
@@ -1448,7 +1514,15 @@ class DepartmentHeadTutor extends BaseController {
     		if ($amount != 0) {
 	    		for ($i=0; $i <$totalUnchosen ; $i++) {
 	    		 	if (Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('round,wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find()) {
-		    			$voluntary[$i] = Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('round,wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
+
+	    		 		$roundList = Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('round')->select();
+	    		 		if (count($roundList) == 1) {
+	    		 			$nowRound = 1;
+	    		 		} else {
+	    		 			$nowRound = 2;
+	    		 		}
+
+		    			$voluntary[$i] = Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->where('round',$nowRound)->field('round,wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
 						$voluntary[$i]['information'] = Db::table('user_student_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('sid,serialNum,name')->find();
 						
 						for ($j=0; $j <$voluntaryNum['voluntaryNum'] ; $j++) { 
@@ -1459,6 +1533,7 @@ class DepartmentHeadTutor extends BaseController {
 						$data['information'][$i]['sid'] = $voluntary[$i]['information']['sid'];
 						$data['information'][$i]['serialNum'] = $voluntary[$i]['information']['serialNum'];
 						$data['information'][$i]['name'] = $voluntary[$i]['information']['name'];
+						$data['information'][$i]['round'] = $voluntary[$i]['round'];
 					} else {
 						$voluntary[$i]['information'] = Db::table('user_student_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('sid,serialNum,name')->find();
 
@@ -1496,5 +1571,31 @@ class DepartmentHeadTutor extends BaseController {
     	return json($issue);
     }
 
+
+    //获取导师对应学生的结果
+    public function getTeacherToStudentExportResult($gradeForExport,$departmentForExport) {
+    	$user = $this->auto_login();
+    	// $user['department'] = "计算机系";
+    	// $gradeForExport = "2014";
+
+    	$teacherList = Db::table('user_teacher t,tc_issue_'.$gradeForExport.' i')->where('t.workNumber=i.workNumber')->where('t.department',$departmentForExport)->field('t.name,t.department,t.position,t.workNumber,i.title')->select();
+    	$count = count($teacherList);
+
+    	for ($i=0; $i <$count ; $i++) { 
+    		$result[$i]['teacher'] = $teacherList[$i];
+
+    		$student[$i] = Db::table('tc_result_'.$gradeForExport)->where('workNumber',$teacherList[$i]['workNumber'])->field('sid')->select();
+    		$countStudent = count($student[$i]);
+
+    		for ($j=0; $j <$countStudent ; $j++) { 
+    			$result[$i]['students'][$j] = Db::table('user_student_'.$gradeForExport)->where('sid',$student[$i][$j]['sid'])->field('serialNum,name,telephone')->find();
+    		}
+    		$result[$i]['stuNum'] = $countStudent;
+    		$result[$i]['grade'] = $gradeForExport;
+    		$result[$i]['department'] = $departmentForExport;
+    	}
+
+    	return $result;
+    }
     
 }
