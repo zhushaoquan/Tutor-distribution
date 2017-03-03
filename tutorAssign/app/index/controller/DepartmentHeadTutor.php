@@ -1060,7 +1060,7 @@ class DepartmentHeadTutor extends BaseController {
             	$insert['department'] = $data->sheets[0]['cells'][$i][4];
             	$insert['isExperial'] = $data->sheets[0]['cells'][$i][5];
             	$insert['position'] = $data->sheets[0]['cells'][$i][6];
-            	$insert['telephone'] = $data->sheets[0]['cells'][$i][7];
+            	$insert['email'] = $data->sheets[0]['cells'][$i][7];
             	//判断数据是否存在，并覆盖/插入数据库中
             	if (Db::table('user_teacher')->where('workNumber',$insert['workNumber'])->find()) {
             		Db::table('user_teacher')->update($insert);
