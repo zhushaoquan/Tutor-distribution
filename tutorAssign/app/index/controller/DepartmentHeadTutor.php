@@ -126,7 +126,7 @@ class DepartmentHeadTutor extends BaseController {
 	public function infoSetting() {
 		$user = $this->auto_login();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
-		$userExist = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
+		$userExist = Db::table('tc_voluntaryinfosetting')->where('grade',$grade[0]['grade'])->where('workNumber',$user['workNumber'])->find();
 
 		$request = Request::instance();
 		if ($request->isPost()) {
@@ -217,7 +217,7 @@ class DepartmentHeadTutor extends BaseController {
 					$this->error("时间设置失败，请重新设置",url('timeSetting'));
 				}
 			} else {
-				if (Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->update($data)) {
+				if (Db::table('tc_voluntaryinfosetting')->where('grade',$grade[0]['grade'])->where('workNumber',$user['workNumber'])->update($data)) {
 					$this->success("时间更新成功",url('timeSetting'));
 				} else {
 					$this->error("时间更新失败，请重新更新",url('timeSetting'));
