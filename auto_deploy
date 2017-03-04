@@ -2,7 +2,7 @@
 cd /e/GitRepository/tutor
 git pull
 git checkout deploy
-git merge master -m "auto_depoly"
+git merge master
 git push
 git checkout master
 exit 0
