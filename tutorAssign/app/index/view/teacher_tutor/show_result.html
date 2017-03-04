@@ -62,7 +62,7 @@
                         <div class="col-sm-2" >
                             <select  class="form-control" name="grade_now" >
                                 <?php foreach($grades as $key => $value) {?>
-                                    <option value="{{$value['grade']}}" >{{$value['grade']}}级</option>
+                                    <option value="{{$value['grade']}}" <?php if(isset($grade_now)) {if($value['grade'] == $grade_now ) {?> selected="selected" <?php }}?>   >{{$value['grade']}}级</option>
                                 <?php }?>
                             </select>
                         </div>
