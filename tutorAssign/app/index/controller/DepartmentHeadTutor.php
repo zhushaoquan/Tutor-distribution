@@ -630,6 +630,7 @@ class DepartmentHeadTutor extends BaseController {
     		$student['rank'] = $data['rank'];
     		$student['grade'] = $data['grade'];
     		$student['telephone'] = $data['telephone'];
+    		$student['avator'] = "/uploads/default/defaultAvator.png";
 
     		if ($user['department'] == $data['department']) {
 	    		if ((Db::table('user_student_'.$student['grade'])->where('serialNum',$data['serialNum'])->find()) == "") {
@@ -764,6 +765,7 @@ class DepartmentHeadTutor extends BaseController {
     		$teacher['email'] = "fzu@edu.cn";
     		$teacher['isExperial'] = $data['isExperial'];
     		$teacher['position'] = $data['position'];
+    		$teacher['avator'] = "/uploads/default/defaultAvator.png";
 
     		if ($user['department'] == $data['department']) {
 	    		if ((Db::table('user_teacher')->where('workNumber',$data['workNumber'])->find()) == "") {
@@ -999,6 +1001,7 @@ class DepartmentHeadTutor extends BaseController {
 
     //获取学生信息Excel表格，进行处理并添加入数据表中
     public function student_excel_add() {
+    	$user = $this->auto_login();
     	$request = Request::instance();
     	if ($request->isPost()) {
     		$feedback = $request->post();
@@ -1011,37 +1014,43 @@ class DepartmentHeadTutor extends BaseController {
 
             error_reporting(E_ALL ^ E_NOTICE);
 
-            //循环处理Excel表格里的每一行数据，并插入数据库
-            for ($i=3; $i <=$data->sheets[0]['numRows'] ; $i++) { 
-            	$insert = [];
-            	$insert['grade'] = $data->sheets[0]['cells'][$i][1];
-            	$insert['serialNum'] = $data->sheets[0]['cells'][$i][2];
-            	$insert['password'] = $data->sheets[0]['cells'][$i][2];
-            	$insert['name'] = $data->sheets[0]['cells'][$i][3];
-            	$insert['gender'] = $data->sheets[0]['cells'][$i][4];
-            	$insert['college'] = "数计学院";
-            	$insert['department'] = $data->sheets[0]['cells'][$i][5];
-            	$insert['gpa'] = $data->sheets[0]['cells'][$i][6];
-            	$insert['rank'] = $data->sheets[0]['cells'][$i][7];
-            	$insert['telephone'] = $data->sheets[0]['cells'][$i][8];
-            	$insert['chosen'] = 0;
-            	$insert['avator'] = "/uploads/default/defaultAvator.png";
-            	//判断数据是否存在，并覆盖/插入数据库中
-            	if (Db::table('user_student_'.$insert['grade'])->where('serialNum',$insert['serialNum'])->find()) {
-            		Db::table('user_student_'.$insert['grade'])->where('serialNum',$insert['serialNum'])->update($insert);
-            	} else {
-            		Db::table('user_student_'.$insert['grade'])->insert($insert);
-            	}
-            }
+            if ($user['department'] == $data->sheets[0]['cells'][3][5]) {
+	            //循环处理Excel表格里的每一行数据，并插入数据库
+	            for ($i=3; $i <=$data->sheets[0]['numRows'] ; $i++) { 
+	            	$insert = [];
+	            	$insert['grade'] = $data->sheets[0]['cells'][$i][1];
+	            	$insert['serialNum'] = $data->sheets[0]['cells'][$i][2];
+	            	$insert['password'] = $data->sheets[0]['cells'][$i][2];
+	            	$insert['name'] = $data->sheets[0]['cells'][$i][3];
+	            	$insert['gender'] = $data->sheets[0]['cells'][$i][4];
+	            	$insert['college'] = "数计学院";
+	            	$insert['department'] = $data->sheets[0]['cells'][$i][5];
+	            	$insert['gpa'] = $data->sheets[0]['cells'][$i][6];
+	            	$insert['rank'] = $data->sheets[0]['cells'][$i][7];
+	            	$insert['telephone'] = $data->sheets[0]['cells'][$i][8];
+	            	$insert['chosen'] = 0;
+	            	$insert['avator'] = "/uploads/default/defaultAvator.png";
+	            	//判断数据是否存在，并覆盖/插入数据库中
+	            	if (Db::table('user_student_'.$insert['grade'])->where('serialNum',$insert['serialNum'])->find()) {
+	            		Db::table('user_student_'.$insert['grade'])->where('serialNum',$insert['serialNum'])->update($insert);
+	            	} else {
+	            		Db::table('user_student_'.$insert['grade'])->insert($insert);
+	            	}
+	            }
 
-            $addInfo['totalNum'] = $data->sheets[0]['numRows']-3;
-            $addInfo['status'] = true;
+	            $addInfo['totalNum'] = $data->sheets[0]['numRows']-3;
+	            $addInfo['status'] = true;
+	        } else {
+	        	$addInfo['totalNum'] = 0;
+	            $addInfo['status'] = false;
+	        }
             return json($addInfo);
     	}
     }
 
     //获取导师信息Excel表格，进行处理并添加入数据表中
     public function teacher_excel_add() {
+    	$user = $this->auto_login();
     	$request = Request::instance();
     	if ($request->isPost()) {
     		$feedback = $request->post();
@@ -1054,27 +1063,33 @@ class DepartmentHeadTutor extends BaseController {
 
             error_reporting(E_ALL ^ E_NOTICE);
 
-            //循环处理Excel表格里的每一行数据，并插入数据库
-            for ($i=3; $i <=$data->sheets[0]['numRows'] ; $i++) { 
-            	$insert = [];
-            	$insert['workNumber'] = $data->sheets[0]['cells'][$i][1];
-            	$insert['password'] = $data->sheets[0]['cells'][$i][1];
-            	$insert['name'] = $data->sheets[0]['cells'][$i][2];
-            	$insert['sex'] = $data->sheets[0]['cells'][$i][3];
-            	$insert['department'] = $data->sheets[0]['cells'][$i][4];
-            	$insert['isExperial'] = $data->sheets[0]['cells'][$i][5];
-            	$insert['position'] = $data->sheets[0]['cells'][$i][6];
-            	$insert['email'] = $data->sheets[0]['cells'][$i][7];
-            	//判断数据是否存在，并覆盖/插入数据库中
-            	if (Db::table('user_teacher')->where('workNumber',$insert['workNumber'])->find()) {
-            		Db::table('user_teacher')->update($insert);
-            	} else {
-            		Db::table('user_teacher')->insert($insert);
-            	}
-            }
+            if ($user['department'] == $data->sheets[0]['cells'][3][4]) {
+	            //循环处理Excel表格里的每一行数据，并插入数据库
+	            for ($i=3; $i <=$data->sheets[0]['numRows'] ; $i++) { 
+	            	$insert = [];
+	            	$insert['workNumber'] = $data->sheets[0]['cells'][$i][1];
+	            	$insert['password'] = $data->sheets[0]['cells'][$i][1];
+	            	$insert['name'] = $data->sheets[0]['cells'][$i][2];
+	            	$insert['sex'] = $data->sheets[0]['cells'][$i][3];
+	            	$insert['department'] = $data->sheets[0]['cells'][$i][4];
+	            	$insert['isExperial'] = $data->sheets[0]['cells'][$i][5];
+	            	$insert['position'] = $data->sheets[0]['cells'][$i][6];
+	            	$insert['email'] = $data->sheets[0]['cells'][$i][7];
+	            	$insert['avator'] = "/uploads/default/defaultAvator.png";
+	            	//判断数据是否存在，并覆盖/插入数据库中
+	            	if (Db::table('user_teacher')->where('workNumber',$insert['workNumber'])->find()) {
+	            		Db::table('user_teacher')->update($insert);
+	            	} else {
+	            		Db::table('user_teacher')->insert($insert);
+	            	}
+	            }
 
-            $addInfo['totalNum'] = $data->sheets[0]['numRows']-3;
-            $addInfo['status'] = true;
+	            $addInfo['totalNum'] = $data->sheets[0]['numRows']-3;
+	            $addInfo['status'] = true;
+	        } else {
+	        	$addInfo['totalNum'] = 0;
+	            $addInfo['status'] = false;
+	        }
             return json($addInfo);	
     	}
     }
@@ -1355,7 +1370,7 @@ class DepartmentHeadTutor extends BaseController {
         header("Content-Type:application/vnd.ms-execl");
         header("Content-Type:application/octet-stream");
         header("Content-Type:application/download");;
-        header('Content-Disposition:attachment;filename='.'"'.$insert[0]['grade'].'级导师互选结果.xls"');
+        header('Content-Disposition:attachment;filename='.'"'.$gradeForExport.'级导师互选结果.xls"');
         header("Content-Transfer-Encoding:binary");
         $write->save('php://output');
 
@@ -1581,8 +1596,13 @@ class DepartmentHeadTutor extends BaseController {
     	$user = $this->auto_login();
     	// $user['department'] = "计算机系";
     	// $gradeForExport = "2014";
-
-    	$teacherList = Db::table('user_teacher t,tc_issue_'.$gradeForExport.' i')->where('t.workNumber=i.workNumber')->where('t.department',$departmentForExport)->field('t.name,t.department,t.position,t.workNumber,i.title')->select();
+    	if ($departmentForExport == "计算机实验班") {
+    		$teacherList = Db::table('user_teacher t,tc_issue_'.$gradeForExport.' i')->where('isExperial',1)->whereOr('isExperial',3)->where('t.department',$departmentForExport)->field('t.name,t.department,t.position,t.workNumber,i.title')->select();
+    	} elseif ($departmentForExport == "数学实验班") {
+    		$teacherList = Db::table('user_teacher t,tc_issue_'.$gradeForExport.' i')->where('isExperial',2)->whereOr('isExperial',3)->where('t.department',$departmentForExport)->field('t.name,t.department,t.position,t.workNumber,i.title')->select();
+    	} else {
+    		$teacherList = Db::table('user_teacher t,tc_issue_'.$gradeForExport.' i')->where('t.workNumber=i.workNumber')->where('t.department',$departmentForExport)->field('t.name,t.department,t.position,t.workNumber,i.title')->select();
+    	}
     	$count = count($teacherList);
 
     	for ($i=0; $i <$count ; $i++) { 
