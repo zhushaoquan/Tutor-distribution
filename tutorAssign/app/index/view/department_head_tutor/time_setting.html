@@ -352,7 +352,8 @@
         var isNegative = numIsNegative(formNum);
 
         showWarnInfo(isNumEmpty, isDateEmpty, isEndBigger, isSecondRoundBigger, isNegative);
-        return !isNumEmpty && !isDateEmpty && isEndBigger && isSecondRoundBigger && !isNegative;
+        // return !isNumEmpty && !isDateEmpty && isEndBigger && isSecondRoundBigger && !isNegative;
+        return !isNumEmpty && !isNegative;
     }
 
     function numIsNegative(formNum) {
