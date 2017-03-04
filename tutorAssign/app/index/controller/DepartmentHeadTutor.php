@@ -28,8 +28,9 @@ class DepartmentHeadTutor extends BaseController {
 
 	public function getTimeStatus() {
 		$user = $this->auto_login();
+		$grade = Db::table('tc_grade')->order('grade desc')->select(); 
 
-		$timeSet = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
+		$timeSet = Db::table('tc_voluntaryinfosetting')->where('grade',$grade[0]['grade'])->where('workNumber',$user['workNumber'])->find();
         $currentTime = time();
         if (!empty($timeSet)) {
         	if ($currentTime < $timeSet['issueStart']) {
@@ -69,7 +70,7 @@ class DepartmentHeadTutor extends BaseController {
 		$user = $this->auto_login();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
-		$settingInfo = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
+		$settingInfo = Db::table('tc_voluntaryinfosetting')->where('grade',$grade[0]['grade'])->where('workNumber',$user['workNumber'])->find();
 
 		if (empty($settingInfo)) {
 			$settingInfo['empty'] = 1;
@@ -685,6 +686,7 @@ class DepartmentHeadTutor extends BaseController {
 
     //学生管理界面的搜索接口
     public function searchStudent() {
+    	$user = $this->auto_login();
     	$request = Request::instance();
     	if ($request->isGet()) {
     		$data = $request->get();
@@ -693,9 +695,9 @@ class DepartmentHeadTutor extends BaseController {
     		$grade = $data['grade'];
     		$condition = $data['condition'];
 
-    		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->select())/10);
+    		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('department',$user['department'])->where('serialNum|name','like','%'.$condition.'%')->select())/10);
     		$student['amount'] = $totalPage;
-    		$student['information'] = Db::table('user_student_'.$grade)->where('serialNum|name','like','%'.$condition.'%')->field('sid,serialNum,name,department,grade,gpa,rank')->page($curPage,10)->select();
+    		$student['information'] = Db::table('user_student_'.$grade)->where('department',$user['department'])->where('serialNum|name','like','%'.$condition.'%')->field('sid,serialNum,name,department,grade,gpa,rank')->page($curPage,10)->select();
     		return json($student);
     	}
     }
@@ -703,6 +705,7 @@ class DepartmentHeadTutor extends BaseController {
 
     //导师管理界面的搜索接口
     public function searchTeacher() {
+    	$user = $this->auto_login();
     	$request = Request::instance();
     	if ($request->isGet()) {
     		$data = $request->get();
@@ -710,9 +713,9 @@ class DepartmentHeadTutor extends BaseController {
 
     		$condition = $data['condition'];
 
-    		$totalPage = ceil(count(Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->select())/10);
+    		$totalPage = ceil(count(Db::table('user_teacher')->where('department',$user['department'])->where('workNumber|name','like','%'.$condition.'%')->select())/10);
     		$teacher['amount'] = $totalPage;
-    		$teacher['information'] = Db::table('user_teacher')->where('workNumber|name','like','%'.$condition.'%')->field('workNumber,name,password')->page($curPage,10)->select();
+    		$teacher['information'] = Db::table('user_teacher')->where('department',$user['department'])->where('workNumber|name','like','%'.$condition.'%')->field('workNumber,name,password')->page($curPage,10)->select();
     		return json($teacher);
     	}
     }
