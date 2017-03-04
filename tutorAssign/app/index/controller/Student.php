@@ -405,11 +405,11 @@ class Student extends BaseController {
 	
         $this->assign('tutors', $tutors);
         $this->assign('user', $this->user);
-        $_SESSION['wishFirst'] = "";
-        $_SESSION['wishSecond'] = "";
-        $_SESSION['wishThird'] = "";
-        $_SESSION['wishForth'] = "";
-        $_SESSION['wishFifth'] = "";
+        // $_SESSION['wishFirst'] = "";
+        // $_SESSION['wishSecond'] = "";
+        // $_SESSION['wishThird'] = "";
+        // $_SESSION['wishForth'] = "";
+        // $_SESSION['wishFifth'] = "";
 
 		$request = Request::instance();
         if ($request->isPost()) {
@@ -464,11 +464,11 @@ class Student extends BaseController {
         if($this->ontime == 1|| $this->ontime == 2) {
         	$voluntary = Db::table('tc_voluntary_'.$this->grades)->where('sid',$this->user['sid'])->where('round', $this->ontime)->find();
 
-        	// $_SESSION['wishFirst'] = $voluntary['wishFirst'];
-        	// $_SESSION['wishSecond'] = $voluntary['wishSecond'];
-        	// $_SESSION['wishThird'] = $voluntary['wishThird'];
-        	// $_SESSION['wishForth'] = $voluntary['wishForth'];
-        	// $_SESSION['wishFifth'] = $voluntary['wishFifth'];
+        	$_SESSION['wishFirst'] = $voluntary['wishFirst'];
+        	$_SESSION['wishSecond'] = $voluntary['wishSecond'];
+        	$_SESSION['wishThird'] = $voluntary['wishThird'];
+        	$_SESSION['wishForth'] = $voluntary['wishForth'];
+        	$_SESSION['wishFifth'] = $voluntary['wishFifth'];
 /*
         	Session::set('wishFirst', $voluntary['wishFirst']);
             Session::set('wishSecond',$voluntary['wishSecond']);
