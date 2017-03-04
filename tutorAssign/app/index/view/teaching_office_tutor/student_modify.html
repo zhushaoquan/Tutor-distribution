@@ -75,7 +75,6 @@
                             </select>
                             
                         </div>
-
                         <label class="col-md-2 control-label"  >选择系别：</label>
                         <div class="col-xs-2" >
                             <select id="departSelect" class="form-control" name="department" style="display: inline; width: 100%">
@@ -136,9 +135,11 @@
                                     }
                                     echo '<input type="hidden" name="count" value="'.($i-1).'">';
                                 ?>
-
+                          
+                           <input type="hidden" name="gra" value="{{$grade}}">
+                           <input type="hidden" name="depa" value="{{$dep}}">
                             </tbody>
-                           
+
                         </table>
                         <div class="submit-area">
                             <button type="submit" class="btn btn-primary" style="width: 100px" id="modify-info">确&nbsp;&nbsp;认</button>
