@@ -379,6 +379,18 @@ class Student extends BaseController {
 
 	public function edit_voluntary() {
 
+        $request = Request::instance();
+		if ($request->isGet()) {
+            $disabled = $request->get('disabled', '');
+            $disabled = 1;       
+        // exit;
+        } else {
+        	$disabled = 0;
+        }
+        $this->assign('disabled',$disabled);
+
+
+
 		if($this->user['department'] == $this->department_1) {
 			//计算机实验吧
 			$tutors = Db::table('user_teacher') ->alias('t')->join('tc_issue_'.$this->grades.' i', 't.workNumber = i.workNumber')
@@ -412,7 +424,7 @@ class Student extends BaseController {
         // $_SESSION['wishFifth'] = "";
 
 		$request = Request::instance();
-        if ($request->isPost()) {
+        if ($request->isPost() && $disabled==1) {
         	if($this->ontime == 1)$data1['round'] = 1;
         	else if($this->ontime == 2)$data1['round'] = 2;
         	else $this->showNotice("当前不在填报志愿时间内！",url('Student/edit_voluntary'));
@@ -452,8 +464,7 @@ class Student extends BaseController {
 		        	$data1['vid'] = $result['vid'];
 		        	$bool = DB::table('tc_voluntary_'.$this->grades)->update($data1);
 		        }
-
-		        if($bool) $this->showNotice("志愿填报成功，静候佳音吧！",url('Student/edit_voluntary'));
+                $this->showNotice("志愿填报成功，静候佳音吧！",url('Student/edit_voluntary'));
 
             }
 
@@ -473,6 +484,7 @@ class Student extends BaseController {
         $voluntary = Db::table('tc_voluntary_'.$this->grades)->where('sid',$this->user['sid'])->where('round', $this->ontime)->find();
 
         $this->assign('voluntary',$voluntary);
+       // $this->assign('disabled',$disabled);
         return $this->fetch('edit_voluntary');
 	}
 
