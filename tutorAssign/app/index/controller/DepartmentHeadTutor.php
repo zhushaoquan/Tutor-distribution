@@ -805,7 +805,7 @@ class DepartmentHeadTutor extends BaseController {
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
 		$pageSize=8;
 		$gg=DB::table('tc_grade')->field('grade')->select();
-		$grade=$gg[0]['grade'];
+		if($grade==0)$grade=$gg[0]['grade'];
 		if($_SERVER["REQUEST_METHOD"] == "POST")
 		{
 			$grade=$_POST['grade'];
@@ -863,7 +863,7 @@ class DepartmentHeadTutor extends BaseController {
 		
 		$pageSize=8;
 		$gg=DB::table('tc_grade')->field('grade')->select();
-		$grade=$gg[0]['grade'];
+		if($grade==0)$grade=$gg[0]['grade'];
 		if($_SERVER["REQUEST_METHOD"] == "POST")
 		{
 			$grade=$_POST['grade'];
@@ -903,7 +903,7 @@ class DepartmentHeadTutor extends BaseController {
    
 		foreach($tea as $value)
 		{
-			$stu=Db::query("select s.serialNum snum,s.name sname from user_student_" .$grade." s,tc_result_".$grade. " r where  r.workNumber=?  and s.sid=r.sid ",[$value['tnum']]);
+			$stu=Db::query("select s.serialNum snum,s.name sname from user_student_" .$grade." s,tc_result_".$grade. " r where  r.workNumber=?  and s.sid=r.sid and s.department=?",[$value['tnum'],$user['department']]);
 			$tea[$i]['tstudentL'] = $stu;
 			$tea[$i]['lenth'] =count($stu);
 			$i++;	
