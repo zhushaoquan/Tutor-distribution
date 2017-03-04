@@ -1025,6 +1025,7 @@ class DepartmentHeadTutor extends BaseController {
             	$insert['rank'] = $data->sheets[0]['cells'][$i][7];
             	$insert['telephone'] = $data->sheets[0]['cells'][$i][8];
             	$insert['chosen'] = 0;
+            	$insert['avator'] = "/uploads/default/defaultAvator.png";
             	//判断数据是否存在，并覆盖/插入数据库中
             	if (Db::table('user_student_'.$insert['grade'])->where('serialNum',$insert['serialNum'])->find()) {
             		Db::table('user_student_'.$insert['grade'])->where('serialNum',$insert['serialNum'])->update($insert);
