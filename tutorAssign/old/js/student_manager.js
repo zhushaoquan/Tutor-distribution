@@ -1,3 +1,9 @@
+//============================
+//踩坑提示：
+//如果totalpage为0，需要将其设置为1
+//在设置totalpage之前需要将currentPage设置成1
+
+
 var onSearch = false;
 //===============================
 // 学生列表
@@ -69,6 +75,7 @@ function initPaginator() {
         page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
         onPageChange: function (page) {
             var grade = selectedGrade();
+            console.log("page change");
             var request = {grade: grade, curPage: page};
             refreshTable(request,api_student_list);
         }
@@ -96,6 +103,7 @@ function refreshTable(request, url) {
                 table_student.isNull = false;
             }
             else{
+                setCurrentPage(1);
                 setTotalpages(1);
                 table_student.isNull = true;
             }
@@ -330,7 +338,7 @@ function setNormalCallback() {
     var onPageChange = function (page) {
         var grade = selectedGrade();
         var request = {grade: grade, curPage: page};
-        refreshTable(request);
+        refreshTable(request,api_student_list);
     }
     $('#tab-pagination').jqPaginator('option', {
         onPageChange: onPageChange
