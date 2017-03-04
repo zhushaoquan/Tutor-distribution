@@ -1511,8 +1511,8 @@ class DepartmentHeadTutor extends BaseController {
 
     //获取未分配学生列表
     public function unchosenStudentList() {
-    	// $user = $this->auto_login();
-    	$user['workNumber'] = "11061";
+    	$user = $this->auto_login();
+    	// $user['workNumber'] = "11061";
     	$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
     	$voluntaryNum = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
     	$wishList = ['wishFirst','wishSecond','wishThird','wishForth','wishFifth'];
