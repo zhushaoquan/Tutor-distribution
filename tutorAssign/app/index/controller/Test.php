@@ -16,4 +16,8 @@ class Test extends BaseController
     public function auto_assign2(){
         return $this->fetch("auto_assign2");
     }
+
+    public function redirectToPage() {
+    	return $this->fetch('redirectPage');
+    }
 }

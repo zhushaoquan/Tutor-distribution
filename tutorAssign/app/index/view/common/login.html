@@ -62,9 +62,6 @@
         </form> -->
     </div>
 </div>
-<div id="footer">
-    <p>Designed by Lin</p>
-</div>
 </body>
 <script>
     api = {
@@ -101,4 +98,11 @@
         return jsonStr;
     }
 </script>
+
+<script type="text/javascript">
+    if(/AppleWebKit.*Mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))) { 
+        window.location.href="{{$Think.const.PREFIX}}/test/redirectToPage"; 
+    }
+</script>
+
 </html>

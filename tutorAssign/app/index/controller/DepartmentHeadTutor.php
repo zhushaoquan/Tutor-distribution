@@ -1511,8 +1511,8 @@ class DepartmentHeadTutor extends BaseController {
 
     //获取未分配学生列表
     public function unchosenStudentList() {
-    	// $user = $this->auto_login();
-    	$user['workNumber'] = "11061";
+    	$user = $this->auto_login();
+    	// $user['workNumber'] = "11061";
     	$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
     	$voluntaryNum = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
     	$wishList = ['wishFirst','wishSecond','wishThird','wishForth','wishFifth'];
@@ -1594,12 +1594,12 @@ class DepartmentHeadTutor extends BaseController {
     //获取导师对应学生的结果
     public function getTeacherToStudentExportResult($gradeForExport,$departmentForExport) {
     	$user = $this->auto_login();
-    	// $user['department'] = "计算机系";
-    	// $gradeForExport = "2014";
+    	// $departmentForExport = "计算机实验班";
+    	// $gradeForExport = "2015";
     	if ($departmentForExport == "计算机实验班") {
-    		$teacherList = Db::table('user_teacher t,tc_issue_'.$gradeForExport.' i')->where('isExperial',1)->whereOr('isExperial',3)->where('t.department',$departmentForExport)->field('t.name,t.department,t.position,t.workNumber,i.title')->select();
+    		$teacherList = Db::table('user_teacher t,tc_issue_'.$gradeForExport.' i')->where('isExperial',1)->whereOr('isExperial',3)->where('t.workNumber=i.workNumber')->field('t.name,t.department,t.position,t.workNumber,i.title')->select();
     	} elseif ($departmentForExport == "数学实验班") {
-    		$teacherList = Db::table('user_teacher t,tc_issue_'.$gradeForExport.' i')->where('isExperial',2)->whereOr('isExperial',3)->where('t.department',$departmentForExport)->field('t.name,t.department,t.position,t.workNumber,i.title')->select();
+    		$teacherList = Db::table('user_teacher t,tc_issue_'.$gradeForExport.' i')->where('isExperial',2)->whereOr('isExperial',3)->where('t.workNumber=i.workNumber')->field('t.name,t.department,t.position,t.workNumber,i.title')->select();
     	} else {
     		$teacherList = Db::table('user_teacher t,tc_issue_'.$gradeForExport.' i')->where('t.workNumber=i.workNumber')->where('t.department',$departmentForExport)->field('t.name,t.department,t.position,t.workNumber,i.title')->select();
     	}
