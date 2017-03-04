@@ -121,9 +121,10 @@ function selectedGrade() {
 //下拉框年级改变，刷新表格
 function listenSelectChage() {
     $("#grade-selector").change(function () {
+        console.log("grade change");
         var grade = selectedGrade();
         var requset = {grade: grade, curPage: 1};
-        refreshTable(requset);
+        refreshTable(requset,api_student_list);
         setNormalCallback();
     });
 }
