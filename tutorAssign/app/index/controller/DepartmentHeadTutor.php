@@ -1019,11 +1019,11 @@ class DepartmentHeadTutor extends BaseController {
             	$insert['password'] = $data->sheets[0]['cells'][$i][2];
             	$insert['name'] = $data->sheets[0]['cells'][$i][3];
             	$insert['gender'] = $data->sheets[0]['cells'][$i][4];
-            	$insert['college'] = $data->sheets[0]['cells'][$i][5];
-            	$insert['department'] = $data->sheets[0]['cells'][$i][6];
-            	$insert['gpa'] = $data->sheets[0]['cells'][$i][7];
-            	$insert['rank'] = $data->sheets[0]['cells'][$i][8];
-            	$insert['telephone'] = $data->sheets[0]['cells'][$i][9];
+            	// $insert['college'] = $data->sheets[0]['cells'][$i][5];
+            	$insert['department'] = $data->sheets[0]['cells'][$i][5];
+            	$insert['gpa'] = $data->sheets[0]['cells'][$i][6];
+            	$insert['rank'] = $data->sheets[0]['cells'][$i][7];
+            	$insert['telephone'] = $data->sheets[0]['cells'][$i][8];
             	$insert['chosen'] = 0;
             	//判断数据是否存在，并覆盖/插入数据库中
             	if (Db::table('user_student_'.$insert['grade'])->where('serialNum',$insert['serialNum'])->find()) {
