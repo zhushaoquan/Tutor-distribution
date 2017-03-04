@@ -1,8 +1,0 @@
-#!/bin/bash
-cd /e/GitRepository/tutor
-git pull
-git checkout deploy
-git merge master
-git push
-git checkout master
-exit 0
