@@ -46,13 +46,7 @@
                             <label class="control-label input-label">系别</label>
                         </div>
                         <select v-model="department" class="form-control input-add">
-                            <option selected>应用数学系</option>
-                            <option>信息与计算科学系</option>
-                            <option>计算机系</option>
-                            <option>信息安全与网络系</option>
-                            <option>软件工程系</option>
-                            <option>计算机实验班</option>
-                            <option>数学实验班</option>
+                            <option selected>{{$user.department}}</option>
                         </select>
                     </div>
                     <div class="input-div clearfix">
