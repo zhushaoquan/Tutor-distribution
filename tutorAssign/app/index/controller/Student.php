@@ -48,12 +48,17 @@ class Student extends BaseController {
         data['time'] = 3,志愿结果已出
 
         */
-        if(isset($data['issueStart'])) {
-
-	        if($this->user['chosen'] == 1) {
+        if($this->user['chosen'] == 1) {
 	        	$data['ontime'] = 3;
 	        	$data['message'] = "<font color='#FF0000'>".$this->user['name']."</font>同学，志愿结果已出，请前往 最终结果 页面查看哦~~~";
-	        }else if($nowtime >= $data['issueStart'] && $nowtime <= $data['issueEnd']) {
+	        } 
+	    else if(isset($data['issueStart'])) {
+
+	        // if($this->user['chosen'] == 1) {
+	        // 	$data['ontime'] = 3;
+	        // 	$data['message'] = "<font color='#FF0000'>".$this->user['name']."</font>同学，志愿结果已出，请前往 最终结果 页面查看哦~~~";
+	        // }else 
+	        if($nowtime >= $data['issueStart'] && $nowtime <= $data['issueEnd']) {
 	        	//导师填报课题时段！
 	        	$data['ontime'] = 0;
 	        	$data['message'] = "当前为".$this->grades."级<font color='#FF0000'>".$data['department']."</font>的导师<font color='#FF0000'>填报课题</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['issueStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['issueEnd'])."</font>！";
