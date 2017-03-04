@@ -193,9 +193,11 @@ $('#telephone').click(function(){
 
         telength = $('#telephone').val();
 
-        if (telength.length != 11) {
-            $("#telWrong").css("display","block");
-            return false;
+        if (telength.length != 0) {
+            if (telength.length != 11) {
+                $("#telWrong").css("display","block");
+                return false;
+            }
         }
 
         return true;
