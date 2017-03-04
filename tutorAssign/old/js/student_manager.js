@@ -99,6 +99,7 @@ function refreshTable(request, url) {
             //noinspection JSUnresolvedVariable
             if(data.amount!=0){
                 //noinspection JSUnresolvedVariable
+                setCurrentPage(1);
                 setTotalpages(data.amount);
                 table_student.isNull = false;
             }
