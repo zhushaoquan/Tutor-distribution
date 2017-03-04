@@ -62,7 +62,7 @@
                 <form role="form" action="{{:url('Student/saveModify')}}" name="modify" method="post" enctype="multipart/form-data" onsubmit="return checkall()">
                       <div class="form-group my-modify-detail">
                         <div class="pw-title"><span>旧密码：</span></div>
-                        <div class="pw-modify"><input type="password" name="oldPassword" class="form-control-1 pw-form-width" id="oldPassword" placeholder="旧密码" value=""><p id="oldPwWrong" style="font-size: 12px;float: right;padding-right: 48px;padding-top: 8px;display: none;color: red;">*旧密码输入错误</p></div>
+                        <div class="pw-modify"><input type="password" name="oldPassword" class="form-control-1 pw-form-width" id="oldPassword" placeholder="旧密码" value="{{$user.password}}"><p id="oldPwWrong" style="font-size: 12px;float: right;padding-right: 48px;padding-top: 8px;display: none;color: red;">*旧密码输入错误</p></div>
                       </div>
                       <div class="form-group pw-position my-modify-detail">
                         <div class="pw-title"><span>新密码：</span></div>
@@ -78,11 +78,11 @@
                       </div>
                       <div class="form-group my-modify-detail">
                         <div class="email-title"><span>邮&nbsp;&nbsp;&nbsp;箱：</span></div>
-                        <div class="pw-modify"><input type="email" name="email" class="form-control-1 pw-form-width" id="exampleInputEmail1" placeholder="邮箱" value="{{$user.email}}"></div>
+                        <div class="pw-modify"><input type="email" name="email" class="form-control-1 pw-form-width" id="email" placeholder="邮箱" value="{{$user.email}}"></div>
                       </div>
                       <div class="form-group my-modify-detail" style="height: 140px;">
                         <div class="skill-modify-title"><span>技能经历：</span></div>
-                        <div class="skill-modify-text"><textarea class="form-control skill-width" name="skill" rows="5">{{$user.skill}}</textarea></div>
+                        <div class="skill-modify-text"><textarea class="form-control skill-width" name="skill" id="skill" rows="5">{{$user.skill}}</textarea></div>
                       </div>
                       <div class="modify-btn-position">
                         <button type="submit" id="modifyConfirm" class="btn btn-info button-size">确认</button>
@@ -117,6 +117,7 @@
         if (avatorURL) {
             $("#avatorPre").attr("src",avatorURL);
         }
+        document.getElementById("modifyConfirm").disabled=false;
     })
     function getAvatorURL(file) {
          var url = null ; 
@@ -133,58 +134,66 @@
 
 <script type="text/javascript">
 
-$("#oldPassword").change(function(){
-    oldPW = $("#oldPassword").val();
-    $.post("{{$Think.const.PREFIX}}/Student/oldPasswordConfirm",
-    {
-        oldPW: oldPW
-    },
-        function(data,status) {
-            console.log(data);
-            if (data == false) {
-                $("#oldPwWrong").css("display","block");
-                document.getElementById("modifyConfirm").disabled=true;
-                modify.oldPassword.focus();
-            }
-            if (data == true) {
-                $("#oldPwWrong").css("display","none");
-                document.getElementById("modifyConfirm").disabled=false;
-            }
-        }
-    );
-})
-
-$("#newPasswordConfirm").focus(function(){
-    oldPW = $("#oldPassword").val();
-    newPW = $("#newPassword").val();
-    if (oldPW == newPW) {
-        $("#passwordSame").css("display","block");
-        modify.newPassword.focus();
-    }
-    if (oldPW != newPW) {
-        $("#passwordSame").css("display","none");
-    }
-})
-
 $('#newPasswordConfirm').change(function(){
     newPW = $("#newPassword").val();
     newPWC = $("#newPasswordConfirm").val();
     if (newPW == newPWC) {
         $("#newPwConfirmWrong").css("display","none");
-    }
+    }   
     if (newPW != newPWC) {
         $("#newPwConfirmWrong").css("display","block");
         modify.newPasswordConfirm.focus();
     }
 })
 
-    function checkall() {
+$('#email').click(function(){
+    oldPW = $("#oldPassword").val();
+    newPW = $("#newPassword").val();
+    newPWC = $("#newPasswordConfirm").val();
+    if (newPW == "" && newPWC == "") {
+        $("#oldPwWrong").css("display","none");
+        $("#passwordSame").css("display","none");
+        $("#newPwConfirmWrong").css("display","none");
+    }
+    if (newPW == newPWC) {
+        $("#oldPwWrong").css("display","none");
+        $("#passwordSame").css("display","none");
+        $("#newPwConfirmWrong").css("display","none");
+    }
+})
 
-        if (modify.oldPassword.value =="") {
-            alert("请输入旧密码！");
-            modify.oldPassword.focus();
-            return false;
-        }
+$('#telephone').click(function(){
+    oldPW = $("#oldPassword").val();
+    newPW = $("#newPassword").val();
+    newPWC = $("#newPasswordConfirm").val();
+    if (newPW == "" && newPWC == "") {
+        $("#oldPwWrong").css("display","none");
+        $("#passwordSame").css("display","none");
+        $("#newPwConfirmWrong").css("display","none");
+    }
+    if (newPW == newPWC) {
+        $("#oldPwWrong").css("display","none");
+        $("#passwordSame").css("display","none");
+        $("#newPwConfirmWrong").css("display","none");
+    }
+})
+
+$('#skill').click(function(){
+    oldPW = $("#oldPassword").val();
+    newPW = $("#newPassword").val();
+    newPWC = $("#newPasswordConfirm").val();
+    if (oldPW == "" && newPW == "" && newPWC == "") {
+        $("#oldPwWrong").css("display","none");
+        $("#passwordSame").css("display","none");
+        $("#newPwConfirmWrong").css("display","none");
+    }
+    if (newPW == newPWC) {
+        $("#oldPwWrong").css("display","none");
+        $("#passwordSame").css("display","none");
+        $("#newPwConfirmWrong").css("display","none");
+    }
+})
+    function checkall() {
         
         if (modify.newPassword.value != "" && modify.newPasswordConfirm.value == "") {
             $("#newPw").css("display","block");
