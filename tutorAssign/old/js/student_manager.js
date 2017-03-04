@@ -3,8 +3,8 @@
 //如果totalpage为0，需要将其设置为1
 //在设置totalpage之前需要将currentPage设置成1
 
-
 var onSearch = false;
+isInit = true;
 //===============================
 // 学生列表
 var table_student = new Vue({
@@ -63,6 +63,9 @@ listenSearchEvent();
 
 //===============================
 // 分页组件
+// 初始化会调用一次onPageChange
+// 由于initGradeSelect()中年级列表是异步回调，无法立即将值获取传给onPageChange
+// 所以第一次刷新界面放到 initGradeSelect() 成功获取数据之后
 function initPaginator() {
     $('#tab-pagination').jqPaginator({
         totalPages: 9,
@@ -74,10 +77,12 @@ function initPaginator() {
         last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
         page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
         onPageChange: function (page) {
-            var grade = selectedGrade();
-            console.log("page change");
-            var request = {grade: grade, curPage: page};
-            refreshTable(request,api_student_list);
+            // if(!isInit){
+            //     isInit = false;
+            //     var grade = selectedGrade();
+            //     var request = {grade: grade, curPage: page};
+            //     refreshTable(request,api_student_list);
+            // }
         }
     });
 }
@@ -117,10 +122,11 @@ function refreshTable(request, url) {
 //===============================
 // 获取年级下拉框当前选中项
 function selectedGrade() {
+    console.log("call selectedGrade");
     if ($("#grade-selector").val() != null) {
         return $("#grade-selector").val().split("级")[0];
     } else {
-        return "2014";
+        return selector_grade.grades[0].grade;
     }
 }
 
@@ -147,6 +153,10 @@ function initGradeSelect() {
         url: api_grade_list,
         success: function (data) {
             selector_grade.grades = data;
+            console.log("initGradeSelect:"+selectedGrade());
+            var request = {grade: selectedGrade, curPage: 1};
+            refreshTable(request,api_student_list);
+            setNormalCallback();
         },
         dataType: "json"
     });
@@ -298,7 +308,7 @@ function listenSearchEvent() {
                 var page = getCurrentPage();
                 var request = {grade: grade, curPage: 1};
                 setCurrentPage(1);
-                refreshTable(request);
+                refreshTable(request,api_student_list);
             } else {
                 onSearch = true;
                 var request = {
@@ -334,7 +344,7 @@ function setSearchCallback() {
 }
 
 //=============================
-// 非搜索情况下的 onPageChange 回调
+// 非搜索情况下的 onPageChange 回调(pagainto)
 function setNormalCallback() {
     var onPageChange = function (page) {
         var grade = selectedGrade();
