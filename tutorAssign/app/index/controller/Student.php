@@ -405,6 +405,12 @@ class Student extends BaseController {
 	
         $this->assign('tutors', $tutors);
         $this->assign('user', $this->user);
+        $_SESSION['wishFirst'] = "";
+        $_SESSION['wishSecond'] = "";
+        $_SESSION['wishThird'] = "";
+        $_SESSION['wishForth'] = "";
+        $_SESSION['wishFifth'] = "";
+
 		$request = Request::instance();
         if ($request->isPost()) {
         	if($this->ontime == 1)$data1['round'] = 1;
