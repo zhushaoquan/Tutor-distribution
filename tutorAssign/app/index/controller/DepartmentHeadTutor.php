@@ -353,7 +353,11 @@ class DepartmentHeadTutor extends BaseController {
 	        $studentElected = str_replace("\r\n", '', $studentElected);
 	        $studentElectedArr1 = explode(',', $studentElected);
 
-	        $studentElectedArr = array_merge($studentElectedArr1,$studentElectedArr2);
+	        if ($studentUnElected != "") {
+		        $studentElectedArr = array_merge($studentElectedArr1,$studentElectedArr2);
+		    } else {
+		    	$studentElectedArr = $studentElectedArr1;
+		    }
 
 	        //分割studentElected字符串，转换为数组，并存到临时的结果表中
 	        for ($i = 0; $i < count($studentElectedArr); $i++) {
@@ -1392,7 +1396,7 @@ class DepartmentHeadTutor extends BaseController {
 
         $data=Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
         ->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
-        ->field('t.workNumber as tnum,t.department as tdep,t.position as tposi,t.name as tname,t.telephone as ttele,s.serialNum as snum,s.name as sname,s.telephone as stele')
+        ->field('t.workNumber as tnum,t.department as tdep,t.position as tposi,t.name as tname,t.email as ttele,s.serialNum as snum,s.name as sname,s.telephone as stele')
         ->order('s.serialNum')->select();
 
         $count = count($data);
@@ -1440,9 +1444,9 @@ class DepartmentHeadTutor extends BaseController {
         $excel->getActiveSheet()->getColumnDimension('D')->setWidth(16);
         $excel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
         $excel->getActiveSheet()->getColumnDimension('F')->setWidth(12);
-        $excel->getActiveSheet()->getColumnDimension('G')->setWidth(10);
+        $excel->getActiveSheet()->getColumnDimension('G')->setWidth(30);
         $excel->getActiveSheet()->getColumnDimension('H')->setWidth(26);
-        $excel->getActiveSheet()->getColumnDimension('I')->setWidth(20);
+        $excel->getActiveSheet()->getColumnDimension('I')->setWidth(40);
 
         //设置学号栏为文本格式
         $excel->getActiveSheet()->getStyle('D')->getNumberFormat()->setFormatCode('000000000');
