@@ -1,5 +1,6 @@
 .idea/*
 .idea
+auto_depoly
 tutorAssign/uploads/*
 tutorAssign/runtime/*
 *.log
