@@ -1019,7 +1019,7 @@ class DepartmentHeadTutor extends BaseController {
             	$insert['password'] = $data->sheets[0]['cells'][$i][2];
             	$insert['name'] = $data->sheets[0]['cells'][$i][3];
             	$insert['gender'] = $data->sheets[0]['cells'][$i][4];
-            	// $insert['college'] = $data->sheets[0]['cells'][$i][5];
+            	$insert['college'] = "数计学院";
             	$insert['department'] = $data->sheets[0]['cells'][$i][5];
             	$insert['gpa'] = $data->sheets[0]['cells'][$i][6];
             	$insert['rank'] = $data->sheets[0]['cells'][$i][7];
@@ -1089,13 +1089,13 @@ class DepartmentHeadTutor extends BaseController {
         $excel->getActiveSheet()->getColumnDimension('B')->setWidth(10);
         $excel->getActiveSheet()->getColumnDimension('C')->setWidth(9);
         $excel->getActiveSheet()->getColumnDimension('D')->setWidth(16);
-        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(25);
-        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(114);
+        // $excel->getActiveSheet()->getColumnDimension('E')->setWidth(25);
+        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(114);
+        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(25);
         $excel->getActiveSheet()->getColumnDimension('G')->setWidth(25);
-        $excel->getActiveSheet()->getColumnDimension('H')->setWidth(25);
-        $excel->getActiveSheet()->getColumnDimension('I')->setWidth(12);
+        $excel->getActiveSheet()->getColumnDimension('H')->setWidth(12);
 
-        $excel->getActiveSheet()->mergeCells('A1:I1');  //合并A1:I1单元格
+        $excel->getActiveSheet()->mergeCells('A1:H1');  //合并A1:I1单元格
         $excel->getActiveSheet()->setTitle('学生信息导入模版');
         $excel->getActiveSheet()->setCellValue('A1','数计学院20xx级学生名单');
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
@@ -1119,9 +1119,9 @@ class DepartmentHeadTutor extends BaseController {
         ];
 
         //设置表头数组
-        $letter = ['A','B','C','D','E','F','G','H','I'];
-        $tableHeader = ['年级','学号','姓名','性别（男、女）','学院','系别（应用数学系、信息与计算科学系、计算机系、信息安全与网络系、软件工程系、计算机实验班、数学实验班）','绩点（保留两位小数）','绩点排名（格式：1/78）','联系方式'];
-        for ($i=0; $i <9 ; $i++) { 
+        $letter = ['A','B','C','D','E','F','G','H'];
+        $tableHeader = ['年级','学号','姓名','性别（男、女）','系别（应用数学系、信息与计算科学系、计算机系、信息安全与网络系、软件工程系、计算机实验班、数学实验班）','绩点（保留两位小数）','绩点排名（格式：1/78）','联系方式'];
+        for ($i=0; $i <8 ; $i++) { 
             $excel->getActiveSheet()->setCellValue($letter[$i].'2',$tableHeader[$i]);
             $excel->getActiveSheet()->getStyle($letter[$i].'2')->applyFromArray($styleArray);
             $excel->getActiveSheet()->getStyle($letter[$i].'2')->getFont()->setBold(true);
