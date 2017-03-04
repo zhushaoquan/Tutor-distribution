@@ -155,6 +155,9 @@ class TeacherTutor extends BaseController {
                  $data['message2'] .="!";
                  $this->assign('message2',$data['message2']);
 
+               $data['message3'] = "若学生被其他导师抢走，则会在刷新页面后消失！";
+               $this->assign('message3',$data['message3']);
+
 
              } else if($nowtime >= $data['confirmSecondStart'] && $nowtime <= $data['confirmSecondEnd']) {
                 $this->round = 2;
@@ -177,6 +180,9 @@ class TeacherTutor extends BaseController {
                }
                  $data['message2'] .="!";
                  $this->assign('message2',$data['message2']);
+
+                 $data['message3'] = "若学生被其他导师抢走，则会在刷新页面后消失！";
+                 $this->assign('message3',$data['message3']);
 
              }else {
                 $data['message'] = "当前不在毕设互选时间段哟~~";
