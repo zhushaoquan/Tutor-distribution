@@ -460,8 +460,7 @@ class Student extends BaseController {
             
 
 
-        }
-        if($this->ontime == 1|| $this->ontime == 2) {
+        } else {
         	$voluntary = Db::table('tc_voluntary_'.$this->grades)->where('sid',$this->user['sid'])->where('round', $this->ontime)->find();
 
         	$_SESSION['wishFirst'] = $voluntary['wishFirst'];
@@ -469,26 +468,8 @@ class Student extends BaseController {
         	$_SESSION['wishThird'] = $voluntary['wishThird'];
         	$_SESSION['wishForth'] = $voluntary['wishForth'];
         	$_SESSION['wishFifth'] = $voluntary['wishFifth'];
-/*
-        	Session::set('wishFirst', $voluntary['wishFirst']);
-            Session::set('wishSecond',$voluntary['wishSecond']);
-            Session::set('wishThird', $voluntary['wishThird']);
-            Session::set('wishForth', $voluntary['wishForth']);
-            Session::set('wishFifth', $voluntary['wishFifth']);
 
- */
-
-        }
-        else  {
-        	$voluntary = array();
-        	// Session::set('wishFirst', '');
-         //    Session::set('wishSecond','');
-         //    Session::set('wishThird', '');
-         //    Session::set('wishThird', '');
-         //    Session::set('wishFifth', '');
-        }
-
-            
+        }     
         
         $this->assign('voluntary',$voluntary);
         return $this->fetch('edit_voluntary');
