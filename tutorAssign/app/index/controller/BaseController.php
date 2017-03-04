@@ -29,6 +29,10 @@ class BaseController extends Controller {
                 $countGrade = count($grade);
                 for ($i=0; $i <$countGrade ; $i++) { 
                     $user = Db::table('user_student_'.$grade[$i]['grade'])->where('serialNum',$login_name)->find();
+                    if(!!$user) {
+                        $user['grade'] = $grade[$i]['grade'];
+                        break;
+                    }
                 }
             } else {
                 $table = Db::table('user_' . $login_type);
