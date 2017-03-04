@@ -99,7 +99,6 @@ function refreshTable(request, url) {
             //noinspection JSUnresolvedVariable
             if(data.amount!=0){
                 //noinspection JSUnresolvedVariable
-                setCurrentPage(1);
                 setTotalpages(data.amount);
                 table_student.isNull = false;
             }
@@ -133,6 +132,7 @@ function listenSelectChage() {
         console.log("grade change");
         var grade = selectedGrade();
         var requset = {grade: grade, curPage: 1};
+        setCurrentPage(1);
         refreshTable(requset,api_student_list);
         setNormalCallback();
     });
