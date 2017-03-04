@@ -168,7 +168,7 @@ class Student extends BaseController {
 		//$grade = Db::table('tc_grade')->order('grade desc')->select();
 		$grades = $this->user['grade'];
 
-		$student = Db::table('user_student_'.$grade[0]['grade'])->where('serialNum',$user['serialNum'])->find(); //如果直接使用session里的用户信息，修改的信息必须重新登录才能更新显示
+		$student = Db::table('user_student_'.$grades)->where('serialNum',$user['serialNum'])->find(); //如果直接使用session里的用户信息，修改的信息必须重新登录才能更新显示
         
 		if ($student['avator'] == "") {
         	$student['avatorIsEmpty'] = 1;
@@ -184,7 +184,6 @@ class Student extends BaseController {
 		$user = $this->auto_login();
 		$where['sid'] = $user['sid'];
 		$request = Request::instance();
-		$grade = Db::table('tc_grade')->order('grade desc')->select();
 
 		//获取上传的头像的信息
 		$avator = request()->file('avator');
@@ -198,7 +197,7 @@ class Student extends BaseController {
 		if ($request->isPost()) {
 			$password = $request->post('newPasswordConfirm');
 			if ($password == "") {
-				$data['password'] = $request->post('oldPassword');
+				$data['password'] = $user['password'];
 			} else {
 				$data['password'] = $request->post('newPasswordConfirm');
 			}
@@ -207,7 +206,7 @@ class Student extends BaseController {
 			$data['email'] = $request->post('email');
 			$data['skill'] = $request->post('skill');
 
-			if (Db::table('user_student_'.$grade[0]['grade'])->where($where)->update($data)) {
+			if (Db::table('user_student_'.$user['grade'])->where($where)->update($data)) {
 				$this->success("信息修改成功!",url('index'));
 			} else {
 				$this->error("信息尚未修改，请修改信息后再次提交修改!",url('modify'));
@@ -619,7 +618,12 @@ class Student extends BaseController {
 	public function oldPasswordConfirm() {
 		$user = $this->auto_login();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
-        $student = Db::table('user_student_'.$grade[0]['grade'])->where('sid',$user['sid'])->find();
+		for ($i=0; $i <count($grade) ; $i++) { 
+			$student = Db::table('user_student_'.$grade[$i]['grade'])->where('sid',$user['sid'])->find();
+			if (!empty($student)) {
+				break;
+			}
+		}
 
         $request = Request::instance();
         if ($request->isPost()) {
