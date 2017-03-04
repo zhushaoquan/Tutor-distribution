@@ -568,7 +568,7 @@ class DepartmentHeadTutor extends BaseController {
 		if ($request->isPost()) {
 			$password = $request->post('newPasswordConfirm');
 			if ($password == "") {
-				$data['password'] = $request->post('oldPassword');
+				$data['password'] = $user['password'];
 			} else {
 				$data['password'] = $request->post('newPasswordConfirm');
 			}
