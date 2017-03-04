@@ -470,7 +470,8 @@ class Student extends BaseController {
         	$_SESSION['wishFifth'] = $voluntary['wishFifth'];
 
         }     
-        
+        $voluntary = Db::table('tc_voluntary_'.$this->grades)->where('sid',$this->user['sid'])->where('round', $this->ontime)->find();
+
         $this->assign('voluntary',$voluntary);
         return $this->fetch('edit_voluntary');
 	}
