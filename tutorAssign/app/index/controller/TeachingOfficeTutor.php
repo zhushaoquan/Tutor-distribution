@@ -144,9 +144,6 @@ class TeachingOfficeTutor extends BaseController {
 		{
 			$str="".$i;
 			$str1="snum".$i;
-		//	var_dump($str);
-		//	var_dump($str1);
-		//	var_dump($_POST[$str1]);
 			$seri=DB::table('user_student_'.$grade)->where('serialNum',$_POST[$str1])->field('sid')->find();
 		//	var_dump($seri['sid']);
 			Db::table('tc_result_'.$grade)->where('sid',$seri['sid'])->setField('workNumber',$_POST[$str]);
