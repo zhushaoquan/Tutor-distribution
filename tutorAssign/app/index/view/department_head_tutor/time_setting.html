@@ -346,14 +346,14 @@
         var formNum = $("input[type='number']");
 
         var isNumEmpty = validateForm(formNum, 1);
-        // var isDateEmpty = validateForm(formDate, 2);
-        // var isEndBigger = checkDate(formDate);
-        // var isSecondRoundBigger = checkDateOfTwoRound(formDate);
+        var isDateEmpty = validateForm(formDate, 2);
+        var isEndBigger = checkDate(formDate);
+        var isSecondRoundBigger = checkDateOfTwoRound(formDate);
         var isNegative = numIsNegative(formNum);
 
         showWarnInfo(isNumEmpty, isDateEmpty, isEndBigger, isSecondRoundBigger, isNegative);
-        // return !isNumEmpty && !isDateEmpty && isEndBigger && isSecondRoundBigger && !isNegative;
-        return !isNumEmpty && !isNegative;
+        return !isNumEmpty && !isDateEmpty && isEndBigger && isSecondRoundBigger && !isNegative;
+        // return !isNumEmpty && !isNegative;
     }
 
     function numIsNegative(formNum) {
