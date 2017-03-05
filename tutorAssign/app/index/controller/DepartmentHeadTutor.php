@@ -75,11 +75,11 @@ class DepartmentHeadTutor extends BaseController {
 		if (empty($settingInfo)) {
 			$settingInfo['empty'] = 1;
 
-			$settingInfo['voluntaryNum'] = 0;
-			$settingInfo['totalMax'] = 0;
+			$settingInfo['voluntaryNum'] = 5;
+			$settingInfo['totalMax'] = 3;
 			$settingInfo['totalMin'] = 0;
-			$settingInfo['defaultNum'] = 0;
-			$settingInfo['experialMax'] = 0;
+			$settingInfo['defaultNum'] = 3;
+			$settingInfo['experialMax'] = 3;
 			$settingInfo['grade'] = $grade[0]['grade'];
 
 			$settingInfo['issueStart'] = NULL;
@@ -98,6 +98,7 @@ class DepartmentHeadTutor extends BaseController {
 			$settingInfo['confirmSecondEnd'] = NULL;
 
 		} else {
+
 			$settingInfo['issueStart'] = date('Y-m-d H:i',$settingInfo['issueStart']);
 			$settingInfo['issueEnd'] = date('Y-m-d H:i',$settingInfo['issueEnd']);
 
