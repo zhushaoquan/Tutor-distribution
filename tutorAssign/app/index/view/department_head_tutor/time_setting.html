@@ -477,9 +477,11 @@
             finalText = finalText.concat("<br>" + order + ".人数不能为负！")
         }
 
-        $("#warn-alert-text").html(finalText);
-        $("#warn-alert").show(300);
-        console.log(finalText);
+        if (isDateEmpty || isNumEmpty || !isEndBigger || !isEndBigger || !isSecondRoundBigger || isNegative) {
+            $("#warn-alert-text").html(finalText);
+            $("#warn-alert").show(300);
+            console.log(finalText);
+        }
     }
 </script>
 <script type="text/javascript">
