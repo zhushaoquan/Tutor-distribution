@@ -218,50 +218,71 @@ class TeacherTutor extends BaseController {
      
     }
 
+    public function showNotice($str, $smartMode = HISTORY_BACK) {
+    $str = str_replace("\n", "", $str);
+    echo '<DOCTYPE HTML>';
+    echo '<html>';
+    echo '<head>';
+    echo '<meta charset="UTF-8" />';
+    echo '<title>提示信息</title>';
+    echo '</head>';
+    echo '<body>';
+    echo '<script language="javascript">';
+    echo "alert('".addslashes($str)."');";
+    if($smartMode == HISTORY_BACK)
+        echo 'window.history.go(-1);';
+    else 
+        echo 'window.location.href="'.$smartMode.'";';
+    echo '</script>';
+    echo '</body>';
+    echo '</html>';
+    exit;
+    }
+
   
 
-  public function showNotice($str, $smartMode) {
-        $str = str_replace("\n", "", $str);
-        echo '<!DOCTYPE HTML>';
-        echo '<html>';
-        echo '<head>';
-        echo '<meta charset="UTF-8" />';
-        echo '<title>提示信息</title>';
-        echo     '<link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">';
-        echo     '<script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>';
-        echo     '<script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>';
-        echo '</head>';
-        echo '<body style="background: #ddd">';
-        echo '</body>';
-        echo '<script language="javascript">
+  // public function showNotice($str, $smartMode) {
+  //       $str = str_replace("\n", "", $str);
+  //       echo '<!DOCTYPE HTML>';
+  //       echo '<html>';
+  //       echo '<head>';
+  //       echo '<meta charset="UTF-8" />';
+  //       echo '<title>提示信息</title>';
+  //       echo     '<link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">';
+  //       echo     '<script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>';
+  //       echo     '<script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>';
+  //       echo '</head>';
+  //       echo '<body style="background: #ddd">';
+  //       echo '</body>';
+  //       echo '<script language="javascript">
 
-                    $(document).ready(function () {
-                        var popUp =
-                                \'<div style="width:100%;height:500px;text-align: center;position: absolute;top: 2%;">\' +
-                                \'<div class ="popStyle">\' +
-                                \'<div class="modal-dialog">\' +
-                                \'<div class="modal-content">\' +
-                                \'<div class="modal-header">\' + \'<h4 class="modal-title" id="myModalLabel">提示信息</h4>\' +
-                                \'</div>\' +
-                                \'<div class="modal-body">\' + \'<p>{{$str}}</p>\' +
-                                \'</div>\' +
-                                \'<div class="modal-footer">\' +
-                                \'<a href = "'.$smartMode.'"><button type="button" class="btn btn-info "> 关闭</button></a>\' +
-                                \'</div>\' +
-                                \'</div>\' +
-                                \'</div>\' +
-                                \'</div>\' +
-                                \'</div>\'
+  //                   $(document).ready(function () {
+  //                       var popUp =
+  //                               \'<div style="width:100%;height:500px;text-align: center;position: absolute;top: 2%;">\' +
+  //                               \'<div class ="popStyle">\' +
+  //                               \'<div class="modal-dialog">\' +
+  //                               \'<div class="modal-content">\' +
+  //                               \'<div class="modal-header">\' + \'<h4 class="modal-title" id="myModalLabel">提示信息</h4>\' +
+  //                               \'</div>\' +
+  //                               \'<div class="modal-body">\' + \'<p>{{$str}}</p>\' +
+  //                               \'</div>\' +
+  //                               \'<div class="modal-footer">\' +
+  //                               \'<a href = "'.$smartMode.'"><button type="button" class="btn btn-info "> 关闭</button></a>\' +
+  //                               \'</div>\' +
+  //                               \'</div>\' +
+  //                               \'</div>\' +
+  //                               \'</div>\' +
+  //                               \'</div>\'
         
-                        $(\'body\').append(popUp);
-                        $(\'.modal-body\').find(\'p\').text("'.addslashes($str).'");
+  //                       $(\'body\').append(popUp);
+  //                       $(\'.modal-body\').find(\'p\').text("'.addslashes($str).'");
         
-                    });
-                </script>';
-        echo '</html>';
+  //                   });
+  //               </script>';
+  //       echo '</html>';
 
        
-    }
+  //   }
 
      public function issue_submit() {
          $user = $this->auto_login();
