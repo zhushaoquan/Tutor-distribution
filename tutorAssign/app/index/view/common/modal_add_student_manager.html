@@ -38,7 +38,7 @@
                         <div class="wrapper">
                             <label class="control-label input-label">绩点</label>
                         </div>
-                        <input onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false" v-model="gpa" class="form-control input-add" placeholder="如：3.5" type="text">
+                        <input id="gpa" onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false" v-model="gpa" class="form-control input-add" placeholder="如：3.5" type="text">
                         <span id="gpaIsLegal"></span>
                     </div>
                     <div class="input-div clearfix">
