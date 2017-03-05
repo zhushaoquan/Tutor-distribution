@@ -75,11 +75,11 @@ class DepartmentHeadTutor extends BaseController {
 		if (empty($settingInfo)) {
 			$settingInfo['empty'] = 1;
 
-			$settingInfo['voluntaryNum'] = 5;
-			$settingInfo['totalMax'] = 8;
+			$settingInfo['voluntaryNum'] = 0;
+			$settingInfo['totalMax'] = 0;
 			$settingInfo['totalMin'] = 0;
-			$settingInfo['defaultNum'] = 8;
-			$settingInfo['experialMax'] = 5;
+			$settingInfo['defaultNum'] = 0;
+			$settingInfo['experialMax'] = 0;
 			$settingInfo['grade'] = $grade[0]['grade'];
 
 			$settingInfo['issueStart'] = NULL;
