@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace app\index\controller;
 use think\Config;
 use think\Db;
@@ -51,7 +51,8 @@ class Student extends BaseController {
         if($this->user['chosen'] == 1) {
 	        	$data['ontime'] = 3;
 	        	$data['message'] = "<font color='#FF0000'>".$this->user['name']."</font>同学，志愿结果已出，请前往 志愿结果 页面查看哦~~~";
-	        } 
+	        }
+
 	    else if(isset($data['issueStart'])) {
 
 	        // if($this->user['chosen'] == 1) {
@@ -117,11 +118,7 @@ class Student extends BaseController {
 		return $this->fetch('index');
 	}
 
-<<<<<<< HEAD
 	public function showNotice($str, $smartMode) {
-=======
-	public function showNotice($str, $smartMode = HISTORY_BACK) {
->>>>>>> 0dabee0cd616333f11ead486f53d2085442bde05
     $str = str_replace("\n", "", $str);
     echo '<DOCTYPE HTML>';
     echo '<html>';
@@ -400,18 +397,6 @@ class Student extends BaseController {
 
 	public function edit_voluntary() {
 
-  //       $request = Request::instance();
-		// if ($request->isGet()) {
-  //           $disabled = $request->get('disabled', '');
-  //           $disabled = 1;       
-  //       // exit;
-  //       } else {
-  //       	$disabled = 0;
-  //       }
-  //       $this->assign('disabled',$disabled);
-
-
-
 		if($this->user['department'] == $this->department_1) {
 			//计算机实验吧
 			$tutors = Db::table('user_teacher') ->alias('t')->join('tc_issue_'.$this->grades.' i', 't.workNumber = i.workNumber')
@@ -455,13 +440,6 @@ class Student extends BaseController {
             $data1['round'] = intval($this->ontime);
             $volunNum = $this->voluntaryinfosetting['voluntaryNum'];
 
-            $_SESSION['wishFirst'] = $data1['wishFirst'];
-        	$_SESSION['wishSecond'] = $data1['wishSecond'];
-        	$_SESSION['wishThird'] = $data1['wishThird'];
-        	$_SESSION['wishForth'] = $data1['wishForth'];
-        	$_SESSION['wishFifth'] = $data1['wishFifth'];
-
-        	
             if($data1['wishFirst'] == '') {
             	$this->showNotice("第一志愿不得为空",url('Student/edit_voluntary'));
             } else if($data1['wishSecond'] == '' && $volunNum >=2) {
@@ -488,20 +466,25 @@ class Student extends BaseController {
             
 
 
-        } else {
-        	$voluntary = Db::table('tc_voluntary_'.$this->grades)->where('sid',$this->user['sid'])->where('round', $this->ontime)->find();
+        } 
 
-        	$_SESSION['wishFirst'] = $voluntary['wishFirst'];
-        	$_SESSION['wishSecond'] = $voluntary['wishSecond'];
-        	$_SESSION['wishThird'] = $voluntary['wishThird'];
-        	$_SESSION['wishForth'] = $voluntary['wishForth'];
-        	$_SESSION['wishFifth'] = $voluntary['wishFifth'];
+        // $ontime = $this->$ontime;
+        // var_dump($ontime);
+        // exit;
+        if($this->ontime ==1) $ontime = 1;
+        else if($this->ontime ==2) $ontime = 2;
+        else if($this->ontime == 11) $ontime = 1;
+        else if($this->ontime == 22) $ontime = 2;
+        else if($this->ontime == 3) {
+        	$bool = Db::table('tc_voluntary_'.$this->grades)->where('sid',$this->user['sid'])->where('round', 2)->find();
+        	if($bool) $ontime = 2;
+        	else $ontime = 1;
+        } 
+        else $ontime = 0;
 
-        }     
-        $voluntary = Db::table('tc_voluntary_'.$this->grades)->where('sid',$this->user['sid'])->where('round', $this->ontime)->find();
+        $voluntary = Db::table('tc_voluntary_'.$this->grades)->where('sid',$this->user['sid'])->where('round', $ontime)->find();
 
         $this->assign('voluntary',$voluntary);
-       // $this->assign('disabled',$disabled);
         return $this->fetch('edit_voluntary');
 	}
 
