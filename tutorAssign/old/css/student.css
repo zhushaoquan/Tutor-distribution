@@ -64,15 +64,15 @@
 .skill-title {
 	font-size: 16px;
 	padding-left: 100px; 
-	padding-top: 20px;
+	padding-top: 5px;
 }
 
 .skill-detail {
 	font-size: 16px;
-	width: 1000px;
+	width: 900px;
 	height: 100px;
 	padding-left: 100px; 
-	padding-top: 10px;
+	padding-top: 5px;
 }
 
 .button-position {
@@ -250,7 +250,7 @@
 	width: 100%;
 	height: 60px;
 	text-align: center;
-	margin-top: 45px;
+	margin-top: 20px;
 }
 .information-detail{
 	font-size:16px;
