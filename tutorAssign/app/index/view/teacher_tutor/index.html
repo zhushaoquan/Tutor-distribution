@@ -62,7 +62,7 @@
                     <ul>
                         <li><span>姓名：</span><span>{{$user.name}}</span><span>工号：</span><span>{{$user.workNumber}}</span><span>性别：</span><span>{{$user.sex}}</span></li>
                         <li><span>系别：</span><span>{{$user.department}}</span><span>电话：</span><span>{{$user.telephone}}</span><span>邮箱：</span><span>{{$user.email}}</span></li>
-                        <li><span>生日：</span><span>{{$user.birthday}}</span><span>职称：</span><span>{{$user.position}}</span><span style="width: 100px;">实验班导师：</span><span>{{$user.isExperial}}</span></li>
+                        <li><span>生日：</span><span>{{$user.birthday}}</span><span>职称：</span><span>{{$user.position}}</span><span style="width: 100px;">实验班导师：</span>{if condition="$user.isExperial eq 0"}<span>否</span>{elseif condition="$user.isExperial eq 1"}<span>是</span>{/if}</li>
                     </ul>
                 </div>
                 <div class="skill-title">
@@ -89,7 +89,7 @@
             </div>
             
             <div class="footer"  style="border-radius: 10px;">
-                Designed by Lin & 我说的都队
+                Copyright &copy; 我说的都队
             </div>
         </div>
     </div>
