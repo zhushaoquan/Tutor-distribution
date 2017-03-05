@@ -118,47 +118,64 @@ class Student extends BaseController {
 	}
 
 	public function showNotice($str, $smartMode) {
-        $str = str_replace("\n", "", $str);
-        echo '<!DOCTYPE HTML>';
-        echo '<html>';
-        echo '<head>';
-        echo '<meta charset="UTF-8" />';
-        echo '<title>提示信息</title>';
-        echo     '<link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">';
-        echo     '<script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>';
-        echo     '<script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>';
-        echo '</head>';
-        echo '<body style="background: #ddd">';
-        echo '</body>';
-        echo '<script language="javascript">
+    $str = str_replace("\n", "", $str);
+    echo '<DOCTYPE HTML>';
+    echo '<html>';
+    echo '<head>';
+    echo '<meta charset="UTF-8" />';
+    echo '<title>提示信息</title>';
+    echo '</head>';
+    echo '<body>';
+    echo '<script language="javascript">';
+    echo "alert('".addslashes($str)."');";
+    echo 'window.location.href="'.$smartMode.'";';
+    echo '</script>';
+    echo '</body>';
+    echo '</html>';
+    exit;
+    }
 
-                    $(document).ready(function () {
-                        var popUp =
-                                \'<div style="width:100%;height:500px;text-align: center;position: absolute;top: 2%;">\' +
-                                \'<div class ="popStyle">\' +
-                                \'<div class="modal-dialog">\' +
-                                \'<div class="modal-content">\' +
-                                \'<div class="modal-header">\' + \'<h4 class="modal-title" id="myModalLabel">提示信息</h4>\' +
-                                \'</div>\' +
-                                \'<div class="modal-body">\' + \'<p>{{$str}}</p>\' +
-                                \'</div>\' +
-                                \'<div class="modal-footer">\' +
-                                \'<a href = "'.$smartMode.'"><button type="button" class="btn btn-info "> 关闭</button></a>\' +
-                                \'</div>\' +
-                                \'</div>\' +
-                                \'</div>\' +
-                                \'</div>\' +
-                                \'</div>\'
+    //     $str = str_replace("\n", "", $str);
+    //     echo '<!DOCTYPE HTML>';
+    //     echo '<html>';
+    //     echo '<head>';
+    //     echo '<meta charset="UTF-8" />';
+    //     echo '<title>提示信息</title>';
+    //     echo     '<link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">';
+    //     echo     '<script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>';
+    //     echo     '<script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>';
+    //     echo '</head>';
+    //     echo '<body style="background: #ddd">';
+    //     echo '</body>';
+    //     echo '<script language="javascript">
+
+    //                 $(document).ready(function () {
+    //                     var popUp =
+    //                             \'<div style="width:100%;height:500px;text-align: center;position: absolute;top: 2%;">\' +
+    //                             \'<div class ="popStyle">\' +
+    //                             \'<div class="modal-dialog">\' +
+    //                             \'<div class="modal-content">\' +
+    //                             \'<div class="modal-header">\' + \'<h4 class="modal-title" id="myModalLabel">提示信息</h4>\' +
+    //                             \'</div>\' +
+    //                             \'<div class="modal-body">\' + \'<p>{{$str}}</p>\' +
+    //                             \'</div>\' +
+    //                             \'<div class="modal-footer">\' +
+    //                             \'<a href = "'.$smartMode.'"><button type="button" class="btn btn-info "> 关闭</button></a>\' +
+    //                             \'</div>\' +
+    //                             \'</div>\' +
+    //                             \'</div>\' +
+    //                             \'</div>\' +
+    //                             \'</div>\'
         
-                        $(\'body\').append(popUp);
-                        $(\'.modal-body\').find(\'p\').text("'.addslashes($str).'");
+    //                     $(\'body\').append(popUp);
+    //                     $(\'.modal-body\').find(\'p\').text("'.addslashes($str).'");
         
-                    });
-                </script>';
-        echo '</html>';
+    //                 });
+    //             </script>';
+    //     echo '</html>';
 
        
-    }
+    // }
     public function test123() {
     	$this->showNotice("志愿填报成功，静候佳音吧！",url('Student/edit_voluntary'));
     }
@@ -228,7 +245,7 @@ class Student extends BaseController {
 				//计算机实验班
 				$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades.' i', 't.workNumber = i.workNumber')
 				                                     ->where('isExperial','in','1,3')
-				                                     ->where('compExperNow < totalCompExper')
+				                                    // ->where('compExperNow < totalCompExper')
 				                                     ->where('department|name|sex|position','like','%'.$this->search_teacher.'%')
 				                                     ->order('t.workNumber asc')
 				                                     ->paginate($listRows = $this->pageSize, $simple = false, $config = [
@@ -239,7 +256,7 @@ class Student extends BaseController {
 				//数学实验板
 				$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades.' i', 't.workNumber = i.workNumber')
 				                                     ->where('isExperial','in','2,3')
-				                                     ->where('mathExperNow < totalMathExper')
+				                                    // ->where('mathExperNow < totalMathExper')
 				                                     ->where('department|name|sex|position','like','%'.$this->search_teacher.'%')
 				                                     ->order('t.workNumber asc')
 				                                     ->paginate($listRows = $this->pageSize, $simple = false, $config = [
@@ -249,7 +266,7 @@ class Student extends BaseController {
 				//自然班
 				$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades.' i', 't.workNumber = i.workNumber')
 				                                     ->where('department',$this->user['department'])
-				                                     ->where('naturNow < totalNatur')
+				                                    // ->where('naturNow < totalNatur')
 				                                     ->where('department|name|sex|position','like','%'.$this->search_teacher.'%')
 				                                     ->order('t.workNumber asc')
 				                                      ->paginate($listRows = $this->pageSize, $simple = false, $config = [
@@ -261,7 +278,7 @@ class Student extends BaseController {
 			//计算机实验班
 			$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades.' i', 't.workNumber = i.workNumber')
 			                                     ->where('isExperial','in','1,3')   
-			                                     ->where('compExperNow < totalCompExper')
+			                                  //   ->where('compExperNow < totalCompExper')
 			                                     ->order('t.workNumber asc')
 			                                     ->paginate($this->pageSize);
 
@@ -269,14 +286,14 @@ class Student extends BaseController {
 			//数学实验板
 			$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades.' i', 't.workNumber = i.workNumber')
 			                                     ->where('isExperial','in','2,3')
-			                                     ->where('mathExperNow < totalMathExper')
+			                                  //   ->where('mathExperNow < totalMathExper')
 			                                     ->order('t.workNumber asc')
 			                                     ->paginate($this->pageSize);
 		} else {
 			//自然班
 			$teachers = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades.' i', 't.workNumber = i.workNumber')
 			                                     ->where('department',$this->user['department'])
-			                                     ->where('naturNow < totalNatur')
+			                                  //   ->where('naturNow < totalNatur')
 			                                     ->order('t.workNumber asc')
 			                                      ->paginate($this->pageSize);
 		}
