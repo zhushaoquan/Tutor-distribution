@@ -379,15 +379,15 @@ class Student extends BaseController {
 
 	public function edit_voluntary() {
 
-        $request = Request::instance();
-		if ($request->isGet()) {
-            $disabled = $request->get('disabled', '');
-            $disabled = 1;       
-        // exit;
-        } else {
-        	$disabled = 0;
-        }
-        $this->assign('disabled',$disabled);
+  //       $request = Request::instance();
+		// if ($request->isGet()) {
+  //           $disabled = $request->get('disabled', '');
+  //           $disabled = 1;       
+  //       // exit;
+  //       } else {
+  //       	$disabled = 0;
+  //       }
+  //       $this->assign('disabled',$disabled);
 
 
 
@@ -424,7 +424,7 @@ class Student extends BaseController {
         // $_SESSION['wishFifth'] = "";
 
 		$request = Request::instance();
-        if ($request->isPost() && $disabled==1) {
+        if ($request->isPost()) {
         	if($this->ontime == 1)$data1['round'] = 1;
         	else if($this->ontime == 2)$data1['round'] = 2;
         	else $this->showNotice("当前不在填报志愿时间内！",url('Student/edit_voluntary'));
