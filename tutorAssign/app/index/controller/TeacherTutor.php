@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace app\index\controller;
 use think\Config;
 use think\Db;

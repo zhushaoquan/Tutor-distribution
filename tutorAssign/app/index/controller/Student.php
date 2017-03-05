@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace app\index\controller;
 use think\Config;
 use think\Db;
@@ -117,7 +117,11 @@ class Student extends BaseController {
 		return $this->fetch('index');
 	}
 
+<<<<<<< HEAD
 	public function showNotice($str, $smartMode) {
+=======
+	public function showNotice($str, $smartMode = HISTORY_BACK) {
+>>>>>>> 0dabee0cd616333f11ead486f53d2085442bde05
     $str = str_replace("\n", "", $str);
     echo '<DOCTYPE HTML>';
     echo '<html>';
