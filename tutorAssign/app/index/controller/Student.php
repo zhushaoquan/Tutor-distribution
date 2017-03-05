@@ -417,11 +417,7 @@ class Student extends BaseController {
 	
         $this->assign('tutors', $tutors);
         $this->assign('user', $this->user);
-        // $_SESSION['wishFirst'] = "";
-        // $_SESSION['wishSecond'] = "";
-        // $_SESSION['wishThird'] = "";
-        // $_SESSION['wishForth'] = "";
-        // $_SESSION['wishFifth'] = "";
+        
 
 		$request = Request::instance();
         if ($request->isPost()) {
@@ -498,7 +494,7 @@ class Student extends BaseController {
 		if($this->user['chosen'] == '1') {
 
 			$result = Db::table('tc_result_'.$this->grades)->where('sid',$this->user['sid'])->find();
-			$teacher = Db::table('user_teacher')->where('workNumber', $result['workNumber'])->find();
+			$teacher = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades.' i', 't.workNumber = i.workNumber')->where('t.workNumber', $result['workNumber'])->find();
 		    $sids = Db::table('tc_result_'.$this->grades)->where("sid!=".$this->user['sid']." and "."workNumber=".$teacher['workNumber'])->select();
 		    if($sids != NULL) {
 		    	 $students = array();
