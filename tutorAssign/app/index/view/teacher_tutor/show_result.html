@@ -74,7 +74,7 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>#</th>
+                            
                             <th>年级</th>
                             <th>学号</th>
                             <th>姓名</th>
@@ -87,7 +87,7 @@
                         <tbody>
                         <?php foreach ($students as $key => $value):?>
                         <tr>
-                            <td>{{$key}}</td>
+                            
                             <td>{{$grade_now}}级</td>
                             <td><?php echo $value['serialNum']?></td>
                             <td><a href="{{:url('/index/TeacherTutor/show_resultdetail_1/sid/'.$value['sid'].'/grade/'.$grade_now)}}"><?php echo $value['name']?></a></td>
