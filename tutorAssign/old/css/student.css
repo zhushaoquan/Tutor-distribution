@@ -50,14 +50,14 @@
 	list-style: none;
 	display: inline-block;
 
-	width: 90px;
+	width: 60px;
 }
 
 .my-information-detail-1 ul li span:nth-child(even) {
 	list-style: none;
 	display: inline-block;
 
-	width: 200px;
+	width: 210px;
 	/*background: #0ff;*/
 }
 
