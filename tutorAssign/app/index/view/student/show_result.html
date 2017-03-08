@@ -57,12 +57,12 @@
 
                 </div>
                 <hr>
-                <div class="my-information-detail-1">
+                <div class="sturesult">
                     <?php if(isset($voluntory_teacher['name'])&&$user['chosen']==1) { ?>
                     <ul>
                         <li><span>导师名字：</span><span class="span-value"><a href="{{:url('/index/Student/tutor_detail_1/workNumber/'.$voluntory_teacher['workNumber'])}}"><?php if(isset($voluntory_teacher['name']))echo $voluntory_teacher['name']; ?></a></span></li>
-                        <li><span>导师工号：</span><span class="span-value"><?php if(isset($voluntory_teacher['workNumber']))echo $voluntory_teacher['workNumber']; ?></span</li>
-                        <li><span>毕设选题：</span><span class="span-value"><?php if(isset($voluntory_teacher['title']))echo $voluntory_teacher['title']; ?></span></li>
+                        <li><span>导师工号：</span><span class="span-value" ><?php if(isset($voluntory_teacher['workNumber']))echo $voluntory_teacher['workNumber']; ?></span</li>
+                        <li><span>毕设选题：</span><span class="span-value" style="width:85%;"><?php if(isset($voluntory_teacher['title']))echo $voluntory_teacher['title']; ?></span></li>
                         <li><span>电子邮箱：</span><span class="span-value"><?php if(isset($voluntory_teacher['email']))echo $voluntory_teacher['email']; ?></span></li>
                         <li><span>同选学生</span>
                             <table class="table table-bordered">
