@@ -58,6 +58,13 @@
                 <div class="my-information-subtitle">
                     <span>你可以在这里查看或修改自己的个人信息</span>
                 </div>
+                <div class="avator-positon">
+                    {if condition="$user.avatorIsEmpty eq 0"}
+                      <img src="{{$Think.const.COMMON_PATH}}{{$user.avator}}" class="avatorPre">
+                    {elseif condition="$user.avatorIsEmpty eq 1"}
+                      <img src="{{$Think.const.OLD}}/image/defaultAvator.png" class="avatorPre">
+                    {/if}
+                </div>
                 <div class="my-information-detail-1">
                     <ul>
                         <li><span>姓名：</span><span>{{$user.name}}</span><span>学号：</span><span>{{$user.serialNum}}</span><span>性别：</span><span>{{$user.gender}}</span></li>
@@ -66,10 +73,10 @@
                         <li><span>电话：</span><span>{{$user.telephone}}</span><span>邮箱：</span><span>{{$user.email}}</span></li>
                     </ul>
                 </div>
-                <div class="skill-title">
+                <div class="new-skill-title" style="padding-left: 100px;">
                     <p>技能及经历：</p>
                 </div>
-                <div class="skill-detail">
+                <div class="new-skill-detail" style="padding-left: 100px; width: 900px;">
                     <p>{{$user.skill}}</p>
                 </div>
 
@@ -79,16 +86,7 @@
                     </a>
                 </div>
 
-                <div class="avator-positon">
-                    {if condition="$user.avatorIsEmpty eq 0"}
-                      <img src="{{$Think.const.COMMON_PATH}}{{$user.avator}}" class="avatorPre">
-                    {elseif condition="$user.avatorIsEmpty eq 1"}
-                      <img src="{{$Think.const.OLD}}/image/defaultAvator.png" class="avatorPre">
-                    {/if}
-                </div>
-
             </div>
-            
             <div class="footer"  style="border-radius: 10px;">
                 Copyright &copy; 我说的都队
             </div>
