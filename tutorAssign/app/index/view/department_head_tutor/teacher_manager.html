@@ -109,7 +109,7 @@
                                         <input v-model="item.checked" type="checkbox" class="chb">
                                     </td>
                                     <td>{{ item.workNumber }}</td>
-                                    <td>{{ item.name }}</td>
+                                    <td><a href="{{$Think.const.PREFIX}}/DepartmentHeadTutor/getTeacherDetail/workNumber/{{item.workNumber}}" \>{{ item.name }}</a></td>
                                     <!-- <td>{{ item.password }}</td> -->
                                 </tr>
                                 </tbody>
@@ -123,7 +123,9 @@
                     </div>
                 </div>
             </div>
-            {include file="common/footer"}
+            <div class="footer" style="border-radius: 10px;">
+                Copyright &copy; 我说的都队<p id="nowPage" display="none">{{$teacherNowPage}}</p>
+            </div>
         </div>
     </div>
 </div>

@@ -3,6 +3,7 @@ namespace app\index\controller;
 use think\Config;
 use think\Db;
 use think\Request;
+use think\Session;
 use think\Controller;
 
 class DepartmentHeadTutor extends BaseController {
@@ -10,6 +11,8 @@ class DepartmentHeadTutor extends BaseController {
 	public $pageSize = 7;
 	
 	public function index() {
+		session::set('studentCurPage',1);
+		session::set('teacherCurPage',1);
 		$user = $this->auto_login();
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
 		
@@ -56,6 +59,8 @@ class DepartmentHeadTutor extends BaseController {
 	}
 
 	public function matchSetting() {
+		session::set('studentCurPage',1);
+		session::set('teacherCurPage',1);
 		$user = $this->auto_login();
 
 		$this->assign('user', $user);
@@ -67,6 +72,9 @@ class DepartmentHeadTutor extends BaseController {
 
 
 	public function timeSetting() {
+		session::set('studentCurPage',1);
+		session::set('teacherCurPage',1);
+
 		$user = $this->auto_login();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
@@ -608,9 +616,15 @@ class DepartmentHeadTutor extends BaseController {
 	}
 
 	public function studentManager(){
+		session::set('teacherCurPage',1);
         $user = $this->auto_login();
-
+        if (!session::get('studentCurPage')) {
+        	session::set('studentCurPage',1);
+        }
         $timeStatus = $this->getTimeStatus();
+        $nowPage = session::get('studentCurPage');
+
+		$this->assign('studentNowPage',$nowPage);
         $this->assign('timeStatus',$timeStatus);
         $this->assign('user',$user);
 	    return $this->fetch('student_manager');
@@ -685,6 +699,8 @@ class DepartmentHeadTutor extends BaseController {
     		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('department',$department)->select())/$pageSize);
     		$studentList['amount'] = $totalPage;
     		$studentList['information'] = Db::table('user_student_'.$grade)->where('department',$department)->field('sid,serialNum,name,department,grade,gpa,rank')->order('serialNum asc')->page($curPage,$pageSize)->select();
+
+    		session::set('studentCurPage',$curPage);
     		return json($studentList);
     	}
     }
@@ -712,6 +728,8 @@ class DepartmentHeadTutor extends BaseController {
     //导师管理界面的搜索接口
     public function searchTeacher() {
     	$user = $this->auto_login();
+    	// $user['department'] = "计算机实验班";
+
     	$request = Request::instance();
     	if ($request->isGet()) {
     		$data = $request->get();
@@ -719,9 +737,26 @@ class DepartmentHeadTutor extends BaseController {
 
     		$condition = $data['condition'];
 
-    		$totalPage = ceil(count(Db::table('user_teacher')->where('department',$user['department'])->where('workNumber|name','like','%'.$condition.'%')->select())/10);
+    		if ($user['department'] == "计算机实验班") {
+    			$searchResult = Db::table('user_teacher')->where('isExperial',1)->whereOr('isExperial',3)->where('workNumber|name','like','%'.$condition.'%')->select();
+
+    			$teacher['information'] = Db::table('user_teacher')->where('isExperial',1)->whereOr('isExperial',3)->where('workNumber|name','like','%'.$condition.'%')->field('workNumber,name,password')->page($curPage,10)->select();
+
+
+    		} elseif ($user['department'] == "数学实验班") {
+    			$searchResult = Db::table('user_teacher')->where('isExperial',2)->whereOr('isExperial',3)->where('workNumber|name','like','%'.$condition.'%')->select();
+
+    			$teacher['information'] = Db::table('user_teacher')->where('isExperial',2)->whereOr('isExperial',3)->where('workNumber|name','like','%'.$condition.'%')->field('workNumber,name,password')->page($curPage,10)->select();
+
+    		} else {
+    			$searchResult = Db::table('user_teacher')->where('department',$user['department'])->where('workNumber|name','like','%'.$condition.'%')->select();
+
+    			$teacher['information'] = Db::table('user_teacher')->where('department',$user['department'])->where('workNumber|name','like','%'.$condition.'%')->field('workNumber,name,password')->page($curPage,10)->select();
+    		}
+
+    		$totalPage = ceil(count($searchResult)/10);
     		$teacher['amount'] = $totalPage;
-    		$teacher['information'] = Db::table('user_teacher')->where('department',$user['department'])->where('workNumber|name','like','%'.$condition.'%')->field('workNumber,name,password')->page($curPage,10)->select();
+
     		return json($teacher);
     	}
     }
@@ -750,6 +785,7 @@ class DepartmentHeadTutor extends BaseController {
 	    		$teacherList['amount'] = $totalPage;
 	    		$teacherList['information'] = Db::table('user_teacher')->where('department',$department)->field('workNumber,name,password')->order('workNumber asc')->page($curPage,$pageSize)->select();
 	    	}
+	    	session::set('teacherCurPage',$curPage);
     		return json($teacherList);
     	}
     }
@@ -808,6 +844,9 @@ class DepartmentHeadTutor extends BaseController {
 
     public function student_result($dep="",$to="",$grade=0)//学生结果查看
     {
+    	session::set('studentCurPage',1);
+		session::set('teacherCurPage',1);
+
     	$user = $this->auto_login();
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
 		$pageSize=8;
@@ -865,6 +904,9 @@ class DepartmentHeadTutor extends BaseController {
 
     public function tutor_result($dep="",$grade=0)//导师结果查看
     {
+    	session::set('studentCurPage',1);
+		session::set('teacherCurPage',1);
+
     	$user = $this->auto_login();
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
 		
@@ -948,9 +990,17 @@ class DepartmentHeadTutor extends BaseController {
 
 
     public function teacherManager(){
+    	session::set('studentCurPage',1);
     	$user = $this->auto_login();
 
+    	if (!session::get('teacherCurPage')) {
+    		session::set('teacherCurPage',1);
+    	}
+
     	$timeStatus = $this->getTimeStatus();
+    	$nowPage = session::get('teacherCurPage');
+
+		$this->assign('teacherNowPage',$nowPage);
         $this->assign('timeStatus',$timeStatus);
     	$this->assign('user',$user);
     	return $this->fetch('teacher_manager');
@@ -1625,6 +1675,45 @@ class DepartmentHeadTutor extends BaseController {
     	}
 
     	return $result;
+    }
+
+
+    public function getStudentDetail($serialNum,$grade) {
+    	$user = $this->auto_login();
+
+    	$student = Db::table('user_student_'.$grade)->where('serialNum',$serialNum)->find();
+
+    	if ($student['avator'] == "/uploads/default/defaultAvator.png") {
+    		$avatorIsEmpty = 1;
+    	} else {
+    		$avatorIsEmpty = 0;
+    	}
+
+    	$this->assign('avatorIsEmpty',$avatorIsEmpty);
+    	$this->assign('student',$student);
+    	$this->assign('user',$user);
+
+    	return $this->fetch('student_detail');
+    }
+
+    public function getTeacherDetail($workNumber) {
+    	$user = $this->auto_login();
+    	$grade = Db::table('tc_grade')->order('grade desc')->select();
+
+    	$tutor = Db::table('user_teacher')->where('workNumber',$workNumber)->find();
+    	$issue = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$workNumber)->find();
+
+    	if ($tutor['avator'] == "") {
+    		$avatorIsEmpty = 1;
+    	} else {
+    		$avatorIsEmpty = 0;
+    	}
+
+    	$this->assign('issue',$issue);
+    	$this->assign('avatorIsEmpty',$avatorIsEmpty);
+    	$this->assign('tutor',$tutor);
+    	$this->assign('user',$user);
+    	return $this->fetch('teacher_detail');
     }
     
 }

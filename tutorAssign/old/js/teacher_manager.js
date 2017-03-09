@@ -1,3 +1,6 @@
+
+var nowPage = $("#nowPage").text();
+var isInit = true;
 var onSearch = false;
 //===============================
 // 导师列表
@@ -45,7 +48,7 @@ initUpload();
 //初始化分页组件
 function initPaginator() {
     $('#tab-pagination').jqPaginator({
-        totalPages: 9,
+        totalPages: 100,
         visiblePages: 8,
         currentPage: 1,
         first: '<li class="first"><a href="javascript:void(0);">首页<\/a><\/li>',
@@ -54,6 +57,11 @@ function initPaginator() {
         last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
         page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
         onPageChange: function (page) {
+            if(isInit){
+                isInit = false;
+                page=nowPage;
+                setCurrentPage(parseInt(nowPage,10));
+            }
             var request = {curPage: page};
             refreshTable(request,api_teacher_list);
         }

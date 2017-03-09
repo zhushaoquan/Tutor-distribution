@@ -76,7 +76,7 @@
                 <div class="table-responsive">
                     <table class="table">
                         <tr>
-                            <th>#</th>
+                            
                             <th>姓名</th>
                             <th>性别</th>
                             <th>排名</th>
@@ -91,7 +91,7 @@
                             <form method="post" action="{{:url('TeacherTutor/student_list')}}">
                                 <tr>
                                
-                                    <td  ><input  style="display: none;" type="text" value="{{$t.sid}}" name="sid">{{$t.sid}}</td>
+                                    
                                     <td><a href="{{:url('/index/TeacherTutor/show_resultdetail/sid/'.$t.sid.'/grade/'.$t.grade)}}">{{$t.name}}</a></td>
                                     <td>{{$t.gender}}</td>
                                     <td>{{$t.rank}}</td>

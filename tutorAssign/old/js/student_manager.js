@@ -3,6 +3,8 @@
 //如果totalpage为0，需要将其设置为1
 //在设置totalpage之前需要将currentPage设置成1
 
+var nowPage = $("#nowPage").text();
+console.log("nowPage: "+nowPage);
 var onSearch = false;
 isInit = true;
 //===============================
@@ -68,7 +70,7 @@ listenSearchEvent();
 // 所以第一次刷新界面放到 initGradeSelect() 成功获取数据之后
 function initPaginator() {
     $('#tab-pagination').jqPaginator({
-        totalPages: 9,
+        totalPages: 100,
         visiblePages: 8,
         currentPage: 1,
         first: '<li class="first"><a href="javascript:void(0);">首页<\/a><\/li>',
@@ -154,8 +156,10 @@ function initGradeSelect() {
         success: function (data) {
             selector_grade.grades = data;
             console.log("initGradeSelect:"+selectedGrade());
-            var request = {grade: selectedGrade, curPage: 1};
+            var request = {grade: selectedGrade, curPage: nowPage};
+
             refreshTable(request,api_student_list);
+            setCurrentPage(parseInt(nowPage, 10));
             setNormalCallback();
         },
         dataType: "json"
@@ -320,7 +324,7 @@ function listenSearchEvent() {
                 }
                 //加载搜索数据
                 refreshTable(request, api_student_search);
-                setCurrentPage(1)
+                setCurrentPage(1);
                 setSearchCallback();
             }
         }

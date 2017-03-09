@@ -302,3 +302,32 @@
 .teacher-list{
 
 }
+.sturesult {
+	font-size: 16px;
+	padding: 10px 70px;
+
+}
+
+.sturesult ul li {
+	list-style: none;
+	margin-bottom: 20px;
+}
+
+.span-value{
+	margin-right: 60px;
+}
+
+.sturesult ul li span:nth-child(odd) {
+	list-style: none;
+	display: inline-block;
+
+	width: 90px;
+}
+
+.sturesult ul li span:nth-child(even) {
+	list-style: none;
+	display: inline-block;
+
+	width: 210px;
+	/*background: #0ff;*/
+}
