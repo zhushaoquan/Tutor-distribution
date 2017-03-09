@@ -3,6 +3,8 @@
 //如果totalpage为0，需要将其设置为1
 //在设置totalpage之前需要将currentPage设置成1
 
+var nowPage = $("#nowPage").text();
+console.log("nowPage: "+nowPage);
 var onSearch = false;
 isInit = true;
 //===============================
@@ -154,7 +156,9 @@ function initGradeSelect() {
         success: function (data) {
             selector_grade.grades = data;
             console.log("initGradeSelect:"+selectedGrade());
-            var request = {grade: selectedGrade, curPage: 1};
+            var request = {grade: selectedGrade, curPage: nowPage};
+
+            setCurrentPage(parseInt(nowPage, 10));
             refreshTable(request,api_student_list);
             setNormalCallback();
         },
@@ -320,7 +324,7 @@ function listenSearchEvent() {
                 }
                 //加载搜索数据
                 refreshTable(request, api_student_search);
-                setCurrentPage(1)
+                setCurrentPage(1);
                 setSearchCallback();
             }
         }

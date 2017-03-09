@@ -3,6 +3,7 @@ namespace app\index\controller;
 use think\Config;
 use think\Db;
 use think\Request;
+use think\Session;
 use think\Controller;
 
 class DepartmentHeadTutor extends BaseController {
@@ -609,8 +610,12 @@ class DepartmentHeadTutor extends BaseController {
 
 	public function studentManager(){
         $user = $this->auto_login();
-
+        if (!session::get('curPage')) {
+        	session::set('curPage',1);
+        }
         $timeStatus = $this->getTimeStatus();
+        $nowPage = session::get('curPage');
+		$this->assign('nowPage',$nowPage);
         $this->assign('timeStatus',$timeStatus);
         $this->assign('user',$user);
 	    return $this->fetch('student_manager');
@@ -685,6 +690,8 @@ class DepartmentHeadTutor extends BaseController {
     		$totalPage = ceil(count(Db::table('user_student_'.$grade)->where('department',$department)->select())/$pageSize);
     		$studentList['amount'] = $totalPage;
     		$studentList['information'] = Db::table('user_student_'.$grade)->where('department',$department)->field('sid,serialNum,name,department,grade,gpa,rank')->order('serialNum asc')->page($curPage,$pageSize)->select();
+
+    		session::set('curPage',$curPage);
     		return json($studentList);
     	}
     }
