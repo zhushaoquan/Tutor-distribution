@@ -11,6 +11,8 @@ class DepartmentHeadTutor extends BaseController {
 	public $pageSize = 7;
 	
 	public function index() {
+		session::set('studentCurPage',1);
+		session::set('teacherCurPage',1);
 		$user = $this->auto_login();
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
 		
@@ -57,6 +59,8 @@ class DepartmentHeadTutor extends BaseController {
 	}
 
 	public function matchSetting() {
+		session::set('studentCurPage',1);
+		session::set('teacherCurPage',1);
 		$user = $this->auto_login();
 
 		$this->assign('user', $user);
@@ -68,6 +72,9 @@ class DepartmentHeadTutor extends BaseController {
 
 
 	public function timeSetting() {
+		session::set('studentCurPage',1);
+		session::set('teacherCurPage',1);
+
 		$user = $this->auto_login();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
@@ -609,13 +616,15 @@ class DepartmentHeadTutor extends BaseController {
 	}
 
 	public function studentManager(){
+		session::set('teacherCurPage',1);
         $user = $this->auto_login();
-        if (!session::get('curPage')) {
-        	session::set('curPage',1);
+        if (!session::get('studentCurPage')) {
+        	session::set('studentCurPage',1);
         }
         $timeStatus = $this->getTimeStatus();
-        $nowPage = session::get('curPage');
-		$this->assign('nowPage',$nowPage);
+        $nowPage = session::get('studentCurPage');
+
+		$this->assign('studentNowPage',$nowPage);
         $this->assign('timeStatus',$timeStatus);
         $this->assign('user',$user);
 	    return $this->fetch('student_manager');
@@ -691,7 +700,7 @@ class DepartmentHeadTutor extends BaseController {
     		$studentList['amount'] = $totalPage;
     		$studentList['information'] = Db::table('user_student_'.$grade)->where('department',$department)->field('sid,serialNum,name,department,grade,gpa,rank')->order('serialNum asc')->page($curPage,$pageSize)->select();
 
-    		session::set('curPage',$curPage);
+    		session::set('studentCurPage',$curPage);
     		return json($studentList);
     	}
     }
@@ -757,6 +766,7 @@ class DepartmentHeadTutor extends BaseController {
 	    		$teacherList['amount'] = $totalPage;
 	    		$teacherList['information'] = Db::table('user_teacher')->where('department',$department)->field('workNumber,name,password')->order('workNumber asc')->page($curPage,$pageSize)->select();
 	    	}
+	    	session::set('teacherCurPage',$curPage);
     		return json($teacherList);
     	}
     }
@@ -815,6 +825,9 @@ class DepartmentHeadTutor extends BaseController {
 
     public function student_result($dep="",$to="",$grade=0)//学生结果查看
     {
+    	session::set('studentCurPage',1);
+		session::set('teacherCurPage',1);
+
     	$user = $this->auto_login();
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
 		$pageSize=8;
@@ -872,6 +885,9 @@ class DepartmentHeadTutor extends BaseController {
 
     public function tutor_result($dep="",$grade=0)//导师结果查看
     {
+    	session::set('studentCurPage',1);
+		session::set('teacherCurPage',1);
+		
     	$user = $this->auto_login();
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
 		
@@ -955,9 +971,17 @@ class DepartmentHeadTutor extends BaseController {
 
 
     public function teacherManager(){
+    	session::set('studentCurPage',1);
     	$user = $this->auto_login();
 
+    	if (!session::get('teacherCurPage')) {
+    		session::set('teacherCurPage',1);
+    	}
+
     	$timeStatus = $this->getTimeStatus();
+    	$nowPage = session::get('teacherCurPage');
+
+		$this->assign('teacherNowPage',$nowPage);
         $this->assign('timeStatus',$timeStatus);
     	$this->assign('user',$user);
     	return $this->fetch('teacher_manager');
