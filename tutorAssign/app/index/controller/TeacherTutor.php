@@ -291,8 +291,8 @@ class TeacherTutor extends BaseController {
          if ($request->isPost()) {
 
             $data1['workNumber'] = $user['workNumber'];
-            $data1['title'] = $request->post('title', '');
-            $data1['content'] = $request->post('content', '');
+            $data1['title'] = addslashes(trim($request->post('title', '')));
+            $data1['content'] = addcslashes(trim($request->post('content', '')));
             $data1['time'] = time();
             $data1['totalCompExper'] = intval($request->post('totalCompExper', ''));
             $data1['totalMathExper'] = intval($request->post('totalMathExper', ''));

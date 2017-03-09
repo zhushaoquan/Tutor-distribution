@@ -17,6 +17,12 @@
             padding-top: 10px;
         }
     </style>
+    <script type="text/javascript">
+    function goBack()
+      {
+      window.history.back()
+      }
+    </script>
 </head>
 <body>
 
@@ -93,9 +99,10 @@
                 </div>
                 
                 <div class="edit-btn">
-                <a  href="{{:url('Student/tutor_list')}}" style="color:white;">
-                    <button class="btn btn-info button-size" type="submit" >
-                    返回</button></a>
+                <!-- <a  href="{{:url('Student/tutor_list')}}" style="color:white;"> -->
+                    <button class="btn btn-info button-size" type="submit" onclick="goBack()">
+                    返回</button>
+                <!-- </a> -->
                     
                 </div>
 
