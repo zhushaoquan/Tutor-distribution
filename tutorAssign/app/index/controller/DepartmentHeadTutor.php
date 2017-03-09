@@ -728,6 +728,8 @@ class DepartmentHeadTutor extends BaseController {
     //导师管理界面的搜索接口
     public function searchTeacher() {
     	$user = $this->auto_login();
+    	// $user['department'] = "计算机实验班";
+
     	$request = Request::instance();
     	if ($request->isGet()) {
     		$data = $request->get();
@@ -735,9 +737,26 @@ class DepartmentHeadTutor extends BaseController {
 
     		$condition = $data['condition'];
 
-    		$totalPage = ceil(count(Db::table('user_teacher')->where('department',$user['department'])->where('workNumber|name','like','%'.$condition.'%')->select())/10);
+    		if ($user['department'] == "计算机实验班") {
+    			$searchResult = Db::table('user_teacher')->where('isExperial',1)->whereOr('isExperial',3)->where('workNumber|name','like','%'.$condition.'%')->select();
+
+    			$teacher['information'] = Db::table('user_teacher')->where('isExperial',1)->whereOr('isExperial',3)->where('workNumber|name','like','%'.$condition.'%')->field('workNumber,name,password')->page($curPage,10)->select();
+
+
+    		} elseif ($user['department'] == "数学实验班") {
+    			$searchResult = Db::table('user_teacher')->where('isExperial',2)->whereOr('isExperial',3)->where('workNumber|name','like','%'.$condition.'%')->select();
+
+    			$teacher['information'] = Db::table('user_teacher')->where('isExperial',2)->whereOr('isExperial',3)->where('workNumber|name','like','%'.$condition.'%')->field('workNumber,name,password')->page($curPage,10)->select();
+
+    		} else {
+    			$searchResult = Db::table('user_teacher')->where('department',$user['department'])->where('workNumber|name','like','%'.$condition.'%')->select();
+
+    			$teacher['information'] = Db::table('user_teacher')->where('department',$user['department'])->where('workNumber|name','like','%'.$condition.'%')->field('workNumber,name,password')->page($curPage,10)->select();
+    		}
+
+    		$totalPage = ceil(count($searchResult)/10);
     		$teacher['amount'] = $totalPage;
-    		$teacher['information'] = Db::table('user_teacher')->where('department',$user['department'])->where('workNumber|name','like','%'.$condition.'%')->field('workNumber,name,password')->page($curPage,10)->select();
+
     		return json($teacher);
     	}
     }
