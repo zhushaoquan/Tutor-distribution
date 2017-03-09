@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>毕设选导-教师报课管理系统</title>
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/backstage.css">
+    <link rel="stylesheet" type="text/css" href="{{$Think.const.OLD}}/css/student.css">
+    <style type="text/css">
+        .sider-navbar-nav li {
+            color: #fff;
+            text-align: center;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container-backstage" class="clearfix">
+    <div id="siderbar">
+        <nav class="sider-navbar">
+            <div class="sider-navbar-header">
+                <img src="__STATIC__/image/mainpage-logo2.png" alt="" width="240">
+            </div>
+            <ul class="sider-navbar-nav">
+                <a href="{{:url('DepartmentHeadTutor/index')}}"><li><img src="__STATIC__/image/系负责人/个人信息.png" height="22px" width="22px"> 个人信息</li></a>
+                <a href="{{:url('DepartmentHeadTutor/studentManager')}}"><li class="active"><img src="__STATIC__/image/系负责人/学生管理.png" height="22px" width="22px"> 学生管理</li></a>
+                <a href="{{:url('DepartmentHeadTutor/teacherManager')}}"><li><img src="__STATIC__/image/系负责人/导师管理.png" height="22px" width="22px"> 导师管理</li></a>
+                <a href="{{:url('DepartmentHeadTutor/timeSetting')}}"><li><img src="__STATIC__/image/系负责人/匹配设置.png" height="22px" width="22px"> 匹配设置</li></a>
+                <a href="{{:url('DepartmentHeadTutor/matchSetting')}}"><li><img src="__STATIC__/image/系负责人/匹配结果.png" height="22px" width="22px"> 智能匹配</li></a>
+                <a href="{{:url('DepartmentHeadTutor/student_result')}}"> <li><img src="__STATIC__/image/系负责人/学生结果.png" height="22px" width="22px"> 学生结果</li> </a>
+                <a href="{{:url('DepartmentHeadTutor/tutor_result')}}"> <li><img src="__STATIC__/image/系负责人/导师结果.png" height="22px" width="22px"> 导师结果</li> </a>
+            </ul>
+        </nav>
+    </div>
+    <div id="mainpage">
+        <div class="top-nav">
+            <div class="user-area">
+                <div class="hello-user">
+                    <span><i class="glyphicon glyphicon-user"></i>欢迎您,</span>
+                    <span class="user-name">{{:user_type()}}: {{$user['name']|default="xxx"}}</span>
+                </div>
+            </div>
+            <div class="login-out-area">
+                <a href="{{:url('BaseController/logout')}}"><i class = "glyphicon glyphicon-off"></i>退出</a>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="main-content" style="border-radius: 10px;padding: 20px;">
+                <div class="my-information-title">
+                   
+                        <span>{{$student.name}} 的信息</span>
+        
+                </div>
+                <div class="my-information-subtitle">
+                    <span>{{$student.grade}}级 {{$student.department}} {{$student.name}} 的详细信息如下</span>
+                </div>
+                <div class="avator-positon">
+                    {if condition="$avatorIsEmpty eq 0"}
+                      <img src="{{$Think.const.COMMON_PATH}}{{$user.avator}}" class="avatorPre">
+                    {elseif condition="$avatorIsEmpty eq 1"}
+                      <img src="{{$Think.const.OLD}}/image/defaultAvator.png" class="avatorPre">
+                    {/if}
+                </div>
+                <div class="my-information-detail-1">
+                    <ul>
+                        <li><span>姓名：</span><span>{{$student.name}}</span><span>学号：</span><span>{{$student.serialNum}}</span><span>性别：</span><span>{{$student.gender}}</span></li>
+                        <li><span>学院：</span><span>{{$student.college}}</span><span>系别：</span><span>{{$student.department}}</span><span>方向：</span><span>{{$student.field}}</span></li>
+                        <li><span>绩点：</span><span>{{$student.gpa}}</span><span>排名：</span><span>{{$student.rank}}</span><span>中选：</span><span>{{$student.chosen}}</span></li>
+                        <li><span>电话：</span><span>{{$student.telephone}}</span><span>邮箱：</span><span>{{$student.email}}</span></li>
+                    </ul>
+                </div>
+                <div class="new-skill-title" style="padding-left: 100px;">
+                    <p>技能及经历：</p>
+                </div>
+                <div class="new-skill-detail" style="padding-left: 100px; width: 900px;">
+                    <p>{{$student.skill}}</p>
+                </div>
+
+                <div class="edit-btn">
+                    <a href="{{:url('DepartmentHeadTutor/studentManager')}}">
+                        <button class="btn btn-info button-size" type="submit">返回</button>
+                    </a>
+                </div>
+
+            </div>
+            <div class="footer"  style="border-radius: 10px;">
+                Copyright &copy; 我说的都队
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="__STATIC__/js/index.js"></script>
+<script type="text/javascript" src="__STATIC__/js/jquery2.14.min.js"></script>
+<script type="text/javascript" src="__STATIC__/js/bootstrap.js"></script>
+<script type="text/javascript" src="__STATIC__/js/backstage.js"></script>
+</body>
+</html>
+
+

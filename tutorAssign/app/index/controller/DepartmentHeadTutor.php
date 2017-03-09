@@ -1626,5 +1626,44 @@ class DepartmentHeadTutor extends BaseController {
 
     	return $result;
     }
+
+
+    public function getStudentDetail($serialNum,$grade) {
+    	$user = $this->auto_login();
+
+    	$student = Db::table('user_student_'.$grade)->where('serialNum',$serialNum)->find();
+
+    	if ($student['avator'] == "/uploads/default/defaultAvator.png") {
+    		$avatorIsEmpty = 1;
+    	} else {
+    		$avatorIsEmpty = 0;
+    	}
+
+    	$this->assign('avatorIsEmpty',$avatorIsEmpty);
+    	$this->assign('student',$student);
+    	$this->assign('user',$user);
+
+    	return $this->fetch('student_detail');
+    }
+
+    public function getTeacherDetail($workNumber) {
+    	$user = $this->auto_login();
+    	$grade = Db::table('tc_grade')->order('grade desc')->select();
+
+    	$tutor = Db::table('user_teacher')->where('workNumber',$workNumber)->find();
+    	$issue = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$workNumber)->find();
+
+    	if ($tutor['avator'] == "/uploads/default/defaultAvator.png") {
+    		$avatorIsEmpty = 1;
+    	} else {
+    		$avatorIsEmpty = 0;
+    	}
+
+    	$this->assign('issue',$issue);
+    	$this->assign('avatorIsEmpty',$avatorIsEmpty);
+    	$this->assign('tutor',$tutor);
+    	$this->assign('user',$user);
+    	return $this->fetch('teacher_detail');
+    }
     
 }

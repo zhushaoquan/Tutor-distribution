@@ -116,7 +116,7 @@
                                     <input v-model="item.checked" type="checkbox" class="chb">
                                 </td>
                                 <td>{{ item.serialNum }}</td>
-                                <td>{{ item.name }}</td>
+                                <td><a href="{{$Think.const.PREFIX}}/DepartmentHeadTutor/getStudentDetail/serialNum/{{item.serialNum}}/grade/{{item.grade}}" \>{{ item.name }}</a></td>
                                 <td>{{ item.grade }}</td>
                                 <td>{{ item.gpa }}</td>
                                 <td>{{ item.rank }}</td>
