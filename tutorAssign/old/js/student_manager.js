@@ -70,7 +70,7 @@ listenSearchEvent();
 // 所以第一次刷新界面放到 initGradeSelect() 成功获取数据之后
 function initPaginator() {
     $('#tab-pagination').jqPaginator({
-        totalPages: 9,
+        totalPages: 100,
         visiblePages: 8,
         currentPage: 1,
         first: '<li class="first"><a href="javascript:void(0);">首页<\/a><\/li>',
@@ -158,8 +158,8 @@ function initGradeSelect() {
             console.log("initGradeSelect:"+selectedGrade());
             var request = {grade: selectedGrade, curPage: nowPage};
 
-            setCurrentPage(parseInt(nowPage, 10));
             refreshTable(request,api_student_list);
+            setCurrentPage(parseInt(nowPage, 10));
             setNormalCallback();
         },
         dataType: "json"
