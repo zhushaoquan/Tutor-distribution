@@ -887,7 +887,7 @@ class DepartmentHeadTutor extends BaseController {
     {
     	session::set('studentCurPage',1);
 		session::set('teacherCurPage',1);
-		
+
     	$user = $this->auto_login();
 		$head = Db::table('user_department_head')->where('workNumber',$user['workNumber'])->find();
 		
@@ -1684,7 +1684,7 @@ class DepartmentHeadTutor extends BaseController {
     	$tutor = Db::table('user_teacher')->where('workNumber',$workNumber)->find();
     	$issue = Db::table('tc_issue_'.$grade[0]['grade'])->where('workNumber',$workNumber)->find();
 
-    	if ($tutor['avator'] == "/uploads/default/defaultAvator.png") {
+    	if ($tutor['avator'] == "") {
     		$avatorIsEmpty = 1;
     	} else {
     		$avatorIsEmpty = 0;

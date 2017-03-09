@@ -69,7 +69,7 @@
                     <ul>
                         <li><span>姓名：</span><span>{{$student.name}}</span><span>学号：</span><span>{{$student.serialNum}}</span><span>性别：</span><span>{{$student.gender}}</span></li>
                         <li><span>学院：</span><span>{{$student.college}}</span><span>系别：</span><span>{{$student.department}}</span><span>方向：</span><span>{{$student.field}}</span></li>
-                        <li><span>绩点：</span><span>{{$student.gpa}}</span><span>排名：</span><span>{{$student.rank}}</span><span>中选：</span><span>{{$student.chosen}}</span></li>
+                        <li><span>绩点：</span><span>{{$student.gpa}}</span><span>排名：</span><span>{{$student.rank}}</span><span>中选：</span>{if condition="$student.chosen eq 1"}<span>是</span>{elseif condition="$student.chosen eq 0"}<span>否</span>{/if}</li>
                         <li><span>电话：</span><span>{{$student.telephone}}</span><span>邮箱：</span><span>{{$student.email}}</span></li>
                     </ul>
                 </div>
