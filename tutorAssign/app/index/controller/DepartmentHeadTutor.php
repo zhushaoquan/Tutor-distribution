@@ -1716,4 +1716,70 @@ class DepartmentHeadTutor extends BaseController {
     	return $this->fetch('teacher_detail');
     }
     
+
+    //获取所有被选择的导师名单
+    public function getSelectedTeacher() {
+    	$studentVoluntary = Db::table('tc_voluntary_2015')->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->select();
+
+		$first = array_column($studentVoluntary, 'wishFirst');
+		$second = array_column($studentVoluntary, 'wishSecond');
+		$third = array_column($studentVoluntary, 'wishThird');
+		$forth = array_column($studentVoluntary, 'wishForth');
+		$fifth = array_column($studentVoluntary, 'wishFifth');
+
+		$teacher = array_values(array_unique(array_merge($first,$second,$third,$forth,$fifth)));
+    	
+		$count = count($teacher);
+		for ($i=0; $i <$count ; $i++) { 
+			$teacherInfo[$i] = Db::table('user_teacher')->where('workNumber',$teacher[$i])->field('workNumber,name,email')->find();
+			$teacherInfo[$i] = str_replace("\r\n", '', $teacherInfo[$i]);
+		}
+
+    	// var_dump(count($teacherInfo));
+    	return $teacherInfo;
+    }
+
+    //导出所有被选择的导师名单
+    public function exportSelectedTeacher() {
+
+    	require_once 'extend/PHPExcel_1.8.0_doc/Classes/PHPExcel.php';
+        $excel = new \PHPExcel();
+
+        $insert = $this->getSelectedTeacher();
+
+     	$excel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
+        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
+        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(50);
+
+        $excel->getActiveSheet()->getStyle('A')->getNumberFormat()->setFormatCode('00000');
+
+        $letter = ['A','B','C'];
+        $tableHeader = ['工号','姓名','邮件'];
+        for ($i=0; $i <3 ; $i++) { 
+            $excel->getActiveSheet()->setCellValue($letter[$i].'1',$tableHeader[$i]);            //设置单元格的值
+        }
+
+        $totalInsert = count($insert);   //计算总插入数
+        for ($i=0; $i <$totalInsert ; $i++) { 
+            $excel->getActiveSheet()->setCellValue('A'.($i+2),$insert[$i]['workNumber']);
+            $excel->getActiveSheet()->setCellValue('B'.($i+2),$insert[$i]['name']);
+            $excel->getActiveSheet()->setCellValue('C'.($i+2),$insert[$i]['email']);
+        }
+
+        //将excel导出自动下载至本地
+        $write = new \PHPExcel_Writer_Excel5($excel);
+        ob_end_clean(); //解决excel导出乱码的问题!!!
+        header("Pragma: public");
+        header("Expires: 0");
+        header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
+        header("Content-Type:application/force-download");
+        header("Content-Type:application/vnd.ms-execl");
+        header("Content-Type:application/octet-stream");
+        header("Content-Type:application/download");;
+        header('Content-Disposition:attachment;filename='.'"被选导师名单.xls"');
+        header("Content-Transfer-Encoding:binary");
+        $write->save('php://output');
+        // return json($insert);
+    }
+
 }
