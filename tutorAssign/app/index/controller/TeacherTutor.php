@@ -39,9 +39,6 @@ class TeacherTutor extends BaseController {
         // $this->user = $this->auto_login();  
         $user = $this->auto_login();    
   
-
-
-
         $this->user = Db::table('user_teacher')->where('workNumber',$user['workNumber'])->find();
 
         // var_dump($this->user['workNumber']);

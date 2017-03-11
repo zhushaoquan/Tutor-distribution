@@ -20,4 +20,8 @@ class Test extends BaseController
     public function redirectToPage() {
     	return $this->fetch('redirectPage');
     }
+
+    public function maintain() {
+        return $this->fetch('maintain');
+    }
 }
