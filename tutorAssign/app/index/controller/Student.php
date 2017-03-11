@@ -401,7 +401,7 @@ class Student extends BaseController {
 			//计算机实验吧
 			$tutors = Db::table('user_teacher') ->alias('t')->join('tc_issue_'.$this->grades.' i', 't.workNumber = i.workNumber')
 			                                    ->where('isExperial','in','1,3')   
-			                                    ->where('compExperNow < totalCompExper')
+			                                   // ->where('compExperNow < totalCompExper')
 			                                    ->order("convert(t.name using gb2312) ASC")
 			                                    ->select();
 
@@ -409,14 +409,14 @@ class Student extends BaseController {
 			//数学实验板
 			$tutors = Db::table('user_teacher') ->alias('t')->join('tc_issue_'.$this->grades.' i', 't.workNumber = i.workNumber')
 			                                    ->where('isExperial','in','2,3')
-			                                    ->where('mathExperNow < totalMathExper')
+			                                   // ->where('mathExperNow < totalMathExper')
 			                                    ->order("convert(t.name using gb2312) ASC")
 			                                    ->select();
 		} else {
 			//自然班
 			$tutors = Db::table('user_teacher')->alias('t')->join('tc_issue_'.$this->grades.' i', 't.workNumber = i.workNumber')
 			                                   ->where('department',$this->user['department'])
-			                                   ->where('naturNow < totalNatur')
+			                                 //  ->where('naturNow < totalNatur')
 			                                   ->order("convert(t.name using gb2312) ASC")
 			                                   ->select();
 		}

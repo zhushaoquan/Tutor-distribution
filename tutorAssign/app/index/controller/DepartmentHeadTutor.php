@@ -1447,7 +1447,7 @@ class DepartmentHeadTutor extends BaseController {
 
         $data=Db::table('user_teacher t,user_student_'.$grade.' s,tc_result_'.$grade.' r')
         ->where('t.workNumber=r.workNumber and s.sid=r.sid')->where('s.department','=',$dep)->where('s.grade',$grade)
-        ->field('t.workNumber as tnum,t.department as tdep,t.position as tposi,t.name as tname,t.email as ttele,s.serialNum as snum,s.name as sname,s.telephone as stele')
+        ->field('t.workNumber as tnum,t.department as tdep,t.position as tposi,t.name as tname,t.email as ttele,s.serialNum as snum,s.name as sname,s.telephone as stele,s.department as sdep')
         ->order('s.serialNum')->select();
 
         $count = count($data);
@@ -1534,7 +1534,7 @@ class DepartmentHeadTutor extends BaseController {
         $totalInsert = count($insert);   //计算总插入数
         for ($i=0; $i <$totalInsert ; $i++) { 
             $excel->getActiveSheet()->setCellValue('A'.($i+3),($i+1));
-            $excel->getActiveSheet()->setCellValue('B'.($i+3),$insert[$i]['tdep']);
+            $excel->getActiveSheet()->setCellValue('B'.($i+3),$insert[$i]['sdep']);
             $excel->getActiveSheet()->setCellValue('C'.($i+3),$insert[$i]['sname']);
             $excel->getActiveSheet()->setCellValue('D'.($i+3),$insert[$i]['snum']);
             $excel->getActiveSheet()->setCellValue('E'.($i+3),$insert[$i]['stele']);

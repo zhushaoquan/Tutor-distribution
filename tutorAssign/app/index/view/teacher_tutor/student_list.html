@@ -155,7 +155,7 @@
                 </div>  
             </div>
             <div class="modal-footer">
-            <form method="post" action="{{:url('TeacherTutor/student_list')}}">
+            <form method="post" action="{{:url('TeacherTutor/student_list')}}" enctype="multipart/form-data">
                 <input style="display: none;" type="text" value="{{datas.sid}}" name="sid">
                 <?php $i = '{{datas.sid}}'; ?>
                 <button <?php if($i == null) {?> disabled="disabled" <?php } ?> id="choiceagain" type="submit" class="btn btn-primary" name="choise" value="选择" >

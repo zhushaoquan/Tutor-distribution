@@ -553,10 +553,11 @@ class TeacherTutor extends BaseController {
       // $data['student']=DB::table('user_student_'.$this->grades[0]['grade'])->where('sid',$sid)
       //                                                           //->field('name,serialNum')
       //                                                           ->find();
-
-      $data['student']=DB::table('user_student_'.$this->grades[0]['grade'])->alias('s')->join('tc_voluntary_'.$this->grades[0]['grade'].'  v','s.sid = v.sid')->where('s.sid',$sid)
+      $data['student']['sid'] = $sid;
+      $data['student']=DB::table('user_student_2015')->alias('s')->join('tc_voluntary_2015 v','s.sid = v.sid')->where('s.sid',$sid)
                                                                 ->find();
-
+      // var_dump($data);
+      // exit;
       if($data['student']['wishFirst'] == $this->user['workNumber'])$data['student']['voluntary'] = "第一志愿";
       else if($data['student']['wishSecond'] == $this->user['workNumber'])$data['student']['voluntary'] = "第二志愿";
       else if($data['student']['wishThird'] == $this->user['workNumber'])$data['student']['voluntary'] = "第三志愿";
