@@ -1573,6 +1573,9 @@ class DepartmentHeadTutor extends BaseController {
     	$wishList = ['wishFirst','wishSecond','wishThird','wishForth','wishFifth'];
     	// $head['department'] = "信息安全与网络工程系";
 
+    	$time = time();
+    	$nowTime = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->field('firstStart,firstEnd,secondStart,secondEnd')->find();
+
     	$request = Request::instance();
     	$lastGrade = Db::table('tc_grade')->order('grade desc')->select();
     	$pageSize = 10;
@@ -1585,16 +1588,14 @@ class DepartmentHeadTutor extends BaseController {
     		$totalUnchosen = count($unchosenStudent);
     		$data['amount'] = $amount;
 
+			if (($time >= $nowTime['firstStart']) && ($time <= $nowTime['secondStart'])) {
+	 			$nowRound = 1;
+	 		} elseif(($time >= $nowTime['secondStart'])) {
+	 			$nowRound = 2;
+	 		}
     		if ($amount != 0) {
 	    		for ($i=0; $i <$totalUnchosen ; $i++) {
-	    		 	if (Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('round,wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find()) {
-
-	    		 		$roundList = Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('round')->select();
-	    		 		if (count($roundList) == 1) {
-	    		 			$nowRound = 1;
-	    		 		} else {
-	    		 			$nowRound = 2;
-	    		 		}
+	    		 	if (Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->where('round',$nowRound)->field('round,wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find()) {
 
 		    			$voluntary[$i] = Db::table('tc_voluntary_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->where('round',$nowRound)->field('round,wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
 						$voluntary[$i]['information'] = Db::table('user_student_'.$grade)->where('sid',$unchosenStudent[$i]['sid'])->field('sid,serialNum,name')->find();
