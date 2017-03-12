@@ -296,10 +296,19 @@ class DepartmentHeadTutor extends BaseController {
 	public function intelligentAlloc() {
 		$user = $this->auto_login();
 		$grade = Db::table('tc_grade')->order('grade desc')->select();
-		// $user['department'] = "计算机系";
-		// $user['workNumber'] = "11061";
+		// $user['department'] = "计算机实验班";
+		// $user['workNumber'] = "10044";
 		$wishList = ['wishFirst','wishSecond','wishThird','wishForth','wishFifth'];
 		$voluntaryNum = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->find();
+
+		$time = time();
+    	$nowTime = Db::table('tc_voluntaryinfosetting')->where('workNumber',$user['workNumber'])->field('firstStart,firstEnd,secondStart,secondEnd')->find();
+
+    	if (($time >= $nowTime['firstStart']) && ($time <= $nowTime['secondStart'])) {
+	 			$nowRound = 1;
+	 		} elseif(($time >= $nowTime['secondStart'])) {
+	 			$nowRound = 2;
+	 		}
 
 		//获取未分配到导师的学生信息
 		$student = Db::table('user_student_'.$grade[0]['grade'])->where('chosen',0)->where('department',$user['department'])->field('sid,serialNum,gpa,chosen')->select();
@@ -309,7 +318,7 @@ class DepartmentHeadTutor extends BaseController {
 		for ($i=0; $i <$countStudent ; $i++) {
 			//获取每个学生的志愿信息
 			if (Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid', $student[$i]['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find()) { 
-				$student[$i]['voluntary'] = Db::table('tc_voluntary_'.$grade[0]['grade'])->where('sid', $student[$i]['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
+				$student[$i]['voluntary'] = Db::table('tc_voluntary_'.$grade[0]['grade'])->where('round',$nowRound)->where('sid', $student[$i]['sid'])->field('wishFirst,wishSecond,wishThird,wishForth,wishFifth')->find();
 
 			//将每个学生的志愿信息转换成规定格式的txt文件
 				$inputStudent[$i] = $student[$i]['serialNum'] . ' ' . $student[$i]['gpa'] . PHP_EOL;
@@ -415,6 +424,7 @@ class DepartmentHeadTutor extends BaseController {
 	        }
 		    $data['status'] = "success";
 		    return json($data);
+		    // return json($studentElectedArr);
 		} else {
 			$data['amount'] = 0;
 			$data['msg'] = "所有学生均未填报志愿，无法进行智能分配";
