@@ -286,10 +286,13 @@ class TeacherTutor extends BaseController {
          $data['issue']['content'] = htmlspecialchars_decode($data['issue']['content']);
          $request = Request::instance();
          if ($request->isPost()) {
-
+            // echo $request->post('title', '');
+               // echo $request->post('content', '');
+               // exit;
+            // exit;
             $data1['workNumber'] = $user['workNumber'];
             $data1['title'] = addslashes(trim($request->post('title', '')));
-            $data1['content'] = addcslashes(trim($request->post('content', '')));
+            $data1['content'] = trim($request->post('content', ''));
             $data1['time'] = time();
             $data1['totalCompExper'] = intval($request->post('totalCompExper', ''));
             $data1['totalMathExper'] = intval($request->post('totalMathExper', ''));
@@ -512,6 +515,8 @@ class TeacherTutor extends BaseController {
     }
 
     public function show_resultdetail($sid = null,$grade = null) {
+      print(1111);
+      exit;
         $user = $this->auto_login();
         if($grade == null) {
           $grade = $grades[0]['grade'];

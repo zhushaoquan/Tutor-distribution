@@ -98,8 +98,8 @@
                                     <td>{{$t.gpa}}</td>
                                     <td><?php if($t['wishFirst'] == $user['workNumber'])echo "第一志愿";else if($t['wishSecond'] == $user['workNumber'])echo "第二志愿"; else if($t['wishThird'] == $user['workNumber'])echo "第三志愿"; else if($t['wishForth'] == $user['workNumber'])echo "第四志愿";else echo "第五志愿"?></td>
 
-                                    <td><a class="btn btn-info select " style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#choiceModal"  value="{{$t.sid}}" name="choise">选&nbsp;择</a></td>
-                                    <td><a class="btn btn-info reject" style="width:60px;" data-toggle="modal" data-backdrop="static" data-target="#rejectModal"  value="{{$t.sid}}" name="choise">拒&nbsp;绝</a></td>
+                                    <td><a href="{{:url('/index/TeacherTutor/show_resultdetail/sid/'.$t.sid.'/grade/'.$t.grade)}}">选&nbsp;择</a></td>
+                                    <td><a a href="{{:url('/index/TeacherTutor/show_resultdetail/sid/'.$t.sid.'/grade/'.$t.grade)}}">拒&nbsp;绝</a></td>
                                     <?php ?>
 
                                    
