@@ -135,7 +135,8 @@ class TeacherTutor extends BaseController {
                 //第一轮导师选择学生时间
                 $data['ontime'] = 11;
                 $data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmFirstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmFirstEnd'])."</font>,请导师们尽快选择学生！";
-                $data['message1'] = "导师所带学生总数不得超过 <font color='#FF0000'>".$this->issue['totalNatur']." </font>名，不得少于 <font color='#FF0000'> ".$data['voluntaryinfosetting']['totalMin']."</font>名";
+                $all_people = $this->issue['totalNatur']+$this->issue['totalCompExper']+$this->issue['totalMathExper'];
+                $data['message1'] = "导师所带学生总数不得超过 <font color='#FF0000'>".$all_people." </font>名，不得少于 <font color='#FF0000'> ".$data['voluntaryinfosetting']['totalMin']."</font>名";
                if($this->user['isExperial']!=0) $data['message1'].="，实验班总人数不超过<font color='#FF0000'>".($this->issue['totalCompExper']+$this->issue['totalMathExper'])."</font>名";
                $data['message1'] .="！"; 
                 $this->assign('message1',$data['message1']);
@@ -161,8 +162,8 @@ class TeacherTutor extends BaseController {
                 //第二轮导师选择学生时间
                 $data['ontime'] = 22;
                 $data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>"."</font>的<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondEnd'])."</font>,请导师们尽快选择学生！";
-                
-                $data['message1'] = "导师所带学生总数不得超过 <font color='#FF0000'>".$this->issue['totalNatur']." </font>名，不得少于 <font color='#FF0000'> ".$data['voluntaryinfosetting']['totalMin']."</font>名";
+                $all_people = $this->issue['totalNatur']+$this->issue['totalCompExper']+$this->issue['totalMathExper'];
+                $data['message1'] = "导师所带学生总数不得超过 <font color='#FF0000'>".$all_people." </font>名，不得少于 <font color='#FF0000'> ".$data['voluntaryinfosetting']['totalMin']."</font>名";
                if($this->user['isExperial']!=0) $data['message1'].="，实验班总人数不超过<font color='#FF0000'>".$this->issue['totalCompExper']+$this->issue['totalMathExper']."</font>名";
                 $data['message1'] .="！"; 
                 $this->assign('message1',$data['message1']);
@@ -515,8 +516,6 @@ class TeacherTutor extends BaseController {
     }
 
     public function show_resultdetail($sid = null,$grade = null) {
-      print(1111);
-      exit;
         $user = $this->auto_login();
         if($grade == null) {
           $grade = $grades[0]['grade'];
@@ -533,22 +532,22 @@ class TeacherTutor extends BaseController {
         return $this->fetch('information_detail');
     }
 
-     public function show_resultdetail_1($sid = null,$grade = null) {
-        $user = $this->auto_login();
-        if($grade == null) {
-          $grade = $grades[0]['grade'];
-        }
+    //  public function show_resultdetail_1($sid = null,$grade = null) {
+    //     $user = $this->auto_login();
+    //     if($grade == null) {
+    //       $grade = $grades[0]['grade'];
+    //     }
        
-        $student = Db::table('user_student_'.$grade)->alias('s')->join('tc_voluntary_'.$grade.' v' ,'v.sid = s.sid')->where('s.sid', $sid)->find();
-        if ($student['avator'] == "") {
-          $student['avatorIsEmpty'] = 1;
-        } else {
-          $student['avatorIsEmpty'] = 0;
-        }
-        $this->assign('student', $student);
-        $this->assign('user', $user);
-        return $this->fetch('information_detail_1');
-    }
+    //     $student = Db::table('user_student_'.$grade)->alias('s')->join('tc_voluntary_'.$grade.' v' ,'v.sid = s.sid')->where('s.sid', $sid)->find();
+    //     if ($student['avator'] == "") {
+    //       $student['avatorIsEmpty'] = 1;
+    //     } else {
+    //       $student['avatorIsEmpty'] = 0;
+    //     }
+    //     $this->assign('student', $student);
+    //     $this->assign('user', $user);
+    //     return $this->fetch('information_detail_1');
+    // }
 
 
     public function show_studentdetail($sid)
