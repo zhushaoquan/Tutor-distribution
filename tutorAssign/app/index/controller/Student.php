@@ -46,7 +46,6 @@ class Student extends BaseController {
         data['time'] = 11,第一轮导师选择学生时间
         data['time'] = 22,第二轮导师选择学生时间
         data['time'] = 3,志愿结果已出
-
         */
         if($this->user['chosen'] == 1) {
 	        	$data['ontime'] = 3;
@@ -59,32 +58,57 @@ class Student extends BaseController {
 	        // 	$data['ontime'] = 3;
 	        // 	$data['message'] = "<font color='#FF0000'>".$this->user['name']."</font>同学，志愿结果已出，请前往 最终结果 页面查看哦~~~";
 	        // }else 
-	        if($nowtime >= $data['issueStart'] && $nowtime <= $data['issueEnd']) {
+	        if($nowtime < $data['issueStart']) {
+	        	//填报可提前
+	        	$data['ontime'] = 0;//暂定，可能有改动
+	        	$data['message'] = "当前为".$this->grades."级毕设互选预备阶段，下一阶段为<font color='#FF0000'>".$data['department']."</font>的导师<font color='#FF0000'>填报课题</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['issueStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['issueEnd'])."</font>！";
+
+	        }else if($nowtime >= $data['issueStart'] && $nowtime < $data['issueEnd']) {
 	        	//导师填报课题时段！
 	        	$data['ontime'] = 0;
 	        	$data['message'] = "当前为".$this->grades."级<font color='#FF0000'>".$data['department']."</font>的导师<font color='#FF0000'>填报课题</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['issueStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['issueEnd'])."</font>！";
-	        }else if($nowtime < $data['firstEnd'] && $nowtime > $data['firstStart']) {
+	        }else if($nowtime >= $data['issueEnd'] && $nowtime < $data['firstStart']) {
+	        	//第一轮志愿填报前夕
+	        	//$this->round = 0;//暂定，可能有改动
+	        	$data['ontime'] = 0;//暂定，可能有改动
+	        	$data['message'] = "导师填报课题已结束，下一阶段为".$this->grades."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['firstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['firstEnd'])."</font>,请同学们耐心等待哟！";
+	        }else if($nowtime < $data['firstEnd'] && $nowtime >= $data['firstStart']) {
 	        	$this->round = 1;
 	        	//第一轮志愿填报
 	        	$data['ontime'] = 1;
 	            $data['message'] = "当前为".$this->grades."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['firstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['firstEnd'])."</font>,请同学们按时填报、修改志愿！";
-	         } else if($nowtime  < $data['secondEnd'] && $nowtime > $data['secondStart']) {
-	         	$this->round = 2;
-	         	//第二轮志愿填报时间
-	         	$data['ontime'] = 2;
-	         	$data['message'] = "当前为".$this->grades."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['secondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['secondEnd'])."</font>,请同学们按时填报、修改志愿！";
-	         }else if($nowtime >= $data['confirmFirstStart'] && $nowtime <= $data['confirmFirstEnd']) {
+	         }else if($nowtime >= $data['firstEnd'] && $nowtime < $data['confirmFirstStart']) {
+	         	$this->round = 1;//暂定，可能有改动
+	         	//第一轮志愿填报至导师选择
+	         	$data['ontime'] = 11;//暂定，可能有改动
+	         	$data['message'] = "第一轮志愿填报已结束，下一阶段为".$this->grades."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmFirstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmFirstEnd'])."</font>,请同学们耐心等候！";
+	         }else if($nowtime >= $data['confirmFirstStart'] && $nowtime < $data['confirmFirstEnd']) {
 	         	$this->round = 1;
 	         	//第一轮导师选择学生时间
 	         	$data['ontime'] = 11;
 	         	$data['message'] = "当前为".$this->grades."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmFirstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmFirstEnd'])."</font>,请同学们耐心等候！";
-	         } else if($nowtime >= $data['confirmSecondStart'] && $nowtime <= $data['confirmSecondEnd']) {
+	         }else if($nowtime >= $data['confirmFirstEnd'] &&  $nowtime < $data['secondStart']){
+	         	// $this->round = 2;//暂定，可能有改动
+	         	//第一轮导师选择-》第二轮志愿填报
+	         	$data['ontime'] = 0;//暂定，可能有改动
+	         	$data['message'] = "第一轮导师选择学生已结束，下一阶段为".$this->grades."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['secondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['secondEnd'])."</font>,请同学们耐心等待哟！";
+	         }else if($nowtime  < $data['secondEnd'] && $nowtime >= $data['secondStart']) {
+	         	$this->round = 2;
+	         	//第二轮志愿填时间
+	         	$data['ontime'] = 2;
+	         	$data['message'] = "当前为".$this->grades."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['secondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['secondEnd'])."</font>,请同学们按时填报、修改志愿！";
+	         }else if($nowtime >= $data['secondEnd'] && $nowtime < $data['confirmSecondStart']){
+	         	$this->round = 2;//暂定，可能有改动
+	         	//第二轮志愿填报-》导师选择
+	         	$data['ontime'] = 22;//暂定，可能有改动
+	         	$data['message'] = "第二轮志愿填报时间已结束，下一阶段为".$this->grades."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondEnd'])."</font>,请同学们耐心等候！";
+	         }else if($nowtime >= $data['confirmSecondStart'] && $nowtime <= $data['confirmSecondEnd']) {
 	         	$this->round = 2;
 	         	//第二轮导师选择学生时间
 	         	$data['ontime'] = 22;
 	         	$data['message'] = "当前为".$this->grades."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondEnd'])."</font>,请同学们耐心等候！";
 	         }else {
-	            $data['message'] = "当前不在毕设互选时间段哟~~";      
+        	    $data['message'] = $this->grades."级毕设互选已结束，未被选中的学生将由学院进行智能分配";  
 	         }
         } else {
         	$data['ontime'] = -1;

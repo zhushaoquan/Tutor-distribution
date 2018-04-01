@@ -92,21 +92,18 @@ class TeacherTutor extends BaseController {
         data['time'] = 11,第一轮导师选择学生时间
         data['time'] = 22,第二轮导师选择学生时间
         data['time'] = 3,志愿结果已出
-
         */
         if(isset($data['issueStart'])) {
             if($nowtime >= $data['issueStart'] && $nowtime <= $data['issueEnd']) {
+               // if($nowtime <= $data['issueEnd']) {
                 //导师填报课题时段！
                 $data['ontime'] = 0;
-
                 $data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的导师"."<font color='#FF0000'>填报课题</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['issueStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['issueEnd'])."</font>！";
                 $data['voluntaryinfosetting'] = $this->voluntaryinfosetting;
                 $data['message1'] = "导师所带学生总数不得超过 <font color='#FF0000'>".$data['voluntaryinfosetting']['totalMax']." </font>名，不得少于 <font color='#FF0000'> ".$data['voluntaryinfosetting']['totalMin']."</font>";
                  if($this->user['isExperial']!=0) $data['message1'].="名，实验班总人数不超过<font color='#FF0000'>".$data['voluntaryinfosetting']['experialMax']."</font>";
                  $data['message1'].="名！";
                  $this->assign('message1',$data['message1']);
-
-
                  $data['message2'] = "当前已带自然班学生<font color='#FF0000'>".$this->issue['naturNow']."</font>名";
                  if($this->user['isExperial']==1) {
                   $data['message2'] .= ",已带计算机实验班学生<font color='#FF0000'>".$this->issue['compExperNow']."</font>名";
@@ -118,19 +115,14 @@ class TeacherTutor extends BaseController {
                  $data['message2'] .="!";
                  $this->assign('message2',$data['message2']);
 
-
             }else if($nowtime <= $data['firstEnd'] && $nowtime >= $data['firstStart']) {
+               // }else if($nowtime <= $data['firstEnd'] && $nowtime > $data['issueEnd']) {
                 $this->round = 1;
                 //第一轮志愿填报
                 $data['ontime'] = 1;
                 $data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['firstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['firstEnd'])."</font>！";
-             } else if($nowtime  <= $data['secondEnd'] && $nowtime >= $data['secondStart']) {
-                $this->round = 2;
-                //第二轮志愿填报时间
-                $data['ontime'] = 2;
-                $data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['secondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['secondEnd'])."</font>！";
-
-             }else if($nowtime >= $data['confirmFirstStart'] && $nowtime <= $data['confirmFirstEnd']) {
+             } else if($nowtime >= $data['confirmFirstStart'] && $nowtime <= $data['confirmFirstEnd']) {
+             //  } else if($nowtime >= $data['firstEnd'] && $nowtime <= $data['confirmFirstEnd']) {
                 $this->round = 1;
                 //第一轮导师选择学生时间
                 $data['ontime'] = 11;
@@ -140,7 +132,6 @@ class TeacherTutor extends BaseController {
                if($this->user['isExperial']!=0) $data['message1'].="，实验班总人数不超过<font color='#FF0000'>".($this->issue['totalCompExper']+$this->issue['totalMathExper'])."</font>名";
                $data['message1'] .="！"; 
                 $this->assign('message1',$data['message1']);
-
 
                $data['message2'] = "当前已带自然班学生<font color='#FF0000'>".$this->issue['naturNow']."</font>名";
                 if($this->user['isExperial']==1) {
@@ -157,14 +148,24 @@ class TeacherTutor extends BaseController {
                $this->assign('message3',$data['message3']);
 
 
+             } else if($nowtime  <= $data['secondEnd'] && $nowtime >= $data['secondStart']) {
+               // } else if($nowtime  <= $data['secondEnd'] && $nowtime >= $data['confirmFirstEnd']) {
+                $this->round = 2;
+                //第二轮志愿填报时间
+                $data['ontime'] = 2;
+                $data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['secondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['secondEnd'])."</font>！";
+
              } else if($nowtime >= $data['confirmSecondStart'] && $nowtime <= $data['confirmSecondEnd']) {
+                 // } else if($nowtime >= $data['secondEnd'] && $nowtime <= $data['confirmSecondEnd']) {
                 $this->round = 2;
                 //第二轮导师选择学生时间
                 $data['ontime'] = 22;
                 $data['message'] = "当前为".$this->grades[0]['grade']."级<font color='#FF0000'>"."</font>的<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondEnd'])."</font>,请导师们尽快选择学生！";
                 $all_people = $this->issue['totalNatur']+$this->issue['totalCompExper']+$this->issue['totalMathExper'];
                 $data['message1'] = "导师所带学生总数不得超过 <font color='#FF0000'>".$all_people." </font>名，不得少于 <font color='#FF0000'> ".$data['voluntaryinfosetting']['totalMin']."</font>名";
-               if($this->user['isExperial']!=0) $data['message1'].="，实验班总人数不超过<font color='#FF0000'>".$this->issue['totalCompExper']+$this->issue['totalMathExper']."</font>名";
+
+               if($this->user['isExperial']!= 0) {
+                   $data['message1'].= "，实验班总人数不超过<font color='#FF0000'>".($this->issue['totalCompExper']+$this->issue['totalMathExper'])."</font>名";}
                 $data['message1'] .="！"; 
                 $this->assign('message1',$data['message1']);
 
@@ -183,7 +184,18 @@ class TeacherTutor extends BaseController {
                  $this->assign('message3',$data['message3']);
 
              }else {
-                $data['message'] = "当前不在毕设互选时间段哟~~";
+                // $data['message'] = $this->grades[0]['grade']."级毕业设计已结束，老师们辛苦啦~";
+                if($nowtime > $data['issueEnd'] && $nowtime <= $data['firstEnd']) {
+                  $data['message'] = "填报课题已结束，下一阶段为".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['firstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['firstEnd'])."</font>！";
+                } else if($nowtime > $data['firstEnd']&& $nowtime < $data['confirmFirstStart']){
+                  $data['message'] = "第一轮志愿填报已结束，下一阶段".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第一轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmFirstStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmFirstEnd'])."</font>!";
+                } else if($nowtime > $data['confirmFirstEnd'] && $nowtime <= $data['secondStart']){
+                  $data['message'] = "第一轮导师选择已结束，下一阶段为".$this->grades[0]['grade']."级<font color='#FF0000'>".$data['department']."</font>的<font color='#FF0000'>第二轮的志愿填报</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['secondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['secondEnd'])."</font>！";
+                } else if($nowtime > $data['secondEnd'] && $nowtime <= $data['confirmSecondStart']) {
+                   $data['message'] = "第二轮志愿填报已结束，下一阶段为".$this->grades[0]['grade']."级<font color='#FF0000'>"."</font>的<font color='#FF0000'>第二轮的导师选择学生</font>时间：<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondStart'])."</font>至<font color='#FF0000'>".date('Y-m-d H:i',$data['confirmSecondEnd'])."</font>！";
+                }else {
+                  $data['message'] = $this->grades[0]['grade']."级毕业设计已结束，老师们辛苦啦~";
+                }
              }
              $this->ontime = $data['ontime'];
              $this->assign('message',$data['message']);
@@ -532,22 +544,24 @@ class TeacherTutor extends BaseController {
         return $this->fetch('information_detail');
     }
 
-    //  public function show_resultdetail_1($sid = null,$grade = null) {
-    //     $user = $this->auto_login();
-    //     if($grade == null) {
-    //       $grade = $grades[0]['grade'];
-    //     }
+
+    //有用
+     public function show_resultdetail_1($sid = null,$grade = null) {
+        $user = $this->auto_login();
+        if($grade == null) {
+          $grade = $grades[0]['grade'];
+        }
        
-    //     $student = Db::table('user_student_'.$grade)->alias('s')->join('tc_voluntary_'.$grade.' v' ,'v.sid = s.sid')->where('s.sid', $sid)->find();
-    //     if ($student['avator'] == "") {
-    //       $student['avatorIsEmpty'] = 1;
-    //     } else {
-    //       $student['avatorIsEmpty'] = 0;
-    //     }
-    //     $this->assign('student', $student);
-    //     $this->assign('user', $user);
-    //     return $this->fetch('information_detail_1');
-    // }
+        $student = Db::table('user_student_'.$grade)->alias('s')->join('tc_voluntary_'.$grade.' v' ,'v.sid = s.sid')->where('s.sid', $sid)->find();
+        if ($student['avator'] == "") {
+          $student['avatorIsEmpty'] = 1;
+        } else {
+          $student['avatorIsEmpty'] = 0;
+        }
+        $this->assign('student', $student);
+        $this->assign('user', $user);
+        return $this->fetch('information_detail_1');
+    }
 
 
     public function show_studentdetail($sid)
